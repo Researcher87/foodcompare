@@ -3,10 +3,13 @@ import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import TabContainer from "./TabContainer";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
+import {applicationStrings} from "../../static/labels";
+import {LanguageContext} from "../../contexts/LangContext";
 
 
 export default function FoodDataPanelContainer() {
     const applicationData = useContext(ApplicationDataContextStore)
+    const languageContext = useContext(LanguageContext)
 
     if (!applicationData) {
         return <div/>
@@ -23,19 +26,19 @@ export default function FoodDataPanelContainer() {
     }
 
     const onNewFoodItemSelected = (): void => {
-        const newTabIndex = applicationData.applicationData.foodDataPanel.selectedFoodItems.length -1
+        const newTabIndex = applicationData.applicationData.foodDataPanel.selectedFoodItems.length - 1
         applicationData.setSelectedTab(newTabIndex)
     }
 
-    const selectedTabIndex =  applicationData.applicationData.foodDataPanel.selectedFoodItemIndex
+    const selectedTabIndex = applicationData.applicationData.foodDataPanel.selectedFoodItemIndex
 
-    if(!(selectedTabIndex >= 0)) {
+    if (!(selectedTabIndex >= 0)) {
         return <div/>
     }
 
     const selectedFoodItem = applicationData.applicationData.foodDataPanel.selectedFoodItems[selectedTabIndex]
 
-    if(applicationData.debug) {
+    if (applicationData.debug) {
         console.log('FoodDataPanelContainer: Render, selected food item = ', selectedFoodItem)
     }
 
@@ -49,10 +52,12 @@ export default function FoodDataPanelContainer() {
                     <div>Platzhalter</div>
                 </div>
                 <div className="col-10" style={{maxWidth: "1100px", marginTop: "-10px"}}>
-                    {selectedFoodItems && selectedFoodItems.length > 0 &&
-                    <div>
-                        <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
-                    </div>
+                    {selectedFoodItems && selectedFoodItems.length > 0 ?
+                        <div>
+                            <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
+                        </div>
+                        :
+                        <div style={{padding: "24px"}}><i>{applicationStrings.text_empty_fooddatapanel[languageContext.language]}</i></div>
                     }
                 </div>
             </div>

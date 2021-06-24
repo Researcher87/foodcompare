@@ -671,6 +671,10 @@ export const applicationStrings = {
         de: 'Berechnung von Grundumsatz und PAL:',
         en: 'Calculation of BMR and PAL:',
     },
+    text_empty_fooddatapanel: {
+        de: 'Klicken Sie auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden, die dann in separaten Tabs angezeigt werden.',
+        en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like -- they will be displayed in separate tabs.'
+    },
     text_setUserdata_p1: {
         de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 30 Jahre) angezeigt.',
         en: 'You are currently seeing the reference data for an average adult (male, 30 years).'
