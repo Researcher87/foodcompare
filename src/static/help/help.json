@@ -1,0 +1,149 @@
+{
+	"entries": [
+		{
+			"id": 1,
+			"remark": "Base data page",
+			"de": {
+				"title": "Übersicht",
+				"content": [
+					"Die Übersicht zeigt die grundlegende Zusammensetzung der Nahrung an. Das linke Diagramm berücksichtigt dabei alle wesentlichen Komponenten, die in dem Lebensmittel enthalten sind, das rechte Diagramm ignoriert den Wasseranteil und zeigt damit nur die Makronährstoffe an.",
+					"<br /><b>Zucker:</b> Als Zucker ist hier die Gesamtheit der Einfachzucker (Traubenzucker, Fruchtzucker, Galaktose) und  Zweifachzucker (Sukrose, Laktose, Maltose) gemeint. Es handelt sich um eine Teilmenge der Kohlenhydrate."
+				]
+			},
+			"en": {
+				"title": "Overview",
+				"content": [
+					"Displays the general composition of the selected food. The left-hand chart regards all essential parts of the food, whereas the right-hand chart ignores the water content, thus simply concentrating on the macro nutrients.",
+					"<br /><b>Sugar:</b> Refers to the amount of single and double sugars, i.e., the amount of glucose, fructose, galactose as well as sucrose, lactose and maltose. Sugar is a subset of the carbohydrates."
+				]
+			}
+		},
+		
+		{
+			"id": 2,
+			"remark": "Energy data page",
+			"de": {
+				"title": "Energie",
+				"content": [
+					"Die Übersicht zu den Energiedaten zeigt an, wie viel Energie je 100 g und Portion in dem ausgewählten Lebensmittel oder der Lebensmittelzusammenstellung enthalten ist. Als Bezugsgröße werden hier der Grundumsatz und der Gesamtumsatz (Grundumsatz + Leistungszuwachs PAL) dargestellt." 
+				]
+			},
+			"en": {
+				"title": "Energy",
+				"content": [
+					"Displays the energy contained in the food or food combination, both for a 100 gram equivalent and for a portion. The values relate to the BMR (Basic Metabolic Rate) and Energy Expenditure (BMR + PAL)."
+				]
+			}
+		}, 
+		
+		{
+			"id": 3,
+			"remark": "Vitamin page",
+			"de": {
+				"title": "Vitamine",
+				"content": [
+					"Das Diagramm zeigt die enthaltenen Vitamine im Vergleich zum Tagesbedarf eines Erwachsenen an (der Tagesbedarf wird aus den eingestellten User-Daten berechnet). Im Tabellenmodus werden hingegen die absoluten Werte in mg angezeigt." 
+				]
+			},
+			"en": {
+				"title": "Vitamins",
+				"content": [
+					"Displays the vitamins contained by the food or food combination. The values relate to the daily dietary requirements of an adult (that is, of the body data set in the settings menu). By contrast, the table mode displays the absolute amounts of vitamins in mg."
+				]
+			}
+		}, 
+		
+		{
+			"id": 4,
+			"remark": "Mineral page",
+			"de": {
+				"title": "Mineralstoffe",
+				"content": [
+					"Das Diagramm zeigt die enthaltenen Mineralstoffe im Vergleich zum Tagesbedarf eines Erwachsenen an (der Tagesbedarf wird aus den eingestellten User-Daten berechnet). Im Tabellenmodus werden hingegen die absoluten Werte in mg angezeigt." 
+				]
+			},
+			"en": {
+				"title": "Minerals",
+				"content": [
+					"Displays the minerals contained by the food or food combination. The values relate to the daily dietary requirements of an adult (that is, of the body data set in the settings menu). By contrast, the table mode displays the absolute amounts of minerals in mg."
+				]
+			}
+		}, 
+		
+		{
+			"id": 5,
+			"remark": "Lipids",
+			"de": {
+				"title": "Lipide (Fettsäuren)",
+				"content": [
+					"Die in der Nahrung enthaltenen Fettsäuren lassen sich grob in gesättigte, einfach ungesättigte und mehrfach ungesättigte Fettsäuren unterteilen. Letztere bestehen aus Omega-3-Fettsäuren und Omega-6-Fettsäuren.",
+					"Das Diagramm zeigt einmal die grobe Verteilung der Fettsäuren in Prozent an und einmal die Verteilung der mehrfach ungesättigten Fettsäuren (Omega-3/6). Leider gibt es nicht zu allen Lebensmitteln ausreichend Daten, um die Omega-3/6-Verteilung sinnvoll darstellen zu können. Zudem gibt es bei den meisten Lebensmitteln einen gewissen Anteil, bei dem aus den gegebenen Daten unklar ist, ob es sich um Omega-3 oder Omega-6-Fettsäuren handelt. Dieser ist entsprechend grau dargestellt.",
+					"Im Tabellenmodus werden die absoluten Werte der einzelnen Fettsäuren angezeigt. Dort werden zusätzlich noch die Transfettsäuren, die Teil der ungesättigten Fettsäuren sind, sowie Cholesterol aufgelistet. Durch Überlappung der Lipid-Arten ergibt die Summe der Einzelwerte oft mehr als der Gesamtwert an Fettsäuren."
+				]
+			},
+			"en": {
+				"title": "Lipids (fatty acids)",
+				"content": [
+					"Lipids contained by food can be roughly divided into saturated, mono-unsaturated and poly-unsaturated fatty acids, the latter consisting of Omega-3 fatty acids and Omega-6 fatty acids.",
+					"The chart displays the general distribution of the primary fatty acids, as well as the distribution of Omega-3 and Omega-6 fatty acids. Unfortunately, there is not sufficent data for all food items to reliably display their Omega-3 and Omega-6 distribution. Besides, the imported lipids data of some food items is rather unspecific, leading to amounts of poly-unsaturated fatty acids which cannot be unequivocally assigned to Omega-3 or Omega-6 fatty acids. Those amounts are displayed in gray color.",
+					"The table mode displays the absolute values for lipids. In addition to the chart, is also displays data to trans fatty acids and cholesterol. Due to overlapping lipid categories, the sum of the single values may exceed the total amount of lipids in the food."
+				]
+			}
+		},
+		
+		{
+			"id": 6,
+			"remark": "Info",
+			"de": {
+				"title": "Info",
+				"content": [
+					"Auf der Info-Seite werden allgemeine Angaben zu dem ausgewählten Lebensmittel dargestellt. Bei einer Zusammenstellung an Lebensmitteln können einige Daten nicht angezeigt werden."
+				]
+			},
+			"en": {
+				"title": "Info",
+				"content": [
+					"Displays basic data to the selected food item. If a combination of food items is used, some values may not be displayed."
+				]
+			}
+		},
+		
+		{
+			"id": 7,
+			"remark": "Kohlenhydrate",
+			"de": {
+				"title": "Kohlenhydrate",
+				"content": [
+					"Kohlenhydrate lassen sich grob in Einfachzucker (Glukose, Fruktose, Galaktose), Zweichfachzucker (Sukrose, Laktose, Maltose) und Mehrfachzucker gliedern, zu denen bspw. die Stärke gehört.",
+					"Unter <b>Zucker</b> werden allgemein die Einfach- und Zweifachzucker zusammengefasst. Der Begriff darf nicht mit dem handelsüblichen Haushaltszucker <i>Sukrose</i> (Saccharose) verwechselt werden. <b>Ballaststoffe</b> sind weitgehend unverdauliche Mehrfachzucker. Diese beiden Angaben sind bei den meisten Lebensmitteln in Vinus enthalten.",
+					"Die detailierten Daten zu Einfachzuckern, Zweifachzuckern und Stärke sind leider nur bei ausgewählten Lebensmitteln verfügbar."
+				]
+			},
+			"en": {
+				"title": "Carbohydrates",
+				"content": [
+					"Carbohydrates can be grouped into Monosaccharides (Glucose, Fructose, Glucose), Disaccharides (Sucrose, Lactose, Galactose) and Polysaccharides. Starch, for instance, is part of the polysaccharides.",
+					"The term <b>Sugar</b> refers to the amount of monosaccharides and disaccharides. It must not be confused with the common household sugar, which in this context is <i>Sucrose</i>. <b>Dietary fibers</b> are mostly indigestible polysaccharides. Those two values are available for most food items in Vinus.",
+					"Detailed data for monosaccharides, disaccharides and polysaccharides are only available for selected food items, though."
+				]
+			}
+		},
+		
+		{
+			"id": 8,
+			"remark": "Proteine",
+			"de": {
+				"title": "Proteine",
+				"content": [
+					"Diese Ansicht stellt die in den Proteinen des Lebensmittels enthaltenen Aminosäuren dar. Sofern Proteindaten vorliegen zeigt die Tabellenansicht die meisten der 20 verschiedenen Aminosäuren an. Die Diagrammansicht beschränkt sich hingegen auf die essenziellen Aminosäuren, die der Mensch selbst nicht herstellen kann und entsprechend durch die Nahrung aufnehmen muss. Wie bei den Vitaminen und Mineralstoffen ist auch hier der Bezugspunkt der tägliche Bedarf eines Menschen (der Tagesbedarf wird aus den eingestellten User-Daten berechnet)."
+				]
+			},
+			"en": {
+				"title": "Info",
+				"content": [
+					"This view displays the amino acids contained by the food's proteins. If protein data is available, the table mode will display most of the 20 different amino acids. By contrast, the chart view will only display the essential amino acids, which the human body cannot produce on its own. Thus, those amino acids need to be consumed by nutrition. As with the vitamin and mineral chart, the data refers to the daily dietary requirements of an adult (that is, of the body data set in the settings menu)."
+				]
+			}
+		}
+	]
+}

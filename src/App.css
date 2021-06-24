@@ -1,0 +1,271 @@
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+.button-displaymode, .button-displaymode-enabled, .button-displaymode-disabled {
+    width: 40px;
+    font-size: 0.9em;
+    color: white;
+}
+
+.button-displaymode-enabled {
+    background: #bf0f17;
+}
+
+.button-displaymode-disabled {
+    background: rgba(191, 15, 23, 0.5);
+}
+
+.button-foodPanelHead, .button-closeTab {
+    width: 40px;
+    font-size: 0.9em;
+}
+
+.btn-link {
+    color: #969696 !important;
+}
+
+.btn-link.active {
+    color: #0064ff !important;
+    text-decoration: underline;
+}
+
+.chartFormLine {
+    margin-top: 40px;
+}
+
+.foodDataPanel {
+    padding-top: 12px;
+}
+
+@media (min-height: 700px) {
+    .foodDataPanel {
+        padding-top: 16px;
+    }
+}
+
+@media (min-height: 750px) {
+    .foodDataPanel {
+        padding-top: 24px;
+    }
+}
+
+
+.form-button {
+    min-width: 128px;
+    margin-left: 16px;
+}
+
+.form-label {
+    color: #999999;
+    font-weight: bold;
+}
+
+.form-elements {
+    margin-right: 20px;
+}
+
+.form-elements-largespace {
+    margin-right: 50px;
+}
+
+.form-language {
+    font-size: 0.9em;
+}
+
+.form-radiobutton {
+    margin-right: 5px;
+}
+
+.form-row, .form-row-indent {
+    padding-bottom: 20px;
+}
+
+.form-row-indent {
+    margin-left: 24px;
+}
+
+.form-section {
+    padding-bottom: 16px;
+}
+
+.header {
+    background: #d5ce9c;
+    min-height: 84px;
+}
+
+.header-menu {
+    padding-right: 12px;
+}
+
+.header-link {
+    font-size: 0.9em;
+}
+
+.legendItem {
+    width: 6px;
+    height: 6px;
+    font-size: 0.9em;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+.mainPanel {
+    background: #f2f5fd;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding-top: 4px; }
+
+@media (min-width: 640px) {
+    .legendItem {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (min-width: 800px) {
+    .legendItem {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .legendItem {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .legendItem {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+@media (min-width: 800px) {
+    .header-link {
+        margin-top: 14px;
+        min-width: 64px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header-link {
+        margin-top: 12px;
+        min-width: 68px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .header-link {
+        margin-top: 8px;
+        min-width: 76px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .header-link {
+        margin-top: 4px;
+        min-width: 84px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .header-link {
+        margin-top: -2px;
+        min-width: 96px;
+    }
+}
+
+@media (min-width: 2400px) {
+    .header-link {
+        margin-top: -8px;
+        min-width: 112px;
+    }
+}
+
+.header-link.active {
+    color: white;
+}
+
+.header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+.tab-panel {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    background: #b6c9f1 !important;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom: 1px solid black !important;
+}
+
+.tab-sidebar {
+    background: rgba(182, 201, 241, 0.68) !important;
+}
+
+.tab-panel button.tab {
+    border: 1px solid black !important;
+    font-weight: normal;
+    background: #d5e0f7 !important;
+}
+
+.tab-panel button.tab.active {
+    background: #006ab9 !important;
+    color: white;
+    font-weight: bold;
+}
+
+.tab-content {
+    padding: 0px !important;
+}
+
+.tab-infoitem {
+    padding-right: 30px;
+}
+
+.tableHeaderClass {
+    display: none !important;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
