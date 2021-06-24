@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/foodcompare/static/css/main.49d725d1.chunk.css",
+    "main.js": "/foodcompare/static/js/main.52279c8b.chunk.js",
+    "main.js.map": "/foodcompare/static/js/main.52279c8b.chunk.js.map",
+    "runtime-main.js": "/foodcompare/static/js/runtime-main.c0db3316.js",
+    "runtime-main.js.map": "/foodcompare/static/js/runtime-main.c0db3316.js.map",
+    "static/css/2.248a081a.chunk.css": "/foodcompare/static/css/2.248a081a.chunk.css",
+    "static/js/2.47494e03.chunk.js": "/foodcompare/static/js/2.47494e03.chunk.js",
+    "static/js/2.47494e03.chunk.js.map": "/foodcompare/static/js/2.47494e03.chunk.js.map",
+    "static/js/3.9f0952db.chunk.js": "/foodcompare/static/js/3.9f0952db.chunk.js",
+    "static/js/3.9f0952db.chunk.js.map": "/foodcompare/static/js/3.9f0952db.chunk.js.map",
+    "index.html": "/foodcompare/index.html",
+    "static/css/2.248a081a.chunk.css.map": "/foodcompare/static/css/2.248a081a.chunk.css.map",
+    "static/css/main.49d725d1.chunk.css.map": "/foodcompare/static/css/main.49d725d1.chunk.css.map",
+    "static/js/2.47494e03.chunk.js.LICENSE.txt": "/foodcompare/static/js/2.47494e03.chunk.js.LICENSE.txt",
+    "static/media/impressum-english.f6495d9a.png": "/foodcompare/static/media/impressum-english.f6495d9a.png",
+    "static/media/impressum-german.92ba80d6.png": "/foodcompare/static/media/impressum-german.92ba80d6.png",
+    "static/media/notifications.css": "/foodcompare/static/media/notification.c5d9251e.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c0db3316.js",
+    "static/css/2.248a081a.chunk.css",
+    "static/js/2.47494e03.chunk.js",
+    "static/css/main.49d725d1.chunk.css",
+    "static/js/main.52279c8b.chunk.js"
+  ]
+}
