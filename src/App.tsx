@@ -5,15 +5,20 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import {NotificationContainer} from 'react-notifications'
 import ApplicationDataContextProvider from "./contexts/ApplicationDataContext";
 import FoodDataPanelContainer from "./components/fooddatapanel/FoodDataPanelContainer";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "./components/Header";
 import {MENU_FOODDATAPANEL, MENU_HOME, MENU_CONTACT, MENU_RANKING, MENU_SETTINGS} from "./config/Constants";
 import {LanguageProvider} from "./contexts/LangContext";
 import {UserSettings} from "./components/UserSettings";
 import {Contact} from "./components/Contact";
+import ReactTooltip from "react-tooltip";
 
 function App() {
     const [selectedMenu, setSelectedMenu] = useState<string | null>(MENU_FOODDATAPANEL)
+
+    useEffect(() => {
+        ReactTooltip.rebuild()
+    })
 
     const changeMenu = (event: any) => {
         setSelectedMenu(event.target.value)
@@ -27,6 +32,7 @@ function App() {
         <div className="App">
             <div>
                 <NotificationContainer/>
+                <ReactTooltip />
                 <LanguageProvider>
                     <ApplicationDataContextProvider>
                         <Header changeMenu={changeMenu} selectedMenu={selectedMenu}/>

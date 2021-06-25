@@ -2,15 +2,15 @@ import React, {useContext, useState} from 'react'
 import {Button} from 'react-bootstrap'
 
 import FoodSelectorModal from '../foodselector/FoodSelectorModal'
-import {FaLayerGroup, FaPlusSquare, FaTrash} from "react-icons/all";
+import {FaPlusSquare, FaTrash} from "react-icons/all";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-import getName from "../../service/LanguageService";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import FoodDataPage from "./FoodDataPage";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {confirmAction} from "../ConfirmationDialog";
+import ReactTooltip from "react-tooltip";
 
 interface FoodAnalyzerContainerProps {
     onNewFoodItemSelected: () => void
@@ -18,9 +18,10 @@ interface FoodAnalyzerContainerProps {
 
 export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps) {
     const applicationData = useContext(ApplicationDataContextStore)
-    const languageContext= useContext(LanguageContext)
+    const languageContext = useContext(LanguageContext)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(false)
+    const [iconActive, setIconActive] = useState<boolean>(false)
 
     const onHide = (): void => {
         setShowFoodSelector(false)
@@ -51,7 +52,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     }
 
     const onCloseAllTabs = async () => {
-        if( await confirmAction(
+        if (await confirmAction(
             applicationStrings.confirm_close_all_tabs[languageContext.language],
             applicationStrings.button_yes[languageContext.language],
             applicationStrings.button_no[languageContext.language],
@@ -66,7 +67,9 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     }
 
     const selectedFoodItems = applicationData?.applicationData.foodDataPanel.selectedFoodItems
-    const deleteIconEnabled =  selectedFoodItems && selectedFoodItems.length > 0
+    const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
+
+    ReactTooltip.rebuild()
 
     return (
         <div>
@@ -75,8 +78,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit}/>
                 }
 
-                <Button className={"icon"}
-                        onClick={() => setShowFoodSelector(!showFoodSelector)}
+                <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
+                        className={"btn"}
                         data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
                     <FaPlusSquare/>
                 </Button>
