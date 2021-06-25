@@ -128,11 +128,11 @@ export default function Header(props: HeaderProps) {
                             <div className="col-5 text-start" style={{paddingTop: "5px"}}>
                                 <img src={text}/>
                             </div>
-                            <div className="col text-end" style={{paddingTop: "12px"}}>
+                            <div className="col text-end" style={{paddingTop: "6px"}}>
                                 {renderLanguageButtons()}
                             </div>
                         </div>
-                        <div className="row" style={{marginTop: "24px"}}>
+                        <div className="row" style={{marginTop: "3px"}}>
                             <div className="col-md-12 text-start">
                                 {renderMenus()}
                             </div>
