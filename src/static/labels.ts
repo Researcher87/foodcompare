@@ -675,6 +675,10 @@ export const applicationStrings = {
         de: 'Klicken Sie auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden, die dann in separaten Tabs angezeigt werden.',
         en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like -- they will be displayed in separate tabs.'
     },
+    text_empty_fooddatapanel_intro: {
+        de: 'Food Compare ermöglicht das Analysieren der Nährstoffzusammensetzung von Lebensmitteln sowie dem Vergleichen verschiedener Lebensmittel miteinander. Daten werden in verschiedenen Lebensmitteldiagrammen dargestellt und umfassen grundlegende Nährstoffe (Kohlenhydrate, Proteine, Fette), Unterelemente wie Zucker und Ballaststoffe sowie Mikronährstoffe (Vitamine und Mineralstoffe).',
+        en: 'Food Compare allows you do analyze the composition of nutrients within foods and to compare them with each other. The data, which is displayed in different food charts, comprises basic nutrient data (carbohydrates, proteins, fats), sub-elements like sugar and dietary fibers, as well as micronutrients (vitamins and minerals).'
+    },
     text_setUserdata_p1: {
         de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 30 Jahre) angezeigt.',
         en: 'You are currently seeing the reference data for an average adult (male, 30 years).'
