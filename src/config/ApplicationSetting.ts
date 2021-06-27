@@ -1,7 +1,7 @@
 import {SEX_MALE} from "./Constants";
 
-export const release = "1.0"
-export const buildDate = "2020-06-24"
+export const release = "1.0.1"
+export const buildDate = "2021-06-27"
 
 export const minimalOmegaRatio = 0.3
 
