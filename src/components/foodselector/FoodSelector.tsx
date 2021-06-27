@@ -18,6 +18,7 @@ import {LanguageContext} from "../../contexts/LangContext";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
+    compositeSelector: boolean
 }
 
 export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
@@ -109,7 +110,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         const amount = parseInt(e.target.value)
 
-        if(!isNaN(amount)) {
+        if (!isNaN(amount)) {
             setPortionAmount(amount)
         }
     }
@@ -151,11 +152,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined, portion: PortionData | undefined) => {
-        if(!foodItem || !foodClass || !portion) {
+        if (!foodItem || !foodClass || !portion) {
             return
         }
 
-        if(portion.portionType === 0) {
+        if (portion.portionType === 0) {
             portion.amount = portionAmount
         }
 
@@ -167,6 +168,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         props.updateSelectedFoodItem(newFoodItem)
     }
+
+    const amount_label = props.compositeSelector ? `${applicationStrings.label_amount_short[language]}:` : `${applicationStrings.label_amount[language]}:`
 
     return <div>
         <div className="container">
@@ -202,7 +205,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     </div>
                     <div className={"col-md-3"}>
                         <span
-                            className={'form-label'}>{applicationStrings.label_amount[language]}:</span>
+                            className={'form-label'}>{amount_label}</span>
                         <input className="form-control inputfield"
                                disabled={selectedPortion?.value.portionType !== 0}
                                value={portionAmount}

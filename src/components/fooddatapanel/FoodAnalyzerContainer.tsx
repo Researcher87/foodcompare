@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import {Button} from 'react-bootstrap'
 
 import FoodSelectorModal from '../foodselector/FoodSelectorModal'
-import {FaPlusSquare, FaTrash} from "react-icons/all";
+import {FaLayerGroup, FaPlusSquare, FaTrash} from "react-icons/all";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
@@ -21,7 +21,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const languageContext = useContext(LanguageContext)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(false)
-    const [iconActive, setIconActive] = useState<boolean>(false)
+    const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(false)
 
     const onHide = (): void => {
         setShowFoodSelector(false)
@@ -75,19 +75,22 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
         <div>
             <div>
                 {showFoodSelector &&
-                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit}/>
+                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={false}/>
+                }
+                {showFoodAggregatedFoodSelector &&
+                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={true}/>
                 }
 
                 <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
-                        className={"btn"}
+                        className={"icon"}
                         data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
                     <FaPlusSquare/>
                 </Button>
-
-                {/*<Button className={"icon"} data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>*/}
-                {/*    <FaLayerGroup/>*/}
-                {/*</Button>*/}
-
+                <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
+                        className={"icon"}
+                        data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
+                    <FaLayerGroup/>
+                </Button>
                 <Button onClick={() => onCloseAllTabs()}
                         disabled={deleteIconEnabled === false}
                         data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>

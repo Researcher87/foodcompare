@@ -1,4 +1,8 @@
 export const applicationStrings = {
+    button_add: {
+        de: 'Hinzufügen',
+        en: 'Add'
+    },
     button_cancel: {
         de: 'Abbrechen',
         en: 'Cancel'
@@ -13,7 +17,11 @@ export const applicationStrings = {
     },
     button_select: {
         de: 'Auswählen',
-        en: 'Select'
+        en: 'Show'
+    },
+    button_show: {
+        de: 'Anzeigen',
+        en: 'Show'
     },
     button_submit: {
         de: 'Übernehmen',
@@ -50,6 +58,10 @@ export const applicationStrings = {
     label_amount: {
         de: 'Menge (Gramm)',
         en: 'Amount (gram)'
+    },
+    label_amount_short: {
+        de: 'Gramm',
+        en: 'Gram'
     },
     label_category: {
         de: 'Kategorie',
@@ -138,6 +150,10 @@ export const applicationStrings = {
     label_foodselector: {
         de: 'Lebensmittelauswahl',
         en: 'Food Selector'
+    },
+    label_foodselector_composite: {
+        de: 'Zusammenstellung eines Lebensmittels',
+        en: 'Composite food generation'
     },
     label_info: {
         de: 'Info',
@@ -560,8 +576,8 @@ export const applicationStrings = {
         en: 'The form is incomplete.'
     },
     message_error_invalid_portion: {
-        de: 'Geben Sie bitte eine Portion zwischen 1 und 1000 Gramm an.',
-        en: 'Please specify a portion amount between 1 and 1000 gram.'
+        de: 'Geben Sie bitte eine Portion zwischen 1 und 5000 Gramm an.',
+        en: 'Please specify a portion amount between 1 and 5000 gram.'
     },
     message_userdata_success: {
         de: 'Änderungen wurden gespeichert.',
