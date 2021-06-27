@@ -12,11 +12,15 @@ import {LanguageProvider} from "./contexts/LangContext";
 import {UserSettings} from "./components/UserSettings";
 import {Contact} from "./components/Contact";
 import ReactTooltip from "react-tooltip";
+import ReactGa from "react-ga"
+import {ANALYTICS_MESS_ID} from "./config/GoogleTools";
 
 function App() {
     const [selectedMenu, setSelectedMenu] = useState<string | null>(MENU_FOODDATAPANEL)
 
     useEffect(() => {
+        ReactGa.initialize(ANALYTICS_MESS_ID)
+        ReactGa.pageview("/")
         ReactTooltip.rebuild()
     })
 
