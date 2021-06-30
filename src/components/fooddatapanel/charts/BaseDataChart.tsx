@@ -177,6 +177,9 @@ export default function BaseDataChart(props: ChartProps) {
 
     const renderTotalChart = () => {
         const totalChartData = createTotalChartData();
+        if(!totalChartData) {
+            return <div/>
+        }
 
         return (
             <div>

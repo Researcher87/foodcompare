@@ -4,6 +4,7 @@ export const release = "1.0.1"
 export const buildDate = "2021-06-27"
 
 export const minimalOmegaRatio = 0.3
+export const maximalPortionSize = 5000
 
 export const initialUserDataAge = 35
 export const initialUserDataSize = 175

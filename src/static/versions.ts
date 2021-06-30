@@ -17,5 +17,16 @@ export const versions = [
         bugfixes: [
             "Solved problem with tool tips on icons not showing after website was first rendered (or menu was changed)."
         ]
+    },
+    {
+        id: "1.0.2",
+        date: "01-07-2021",
+        subject: "Further style adaptions and bug fixes",
+        updates: [
+            "Changed Google Analytics to G4 standard."
+        ],
+        bugfixes: [
+            "Solved some typescript errors (null check for chart data)."
+        ]
     }
 ]
