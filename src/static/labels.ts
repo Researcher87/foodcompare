@@ -143,14 +143,6 @@ export const applicationStrings = {
         de: 'Info',
         en: 'Info'
     },
-    label_info_1: {
-        de: 'Allgemein',
-        en: 'General'
-    },
-    label_info_2: {
-        de: 'Portionsdaten',
-        en: 'Portion data'
-    },
     label_info_category: {
         de: 'Kategorie',
         en: 'Category'
@@ -166,6 +158,10 @@ export const applicationStrings = {
     label_info_foodName: {
         de: 'Lebensmittel',
         en: 'Food'
+    },
+    label_info_portion: {
+        de: 'Portionsdaten',
+        en: 'Portion data'
     },
     label_info_portionType: {
         de: 'Portionstyp',

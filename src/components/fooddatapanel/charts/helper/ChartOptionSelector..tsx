@@ -18,7 +18,7 @@ export function ChartOptionSelector(props: ChartProps) {
     const languageContext = useContext(LanguageContext)
 
     return (
-        <div className="container" style={{paddingTop: "32px"}}>
+        <div className="container">
             <div className="row">
                 <form className="form-inline form-group">
                     <Form.Label className="form-elements">

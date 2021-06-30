@@ -6,6 +6,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeService";
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
+import {defaultPanelHeight} from "../../../config/ApplicationSetting";
 
 interface InfoDataProps {
     selectedFoodItem: SelectedFoodItem
@@ -136,15 +137,14 @@ export function InfoData(props: InfoDataProps) {
 
 
     return (
-        <div style={{padding: "15px"}}>
+        <div style={{height: defaultPanelHeight, padding: "15px"}}>
             {props.selectedFoodItem.foodItem.foodClass !== 0 &&
             <div>
                 <div>
-                    <h5>{applicationStrings.label_info_1[lang]}</h5>
                     {renderSubTable(getGeneralTableData())}
                 </div>
                 <div style={{paddingTop: "30px"}}>
-                    <h5>{applicationStrings.label_info_2[lang]}</h5>
+                    <h5>{applicationStrings.label_info_portion[lang]}</h5>
                     {renderSubTable(getTableDataPortion())}
                 </div>
             </div>

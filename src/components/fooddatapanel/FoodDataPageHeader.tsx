@@ -166,7 +166,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const foodName = getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, props.selectedFoodItem.foodItem.nameId, languageContext.language)
 
     return (
-        <div style={{paddingBottom: "35px"}}>
+        <div style={{paddingBottom: "6px"}}>
             <div className={"row d-flex flex-nowrap"}>
                 <div className="col-md-2 col-sm-3">
                     <div className={"card"}>
