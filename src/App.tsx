@@ -56,4 +56,19 @@ function App() {
     );
 }
 
+(async () => {
+    try {   // NOTE: uBlock Origin may cause a crash here
+        await ga4react.initialize();
+    } catch(e) {
+        console.error(e)
+    }
+
+    render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById("root")
+    );
+})();
+
 export default App;
