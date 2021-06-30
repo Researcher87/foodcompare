@@ -11,6 +11,7 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";
 import {max_portion} from "../../config/ChartConfig";
+import {maximalPortionSize} from "../../config/ApplicationSetting";
 
 interface FoodSelectorModalProps {
     onHide: () => void,
@@ -46,7 +47,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
         if (!selectedFoodItem || !selectedFoodItem.foodItem || !selectedFoodItem.foodClass || !selectedFoodItem.portion) {
             NotificationManager.error(applicationStrings.message_error_incomplete_form[language])
-        } else if (selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > 1000) {
+        } else if (selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
             NotificationManager.error(applicationStrings.message_error_invalid_portion[language])
         } else {
             props.selectedFoodItemCallback(selectedFoodItem)

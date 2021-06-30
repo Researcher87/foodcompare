@@ -560,8 +560,8 @@ export const applicationStrings = {
         en: 'The form is incomplete.'
     },
     message_error_invalid_portion: {
-        de: 'Geben Sie bitte eine Portion zwischen 1 und 1000 Gramm an.',
-        en: 'Please specify a portion amount between 1 and 1000 gram.'
+        de: 'Geben Sie bitte eine Portion zwischen 1 und 5000 Gramm an.',
+        en: 'Please specify a portion amount between 1 and 5000 gram.'
     },
     message_userdata_success: {
         de: 'Änderungen wurden gespeichert.',
@@ -577,11 +577,11 @@ export const applicationStrings = {
     },
     message_userdata_error_size: {
         de: 'Geben Sie bitte eine Körpergröße zwischen 80 und 225 cm ein.',
-        en: 'Please enter an age between 15 and 100 years.'
+        en: 'Please enter a body height between 80 and 225 cm.'
     },
     message_userdata_error_weight: {
         de: 'Geben Sie bitte ein Gewicht zwischen 30 und 250 kg ein.',
-        en: 'Please enter a body weight between 30 and 500 kg.'
+        en: 'Please enter a body weight between 30 and 250 kg.'
     },
     palcat_name_1: {
         de: 'Extrem niedrige Aktivität',
