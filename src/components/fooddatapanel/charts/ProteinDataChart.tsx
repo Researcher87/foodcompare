@@ -180,9 +180,13 @@ export default function ProteinDataChart(props: ChartProps) {
     }
 
     const data = createProteinChartData();
+    if(!data) {
+        return <div/>
+    }
+
     const maxValue = (data && data.datasets && data.datasets.length > 0) ? Math.max(...data.datasets[0].data) : 0;
     const options = getOptions(applicationStrings.label_charttype_proteins[lang], maxValue);
-    const dataExists = data && data.datasets && data.datasets[0].data && data.datasets[0].data.length > 0
+    const dataExists = data.datasets && data.datasets[0].data && data.datasets[0].data.length > 0
 
     return (
         <div className="container-fluid">

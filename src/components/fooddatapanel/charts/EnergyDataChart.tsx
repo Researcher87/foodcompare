@@ -97,6 +97,9 @@ export default function EnergyDataChart(props: ChartProps) {
     }
 
     const data = createEnergyLevelChart();
+    if(!data) {
+        return <div/>
+    }
 
     return (
         <div className="container-fluid">

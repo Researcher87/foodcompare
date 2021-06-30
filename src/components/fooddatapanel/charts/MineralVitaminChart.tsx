@@ -277,6 +277,10 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const data = props.selectedSubChart === CHART_VITAMINS ? createVitaminChartData() : createMineralChartData();
+    if(!data) {
+        return <div/>
+    }
+
     const maxValue = (data && data.datasets && data.datasets.length > 0) ? Math.max(...data.datasets[0].data) : 0;
 
     const title = props.selectedSubChart === CHART_VITAMINS ? applicationStrings.label_charttype_vitamins[lang] :
