@@ -23,6 +23,7 @@ import FoodDataPageBody from "./FoodDataPageBody";
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
 import {HelpModal} from "../HelpModal";
 import {getHelpText, HelpText} from "../../service/HelpService";
+import getName from "../../service/LanguageService";
 
 
 interface FoodDataPageHeaderProps {
@@ -163,7 +164,14 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const tablesButtonClasses = props.displayMode === DISPLAYMODE_TABLE ? enabledDisplayButtonClasses
         : disabledDisplayButtonClasses;
 
-    const foodName = getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, props.selectedFoodItem.foodItem.nameId, languageContext.language)
+    const foodNamesList = applicationContext.foodDataCorpus.foodNames;
+
+    const foodName = getNameFromFoodNameList(foodNamesList, props.selectedFoodItem.foodItem.nameId, languageContext.language)
+    const condition = applicationContext.foodDataCorpus.conditions.find(condition => condition.id = props.selectedFoodItem.foodItem.conditionId)
+    const conditionName = condition ? getName(condition, languageContext.language) : ""
+    const portionSize = props.selectedFoodItem.portion.amount
+
+    const fullName = `${foodName} (${conditionName}, ${portionSize} g)`
 
     return (
         <div style={{paddingBottom: "6px"}}>
@@ -179,7 +187,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                     <div className="row d-flex flex-nowrap" style={{marginTop: "10px"}}>
                         <div className="col-md-8" style={{paddingTop: "6px", paddingLeft: "32px"}}>
                             <div style={{borderBottom: "1px solid #BBBBBB", paddingLeft: "12px"}}>
-                                <b>{foodName}</b>
+                                <b>{fullName}</b>
                             </div>
                         </div>
                         <div className="col-md-auto">
