@@ -84,6 +84,10 @@ export default function CarbsDataChart(props: ChartProps) {
         const valueMaltose = carbohydrateData.maltose !== null ? autoRound(carbohydrateData.maltose / totalAmount * 100) : null;
         const valueStarch = carbohydrateData.starch !== null ? autoRound(carbohydrateData.starch / totalAmount * 100) : null;
 
+        if (!valueMaltose && !valueSucrose && !valueLactose && !valueGlucose && !valueFructose && !valueGalactose) {
+            return null
+        }
+
         let valueMisc = 100
         const labels: Array<String> = []
         const values: Array<number> = []
@@ -338,9 +342,9 @@ export default function CarbsDataChart(props: ChartProps) {
                     renderChart(detailChartData)
                     }
                     {!detailChartData && chartSelection === Constants.CARBS_DATA_DETAIL &&
-                    <p className="text-center" style={{height: ChartConfig.default_chart_height}}>
+                    <div style={{height: ChartConfig.default_chart_height}}>
                         {applicationStrings.label_noData[lang]}
-                    </p>
+                    </div>
                     }
                 </div>
 
