@@ -293,9 +293,9 @@ export default function CarbsDataChart(props: ChartProps) {
     const renderChart = (data: any) => {
         if (!data) {
             return (
-                <p className="text-center" style={{height: ChartConfig.default_chart_height}}>
+                <div style={{height: ChartConfig.default_chart_height}}>
                     {applicationStrings.label_noData[lang]}
-                </p>
+                </div>
             )
         }
 

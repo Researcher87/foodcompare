@@ -99,7 +99,7 @@ export default function EnergyDataChart(props: ChartProps) {
 
     const data = createEnergyLevelChart();
     if(!data) {
-        return <div/>
+        return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
     }
 
     return (

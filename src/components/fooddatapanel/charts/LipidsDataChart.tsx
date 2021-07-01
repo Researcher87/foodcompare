@@ -212,7 +212,7 @@ export default function LipidsDataChart(props: ChartProps) {
         let data
         if (lipidsType === Constants.LIPIDS_DATA_BASE) {
             if (!saturated || !unsaturatedMono || !unsaturatedPoly) {
-                return <div>{applicationStrings.label_noData[lang]}</div>
+                return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
             }
             data = createTotalChartData(totalLipidsAmount, saturated, unsaturatedMono, unsaturatedPoly);
         } else if (lipidsType === Constants.LIPIDS_DATA_OMEGA) {
@@ -220,11 +220,16 @@ export default function LipidsDataChart(props: ChartProps) {
                 data = createOmegaChartData(totalLipidsAmount, omegaData)
             }
 
+            if(!omegaData) {
+                return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+            }
         }
 
         if(!data) {
             return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
         }
+
+        console.log('Oh')
 
         return (
             <div>
@@ -261,9 +266,7 @@ export default function LipidsDataChart(props: ChartProps) {
                     renderChart(Constants.LIPIDS_DATA_OMEGA)
                     }
                     {!omegaDataAvailabe && chartSelection === Constants.LIPIDS_DATA_OMEGA &&
-                    <p className="text-center" style={{height: ChartConfig.default_chart_height}}>
-                        {applicationStrings.label_noData[lang]}
-                    </p>
+                         <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
                     }
                 </div>
 
