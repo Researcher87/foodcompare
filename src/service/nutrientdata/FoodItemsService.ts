@@ -25,12 +25,8 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
             }
             const nameType = foodNames[nameId-1]
             let foodName = getName(nameType, language)
-
-            const conditionIndex = conditions.findIndex(condition => {
-                return condition.id === foodItem.conditionId
-            })
-
-            const conditionName = conditionIndex >= 0 ? getName(conditions[conditionIndex], language) : null
+            const condition = conditions.find(condition => condition.id === foodItem.conditionId)
+            const conditionName =condition ? getName(condition, language) : null
 
             if(conditionName) {
                 foodName = `${foodName} (${conditionName})`
