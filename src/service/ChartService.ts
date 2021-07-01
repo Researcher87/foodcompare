@@ -2,12 +2,25 @@
  * Returns a default-styled configuration for a bar chart.
  *
  * title: The charts title.
- * maxScalesY: Optional, the maximum Y value.
- * scaleLabelY: Optional, the label (unit) for the Y-axis.
+ * unit: The unit to use for the axis title and tooltip.
+ * minYValue: Optional, a pre-defined maxYValue for the Y axis (e.g. 100)
  */
 import {shortenName} from "./nutrientdata/NameTypeService";
 
-export function getBarChartOptions(title: string, unit: string, scalesObject?: any | undefined) {
+export function getBarChartOptions(title: string, unit: string, maxYValue?: number | undefined) {
+    let yAxis: any = {
+        title: {
+            display: true,
+            text: unit
+        }
+    }
+
+    if(maxYValue) {
+        yAxis = {...yAxis, min: 0, max: maxYValue}
+    }
+
+    const scalesObject = {y: yAxis}
+
     return getOptions(title, unit, scalesObject);
 }
 
@@ -38,7 +51,7 @@ function getOptions(title: string, unit: string, scalesObject?: any | undefined)
         }
     }
 
-    if(scalesObject !== undefined) {
+    if (scalesObject !== undefined) {
         options = {...options, scales: scalesObject}
     }
 
@@ -56,11 +69,10 @@ function getToolTips(unit: string) {
 }
 
 
-
 function getScalesForRankingChart(unit: string) {
     let scaleLabel: any | null = null;
 
-    if(unit) {
+    if (unit) {
         scaleLabel = {
             display: true,
             labelString: unit
@@ -68,7 +80,7 @@ function getScalesForRankingChart(unit: string) {
     }
 
     let axesObj = {};
-    if(scaleLabel) {
+    if (scaleLabel) {
         axesObj["scaleLabel"] = scaleLabel;
     }
 
@@ -79,7 +91,7 @@ function getScalesForRankingChart(unit: string) {
         xAxes: [{
             ticks: {
                 autoSkip: false,
-                callback: function(value, index, values) {
+                callback: function (value, index, values) {
                     return shortenName(value, 24);
                 }
             }

@@ -128,18 +128,8 @@ export default function ProteinDataChart(props: ChartProps) {
     }
 
     const getOptions = (title, maxValue) => {
-        let scales: any = undefined
-        if(expand100 && maxValue < 100) {
-            scales = {
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            }
-        }
-
-
-        return getBarChartOptions(title, "%", scales);
+        const maxYvalue = expand100 ? 100 : undefined
+        return getBarChartOptions(title, "%", maxYvalue);
     }
 
     const renderFormLine = () => {
