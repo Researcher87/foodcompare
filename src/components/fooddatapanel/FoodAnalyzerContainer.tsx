@@ -21,7 +21,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const languageContext = useContext(LanguageContext)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(false)
-    const [iconActive, setIconActive] = useState<boolean>(false)
 
     const onHide = (): void => {
         setShowFoodSelector(false)

@@ -167,15 +167,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const foodNamesList = applicationContext.foodDataCorpus.foodNames;
 
     const foodName = getNameFromFoodNameList(foodNamesList, props.selectedFoodItem.foodItem.nameId, languageContext.language)
-
-    console.log('AA:', props.selectedFoodItem.foodItem.conditionId)
-    console.log('BB:', applicationContext.foodDataCorpus.conditions)
-
     const condition = applicationContext.foodDataCorpus.conditions.find(condition => condition.id === props.selectedFoodItem.foodItem.conditionId)
     const conditionName = condition ? getName(condition, languageContext.language) : ""
     const portionSize = props.selectedFoodItem.portion.amount
-
-    console.log('CCC:',  condition)
 
     const fullName = `${foodName} (${conditionName}, ${portionSize} g)`
 
