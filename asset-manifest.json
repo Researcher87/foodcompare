@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/foodcompare/static/css/main.4801eb6b.chunk.css",
-    "main.js": "/foodcompare/static/js/main.97654fa6.chunk.js",
-    "main.js.map": "/foodcompare/static/js/main.97654fa6.chunk.js.map",
+    "main.css": "/foodcompare/static/css/main.39034203.chunk.css",
+    "main.js": "/foodcompare/static/js/main.3574ecf4.chunk.js",
+    "main.js.map": "/foodcompare/static/js/main.3574ecf4.chunk.js.map",
     "runtime-main.js": "/foodcompare/static/js/runtime-main.339934ed.js",
     "runtime-main.js.map": "/foodcompare/static/js/runtime-main.339934ed.js.map",
     "static/css/2.0c21a86f.chunk.css": "/foodcompare/static/css/2.0c21a86f.chunk.css",
-    "static/js/2.328a614a.chunk.js": "/foodcompare/static/js/2.328a614a.chunk.js",
-    "static/js/2.328a614a.chunk.js.map": "/foodcompare/static/js/2.328a614a.chunk.js.map",
+    "static/js/2.0fb31a23.chunk.js": "/foodcompare/static/js/2.0fb31a23.chunk.js",
+    "static/js/2.0fb31a23.chunk.js.map": "/foodcompare/static/js/2.0fb31a23.chunk.js.map",
     "static/js/3.11650d05.chunk.js": "/foodcompare/static/js/3.11650d05.chunk.js",
     "static/js/3.11650d05.chunk.js.map": "/foodcompare/static/js/3.11650d05.chunk.js.map",
     "index.html": "/foodcompare/index.html",
     "static/css/2.0c21a86f.chunk.css.map": "/foodcompare/static/css/2.0c21a86f.chunk.css.map",
-    "static/css/main.4801eb6b.chunk.css.map": "/foodcompare/static/css/main.4801eb6b.chunk.css.map",
-    "static/js/2.328a614a.chunk.js.LICENSE.txt": "/foodcompare/static/js/2.328a614a.chunk.js.LICENSE.txt",
+    "static/css/main.39034203.chunk.css.map": "/foodcompare/static/css/main.39034203.chunk.css.map",
+    "static/js/2.0fb31a23.chunk.js.LICENSE.txt": "/foodcompare/static/js/2.0fb31a23.chunk.js.LICENSE.txt",
     "static/media/impressum-english.f6495d9a.png": "/foodcompare/static/media/impressum-english.f6495d9a.png",
     "static/media/impressum-german.92ba80d6.png": "/foodcompare/static/media/impressum-german.92ba80d6.png",
     "static/media/notifications.css": "/foodcompare/static/media/notification.c5d9251e.ttf"
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.339934ed.js",
     "static/css/2.0c21a86f.chunk.css",
-    "static/js/2.328a614a.chunk.js",
-    "static/css/main.4801eb6b.chunk.css",
-    "static/js/main.97654fa6.chunk.js"
+    "static/js/2.0fb31a23.chunk.js",
+    "static/css/main.39034203.chunk.css",
+    "static/js/main.3574ecf4.chunk.js"
   ]
 }
