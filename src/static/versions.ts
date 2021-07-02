@@ -15,18 +15,26 @@ export const versions = [
             "Added Google Analytics and Google Adsense Configuration."
         ],
         bugfixes: [
-            "Solved problem with tool tips on icons not showing after website was first rendered (or menu was changed)."
+            "Solved problem with tool tips on icons not showing after website was first rendered (or menu was changed).",
         ]
     },
     {
         id: "1.0.2",
-        date: "01-07-2021",
+        date: "02-07-2021",
         subject: "Further style adaptions and bug fixes",
         updates: [
-            "Changed Google Analytics to G4 standard."
+            "The food data panel has a unique height for all data menus now.",
+            "Changed Google Analytics to G4 standard.",
+            "Changed table data layout.",
+            "Extended the food name displayed in the data panel (now also displays condition and portion amount).",
+            "Solved other minor styling issues.",
+            "German language is detected and set automatically now.",
+            "Food tab names also change now when the language is changed."
         ],
         bugfixes: [
-            "Solved some typescript errors (null check for chart data)."
+            "Solved some typescript errors (null check for chart data).",
+            "Wrong condition names on the information page and in the food list selector have been corrected.",
+            "If no detailed carb data is available, no chart will be generated instead of a 100 % remainder chart."
         ]
     }
 ]
