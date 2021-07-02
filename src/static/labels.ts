@@ -143,14 +143,6 @@ export const applicationStrings = {
         de: 'Info',
         en: 'Info'
     },
-    label_info_1: {
-        de: 'Allgemein',
-        en: 'General'
-    },
-    label_info_2: {
-        de: 'Portionsdaten',
-        en: 'Portion data'
-    },
     label_info_category: {
         de: 'Kategorie',
         en: 'Category'
@@ -166,6 +158,10 @@ export const applicationStrings = {
     label_info_foodName: {
         de: 'Lebensmittel',
         en: 'Food'
+    },
+    label_info_portion: {
+        de: 'Portionsdaten',
+        en: 'Portion data'
     },
     label_info_portionType: {
         de: 'Portionstyp',
@@ -652,8 +648,8 @@ export const applicationStrings = {
         en: 'All rights reserved.'
     },
     text_contact_disclaimer2: {
-        de: 'FoodCompare basiert auf freien Datenquellen, die im Quellenabschnitt weiter unten aufgelistet sind. Es besteht keinerlei Garantie für die Korrektheit oder Zuverlässigkeit der ins Projekt geladenen und im Projekt verwendeten Daten. Vinus ist ein freies Programm zur Visualisierung von Nährwerten in Lebensmitteln, das in keiner Weise medizinische oder biologische Befunde ersetzt, sondern lediglich bestehende Nährwertdaten und -quellen grafisch aufbereitet darstellt.',
-        en: 'FoodCompare is based upon free data sources listed in the sources section below. There is no warranty for the correctness or reliability of the data imported to and used within the project. Vinus is a free visualization tool for food nutrients, which does not replace in any way medical or biological food and nutrient data sources and will merely supplement existing food nutrient sources for laypeople that are interested in this matter.'
+        de: 'Food Compare basiert auf freien Datenquellen, die im Quellenabschnitt weiter unten aufgelistet sind. Es besteht keinerlei Garantie für die Korrektheit oder Zuverlässigkeit der ins Projekt geladenen und im Projekt verwendeten Daten. Vinus ist ein freies Programm zur Visualisierung von Nährwerten in Lebensmitteln, das in keiner Weise medizinische oder biologische Befunde ersetzt, sondern lediglich bestehende Nährwertdaten und -quellen grafisch aufbereitet darstellt.',
+        en: 'Food Compare is based upon free data sources listed in the sources section below. There is no warranty for the correctness or reliability of the data imported to and used within the project. Vinus is a free visualization tool for food nutrients, which does not replace in any way medical or biological food and nutrient data sources and will merely supplement existing food nutrient sources for laypeople that are interested in this matter.'
     },
     text_contact_source1: {
         de: 'Quellen:',

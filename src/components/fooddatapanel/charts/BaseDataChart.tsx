@@ -9,6 +9,7 @@ import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
 import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
 import {CustomLegend} from "./helper/CustomLegend";
+import {default_chart_height} from "../../../config/ChartConfig";
 
 export default function BaseDataChart(props: ChartProps) {
     const languageContext = useContext(LanguageContext)
@@ -235,7 +236,7 @@ export default function BaseDataChart(props: ChartProps) {
         <div className="container-fluid">
             <div className="d-flex">
                 <div className="d-inline-block">
-                    <div className="row">
+                    <div className="row" style={{height: default_chart_height}}>
                         <div className="col-6">
                             <div>{renderTotalChart()}</div>
                         </div>

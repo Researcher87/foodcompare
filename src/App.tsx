@@ -65,7 +65,11 @@ function App(): JSX.Element {
 
 (async () => {
     await ga4react.initialize();
-
+    try {   // NOTE: uBlock Origin may cause a crash here
+        await ga4react.initialize();
+    } catch(e) {
+        console.error(e)
+    }
     render(
         <React.StrictMode>
             <App />

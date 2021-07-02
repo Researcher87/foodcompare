@@ -52,7 +52,7 @@ export function Contact() {
                 <div className="col-6" style={{paddingBottom: "40px", paddingRight: "80px"}}>
                     <div>
                         <h1>
-                            FoodCompare
+                            Food Compare
                         </h1>
                         <h6>
                             Version {release}
