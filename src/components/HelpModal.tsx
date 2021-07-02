@@ -23,11 +23,10 @@ export function HelpModal(props: HelpModalProps): ReactElement {
                     <div className="modal-header">
                         <h5 className="modal-title">{props.helpText.title}</h5>
                         <button type="button"
-                                className="close"
+                                className="btn-close"
                                 data-dismiss="modal"
                                 aria-label="Close"
                                 onClick={props.closeHelpModal}>
-                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div className="modal-body">
