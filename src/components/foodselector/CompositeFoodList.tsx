@@ -24,7 +24,7 @@ export function CompositeFoodList(props: CompositeFoodListProps) {
 
     const renderLine = (selectedFoodItem: SelectedFoodItem, index: number) => {
         if(applicationContext) {
-            const name = getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, selectedFoodItem.foodItem.nameId, languageContext.language)
+            const name = getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, selectedFoodItem.foodItem.nameId!!, languageContext.language)
 
             return <div className={"row"}
                         key={`composite food list ${index}`}

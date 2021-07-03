@@ -144,7 +144,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updatePortionsList = (foodItem: FoodItem) => {
-        const portionDataList = getPortionReactSelectList(foodItem.portionData, applicationData.foodDataCorpus.portionTypes, language)
+        const portionDataList = getPortionReactSelectList(foodItem.portionData!!, applicationData.foodDataCorpus.portionTypes, language)
         setPortionsList(portionDataList)
         const defaultPortion = getDefaultPortionData(foodItem, portionDataList)
         setSelectedPortion(defaultPortion)

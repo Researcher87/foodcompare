@@ -12,6 +12,7 @@ import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";
 import {CompositeFoodList} from "./CompositeFoodList";
 import {maximalPortionSize} from "../../config/ApplicationSetting";
+import combineFoodItems from "../../service/FoodDataAggregationService";
 
 export interface FoodSelectorModalProps {
     onHide: () => void,
@@ -80,9 +81,15 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const onSubmitComposite = () => {
+        const aggregatedSelectedFoodItem = combineFoodItems(compositeList)
+        console.log('Composite:', aggregatedSelectedFoodItem)
 
-        console.log('Composite:', compositeList)
+        if(!aggregatedSelectedFoodItem) {
+            console.error('Error while creating aggregated food item.')
+        }
 
+        props.selectedFoodItemCallback(aggregatedSelectedFoodItem)
+        props.onHide()
     }
 
     const title = props.compositeSelector ? applicationStrings.label_foodselector_composite[language] : applicationStrings.label_foodselector[language]

@@ -2,13 +2,14 @@ import Source from './Source'
 
 export default interface FoodItem {
 	id: number
-	foodClass: number
-	usdaId: string
-	conditionId: number
-	nameId: number
-	defaultPortionId: number
-	portionData: Array<PortionData>
+	foodClass?: number
+	usdaId?: string
+	conditionId?: number
+	nameId?: number
+	defaultPortionId?: number
+	portionData?: Array<PortionData>
 	nutrientDataList: Array<NutrientData>
+	aggregated?: Boolean
 }
 
 export interface PortionData {

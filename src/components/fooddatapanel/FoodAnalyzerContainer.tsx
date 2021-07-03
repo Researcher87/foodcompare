@@ -32,8 +32,14 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             return
         }
 
-        const foodName = getNameFromFoodNameList(applicationData.foodDataCorpus.foodNames,
-            selectedFoodItem.foodItem.nameId, languageContext.language)
+        let foodName
+        if(selectedFoodItem.foodItem.nameId) {
+            foodName = getNameFromFoodNameList(applicationData.foodDataCorpus.foodNames,
+                selectedFoodItem.foodItem.nameId, languageContext.language)
+        } else {
+            foodName = 'Individual'
+        }
+
         if (foodName === null) {
             console.error('No food name available.')
             return

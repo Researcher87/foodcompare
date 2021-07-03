@@ -3,7 +3,7 @@ import FoodClass from "../nutrientdata/FoodClass";
 
 export default interface SelectedFoodItem {
     foodItem: FoodItem
-    foodClass: FoodClass
+    foodClass?: FoodClass
     portion: PortionData
     tab?: string
     component?: JSX.Element
