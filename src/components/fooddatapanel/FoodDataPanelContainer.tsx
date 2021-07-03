@@ -49,7 +49,6 @@ export default function FoodDataPanelContainer() {
             <div className="row">
                 <div className={"col-2"}>
                     <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}/>
-                    <div>Platzhalter</div>
                 </div>
                 <div className="col-10" style={{maxWidth: "1100px", marginTop: "-10px"}}>
                     {selectedFoodItems && selectedFoodItems.length > 0 ?
@@ -57,7 +56,10 @@ export default function FoodDataPanelContainer() {
                             <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
                         </div>
                         :
-                        <div style={{padding: "24px"}}><i>{applicationStrings.text_empty_fooddatapanel[languageContext.language]}</i></div>
+                        <div style={{padding: "24px"}}><i>
+                            {applicationStrings.text_empty_fooddatapanel_intro[languageContext.language]}
+                            <br/><br/>
+                            {applicationStrings.text_empty_fooddatapanel[languageContext.language]}</i></div>
                     }
                 </div>
             </div>

@@ -82,7 +82,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                 }
 
                 <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
-                        className={"icon"}
+                        className={"btn"}
+                        style={{marginRight: "12px"}}
                         data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
                     <FaPlusSquare/>
                 </Button>

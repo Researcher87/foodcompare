@@ -1,22 +1,22 @@
-import {Component, createContext, ReactElement, useContext, useEffect, useState} from "react";
+import {Component, createContext, ReactElement} from "react";
 import * as NutrientDataImportService from "../service/NutrientDataImportService";
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
-import NameType from "../types/nutrientdata/NameType";
-import Source from "../types/nutrientdata/Source";
-import FoodClass from "../types/nutrientdata/FoodClass";
-import FoodItem from "../types/nutrientdata/FoodItem";
-import DietaryRequirement from "../types/nutrientdata/DietaryRequirement";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
-import {ApplicationData, FoodDataPanelData} from "../types/livedata/ApplicationData";
-import {DISPLAYMODE_CHART, SEX_MALE} from "../config/Constants";
-import {applicationStrings} from "../static/labels";
+import {ApplicationData} from "../types/livedata/ApplicationData";
+import {DISPLAYMODE_CHART} from "../config/Constants";
 import {UserData} from "../types/livedata/UserData";
 import {
     initialUserDataAge,
     initialUserDataBreastfeeding,
     initialUserDataLeisureSports,
-    initialUserDataPalValue, initialUserDataPregnant, initialUserDataSex, initialUserDataSize, initialUserDataWeight
+    initialUserDataPalValue,
+    initialUserDataPregnant,
+    initialUserDataSex,
+    initialUserDataSize,
+    initialUserDataWeight
 } from "../config/ApplicationSetting";
+import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
+import NameType from "../types/nutrientdata/NameType";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
@@ -29,6 +29,7 @@ export interface ApplicationDataContext {
     removeItemFromFoodDataPanel: (number) => void
     removeAllItemsFromFoodDataPanel: () => void
     setUserData: (userData: UserData) => void
+    updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void
 }
 
 export const ApplicationDataContextStore = createContext<ApplicationDataContext | null>(null)
@@ -107,6 +108,29 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         })
     }
 
+    updateAllFoodItemNames = (foodNames: Array<NameType>, newLanguage: string) => {
+        const selectedFoodItems = this.state.applicationData.foodDataPanel.selectedFoodItems
+        const newFoodItems = selectedFoodItems.map(selectedFoodItem => {
+            const foodName = getNameFromFoodNameList(foodNames,
+                selectedFoodItem.foodItem.nameId, newLanguage)
+            if(foodName) {
+                selectedFoodItem = {...selectedFoodItem, tab: foodName}
+            }
+            return selectedFoodItem
+        })
+
+        this.setState({
+            ...this.state,
+            applicationData: {
+                ...this.state.applicationData,
+                foodDataPanel: {
+                    ...this.state.applicationData.foodDataPanel,
+                    selectedFoodItems: newFoodItems,
+                }
+            }
+        })
+    }
+
     state: ApplicationDataContext = {
         foodDataCorpus: {
             categories: [],
@@ -143,7 +167,8 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         addItemToFoodDataPanel: this.addItemToFoodDataPanel,
         removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
         removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
-        setUserData: this.setUserData
+        setUserData: this.setUserData,
+        updateAllFoodItemNames: this.updateAllFoodItemNames
     }
 
 

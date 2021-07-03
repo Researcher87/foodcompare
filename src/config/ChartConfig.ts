@@ -27,7 +27,7 @@ export const basedata_chart_height = 300;
 export const basedata_piechart_width = 300;
 export const basedata_barchart_width = 380;
 
-export const default_chart_height = 400;
+export const default_chart_height = 380;
 export const default_chart_width = 800;
 
 export const energy_chart_height = 413;

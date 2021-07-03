@@ -7,6 +7,7 @@ import {getBarChartOptions} from "../../../service/ChartService";
 import {applicationStrings} from "../../../static/labels";
 import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/calculation/EnergyService";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
+import {default_chart_height} from "../../../config/ChartConfig";
 
 export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -97,6 +98,9 @@ export default function EnergyDataChart(props: ChartProps) {
     }
 
     const data = createEnergyLevelChart();
+    if(!data) {
+        return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+    }
 
     return (
         <div className="container-fluid">
@@ -105,7 +109,7 @@ export default function EnergyDataChart(props: ChartProps) {
                     <div>
                         <Bar
                             data={data}
-                            height={ChartConfig.energy_chart_height}
+                            height={ChartConfig.default_chart_height}
                             options={getOptions()}
                             type={"bar"}
                         />
@@ -115,6 +119,7 @@ export default function EnergyDataChart(props: ChartProps) {
                     {renderUserDataInfoPage()}
                 </div>
             </div>
+            <div style={{height: "64px"}}></div>
         </div>
     )
 

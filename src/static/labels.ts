@@ -159,14 +159,6 @@ export const applicationStrings = {
         de: 'Info',
         en: 'Info'
     },
-    label_info_1: {
-        de: 'Allgemein',
-        en: 'General'
-    },
-    label_info_2: {
-        de: 'Portionsdaten',
-        en: 'Portion data'
-    },
     label_info_category: {
         de: 'Kategorie',
         en: 'Category'
@@ -182,6 +174,10 @@ export const applicationStrings = {
     label_info_foodName: {
         de: 'Lebensmittel',
         en: 'Food'
+    },
+    label_info_portion: {
+        de: 'Portionsdaten',
+        en: 'Portion data'
     },
     label_info_portionType: {
         de: 'Portionstyp',
@@ -593,11 +589,11 @@ export const applicationStrings = {
     },
     message_userdata_error_size: {
         de: 'Geben Sie bitte eine Körpergröße zwischen 80 und 225 cm ein.',
-        en: 'Please enter an age between 15 and 100 years.'
+        en: 'Please enter a body height between 80 and 225 cm.'
     },
     message_userdata_error_weight: {
         de: 'Geben Sie bitte ein Gewicht zwischen 30 und 250 kg ein.',
-        en: 'Please enter a body weight between 30 and 500 kg.'
+        en: 'Please enter a body weight between 30 and 250 kg.'
     },
     palcat_name_1: {
         de: 'Extrem niedrige Aktivität',
@@ -668,8 +664,8 @@ export const applicationStrings = {
         en: 'All rights reserved.'
     },
     text_contact_disclaimer2: {
-        de: 'FoodCompare basiert auf freien Datenquellen, die im Quellenabschnitt weiter unten aufgelistet sind. Es besteht keinerlei Garantie für die Korrektheit oder Zuverlässigkeit der ins Projekt geladenen und im Projekt verwendeten Daten. Vinus ist ein freies Programm zur Visualisierung von Nährwerten in Lebensmitteln, das in keiner Weise medizinische oder biologische Befunde ersetzt, sondern lediglich bestehende Nährwertdaten und -quellen grafisch aufbereitet darstellt.',
-        en: 'FoodCompare is based upon free data sources listed in the sources section below. There is no warranty for the correctness or reliability of the data imported to and used within the project. Vinus is a free visualization tool for food nutrients, which does not replace in any way medical or biological food and nutrient data sources and will merely supplement existing food nutrient sources for laypeople that are interested in this matter.'
+        de: 'Food Compare basiert auf freien Datenquellen, die im Quellenabschnitt weiter unten aufgelistet sind. Es besteht keinerlei Garantie für die Korrektheit oder Zuverlässigkeit der ins Projekt geladenen und im Projekt verwendeten Daten. Vinus ist ein freies Programm zur Visualisierung von Nährwerten in Lebensmitteln, das in keiner Weise medizinische oder biologische Befunde ersetzt, sondern lediglich bestehende Nährwertdaten und -quellen grafisch aufbereitet darstellt.',
+        en: 'Food Compare is based upon free data sources listed in the sources section below. There is no warranty for the correctness or reliability of the data imported to and used within the project. Vinus is a free visualization tool for food nutrients, which does not replace in any way medical or biological food and nutrient data sources and will merely supplement existing food nutrient sources for laypeople that are interested in this matter.'
     },
     text_contact_source1: {
         de: 'Quellen:',
@@ -690,6 +686,10 @@ export const applicationStrings = {
     text_empty_fooddatapanel: {
         de: 'Klicken Sie auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden, die dann in separaten Tabs angezeigt werden.',
         en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like -- they will be displayed in separate tabs.'
+    },
+    text_empty_fooddatapanel_intro: {
+        de: 'Food Compare ermöglicht das Analysieren der Nährstoffzusammensetzung von Lebensmitteln sowie dem Vergleichen verschiedener Lebensmittel miteinander. Daten werden in verschiedenen Lebensmitteldiagrammen dargestellt und umfassen grundlegende Nährstoffe (Kohlenhydrate, Proteine, Fette), Unterelemente wie Zucker und Ballaststoffe sowie Mikronährstoffe (Vitamine und Mineralstoffe).',
+        en: 'Food Compare allows you do analyze the composition of nutrients within foods and to compare them with each other. The data, which is displayed in different food charts, comprises basic nutrient data (carbohydrates, proteins, fats), sub-elements like sugar and dietary fibers, as well as micronutrients (vitamins and minerals).'
     },
     text_setUserdata_p1: {
         de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 30 Jahre) angezeigt.',

@@ -16,7 +16,7 @@ export function loadFoodDataCorpus(): FoodDataCorpus {
 	const foodClasses = loadFoodClasses()
 	const nutrientData = loadNutrientData()
 	const dietaryRequirements = loadDietaryRequirements()
-	
+
 	return {
 		categories: categories,
 		conditions: conditions,

@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 
 import {Button, Modal} from 'react-bootstrap'
 
-import {NotificationManager, NotificationContainer} from 'react-notifications'
+import {NotificationManager} from 'react-notifications'
 import 'react-notifications/lib/notifications.css';
 
 import FoodSelector from "./FoodSelector";
@@ -11,6 +11,7 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";
 import {CompositeFoodList} from "./CompositeFoodList";
+import {maximalPortionSize} from "../../config/ApplicationSetting";
 
 export interface FoodSelectorModalProps {
     onHide: () => void,
@@ -50,7 +51,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const onSubmit = () => {
-        if(props.compositeSelector) {
+        if (props.compositeSelector) {
             onSubmitComposite()
         } else {
             onSubmitSingleItem()
@@ -70,7 +71,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
         if (!selectedFoodItem || !selectedFoodItem.foodItem || !selectedFoodItem.foodClass || !selectedFoodItem.portion) {
             NotificationManager.error(applicationStrings.message_error_incomplete_form[language])
-        } else if (selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > 5000) {
+        } else if (selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
             NotificationManager.error(applicationStrings.message_error_invalid_portion[language])
         } else {
             props.selectedFoodItemCallback(selectedFoodItem)
@@ -79,6 +80,8 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const onSubmitComposite = () => {
+
+        console.log('Composite:', compositeList)
 
     }
 
@@ -98,10 +101,11 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                             <div className={"row"}>
                                 <div className={"col-6"}>
                                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
-                                                  compositeSelector={true}></FoodSelector>
+                                                  compositeSelector={true}/>
                                 </div>
                                 <div className={"col-6"}>
-                                    <CompositeFoodList selectedFoodItems={compositeList} deleteItem={deleteCompositeElement}></CompositeFoodList>
+                                    <CompositeFoodList selectedFoodItems={compositeList}
+                                                       deleteItem={deleteCompositeElement}/>
                                 </div>
                             </div>
                         </div>

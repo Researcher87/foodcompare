@@ -30,6 +30,7 @@ export default function Header(props: HeaderProps) {
 
     const handleLanguageButtonClick = (event: any): void => {
         userLanguageChange(event.target.value)
+        applicationData.updateAllFoodItemNames( applicationData.foodDataCorpus.foodNames, event.target.value)
     }
 
     const renderMenus = () => {

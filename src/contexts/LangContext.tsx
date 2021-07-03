@@ -1,4 +1,5 @@
 import {createContext, useState} from "react";
+import {LANGUAGE_DE, LANGUAGE_EN} from "../config/Constants";
 
 export interface LanguageProviderProps {
     language: string
@@ -11,13 +12,15 @@ export const LanguageContext = createContext<LanguageProviderProps>({
 });
 
 export function LanguageProvider({ children }) {
-    const defaultLanguage = window.localStorage.getItem('rcml-lang');
-    const [language, setLanguage] = useState(defaultLanguage || 'en');
+    const userLanguage = navigator.language;
+    const preferredLanguage = userLanguage === 'de' ? LANGUAGE_DE : LANGUAGE_EN
+
+    const [language, setLanguage] = useState(preferredLanguage);
+
 
     const userLanguageChange = (selectedLanaguage: string): void => {
-        const newLanguage = selectedLanaguage ? selectedLanaguage : 'en'
+        const newLanguage = selectedLanaguage ? selectedLanaguage : LANGUAGE_EN
         setLanguage(newLanguage);
-        window.localStorage.setItem('rcml-lang', newLanguage);
     }
 
     const provider: LanguageProviderProps = {

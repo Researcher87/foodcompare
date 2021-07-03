@@ -220,18 +220,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     const getOptions = (title, maxValue) => {
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;
-        let scales: any = undefined
-
-        if(expand100 && maxValue < 100) {
-            scales = {
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            }
-        }
-
-        return getBarChartOptions(title, "%", scales);
+        const maxYvalue = expand100 ? 100 : undefined
+        return getBarChartOptions(title, "%", maxYvalue);
     }
 
 
@@ -277,12 +267,18 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const data = props.selectedSubChart === CHART_VITAMINS ? createVitaminChartData() : createMineralChartData();
+    if(!data) {
+        return <div/>
+    }
+
     const maxValue = (data && data.datasets && data.datasets.length > 0) ? Math.max(...data.datasets[0].data) : 0;
 
     const title = props.selectedSubChart === CHART_VITAMINS ? applicationStrings.label_charttype_vitamins[lang] :
         applicationStrings.label_charttype_minerals[lang];
 
     const options = getOptions(title, maxValue);
+
+    console.log('Options:', options)
 
     return (
         <div className="container-fluid">
