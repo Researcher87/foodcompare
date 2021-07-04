@@ -410,6 +410,7 @@ function buildLipidData(compositeList: Array<SelectedFoodItem>, portionSize: num
     let saturated = 0;
     let omega3 = 0;
     let omega6 = 0;
+    let omegaUncertain = 0;
     let cholesterol = 0;
     let transFattyAcids = 0;
 
@@ -423,9 +424,12 @@ function buildLipidData(compositeList: Array<SelectedFoodItem>, portionSize: num
         saturated += (lipidData.saturated ? lipidData.saturated : 0) * portionFactor;
         omega3 += (lipidData.omegaData?.omega3 ? lipidData.omegaData.omega3 : 0) * portionFactor;
         omega6 += (lipidData.omegaData?.omega6 ? lipidData.omegaData.omega6 : 0) * portionFactor;
+        omegaUncertain += (lipidData.omegaData?.uncertain ? lipidData.omegaData.uncertain : 0) * portionFactor;
         cholesterol += (lipidData.cholesterol ? lipidData.cholesterol : 0) * portionFactor;
         transFattyAcids += (lipidData.transFattyAcids ? lipidData.transFattyAcids : 0) * portionFactor;
     })
+
+    const omegaRatio = (omega3 + omega6) / (omega3 + omega6 + omegaUncertain)
 
     return {
         unsaturatedMono: createFinalValue(unsaturatedMono, portionSize),
@@ -434,8 +438,8 @@ function buildLipidData(compositeList: Array<SelectedFoodItem>, portionSize: num
         omegaData: {
             omega3: createFinalValue(omega3, portionSize),
             omega6: createFinalValue(omega6, portionSize),
-            uncertain: null,
-            uncertainRatio: null
+            uncertain: createFinalValue(omegaUncertain, portionSize),
+            uncertainRatio: omegaRatio
         },
         cholesterol: createFinalValue(cholesterol, portionSize),
         transFattyAcids: createFinalValue(transFattyAcids, portionSize),
