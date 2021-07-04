@@ -39,18 +39,18 @@ export function InfoData(props: InfoDataProps) {
         }
 
         const foodNameId = props.selectedFoodItem.foodItem.nameId
-        const foodName = getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodNameId, lang)
+        const foodName = foodNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodNameId, lang) : ''
 
         const foodClass = props.selectedFoodItem.foodClass;
-        const foodClassNameId = props.selectedFoodItem.foodClass.nameKey
+        const foodClassNameId = props.selectedFoodItem.foodClass ? props.selectedFoodItem.foodClass.nameKey : null
 
         const sourceItemId = props.selectedFoodItem.foodItem.usdaId
         const source = `United States Department of Agriculture (USDA)`;
         const sourceLine2 = `ID = ${sourceItemId}`;
-        const foodClassName = foodClass ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodClassNameId, lang) : null;
+        const foodClassName = foodClassNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodClassNameId, lang) : null;
 
-        const categoryId = props.selectedFoodItem.foodClass.category
-        const category = applicationContext.foodDataCorpus.categories.find(category => category.id === categoryId)
+        const categoryId = props.selectedFoodItem.foodClass ?  props.selectedFoodItem.foodClass.category : null
+        const category = categoryId ? applicationContext.foodDataCorpus.categories.find(category => category.id === categoryId) : null
         const categoryName = category ? getName(category, lang) : null;
 
         const conditionId = props.selectedFoodItem.foodItem.conditionId
@@ -87,7 +87,6 @@ export function InfoData(props: InfoDataProps) {
     const getTableDataPortion = () => {
         const portion = props.selectedFoodItem.portion;
         const portionValue = `${portion.amount} g`;
-
 
         const portionObject = applicationContext?.foodDataCorpus.portionTypes.find(portion => portion.id === portion.id)
         if (portionObject) {

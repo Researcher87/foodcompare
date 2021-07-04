@@ -92,7 +92,7 @@ export default function LipidsDataChart(props: ChartProps) {
 
 
     const createOmegaChartData = (totalAmount: number, omegaData: OmegaData) => {
-        if (!omegaData.omega3 || !omegaData.omega6 || !omegaData.uncertain) {
+        if (omegaData.omega3 === null || omegaData.omega6 === null || omegaData.uncertain === null) {
             return null;
         }
 
@@ -173,10 +173,6 @@ export default function LipidsDataChart(props: ChartProps) {
 
     const lipidData = props.selectedFoodItem.foodItem.nutrientDataList[0].lipidData;
 
-    const omegaDataRation = lipidData.omegaData ?
-        lipidData.omegaData.uncertainRatio != null ? lipidData.omegaData.uncertainRatio : 100
-        : 1
-
     let omegaDataAvailabe = false
     if (lipidData.omegaData && lipidData.omegaData.uncertainRatio && lipidData.omegaData.uncertainRatio <= minimalOmegaRatio) {
         omegaDataAvailabe = true
@@ -238,12 +234,12 @@ export default function LipidsDataChart(props: ChartProps) {
                 data = createOmegaChartData(totalLipidsAmount, omegaData)
             }
 
-            if(!omegaData) {
+            if (!omegaData) {
                 return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
             }
         }
 
-        if(!data) {
+        if (!data) {
             return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
         }
 
@@ -284,7 +280,7 @@ export default function LipidsDataChart(props: ChartProps) {
                     renderChart(Constants.LIPIDS_DATA_OMEGA)
                     }
                     {!omegaDataAvailabe && chartSelection === Constants.LIPIDS_DATA_OMEGA &&
-                         <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+                    <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
                     }
                 </div>
 

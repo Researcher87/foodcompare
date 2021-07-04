@@ -114,9 +114,10 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     updateAllFoodItemNames = (foodNames: Array<NameType>, newLanguage: string) => {
         const selectedFoodItems = this.state.applicationData.foodDataPanel.selectedFoodItems
         const newFoodItems = selectedFoodItems.map(selectedFoodItem => {
-            const foodName = getNameFromFoodNameList(foodNames,
-                selectedFoodItem.foodItem.nameId, newLanguage)
-            if (foodName) {
+            const foodName = selectedFoodItem.foodItem.nameId
+                ? getNameFromFoodNameList(foodNames, selectedFoodItem.foodItem.nameId, newLanguage)
+                : "Individual"
+            if(foodName) {
                 selectedFoodItem = {...selectedFoodItem, tab: foodName}
             }
             return selectedFoodItem
