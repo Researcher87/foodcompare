@@ -18,7 +18,7 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
 
     if(filteredFoodItems && filteredFoodItems.length > 0) {
         filteredFoodItems.forEach(foodItem => {
-            const nameId = foodItem.nameId
+            const nameId = foodItem.nameId!!
             if(nameId > foodNames.length) {
                 console.error(`Illegal food name Id in food item having ID=${foodItem.id}`)
                 return

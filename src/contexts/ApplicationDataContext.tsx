@@ -6,6 +6,7 @@ import {ApplicationData} from "../types/livedata/ApplicationData";
 import {DISPLAYMODE_CHART} from "../config/Constants";
 import {UserData} from "../types/livedata/UserData";
 import {
+    initialChartConfigData,
     initialUserDataAge,
     initialUserDataBreastfeeding,
     initialUserDataLeisureSports,
@@ -17,6 +18,7 @@ import {
 } from "../config/ApplicationSetting";
 import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
+import {ChartConfigData} from "../types/livedata/ChartConfigData";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
@@ -30,6 +32,7 @@ export interface ApplicationDataContext {
     removeAllItemsFromFoodDataPanel: () => void
     setUserData: (userData: UserData) => void
     updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void
+    updateChartConfig: (chartConfig: ChartConfigData) => void
 }
 
 export const ApplicationDataContextStore = createContext<ApplicationDataContext | null>(null)
@@ -111,8 +114,9 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     updateAllFoodItemNames = (foodNames: Array<NameType>, newLanguage: string) => {
         const selectedFoodItems = this.state.applicationData.foodDataPanel.selectedFoodItems
         const newFoodItems = selectedFoodItems.map(selectedFoodItem => {
-            const foodName = getNameFromFoodNameList(foodNames,
-                selectedFoodItem.foodItem.nameId, newLanguage)
+            const foodName = selectedFoodItem.foodItem.nameId
+                ? getNameFromFoodNameList(foodNames, selectedFoodItem.foodItem.nameId, newLanguage)
+                : "Individual"
             if(foodName) {
                 selectedFoodItem = {...selectedFoodItem, tab: foodName}
             }
@@ -126,6 +130,19 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 foodDataPanel: {
                     ...this.state.applicationData.foodDataPanel,
                     selectedFoodItems: newFoodItems,
+                }
+            }
+        })
+    }
+
+    updateChartConfig = (chartConfig: ChartConfigData) => {
+        this.setState({
+            ...this.state,
+            applicationData: {
+                ...this.state.applicationData,
+                foodDataPanel: {
+                    ...this.state.applicationData.foodDataPanel,
+                    chartConfigData: chartConfig
                 }
             }
         })
@@ -147,7 +164,8 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 selectedFoodItems: [],
                 selectedDataPage: 0,
                 displayMode: DISPLAYMODE_CHART,
-                selectedFoodItemIndex: 0
+                selectedFoodItemIndex: 0,
+                chartConfigData: initialChartConfigData
             }
         },
         userData: {
@@ -168,9 +186,9 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
         removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
         setUserData: this.setUserData,
-        updateAllFoodItemNames: this.updateAllFoodItemNames
+        updateAllFoodItemNames: this.updateAllFoodItemNames,
+        updateChartConfig: this.updateChartConfig
     }
-
 
     componentDidMount() {
         const foodDataCorpus = NutrientDataImportService.loadFoodDataCorpus()
@@ -178,7 +196,6 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             foodDataCorpus: foodDataCorpus
         })
     }
-
 
     render(): ReactElement {
         return (

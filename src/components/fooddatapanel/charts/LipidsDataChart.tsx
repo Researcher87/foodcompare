@@ -1,28 +1,52 @@
 import {ChartProps} from "../ChartPanel";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import * as ChartConfig from "../../../config/ChartConfig"
+import {default_chart_height} from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
-import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
+import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants"
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {autoRound} from "../../../service/calculation/MathService";
 import {applicationStrings} from "../../../static/labels";
 import {OmegaData} from "../../../types/nutrientdata/FoodItem";
-import {minimalOmegaRatio} from "../../../config/ApplicationSetting";
+import {initialChartConfigData, minimalOmegaRatio} from "../../../config/ApplicationSetting";
 import {CustomLegend} from "./helper/CustomLegend";
 import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
 import {Form} from "react-bootstrap";
-import {default_chart_height} from "../../../config/ChartConfig";
+import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 
 export default function LipidsDataChart(props: ChartProps) {
+    const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const [chartType, setChartType] = useState<string>(CHART_TYPE_PIE)
-    const [showLegend, setShowLegend] = useState<boolean>(true)
-    const [chartSelection, setChartSelection] = useState<string>(Constants.LIPIDS_DATA_BASE)
+    const chartConfig = applicationContext
+        ? applicationContext.applicationData.foodDataPanel.chartConfigData.lipidsChartConfig
+        : initialChartConfigData.lipidsChartConfig
+
+    const [chartType, setChartType] = useState<string>(chartConfig.chartType)
+    const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
+    const [chartSelection, setChartSelection] = useState<string>(chartConfig.subChart)
+
+    useEffect(() => {
+        updateChartConfig()
+    }, [chartType, showLegend, chartSelection])
+
+    const updateChartConfig = () => {
+        if (applicationContext) {
+            const newChartConfig = {
+                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                lipidsChartConfig: {
+                    chartType: chartType,
+                    showLegend: showLegend,
+                    subChart: chartSelection
+                }
+            }
+            applicationContext.updateChartConfig(newChartConfig)
+        }
+    }
 
     const lipidsData = props.selectedFoodItem.foodItem.nutrientDataList[0].lipidData;
     const totalLipidsAmount = props.selectedFoodItem.foodItem.nutrientDataList[0].baseData.lipids;
@@ -44,7 +68,7 @@ export default function LipidsDataChart(props: ChartProps) {
             valueRemainder = 0;
         }
 
-        const data = {
+        return {
             labels: [applicationStrings.label_nutrient_lipids_saturated[lang],
                 applicationStrings.label_nutrient_lipids_unsaturated_mono[lang],
                 applicationStrings.label_nutrient_lipids_unsaturated_poly[lang],
@@ -63,14 +87,12 @@ export default function LipidsDataChart(props: ChartProps) {
                 borderWidth: 2,
                 borderColor: '#555',
             }]
-        }
-
-        return data;
+        };
     }
 
 
     const createOmegaChartData = (totalAmount: number, omegaData: OmegaData) => {
-        if (!omegaData.omega3 || !omegaData.omega6 || !omegaData.uncertain) {
+        if (omegaData.omega3 === null || omegaData.omega6 === null || omegaData.uncertain === null) {
             return null;
         }
 
@@ -101,7 +123,7 @@ export default function LipidsDataChart(props: ChartProps) {
 
     const getLegendBaseChart = () => {
 
-        const legendData = [
+        return [
             {
                 item: applicationStrings.label_nutrient_lipids_saturated[lang],
                 color: ChartConfig.color_lipids_saturated,
@@ -119,13 +141,11 @@ export default function LipidsDataChart(props: ChartProps) {
                 color: ChartConfig.color_lipids_misc
             },
         ];
-
-        return legendData;
     }
 
 
     const getLegendOmegaChart = () => {
-        const legendData = [
+        return [
             {
                 item: applicationStrings.label_nutrient_omega3[lang],
                 color: ChartConfig.color_lipids_omega3,
@@ -139,8 +159,6 @@ export default function LipidsDataChart(props: ChartProps) {
                 color: ChartConfig.color_lipids_misc,
             },
         ];
-
-        return legendData;
     }
 
 
@@ -154,10 +172,6 @@ export default function LipidsDataChart(props: ChartProps) {
 
 
     const lipidData = props.selectedFoodItem.foodItem.nutrientDataList[0].lipidData;
-
-    const omegaDataRation = lipidData.omegaData ?
-        lipidData.omegaData.uncertainRatio != null ? lipidData.omegaData.uncertainRatio : 100
-        : 1
 
     let omegaDataAvailabe = false
     if (lipidData.omegaData && lipidData.omegaData.uncertainRatio && lipidData.omegaData.uncertainRatio <= minimalOmegaRatio) {
@@ -220,12 +234,12 @@ export default function LipidsDataChart(props: ChartProps) {
                 data = createOmegaChartData(totalLipidsAmount, omegaData)
             }
 
-            if(!omegaData) {
+            if (!omegaData) {
                 return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
             }
         }
 
-        if(!data) {
+        if (!data) {
             return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
         }
 
@@ -266,7 +280,7 @@ export default function LipidsDataChart(props: ChartProps) {
                     renderChart(Constants.LIPIDS_DATA_OMEGA)
                     }
                     {!omegaDataAvailabe && chartSelection === Constants.LIPIDS_DATA_OMEGA &&
-                         <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+                    <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
                     }
                 </div>
 

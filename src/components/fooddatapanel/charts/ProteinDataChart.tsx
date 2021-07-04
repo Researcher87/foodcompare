@@ -1,5 +1,5 @@
 import {ChartProps} from "../ChartPanel";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AMOUNT_PORTION, CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
@@ -9,14 +9,37 @@ import * as ChartConfig from "../../../config/ChartConfig"
 import {getBarChartOptions} from "../../../service/ChartService"
 import {Col, Form} from "react-bootstrap";
 import {Bar} from "react-chartjs-2";
+import {initialChartConfigData} from "../../../config/ApplicationSetting";
 
 export default function ProteinDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const [portionType, setPortionType] = useState<string>(AMOUNT_PORTION)
-    const [expand100, setExpand100] = useState<boolean>(false)
+    const chartConfig = applicationContext
+        ? applicationContext.applicationData.foodDataPanel.chartConfigData.proteinChartConfig
+        : initialChartConfigData.proteinChartConfig
+
+
+    const [portionType, setPortionType] = useState<string>(chartConfig.portionType)
+    const [expand100, setExpand100] = useState<boolean>(chartConfig.expandTo100)
+
+    useEffect(() => {
+        updateChartConfig()
+    }, [portionType, expand100])
+
+    const updateChartConfig = () => {
+        if (applicationContext) {
+            const newChartConfig = {
+                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                proteinChartConfig: {
+                    portionType: portionType,
+                    expandTo100: expand100
+                }
+            }
+            applicationContext.updateChartConfig(newChartConfig)
+        }
+    }
 
 
     const createProteinChartData = () => {
@@ -40,71 +63,71 @@ export default function ProteinDataChart(props: ChartProps) {
             labels.push(applicationStrings.label_nutrient_proteins_histidine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.histidine, proteinData.histidine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.isoleucine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_isoleucine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.isoleucine, proteinData.isoleucine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.leucine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_leucine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.leucine, proteinData.leucine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.lysine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_lysine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.lysine, proteinData.lysine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.methionine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_methionine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.methionine, proteinData.methionine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.phenylalanine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_phenylalanine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.phenylalanine, proteinData.phenylalanine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.threonine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_threonine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.threonine, proteinData.threonine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.tryptophan !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_tryptophan[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.tryptophan, proteinData.tryptophan, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.valine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_valine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.valine, proteinData.valine, amount, userData)
-            );
-        };
+            )
+        }
 
         if (proteinData.cystine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_cystine[lang]);
             data.push(determineProteinRequirementRatio(
                 requirementData.cystine, proteinData.cystine, amount, userData)
-            );
-        };
+            )
+        }
 
         return {
             labels: labels,
