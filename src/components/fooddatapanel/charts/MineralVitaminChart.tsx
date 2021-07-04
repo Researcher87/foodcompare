@@ -1,5 +1,5 @@
 import {ChartProps} from "../ChartPanel";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {AMOUNT_PORTION, CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
@@ -9,6 +9,7 @@ import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartService"
 import {Form} from "react-bootstrap";
 import {Bar} from "react-chartjs-2";
+import {initialChartConfigData} from "../../../config/ApplicationSetting";
 
 interface MineralVitaminChartProps extends ChartProps {
     selectedSubChart: string
@@ -19,10 +20,39 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const [chartType_vitamins, setChartType_vitamins] = useState<string>(AMOUNT_PORTION)
-    const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(false)
-    const [chartType_minerals, setChartType_minerals] = useState<string>(AMOUNT_PORTION)
-    const [expand100_minerals, setExpand100_minerals] = useState<boolean>(false)
+    const chartConfigVitamins = applicationContext
+        ? applicationContext.applicationData.foodDataPanel.chartConfigData.vitaminChartConfig
+        : initialChartConfigData.vitaminChartConfig
+
+    const chartConfigMinerals = applicationContext
+        ? applicationContext.applicationData.foodDataPanel.chartConfigData.mineralChartConfig
+        : initialChartConfigData.mineralChartConfig
+
+    const [chartType_vitamins, setChartType_vitamins] = useState<string>(chartConfigVitamins.portionType)
+    const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(chartConfigVitamins.expandTo100)
+    const [chartType_minerals, setChartType_minerals] = useState<string>(chartConfigMinerals.portionType)
+    const [expand100_minerals, setExpand100_minerals] = useState<boolean>(chartConfigMinerals.expandTo100)
+
+    useEffect(() => {
+        updateChartConfig()
+    }, [chartType_vitamins, chartType_minerals, expand100_vitamins, expand100_minerals])
+
+    const updateChartConfig = () => {
+        if (applicationContext) {
+            const newChartConfig = {
+                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                vitaminChartConfig: {
+                    portionType: chartType_vitamins,
+                    expandTo100: expand100_vitamins
+                },
+                mineralChartConfig: {
+                    portionType: chartType_minerals,
+                    expandTo100: expand100_minerals
+                }
+            }
+            applicationContext.updateChartConfig(newChartConfig)
+        }
+    }
 
     if (!applicationContext || applicationContext.foodDataCorpus.dietaryRequirements === null) {
         return <div/>
@@ -208,15 +238,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             setExpand100_minerals(!expand100_minerals)
         }
     }
-
-    // updateStore() {
-    //     if(this.props.selectedMenu === Constants.VITAMIN_CHART) {
-    //         this.props.setChartConfigVitamins(this.state.chartType_vitamins, this.state.expand100_vitamins);
-    //     } else if(this.props.selectedMenu === Constants.MINERAL_CHART) {
-    //         this.props.setChartConfigMinerals(this.state.chartType_minerals, this.state.expand100_minerals);
-    //     }
-    // }
-
 
     const getOptions = (title, maxValue) => {
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;

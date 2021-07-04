@@ -1,5 +1,5 @@
 import {ChartProps} from "../ChartPanel";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {applicationStrings} from "../../../static/labels";
 import {autoRound} from "../../../service/calculation/MathService";
@@ -10,14 +10,40 @@ import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartServ
 import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
 import {CustomLegend} from "./helper/CustomLegend";
 import {default_chart_height} from "../../../config/ChartConfig";
+import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
+import {initialChartConfigData} from "../../../config/ApplicationSetting";
+import {set} from "react-ga";
 
 export default function BaseDataChart(props: ChartProps) {
+    const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const [chartType, setChartType] = useState<string>(CHART_TYPE_PIE)
-    const [showLegend, setShowLegend] = useState<boolean>(true)
-    const [showDetails, setShowDetails] = useState<boolean>(false)
+    const chartConfig = applicationContext
+        ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig
+        : initialChartConfigData.baseChartConfig
+
+    const [chartType, setChartType] = useState<string>(chartConfig.chartType)
+    const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
+    const [showDetails, setShowDetails] = useState<boolean>(chartConfig.showDetails)
+
+    useEffect(() => {
+        updateChartConfig()
+    }, [chartType, showDetails, showLegend])
+
+    const updateChartConfig = () => {
+        if (applicationContext) {
+            const newChartConfig = {
+                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                baseChartConfig: {
+                    chartType: chartType,
+                    showDetails: showDetails,
+                    showLegend: showLegend
+                }
+            }
+            applicationContext.updateChartConfig(newChartConfig)
+        }
+    }
 
     const createTotalChartData = () => {
         const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList[0];
@@ -168,7 +194,6 @@ export default function BaseDataChart(props: ChartProps) {
         setShowDetails(!showDetails)
     }
 
-
     const legendAllowed = showLegend && chartType === CHART_TYPE_PIE
 
     const getOptions = (title) => {
@@ -178,7 +203,7 @@ export default function BaseDataChart(props: ChartProps) {
 
     const renderTotalChart = () => {
         const totalChartData = createTotalChartData();
-        if(!totalChartData) {
+        if (!totalChartData) {
             return <div/>
         }
 
