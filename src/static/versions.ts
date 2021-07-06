@@ -36,5 +36,26 @@ export const versions = [
             "Wrong condition names on the information page and in the food list selector have been corrected.",
             "If no detailed carb data is available, no chart will be generated instead of a 100 % remainder chart."
         ]
+    },
+    {
+        id: "1.1",
+        date: "07-07-2021",
+        subject: "Home menu and aggregated food data.",
+        features: [
+            "Home menu was added to website.",
+            "Mobile app menu was added to website.",
+            "Composite food list: Users can now combine different food elements to so-called composite food lists to show aggregated nutrient data.",
+            "The configuration of the charts in the food data panel is now temporarily saved so that they won't have to be set anew after a tab or menu was changed."
+        ],
+        updates: [
+            "React router was added to the application.",
+            "Text sizes and layouts have been slightly adapted to different screen sizes."
+        ],
+        bugfixes: [
+            "Different style issues were solved.",
+            "The info page shows the correct portion type now.",
+            "The display error related to the 'expand to 100 %' checkbox was solved. The application checks whether the maximum value in the display is below 100 per cent.",
+            "The bug that the food selector icon sometimes had to be clicked twice until the modal opens was resolved."
+        ]
     }
 ]
