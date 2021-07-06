@@ -27,6 +27,14 @@
     font-size: 0.8em;
 }
 
+.legendItem {
+    width: 6px;
+    height: 6px;
+    font-size: 0.9em;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
 .mobile-app-img {
     max-height: 300px;
 }
@@ -42,6 +50,7 @@
     }
     .legendItem {
         width: 14px;
+        min-width: 14px;
         height: 14px;
     }
     .mobile-app-img {
@@ -65,6 +74,7 @@
     }
     .legendItem {
         width: 16px;
+        min-width: 16px;
         height: 16px;
     }
     .mobile-app-img {
@@ -86,6 +96,7 @@
     }
     .legendItem {
         width: 18px;
+        min-width: 18px;
         height: 18px;
     }
     .mobile-app-img {
@@ -106,6 +117,7 @@
     }
     .legendItem {
         width: 20px;
+        min-width: 20px;
         height: 20px;
     }
     .mobile-app-img {
@@ -264,14 +276,6 @@
 
 .header-menu {
     padding-right: 12px;
-}
-
-.legendItem {
-    width: 6px;
-    height: 6px;
-    font-size: 0.9em;
-    margin-right: 5px;
-    border: 1px solid black;
 }
 
 
