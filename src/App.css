@@ -1,13 +1,123 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Initial styles for very small screens */
+
+.foodDataPanel {
+    padding-top: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
+.header-link {
+    font-size: 0.9em;
+}
+
+.header-link.active {
+    color: white;
+}
+
+.header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.home {
+    padding-top: 25px;
+    width: 550px;
+    font-size: 0.8em;
+}
+
+/* Adapted styles for gradually becoming larger screens. */
+
+@media (min-width: 640px) {
+    .home {
+        width: 630px;
+        font-size: 0.8em;
+    }
+    .legendItem {
+        width: 14px;
+        height: 14px;
     }
 }
+
+@media (min-width: 800px) {
+    .foodDataPanel {
+        padding-top: 24px;
+    }
+    .header-link {
+        margin-top: 14px;
+        min-width: 64px;
+    }
+    .home {
+        width: 780px;
+        font-size: 0.9em;
+    }
+    .legendItem {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .header-link {
+        margin-top: 12px;
+        min-width: 68px;
+    }
+    .home {
+        width: 950px;
+        font-size: 1.0em;
+    }
+    .legendItem {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .header-link {
+        margin-top: 8px;
+        min-width: 76px;
+    }
+    .home {
+        width: 1150px;
+        font-size: 1.1em;
+    }
+    .legendItem {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .header-link {
+        margin-top: 4px;
+        min-width: 84px;
+    }
+    .home {
+        width: 1450px;
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 1920px) {
+    .header-link {
+        margin-top: -2px;
+        min-width: 96px;
+    }
+    .home {
+        width: 1700px;
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 2400px) {
+    .header-link {
+        margin-top: -8px;
+        min-width: 112px;
+    }
+    .home {
+        width: 2000px;
+        font-size: 1.3em;
+    }
+}
+
 
 .App-header {
     background-color: #282c34;
@@ -60,18 +170,6 @@
     padding-top: 12px;
 }
 
-@media (min-height: 700px) {
-    .foodDataPanel {
-        padding-top: 16px;
-    }
-}
-
-@media (min-height: 750px) {
-    .foodDataPanel {
-        padding-top: 24px;
-    }
-}
-
 
 .form-button {
     min-width: 128px;
@@ -120,8 +218,8 @@
     padding-right: 12px;
 }
 
-.header-link {
-    font-size: 0.9em;
+.icon {
+    margin-right: 8px;
 }
 
 .legendItem {
@@ -132,95 +230,20 @@
     border: 1px solid black;
 }
 
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+
 .mainPanel {
     background: #f2f5fd;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    padding-top: 4px; }
-
-@media (min-width: 640px) {
-    .legendItem {
-        width: 14px;
-        height: 14px;
-    }
-}
-
-@media (min-width: 800px) {
-    .legendItem {
-        width: 16px;
-        height: 16px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .legendItem {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-@media (min-width: 1280px) {
-    .legendItem {
-        width: 20px;
-        height: 20px;
-    }
+    padding-top: 4px;
 }
 
 
-@media (min-width: 800px) {
-    .header-link {
-        margin-top: 14px;
-        min-width: 64px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .header-link {
-        margin-top: 12px;
-        min-width: 68px;
-    }
-}
-
-@media (min-width: 1280px) {
-    .header-link {
-        margin-top: 8px;
-        min-width: 76px;
-    }
-}
-
-@media (min-width: 1600px) {
-    .header-link {
-        margin-top: 4px;
-        min-width: 84px;
-    }
-}
-
-@media (min-width: 1920px) {
-    .header-link {
-        margin-top: -2px;
-        min-width: 96px;
-    }
-}
-
-@media (min-width: 2400px) {
-    .header-link {
-        margin-top: -8px;
-        min-width: 112px;
-    }
-}
-
-.header-link.active {
-    color: white;
-}
-
-.header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.icon {
-    margin-right: 8px;
-}
 
 .tab-panel {
     padding-top: 5px !important;
@@ -259,13 +282,4 @@
 
 .tableHeaderClass {
     display: none !important;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }

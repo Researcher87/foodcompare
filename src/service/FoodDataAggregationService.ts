@@ -81,7 +81,7 @@ function removeNutrientObjectsWithNullValues(nutrientObject: NutrientData, compo
         let foodItem = compositeList[i].foodItem;
         const nutrientData = foodItem.nutrientDataList[0];
 
-        const threshold = 0.05;   // Defines the amount of base data which must be exist to set a sub-value to null.
+        const threshold = 0.1;   // Defines the amount of base data which must exist to set a sub-value to null.
 
         // Remove base data
         if (nutrientData.baseData.carbohydrates >= threshold) {

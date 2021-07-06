@@ -36,15 +36,15 @@ export default function Header(props: HeaderProps) {
     const renderMenus = () => {
         return (
             <div className="btn-group" role="group">
-                {/*<div className="header-menu">*/}
-                {/*    <Button className="header-link"*/}
-                {/*            value={MENU_HOME}*/}
-                {/*            variant={'link'}*/}
-                {/*            active={props.selectedMenu === MENU_HOME}*/}
-                {/*            onClick={props.changeMenu}>*/}
-                {/*        {applicationStrings.menu_home[language]}*/}
-                {/*    </Button>*/}
-                {/*</div>*/}
+                <div className="header-menu">
+                    <Button className="header-link"
+                            value={MENU_HOME}
+                            variant={'link'}
+                            active={props.selectedMenu === MENU_HOME}
+                            onClick={props.changeMenu}>
+                        {applicationStrings.menu_home[language]}
+                    </Button>
+                </div>
                 <div className="header-menu">
                     <Button className="header-link"
                             value={MENU_FOODDATAPANEL}

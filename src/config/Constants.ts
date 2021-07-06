@@ -46,6 +46,7 @@ export const MENU_FOODDATAPANEL = "food data panel";
 export const MENU_HELP = "help";
 export const MENU_HOME = "home";
 export const MENU_CONTACT = "contact";
+export const MENU_APP = "app";
 export const MENU_RANKING = "ranking";
 export const MENU_SETTINGS= "settings";
 

@@ -11,6 +11,10 @@ export const applicationStrings = {
         de: 'Schließen',
         en: 'Close'
     },
+    button_getstarted: {
+        de: 'Lebensmittel analysieren',
+        en: 'Get started'
+    },
     button_no: {
         de: 'Nein',
         en: 'No'
@@ -54,6 +58,38 @@ export const applicationStrings = {
     confirm_close_all_tabs: {
         de: 'Sollen wirklich alle Lebensmittel-Tabs geschlossen werden?',
         en: 'Really close all food tabs?'
+    },
+    home_carousel_0: {
+        de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
+        en: 'Vitamins in food compared to daily requirements'
+    },
+    home_carousel_1: {
+        de: 'Mineralstoffe in Lebensmitteln im Vergleich zum Tagesbedarf',
+        en: 'Minerals in food compared to daily requirements'
+    },
+    home_carousel_2: {
+        de: 'Nährstoffzusammensetzung in einem Lebensmittel',
+        en: 'Food composition of nutrients'
+    },
+    home_carousel_3: {
+        de: 'Verteilung der Fettsäuren (gesättigt / ungesättigt)',
+        en: 'Distribution of fatty acids (saturated / unsaturated)'
+    },
+    home_carousel_4: {
+        de: 'In Nahrungsmitteln enthaltene Aminosäuren',
+        en: 'Amino acids conainted in foods'
+    },
+    home_carousel_5: {
+        de: 'Zusammenstellung von Menüs (aggregierte Daten)',
+        en: 'Composite menus (aggregated data)'
+    },
+    home_text_1: {
+        de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
+        en: 'FoodCompare is a web project to visually display information about food composition. While conventional resources commonly display nutrient data in tables, Food Compare provides charts and graphics to allow users a better understanding of the containing nutrients (carbohydrates, lipids, proteins) as well as vitamins and minerals.'
+    },
+    home_text_2: {
+        de: 'Das Hauptaugenmerk von Food Compare gilt jedoch nicht nur der Veranschaulichung einzelner Nahrungsmittel, sondern der Vergleichbarkeit von Nährstoffen, Vitaminen und Mineralen in Lebensmittels. Dazu können beliebig viele Tabs geöffnet und Lebensmittel damit leicht miteinander verglichen werden. So lassen sich bspw. auf einfache Weise der Vitamingehalt von einzelnen Obstsorten vergleichen, oder die Aufteilung von Kohlenhydraten, Fetten und Eiweißen zwischen Grundnahrungsmitteln. Dabei erlaubt die Anwendung auch das Zusammenstellen von komplexen Menüs, deren Gesamtgehalt an Nährstoffen, Vitaminen und Mineralstoffen dann berechnet wird.',
+        en: 'The primary focus of Food Compare is to visually compare the composition and contents of different foods, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application also allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
     },
     label_amount: {
         de: 'Menge (Gramm)',

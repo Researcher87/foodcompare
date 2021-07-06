@@ -1,12 +1,4 @@
-import {
-    AMOUNT_100g,
-    AMOUNT_PORTION,
-    CARBS_DATA_BASE,
-    CHART_TYPE_BAR,
-    CHART_TYPE_PIE,
-    LIPIDS_DATA_BASE,
-    SEX_MALE
-} from "./Constants";
+import {AMOUNT_PORTION, CARBS_DATA_BASE, CHART_TYPE_PIE, LIPIDS_DATA_BASE, SEX_MALE} from "./Constants";
 import {ChartConfigData} from "../types/livedata/ChartConfigData";
 
 export const release = "1.0.2"

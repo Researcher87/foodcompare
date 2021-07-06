@@ -15,6 +15,7 @@ import ReactTooltip from "react-tooltip";
 import GA4React, {useGA4React} from "ga-4-react";
 import {ANALYTICS_MESS_ID} from "./config/GoogleTools";
 import {render} from "react-dom";
+import {Home} from "./components/Home";
 
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
@@ -22,21 +23,23 @@ const ga4react = new GA4React(ANALYTICS_MESS_ID);
 function App(): JSX.Element {
     const ga = useGA4React();
 
-    const [selectedMenu, setSelectedMenu] = useState<string | null>(MENU_FOODDATAPANEL)
+    const [selectedMenu, setSelectedMenu] = useState<string | null>(MENU_HOME)
 
     useEffect(() => {
         ReactTooltip.rebuild()
-    })
+    }, [selectedMenu])
 
     const changeMenu = (event: any) => {
         setSelectedMenu(event.target.value)
     }
 
+    const switchToFoodSelectionMenu = () => {
+        setSelectedMenu(MENU_FOODDATAPANEL)
+    }
+
     if (!selectedMenu) {
         return <div/>
     }
-
-
 
     return (
         <div className="App">
@@ -46,6 +49,9 @@ function App(): JSX.Element {
                 <LanguageProvider>
                     <ApplicationDataContextProvider>
                         <Header changeMenu={changeMenu} selectedMenu={selectedMenu}/>
+                        {selectedMenu === MENU_HOME &&
+                        <Home switchToFoodSelectionMenu={switchToFoodSelectionMenu}/>
+                        }
                         {selectedMenu === MENU_FOODDATAPANEL &&
                         <FoodDataPanelContainer/>
                         }
