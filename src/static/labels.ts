@@ -89,7 +89,7 @@ export const applicationStrings = {
     },
     home_text_2: {
         de: 'Das Hauptaugenmerk von Food Compare gilt jedoch nicht nur der Veranschaulichung einzelner Nahrungsmittel, sondern der Vergleichbarkeit von Nährstoffen, Vitaminen und Mineralen in Lebensmittels. Dazu können beliebig viele Tabs geöffnet und Lebensmittel damit leicht miteinander verglichen werden. So lassen sich bspw. auf einfache Weise der Vitamingehalt von einzelnen Obstsorten vergleichen, oder die Aufteilung von Kohlenhydraten, Fetten und Eiweißen zwischen Grundnahrungsmitteln. Dabei erlaubt die Anwendung auch das Zusammenstellen von komplexen Menüs, deren Gesamtgehalt an Nährstoffen, Vitaminen und Mineralstoffen dann berechnet wird.',
-        en: 'The primary focus of Food Compare is to visually compare the composition and contents of different foods, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application also allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
+        en: 'The primary focus of Food Compare is to visually compare the composition and contents of different foods, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
     },
     label_amount: {
         de: 'Menge (Gramm)',
@@ -579,13 +579,17 @@ export const applicationStrings = {
         de: 'Gewicht',
         en: 'Weight'
     },
+    menu_food_data_panel: {
+        de: 'Lebensmittel analysieren',
+        en: 'Food data analyzer'
+    },
     menu_home: {
         de: 'Home',
         en: 'Home'
     },
-    menu_food_data_panel: {
-        de: 'Lebensmittel analysieren',
-        en: 'Food data analyzer'
+    menu_mobile_app: {
+        de: 'Mobile App',
+        en: 'Mobile App'
     },
     menu_ranking: {
         de: 'Lebensmittel Ranking',
@@ -722,6 +726,14 @@ export const applicationStrings = {
     text_empty_fooddatapanel: {
         de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann agezeigt werden.',
         en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
+    },
+    text_foodcompareapp_1: {
+        de: 'Für Androidgeräte bieten wir eine Mobilversion von Food Compare an, welche dieselben Funktionen wie die Website beinhaltet. Zusätzlich können Lebensmittel dort auch nach einem bestimmten Nährstoff, Vitamin oder Mineralstoff sortiert werden. So lassen sich leicht Lebensmittel mit den höchsten Werten von einer Gruppe identifizieren.',
+        en: 'For Android devices we also provide a mobile app containing the same functionality as the website. Additionally, the mobile app also allows you to rank food by specific nutrients, vitamins or minerals to support users in identifying food elements that have the highest amount of a specific nutrient aspect.',
+    },
+    text_foodcompareapp_2: {
+        de: 'App im Playstore erhalten',
+        en: 'Get the App from the Playstore'
     },
     text_setUserdata_p1: {
         de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 30 Jahre) angezeigt.',

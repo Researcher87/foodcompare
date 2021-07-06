@@ -8,7 +8,7 @@ import {
     MENU_HOME,
     MENU_CONTACT,
     MENU_RANKING,
-    MENU_SETTINGS
+    MENU_SETTINGS, MENU_APP
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
@@ -63,6 +63,15 @@ export default function Header(props: HeaderProps) {
                 {/*        {applicationStrings.menu_ranking[language]}*/}
                 {/*    </Button>*/}
                 {/*</div>*/}
+                <div className="header-menu">
+                    <Button className="header-link"
+                            value={MENU_APP}
+                            variant={'link'}
+                            active={props.selectedMenu === MENU_APP}
+                            onClick={props.changeMenu}>
+                        {applicationStrings.menu_mobile_app[language]}
+                    </Button>
+                </div>
                 <div className="header-menu">
                     <Button className="link header-link"
                             value={MENU_SETTINGS}

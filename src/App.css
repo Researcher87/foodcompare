@@ -27,6 +27,10 @@
     font-size: 0.8em;
 }
 
+.mobile-app-img {
+    max-height: 300px;
+}
+
 /* Adapted styles for gradually becoming larger screens. */
 
 @media (min-width: 640px) {
@@ -39,6 +43,9 @@
     .legendItem {
         width: 14px;
         height: 14px;
+    }
+    .mobile-app-img {
+        max-height: 360px;
     }
 }
 
@@ -60,6 +67,9 @@
         width: 16px;
         height: 16px;
     }
+    .mobile-app-img {
+        max-height: 400px;
+    }
 }
 
 
@@ -78,6 +88,9 @@
         width: 18px;
         height: 18px;
     }
+    .mobile-app-img {
+        max-height: 460px;
+    }
 }
 
 @media (min-width: 1280px) {
@@ -95,6 +108,9 @@
         width: 20px;
         height: 20px;
     }
+    .mobile-app-img {
+        max-height: 580px;
+    }
 }
 
 @media (min-width: 1600px) {
@@ -108,6 +124,9 @@
     .home {
         width: 1450px;
     }
+    .mobile-app-img {
+        max-height: 680px;
+    }
 }
 
 @media (min-width: 1920px) {
@@ -117,6 +136,9 @@
     }
     .home {
         width: 1700px;
+    }
+    .mobile-app-img {
+        max-height: 740px;
     }
 }
 
@@ -130,6 +152,9 @@
     }
     .home {
         width: 2000px;
+    }
+    .mobile-app-img {
+        max-height: 880px;
     }
 }
 

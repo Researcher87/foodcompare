@@ -4,6 +4,8 @@ import {ChartConfigData} from "../types/livedata/ChartConfigData";
 export const release = "1.0.2"
 export const buildDate = "2021-07-02"
 
+export const mobileAppPath = "https://play.google.com/store/apps/details?id=com.parapps.foodcompareapp"
+
 export const minimalOmegaRatio = 0.3
 export const maximalPortionSize = 5000
 export const defaultPanelHeight = '468px'

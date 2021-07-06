@@ -7,7 +7,7 @@ import ApplicationDataContextProvider from "./contexts/ApplicationDataContext";
 import FoodDataPanelContainer from "./components/fooddatapanel/FoodDataPanelContainer";
 import React, {useEffect, useState} from "react";
 import Header from "./components/Header";
-import {MENU_FOODDATAPANEL, MENU_HOME, MENU_CONTACT, MENU_RANKING, MENU_SETTINGS} from "./config/Constants";
+import {MENU_FOODDATAPANEL, MENU_HOME, MENU_CONTACT, MENU_RANKING, MENU_SETTINGS, MENU_APP} from "./config/Constants";
 import {LanguageProvider} from "./contexts/LangContext";
 import {UserSettings} from "./components/UserSettings";
 import {Contact} from "./components/Contact";
@@ -16,6 +16,7 @@ import GA4React, {useGA4React} from "ga-4-react";
 import {ANALYTICS_MESS_ID} from "./config/GoogleTools";
 import {render} from "react-dom";
 import {Home} from "./components/Home";
+import {FoodCompareApp} from "./components/FoodCompareApp";
 
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
@@ -54,6 +55,9 @@ function App(): JSX.Element {
                         }
                         {selectedMenu === MENU_FOODDATAPANEL &&
                         <FoodDataPanelContainer/>
+                        }
+                        {selectedMenu === MENU_APP &&
+                        <FoodCompareApp/>
                         }
                         {selectedMenu === MENU_SETTINGS &&
                         <UserSettings/>
