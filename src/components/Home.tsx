@@ -4,14 +4,13 @@ import {Carousel} from 'react-responsive-carousel';
 import {applicationStrings} from "../static/labels";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import {Link} from 'react-router-dom';
+import {PATH_FOODDATA_PANEL} from "../config/Constants";
 
 const images = require.context('../static/image/carousel', true);
 
-interface HomeProps {
-    switchToFoodSelectionMenu: () => void
-}
 
-export function Home(props: HomeProps) {
+export function Home() {
     const languageContext = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
 
@@ -70,14 +69,15 @@ export function Home(props: HomeProps) {
     const renderStartButton = () => {
         return (
             <div className="text-center">
+                <Link to={PATH_FOODDATA_PANEL}>
                 <button type="button"
                         className="btn btn-warning button-apply media app"
-                        style={{minWidth: "150px"}}
-                        onClick={props.switchToFoodSelectionMenu}>
+                        style={{minWidth: "150px"}}>
 					<span style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted[languageContext.language]}
 					</span>
                 </button>
+                </Link>
             </div>
         )
     }
