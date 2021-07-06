@@ -1,5 +1,9 @@
 /* Initial styles for very small screens */
 
+.app {
+    font-size: 0.8em;
+}
+
 .foodDataPanel {
     padding-top: 16px;
 }
@@ -26,9 +30,11 @@
 /* Adapted styles for gradually becoming larger screens. */
 
 @media (min-width: 640px) {
+    .app {
+        font-size: 0.8em;
+    }
     .home {
         width: 630px;
-        font-size: 0.8em;
     }
     .legendItem {
         width: 14px;
@@ -37,6 +43,9 @@
 }
 
 @media (min-width: 800px) {
+    .app {
+        font-size: 0.9em;
+    }
     .foodDataPanel {
         padding-top: 24px;
     }
@@ -46,7 +55,6 @@
     }
     .home {
         width: 780px;
-        font-size: 0.9em;
     }
     .legendItem {
         width: 16px;
@@ -56,13 +64,15 @@
 
 
 @media (min-width: 1024px) {
+    .app {
+        font-size: 1.0em;
+    }
     .header-link {
         margin-top: 12px;
         min-width: 68px;
     }
     .home {
         width: 950px;
-        font-size: 1.0em;
     }
     .legendItem {
         width: 18px;
@@ -71,13 +81,15 @@
 }
 
 @media (min-width: 1280px) {
+    .app {
+        font-size: 1.1em;
+    }
     .header-link {
         margin-top: 8px;
         min-width: 76px;
     }
     .home {
         width: 1150px;
-        font-size: 1.1em;
     }
     .legendItem {
         width: 20px;
@@ -86,13 +98,15 @@
 }
 
 @media (min-width: 1600px) {
+    .app {
+        font-size: 1.2em;
+    }
     .header-link {
         margin-top: 4px;
         min-width: 84px;
     }
     .home {
         width: 1450px;
-        font-size: 1.2em;
     }
 }
 
@@ -103,23 +117,24 @@
     }
     .home {
         width: 1700px;
-        font-size: 1.2em;
     }
 }
 
 @media (min-width: 2400px) {
+    .app {
+        font-size: 1.3em;
+    }
     .header-link {
         margin-top: -8px;
         min-width: 112px;
     }
     .home {
         width: 2000px;
-        font-size: 1.3em;
     }
 }
 
 
-.App-header {
+.app-header {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
@@ -130,8 +145,13 @@
     color: white;
 }
 
-.App-link {
+.app-link {
     color: #61dafb;
+}
+
+.app-logo {
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .button-displaymode, .button-displaymode-enabled, .button-displaymode-disabled {
@@ -218,21 +238,12 @@
     padding-right: 12px;
 }
 
-.icon {
-    margin-right: 8px;
-}
-
 .legendItem {
     width: 6px;
     height: 6px;
     font-size: 0.9em;
     margin-right: 5px;
     border: 1px solid black;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
 }
 
 

@@ -86,24 +86,25 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                 {showFoodAggregatedFoodSelector &&
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={true}/>
                 }
-
-                <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
-                        className={"btn"}
-                        style={{marginRight: "12px"}}
-                        data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
-                    <FaPlusSquare/>
-                </Button>
-                <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
-                        className={"icon"}
-                        data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
-                    <FaLayerGroup/>
-                </Button>
-                <Button onClick={() => onCloseAllTabs()}
-                        disabled={deleteIconEnabled === false}
-                        data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>
-                    <FaTrash/>
-                </Button>
-
+                <div className={"text-center"} style={{paddingTop: "16px"}}>
+                    <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
+                            className={"btn"}
+                            style={{marginRight: "12px"}}
+                            data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
+                        <FaPlusSquare/>
+                    </Button>
+                    <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
+                            className={"btn"}
+                            style={{marginRight: "12px"}}
+                            data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
+                        <FaLayerGroup/>
+                    </Button>
+                    <Button onClick={() => onCloseAllTabs()}
+                            disabled={deleteIconEnabled === false}
+                            data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>
+                        <FaTrash/>
+                    </Button>
+                </div>
             </div>
         </div>
     )

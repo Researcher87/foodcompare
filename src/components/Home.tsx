@@ -71,7 +71,7 @@ export function Home(props: HomeProps) {
         return (
             <div className="text-center">
                 <button type="button"
-                        className="btn btn-warning button-apply"
+                        className="btn btn-warning button-apply media app"
                         style={{minWidth: "150px"}}
                         onClick={props.switchToFoodSelectionMenu}>
 					<span style={{fontWeight: "bold"}}>
@@ -83,7 +83,7 @@ export function Home(props: HomeProps) {
     }
 
     return (
-        <div className="media home" style={{margin: "0 auto"}}>
+        <div className="media home app" style={{margin: "0 auto"}}>
             <div className={"container-fluid"}>
                 <div className="row">
                     <div className={"col-5"}>

@@ -720,12 +720,8 @@ export const applicationStrings = {
         en: 'Calculation of BMR and PAL:',
     },
     text_empty_fooddatapanel: {
-        de: 'Klicken Sie auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden, die dann in separaten Tabs angezeigt werden.',
-        en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like -- they will be displayed in separate tabs.'
-    },
-    text_empty_fooddatapanel_intro: {
-        de: 'Food Compare ermöglicht das Analysieren der Nährstoffzusammensetzung von Lebensmitteln sowie dem Vergleichen verschiedener Lebensmittel miteinander. Daten werden in verschiedenen Lebensmitteldiagrammen dargestellt und umfassen grundlegende Nährstoffe (Kohlenhydrate, Proteine, Fette), Unterelemente wie Zucker und Ballaststoffe sowie Mikronährstoffe (Vitamine und Mineralstoffe).',
-        en: 'Food Compare allows you do analyze the composition of nutrients within foods and to compare them with each other. The data, which is displayed in different food charts, comprises basic nutrient data (carbohydrates, proteins, fats), sub-elements like sugar and dietary fibers, as well as micronutrients (vitamins and minerals).'
+        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann agezeigt werden.',
+        en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
     text_setUserdata_p1: {
         de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 30 Jahre) angezeigt.',
