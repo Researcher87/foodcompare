@@ -30,7 +30,7 @@ export function CustomLegend(props: CustomLegendProps) {
 
 
     return (
-        <div style={{borderLeft: "1px solid #aaaaaa", paddingLeft: "5px"}}>
+        <div className={"form-main"} style={{borderLeft: "1px solid #aaaaaa", paddingLeft: "5px"}}>
             <div style={{paddingTop: "4px"}}>
                 {renderLegend()}
             </div>

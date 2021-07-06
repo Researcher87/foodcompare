@@ -48,8 +48,8 @@ export const applicationStrings = {
         en: 'English'
     },
     checkbox_expand100g: {
-        de: 'Auf 100 g erweitern',
-        en: 'Expand to 100 g'
+        de: 'Auf 100 % erweitern',
+        en: 'Expand to 100 %'
     },
     checkbox_german: {
         de: 'Deutsch',

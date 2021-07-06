@@ -159,7 +159,7 @@ export default function ProteinDataChart(props: ChartProps) {
         const label_portion = `${applicationStrings.label_portion[lang]} (${props.selectedFoodItem.portion.amount} g)`;
 
         return (
-            <div className="container-fluid">
+            <div className="container-fluid form-main">
                 <div className="row foodDataPageHeader">
                     <form className="form-inline form-group">
                         <Form.Label className={"form-elements"}>

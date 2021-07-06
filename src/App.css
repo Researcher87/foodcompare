@@ -215,7 +215,6 @@
     padding-top: 12px;
 }
 
-
 .form-button {
     min-width: 128px;
     margin-left: 16px;
@@ -235,6 +234,10 @@
 }
 
 .form-language {
+    font-size: 0.9em;
+}
+
+.form-main {
     font-size: 0.9em;
 }
 
