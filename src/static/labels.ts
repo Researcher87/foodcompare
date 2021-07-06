@@ -583,6 +583,10 @@ export const applicationStrings = {
         de: 'Lebensmittel analysieren',
         en: 'Food data analyzer'
     },
+    menu_direct_compare: {
+        de: 'Direktvergleich',
+        en: 'Direct comparison'
+    },
     menu_home: {
         de: 'Home',
         en: 'Home'

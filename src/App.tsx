@@ -13,7 +13,7 @@ import {
     PATH_CONTACT,
     PATH_RANKING,
     PATH_USERSETTINGS,
-    PATH_MOBILE_APP
+    PATH_MOBILE_APP, PATH_DIRECT_COMPARE
 } from "./config/Constants";
 import {LanguageProvider} from "./contexts/LangContext";
 import {UserSettings} from "./components/UserSettings";
@@ -26,6 +26,7 @@ import {Home} from "./components/Home";
 import {FoodCompareApp} from "./components/FoodCompareApp";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Switch from "react-bootstrap/Switch";
+import {DirectCompare} from "./components/DirectCompare";
 
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
@@ -46,6 +47,7 @@ function App(): JSX.Element {
                     <Router>
                         <Header/>
                         <Switch>
+                            <Route path={PATH_DIRECT_COMPARE} component={DirectCompare}/>
                             <Route path={PATH_HOME} component={Home}/>
                             <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
                             <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>

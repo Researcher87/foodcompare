@@ -8,7 +8,7 @@ import {
     PATH_HOME,
     PATH_CONTACT,
     PATH_RANKING,
-    PATH_USERSETTINGS, PATH_MOBILE_APP
+    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_DIRECT_COMPARE
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
@@ -55,6 +55,16 @@ export default function Header() {
                                 variant={'link'}
                                 active={activePath === PATH_FOODDATA_PANEL}>
                             {applicationStrings.menu_food_data_panel[language]}
+                        </Button>
+                    </Link>
+                </div>
+                <div className="header-menu">
+                    <Link to={PATH_DIRECT_COMPARE}>
+                        <Button className="header-link"
+                                value={PATH_DIRECT_COMPARE}
+                                variant={'link'}
+                                active={activePath === PATH_DIRECT_COMPARE}>
+                            {applicationStrings.menu_direct_compare[language]}
                         </Button>
                     </Link>
                 </div>
