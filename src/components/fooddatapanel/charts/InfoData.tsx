@@ -85,12 +85,12 @@ export function InfoData(props: InfoDataProps) {
     }
 
     const getTableDataPortion = () => {
-        const portion = props.selectedFoodItem.portion;
-        const portionValue = `${portion.amount} g`;
+        const foodPortion = props.selectedFoodItem.portion;
+        const portionValue = `${foodPortion.amount} g`;
 
-        const portionObject = applicationContext?.foodDataCorpus.portionTypes.find(portion => portion.id === portion.id)
+        const portionObject = applicationContext?.foodDataCorpus.portionTypes.find(portion => portion.id === foodPortion.portionType)
         if (portionObject) {
-            const portionName = portion.portionType !== 0 ? getName(portionObject, lang) : applicationStrings.portion_individual[lang];
+            const portionName = foodPortion.portionType !== 0 ? getName(portionObject, lang) : applicationStrings.portion_individual[lang];
             const tableDataPortion: Array<RowElement> = [];
 
             tableDataPortion.push(
