@@ -25,6 +25,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const onHide = (): void => {
         setShowFoodSelector(false)
+        setShowAggregatedFoodSelector(false)
     }
 
     const onSelectFoodItemSubmit = (selectedFoodItem: SelectedFoodItem): void => {
@@ -83,7 +84,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                 {showFoodSelector &&
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={false}/>
                 }
-                {showFoodAggregatedFoodSelector &&
+                { showFoodAggregatedFoodSelector &&
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={true}/>
                 }
                 <div className={"text-center"} style={{paddingTop: "16px"}}>
