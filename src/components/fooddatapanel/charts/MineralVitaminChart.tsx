@@ -241,7 +241,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     const getOptions = (title, maxValue) => {
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;
-        const maxYvalue = expand100 ? 100 : undefined
+        const maxYvalue = expand100 && maxValue < 100 ? 100 : undefined
         return getBarChartOptions(title, "%", maxYvalue);
     }
 

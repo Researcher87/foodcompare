@@ -151,7 +151,7 @@ export default function ProteinDataChart(props: ChartProps) {
     }
 
     const getOptions = (title, maxValue) => {
-        const maxYvalue = expand100 ? 100 : undefined
+        const maxYvalue = expand100 && maxValue < 100 ? 100 : undefined
         return getBarChartOptions(title, "%", maxYvalue);
     }
 
