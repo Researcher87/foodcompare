@@ -736,8 +736,8 @@ export const applicationStrings = {
         en: 'Get the App from the Playstore'
     },
     text_setUserdata_p1: {
-        de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 30 Jahre) angezeigt.',
-        en: 'You are currently seeing the reference data for an average adult (male, 30 years).'
+        de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',
+        en: 'You are currently seeing the reference data for an average adult (male, 35 years).'
     },
     text_setUserdata_p2: {
         de: 'Geben Sie, bei Bedarf, in den Einstellungen Ihre eigenen Körperdaten für ein genaueres Ergebnis ein.',
