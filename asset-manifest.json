@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/foodcompare/static/css/main.8d945b10.chunk.css",
-    "main.js": "/foodcompare/static/js/main.e2fac28d.chunk.js",
-    "main.js.map": "/foodcompare/static/js/main.e2fac28d.chunk.js.map",
+    "main.js": "/foodcompare/static/js/main.b8bf054e.chunk.js",
+    "main.js.map": "/foodcompare/static/js/main.b8bf054e.chunk.js.map",
     "runtime-main.js": "/foodcompare/static/js/runtime-main.0dcd85bc.js",
     "runtime-main.js.map": "/foodcompare/static/js/runtime-main.0dcd85bc.js.map",
     "static/css/2.7ec70f2a.chunk.css": "/foodcompare/static/css/2.7ec70f2a.chunk.css",
@@ -36,6 +36,6 @@
     "static/css/2.7ec70f2a.chunk.css",
     "static/js/2.49ea196c.chunk.js",
     "static/css/main.8d945b10.chunk.css",
-    "static/js/main.e2fac28d.chunk.js"
+    "static/js/main.b8bf054e.chunk.js"
   ]
 }
