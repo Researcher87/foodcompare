@@ -49,7 +49,8 @@ export const versions = [
         ],
         updates: [
             "React router was added to the application.",
-            "Text sizes and layouts have been slightly adapted to different screen sizes."
+            "Text sizes and layouts have been slightly adapted to different screen sizes.",
+            "The energy chart now also displays the BMR and energy expenditure annotations."
         ],
         bugfixes: [
             "Different style issues were solved.",
