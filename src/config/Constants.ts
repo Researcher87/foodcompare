@@ -43,11 +43,11 @@ export const LIPIDS_DATA_BASE = "lipids data base chart";
 export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
 
 export const PATH_DIRECT_COMPARE = "/directcompare";
+export const PATH_FOODCOMPARE = "/foodcompare/";
 export const PATH_FOODDATA_PANEL = "/datapanel";
 export const PATH_HOME = "/home";
 export const PATH_CONTACT = "/contact";
 export const PATH_MOBILE_APP = "/mobileapp";
-export const PATH_RANKING = "/ranking";
 export const PATH_USERSETTINGS= "/usersettings";
 
 export const LANGUAGE_DE = "de";

@@ -7,15 +7,14 @@ import {
     PATH_FOODDATA_PANEL,
     PATH_HOME,
     PATH_CONTACT,
-    PATH_RANKING,
-    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_DIRECT_COMPARE
+    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_DIRECT_COMPARE, PATH_FOODCOMPARE
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {applicationStrings} from "../static/labels";
 import {LanguageContext} from "../contexts/LangContext";
 import {Link} from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
 
 export default function Header() {
@@ -32,8 +31,7 @@ export default function Header() {
         applicationData.updateAllFoodItemNames(applicationData.foodDataCorpus.foodNames, event.target.value)
     }
 
-
-    const activePath = location.pathname
+    const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
 
     const renderMenus = () => {
         return (
@@ -43,7 +41,7 @@ export default function Header() {
                         <Button className="header-link"
                                 value={PATH_HOME}
                                 variant={'link'}
-                                active={activePath === PATH_HOME}>
+                                active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
                             {applicationStrings.menu_home[language]}
                         </Button>
                     </Link>
