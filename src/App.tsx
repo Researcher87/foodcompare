@@ -46,6 +46,7 @@ function App(): JSX.Element {
                     <Router>
                         <Header/>
                         <Switch>
+                            <Route path={"/foodcompare"} component={Home}/>
                             <Route path={PATH_HOME} component={Home}/>
                             <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
                             <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>
