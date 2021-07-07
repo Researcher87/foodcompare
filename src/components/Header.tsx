@@ -8,7 +8,7 @@ import {
     PATH_HOME,
     PATH_CONTACT,
     PATH_RANKING,
-    PATH_USERSETTINGS, PATH_MOBILE_APP
+    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_FOODCOMPARE
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
@@ -44,7 +44,7 @@ export default function Header() {
                         <Button className="header-link"
                                 value={PATH_HOME}
                                 variant={'link'}
-                                active={activePath === PATH_HOME}>
+                                active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
                             {applicationStrings.menu_home[language]}
                         </Button>
                     </Link>
