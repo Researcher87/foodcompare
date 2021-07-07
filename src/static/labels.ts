@@ -11,6 +11,10 @@ export const applicationStrings = {
         de: 'Schließen',
         en: 'Close'
     },
+    button_getstarted: {
+        de: 'Lebensmittel analysieren',
+        en: 'Get started'
+    },
     button_no: {
         de: 'Nein',
         en: 'No'
@@ -44,8 +48,8 @@ export const applicationStrings = {
         en: 'English'
     },
     checkbox_expand100g: {
-        de: 'Auf 100 g erweitern',
-        en: 'Expand to 100 g'
+        de: 'Auf 100 % erweitern',
+        en: 'Expand to 100 %'
     },
     checkbox_german: {
         de: 'Deutsch',
@@ -54,6 +58,38 @@ export const applicationStrings = {
     confirm_close_all_tabs: {
         de: 'Sollen wirklich alle Lebensmittel-Tabs geschlossen werden?',
         en: 'Really close all food tabs?'
+    },
+    home_carousel_0: {
+        de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
+        en: 'Vitamins in food compared to daily requirements'
+    },
+    home_carousel_1: {
+        de: 'Mineralstoffe in Lebensmitteln im Vergleich zum Tagesbedarf',
+        en: 'Minerals in food compared to daily requirements'
+    },
+    home_carousel_2: {
+        de: 'Nährstoffzusammensetzung in einem Lebensmittel',
+        en: 'Food composition of nutrients'
+    },
+    home_carousel_3: {
+        de: 'Verteilung der Fettsäuren (gesättigt / ungesättigt)',
+        en: 'Distribution of fatty acids (saturated / unsaturated)'
+    },
+    home_carousel_4: {
+        de: 'In Nahrungsmitteln enthaltene Aminosäuren',
+        en: 'Amino acids conainted in foods'
+    },
+    home_carousel_5: {
+        de: 'Zusammenstellung von Menüs (aggregierte Daten)',
+        en: 'Composite menus (aggregated data)'
+    },
+    home_text_1: {
+        de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
+        en: 'FoodCompare is a web project to visually display information about food composition. While conventional resources commonly display nutrient data in tables, Food Compare provides charts and graphics to allow users a better understanding of the containing nutrients (carbohydrates, lipids, proteins) as well as vitamins and minerals.'
+    },
+    home_text_2: {
+        de: 'Das Hauptaugenmerk von Food Compare gilt jedoch nicht nur der Veranschaulichung einzelner Nahrungsmittel, sondern der Vergleichbarkeit von Nährstoffen, Vitaminen und Mineralen in Lebensmittels. Dazu können beliebig viele Tabs geöffnet und Lebensmittel damit leicht miteinander verglichen werden. So lassen sich bspw. auf einfache Weise der Vitamingehalt von einzelnen Obstsorten vergleichen, oder die Aufteilung von Kohlenhydraten, Fetten und Eiweißen zwischen Grundnahrungsmitteln. Dabei erlaubt die Anwendung auch das Zusammenstellen von komplexen Menüs, deren Gesamtgehalt an Nährstoffen, Vitaminen und Mineralstoffen dann berechnet wird.',
+        en: 'The primary focus of Food Compare is to visually compare the composition and contents of different foods, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
     },
     label_amount: {
         de: 'Menge (Gramm)',
@@ -543,13 +579,17 @@ export const applicationStrings = {
         de: 'Gewicht',
         en: 'Weight'
     },
+    menu_food_data_panel: {
+        de: 'Lebensmittel analysieren',
+        en: 'Food data analyzer'
+    },
     menu_home: {
         de: 'Home',
         en: 'Home'
     },
-    menu_food_data_panel: {
-        de: 'Lebensmittel analysieren',
-        en: 'Food data analyzer'
+    menu_mobile_app: {
+        de: 'Mobile App',
+        en: 'Mobile App'
     },
     menu_ranking: {
         de: 'Lebensmittel Ranking',
@@ -684,16 +724,20 @@ export const applicationStrings = {
         en: 'Calculation of BMR and PAL:',
     },
     text_empty_fooddatapanel: {
-        de: 'Klicken Sie auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden, die dann in separaten Tabs angezeigt werden.',
-        en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like -- they will be displayed in separate tabs.'
+        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann agezeigt werden.',
+        en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
-    text_empty_fooddatapanel_intro: {
-        de: 'Food Compare ermöglicht das Analysieren der Nährstoffzusammensetzung von Lebensmitteln sowie dem Vergleichen verschiedener Lebensmittel miteinander. Daten werden in verschiedenen Lebensmitteldiagrammen dargestellt und umfassen grundlegende Nährstoffe (Kohlenhydrate, Proteine, Fette), Unterelemente wie Zucker und Ballaststoffe sowie Mikronährstoffe (Vitamine und Mineralstoffe).',
-        en: 'Food Compare allows you do analyze the composition of nutrients within foods and to compare them with each other. The data, which is displayed in different food charts, comprises basic nutrient data (carbohydrates, proteins, fats), sub-elements like sugar and dietary fibers, as well as micronutrients (vitamins and minerals).'
+    text_foodcompareapp_1: {
+        de: 'Für Androidgeräte bieten wir eine Mobilversion von Food Compare an, welche dieselben Funktionen wie die Website beinhaltet. Zusätzlich können Lebensmittel dort auch nach einem bestimmten Nährstoff, Vitamin oder Mineralstoff sortiert werden. So lassen sich leicht Lebensmittel mit den höchsten Werten von einer Gruppe identifizieren.',
+        en: 'For Android devices we also provide a mobile app containing the same functionality as the website. Additionally, the mobile app also allows you to rank food by specific nutrients, vitamins or minerals to support users in identifying food elements that have the highest amount of a specific nutrient aspect.',
+    },
+    text_foodcompareapp_2: {
+        de: 'App im Playstore erhalten',
+        en: 'Get the App from the Playstore'
     },
     text_setUserdata_p1: {
-        de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 30 Jahre) angezeigt.',
-        en: 'You are currently seeing the reference data for an average adult (male, 30 years).'
+        de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',
+        en: 'You are currently seeing the reference data for an average adult (male, 35 years).'
     },
     text_setUserdata_p2: {
         de: 'Geben Sie, bei Bedarf, in den Einstellungen Ihre eigenen Körperdaten für ein genaueres Ergebnis ein.',

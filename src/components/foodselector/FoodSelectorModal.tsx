@@ -22,7 +22,6 @@ export interface FoodSelectorModalProps {
 
 
 const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelectorModalProps) => {
-    const [showModal, setShowModal] = useState<Boolean>(true)
     const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(null)
     const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>([])
 
@@ -82,20 +81,24 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const onSubmitComposite = () => {
         const aggregatedSelectedFoodItem = combineFoodItems(compositeList)
-        console.log('Composite:', aggregatedSelectedFoodItem)
 
         if(!aggregatedSelectedFoodItem) {
             console.error('Error while creating aggregated food item.')
+            return
         }
 
         props.selectedFoodItemCallback(aggregatedSelectedFoodItem)
         props.onHide()
     }
 
+    const onCancel = () => {
+        props.onHide()
+    }
+
     const title = props.compositeSelector ? applicationStrings.label_foodselector_composite[language] : applicationStrings.label_foodselector[language]
 
     return (
-        <Modal size={'lg'} show={showModal} onHide={props.onHide}>
+        <Modal size={'lg'} show={true} onHide={props.onHide}>
             <Modal.Header>
                 <b>{title}</b>
             </Modal.Header>
@@ -139,7 +142,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                     </Button>
                     }
 
-                    <Button className={"btn-secondary form-button float-end"} onClick={() => setShowModal(false)}>
+                    <Button className={"btn-secondary form-button float-end"} onClick={onCancel}>
                         {applicationStrings.button_cancel[language]}
                     </Button>
                 </div>

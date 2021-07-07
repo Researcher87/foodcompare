@@ -241,7 +241,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     const getOptions = (title, maxValue) => {
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;
-        const maxYvalue = expand100 ? 100 : undefined
+        const maxYvalue = expand100 && maxValue < 100 ? 100 : undefined
         return getBarChartOptions(title, "%", maxYvalue);
     }
 
@@ -253,7 +253,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;
 
         return (
-            <div className="container-fluid">
+            <div className="container-fluid form-main">
                 <div className="row foodDataPageHeader">
                     <form className="form-inline form-group">
                         <Form.Label className={"form-elements"}>

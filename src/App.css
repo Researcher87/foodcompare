@@ -1,15 +1,177 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Initial styles for very small screens */
+
+.app {
+    font-size: 0.8em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
+.foodDataPanel {
+    padding-top: 16px;
+}
+
+.header-link {
+    font-size: 0.9em;
+}
+
+.header-link.active {
+    color: white;
+}
+
+.header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.home {
+    padding-top: 25px;
+    width: 550px;
+    font-size: 0.8em;
+}
+
+.legendItem {
+    width: 6px;
+    height: 6px;
+    font-size: 0.9em;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+.mobile-app-img {
+    max-height: 300px;
+}
+
+/* Adapted styles for gradually becoming larger screens. */
+
+@media (min-width: 640px) {
+    .app {
+        font-size: 0.8em;
+    }
+    .home {
+        width: 630px;
+    }
+    .legendItem {
+        width: 14px;
+        min-width: 14px;
+        height: 14px;
+    }
+    .mobile-app-img {
+        max-height: 360px;
     }
 }
 
-.App-header {
+@media (min-width: 800px) {
+    .app {
+        font-size: 0.9em;
+    }
+    .foodDataPanel {
+        padding-top: 24px;
+    }
+    .header-link {
+        margin-top: 14px;
+        min-width: 64px;
+    }
+    .home {
+        width: 780px;
+    }
+    .legendItem {
+        width: 16px;
+        min-width: 16px;
+        height: 16px;
+    }
+    .mobile-app-img {
+        max-height: 400px;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .app {
+        font-size: 1.0em;
+    }
+    .header-link {
+        margin-top: 12px;
+        min-width: 68px;
+    }
+    .home {
+        width: 950px;
+    }
+    .legendItem {
+        width: 18px;
+        min-width: 18px;
+        height: 18px;
+    }
+    .mobile-app-img {
+        max-height: 460px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .app {
+        font-size: 1.1em;
+    }
+    .header-link {
+        margin-top: 8px;
+        min-width: 76px;
+    }
+    .home {
+        width: 1150px;
+    }
+    .legendItem {
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+    }
+    .mobile-app-img {
+        max-height: 580px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .app {
+        font-size: 1.2em;
+    }
+    .header-link {
+        margin-top: 4px;
+        min-width: 84px;
+    }
+    .home {
+        width: 1450px;
+    }
+    .mobile-app-img {
+        max-height: 680px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .header-link {
+        margin-top: -2px;
+        min-width: 96px;
+    }
+    .home {
+        width: 1700px;
+    }
+    .mobile-app-img {
+        max-height: 740px;
+    }
+}
+
+@media (min-width: 2400px) {
+    .app {
+        font-size: 1.3em;
+    }
+    .header-link {
+        margin-top: -8px;
+        min-width: 112px;
+    }
+    .home {
+        width: 2000px;
+    }
+    .mobile-app-img {
+        max-height: 880px;
+    }
+}
+
+
+.app-header {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
@@ -20,8 +182,13 @@
     color: white;
 }
 
-.App-link {
+.app-link {
     color: #61dafb;
+}
+
+.app-logo {
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .button-displaymode, .button-displaymode-enabled, .button-displaymode-disabled {
@@ -60,19 +227,6 @@
     padding-top: 12px;
 }
 
-@media (min-height: 700px) {
-    .foodDataPanel {
-        padding-top: 16px;
-    }
-}
-
-@media (min-height: 750px) {
-    .foodDataPanel {
-        padding-top: 24px;
-    }
-}
-
-
 .form-button {
     min-width: 128px;
     margin-left: 16px;
@@ -92,6 +246,10 @@
 }
 
 .form-language {
+    font-size: 0.9em;
+}
+
+.form-main {
     font-size: 0.9em;
 }
 
@@ -120,107 +278,15 @@
     padding-right: 12px;
 }
 
-.header-link {
-    font-size: 0.9em;
-}
-
-.legendItem {
-    width: 6px;
-    height: 6px;
-    font-size: 0.9em;
-    margin-right: 5px;
-    border: 1px solid black;
-}
 
 .mainPanel {
     background: #f2f5fd;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    padding-top: 4px; }
-
-@media (min-width: 640px) {
-    .legendItem {
-        width: 14px;
-        height: 14px;
-    }
-}
-
-@media (min-width: 800px) {
-    .legendItem {
-        width: 16px;
-        height: 16px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .legendItem {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-@media (min-width: 1280px) {
-    .legendItem {
-        width: 20px;
-        height: 20px;
-    }
+    padding-top: 4px;
 }
 
 
-@media (min-width: 800px) {
-    .header-link {
-        margin-top: 14px;
-        min-width: 64px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .header-link {
-        margin-top: 12px;
-        min-width: 68px;
-    }
-}
-
-@media (min-width: 1280px) {
-    .header-link {
-        margin-top: 8px;
-        min-width: 76px;
-    }
-}
-
-@media (min-width: 1600px) {
-    .header-link {
-        margin-top: 4px;
-        min-width: 84px;
-    }
-}
-
-@media (min-width: 1920px) {
-    .header-link {
-        margin-top: -2px;
-        min-width: 96px;
-    }
-}
-
-@media (min-width: 2400px) {
-    .header-link {
-        margin-top: -8px;
-        min-width: 112px;
-    }
-}
-
-.header-link.active {
-    color: white;
-}
-
-.header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.icon {
-    margin-right: 8px;
-}
 
 .tab-panel {
     padding-top: 5px !important;
@@ -259,13 +325,4 @@
 
 .tableHeaderClass {
     display: none !important;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }

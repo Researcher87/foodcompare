@@ -50,16 +50,17 @@ export default function FoodDataPanelContainer() {
                 <div className={"col-2"}>
                     <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}/>
                 </div>
-                <div className="col-10" style={{maxWidth: "1100px", marginTop: "-10px"}}>
+                <div className="col-10 media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
                     {selectedFoodItems && selectedFoodItems.length > 0 ?
                         <div>
                             <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
                         </div>
                         :
-                        <div style={{padding: "24px"}}><i>
-                            {applicationStrings.text_empty_fooddatapanel_intro[languageContext.language]}
-                            <br/><br/>
-                            {applicationStrings.text_empty_fooddatapanel[languageContext.language]}</i></div>
+                        <div style={{padding: "24px"}}>
+                            <i>
+                                {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
+                            </i>
+                        </div>
                     }
                 </div>
             </div>

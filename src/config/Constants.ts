@@ -42,12 +42,12 @@ export const CARBS_DATA_DETAIL = "carbs data detail chart"
 export const LIPIDS_DATA_BASE = "lipids data base chart";
 export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
 
-export const MENU_FOODDATAPANEL = "food data panel";
-export const MENU_HELP = "help";
-export const MENU_HOME = "home";
-export const MENU_CONTACT = "contact";
-export const MENU_RANKING = "ranking";
-export const MENU_SETTINGS= "settings";
+export const PATH_FOODDATA_PANEL = "/datapanel";
+export const PATH_HOME = "/home";
+export const PATH_CONTACT = "/contact";
+export const PATH_MOBILE_APP = "/mobileapp";
+export const PATH_RANKING = "/ranking";
+export const PATH_USERSETTINGS= "/usersettings";
 
 export const LANGUAGE_DE = "de";
 export const LANGUAGE_EN = "en";

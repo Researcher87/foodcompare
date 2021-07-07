@@ -1,16 +1,10 @@
-import {
-    AMOUNT_100g,
-    AMOUNT_PORTION,
-    CARBS_DATA_BASE,
-    CHART_TYPE_BAR,
-    CHART_TYPE_PIE,
-    LIPIDS_DATA_BASE,
-    SEX_MALE
-} from "./Constants";
+import {AMOUNT_PORTION, CARBS_DATA_BASE, CHART_TYPE_PIE, LIPIDS_DATA_BASE, SEX_MALE} from "./Constants";
 import {ChartConfigData} from "../types/livedata/ChartConfigData";
 
-export const release = "1.0.2"
-export const buildDate = "2021-07-02"
+export const release = "1.1"
+export const buildDate = "2021-07-07"
+
+export const mobileAppPath = "https://play.google.com/store/apps/details?id=com.parapps.foodcompareapp"
 
 export const minimalOmegaRatio = 0.3
 export const maximalPortionSize = 5000

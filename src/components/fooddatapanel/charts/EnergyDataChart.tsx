@@ -2,12 +2,13 @@ import {ChartProps} from "../ChartPanel";
 import {useContext} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {Bar} from "react-chartjs-2";
+import {Bar, Chart} from "react-chartjs-2";
 import {getBarChartOptions} from "../../../service/ChartService";
 import {applicationStrings} from "../../../static/labels";
 import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/calculation/EnergyService";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {default_chart_height} from "../../../config/ChartConfig";
+import annotationPlugin from 'chartjs-plugin-annotation'
 
 export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -16,6 +17,8 @@ export default function EnergyDataChart(props: ChartProps) {
 
     const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList[0];
     const energy100g = nutrientData.baseData.energy;
+
+    Chart.register(annotationPlugin)
 
     if (!applicationContext || !energy100g) {
         return <div>No data.</div>
@@ -65,40 +68,50 @@ export default function EnergyDataChart(props: ChartProps) {
         const totalEnergy = calculateTotalEnergyConsumption(bmr, palValue, leisureSports);
 
         const annotation = {
-            annotations: [{
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: bmr,
-                borderColor: ChartConfig.color_line_red,
-                borderWidth: 4,
-                label: {
-                    enabled: true,
-                    content: applicationStrings.label_chart_bmr[lang]
-                }
-            },
-                {
+            annotations: {
+                line1: {
                     type: 'line',
                     mode: 'horizontal',
                     scaleID: 'y-axis-0',
-                    value: totalEnergy,
-                    borderColor: ChartConfig.color_line_blue,
+                    yMin: bmr,
+                    yMax: bmr,
+                    borderColor: ChartConfig.color_line_red,
                     borderWidth: 4,
                     label: {
                         enabled: true,
-                        content: applicationStrings.label_chart_energyExpenditure[lang]
+                        content: applicationStrings.label_chart_bmr[lang]
                     }
                 },
-            ]
-        };
+                line2:
+                    {
+                        type: 'line',
+                        mode: 'horizontal',
+                        scaleID: 'y-axis-0',
+                        yMin: totalEnergy,
+                        yMax: totalEnergy,
+                        borderColor: ChartConfig.color_line_blue,
+                        borderWidth: 4,
+                        label: {
+                            enabled: true,
+                            content: applicationStrings.label_chart_energyExpenditure[lang]
+                        }
+                    },
+            }
+        }
 
         let options: any = getBarChartOptions(applicationStrings.label_charttype_energy[languageContext.language], "kCal");
-        options = {...options, annotation: annotation};
+        options = {
+            ...options, plugins: {
+                ...options.plugins,
+                annotation: annotation
+            }
+        }
+
         return options;
     }
 
     const data = createEnergyLevelChart();
-    if(!data) {
+    if (!data) {
         return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
     }
 
