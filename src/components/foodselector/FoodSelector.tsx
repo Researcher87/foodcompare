@@ -18,7 +18,9 @@ import {LanguageContext} from "../../contexts/LangContext";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
-    compositeSelector: boolean
+    smallVariant: boolean
+    noCategorySelect?: boolean
+    initialFoodClassToSet?: number
 }
 
 export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
@@ -37,6 +39,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const {language} = useContext(LanguageContext)
 
     useEffect(() => {
+        const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
+
         if (applicationData && applicationData.foodDataCorpus && categoriesList.length === 0) {
             const foodDataCorpus = applicationData.foodDataCorpus
 
@@ -48,11 +52,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             if (foodDataCorpus.foodClasses) {
                 const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, 0, applicationData.foodDataCorpus.foodNames, language)
                 setFoodClassesList(foodClasses)
-                const foodClass = foodClasses[0]
+                const foodClass = foodClasses[initialFoodClass]
                 setSelectedFoodClass(foodClass)
 
                 if (foodDataCorpus.foodItems && foodClasses) {
-                    const foodItemsOfFoodClass = getFoodItemsSelectList(foodDataCorpus.foodItems, foodClasses[0].value.id, foodDataCorpus.foodNames,
+                    const foodItemsOfFoodClass = getFoodItemsSelectList(foodDataCorpus.foodItems, foodClasses[initialFoodClass].value.id, foodDataCorpus.foodNames,
                         foodDataCorpus.conditions, language)
 
                     setFoodItemsList(foodItemsOfFoodClass)
@@ -169,10 +173,12 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         props.updateSelectedFoodItem(newFoodItem)
     }
 
-    const amount_label = props.compositeSelector ? `${applicationStrings.label_amount_short[language]}:` : `${applicationStrings.label_amount[language]}:`
+    const amount_label = props.smallVariant ? `${applicationStrings.label_amount_short[language]}:` : `${applicationStrings.label_amount[language]}:`
+    const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
 
     return <div>
         <div className="container">
+            {props.noCategorySelect !== true &&
             <div className="column select-menu form-section">
                 <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
                 <Select options={categoriesList}
@@ -180,10 +186,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         onChange={(value) => handleCategoryChange(value)}
                 />
             </div>
+            }
             <div className="column select-menu form-section">
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select options={foodClassesList}
-                        value={selectdFoodClass ? selectdFoodClass : foodClassesList[0]}
+                        value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
                 />
             </div>
@@ -196,14 +203,14 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             </div>
             <div className="column select-menu form-section">
                 <div className={"row"}>
-                    <div className={"col-md-9"}>
+                    <div className={"col-lg-8 col-xl-9"}>
                         <span
                             className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
                         <Select options={portionsList}
                                 value={selectedPortion ? selectedPortion : portionsList[0]}
                                 onChange={(value) => handlePortionChange(value)}/>
                     </div>
-                    <div className={"col-md-3"}>
+                    <div className={"col-lg-4 col-xl-3"}>
                         <span
                             className={'form-label'}>{amount_label}</span>
                         <input className="form-control inputfield"

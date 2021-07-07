@@ -13,6 +13,12 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 
 interface MineralVitaminChartProps extends ChartProps {
     selectedSubChart: string
+    directCompareUse?: boolean
+    presetConfig?: {
+        maxValue: number,
+        chartType: string,
+        expand100: boolean
+    }
 }
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
@@ -28,10 +34,13 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         ? applicationContext.applicationData.foodDataPanel.chartConfigData.mineralChartConfig
         : initialChartConfigData.mineralChartConfig
 
-    const [chartType_vitamins, setChartType_vitamins] = useState<string>(chartConfigVitamins.portionType)
-    const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(chartConfigVitamins.expandTo100)
-    const [chartType_minerals, setChartType_minerals] = useState<string>(chartConfigMinerals.portionType)
-    const [expand100_minerals, setExpand100_minerals] = useState<boolean>(chartConfigMinerals.expandTo100)
+    const presetChartType = props.presetConfig ? props.presetConfig.chartType : null
+    const presetExpand100 = props.presetConfig ? props.presetConfig.expand100 : null
+
+    const [chartType_vitamins, setChartType_vitamins] = useState<string>(presetChartType !== null ? presetChartType : chartConfigVitamins.portionType)
+    const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(presetExpand100 !== null ? presetExpand100 : chartConfigVitamins.expandTo100)
+    const [chartType_minerals, setChartType_minerals] = useState<string>(presetChartType !== null ? presetChartType : chartConfigMinerals.portionType)
+    const [expand100_minerals, setExpand100_minerals] = useState<boolean>(presetExpand100 !== null ? presetExpand100 : chartConfigMinerals.expandTo100)
 
     useEffect(() => {
         updateChartConfig()
@@ -288,7 +297,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const data = props.selectedSubChart === CHART_VITAMINS ? createVitaminChartData() : createMineralChartData();
-    if(!data) {
+    if (!data) {
         return <div/>
     }
 
@@ -298,8 +307,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         applicationStrings.label_charttype_minerals[lang];
 
     const options = getOptions(title, maxValue);
-
-    console.log('Options:', options)
 
     return (
         <div className="container-fluid">
@@ -314,7 +321,9 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
                 </div>
             </div>
             <div className="row chartFormLine">
-                {renderFormLine()}
+                {props.directCompareUse !== true &&
+                renderFormLine()
+                }
             </div>
         </div>
     )

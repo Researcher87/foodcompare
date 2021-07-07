@@ -219,6 +219,14 @@
     text-decoration: underline;
 }
 
+.card1 {
+    background-color: #ffe085 !important;
+}
+
+.card2 {
+    background-color: #d9ecff !important;
+}
+
 .chartFormLine {
     padding-top: 32px;
 }

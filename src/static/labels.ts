@@ -31,6 +31,10 @@ export const applicationStrings = {
         de: 'Übernehmen',
         en: 'Submit'
     },
+    button_update: {
+        de: "Aktualisieren",
+        en: "Update"
+    },
     button_yes: {
         de: 'Ja',
         en: 'Yes'
@@ -174,6 +178,10 @@ export const applicationStrings = {
     label_datatype: {
         de: 'Datentyp',
         en: 'Data type'
+    },
+    label_food: {
+        de: "Lebensmittel",
+        en: "Food"
     },
     label_foodclass: {
         de: 'Lebensmittel',

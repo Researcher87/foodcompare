@@ -27,7 +27,7 @@ import {Home} from "./components/Home";
 import {FoodCompareApp} from "./components/FoodCompareApp";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Switch from "react-bootstrap/Switch";
-import {DirectCompare} from "./components/DirectCompare";
+import {DirectCompareContainer} from "./components/directcompare/DirectCompareContainer";
 
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
@@ -51,7 +51,7 @@ function App(): JSX.Element {
                             <Route path={PATH_FOODCOMPARE} component={Home}/>
                             <Route path={PATH_HOME} component={Home}/>
                             <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
-                            <Route path={PATH_DIRECT_COMPARE} component={DirectCompare}/>
+                            <Route path={PATH_DIRECT_COMPARE} component={DirectCompareContainer}/>
                             <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>
                             <Route path={PATH_USERSETTINGS} component={UserSettings}/>
                             <Route path={PATH_CONTACT} component={Contact}/>
@@ -66,7 +66,6 @@ function App(): JSX.Element {
 }
 
 (async () => {
-    await ga4react.initialize();
     try {   // NOTE: uBlock Origin may cause a crash here
         await ga4react.initialize();
     } catch (e) {
