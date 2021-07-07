@@ -32,8 +32,9 @@ export default function Header() {
         applicationData.updateAllFoodItemNames(applicationData.foodDataCorpus.foodNames, event.target.value)
     }
 
+    const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
 
-    const activePath = location.pathname
+    console.log('ABC:', activePath)
 
     const renderMenus = () => {
         return (
