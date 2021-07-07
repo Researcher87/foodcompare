@@ -34,8 +34,6 @@ export default function Header() {
 
     const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
 
-    console.log('ABC:', activePath)
-
     const renderMenus = () => {
         return (
             <div className="btn-group" role="group">
