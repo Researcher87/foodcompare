@@ -7,10 +7,12 @@ import {
     TAB_MINERAL_DATA,
     TAB_VITAMIN_DATA
 } from "../../config/Constants";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import MineralVitaminChart from "../fooddatapanel/charts/MineralVitaminChart";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {DC_MineralVitaminChart} from "./DC_MineralVitaminChart";
+import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
+import { Card } from "react-bootstrap";
 
 export interface DirectCompareDataPanelProps {
     selectedFoodItem1: SelectedFoodItem
@@ -18,10 +20,20 @@ export interface DirectCompareDataPanelProps {
 }
 
 export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
+    const applicationContext = useContext(ApplicationDataContextStore)
 
-    const [selectedDataTab, setSelectedDataTab] = useState<string>(TAB_BASE_DATA)
+    const initialPage = applicationContext?.applicationData.directCompareDataPanel.selectedDataPage
+        ? applicationContext?.applicationData.directCompareDataPanel.selectedDataPage
+        : TAB_BASE_DATA
 
-    const setInfoPage = (datapage: string) => {
+    const [selectedDataTab, setSelectedDataTab] = useState<string>(initialPage)
+
+    if(!applicationContext) {
+        return <div/>
+    }
+
+    const setDataPage = (datapage: string) => {
+        applicationContext.applicationData.directCompareDataPanel.setSelectedDirectCompareDataPage(datapage)
         setSelectedDataTab(datapage)
     }
 
@@ -31,12 +43,12 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
             case TAB_VITAMIN_DATA:
                 return <DC_MineralVitaminChart selectedFoodItem1={props.selectedFoodItem1}
                                                selectedFoodItem2={props.selectedFoodItem2}
-                                               chartType={CHART_VITAMINS}
+                                               selectedSubChart={CHART_VITAMINS}
                 />
             case TAB_MINERAL_DATA:
                 return <DC_MineralVitaminChart selectedFoodItem1={props.selectedFoodItem1}
                                                selectedFoodItem2={props.selectedFoodItem2}
-                                               chartType={CHART_MINERALS}
+                                               selectedSubChart={CHART_MINERALS}
                 />
         }
 
@@ -45,7 +57,9 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     }
 
     return <div>
-        <ChartMenuPanel infoPage={selectedDataTab} verticalArrangement={false} setInfoPage={setInfoPage}/>
+        <Card.Header>
+            <ChartMenuPanel dataPage={selectedDataTab} verticalArrangement={false} setDataPage={setDataPage}/>
+        </Card.Header>
         {renderCharts()}
     </div>
 

@@ -9,8 +9,8 @@ import {LanguageContext} from "../../../contexts/LangContext";
 import {autoRound} from "../../../service/calculation/MathService";
 import {applicationStrings} from "../../../static/labels";
 import {Form} from "react-bootstrap";
-import {CustomLegend} from "./helper/CustomLegend";
-import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
+import {CustomLegend} from "../../charthelper/CustomLegend";
+import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 
@@ -41,7 +41,7 @@ export default function CarbsDataChart(props: ChartProps) {
                     subChart: chartSelection
                 }
             }
-            applicationContext.updateChartConfig(newChartConfig)
+            applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
         }
     }
 
@@ -385,10 +385,10 @@ export default function CarbsDataChart(props: ChartProps) {
                 }
             </div>
             <div className="row chartFormLine">
-                <ChartOptionSelector chartType={chartType}
-                                     showLegend={showLegend}
-                                     handleRadioButtonClick={handleRadioButtonClick}
-                                     handleLegendCheckboxClick={handleLegendCheckbox}/>
+                <PieChartConfigurationForm chartType={chartType}
+                                           showLegend={showLegend}
+                                           handleRadioButtonClick={handleRadioButtonClick}
+                                           handleLegendCheckboxClick={handleLegendCheckbox}/>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import {AMOUNT_PORTION, CARBS_DATA_BASE, CHART_TYPE_PIE, LIPIDS_DATA_BASE, SEX_MALE} from "./Constants";
-import {ChartConfigData} from "../types/livedata/ChartConfigData";
+import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
 
 export const release = "1.1"
 export const buildDate = "2021-07-07"
@@ -27,11 +27,11 @@ export const initialChartConfigData: ChartConfigData = {
     },
     vitaminChartConfig: {
         portionType: AMOUNT_PORTION,
-        expandTo100: false
+        expand100: false
     },
     mineralChartConfig: {
         portionType: AMOUNT_PORTION,
-        expandTo100: false
+        expand100: false
     },
     lipidsChartConfig: {
         chartType: CHART_TYPE_PIE,
@@ -45,6 +45,19 @@ export const initialChartConfigData: ChartConfigData = {
     },
     proteinChartConfig: {
         portionType: AMOUNT_PORTION,
-        expandTo100: false
+        expand100: false
     }
+}
+
+export const initialDirectCompareConfigData: DirectCompareChartConfigData = {
+    vitaminChartConfig: {
+        portionType: AMOUNT_PORTION,
+        expand100: false,
+        synchronize: true
+    },
+    mineralChartConfig: {
+        portionType: AMOUNT_PORTION,
+        expand100: false,
+        synchronize: true
+    },
 }

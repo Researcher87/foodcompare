@@ -59,6 +59,10 @@ export const applicationStrings = {
         de: 'Deutsch',
         en: 'German'
     },
+    checkbox_synchronize: {
+        de: 'Synchronisieren',
+        en: 'Synchronize'
+    },
     confirm_close_all_tabs: {
         de: 'Sollen wirklich alle Lebensmittel-Tabs geschlossen werden?',
         en: 'Really close all food tabs?'

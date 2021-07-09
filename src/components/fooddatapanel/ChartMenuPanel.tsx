@@ -14,8 +14,8 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import {LanguageContext} from "../../contexts/LangContext";
 
 interface ChartMenuPanelProps {
-    infoPage: string
-    setInfoPage: (id: string) => void
+    dataPage: string
+    setDataPage: (id: string) => void
     verticalArrangement: boolean
 }
 
@@ -23,7 +23,7 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
     const languageContext = useContext(LanguageContext)
 
     const handlePageButtonClick = (value: string) => {
-        props.setInfoPage(value)
+        props.setDataPage(value)
     }
 
     const variant = "link"
@@ -34,49 +34,49 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
                 <Button className="btn btn-link header-link"
                         onClick={() => handlePageButtonClick(TAB_BASE_DATA)}
                         variant={variant}
-                        active={props.infoPage === TAB_BASE_DATA}>
+                        active={props.dataPage === TAB_BASE_DATA}>
                     {applicationStrings.label_overview[languageContext.language]}
                 </Button>
                 <Button className="btn btn-link header-link header-link"
                         onClick={() => handlePageButtonClick(TAB_ENERGY_DATA)}
                         variant={variant}
-                        active={props.infoPage === TAB_ENERGY_DATA}>
+                        active={props.dataPage === TAB_ENERGY_DATA}>
                     {applicationStrings.label_nutrient_energy[languageContext.language]}
                 </Button>
                 <Button className="btn btn-link header-link"
                         onClick={() => handlePageButtonClick(TAB_VITAMIN_DATA)}
                         variant={variant}
-                        active={props.infoPage === TAB_VITAMIN_DATA}>
+                        active={props.dataPage === TAB_VITAMIN_DATA}>
                     {applicationStrings.label_nutrient_vit[languageContext.language]}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_MINERAL_DATA)}
                         variant={variant}
-                        active={props.infoPage === TAB_MINERAL_DATA}>
+                        active={props.dataPage === TAB_MINERAL_DATA}>
                     {applicationStrings.label_nutrient_min[languageContext.language]}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_LIPIDS_DATA)}
                         variant={variant}
-                        active={props.infoPage === TAB_LIPIDS_DATA}>
+                        active={props.dataPage === TAB_LIPIDS_DATA}>
                     {applicationStrings.label_nutrient_lipids[languageContext.language]}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_CARBS_DATA)}
                         variant={variant}
-                        active={props.infoPage === TAB_CARBS_DATA}>
+                        active={props.dataPage === TAB_CARBS_DATA}>
                     {applicationStrings.label_nutrient_carbohydrates[languageContext.language]}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_PROTEINS_DATA)}
                         variant={variant}
-                        active={props.infoPage === TAB_PROTEINS_DATA}>
+                        active={props.dataPage === TAB_PROTEINS_DATA}>
                     {applicationStrings.label_nutrient_proteins[languageContext.language]}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_INFO)}
                         variant={variant}
-                        active={props.infoPage === TAB_INFO}>
+                        active={props.dataPage === TAB_INFO}>
                     {applicationStrings.label_info[languageContext.language]}
                 </Button>
             </ButtonGroup>

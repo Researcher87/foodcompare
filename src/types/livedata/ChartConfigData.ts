@@ -7,6 +7,11 @@ export interface ChartConfigData {
     proteinChartConfig: BarChartConfig
 }
 
+export interface DirectCompareChartConfigData {
+    vitaminChartConfig: DirectCompareBarChartConfig
+    mineralChartConfig: DirectCompareBarChartConfig
+}
+
 interface GeneralChartConfig {
     chartType: string
     showLegend: boolean
@@ -22,5 +27,9 @@ interface GeneralChartConfigWithSubCharts extends GeneralChartConfig {
 
 interface BarChartConfig {
     portionType: string
-    expandTo100: boolean
+    expand100: boolean
+}
+
+interface DirectCompareBarChartConfig extends BarChartConfig{
+    synchronize: boolean
 }

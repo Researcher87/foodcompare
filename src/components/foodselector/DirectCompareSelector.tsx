@@ -5,6 +5,7 @@ import {LanguageContext} from "../../contexts/LangContext";
 import FoodSelector from "./FoodSelector";
 import {Button, Card, CardDeck} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
+import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 
 interface DirectCompareSelectorProps {
     updateSelectedFoodItems: (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => void
@@ -15,7 +16,7 @@ const STATUS_NOT_UPDATED = "not updated"
 const STATUS_UPDATED = "updated"
 
 export function DirectCompareSelector(props: DirectCompareSelectorProps) {
-    const applicationData = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const language = languageContext.language
 
@@ -23,7 +24,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const [selectedFoodItem2, setSelectedFoodItem2] = useState<SelectedFoodItem | null>(null)
     const [displayStatus, setDisplayStatus] = useState<string>(STATUS_FIRST_TIME)
 
-    if (!applicationData) {
+    if (!applicationContext) {
         return <div/>
     }
 
@@ -52,12 +53,11 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
 
     const renderFoodSelectorCard = (foodSelectorNumber: number) => {
         const updateSelectedFoodItem = foodSelectorNumber === 1 ? updateSelectedFoodItem1 : updateSelectedFoodItem2
-        const cssClass = foodSelectorNumber === 1 ? 'card1' : 'card2'
+        const styleClass = foodSelectorNumber === 1 ? {backgroundColor: direct_compare_color1} : {backgroundColor: direct_compare_color2}
         const initialFoodClassToSet = foodSelectorNumber -1
 
-
         return <div style={{paddingTop: "32px"}}>
-            <Card className={cssClass}>
+            <Card style={styleClass}>
                 <Card.Header>
                     {applicationStrings.label_food[language]} {foodSelectorNumber}
                 </Card.Header>

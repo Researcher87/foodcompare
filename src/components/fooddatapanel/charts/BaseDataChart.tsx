@@ -7,8 +7,8 @@ import * as ChartConfig from "../../../config/ChartConfig"
 import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
-import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
-import {CustomLegend} from "./helper/CustomLegend";
+import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
+import {CustomLegend} from "../../charthelper/CustomLegend";
 import {default_chart_height} from "../../../config/ChartConfig";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
@@ -41,7 +41,7 @@ export default function BaseDataChart(props: ChartProps) {
                     showLegend: showLegend
                 }
             }
-            applicationContext.updateChartConfig(newChartConfig)
+            applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
         }
     }
 
@@ -277,13 +277,13 @@ export default function BaseDataChart(props: ChartProps) {
                 }
             </div>
             <div className="row chartFormLine">
-                <ChartOptionSelector chartType={chartType}
-                                     showLegend={showLegend}
-                                     showDetails={showDetails}
-                                     detailsCheckboxAvailable={true}
-                                     handleRadioButtonClick={handleRadioButtonClick}
-                                     handleLegendCheckboxClick={handleLegendCheckboxClick}
-                                     handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
+                <PieChartConfigurationForm chartType={chartType}
+                                           showLegend={showLegend}
+                                           showDetails={showDetails}
+                                           detailsCheckboxAvailable={true}
+                                           handleRadioButtonClick={handleRadioButtonClick}
+                                           handleLegendCheckboxClick={handleLegendCheckboxClick}
+                                           handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
             </div>
         </div>
     )

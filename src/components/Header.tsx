@@ -28,7 +28,7 @@ export default function Header() {
 
     const handleLanguageButtonClick = (event: any): void => {
         userLanguageChange(event.target.value)
-        applicationData.updateAllFoodItemNames(applicationData.foodDataCorpus.foodNames, event.target.value)
+        applicationData.applicationData.foodDataPanel.updateAllFoodItemNames(applicationData.foodDataCorpus.foodNames, event.target.value)
     }
 
     const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME

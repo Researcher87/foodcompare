@@ -1,47 +1,45 @@
 import FoodAnalyzerContainer from "./FoodAnalyzerContainer";
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import TabContainer from "./TabContainer";
-import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {applicationStrings} from "../../static/labels";
 import {LanguageContext} from "../../contexts/LangContext";
 
 
 export default function FoodDataPanelContainer() {
-    const applicationData = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
 
-    if (!applicationData) {
+    if (!applicationContext || !applicationContext.ready) {
         return <div/>
     }
 
-    const selectedFoodItems = applicationData.applicationData.foodDataPanel.selectedFoodItems
+    const selectedFoodItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems
 
     const onTabChange = (foodId) => {
         for (let i = 0; i < selectedFoodItems.length; i++) {
             if (selectedFoodItems[i].id === foodId) {
-                applicationData.setSelectedTab(i)
+                applicationContext.applicationData.foodDataPanel.setSelectedFoodTab(i)
             }
         }
     }
 
     const onNewFoodItemSelected = (): void => {
-        const newTabIndex = applicationData.applicationData.foodDataPanel.selectedFoodItems.length - 1
-        applicationData.setSelectedTab(newTabIndex)
+        const newTabIndex = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
+        applicationContext.applicationData.foodDataPanel.setSelectedFoodTab(newTabIndex)
     }
 
-    const selectedTabIndex = applicationData.applicationData.foodDataPanel.selectedFoodItemIndex
+    const selectedTabIndex = applicationContext.applicationData.foodDataPanel.selectedFoodItemIndex
 
     if (!(selectedTabIndex >= 0)) {
         return <div/>
     }
 
-    const selectedFoodItem = applicationData.applicationData.foodDataPanel.selectedFoodItems[selectedTabIndex]
+    const selectedFoodItem = applicationContext.applicationData.foodDataPanel.selectedFoodItems[selectedTabIndex]
 
-    if (applicationData.debug) {
+    if (applicationContext.debug) {
         console.log('FoodDataPanelContainer: Render, selected food item = ', selectedFoodItem)
     }
-
 
     return <div>
         {selectedFoodItem !== null &&

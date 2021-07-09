@@ -12,8 +12,8 @@ import {autoRound} from "../../../service/calculation/MathService";
 import {applicationStrings} from "../../../static/labels";
 import {OmegaData} from "../../../types/nutrientdata/FoodItem";
 import {initialChartConfigData, minimalOmegaRatio} from "../../../config/ApplicationSetting";
-import {CustomLegend} from "./helper/CustomLegend";
-import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
+import {CustomLegend} from "../../charthelper/CustomLegend";
+import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 
@@ -44,7 +44,7 @@ export default function LipidsDataChart(props: ChartProps) {
                     subChart: chartSelection
                 }
             }
-            applicationContext.updateChartConfig(newChartConfig)
+            applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
         }
     }
 
@@ -243,8 +243,6 @@ export default function LipidsDataChart(props: ChartProps) {
             return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
         }
 
-        console.log('Oh')
-
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&
@@ -296,10 +294,10 @@ export default function LipidsDataChart(props: ChartProps) {
                 }
             </div>
             <div className="row chartFormLine">
-                <ChartOptionSelector chartType={chartType}
-                                     showLegend={showLegend}
-                                     handleRadioButtonClick={handleRadioButtonClick}
-                                     handleLegendCheckboxClick={handleLegendCheckbox}/>
+                <PieChartConfigurationForm chartType={chartType}
+                                           showLegend={showLegend}
+                                           handleRadioButtonClick={handleRadioButtonClick}
+                                           handleLegendCheckboxClick={handleLegendCheckbox}/>
             </div>
         </div>
     );

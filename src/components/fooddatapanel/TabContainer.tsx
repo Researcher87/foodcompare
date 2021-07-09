@@ -1,6 +1,5 @@
-import React, {Component, useContext} from "react";
+import React, {useContext} from "react";
 import CloseableTabs from 'react-closeable-tabs';
-import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 
 interface TabContainerProps {

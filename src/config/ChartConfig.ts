@@ -30,6 +30,8 @@ export const basedata_barchart_width = 380;
 export const default_chart_height = 380;
 export const default_chart_width = 800;
 
+export const direct_compare_chartheight = 300;
+
 export const energy_chart_height = 413;
 
 export const minimal_table_height = energy_chart_height;
@@ -55,3 +57,6 @@ export const color_lipids_omega6 = color_brown;
 export const color_lipids_misc = color_gray;
 
 export const color_ash = color_gray;
+
+export const direct_compare_color1 = "#ffe085"
+export const direct_compare_color2 = "#d9ecff"

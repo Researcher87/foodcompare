@@ -27,7 +27,7 @@ import {Home} from "./components/Home";
 import {FoodCompareApp} from "./components/FoodCompareApp";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Switch from "react-bootstrap/Switch";
-import {DirectCompareContainer} from "./components/directcompare/DirectCompareContainer";
+import DirectCompareContainer from "./components/directcompare/DirectCompareContainer";
 
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);

@@ -171,6 +171,44 @@
 }
 
 
+
+/* Adapted styles for gradually becoming larger screens (height). */
+
+.direct-compare-panel {
+    height: 320px;
+}
+
+@media (min-height: 590px) {
+    .direct-compare-panel {
+        height: 400px;
+    }
+}
+
+@media (min-height: 750px) {
+    .direct-compare-panel {
+        height: 540px;
+    }
+}
+
+@media (min-height: 890px) {
+    .direct-compare-panel {
+        height: 620px;
+    }
+}
+
+@media (min-height: 1000px) {
+    .direct-compare-panel {
+        height: 750px;
+    }
+}
+
+@media (min-height: 1200px) {
+    .direct-compare-panel {
+        height: 850px;
+    }
+}
+
+
 .app-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -217,14 +255,6 @@
 .btn-link.active {
     color: #0064ff !important;
     text-decoration: underline;
-}
-
-.card1 {
-    background-color: #ffe085 !important;
-}
-
-.card2 {
-    background-color: #d9ecff !important;
 }
 
 .chartFormLine {

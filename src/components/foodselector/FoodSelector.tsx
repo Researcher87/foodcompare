@@ -35,14 +35,14 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const [foodItemsList, setFoodItemsList] = useState<Array<ReactSelectFoodItemOption>>([])
     const [portionsList, setPortionsList] = useState<Array<ReactSelectPortionOption>>([])
 
-    const applicationData = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
     useEffect(() => {
         const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
 
-        if (applicationData && applicationData.foodDataCorpus && categoriesList.length === 0) {
-            const foodDataCorpus = applicationData.foodDataCorpus
+        if (applicationContext && applicationContext.foodDataCorpus && categoriesList.length === 0) {
+            const foodDataCorpus = applicationContext.foodDataCorpus
 
             if (foodDataCorpus.categories) {
                 const categoryItems = getCategorySelectList(foodDataCorpus.categories, language)
@@ -50,7 +50,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             }
 
             if (foodDataCorpus.foodClasses) {
-                const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, 0, applicationData.foodDataCorpus.foodNames, language)
+                const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, 0, applicationContext.foodDataCorpus.foodNames, language)
                 setFoodClassesList(foodClasses)
                 const foodClass = foodClasses[initialFoodClass]
                 setSelectedFoodClass(foodClass)
@@ -82,7 +82,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     }, [selectedFoodItem, selectedPortion, selectdFoodClass, selectedCategory, portionAmount])
 
-    if (!applicationData) {
+    if (!applicationContext) {
         return <div/>
     }
 
@@ -120,10 +120,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updateFoodClasses = (category: ReactSelectOption) => {
-        const foodClasses = applicationData.foodDataCorpus.foodClasses
+        const foodClasses = applicationContext.foodDataCorpus.foodClasses
 
         if (foodClasses) {
-            const foodClassItems = getFoodClassSelectList(foodClasses, category.value, applicationData.foodDataCorpus.foodNames, language)
+            const foodClassItems = getFoodClassSelectList(foodClasses, category.value, applicationContext.foodDataCorpus.foodNames, language)
             setFoodClassesList(foodClassItems)
             setSelectedFoodClass(foodClassItems[0])
             updateFoodItem(foodClassItems[0])
@@ -131,9 +131,9 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updateFoodItem = (foodClass: ReactSelectFoodClassOption) => {
-        const foodItems = applicationData.foodDataCorpus.foodItems
-        const foodNames = applicationData.foodDataCorpus.foodNames
-        const conditions = applicationData.foodDataCorpus.conditions
+        const foodItems = applicationContext.foodDataCorpus.foodItems
+        const foodNames = applicationContext.foodDataCorpus.foodNames
+        const conditions = applicationContext.foodDataCorpus.conditions
 
         if (foodItems) {
             const foodClassItems = getFoodItemsSelectList(foodItems, foodClass.value.id, foodNames, conditions, language)
@@ -148,7 +148,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updatePortionsList = (foodItem: FoodItem) => {
-        const portionDataList = getPortionReactSelectList(foodItem.portionData!!, applicationData.foodDataCorpus.portionTypes, language)
+        const portionDataList = getPortionReactSelectList(foodItem.portionData!!, applicationContext.foodDataCorpus.portionTypes, language)
         setPortionsList(portionDataList)
         const defaultPortion = getDefaultPortionData(foodItem, portionDataList)
         setSelectedPortion(defaultPortion)

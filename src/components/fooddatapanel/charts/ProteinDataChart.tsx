@@ -10,6 +10,7 @@ import {getBarChartOptions} from "../../../service/ChartService"
 import {Col, Form} from "react-bootstrap";
 import {Bar} from "react-chartjs-2";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
+import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 
 export default function ProteinDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -22,7 +23,7 @@ export default function ProteinDataChart(props: ChartProps) {
 
 
     const [portionType, setPortionType] = useState<string>(chartConfig.portionType)
-    const [expand100, setExpand100] = useState<boolean>(chartConfig.expandTo100)
+    const [expand100, setExpand100] = useState<boolean>(chartConfig.expand100)
 
     useEffect(() => {
         updateChartConfig()
@@ -34,10 +35,10 @@ export default function ProteinDataChart(props: ChartProps) {
                 ...applicationContext.applicationData.foodDataPanel.chartConfigData,
                 proteinChartConfig: {
                     portionType: portionType,
-                    expandTo100: expand100
+                    expand100: expand100
                 }
             }
-            applicationContext.updateChartConfig(newChartConfig)
+            applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
         }
     }
 
@@ -146,7 +147,7 @@ export default function ProteinDataChart(props: ChartProps) {
         setPortionType(event.target.value)
     }
 
-    const handleExpandCheckbox = (event: any) => {
+    const handleExpandCheckbox = () => {
             setExpand100(!expand100)
     }
 
@@ -155,41 +156,16 @@ export default function ProteinDataChart(props: ChartProps) {
         return getBarChartOptions(title, "%", maxYvalue);
     }
 
-    const renderFormLine = () => {
-        const label_portion = `${applicationStrings.label_portion[lang]} (${props.selectedFoodItem.portion.amount} g)`;
+    const renderChartConfigurationForm = () => {
+        const barChartProps = {
+            selectedFoodItem: props.selectedFoodItem,
+            portionType: portionType,
+            expand100: expand100,
+            handleRadioButtonClick: handleRadioButtonClick,
+            handleExpandCheckboxClick: handleExpandCheckbox
+        }
 
-        return (
-            <div className="container-fluid form-main">
-                <div className="row foodDataPageHeader">
-                    <form className="form-inline form-group">
-                        <Form.Label className={"form-elements"}>
-                            <b>{applicationStrings.label_reference[lang]}:</b>
-                        </Form.Label>
-                        <Form.Check type="radio"
-                                    inline={true}
-                                    label={"100g"}
-                                    value={GRAM}
-                                    checked={(portionType === GRAM)}
-                                    onChange={handleRadioButtonClick}
-                        />
-                        <Form.Check type="radio"
-                                    inline={true}
-                                    style={{paddingRight: "48px"}}
-                                    label={label_portion}
-                                    value={AMOUNT_PORTION}
-                                    checked={portionType === AMOUNT_PORTION}
-                                    onChange={handleRadioButtonClick}
-                        />
-                        <Form.Check className="form-radiobutton"
-                                    inline={true}
-                                    label={applicationStrings.checkbox_expand100g[lang]}
-                                    checked={expand100}
-                                    onChange={handleExpandCheckbox}>
-                        </Form.Check>
-                    </form>
-                </div>
-            </div>
-        )
+        return <BarChartConfigurationForm {...barChartProps} />
     }
 
     const data = createProteinChartData();
@@ -221,7 +197,7 @@ export default function ProteinDataChart(props: ChartProps) {
                 </div>
             </div>
             <div className="row chartFormLine">
-                {renderFormLine()}
+                {renderChartConfigurationForm()}
             </div>
         </div>
     )

@@ -1,10 +1,10 @@
 import {useContext} from "react";
-import {LanguageContext} from "../../../../contexts/LangContext";
-import {applicationStrings} from "../../../../static/labels";
-import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../../config/Constants";
+import {LanguageContext} from "../../contexts/LangContext";
+import {applicationStrings} from "../../static/labels";
+import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../config/Constants";
 import {Form, FormCheck} from 'react-bootstrap';
 
-interface ChartProps {
+interface PieChartConfigurationProps {
     chartType: string
     showLegend: boolean
     showDetails?: boolean
@@ -14,7 +14,7 @@ interface ChartProps {
     handleDetailsCheckboxClick?: (event: any) => void
 }
 
-export function ChartOptionSelector(props: ChartProps) {
+export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)
 
     return (

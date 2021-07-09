@@ -30,8 +30,8 @@ import {ChartMenuPanel} from "./ChartMenuPanel";
 interface FoodDataPageHeaderProps {
     displayMode: string
     setDisplayMode: (id: string) => void
-    infoPage: string
-    setInfoPage: (id: string) => void
+    dataPage: string
+    setDataPage: (id: string) => void
     selectedFoodItem: SelectedFoodItem
     tableData: Array<FoodTableDataObject>
     selectedDataTab: string
@@ -47,21 +47,17 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         return <div/>
     }
 
-    const handlePageButtonClick = (value: string) => {
-        props.setInfoPage(value)
-    }
-
     const handleRadioButtonClick = (value: string) => {
         props.setDisplayMode(value)
     }
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
-        applicationContext.removeItemFromFoodDataPanel(id)
+        applicationContext.applicationData.foodDataPanel.removeItemFromFoodDataPanel(id)
     }
 
     const help = () => {
-        switch (props.infoPage) {
+        switch (props.dataPage) {
             case TAB_BASE_DATA:
                 setHelpModalId(1)
                 return;
@@ -132,7 +128,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                 <div className="col-md-2 col-sm-3">
                     <div className={"card"}>
                         <div className="card-body" style={{paddingRight: "30px"}}>
-                            <ChartMenuPanel infoPage={props.infoPage} verticalArrangement={true} setInfoPage={props.setInfoPage}/>
+                            <ChartMenuPanel dataPage={props.dataPage} verticalArrangement={true} setDataPage={props.setDataPage}/>
                         </div>
                     </div>
                 </div>
