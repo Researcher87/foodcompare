@@ -11,46 +11,67 @@ import {Col, Form} from "react-bootstrap";
 import {Bar} from "react-chartjs-2";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
+import {set} from "react-ga";
 
-export default function ProteinDataChart(props: ChartProps) {
+interface ProteinDataChartProps extends ChartProps {
+    directCompareUse?: boolean
+    directCompareConfig?: {
+        maxValue?: number,
+        portionType: string,
+        expand100: boolean,
+        barChartColor: string
+    }
+}
+
+export default function ProteinDataChartProps(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const chartConfig = applicationContext
-        ? applicationContext.applicationData.foodDataPanel.chartConfigData.proteinChartConfig
-        : initialChartConfigData.proteinChartConfig
-
+    const chartConfig = props.directCompareConfig
+        ? props.directCompareConfig
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.proteinChartConfig
+            : initialChartConfigData.proteinChartConfig
 
     const [portionType, setPortionType] = useState<string>(chartConfig.portionType)
     const [expand100, setExpand100] = useState<boolean>(chartConfig.expand100)
 
     useEffect(() => {
+        if (props.directCompareConfig) {
+            setExpand100(chartConfig.expand100)
+            setPortionType(chartConfig.portionType)
+        }
+
         updateChartConfig()
-    }, [portionType, expand100])
+    }, [portionType, expand100, props])
 
     const updateChartConfig = () => {
-        if (applicationContext) {
-            const newChartConfig = {
-                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
-                proteinChartConfig: {
-                    portionType: portionType,
-                    expand100: expand100
+        if (applicationContext && !props.directCompareConfig) {
+            const currentSetting = applicationContext.applicationData.foodDataPanel.chartConfigData.proteinChartConfig
+            if (expand100 !== currentSetting.expand100 || portionType !== currentSetting.portionType) {
+                const newChartConfig = {
+                    ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                    proteinChartConfig: {
+                        portionType: portionType,
+                        expand100: expand100
+                    }
                 }
+                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
+
             }
-            applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
         }
     }
 
 
     const createProteinChartData = () => {
         const proteinData = props.selectedFoodItem.foodItem.nutrientDataList[0].proteinData;
-        if(!proteinData || !applicationContext) {
+        if (!proteinData || !applicationContext) {
             return null;
         }
 
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.proteinRequirementData;
-        if(!requirementData) {
+        if (!requirementData) {
             return null;
         }
 
@@ -58,7 +79,7 @@ export default function ProteinDataChart(props: ChartProps) {
         const amount = portionType === AMOUNT_PORTION ? props.selectedFoodItem.portion.amount : 100;
 
         const labels: Array<string> = [];
-        const data: Array<number>  = [];
+        const data: Array<number> = [];
 
         if (proteinData.histidine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_histidine[lang]);
@@ -130,12 +151,16 @@ export default function ProteinDataChart(props: ChartProps) {
             )
         }
 
+        const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
+            ? props.directCompareConfig.barChartColor
+            : ChartConfig.color_proteins
+
         return {
             labels: labels,
             datasets: [{
                 label: applicationStrings.label_charttype_proteins[lang],
                 data: data,
-                backgroundColor: ChartConfig.color_proteins,
+                backgroundColor: chartColor,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
@@ -148,12 +173,29 @@ export default function ProteinDataChart(props: ChartProps) {
     }
 
     const handleExpandCheckbox = () => {
-            setExpand100(!expand100)
+        setExpand100(!expand100)
     }
 
     const getOptions = (title, maxValue) => {
-        const maxYvalue = expand100 && maxValue < 100 ? 100 : undefined
-        return getBarChartOptions(title, "%", maxYvalue);
+        const overallMaxValue = props.directCompareConfig && props.directCompareConfig.maxValue
+            ? props.directCompareConfig.maxValue
+            : maxValue
+
+        let maxYValue
+        if (!props.directCompareConfig) {
+            if (expand100 && overallMaxValue < 100) {
+                maxYValue = 100
+            }
+        } else {
+            if (props.directCompareConfig.maxValue) {
+                maxYValue = props.directCompareConfig.maxValue
+            }
+            if (expand100 === true && (maxYValue === undefined || maxYValue < 100)) {
+                maxYValue = 100
+            }
+        }
+
+        return getBarChartOptions(title, "%", maxYValue);
     }
 
     const renderChartConfigurationForm = () => {
@@ -169,13 +211,16 @@ export default function ProteinDataChart(props: ChartProps) {
     }
 
     const data = createProteinChartData();
-    if(!data) {
+    if (!data) {
         return <div/>
     }
 
     const maxValue = (data && data.datasets && data.datasets.length > 0) ? Math.max(...data.datasets[0].data) : 0;
     const options = getOptions(applicationStrings.label_charttype_proteins[lang], maxValue);
     const dataExists = data.datasets && data.datasets[0].data && data.datasets[0].data.length > 0
+
+    const height = props.directCompareConfig ? ChartConfig.direct_compare_chartheight : ChartConfig.default_chart_height
+
 
     return (
         <div className="container-fluid">
@@ -184,20 +229,22 @@ export default function ProteinDataChart(props: ChartProps) {
                     {dataExists &&
                     <Bar
                         data={data}
-                        height={ChartConfig.default_chart_height}
+                        height={height}
                         options={options}
                         type={"bar"}
                     />
                     }
                     {!dataExists &&
-                    <p className="text-center" style={{ height: ChartConfig.default_chart_height }}>
+                    <p className="text-center" style={{height: ChartConfig.default_chart_height}}>
                         {applicationStrings.label_noData[lang]}
                     </p>
                     }
                 </div>
             </div>
             <div className="row chartFormLine">
-                {renderChartConfigurationForm()}
+                {props.directCompareUse !== true &&
+                renderChartConfigurationForm()
+                }
             </div>
         </div>
     )

@@ -1,14 +1,16 @@
-import {determineFoodRequirementRatio} from "./DietaryRequirementService";
+import {determineFoodRequirementRatio, determineProteinRequirementRatio} from "./DietaryRequirementService";
 import {UserData} from "../../types/livedata/UserData";
 
 /**
- * Determines the maximum vitamin, mineral or protein value of a food item (referring to the daily dietary requirements).
+ * Determines the maximum vitamin or mineral or protein value of a food item (referring to the daily dietary requirements).
  */
-export function getMaximumValue(dataSet: any, amount: number, requirementData: any, userData: UserData) {
+export function getMaximumValue(dataSet: any, amount: number, requirementData: any, userData: UserData, proteins?: boolean) {
     let maxValue = 0
     for (let dataSetKey in dataSet) {
         if (requirementData[dataSetKey]) {
-            const ratioValue = determineFoodRequirementRatio(requirementData[dataSetKey], dataSet[dataSetKey], amount, userData)
+            const ratioValue = proteins === true
+                ? determineProteinRequirementRatio(requirementData[dataSetKey], dataSet[dataSetKey], amount, userData)
+                : determineFoodRequirementRatio(requirementData[dataSetKey], dataSet[dataSetKey], amount, userData)
             if (ratioValue > maxValue) {
                 maxValue = ratioValue
             }

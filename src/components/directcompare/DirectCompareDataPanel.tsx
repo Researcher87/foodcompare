@@ -4,7 +4,7 @@ import {
     CHART_VITAMINS,
     TAB_BASE_DATA,
     TAB_INFO,
-    TAB_MINERAL_DATA,
+    TAB_MINERAL_DATA, TAB_PROTEINS_DATA,
     TAB_VITAMIN_DATA
 } from "../../config/Constants";
 import {useContext, useState} from "react";
@@ -14,6 +14,7 @@ import {DC_MineralVitaminChart} from "./DC_MineralVitaminChart";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {Card} from "react-bootstrap";
 import {DC_BaseDataChart} from "./DC_BaseDataChart";
+import {DC_ProteinDataChart} from "./DC_ProteinDataChart";
 
 export interface DirectCompareDataPanelProps {
     selectedFoodItem1: SelectedFoodItem
@@ -54,6 +55,10 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
                 return <DC_MineralVitaminChart selectedFoodItem1={props.selectedFoodItem1}
                                                selectedFoodItem2={props.selectedFoodItem2}
                                                selectedSubChart={CHART_MINERALS}
+                />
+            case TAB_PROTEINS_DATA:
+                return <DC_ProteinDataChart selectedFoodItem1={props.selectedFoodItem1}
+                                            selectedFoodItem2={props.selectedFoodItem2}
                 />
         }
 

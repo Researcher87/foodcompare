@@ -65,4 +65,19 @@ export const initialDirectCompareConfigData: DirectCompareChartConfigData = {
         expand100: false,
         synchronize: true
     },
+    lipidsChartConfig: {
+        chartType: CHART_TYPE_PIE,
+        showLegend: false,
+        showDetails: false
+    },
+    carbsChartConfig: {
+        chartType: CHART_TYPE_PIE,
+        showLegend: false,
+        showDetails: false
+    },
+    proteinChartConfig: {
+        portionType: AMOUNT_PORTION,
+        expand100: false,
+        synchronize: true
+    }
 }

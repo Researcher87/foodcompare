@@ -79,7 +79,6 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
         props.selectedSubChart === CHART_VITAMINS ? setSynchronizeVitamins(!synchronizeVitamins) : setSynchronizeMinerals(!synchronizeMinerals)
     }
 
-
     const renderChartConfigurationForm = () => {
         const portionType = props.selectedSubChart === CHART_VITAMINS ? portionType_vitamins : portionType_minerals
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals
@@ -148,7 +147,6 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
         <Card.Footer>
             {renderChartConfigurationForm()}
         </Card.Footer>
-
     </div>
 
 }

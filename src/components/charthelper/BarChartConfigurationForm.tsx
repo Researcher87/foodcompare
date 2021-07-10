@@ -11,7 +11,7 @@ interface BarChartConfigurationProps {
     expand100: boolean
     synchronize?: boolean
     handleRadioButtonClick: (event: any) => void
-    handleExpandCheckboxClick: (event: any) => void
+    handleExpandCheckboxClick: () => void
     handleSynchronize?: () => void
 }
 
