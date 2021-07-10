@@ -19,13 +19,13 @@ import ProteinDataChart from "./charts/ProteinDataChart";
 import CarbsDataChart from "./charts/CarbsDataChart";
 import {InfoData} from "./charts/InfoData";
 
-interface ChartPanelProps {
-    selectedFoodItem: SelectedFoodItem
-    selectedDataTab: string
-}
-
 export interface ChartProps {
     selectedFoodItem: SelectedFoodItem
+    directCompareUse?: boolean
+}
+
+interface ChartPanelProps extends ChartProps {
+    selectedDataTab: string
 }
 
 export function ChartPanel(props: ChartPanelProps) {

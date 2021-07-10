@@ -364,3 +364,14 @@
 .tableHeaderClass {
     display: none !important;
 }
+
+
+.vertical-label {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-align: center;
+    text-orientation: mixed;
+}

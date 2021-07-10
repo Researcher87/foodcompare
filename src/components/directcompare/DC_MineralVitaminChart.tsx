@@ -149,7 +149,6 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
             {renderChartConfigurationForm()}
         </Card.Footer>
 
-
     </div>
 
 }

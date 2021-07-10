@@ -50,6 +50,11 @@ export const initialChartConfigData: ChartConfigData = {
 }
 
 export const initialDirectCompareConfigData: DirectCompareChartConfigData = {
+    baseChartConfig: {
+        chartType: CHART_TYPE_PIE,
+        showLegend: false,
+        showDetails: false
+    },
     vitaminChartConfig: {
         portionType: AMOUNT_PORTION,
         expand100: false,

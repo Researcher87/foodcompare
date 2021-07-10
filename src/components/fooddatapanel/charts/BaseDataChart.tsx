@@ -14,34 +14,55 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {set} from "react-ga";
 
-export default function BaseDataChart(props: ChartProps) {
+interface BaseDataChartProps extends ChartProps {
+    directCompareConfig?: {
+        chartType: string,
+        showLegend: boolean,
+        showDetails: boolean
+    }
+}
+
+export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const chartConfig = applicationContext
-        ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig
-        : initialChartConfigData.baseChartConfig
+    const chartConfig = props.directCompareConfig
+        ? props.directCompareConfig
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig
+            : initialChartConfigData.baseChartConfig
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
     const [showDetails, setShowDetails] = useState<boolean>(chartConfig.showDetails)
 
     useEffect(() => {
+        if (props.directCompareConfig) {
+            setChartType(chartConfig.chartType)
+            setShowLegend(chartConfig.showLegend)
+            setShowDetails(chartConfig.showDetails)
+        }
+
         updateChartConfig()
-    }, [chartType, showDetails, showLegend])
+    }, [chartType, showDetails, showLegend, props])
 
     const updateChartConfig = () => {
-        if (applicationContext) {
-            const newChartConfig = {
-                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
-                baseChartConfig: {
-                    chartType: chartType,
-                    showDetails: showDetails,
-                    showLegend: showLegend
+        if (applicationContext && !props.directCompareConfig) {
+            const currentConfig = applicationContext.applicationData.foodDataPanel.chartConfigData
+            if (chartType !== currentConfig.baseChartConfig.chartType
+                || showDetails !== currentConfig.baseChartConfig.showDetails
+                || showLegend !== currentConfig.baseChartConfig.showLegend) {
+                const newChartConfig = {
+                    ...currentConfig,
+                    baseChartConfig: {
+                        chartType: chartType,
+                        showDetails: showDetails,
+                        showLegend: showLegend
+                    }
                 }
+                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
             }
-            applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
         }
     }
 
@@ -184,21 +205,23 @@ export default function BaseDataChart(props: ChartProps) {
 
     const handleRadioButtonClick = (event: any) => {
         setChartType(event.target.value)
+        updateChartConfig()
     }
 
     const handleLegendCheckboxClick = () => {
         setShowLegend(!showLegend)
+        updateChartConfig()
     }
 
     const handleDetailsCheckboxClick = () => {
         setShowDetails(!showDetails)
+        updateChartConfig()
     }
 
     const legendAllowed = showLegend && chartType === CHART_TYPE_PIE
 
     const getOptions = (title) => {
-        let options = chartType === CHART_TYPE_BAR ? getBarChartOptions(title, "%") : getPieChartOptions(title, "%")
-        return options
+        return chartType === CHART_TYPE_BAR ? getBarChartOptions(title, "%") : getPieChartOptions(title, "%")
     }
 
     const renderTotalChart = () => {
@@ -257,11 +280,13 @@ export default function BaseDataChart(props: ChartProps) {
         )
     }
 
+    const height = props.directCompareUse === true ? "320px" : default_chart_height
+
     return (
         <div className="container-fluid">
             <div className="d-flex">
                 <div className="d-inline-block">
-                    <div className="row" style={{height: default_chart_height}}>
+                    <div className="row" style={{height: height}}>
                         <div className="col-6">
                             <div>{renderTotalChart()}</div>
                         </div>
@@ -276,6 +301,7 @@ export default function BaseDataChart(props: ChartProps) {
                 </div>
                 }
             </div>
+            {!props.directCompareUse &&
             <div className="row chartFormLine">
                 <PieChartConfigurationForm chartType={chartType}
                                            showLegend={showLegend}
@@ -285,6 +311,7 @@ export default function BaseDataChart(props: ChartProps) {
                                            handleLegendCheckboxClick={handleLegendCheckboxClick}
                                            handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
             </div>
+            }
         </div>
     )
 

@@ -277,7 +277,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             }
         }
 
-        return getBarChartOptions(title, "%", maxYValue)
+        return getBarChartOptions(title, "%", maxYValue);
     }
 
 

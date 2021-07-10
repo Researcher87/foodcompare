@@ -8,6 +8,7 @@ export interface ChartConfigData {
 }
 
 export interface DirectCompareChartConfigData {
+    baseChartConfig: GeneralChartConfigWithDetails
     vitaminChartConfig: DirectCompareBarChartConfig
     mineralChartConfig: DirectCompareBarChartConfig
 }

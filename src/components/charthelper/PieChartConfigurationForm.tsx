@@ -10,8 +10,8 @@ interface PieChartConfigurationProps {
     showDetails?: boolean
     detailsCheckboxAvailable?: boolean
     handleRadioButtonClick: (event: any) => void
-    handleLegendCheckboxClick: (event: any) => void
-    handleDetailsCheckboxClick?: (event: any) => void
+    handleLegendCheckboxClick: () => void
+    handleDetailsCheckboxClick?: () => void
 }
 
 export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
