@@ -21,7 +21,7 @@ export function DC_BaseDataChart(props: DirectCompareDataPanelProps) {
 
     const [chartType, setChartType] = useState<string>(initialConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(initialConfig.showLegend)
-    const [showDetails, setShowDetaisls] = useState<boolean>(initialConfig.showDetails)
+    const [showDetails, setShowDetails] = useState<boolean>(initialConfig.showDetails)
 
     useEffect(() => {
         updateChartConfig()

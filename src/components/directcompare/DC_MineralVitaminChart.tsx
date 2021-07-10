@@ -25,8 +25,8 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
         ? applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.mineralChartConfig
         : initialDirectCompareConfigData.mineralChartConfig
 
-    const [chartType_vitamins, setChartType_vitamins] = useState<string>(chartConfigVitamins.portionType)
-    const [chartType_minerals, setChartType_minerals] = useState<string>(chartConfigMinerals.portionType)
+    const [portionType_vitamins, setPortionType_vitamins] = useState<string>(chartConfigVitamins.portionType)
+    const [portionType_minerals, setPortionType_minerals] = useState<string>(chartConfigMinerals.portionType)
     const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(chartConfigVitamins.expand100)
     const [expand100_minerals, setExpand100_minerals] = useState<boolean>(chartConfigMinerals.expand100)
     const [synchronizeVitamins, setSynchronizeVitamins] = useState<boolean>(chartConfigVitamins.synchronize)
@@ -34,7 +34,7 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
     useEffect(() => {
         updateChartConfig()
-    }, [chartType_minerals, chartType_vitamins, synchronizeVitamins, synchronizeMinerals, expand100_vitamins, expand100_minerals])
+    }, [portionType_minerals, portionType_vitamins, synchronizeVitamins, synchronizeMinerals, expand100_vitamins, expand100_minerals])
 
     if (!applicationContext) {
         return <div/>
@@ -45,12 +45,12 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
             const newChartConfig = {
                 ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart,
                 vitaminChartConfig: {
-                    portionType: chartType_vitamins,
+                    portionType: portionType_vitamins,
                     expand100: expand100_vitamins,
                     synchronize: synchronizeVitamins
                 },
                 mineralChartConfig: {
-                    portionType: chartType_minerals,
+                    portionType: portionType_minerals,
                     expand100: expand100_minerals,
                     synchronize: synchronizeMinerals
                 }
@@ -68,7 +68,7 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     }
 
     const handleRadioButtonClick = (event: any): void => {
-        props.selectedSubChart === CHART_VITAMINS ? setChartType_vitamins(event.target.value) : setChartType_minerals(event.target.value)
+        props.selectedSubChart === CHART_VITAMINS ? setPortionType_vitamins(event.target.value) : setPortionType_minerals(event.target.value)
     }
 
     const handleExpandCheckbox = () => {
@@ -81,7 +81,7 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
 
     const renderChartConfigurationForm = () => {
-        const portionType = props.selectedSubChart === CHART_VITAMINS ? chartType_vitamins : chartType_minerals
+        const portionType = props.selectedSubChart === CHART_VITAMINS ? portionType_vitamins : portionType_minerals
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals
         const synchronize = props.selectedSubChart === CHART_VITAMINS ? synchronizeVitamins : synchronizeMinerals
 
@@ -118,14 +118,14 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
     const preconfigVitamins = {
         maxValue: maxY,
-        chartType: chartType_vitamins,
+        portionType: portionType_vitamins,
         expand100: expand100_vitamins,
         synchronize: synchronizeVitamins
     }
 
     const preconfigMinerals = {
         maxValue: maxY,
-        chartType: chartType_minerals,
+        portionType: portionType_minerals,
         expand100: expand100_minerals,
         synchronize: synchronizeMinerals
     }

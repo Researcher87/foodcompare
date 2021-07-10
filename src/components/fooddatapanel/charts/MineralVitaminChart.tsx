@@ -8,7 +8,7 @@ import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartService"
 import {Bar} from "react-chartjs-2";
-import {initialChartConfigData} from "../../../config/ApplicationSetting";
+import {initialChartConfigData, initialDirectCompareConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 
 interface MineralVitaminChartProps extends ChartProps {
@@ -16,7 +16,7 @@ interface MineralVitaminChartProps extends ChartProps {
     directCompareUse?: boolean
     directCompareConfig?: {
         maxValue?: number,
-        chartType: string,
+        portionType: string,
         expand100: boolean,
         barChartColor: string
     }
@@ -27,46 +27,69 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const chartConfigVitamins = applicationContext
-        ? applicationContext.applicationData.foodDataPanel.chartConfigData.vitaminChartConfig
-        : initialChartConfigData.vitaminChartConfig
+    const chartConfigVitamins = props.directCompareConfig
+        ? props.directCompareConfig
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.vitaminChartConfig
+            : initialChartConfigData.vitaminChartConfig
 
-    const chartConfigMinerals = applicationContext
-        ? applicationContext.applicationData.foodDataPanel.chartConfigData.mineralChartConfig
-        : initialChartConfigData.mineralChartConfig
+    const chartConfigMinerals = props.directCompareConfig
+        ? props.directCompareConfig
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.mineralChartConfig
+            : initialChartConfigData.mineralChartConfig
 
-    const [chartType_vitamins, setChartType_vitamins] = useState<string>(chartConfigVitamins.portionType)
+    const [portionType_vitamins, setPortionType_vitamins] = useState<string>(chartConfigVitamins.portionType)
     const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(chartConfigVitamins.expand100)
     const [chartType_minerals, setChartType_minerals] = useState<string>(chartConfigMinerals.portionType)
     const [expand100_minerals, setExpand100_minerals] = useState<boolean>(chartConfigMinerals.expand100)
 
     useEffect(() => {
-        if(!props.directCompareConfig) {
-            updateChartConfig()
+        if (props.directCompareConfig) {
+            setPortionType_vitamins(chartConfigVitamins.portionType)
+            setExpand100_vitamins(chartConfigVitamins.expand100)
+            setChartType_minerals(chartConfigMinerals.portionType)
+            setExpand100_minerals(chartConfigMinerals.expand100)
         }
-    }, [chartType_vitamins, chartType_minerals, expand100_vitamins, expand100_minerals])
 
-    const updateChartConfig = () => {
+        updateChartConfig()
+    }, [portionType_vitamins, chartType_minerals, expand100_vitamins, expand100_minerals, props])
 
-        if (applicationContext) {
-            const newChartConfig = {
-                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
-                vitaminChartConfig: {
-                    portionType: chartType_vitamins,
-                    expand100: expand100_vitamins
-                },
-                mineralChartConfig: {
-                    portionType: chartType_minerals,
-                    expand100: expand100_minerals
-                }
-            }
-
-            applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
-        }
-    }
 
     if (!applicationContext || applicationContext.foodDataCorpus.dietaryRequirements === null) {
         return <div/>
+    }
+
+    const anyValueChanged = (): boolean => {
+        const config = props.selectedSubChart === CHART_VITAMINS
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.vitaminChartConfig
+            : applicationContext.applicationData.foodDataPanel.chartConfigData.mineralChartConfig
+
+        if (props.selectedSubChart === CHART_VITAMINS) {
+            return portionType_vitamins !== config.portionType || expand100_vitamins !== config.expand100
+        } else {
+            return chartType_minerals !== config.portionType || expand100_minerals !== config.expand100
+        }
+    }
+
+    const updateChartConfig = () => {
+        if (!props.directCompareConfig && anyValueChanged()) {
+            if (applicationContext) {
+                const newChartConfig = {
+                    ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                    vitaminChartConfig: {
+                        portionType: portionType_vitamins,
+                        expand100: expand100_vitamins
+                    },
+                    mineralChartConfig: {
+                        portionType: chartType_minerals,
+                        expand100: expand100_minerals
+                    }
+                }
+
+                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
+            }
+        }
     }
 
 
@@ -78,9 +101,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             return null
         }
 
-        const amount = props.directCompareConfig
-            ? props.directCompareConfig.chartType === GRAM ? 100 : props.selectedFoodItem.portion.amount
-            : chartType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
+        const amount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         const labels: Array<string> = [];
         const data: Array<number> = [];
@@ -145,7 +166,9 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             data.push(determineFoodRequirementRatio(requirementData.k, vitaminData.k, amount, applicationContext.userData));
         }
 
-        const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor ? props.directCompareConfig.barChartColor : ChartConfig.color_chart_green_3
+        const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
+            ? props.directCompareConfig.barChartColor
+            : ChartConfig.color_chart_green_3
 
         return {
             labels: labels,
@@ -168,9 +191,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             return null
         }
 
-        const amount = props.directCompareConfig
-            ? props.directCompareConfig.chartType === GRAM ? 100 : props.selectedFoodItem.portion.amount
-            : chartType_minerals === GRAM ? 100 : props.selectedFoodItem.portion.amount
+        const amount = chartType_minerals === GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         const labels: Array<string> = [];
         const data: Array<number> = [];
@@ -225,7 +246,9 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             data.push(determineFoodRequirementRatio(requirementData.selenium, mineralData.selenium, amount, applicationContext.userData));
         }
 
-        const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor ? props.directCompareConfig.barChartColor : ChartConfig.color_purple
+        const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
+            ? props.directCompareConfig.barChartColor
+            : ChartConfig.color_purple
 
         const chartData = {
             labels: labels,
@@ -244,7 +267,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     const handleRadioButtonClick = (event: any): void => {
         if (props.selectedSubChart === CHART_VITAMINS) {
-            setChartType_vitamins(event.target.value)
+            setPortionType_vitamins(event.target.value)
         } else if (props.selectedSubChart === CHART_MINERALS) {
             setChartType_minerals(event.target.value)
         }
@@ -260,10 +283,11 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     const getOptions = (title, maxValue) => {
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;
+        const overallMaxValue = props.directCompareConfig && props.directCompareConfig.maxValue
+            ? props.directCompareConfig.maxValue
+            : maxValue
 
-        const overallMaxValue = props.directCompareConfig && props.directCompareConfig.maxValue ? props.directCompareConfig.maxValue : maxValue
         let maxYValue
-
         if (!props.directCompareConfig) {
             if (expand100 && overallMaxValue < 100) {
                 maxYValue = 100
@@ -272,7 +296,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             if (props.directCompareConfig.maxValue) {
                 maxYValue = props.directCompareConfig.maxValue
             }
-            if(props.directCompareConfig.expand100 === true && (maxYValue === undefined || maxYValue < 100)) {
+            if (expand100 === true && (maxYValue === undefined || maxYValue < 100)) {
                 maxYValue = 100
             }
         }
@@ -282,7 +306,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const renderChartConfigurationForm = () => {
-        const portionType = props.selectedSubChart === CHART_VITAMINS ? chartType_vitamins : chartType_minerals;
+        const portionType = props.selectedSubChart === CHART_VITAMINS ? portionType_vitamins : chartType_minerals;
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;
 
         const barChartProps = {
