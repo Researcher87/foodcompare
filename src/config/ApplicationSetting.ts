@@ -68,12 +68,14 @@ export const initialDirectCompareConfigData: DirectCompareChartConfigData = {
     lipidsChartConfig: {
         chartType: CHART_TYPE_PIE,
         showLegend: false,
-        showDetails: false
+        subChart1: LIPIDS_DATA_BASE,
+        subChart2: LIPIDS_DATA_BASE
     },
     carbsChartConfig: {
         chartType: CHART_TYPE_PIE,
         showLegend: false,
-        showDetails: false
+        subChart1: CARBS_DATA_BASE,
+        subChart2: CARBS_DATA_BASE
     },
     proteinChartConfig: {
         portionType: AMOUNT_PORTION,

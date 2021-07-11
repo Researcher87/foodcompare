@@ -11,8 +11,8 @@ export interface DirectCompareChartConfigData {
     baseChartConfig: GeneralChartConfigWithDetails
     vitaminChartConfig: DirectCompareBarChartConfig
     mineralChartConfig: DirectCompareBarChartConfig
-    lipidsChartConfig: GeneralChartConfigWithDetails
-    carbsChartConfig: GeneralChartConfigWithDetails
+    lipidsChartConfig: GeneralChartConfigDirectCompareWithSubCharts
+    carbsChartConfig: GeneralChartConfigDirectCompareWithSubCharts
     proteinChartConfig: DirectCompareBarChartConfig
 }
 
@@ -27,6 +27,11 @@ interface GeneralChartConfigWithDetails extends GeneralChartConfig {
 
 interface GeneralChartConfigWithSubCharts extends GeneralChartConfig {
     subChart: string
+}
+
+interface GeneralChartConfigDirectCompareWithSubCharts extends GeneralChartConfig {
+    subChart1: string
+    subChart2: string
 }
 
 interface BarChartConfig {

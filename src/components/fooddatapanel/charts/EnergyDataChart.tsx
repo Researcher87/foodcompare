@@ -115,6 +115,8 @@ export default function EnergyDataChart(props: ChartProps) {
         return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
     }
 
+    const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.default_chart_height
+
     return (
         <div className="container-fluid">
             <div className="row">
@@ -122,7 +124,7 @@ export default function EnergyDataChart(props: ChartProps) {
                     <div>
                         <Bar
                             data={data}
-                            height={ChartConfig.default_chart_height}
+                            height={height}
                             options={getOptions()}
                             type={"bar"}
                         />
