@@ -4,10 +4,11 @@ import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {PieChartConfigurationForm} from "../charthelper/PieChartConfigurationForm";
 import {Card} from "react-bootstrap";
 import BaseDataChart from "../fooddatapanel/charts/BaseDataChart";
-import {LIPIDS_DATA_BASE, TAB_BASE_DATA, TAB_LIPIDS_DATA} from "../../config/Constants";
+import {LIPIDS_DATA_BASE, TAB_BASE_DATA, TAB_CARBS_DATA, TAB_LIPIDS_DATA} from "../../config/Constants";
 import LipidsDataChart from "../fooddatapanel/charts/LipidsDataChart";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {PieChartDirectCompareProp} from "../../types/livedata/ChartPropsData";
+import CarbsDataChart from "../fooddatapanel/charts/CarbsDataChart";
 
 /**
  * Re-usable direct compare chart component for pie-chart data pages (Lipids, Carbs, Base Data)
@@ -26,6 +27,11 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
             initialConfig = applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig
                 ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig
                 : initialDirectCompareConfigData.lipidsChartConfig
+            break
+        case TAB_CARBS_DATA:
+            initialConfig = applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig
+                ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig
+                : initialDirectCompareConfigData.carbsChartConfig
             break
     }
 
@@ -57,12 +63,15 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
                     ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart,
                     baseChartConfig: pieChartConfig
                 }
-            }
-
-            if (props.chartType === TAB_LIPIDS_DATA) {
+            } else if (props.chartType === TAB_LIPIDS_DATA) {
                 newChartConfig = {
                     ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart,
-                    lipids: pieChartConfig
+                    lipidsChartConfig: pieChartConfig
+                }
+            } else if (props.chartType === TAB_CARBS_DATA) {
+                newChartConfig = {
+                    ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart,
+                    carbsChartConfig: pieChartConfig
                 }
             }
 
@@ -121,6 +130,7 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
             return <BaseDataChart selectedFoodItem={selectedFoodItem} directCompareUse={true}
                                   directCompareConfig={preconfig}/>
         }
+
         if (props.chartType === TAB_LIPIDS_DATA) {
             const selectedSubChart = applicationContext
                 ? index === 1
@@ -136,6 +146,23 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
 
             return <LipidsDataChart selectedFoodItem={selectedFoodItem} directCompareUse={true}
                                   directCompareConfig={preconfig}/>
+        }
+
+        if (props.chartType === TAB_CARBS_DATA) {
+            const selectedSubChart = applicationContext
+                ? index === 1
+                    ? applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.subChart1
+                    : applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.subChart2
+                : LIPIDS_DATA_BASE
+
+            preconfig = {
+                ...preconfig,
+                subChart: selectedSubChart,
+                chartIndex: index
+            }
+
+            return <CarbsDataChart selectedFoodItem={selectedFoodItem} directCompareUse={true}
+                                    directCompareConfig={preconfig}/>
         }
     }
 

@@ -20,12 +20,11 @@ export interface BaseDataChartProps extends ChartProps {
 }
 
 export interface LipidsDataChartProps extends ChartProps {
-    directCompareConfig?: {
-        chartType: string,
-        showLegend: boolean
-        subChart: string
-        chartIndex?: number
-    }
+    directCompareConfig?: PieChartDirectCompareConfig
+}
+
+export interface CarbDataChartProps extends ChartProps {
+    directCompareConfig?: PieChartDirectCompareConfig
 }
 
 export interface ProteinDataChartProps extends ChartProps {
@@ -39,11 +38,19 @@ export interface MineralVitaminChartProps extends ChartProps {
     directCompareConfig?: BarChartDirectCompareConfig
 }
 
+
 export interface BarChartDirectCompareConfig {
     maxValue?: number,
     portionType: string,
     expand100: boolean,
     barChartColor: string
+}
+
+export interface PieChartDirectCompareConfig {
+    chartType: string,
+    showLegend: boolean
+    subChart: string
+    chartIndex?: number
 }
 
 

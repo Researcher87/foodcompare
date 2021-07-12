@@ -16,6 +16,10 @@ import {PieChartConfigurationForm} from "../../charthelper/PieChartConfiguration
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LipidsDataChartProps} from "../../../types/livedata/ChartPropsData";
+import {
+    GeneralChartConfig,
+    GeneralChartConfigDirectCompareWithSubCharts
+} from "../../../types/livedata/ChartConfigData";
 
 export default function LipidsDataChart(props: LipidsDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -68,7 +72,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         if (applicationContext && props.directCompareConfig) {
             const currentSettings = applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart
 
-            const lipidsChartConfig = props.directCompareConfig.chartIndex === 1
+            const lipidsChartConfig: GeneralChartConfigDirectCompareWithSubCharts = props.directCompareConfig.chartIndex === 1
                 ? {
                     chartType: chartType,
                     showLegend: showLegend,
@@ -303,8 +307,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
 
     const height = props.directCompareUse === true ? "320px" : default_chart_height
-
-    console.log("aaaaa", subChart)
 
     return (
         <div className="container-fluid">

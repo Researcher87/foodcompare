@@ -16,29 +16,29 @@ export interface DirectCompareChartConfigData {
     proteinChartConfig: DirectCompareBarChartConfig
 }
 
-interface GeneralChartConfig {
+export interface GeneralChartConfig {
     chartType: string
     showLegend: boolean
 }
 
-interface GeneralChartConfigWithDetails extends GeneralChartConfig {
+export interface GeneralChartConfigWithDetails extends GeneralChartConfig {
     showDetails: boolean
 }
 
-interface GeneralChartConfigWithSubCharts extends GeneralChartConfig {
+export interface GeneralChartConfigWithSubCharts extends GeneralChartConfig {
     subChart: string
 }
 
-interface GeneralChartConfigDirectCompareWithSubCharts extends GeneralChartConfig {
+export interface GeneralChartConfigDirectCompareWithSubCharts extends GeneralChartConfig {
     subChart1: string
     subChart2: string
 }
 
-interface BarChartConfig {
+export interface BarChartConfig {
     portionType: string
     expand100: boolean
 }
 
-interface DirectCompareBarChartConfig extends BarChartConfig{
+export interface DirectCompareBarChartConfig extends BarChartConfig {
     synchronize: boolean
 }

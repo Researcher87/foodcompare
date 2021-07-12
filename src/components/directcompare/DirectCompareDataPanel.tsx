@@ -2,7 +2,7 @@ import {ChartMenuPanel} from "../fooddatapanel/ChartMenuPanel";
 import {
     CHART_MINERALS,
     CHART_VITAMINS,
-    TAB_BASE_DATA,
+    TAB_BASE_DATA, TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
@@ -73,14 +73,19 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
                                                selectedFoodItem2={selectedFoodItem2}
                                                selectedSubChart={CHART_MINERALS}
                 />
-            case TAB_PROTEINS_DATA:
-                return <DC_ProteinDataChart selectedFoodItem1={selectedFoodItem1}
-                                            selectedFoodItem2={selectedFoodItem2}
-                />
             case TAB_LIPIDS_DATA:
                 return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
                                     selectedFoodItem2={selectedFoodItem2}
                                     chartType={TAB_LIPIDS_DATA}
+                />
+            case TAB_CARBS_DATA:
+                return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
+                                    selectedFoodItem2={selectedFoodItem2}
+                                    chartType={TAB_CARBS_DATA}
+                />
+            case TAB_PROTEINS_DATA:
+                return <DC_ProteinDataChart selectedFoodItem1={selectedFoodItem1}
+                                            selectedFoodItem2={selectedFoodItem2}
                 />
         }
 

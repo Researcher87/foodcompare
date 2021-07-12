@@ -11,7 +11,7 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
 
-export default function ProteinDataChartProps(props: ProteinDataChartProps) {
+export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
