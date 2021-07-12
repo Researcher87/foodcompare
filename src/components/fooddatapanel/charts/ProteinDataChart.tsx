@@ -1,27 +1,15 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
-import {AMOUNT_PORTION, CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
+import {AMOUNT_PORTION} from "../../../config/Constants";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {applicationStrings} from "../../../static/labels";
 import {determineProteinRequirementRatio} from "../../../service/calculation/DietaryRequirementService";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {getBarChartOptions} from "../../../service/ChartService"
-import {Col, Form} from "react-bootstrap";
 import {Bar} from "react-chartjs-2";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
-import {set} from "react-ga";
-
-interface ProteinDataChartProps extends ChartProps {
-    directCompareUse?: boolean
-    directCompareConfig?: {
-        maxValue?: number,
-        portionType: string,
-        expand100: boolean,
-        barChartColor: string
-    }
-}
+import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function ProteinDataChartProps(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

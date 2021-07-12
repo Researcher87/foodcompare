@@ -1,4 +1,3 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
 import * as ChartConfig from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
@@ -13,6 +12,7 @@ import {CustomLegend} from "../../charthelper/CustomLegend";
 import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
+import {ChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function CarbsDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

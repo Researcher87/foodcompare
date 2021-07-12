@@ -1,4 +1,3 @@
-import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import BaseDataChart from "./charts/BaseDataChart";
 import EnergyDataChart from "./charts/EnergyDataChart";
 import {
@@ -7,7 +6,6 @@ import {
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
-    TAB_INFO,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
@@ -17,16 +15,7 @@ import MineralVitaminChart from "./charts/MineralVitaminChart";
 import LipidsDataChart from "./charts/LipidsDataChart";
 import ProteinDataChart from "./charts/ProteinDataChart";
 import CarbsDataChart from "./charts/CarbsDataChart";
-import {InfoData} from "./charts/InfoData";
-
-export interface ChartProps {
-    selectedFoodItem: SelectedFoodItem
-    directCompareUse?: boolean
-}
-
-interface ChartPanelProps extends ChartProps {
-    selectedDataTab: string
-}
+import {ChartPanelProps} from "../../types/livedata/ChartPropsData";
 
 export function ChartPanel(props: ChartPanelProps) {
 

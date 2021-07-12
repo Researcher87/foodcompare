@@ -2,13 +2,14 @@ import {ChartMenuPanel} from "../fooddatapanel/ChartMenuPanel";
 import {
     CHART_MINERALS,
     CHART_VITAMINS,
-    TAB_BASE_DATA, TAB_ENERGY_DATA,
-    TAB_INFO, TAB_LIPIDS_DATA,
-    TAB_MINERAL_DATA, TAB_PROTEINS_DATA,
+    TAB_BASE_DATA,
+    TAB_ENERGY_DATA,
+    TAB_LIPIDS_DATA,
+    TAB_MINERAL_DATA,
+    TAB_PROTEINS_DATA,
     TAB_VITAMIN_DATA
 } from "../../config/Constants";
 import {useContext, useState} from "react";
-import MineralVitaminChart from "../fooddatapanel/charts/MineralVitaminChart";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {DC_MineralVitaminChart} from "./DC_MineralVitaminChart";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
@@ -18,11 +19,7 @@ import {DC_ProteinDataChart} from "./DC_ProteinDataChart";
 import {DC_EnergyChart} from "./DC_EnergyChart";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import {LanguageContext} from "../../contexts/LangContext";
-
-export interface DirectCompareDataPanelProps {
-    selectedFoodItem1: SelectedFoodItem
-    selectedFoodItem2: SelectedFoodItem
-}
+import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 
 export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

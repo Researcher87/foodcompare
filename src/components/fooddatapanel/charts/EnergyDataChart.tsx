@@ -1,4 +1,3 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import * as ChartConfig from "../../../config/ChartConfig"
@@ -9,6 +8,7 @@ import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/ca
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {default_chart_height} from "../../../config/ChartConfig";
 import annotationPlugin from 'chartjs-plugin-annotation'
+import {ChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

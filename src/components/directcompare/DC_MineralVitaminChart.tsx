@@ -1,6 +1,5 @@
 import MineralVitaminChart from "../fooddatapanel/charts/MineralVitaminChart";
 import {CHART_VITAMINS} from "../../config/Constants";
-import {DirectCompareDataPanelProps} from "./DirectCompareDataPanel";
 import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {BarChartConfigurationForm} from "../charthelper/BarChartConfigurationForm";
@@ -9,10 +8,7 @@ import {getMaximumValue, nullifyIncompleValues} from "../../service/calculation/
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {Card} from "react-bootstrap";
-
-interface DC_MineralVitaminChartProps extends DirectCompareDataPanelProps {
-    selectedSubChart: string
-}
+import {DC_MineralVitaminChartProps} from "../../types/livedata/ChartPropsData";
 
 export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

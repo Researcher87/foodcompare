@@ -1,6 +1,6 @@
 import {Card} from "react-bootstrap";
 import EnergyDataChart from "../fooddatapanel/charts/EnergyDataChart";
-import {DirectCompareDataPanelProps} from "./DirectCompareDataPanel";
+import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 
 export function DC_EnergyChart(props: DirectCompareDataPanelProps) {
     return <div className={"direct-compare-panel"}>

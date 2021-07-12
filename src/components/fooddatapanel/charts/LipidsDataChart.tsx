@@ -1,4 +1,3 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
 
 import * as ChartConfig from "../../../config/ChartConfig"
@@ -16,15 +15,7 @@ import {CustomLegend} from "../../charthelper/CustomLegend";
 import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
-
-interface LipidsDataChartProps extends ChartProps {
-    directCompareConfig?: {
-        chartType: string,
-        showLegend: boolean
-        subChart: string
-        chartIndex?: number
-    }
-}
+import {LipidsDataChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function LipidsDataChart(props: LipidsDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

@@ -1,26 +1,17 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {applicationStrings} from "../../../static/labels";
 import {autoRound} from "../../../service/calculation/MathService";
 import * as ChartConfig from "../../../config/ChartConfig"
+import {default_chart_height} from "../../../config/ChartConfig"
 import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
 import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {CustomLegend} from "../../charthelper/CustomLegend";
-import {default_chart_height} from "../../../config/ChartConfig";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
-import {set} from "react-ga";
-
-interface BaseDataChartProps extends ChartProps {
-    directCompareConfig?: {
-        chartType: string,
-        showLegend: boolean,
-        showDetails: boolean
-    }
-}
+import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

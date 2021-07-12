@@ -1,4 +1,3 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
@@ -8,19 +7,9 @@ import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartService"
 import {Bar} from "react-chartjs-2";
-import {initialChartConfigData, initialDirectCompareConfigData} from "../../../config/ApplicationSetting";
+import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
-
-interface MineralVitaminChartProps extends ChartProps {
-    selectedSubChart: string
-    directCompareUse?: boolean
-    directCompareConfig?: {
-        maxValue?: number,
-        portionType: string,
-        expand100: boolean,
-        barChartColor: string
-    }
-}
+import {MineralVitaminChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

@@ -1,4 +1,3 @@
-import {DirectCompareDataPanelProps} from "./DirectCompareDataPanel";
 import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
@@ -8,6 +7,7 @@ import {roundToNextValue} from "../../service/calculation/MathService";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 import {Card} from "react-bootstrap";
 import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
+import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 
 export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

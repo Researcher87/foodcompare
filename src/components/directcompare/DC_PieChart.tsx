@@ -1,20 +1,16 @@
-import {DirectCompareDataPanelProps} from "./DirectCompareDataPanel";
 import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {PieChartConfigurationForm} from "../charthelper/PieChartConfigurationForm";
 import {Card} from "react-bootstrap";
 import BaseDataChart from "../fooddatapanel/charts/BaseDataChart";
-import {LIPIDS_DATA_BASE, TAB_BASE_DATA, TAB_CARBS_DATA, TAB_LIPIDS_DATA} from "../../config/Constants";
+import {LIPIDS_DATA_BASE, TAB_BASE_DATA, TAB_LIPIDS_DATA} from "../../config/Constants";
 import LipidsDataChart from "../fooddatapanel/charts/LipidsDataChart";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-
-interface PieChartDirectCompareProp extends DirectCompareDataPanelProps {
-    chartType: string
-}
+import {PieChartDirectCompareProp} from "../../types/livedata/ChartPropsData";
 
 /**
- *
+ * Re-usable direct compare chart component for pie-chart data pages (Lipids, Carbs, Base Data)
  */
 export function DC_PieChart(props: PieChartDirectCompareProp) {
     const applicationContext = useContext(ApplicationDataContextStore)
