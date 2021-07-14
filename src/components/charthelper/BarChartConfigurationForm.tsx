@@ -3,17 +3,7 @@ import {LanguageContext} from "../../contexts/LangContext";
 import {Form} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
 import {AMOUNT_PORTION, GRAM} from "../../config/Constants";
-import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-
-interface BarChartConfigurationProps {
-    selectedFoodItem?: SelectedFoodItem
-    portionType: string
-    expand100: boolean
-    synchronize?: boolean
-    handleRadioButtonClick: (event: any) => void
-    handleExpandCheckboxClick: () => void
-    handleSynchronize?: () => void
-}
+import {BarChartConfigurationProps} from "../../types/livedata/ChartPropsData";
 
 export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)

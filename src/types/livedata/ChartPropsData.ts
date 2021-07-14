@@ -1,4 +1,6 @@
 import SelectedFoodItem from "./SelectedFoodItem";
+import {DirectCompareChartConfigData} from "./ChartConfigData";
+import {DirectCompareData} from "./ApplicationData";
 
 // BASIC CHARTS COMPONENTS:
 
@@ -12,11 +14,7 @@ export interface ChartPanelProps extends ChartProps {
 }
 
 export interface BaseDataChartProps extends ChartProps {
-    directCompareConfig?: {
-        chartType: string,
-        showLegend: boolean,
-        showDetails: boolean
-    }
+    directCompareConfig?: PieChartDirectCompareConfig
 }
 
 export interface LipidsDataChartProps extends ChartProps {
@@ -49,8 +47,10 @@ export interface BarChartDirectCompareConfig {
 export interface PieChartDirectCompareConfig {
     chartType: string,
     showLegend: boolean
-    subChart: string
+    showDetails?: boolean
+    subChart?: string
     chartIndex?: number
+    handleSubchartChange?: (event: any) => void
 }
 
 
@@ -67,4 +67,24 @@ export interface DC_MineralVitaminChartProps extends DirectCompareDataPanelProps
 
 export interface PieChartDirectCompareProp extends DirectCompareDataPanelProps {
     chartType: string
+}
+
+export interface PieChartConfigurationProps {
+    chartType: string
+    showLegend: boolean
+    showDetails?: boolean
+    detailsCheckboxAvailable?: boolean
+    handleRadioButtonClick: (event: any) => void
+    handleLegendCheckboxClick: () => void
+    handleDetailsCheckboxClick?: () => void
+}
+
+export interface BarChartConfigurationProps {
+    selectedFoodItem?: SelectedFoodItem
+    portionType: string
+    expand100: boolean
+    synchronize?: boolean
+    handleRadioButtonClick: (event: any) => void
+    handleExpandCheckboxClick: () => void
+    handleSynchronize?: () => void
 }

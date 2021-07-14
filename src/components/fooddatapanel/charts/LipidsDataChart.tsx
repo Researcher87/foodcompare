@@ -16,10 +16,6 @@ import {PieChartConfigurationForm} from "../../charthelper/PieChartConfiguration
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LipidsDataChartProps} from "../../../types/livedata/ChartPropsData";
-import {
-    GeneralChartConfig,
-    GeneralChartConfigDirectCompareWithSubCharts
-} from "../../../types/livedata/ChartConfigData";
 
 export default function LipidsDataChart(props: LipidsDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -34,7 +30,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [subChart, setSubChart] = useState<string>(chartConfig.subChart)
+    const [subChart, setSubChart] = useState<string>(chartConfig.subChart  ? chartConfig.subChart : LIPIDS_DATA_BASE)
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -69,28 +65,8 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
     const totalLipidsAmount = props.selectedFoodItem.foodItem.nutrientDataList[0].baseData.lipids;
 
     const handleChartSelectionChange = (event: any) => {
-        if (applicationContext && props.directCompareConfig) {
-            const currentSettings = applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart
-
-            const lipidsChartConfig: GeneralChartConfigDirectCompareWithSubCharts = props.directCompareConfig.chartIndex === 1
-                ? {
-                    chartType: chartType,
-                    showLegend: showLegend,
-                    subChart1: event.target.value,
-                    subChart2: currentSettings.lipidsChartConfig.subChart2
-                }
-                : {
-                    chartType: chartType,
-                    showLegend: showLegend,
-                    subChart1: currentSettings.lipidsChartConfig.subChart1,
-                    subChart2: event.target.value
-                }
-
-            const newChartConfig = {
-                ...currentSettings,
-                lipidsChartConfig: lipidsChartConfig
-            }
-            applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
+        if (props.directCompareConfig && props.directCompareConfig.handleSubchartChange) {
+            props.directCompareConfig.handleSubchartChange(event)
         } else {
             setSubChart(event.target.value)
         }

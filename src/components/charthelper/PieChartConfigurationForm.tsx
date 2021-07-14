@@ -2,20 +2,13 @@ import {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../config/Constants";
-import {Form, FormCheck} from 'react-bootstrap';
-
-interface PieChartConfigurationProps {
-    chartType: string
-    showLegend: boolean
-    showDetails?: boolean
-    detailsCheckboxAvailable?: boolean
-    handleRadioButtonClick: (event: any) => void
-    handleLegendCheckboxClick: () => void
-    handleDetailsCheckboxClick?: () => void
-}
+import {Form} from 'react-bootstrap';
+import {PieChartConfigurationProps} from "../../types/livedata/ChartPropsData";
 
 export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)
+
+    console.log('Props:', props.chartType)
 
     return (
         <div className="container form-main">

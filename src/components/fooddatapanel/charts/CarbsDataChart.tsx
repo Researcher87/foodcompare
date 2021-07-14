@@ -1,7 +1,13 @@
 import {useContext, useEffect, useState} from "react";
 import * as ChartConfig from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
-import {CARBS_DATA_BASE, CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
+import {
+    CARBS_DATA_BASE,
+    CARBS_DATA_DETAIL,
+    CHART_TYPE_BAR,
+    CHART_TYPE_PIE,
+    LIPIDS_DATA_OMEGA
+} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
 import {LanguageContext} from "../../../contexts/LangContext";
@@ -29,7 +35,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [subChart, setSubChart] = useState<string>(chartConfig.subChart)
+    const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
 
     useEffect(() => {
         if (props.directCompareConfig) {

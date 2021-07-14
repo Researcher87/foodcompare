@@ -11,7 +11,7 @@ import {PieChartConfigurationForm} from "../../charthelper/PieChartConfiguration
 import {CustomLegend} from "../../charthelper/CustomLegend";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
-import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
+import {BaseDataChartProps, PieChartDirectCompareConfig} from "../../../types/livedata/ChartPropsData";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -24,15 +24,21 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig
             : initialChartConfigData.baseChartConfig
 
+    const showDetailsProp = chartConfig.showDetails
+        ? chartConfig.showDetails
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig.showDetails
+            : initialChartConfigData.baseChartConfig.showDetails
+
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [showDetails, setShowDetails] = useState<boolean>(chartConfig.showDetails)
+    const [showDetails, setShowDetails] = useState<boolean>(showDetailsProp)
 
     useEffect(() => {
         if (props.directCompareConfig) {
             setChartType(chartConfig.chartType)
             setShowLegend(chartConfig.showLegend)
-            setShowDetails(chartConfig.showDetails)
+            setShowDetails(showDetailsProp)
         }
 
         updateChartConfig()
