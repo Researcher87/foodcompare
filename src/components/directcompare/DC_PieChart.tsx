@@ -100,7 +100,6 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
             }
 
             if (newChartConfig) {
-                console.log('Ekelhafter Neger', newChartConfig)
                 applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
             }
         }

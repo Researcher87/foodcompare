@@ -7,7 +7,11 @@ import {roundToNextValue} from "../../service/calculation/MathService";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 import {Card} from "react-bootstrap";
 import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
-import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
+import {
+    BarChartDirectCompareConfig,
+    DirectCompareDataPanelProps,
+    ProteinDataChartProps
+} from "../../types/livedata/ChartPropsData";
 
 export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -85,17 +89,16 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
 
     const maxY = synchronize ? roundToNextValue(maxValue) : undefined
 
-    const preconfig = {
+    const preconfig: BarChartDirectCompareConfig = {
         maxValue: maxY,
         portionType: portionType,
         expand100: expand100,
-        synchronize: synchronize
+        synchronize: synchronize,
+        barChartColor: ''
     }
 
     const preconfigFoodItem1 = {...preconfig, barChartColor: direct_compare_color1}
     const preconfigFoodItem2 = {...preconfig, barChartColor: direct_compare_color2}
-
-    console.log('Expand 100', expand100)
 
     return <div className={"direct-compare-panel"}>
         <Card>

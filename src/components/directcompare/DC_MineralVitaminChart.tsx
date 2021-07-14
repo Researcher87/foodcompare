@@ -109,7 +109,8 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
         nullifyIncompleValues(dataSet1, dataSet2)
     }
 
-    const maxY = synchronize ? roundToNextValue(maxValue) : undefined
+    const maxY = synchronize
+        ? roundToNextValue(maxValue) : undefined
 
     const preconfigVitamins = {
         maxValue: maxY,

@@ -41,7 +41,8 @@ export interface BarChartDirectCompareConfig {
     maxValue?: number,
     portionType: string,
     expand100: boolean,
-    barChartColor: string
+    barChartColor: string,
+    synchronize?: boolean
 }
 
 export interface PieChartDirectCompareConfig {
