@@ -254,7 +254,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         const nutrientChartData = createNutrientChartData();
 
         return (
-            <div className="chart">
+            <div>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie
                     data={nutrientChartData}
@@ -281,9 +281,9 @@ export default function BaseDataChart(props: BaseDataChartProps) {
 
     return (
         <div className="container-fluid">
-            <div className="d-flex">
-                <div className="d-inline-block">
-                    <div className="row" style={{height: height}}>
+            <div className="d-flex text-align-center" style={{justifyContent: "center"}}>
+                <div className="d-inline-block" >
+                    <div className="row">
                         <div className="col-6">
                             <div>{renderTotalChart()}</div>
                         </div>
