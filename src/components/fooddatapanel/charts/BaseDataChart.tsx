@@ -3,7 +3,6 @@ import {LanguageContext} from "../../../contexts/LangContext";
 import {applicationStrings} from "../../../static/labels";
 import {autoRound} from "../../../service/calculation/MathService";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig"
 import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
@@ -11,7 +10,7 @@ import {PieChartConfigurationForm} from "../../charthelper/PieChartConfiguration
 import {CustomLegend} from "../../charthelper/CustomLegend";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
-import {BaseDataChartProps, PieChartDirectCompareConfig} from "../../../types/livedata/ChartPropsData";
+import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -90,7 +89,6 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 borderWidth: 2,
                 borderColor: '#555',
             }]
-
         }
     }
 
@@ -221,31 +219,30 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         return chartType === CHART_TYPE_BAR ? getBarChartOptions(title, "%") : getPieChartOptions(title, "%")
     }
 
-    const renderTotalChart = () => {
-        const totalChartData = createTotalChartData();
-        if (!totalChartData) {
+
+    const renderSubChart = (title: string, chartData: any) => {
+        if (!chartData) {
             return <div/>
         }
 
         const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.basedata_chart_height
 
-
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie
-                    data={totalChartData}
+                    data={chartData}
                     height={height}
                     width={ChartConfig.basedata_piechart_width}
-                    options={getOptions(applicationStrings.label_chart_totalComposition[lang])}
+                    options={getOptions(title)}
                     type={"pie"}/>
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar
-                    data={totalChartData}
+                    data={chartData}
                     height={height}
                     width={ChartConfig.basedata_barchart_width}
-                    options={getOptions(applicationStrings.label_chart_totalComposition[lang])}
+                    options={getOptions(title)}
                     type={"bar"}/>
                 }
             </div>
@@ -253,36 +250,11 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     }
 
 
-    const renderNutrientChart = () => {
-        const nutrientChartData = createNutrientChartData();
+    const totalChartData = createTotalChartData();
+    const nutrientChartData = createNutrientChartData();
 
-        const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.basedata_chart_height
-
-        return (
-            <div>
-                {chartType === CHART_TYPE_PIE &&
-                <Pie
-                    data={nutrientChartData}
-                    height={height}
-                    width={ChartConfig.basedata_piechart_width}
-                    options={getOptions(applicationStrings.label_chart_nutrientComposition[lang])}
-                    type={"pie"}
-                />
-                }
-                {chartType === CHART_TYPE_BAR &&
-                <Bar
-                    data={nutrientChartData}
-                    height={height}
-                    width={ChartConfig.basedata_barchart_width}
-                    options={getOptions(applicationStrings.label_chart_nutrientComposition[lang])}
-                    type={"bar"}
-                />
-                }
-            </div>
-        )
-    }
-
-    const height = props.directCompareUse === true ? direct_compare_chartheight : default_chart_height
+    const totalChartDataTitle = applicationStrings.label_chart_totalComposition[lang]
+    const nutrientChartDataTitle = applicationStrings.label_chart_nutrientComposition[lang]
 
     return (
         <div className="container-fluid">
@@ -290,10 +262,10 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 <div className="d-inline-block" >
                     <div className="row">
                         <div className="col-6">
-                            <div>{renderTotalChart()}</div>
+                            <div>{renderSubChart(totalChartDataTitle, totalChartData)}</div>
                         </div>
                         <div className="col-6">
-                            <div>{renderNutrientChart()}</div>
+                            <div>{renderSubChart(nutrientChartDataTitle, nutrientChartData)}</div>
                         </div>
                     </div>
                 </div>
