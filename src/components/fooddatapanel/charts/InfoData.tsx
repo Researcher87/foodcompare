@@ -7,9 +7,11 @@ import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeSer
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
 import {defaultPanelHeight} from "../../../config/ApplicationSetting";
+import {direct_compare_chartheight} from "../../../config/ChartConfig";
 
 interface InfoDataProps {
-    selectedFoodItem: SelectedFoodItem
+    selectedFoodItem: SelectedFoodItem,
+    directCompare?: boolean
 }
 
 interface RowElement {
@@ -131,9 +133,10 @@ export function InfoData(props: InfoDataProps) {
         );
     }
 
+    const height = props.directCompare !== true ? defaultPanelHeight : direct_compare_chartheight + 20
 
     return (
-        <div style={{height: defaultPanelHeight, padding: "15px"}}>
+        <div style={{height: height, maxHeight: height, overflowY: "auto", padding: "15px"}}>
             {props.selectedFoodItem.foodItem.foodClass !== 0 &&
             <div>
                 <div>

@@ -256,6 +256,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const renderNutrientChart = () => {
         const nutrientChartData = createNutrientChartData();
 
+        const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.basedata_chart_height
+
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&

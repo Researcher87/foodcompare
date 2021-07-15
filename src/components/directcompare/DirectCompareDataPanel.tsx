@@ -3,7 +3,7 @@ import {
     CHART_MINERALS,
     CHART_VITAMINS,
     TAB_BASE_DATA, TAB_CARBS_DATA,
-    TAB_ENERGY_DATA,
+    TAB_ENERGY_DATA, TAB_INFO,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
@@ -20,6 +20,8 @@ import {DC_EnergyChart} from "./DC_EnergyChart";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
+import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
+import {InfoData} from "../fooddatapanel/charts/InfoData";
 
 export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -87,6 +89,16 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
                 return <DC_ProteinDataChart selectedFoodItem1={selectedFoodItem1}
                                             selectedFoodItem2={selectedFoodItem2}
                 />
+            case TAB_INFO:
+                return <div>
+                    <Card>
+                        <InfoData selectedFoodItem={props.selectedFoodItem1} directCompare={true}/>
+                    </Card>
+                    <Card>
+                        <InfoData selectedFoodItem={props.selectedFoodItem2} directCompare={true}/>
+                    </Card>
+                </div>
+
         }
 
         return <div/>
