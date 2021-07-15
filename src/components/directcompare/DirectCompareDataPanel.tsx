@@ -56,7 +56,7 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
             case TAB_BASE_DATA:
                 return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
                                     selectedFoodItem2={selectedFoodItem2}
-                                    chartType={TAB_BASE_DATA}
+                                    dataPage={TAB_BASE_DATA}
                 />
             case TAB_ENERGY_DATA:
                 return <DC_EnergyChart selectedFoodItem1={selectedFoodItem1}
@@ -76,12 +76,12 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
             case TAB_LIPIDS_DATA:
                 return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
                                     selectedFoodItem2={selectedFoodItem2}
-                                    chartType={TAB_LIPIDS_DATA}
+                                    dataPage={TAB_LIPIDS_DATA}
                 />
             case TAB_CARBS_DATA:
                 return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
                                     selectedFoodItem2={selectedFoodItem2}
-                                    chartType={TAB_CARBS_DATA}
+                                    dataPage={TAB_CARBS_DATA}
                 />
             case TAB_PROTEINS_DATA:
                 return <DC_ProteinDataChart selectedFoodItem1={selectedFoodItem1}

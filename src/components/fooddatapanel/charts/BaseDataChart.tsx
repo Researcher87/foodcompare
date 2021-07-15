@@ -3,7 +3,7 @@ import {LanguageContext} from "../../../contexts/LangContext";
 import {applicationStrings} from "../../../static/labels";
 import {autoRound} from "../../../service/calculation/MathService";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {default_chart_height} from "../../../config/ChartConfig"
+import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig"
 import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
@@ -227,12 +227,15 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             return <div/>
         }
 
+        const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.basedata_chart_height
+
+
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie
                     data={totalChartData}
-                    height={ChartConfig.basedata_chart_height}
+                    height={height}
                     width={ChartConfig.basedata_piechart_width}
                     options={getOptions(applicationStrings.label_chart_totalComposition[lang])}
                     type={"pie"}/>
@@ -240,7 +243,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 {chartType === CHART_TYPE_BAR &&
                 <Bar
                     data={totalChartData}
-                    height={ChartConfig.basedata_chart_height}
+                    height={height}
                     width={ChartConfig.basedata_barchart_width}
                     options={getOptions(applicationStrings.label_chart_totalComposition[lang])}
                     type={"bar"}/>
@@ -258,7 +261,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 {chartType === CHART_TYPE_PIE &&
                 <Pie
                     data={nutrientChartData}
-                    height={ChartConfig.basedata_chart_height}
+                    height={height}
                     width={ChartConfig.basedata_piechart_width}
                     options={getOptions(applicationStrings.label_chart_nutrientComposition[lang])}
                     type={"pie"}
@@ -267,7 +270,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 {chartType === CHART_TYPE_BAR &&
                 <Bar
                     data={nutrientChartData}
-                    height={ChartConfig.basedata_chart_height}
+                    height={height}
                     width={ChartConfig.basedata_barchart_width}
                     options={getOptions(applicationStrings.label_chart_nutrientComposition[lang])}
                     type={"bar"}
@@ -277,7 +280,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         )
     }
 
-    const height = props.directCompareUse === true ? "320px" : default_chart_height
+    const height = props.directCompareUse === true ? direct_compare_chartheight : default_chart_height
 
     return (
         <div className="container-fluid">
@@ -298,8 +301,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 </div>
                 }
             </div>
-            {!props.directCompareUse &&
             <div className="row chartFormLine">
+                {!props.directCompareUse &&
                 <PieChartConfigurationForm chartType={chartType}
                                            showLegend={showLegend}
                                            showDetails={showDetails}
@@ -307,8 +310,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                                            handleRadioButtonClick={handleRadioButtonClick}
                                            handleLegendCheckboxClick={handleLegendCheckboxClick}
                                            handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
+                }
             </div>
-            }
         </div>
     )
 

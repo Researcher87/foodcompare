@@ -67,7 +67,7 @@ export interface DC_MineralVitaminChartProps extends DirectCompareDataPanelProps
 }
 
 export interface PieChartDirectCompareProp extends DirectCompareDataPanelProps {
-    chartType: string
+    dataPage: string
 }
 
 export interface PieChartConfigurationProps {

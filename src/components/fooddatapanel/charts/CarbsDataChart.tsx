@@ -20,7 +20,7 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
-import {default_chart_height} from "../../../config/ChartConfig";
+import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
 
 export default function CarbsDataChart(props: CarbDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -400,7 +400,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const detailChartData = createDetailChartData()
     const basicChartData = createBasicChartData()
 
-    const height = props.directCompareUse === true ? "320px" : default_chart_height
+    const height = props.directCompareUse === true ? direct_compare_chartheight : default_chart_height
 
     return (
         <div className="container-fluid">
