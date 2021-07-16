@@ -3,10 +3,10 @@ import * as NutrientDataImportService from "../service/NutrientDataImportService
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {ApplicationData} from "../types/livedata/ApplicationData";
-import {DISPLAYMODE_CHART} from "../config/Constants";
+import {DISPLAYMODE_CHART, TAB_BASE_DATA} from "../config/Constants";
 import {UserData} from "../types/livedata/UserData";
 import {
-    initialChartConfigData,
+    initialChartConfigData, initialDirectCompareConfigData,
     initialUserDataAge,
     initialUserDataBreastfeeding,
     initialUserDataLeisureSports,
@@ -18,21 +18,15 @@ import {
 } from "../config/ApplicationSetting";
 import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
-import {ChartConfigData} from "../types/livedata/ChartConfigData";
+import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
     applicationData: ApplicationData
     userData: UserData
-    selectedTab: number | null
     debug: boolean
-    setSelectedTab: (number) => void
-    addItemToFoodDataPanel: (number) => void
-    removeItemFromFoodDataPanel: (number) => void
-    removeAllItemsFromFoodDataPanel: () => void
     setUserData: (userData: UserData) => void
-    updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void
-    updateChartConfig: (chartConfig: ChartConfigData) => void
+    ready: boolean
 }
 
 export const ApplicationDataContextStore = createContext<ApplicationDataContext | null>(null)
@@ -45,6 +39,16 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             applicationData: {
                 ...this.state.applicationData,
                 foodDataPanel: {...this.state.applicationData.foodDataPanel, selectedFoodItemIndex: selectedTab}
+            }
+        })
+    }
+
+    setSelectedFoodDataPanelPage = (selectedPage: string) => {
+        this.setState({
+            ...this.state,
+            applicationData: {
+                ...this.state.applicationData,
+                foodDataPanel: {...this.state.applicationData.foodDataPanel, selectedDataPage: selectedPage}
             }
         })
     }
@@ -104,13 +108,6 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         })
     }
 
-    setUserData = (userData: UserData) => {
-        this.setState({
-            ...this.state,
-            userData: userData
-        })
-    }
-
     updateAllFoodItemNames = (foodNames: Array<NameType>, newLanguage: string) => {
         const selectedFoodItems = this.state.applicationData.foodDataPanel.selectedFoodItems
         const newFoodItems = selectedFoodItems.map(selectedFoodItem => {
@@ -135,7 +132,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         })
     }
 
-    updateChartConfig = (chartConfig: ChartConfigData) => {
+    updateFoodDataPanelChartConfig = (chartConfig: ChartConfigData) => {
         this.setState({
             ...this.state,
             applicationData: {
@@ -147,6 +144,51 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             }
         })
     }
+
+
+    setSelectedDirectCompareItems = (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => {
+        this.setState({
+            ...this.state,
+            applicationData: {
+                ...this.state.applicationData,
+                directCompareDataPanel: {...this.state.applicationData.directCompareDataPanel,
+                    selectedFoodItem1: selectedFoodItem1,
+                    selectedFoodItem2: selectedFoodItem2
+                }
+            }
+        })
+    }
+
+    setSelectedDirectCompareDataPage = (selectedPage: string) => {
+        this.setState({
+            ...this.state,
+            applicationData: {
+                ...this.state.applicationData,
+                directCompareDataPanel: {...this.state.applicationData.directCompareDataPanel, selectedDataPage: selectedPage}
+            }
+        })
+    }
+
+    updateDirectCompareChartConfig = (chartConfig: DirectCompareChartConfigData) => {
+        this.setState({
+            ...this.state,
+            applicationData: {
+                ...this.state.applicationData,
+                directCompareDataPanel: {
+                    ...this.state.applicationData.directCompareDataPanel,
+                    directCompareConfigChart: chartConfig
+                }
+            }
+        })
+    }
+
+    setUserData = (userData: UserData) => {
+        this.setState({
+            ...this.state,
+            userData: userData
+        })
+    }
+
 
     state: ApplicationDataContext = {
         foodDataCorpus: {
@@ -162,10 +204,26 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         applicationData: {
             foodDataPanel: {
                 selectedFoodItems: [],
-                selectedDataPage: 0,
+                selectedDataPage: TAB_BASE_DATA,
                 displayMode: DISPLAYMODE_CHART,
                 selectedFoodItemIndex: 0,
-                chartConfigData: initialChartConfigData
+                chartConfigData: initialChartConfigData,
+                setSelectedFoodTab: this.setSelectedFoodDataPanelTab,
+                setSelectedDataPage: this.setSelectedFoodDataPanelPage,
+                addItemToFoodDataPanel: this.addItemToFoodDataPanel,
+                removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
+                removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
+                updateAllFoodItemNames: this.updateAllFoodItemNames,
+                updateFoodDataPanelChartConfig: this.updateFoodDataPanelChartConfig
+            },
+            directCompareDataPanel: {
+                selectedFoodItem1: null,
+                selectedFoodItem2: null,
+                selectedDataPage: TAB_BASE_DATA,
+                directCompareConfigChart: initialDirectCompareConfigData,
+                updateDirectCompareChartConfig: this.updateDirectCompareChartConfig,
+                setSelectedDirectCompareDataPage: this.setSelectedDirectCompareDataPage,
+                setSelectedDirectCompareItems: this.setSelectedDirectCompareItems
             }
         },
         userData: {
@@ -179,21 +237,16 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             leisureSports: initialUserDataLeisureSports,
             initialValues: true
         },
-        selectedTab: null,
         debug: true,
-        setSelectedTab: this.setSelectedFoodDataPanelTab,
-        addItemToFoodDataPanel: this.addItemToFoodDataPanel,
-        removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
-        removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
         setUserData: this.setUserData,
-        updateAllFoodItemNames: this.updateAllFoodItemNames,
-        updateChartConfig: this.updateChartConfig
+        ready: false
     }
 
     componentDidMount() {
         const foodDataCorpus = NutrientDataImportService.loadFoodDataCorpus()
         this.setState({
-            foodDataCorpus: foodDataCorpus
+            foodDataCorpus: foodDataCorpus,
+            ready: true
         })
     }
 

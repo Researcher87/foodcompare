@@ -31,6 +31,10 @@ export const applicationStrings = {
         de: 'Übernehmen',
         en: 'Submit'
     },
+    button_update: {
+        de: "Aktualisieren",
+        en: "Update"
+    },
     button_yes: {
         de: 'Ja',
         en: 'Yes'
@@ -54,6 +58,10 @@ export const applicationStrings = {
     checkbox_german: {
         de: 'Deutsch',
         en: 'German'
+    },
+    checkbox_synchronize: {
+        de: 'Synchronisieren',
+        en: 'Synchronize'
     },
     confirm_close_all_tabs: {
         de: 'Sollen wirklich alle Lebensmittel-Tabs geschlossen werden?',
@@ -174,6 +182,10 @@ export const applicationStrings = {
     label_datatype: {
         de: 'Datentyp',
         en: 'Data type'
+    },
+    label_food: {
+        de: "Lebensmittel",
+        en: "Food"
     },
     label_foodclass: {
         de: 'Lebensmittel',
@@ -582,6 +594,10 @@ export const applicationStrings = {
     menu_food_data_panel: {
         de: 'Lebensmittel analysieren',
         en: 'Food data analyzer'
+    },
+    menu_direct_compare: {
+        de: 'Direktvergleich',
+        en: 'Direct comparison'
     },
     menu_home: {
         de: 'Home',

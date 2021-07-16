@@ -9,7 +9,7 @@ import ReactSelectOption, {
 } from "../../types/ReactSelectOption";
 import {getCategorySelectList} from "../../service/nutrientdata/CategoryService";
 import {getFoodClassSelectList} from "../../service/nutrientdata/FoodClassService";
-import {getFoodItemsSelectList} from "../../service/nutrientdata/FoodItemsService";
+import {getFoodItem, getFoodItemsSelectList} from "../../service/nutrientdata/FoodItemsService";
 import FoodItem, {PortionData} from "../../types/nutrientdata/FoodItem";
 import {getDefaultPortionData, getPortionReactSelectList} from "../../service/nutrientdata/PortionDataService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
@@ -18,27 +18,37 @@ import {LanguageContext} from "../../contexts/LangContext";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
-    compositeSelector: boolean
+    smallVariant: boolean
+    noCategorySelect?: boolean
+    initialFoodClassToSet?: number
+    selectedFoodItem?: SelectedFoodItem | null
 }
 
+/**
+ * Component to select a food element. The component can optionally show the category list and can be initialized
+ * with an already existing selected food item (in case of component re-rendering).
+ */
 export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const [selectedCategory, setSelectedCategory] = useState<ReactSelectOption | null>(null)
     const [selectdFoodClass, setSelectedFoodClass] = useState<ReactSelectFoodClassOption | null>(null)
     const [selectedFoodItem, setSelectedFoodItem] = useState<ReactSelectFoodItemOption | null>(null)
     const [selectedPortion, setSelectedPortion] = useState<ReactSelectPortionOption | null>(null)
     const [portionAmount, setPortionAmount] = useState<number>(0)
+    const [initialized, setInitialized] = useState<boolean>(false)
 
     const [categoriesList, setCategoriesList] = useState<Array<ReactSelectOption>>([])
     const [foodClassesList, setFoodClassesList] = useState<Array<ReactSelectFoodClassOption>>([])
     const [foodItemsList, setFoodItemsList] = useState<Array<ReactSelectFoodItemOption>>([])
     const [portionsList, setPortionsList] = useState<Array<ReactSelectPortionOption>>([])
 
-    const applicationData = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
     useEffect(() => {
-        if (applicationData && applicationData.foodDataCorpus && categoriesList.length === 0) {
-            const foodDataCorpus = applicationData.foodDataCorpus
+        const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
+
+        if (applicationContext && applicationContext.foodDataCorpus && categoriesList.length === 0) {
+            const foodDataCorpus = applicationContext.foodDataCorpus
 
             if (foodDataCorpus.categories) {
                 const categoryItems = getCategorySelectList(foodDataCorpus.categories, language)
@@ -46,13 +56,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             }
 
             if (foodDataCorpus.foodClasses) {
-                const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, 0, applicationData.foodDataCorpus.foodNames, language)
+                const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, 0, applicationContext.foodDataCorpus.foodNames, language)
                 setFoodClassesList(foodClasses)
-                const foodClass = foodClasses[0]
+                const foodClass = foodClasses[initialFoodClass]
                 setSelectedFoodClass(foodClass)
 
                 if (foodDataCorpus.foodItems && foodClasses) {
-                    const foodItemsOfFoodClass = getFoodItemsSelectList(foodDataCorpus.foodItems, foodClasses[0].value.id, foodDataCorpus.foodNames,
+                    const foodItemsOfFoodClass = getFoodItemsSelectList(foodDataCorpus.foodItems, foodClasses[initialFoodClass].value.id, foodDataCorpus.foodNames,
                         foodDataCorpus.conditions, language)
 
                     setFoodItemsList(foodItemsOfFoodClass)
@@ -67,7 +77,9 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         setSelectedPortion(defaultPortion)
                         setPortionAmount(defaultPortion.value.amount)
 
-                        makeSelectedFoodItemObject(foodItem, foodClass.value, defaultPortion.value)
+                        if (!props.selectedFoodItem) {
+                            makeSelectedFoodItemObject(foodItem, foodClass.value, defaultPortion.value)
+                        }
                     }
                 }
             }
@@ -78,7 +90,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     }, [selectedFoodItem, selectedPortion, selectdFoodClass, selectedCategory, portionAmount])
 
-    if (!applicationData) {
+    if (!applicationContext) {
         return <div/>
     }
 
@@ -116,10 +128,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updateFoodClasses = (category: ReactSelectOption) => {
-        const foodClasses = applicationData.foodDataCorpus.foodClasses
+        const foodClasses = applicationContext.foodDataCorpus.foodClasses
 
         if (foodClasses) {
-            const foodClassItems = getFoodClassSelectList(foodClasses, category.value, applicationData.foodDataCorpus.foodNames, language)
+            const foodClassItems = getFoodClassSelectList(foodClasses, category.value, applicationContext.foodDataCorpus.foodNames, language)
             setFoodClassesList(foodClassItems)
             setSelectedFoodClass(foodClassItems[0])
             updateFoodItem(foodClassItems[0])
@@ -127,9 +139,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updateFoodItem = (foodClass: ReactSelectFoodClassOption) => {
-        const foodItems = applicationData.foodDataCorpus.foodItems
-        const foodNames = applicationData.foodDataCorpus.foodNames
-        const conditions = applicationData.foodDataCorpus.conditions
+        const {foodItems, foodNames, conditions} = applicationContext.foodDataCorpus
 
         if (foodItems) {
             const foodClassItems = getFoodItemsSelectList(foodItems, foodClass.value.id, foodNames, conditions, language)
@@ -144,12 +154,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updatePortionsList = (foodItem: FoodItem) => {
-        const portionDataList = getPortionReactSelectList(foodItem.portionData!!, applicationData.foodDataCorpus.portionTypes, language)
+        const portionDataList = getPortionReactSelectList(foodItem.portionData!!, applicationContext.foodDataCorpus.portionTypes, language)
         setPortionsList(portionDataList)
         const defaultPortion = getDefaultPortionData(foodItem, portionDataList)
         setSelectedPortion(defaultPortion)
         setPortionAmount(defaultPortion.value.amount)
     }
+
 
     const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined, portion: PortionData | undefined) => {
         if (!foodItem || !foodClass || !portion) {
@@ -169,10 +180,63 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         props.updateSelectedFoodItem(newFoodItem)
     }
 
-    const amount_label = props.compositeSelector ? `${applicationStrings.label_amount_short[language]}:` : `${applicationStrings.label_amount[language]}:`
+
+    const setInitialFoodElement = () => {
+        if (!foodClassesList || foodClassesList.length === 0) {
+            return
+        }
+
+        if(!props.selectedFoodItem || !props.selectedFoodItem.foodClass) {
+            return
+        }
+
+        const predefinedFoodObject = props.selectedFoodItem
+
+        // @ts-ignore
+        const foodClassOption = foodClassesList.find(foodClass => foodClass.value.id === predefinedFoodObject.foodClass.id)
+        const {foodItems, foodNames, conditions, portionTypes} = applicationContext.foodDataCorpus
+
+        if (foodClassOption) {
+            setSelectedFoodClass(foodClassOption)
+            const foodClassItems = getFoodItemsSelectList(foodItems, foodClassOption.value.id, foodNames, conditions, language)
+
+            if (foodClassItems) {
+                setFoodItemsList(foodClassItems)
+                const foodItem = foodClassItems.find(foodItem => foodItem.value.id === predefinedFoodObject.foodItem.id)
+
+                if (foodItem && foodItem.value && foodItem.value.portionData) {
+                    setSelectedFoodItem(foodItem)
+
+                    const portionDataList = getPortionReactSelectList(foodItem.value.portionData, portionTypes, language)
+                    setPortionsList(portionDataList)
+
+                    const portionType = predefinedFoodObject.portion.portionType
+                    const portionObject = portionDataList.find(portion => portion.value.portionType === portionType)
+                    if (portionObject) {
+                        setSelectedPortion(portionObject)
+
+                        //@ts-ignore
+                        const amount = predefinedFoodObject.portion.amount
+                        setPortionAmount(amount)
+                    }
+                }
+            }
+
+        }
+
+        setInitialized(true)
+    }
+
+    if (props.selectedFoodItem && !initialized) {
+        setInitialFoodElement()
+    }
+
+    const amount_label = props.smallVariant ? `${applicationStrings.label_amount_short[language]}:` : `${applicationStrings.label_amount[language]}:`
+    const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
 
     return <div>
         <div className="container">
+            {props.noCategorySelect !== true &&
             <div className="column select-menu form-section">
                 <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
                 <Select options={categoriesList}
@@ -180,10 +244,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         onChange={(value) => handleCategoryChange(value)}
                 />
             </div>
+            }
             <div className="column select-menu form-section">
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select options={foodClassesList}
-                        value={selectdFoodClass ? selectdFoodClass : foodClassesList[0]}
+                        value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
                 />
             </div>
@@ -196,14 +261,14 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             </div>
             <div className="column select-menu form-section">
                 <div className={"row"}>
-                    <div className={"col-md-9"}>
+                    <div className={"col-lg-8 col-xl-9"}>
                         <span
                             className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
                         <Select options={portionsList}
                                 value={selectedPortion ? selectedPortion : portionsList[0]}
                                 onChange={(value) => handlePortionChange(value)}/>
                     </div>
-                    <div className={"col-md-3"}>
+                    <div className={"col-lg-4 col-xl-3"}>
                         <span
                             className={'form-label'}>{amount_label}</span>
                         <input className="form-control inputfield"

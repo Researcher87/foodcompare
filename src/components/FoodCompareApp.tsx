@@ -3,7 +3,6 @@ import {LanguageContext} from "../contexts/LangContext";
 import {applicationStrings} from "../static/labels";
 
 import appPath from '../static/image/app.png';
-import {Button} from "react-bootstrap";
 import {mobileAppPath} from "../config/ApplicationSetting";
 
 export function FoodCompareApp() {

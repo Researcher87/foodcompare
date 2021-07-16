@@ -1,12 +1,9 @@
-import FoodItem from "../../types/nutrientdata/FoodItem";
-import {round} from "../../service/calculation/MathService";
 import React, {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {Button} from "react-bootstrap";
-import {applicationStrings} from "../../static/labels";
 import {FaTrash} from "react-icons/all";
 
 export interface CompositeFoodListProps {
@@ -47,9 +44,6 @@ export function CompositeFoodList(props: CompositeFoodListProps) {
 
         return <div></div>
     }
-
-
-    console.log('Selected food items', props.selectedFoodItems)
 
     return <div className={"container"} style={{maxHeight: "300px", overflowY: "auto"}}>
         {props.selectedFoodItems.map((selectedFoodItem, index) => renderLine(selectedFoodItem, index))}

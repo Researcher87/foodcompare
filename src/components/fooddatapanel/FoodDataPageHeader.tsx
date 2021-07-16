@@ -1,6 +1,6 @@
 import {useContext, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {Button, ButtonGroup} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
 import {FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/all";
 import {
@@ -24,13 +24,14 @@ import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
 import {HelpModal} from "../HelpModal";
 import {getHelpText, HelpText} from "../../service/HelpService";
 import getName from "../../service/LanguageService";
+import {ChartMenuPanel} from "./ChartMenuPanel";
 
 
 interface FoodDataPageHeaderProps {
     displayMode: string
     setDisplayMode: (id: string) => void
-    infoPage: string
-    setInfoPage: (id: string) => void
+    dataPage: string
+    setDataPage: (id: string) => void
     selectedFoodItem: SelectedFoodItem
     tableData: Array<FoodTableDataObject>
     selectedDataTab: string
@@ -46,21 +47,17 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         return <div/>
     }
 
-    const handlePageButtonClick = (value: string) => {
-        props.setInfoPage(value)
-    }
-
     const handleRadioButtonClick = (value: string) => {
         props.setDisplayMode(value)
     }
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
-        applicationContext.removeItemFromFoodDataPanel(id)
+        applicationContext.applicationData.foodDataPanel.removeItemFromFoodDataPanel(id)
     }
 
     const help = () => {
-        switch (props.infoPage) {
+        switch (props.dataPage) {
             case TAB_BASE_DATA:
                 setHelpModalId(1)
                 return;
@@ -88,71 +85,6 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             default:
                 return;
         }
-
-    }
-
-
-    const renderPageTabs = () => {
-        const variant = "link"
-        const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
-
-        return (
-            <div className={"d-flex"}>
-                {helpText !== null &&
-                <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}></HelpModal>
-                }
-                <ButtonGroup vertical>
-                    <Button className="btn btn-link header-link"
-                            onClick={() => handlePageButtonClick(TAB_BASE_DATA)}
-                            variant={variant}
-                            active={props.infoPage === TAB_BASE_DATA}>
-                        {applicationStrings.label_overview[languageContext.language]}
-                    </Button>
-                    <Button className="btn btn-link header-link header-link"
-                            onClick={() => handlePageButtonClick(TAB_ENERGY_DATA)}
-                            variant={variant}
-                            active={props.infoPage === TAB_ENERGY_DATA}>
-                        {applicationStrings.label_nutrient_energy[languageContext.language]}
-                    </Button>
-                    <Button className="btn btn-link header-link"
-                            onClick={() => handlePageButtonClick(TAB_VITAMIN_DATA)}
-                            variant={variant}
-                            active={props.infoPage === TAB_VITAMIN_DATA}>
-                        {applicationStrings.label_nutrient_vit[languageContext.language]}
-                    </Button>
-                    <Button className="btn btn-link page-head-button header-link"
-                            onClick={() => handlePageButtonClick(TAB_MINERAL_DATA)}
-                            variant={variant}
-                            active={props.infoPage === TAB_MINERAL_DATA}>
-                        {applicationStrings.label_nutrient_min[languageContext.language]}
-                    </Button>
-                    <Button className="btn btn-link page-head-button header-link"
-                            onClick={() => handlePageButtonClick(TAB_LIPIDS_DATA)}
-                            variant={variant}
-                            active={props.infoPage === TAB_LIPIDS_DATA}>
-                        {applicationStrings.label_nutrient_lipids[languageContext.language]}
-                    </Button>
-                    <Button className="btn btn-link page-head-button header-link"
-                            onClick={() => handlePageButtonClick(TAB_CARBS_DATA)}
-                            variant={variant}
-                            active={props.infoPage === TAB_CARBS_DATA}>
-                        {applicationStrings.label_nutrient_carbohydrates[languageContext.language]}
-                    </Button>
-                    <Button className="btn btn-link page-head-button header-link"
-                            onClick={() => handlePageButtonClick(TAB_PROTEINS_DATA)}
-                            variant={variant}
-                            active={props.infoPage === TAB_PROTEINS_DATA}>
-                        {applicationStrings.label_nutrient_proteins[languageContext.language]}
-                    </Button>
-                    <Button className="btn btn-link page-head-button header-link"
-                            onClick={() => handlePageButtonClick(TAB_INFO)}
-                            variant={variant}
-                            active={props.infoPage === TAB_INFO}>
-                        {applicationStrings.label_info[languageContext.language]}
-                    </Button>
-                </ButtonGroup>
-            </div>
-        );
     }
 
     const enabledDisplayButtonClasses = "btn button-displaymode-enabled"
@@ -168,7 +100,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
 
     let foodName
-    if(props.selectedFoodItem.foodItem.nameId) {
+    if (props.selectedFoodItem.foodItem.nameId) {
         foodName = getNameFromFoodNameList(foodNamesList, props.selectedFoodItem.foodItem.nameId, languageContext.language)
     } else {
         foodName = 'Individual'
@@ -177,7 +109,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     let fullName
     const portionSize = props.selectedFoodItem.portion.amount
 
-    if(!props.selectedFoodItem.foodItem.aggregated) {
+    if (!props.selectedFoodItem.foodItem.aggregated) {
         const condition = applicationContext.foodDataCorpus.conditions.find(condition => condition.id === props.selectedFoodItem.foodItem.conditionId)
         const conditionName = condition ? getName(condition, languageContext.language) : ""
         fullName = `${foodName} (${conditionName}, ${portionSize} g)`
@@ -185,13 +117,18 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         fullName = `${foodName} (${portionSize} g)`
     }
 
+    const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
+
     return (
         <div style={{paddingBottom: "6px"}}>
+            {helpText !== null &&
+            <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}></HelpModal>
+            }
             <div className={"row d-flex flex-nowrap"}>
                 <div className="col-md-2 col-sm-3">
                     <div className={"card"}>
                         <div className="card-body" style={{paddingRight: "30px"}}>
-                            {renderPageTabs()}
+                            <ChartMenuPanel dataPage={props.dataPage} verticalArrangement={true} setDataPage={props.setDataPage}/>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,3 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import * as ChartConfig from "../../../config/ChartConfig"
@@ -9,6 +8,7 @@ import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/ca
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {default_chart_height} from "../../../config/ChartConfig";
 import annotationPlugin from 'chartjs-plugin-annotation'
+import {ChartProps} from "../../../types/livedata/ChartPropsData";
 
 export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -115,6 +115,8 @@ export default function EnergyDataChart(props: ChartProps) {
         return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
     }
 
+    const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.default_chart_height
+
     return (
         <div className="container-fluid">
             <div className="row">
@@ -122,7 +124,7 @@ export default function EnergyDataChart(props: ChartProps) {
                     <div>
                         <Bar
                             data={data}
-                            height={ChartConfig.default_chart_height}
+                            height={height}
                             options={getOptions()}
                             type={"bar"}
                         />

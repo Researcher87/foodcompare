@@ -7,15 +7,14 @@ import {
     PATH_FOODDATA_PANEL,
     PATH_HOME,
     PATH_CONTACT,
-    PATH_RANKING,
-    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_FOODCOMPARE
+    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_DIRECT_COMPARE, PATH_FOODCOMPARE
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {applicationStrings} from "../static/labels";
 import {LanguageContext} from "../contexts/LangContext";
 import {Link} from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
 
 export default function Header() {
@@ -29,7 +28,7 @@ export default function Header() {
 
     const handleLanguageButtonClick = (event: any): void => {
         userLanguageChange(event.target.value)
-        applicationData.updateAllFoodItemNames(applicationData.foodDataCorpus.foodNames, event.target.value)
+        applicationData.applicationData.foodDataPanel.updateAllFoodItemNames(applicationData.foodDataCorpus.foodNames, event.target.value)
     }
 
     const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
@@ -54,6 +53,16 @@ export default function Header() {
                                 variant={'link'}
                                 active={activePath === PATH_FOODDATA_PANEL}>
                             {applicationStrings.menu_food_data_panel[language]}
+                        </Button>
+                    </Link>
+                </div>
+                <div className="header-menu">
+                    <Link to={PATH_DIRECT_COMPARE}>
+                        <Button className="header-link"
+                                value={PATH_DIRECT_COMPARE}
+                                variant={'link'}
+                                active={activePath === PATH_DIRECT_COMPARE}>
+                            {applicationStrings.menu_direct_compare[language]}
                         </Button>
                     </Link>
                 </div>

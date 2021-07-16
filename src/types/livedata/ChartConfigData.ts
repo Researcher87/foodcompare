@@ -7,20 +7,38 @@ export interface ChartConfigData {
     proteinChartConfig: BarChartConfig
 }
 
-interface GeneralChartConfig {
+export interface DirectCompareChartConfigData {
+    baseChartConfig: GeneralChartConfigWithDetails
+    vitaminChartConfig: DirectCompareBarChartConfig
+    mineralChartConfig: DirectCompareBarChartConfig
+    lipidsChartConfig: GeneralChartConfigDirectCompareWithSubCharts
+    carbsChartConfig: GeneralChartConfigDirectCompareWithSubCharts
+    proteinChartConfig: DirectCompareBarChartConfig
+}
+
+export interface GeneralChartConfig {
     chartType: string
     showLegend: boolean
 }
 
-interface GeneralChartConfigWithDetails extends GeneralChartConfig {
+export interface GeneralChartConfigWithDetails extends GeneralChartConfig {
     showDetails: boolean
 }
 
-interface GeneralChartConfigWithSubCharts extends GeneralChartConfig {
+export interface GeneralChartConfigWithSubCharts extends GeneralChartConfig {
     subChart: string
 }
 
-interface BarChartConfig {
+export interface GeneralChartConfigDirectCompareWithSubCharts extends GeneralChartConfig {
+    subChart1: string
+    subChart2: string
+}
+
+export interface BarChartConfig {
     portionType: string
-    expandTo100: boolean
+    expand100: boolean
+}
+
+export interface DirectCompareBarChartConfig extends BarChartConfig {
+    synchronize: boolean
 }

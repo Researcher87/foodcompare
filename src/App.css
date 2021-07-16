@@ -171,6 +171,44 @@
 }
 
 
+
+/* Adapted styles for gradually becoming larger screens (height). */
+
+.direct-compare-panel {
+    height: 320px;
+}
+
+@media (min-height: 590px) {
+    .direct-compare-panel {
+        height: 400px;
+    }
+}
+
+@media (min-height: 750px) {
+    .direct-compare-panel {
+        height: 540px;
+    }
+}
+
+@media (min-height: 890px) {
+    .direct-compare-panel {
+        height: 620px;
+    }
+}
+
+@media (min-height: 1000px) {
+    .direct-compare-panel {
+        height: 750px;
+    }
+}
+
+@media (min-height: 1200px) {
+    .direct-compare-panel {
+        height: 850px;
+    }
+}
+
+
 .app-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -325,4 +363,15 @@
 
 .tableHeaderClass {
     display: none !important;
+}
+
+
+.vertical-label {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-align: center;
+    text-orientation: mixed;
 }

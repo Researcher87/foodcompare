@@ -1,10 +1,8 @@
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import {LanguageContext} from "../../contexts/LangContext";
 import FoodDataPageHeader from "./FoodDataPageHeader";
-import FoodDataPageBody from "./FoodDataPageBody";
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
 import {
     DISPLAYMODE_CHART,
@@ -34,8 +32,12 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     const applicationData = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
+    const initialDataPage = applicationData?.applicationData.foodDataPanel.selectedDataPage
+        ? applicationData.applicationData.foodDataPanel.selectedDataPage
+        : TAB_BASE_DATA
+
     const [displayMode, setDisplayMode] = useState<string>(DISPLAYMODE_CHART)
-    const [selectedDataTab, setSelectedDataTab] = useState<string>(TAB_BASE_DATA)
+    const [selectedDataTab, setSelectedDataTab] = useState<string>(initialDataPage)
     const [tableData, setTableData] = useState<Array<FoodTableDataObject>>([])
 
     useEffect(() => {
@@ -48,6 +50,7 @@ export default function FoodDataPage(props: FoodDataPageProps) {
 
     const onNewDataPage = (datapage: string) => {
         setSelectedDataTab(datapage)
+        applicationData.applicationData.foodDataPanel.setSelectedDataPage(datapage)
         updatePage()
     }
 
@@ -86,8 +89,8 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     return <div>
         <FoodDataPageHeader displayMode={displayMode}
                             setDisplayMode={onDisplayModeChange}
-                            infoPage={selectedDataTab}
-                            setInfoPage={onNewDataPage}
+                            dataPage={selectedDataTab}
+                            setDataPage={onNewDataPage}
                             selectedFoodItem={props.selectedFoodItem}
                             tableData={tableData}
                             selectedDataTab={selectedDataTab}
