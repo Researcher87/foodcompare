@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
@@ -20,9 +20,22 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const languageContext = useContext(LanguageContext)
     const language = languageContext.language
 
-    const [selectedFoodItem1, setSelectedFoodItem1] = useState<SelectedFoodItem | null>(null)
-    const [selectedFoodItem2, setSelectedFoodItem2] = useState<SelectedFoodItem | null>(null)
+    const initialItem1 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1
+        ? applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1
+        : null
+
+    const initialItem2 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
+        ? applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
+        : null
+
+    console.log('STATUS:', initialItem1)
+
+    const [selectedFoodItem1, setSelectedFoodItem1] = useState<SelectedFoodItem | null>(initialItem1)
+    const [selectedFoodItem2, setSelectedFoodItem2] = useState<SelectedFoodItem | null>(initialItem2)
     const [displayStatus, setDisplayStatus] = useState<string>(STATUS_FIRST_TIME)
+
+    useEffect(() => {
+    }, [selectedFoodItem1, selectedFoodItem2])
 
     if (!applicationContext) {
         return <div/>
@@ -56,6 +69,8 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
         const styleClass = foodSelectorNumber === 1 ? {backgroundColor: direct_compare_color1} : {backgroundColor: direct_compare_color2}
         const initialFoodClassToSet = foodSelectorNumber -1
 
+        const selectedFoodItem = foodSelectorNumber === 1 ? selectedFoodItem1 : selectedFoodItem2
+
         return <div style={{paddingTop: "32px"}}>
             <Card style={styleClass}>
                 <Card.Header>
@@ -66,6 +81,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
                                   smallVariant={true}
                                   noCategorySelect={true}
                                   initialFoodClassToSet={initialFoodClassToSet}
+                                  selectedFoodItem={selectedFoodItem}
                     />
                 </CardDeck>
             </Card>

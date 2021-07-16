@@ -11,6 +11,7 @@ import {CustomLegend} from "../../charthelper/CustomLegend";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
+import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -28,6 +29,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         : applicationContext
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig.showDetails
             : initialChartConfigData.baseChartConfig.showDetails
+
+    console.log('BASE Chart Config:', props.directCompareConfig, applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart)
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
@@ -256,11 +259,13 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const totalChartDataTitle = applicationStrings.label_chart_totalComposition[lang]
     const nutrientChartDataTitle = applicationStrings.label_chart_nutrientComposition[lang]
 
+    const height = props.directCompareConfig ? direct_compare_chartheight : default_chart_height
+
     return (
         <div className="container-fluid">
             <div className="d-flex text-align-center" style={{justifyContent: "center"}}>
-                <div className="d-inline-block" >
-                    <div className="row">
+                <div className="d-inline-block">
+                    <div className="row" style={{height: height}}>
                         <div className="col-6">
                             <div>{renderSubChart(totalChartDataTitle, totalChartData)}</div>
                         </div>
@@ -275,17 +280,19 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 </div>
                 }
             </div>
-            <div className="row chartFormLine">
-                {!props.directCompareUse &&
-                <PieChartConfigurationForm chartType={chartType}
-                                           showLegend={showLegend}
-                                           showDetails={showDetails}
-                                           detailsCheckboxAvailable={true}
-                                           handleRadioButtonClick={handleRadioButtonClick}
-                                           handleLegendCheckboxClick={handleLegendCheckboxClick}
-                                           handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
-                }
-            </div>
+            {!props.directCompareUse ?
+                <div className="row chartFormLine">
+                    <PieChartConfigurationForm chartType={chartType}
+                                               showLegend={showLegend}
+                                               showDetails={showDetails}
+                                               detailsCheckboxAvailable={true}
+                                               handleRadioButtonClick={handleRadioButtonClick}
+                                               handleLegendCheckboxClick={handleLegendCheckboxClick}
+                                               handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
+                </div>
+                :
+                <div className="row chartFormLine"></div>
+            }
         </div>
     )
 

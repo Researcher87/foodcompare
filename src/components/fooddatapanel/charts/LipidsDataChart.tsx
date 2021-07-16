@@ -139,7 +139,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
 
     const getLegendBaseChart = () => {
-
         return [
             {
                 item: applicationStrings.label_nutrient_lipids_saturated[lang],

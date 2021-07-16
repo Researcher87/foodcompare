@@ -8,8 +8,6 @@ import {PieChartConfigurationProps} from "../../types/livedata/ChartPropsData";
 export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)
 
-    console.log('Props:', props.chartType)
-
     return (
         <div className="container form-main">
             <div className="row">

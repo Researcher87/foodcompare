@@ -56,7 +56,8 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     const renderCharts = () => {
         switch (selectedDataTab) {
             case TAB_BASE_DATA:
-                return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
+                return <DC_PieChart key={TAB_BASE_DATA}
+                                    selectedFoodItem1={selectedFoodItem1}
                                     selectedFoodItem2={selectedFoodItem2}
                                     dataPage={TAB_BASE_DATA}
                 />
@@ -66,22 +67,26 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
                 />
 
             case TAB_VITAMIN_DATA:
-                return <DC_MineralVitaminChart selectedFoodItem1={selectedFoodItem1}
+                return <DC_MineralVitaminChart key={TAB_VITAMIN_DATA}
+                                               selectedFoodItem1={selectedFoodItem1}
                                                selectedFoodItem2={selectedFoodItem2}
                                                selectedSubChart={CHART_VITAMINS}
                 />
             case TAB_MINERAL_DATA:
-                return <DC_MineralVitaminChart selectedFoodItem1={selectedFoodItem1}
+                return <DC_MineralVitaminChart key={TAB_MINERAL_DATA}
+                                               selectedFoodItem1={selectedFoodItem1}
                                                selectedFoodItem2={selectedFoodItem2}
                                                selectedSubChart={CHART_MINERALS}
                 />
             case TAB_LIPIDS_DATA:
-                return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
+                return <DC_PieChart key={TAB_LIPIDS_DATA}
+                                    selectedFoodItem1={selectedFoodItem1}
                                     selectedFoodItem2={selectedFoodItem2}
                                     dataPage={TAB_LIPIDS_DATA}
                 />
             case TAB_CARBS_DATA:
-                return <DC_PieChart selectedFoodItem1={selectedFoodItem1}
+                return <DC_PieChart key={TAB_CARBS_DATA}
+                                    selectedFoodItem1={selectedFoodItem1}
                                     selectedFoodItem2={selectedFoodItem2}
                                     dataPage={TAB_CARBS_DATA}
                 />
