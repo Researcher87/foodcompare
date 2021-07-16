@@ -38,6 +38,11 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const addCompositeElement = () => {
         if (selectedFoodItem !== null) {
+            if(selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
+                NotificationManager.error(applicationStrings.message_error_invalid_portion[language])
+                return;
+            }
+
             const newList: Array<SelectedFoodItem> = [...compositeList]
             newList.push(selectedFoodItem)
             setCompositeList(newList)
