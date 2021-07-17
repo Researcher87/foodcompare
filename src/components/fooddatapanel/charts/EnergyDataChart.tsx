@@ -1,24 +1,33 @@
-import {ChartProps} from "../ChartPanel";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {Bar, Chart} from "react-chartjs-2";
-import {getBarChartOptions} from "../../../service/ChartService";
+import {getBarChartOptions} from "../../../service/ChartConfigurationService";
 import {applicationStrings} from "../../../static/labels";
 import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/calculation/EnergyService";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {default_chart_height} from "../../../config/ChartConfig";
 import annotationPlugin from 'chartjs-plugin-annotation'
+import {ChartProps} from "../../../types/livedata/ChartPropsData";
+import {useWindowDimension} from "../../../service/WindowDimension";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 
 export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
     const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList[0];
     const energy100g = nutrientData.baseData.energy;
 
     Chart.register(annotationPlugin)
+
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
+
+    useEffect(() => {
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
+    }, [chartHeight])
 
     if (!applicationContext || !energy100g) {
         return <div>No data.</div>
@@ -115,14 +124,17 @@ export default function EnergyDataChart(props: ChartProps) {
         return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
     }
 
+    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+
     return (
-        <div className="container-fluid">
-            <div className="row">
+        <div className="container-fluid" >
+            <div className="row " style={{height: containerHeight}} key={"energy container " + containerHeight}>
                 <div className="col-6">
                     <div>
                         <Bar
                             data={data}
-                            height={ChartConfig.default_chart_height}
+                            key={'chart ' + chartHeight}
+                            height={chartHeight}
                             options={getOptions()}
                             type={"bar"}
                         />

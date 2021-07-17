@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import SelectedFoodItem from "../../../types/livedata/SelectedFoodItem";
@@ -7,9 +7,14 @@ import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeSer
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
 import {defaultPanelHeight} from "../../../config/ApplicationSetting";
+import {direct_compare_chartheight} from "../../../config/ChartConfig";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {TAB_BASE_DATA} from "../../../config/Constants";
+import {useWindowDimension} from "../../../service/WindowDimension";
 
 interface InfoDataProps {
-    selectedFoodItem: SelectedFoodItem
+    selectedFoodItem: SelectedFoodItem,
+    directCompare?: boolean
 }
 
 interface RowElement {
@@ -22,9 +27,12 @@ export function InfoData(props: InfoDataProps) {
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    const createInfoItem = (key, value) => {
-        return (<span className="tab-infoitem"><b><span style={{paddingRight: "4px"}}>{key}:</span></b>{value}</span>);
-    }
+    const windowSize = useWindowDimension()
+    const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, props.directCompare))
+
+    useEffect(() => {
+        setContainerHeight(calculateChartContainerHeight(windowSize, props.directCompare))
+    }, [containerHeight])
 
     const createRow = (key, value): RowElement => {
         return {
@@ -42,14 +50,14 @@ export function InfoData(props: InfoDataProps) {
         const foodName = foodNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodNameId, lang) : ''
 
         const foodClass = props.selectedFoodItem.foodClass;
-        const foodClassNameId = props.selectedFoodItem.foodClass ? props.selectedFoodItem.foodClass.nameKey : null
+        const foodClassNameId = foodClass ? foodClass.nameKey : null
 
         const sourceItemId = props.selectedFoodItem.foodItem.usdaId
         const source = `United States Department of Agriculture (USDA)`;
         const sourceLine2 = `ID = ${sourceItemId}`;
         const foodClassName = foodClassNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodClassNameId, lang) : null;
 
-        const categoryId = props.selectedFoodItem.foodClass ?  props.selectedFoodItem.foodClass.category : null
+        const categoryId = foodClass ? foodClass.category : null
         const category = categoryId ? applicationContext.foodDataCorpus.categories.find(category => category.id === categoryId) : null
         const categoryName = category ? getName(category, lang) : null;
 
@@ -134,9 +142,8 @@ export function InfoData(props: InfoDataProps) {
         );
     }
 
-
     return (
-        <div style={{height: defaultPanelHeight, padding: "15px"}}>
+        <div style={{height: containerHeight, maxHeight: containerHeight, overflowY: "auto", padding: "15px"}}>
             {props.selectedFoodItem.foodItem.foodClass !== 0 &&
             <div>
                 <div>

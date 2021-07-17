@@ -1,5 +1,4 @@
 export const AMOUNT_PORTION = "amount portion"
-export const AMOUNT_100g = "amount 100g"
 
 export const CHART_TYPE_PIE = "pie chart"
 export const CHART_TYPE_BAR = "bar chart"
@@ -42,12 +41,12 @@ export const CARBS_DATA_DETAIL = "carbs data detail chart"
 export const LIPIDS_DATA_BASE = "lipids data base chart";
 export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
 
-export const PATH_FOODCOMPARE = "/foodcompare/";
+export const PATH_DIRECT_COMPARE = "/directcompare";
+export const PATH_FOODCOMPARE = "/foodcompare"
 export const PATH_FOODDATA_PANEL = "/datapanel";
 export const PATH_HOME = "/home";
 export const PATH_CONTACT = "/contact";
 export const PATH_MOBILE_APP = "/mobileapp";
-export const PATH_RANKING = "/ranking";
 export const PATH_USERSETTINGS= "/usersettings";
 
 export const LANGUAGE_DE = "de";
@@ -55,9 +54,6 @@ export const LANGUAGE_EN = "en";
 
 export const SEX_MALE = "sex male"
 export const SEX_FEMALE = "sex female"
-
-export const SUBCHART_VITAMIN = "vitamin subchart"
-export const SUBCHART_MINERAL = "mineral subchart"
 
 export const TAB_BASE_DATA = "tab_base_data"
 export const TAB_ENERGY_DATA = "tab_energy_data"

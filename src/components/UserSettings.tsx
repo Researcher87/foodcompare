@@ -20,6 +20,7 @@ import Select from 'react-select';
 import {getPalCategories, getPalCategory} from "../service/calculation/EnergyService";
 import ReactTooltip from "react-tooltip";
 import ReactSelectOption from "../types/ReactSelectOption";
+import {isSmallScreen, useWindowDimension} from "../service/WindowDimension";
 
 export function UserSettings() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -34,6 +35,8 @@ export function UserSettings() {
     const [breastFeeding, setBreastFeeding] = useState<boolean>(initialUserDataBreastfeeding)
     const [palValue, setPalValue] = useState<ReactSelectOption | null>(null)
     const [leisureSport, setLeisureSport] = useState<boolean>(initialUserDataLeisureSports)
+
+    const windowSize = useWindowDimension()
 
     useEffect(() => {
         if(applicationContext) {
@@ -132,12 +135,15 @@ export function UserSettings() {
         NotificationManager.error(message)
     }
 
+    const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
+    const inputClass =  isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
+
     const renderTextField = (label, value, callback) => {
         return (
             <div className="form-row">
                 <Form.Label className="form-label">{label}:</Form.Label>
                 <FormControl
-                    className="inputfield"
+                    className={inputClass}
                     type="text"
                     value={value}
                     onChange={callback}
@@ -221,12 +227,13 @@ export function UserSettings() {
             <div className="form-row">
                 <div style={{width: "450px", paddingTop: "30px"}}>
                     <label className="form-label">{applicationStrings.label_userSettings_palValue[lang]}:</label>
-                    <Select options={palCategories}
+                    <Select className={selectClass}
+                            options={palCategories}
                             value={palValue}
                             onChange={(value) => changePalValue(value)}
                     />
                 </div>
-                <p className="infotext">
+                <p className="app">
                     {description}
                 </p>
             </div>
@@ -271,7 +278,7 @@ export function UserSettings() {
     const value_weight = (weight != null) ? weight : initialUserDataWeight
 
     return (
-        <div className="container">
+        <div className="container" style={{paddingTop: "24px"}}>
             <div className="row userDataSettings">
                 <div className="col-12">
                     <form>

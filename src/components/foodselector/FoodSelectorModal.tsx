@@ -22,11 +22,11 @@ export interface FoodSelectorModalProps {
 
 
 const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelectorModalProps) => {
-    const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(null)
-    const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>([])
-
     const applicationData = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
+
+    const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(null)
+    const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>([])
 
     if (!applicationData) {
         return <div/>
@@ -38,6 +38,11 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const addCompositeElement = () => {
         if (selectedFoodItem !== null) {
+            if(selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
+                NotificationManager.error(applicationStrings.message_error_invalid_portion[language])
+                return;
+            }
+
             const newList: Array<SelectedFoodItem> = [...compositeList]
             newList.push(selectedFoodItem)
             setCompositeList(newList)
@@ -105,13 +110,13 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
             <Modal.Body>
                 <div>
                     {!props.compositeSelector ?
-                        <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem} compositeSelector={false}/>
+                        <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem} smallVariant={false}/>
                         :
                         <div className={"container"}>
                             <div className={"row"}>
                                 <div className={"col-6"}>
                                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
-                                                  compositeSelector={true}/>
+                                                  smallVariant={true}/>
                                 </div>
                                 <div className={"col-6"}>
                                     <CompositeFoodList selectedFoodItems={compositeList}

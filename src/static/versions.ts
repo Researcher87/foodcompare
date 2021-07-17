@@ -44,7 +44,7 @@ export const versions = [
         features: [
             "Home menu was added to website.",
             "Mobile app menu was added to website.",
-            "Composite food list: Users can now combine different food elements to so-called composite food lists to show aggregated nutrient data.",
+            "Major Feature: Composite food list: Users can now combine different food elements to so-called composite food lists to show aggregated nutrient data.",
             "The configuration of the charts in the food data panel is now temporarily saved so that they won't have to be set anew after a tab or menu was changed."
         ],
         updates: [
@@ -57,6 +57,23 @@ export const versions = [
             "The info page shows the correct portion type now.",
             "The display error related to the 'expand to 100 %' checkbox was solved. The application checks whether the maximum value in the display is below 100 per cent.",
             "The bug that the food selector icon sometimes had to be clicked twice until the modal opens was resolved."
+        ]
+    },
+    {
+        id: "1.2",
+        date: "07-17-2021",
+        subject: "Direct comparison of food elements",
+        features: [
+            "Major Feature: Foods can now be directly compared with each other in the direct compare panel.",
+            ],
+        updates: [
+            "Portion size validation check was added to the aggregated food list selector.",
+            "Domain configuration was completed on Github (frameset redirect was abolished).",
+            "Forms and link buttons and some texts adapt to smaller screen sizes now.",
+            "The Home menu was extended."
+        ],
+        bugfixes: [
+            "A couple of display and chart configuration bugs have been solved."
         ]
     }
 ]

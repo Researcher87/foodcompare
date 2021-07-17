@@ -1,54 +1,104 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
 import * as ChartConfig from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
-import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
+import {
+    CARBS_DATA_BASE,
+    CARBS_DATA_DETAIL,
+    CHART_TYPE_BAR,
+    CHART_TYPE_PIE,
+    LIPIDS_DATA_OMEGA
+} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
-import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
+import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartConfigurationService";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {autoRound} from "../../../service/calculation/MathService";
 import {applicationStrings} from "../../../static/labels";
 import {Form} from "react-bootstrap";
-import {CustomLegend} from "./helper/CustomLegend";
-import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
+import {CustomLegend} from "../../charthelper/CustomLegend";
+import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
+import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
+import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
+import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
+import {useWindowDimension} from "../../../service/WindowDimension";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 
-export default function CarbsDataChart(props: ChartProps) {
+export default function CarbsDataChart(props: CarbDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
-    const chartConfig = applicationContext
-        ? applicationContext.applicationData.foodDataPanel.chartConfigData.carbsChartConfig
-        : initialChartConfigData.carbsChartConfig
+    let chartConfig = props.directCompareConfig
+        ? props.directCompareConfig
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.carbsChartConfig
+            : initialChartConfigData.carbsChartConfig
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [chartSelection, setChartSelection] = useState<string>(chartConfig.subChart)
+    const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
+        if (props.directCompareConfig) {
+            setChartType(chartConfig.chartType)
+            setShowLegend(chartConfig.showLegend)
+            setSubChart(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
+        }
+
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, chartSelection])
+    }, [chartType, showLegend, subChart, chartHeight, props])
 
     const updateChartConfig = () => {
-        if (applicationContext) {
-            const newChartConfig = {
-                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
-                carbsChartConfig: {
-                    chartType: chartType,
-                    showLegend: showLegend,
-                    subChart: chartSelection
+        if (applicationContext && !props.directCompareConfig) {
+            const currentConfig = applicationContext.applicationData.foodDataPanel.chartConfigData.carbsChartConfig
+            if (chartType !== currentConfig.chartType
+                || subChart !== currentConfig.subChart
+                || showLegend !== currentConfig.showLegend) {
+                const newChartConfig = {
+                    ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                    carbsChartConfig: {
+                        chartType: chartType,
+                        showLegend: showLegend,
+                        subChart: subChart
+                    }
                 }
+                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
             }
-            applicationContext.updateChartConfig(newChartConfig)
         }
     }
 
     const carbohydrateData = props.selectedFoodItem.foodItem.nutrientDataList[0].carbohydrateData;
 
     const handleChartSelectionChange = (event: any) => {
-        setChartSelection(event.target.value)
+        if (applicationContext && props.directCompareConfig) {
+            const currentSettings = applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart
+
+            const carbsChartConfig: GeneralChartConfigDirectCompareWithSubCharts = props.directCompareConfig.chartIndex === 1
+                ? {
+                    chartType: chartType,
+                    showLegend: showLegend,
+                    subChart1: event.target.value,
+                    subChart2: currentSettings.carbsChartConfig.subChart2
+                }
+                : {
+                    chartType: chartType,
+                    showLegend: showLegend,
+                    subChart1: currentSettings.carbsChartConfig.subChart1,
+                    subChart2: event.target.value
+                }
+
+            const newChartConfig = {
+                ...currentSettings,
+                carbsChartConfig: carbsChartConfig
+            }
+            applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
+        } else {
+            setSubChart(event.target.value)
+        }
     }
 
     const createBasicChartData = () => {
@@ -181,22 +231,22 @@ export default function CarbsDataChart(props: ChartProps) {
     const getLegendBaseChart = (labels: Array<String>) => {
         const legendData: Array<any> = []
 
-        if(labels.includes(applicationStrings.label_nutrient_sugar[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_sugar[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_sugar[lang],
                 color: ChartConfig.color_chart_green_3,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_dietaryFibers[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_dietaryFibers[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_dietaryFibers[lang],
                 color: ChartConfig.color_chart_green_2,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_remainder[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_remainder[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_remainder[lang],
                 color: ChartConfig.color_chart_misc,
             })
@@ -209,57 +259,57 @@ export default function CarbsDataChart(props: ChartProps) {
     const getLegendDetailsChart = (labels: Array<String>) => {
         const legendData: Array<any> = []
 
-        if(labels.includes(applicationStrings.label_nutrient_carbohydrates_glucose[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_carbohydrates_glucose[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_glucose[lang],
                 color: ChartConfig.color_chart_green_1,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_carbohydrates_fructose[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_carbohydrates_fructose[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_fructose[lang],
                 color: ChartConfig.color_chart_green_2,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_carbohydrates_galactose[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_carbohydrates_galactose[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_galactose[lang],
                 color: ChartConfig.color_chart_green_3,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_carbohydrates_sucrose[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_carbohydrates_sucrose[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_sucrose[lang],
                 color: ChartConfig.color_chart_yellow_1,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_carbohydrates_lactose[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_carbohydrates_lactose[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_lactose[lang],
                 color: ChartConfig.color_chart_yellow_2,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_carbohydrates_maltose[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_carbohydrates_maltose[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_maltose[lang],
                 color: ChartConfig.color_chart_yellow_3,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_carbohydrates_starch[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_carbohydrates_starch[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_starch[lang],
                 color: ChartConfig.color_chart_orange,
             })
         }
 
-        if(labels.includes(applicationStrings.label_nutrient_remainder[lang])) {
-            legendData.push(            {
+        if (labels.includes(applicationStrings.label_nutrient_remainder[lang])) {
+            legendData.push({
                 item: applicationStrings.label_nutrient_remainder[lang],
                 color: ChartConfig.color_chart_misc,
             })
@@ -280,9 +330,9 @@ export default function CarbsDataChart(props: ChartProps) {
     const getOptions = () => {
         let title;
 
-        if (chartSelection === Constants.CARBS_DATA_BASE) {
+        if (subChart === Constants.CARBS_DATA_BASE) {
             title = applicationStrings.label_charttype_carbs_base[lang];
-        } else if (chartSelection === Constants.CARBS_DATA_DETAIL) {
+        } else if (subChart === Constants.CARBS_DATA_DETAIL) {
             title = applicationStrings.label_charttype_carbs_detail[lang];
         }
 
@@ -304,14 +354,14 @@ export default function CarbsDataChart(props: ChartProps) {
                             label={applicationStrings.label_charttype_carbs_base[lang]}
                             type="radio"
                             value={Constants.CARBS_DATA_BASE}
-                            checked={chartSelection === Constants.CARBS_DATA_BASE}
+                            checked={subChart === Constants.CARBS_DATA_BASE}
                             onChange={handleChartSelectionChange}>
                 </Form.Check>
                 <Form.Check inline={false}
                             label={applicationStrings.label_charttype_carbs_detail[lang]}
                             type="radio"
                             value={Constants.CARBS_DATA_DETAIL}
-                            checked={chartSelection === Constants.CARBS_DATA_DETAIL}
+                            checked={subChart === Constants.CARBS_DATA_DETAIL}
                             onChange={handleChartSelectionChange}>
                 </Form.Check>
             </Form>
@@ -328,18 +378,22 @@ export default function CarbsDataChart(props: ChartProps) {
             )
         }
 
+        const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.default_chart_height
+
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie data={data}
-                     height={ChartConfig.default_chart_height}
+                     key={'chart ' + chartHeight}
+                     height={chartHeight}
                      options={getOptions()}
                      type="pie"
                 />
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar data={data}
-                     height={ChartConfig.default_chart_height}
+                     key={'chart ' + chartHeight}
+                     height={chartHeight}
                      options={getOptions()}
                      type={"bar"}
                 />
@@ -353,20 +407,22 @@ export default function CarbsDataChart(props: ChartProps) {
     const detailChartData = createDetailChartData()
     const basicChartData = createBasicChartData()
 
+    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row" style={{height: containerHeight}} key={"carbs container " + containerHeight}>
                 <div className="col-3" style={{display: "block"}}>
                     {renderChartSelector()}
                 </div>
                 <div className={chartColType}>
-                    {chartSelection === Constants.CARBS_DATA_BASE &&
+                    {subChart === Constants.CARBS_DATA_BASE &&
                     renderChart(basicChartData)
                     }
-                    {detailChartData && chartSelection === Constants.CARBS_DATA_DETAIL &&
+                    {detailChartData && subChart === Constants.CARBS_DATA_DETAIL &&
                     renderChart(detailChartData)
                     }
-                    {!detailChartData && chartSelection === Constants.CARBS_DATA_DETAIL &&
+                    {!detailChartData && subChart === Constants.CARBS_DATA_DETAIL &&
                     <div style={{height: ChartConfig.default_chart_height}}>
                         {applicationStrings.label_noData[lang]}
                     </div>
@@ -375,21 +431,24 @@ export default function CarbsDataChart(props: ChartProps) {
 
                 {showLegend && chartType === Constants.CHART_TYPE_PIE &&
                 <div className="col-3">
-                    {chartSelection === Constants.CARBS_DATA_BASE && basicChartData &&
+                    {subChart === Constants.CARBS_DATA_BASE && basicChartData &&
                     <CustomLegend legendData={getLegendBaseChart(basicChartData.labels)}/>
                     }
-                    {chartSelection === Constants.CARBS_DATA_DETAIL && detailChartData &&
+                    {subChart === Constants.CARBS_DATA_DETAIL && detailChartData &&
                     <CustomLegend legendData={getLegendDetailsChart(detailChartData.labels)}/>
                     }
                 </div>
                 }
             </div>
+            {!props.directCompareConfig &&
             <div className="row chartFormLine">
-                <ChartOptionSelector chartType={chartType}
-                                     showLegend={showLegend}
-                                     handleRadioButtonClick={handleRadioButtonClick}
-                                     handleLegendCheckboxClick={handleLegendCheckbox}/>
+                <PieChartConfigurationForm chartType={chartType}
+                                           showLegend={showLegend}
+                                           handleRadioButtonClick={handleRadioButtonClick}
+                                           handleLegendCheckboxClick={handleLegendCheckbox}/>
+
             </div>
+            }
         </div>
     );
 

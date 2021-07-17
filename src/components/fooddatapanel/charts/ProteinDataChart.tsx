@@ -1,55 +1,70 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
-import {AMOUNT_PORTION, CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
+import {AMOUNT_PORTION} from "../../../config/Constants";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {applicationStrings} from "../../../static/labels";
 import {determineProteinRequirementRatio} from "../../../service/calculation/DietaryRequirementService";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {getBarChartOptions} from "../../../service/ChartService"
-import {Col, Form} from "react-bootstrap";
+import {getBarChartOptions} from "../../../service/ChartConfigurationService"
 import {Bar} from "react-chartjs-2";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
+import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
+import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
+import {useWindowDimension} from "../../../service/WindowDimension";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 
-export default function ProteinDataChart(props: ChartProps) {
+export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
-    const chartConfig = applicationContext
-        ? applicationContext.applicationData.foodDataPanel.chartConfigData.proteinChartConfig
-        : initialChartConfigData.proteinChartConfig
-
+    const chartConfig = props.directCompareConfig
+        ? props.directCompareConfig
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.proteinChartConfig
+            : initialChartConfigData.proteinChartConfig
 
     const [portionType, setPortionType] = useState<string>(chartConfig.portionType)
-    const [expand100, setExpand100] = useState<boolean>(chartConfig.expandTo100)
+    const [expand100, setExpand100] = useState<boolean>(chartConfig.expand100)
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
+        if (props.directCompareConfig) {
+            setExpand100(chartConfig.expand100)
+            setPortionType(chartConfig.portionType)
+        }
+
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [portionType, expand100])
+    }, [portionType, expand100, chartHeight, props])
 
     const updateChartConfig = () => {
-        if (applicationContext) {
-            const newChartConfig = {
-                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
-                proteinChartConfig: {
-                    portionType: portionType,
-                    expandTo100: expand100
+        if (applicationContext && !props.directCompareConfig) {
+            const currentSetting = applicationContext.applicationData.foodDataPanel.chartConfigData.proteinChartConfig
+            if (expand100 !== currentSetting.expand100 || portionType !== currentSetting.portionType) {
+                const newChartConfig = {
+                    ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                    proteinChartConfig: {
+                        portionType: portionType,
+                        expand100: expand100
+                    }
                 }
+                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
+
             }
-            applicationContext.updateChartConfig(newChartConfig)
         }
     }
 
 
     const createProteinChartData = () => {
         const proteinData = props.selectedFoodItem.foodItem.nutrientDataList[0].proteinData;
-        if(!proteinData || !applicationContext) {
+        if (!proteinData || !applicationContext) {
             return null;
         }
 
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.proteinRequirementData;
-        if(!requirementData) {
+        if (!requirementData) {
             return null;
         }
 
@@ -57,7 +72,7 @@ export default function ProteinDataChart(props: ChartProps) {
         const amount = portionType === AMOUNT_PORTION ? props.selectedFoodItem.portion.amount : 100;
 
         const labels: Array<string> = [];
-        const data: Array<number>  = [];
+        const data: Array<number> = [];
 
         if (proteinData.histidine !== null) {
             labels.push(applicationStrings.label_nutrient_proteins_histidine[lang]);
@@ -129,12 +144,16 @@ export default function ProteinDataChart(props: ChartProps) {
             )
         }
 
+        const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
+            ? props.directCompareConfig.barChartColor
+            : ChartConfig.color_proteins
+
         return {
             labels: labels,
             datasets: [{
                 label: applicationStrings.label_charttype_proteins[lang],
                 data: data,
-                backgroundColor: ChartConfig.color_proteins,
+                backgroundColor: chartColor,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
@@ -146,54 +165,46 @@ export default function ProteinDataChart(props: ChartProps) {
         setPortionType(event.target.value)
     }
 
-    const handleExpandCheckbox = (event: any) => {
-            setExpand100(!expand100)
+    const handleExpandCheckbox = () => {
+        setExpand100(!expand100)
     }
 
     const getOptions = (title, maxValue) => {
-        const maxYvalue = expand100 && maxValue < 100 ? 100 : undefined
-        return getBarChartOptions(title, "%", maxYvalue);
+        const overallMaxValue = props.directCompareConfig && props.directCompareConfig.maxValue
+            ? props.directCompareConfig.maxValue
+            : maxValue
+
+        let maxYValue
+        if (!props.directCompareConfig) {
+            if (expand100 && overallMaxValue < 100) {
+                maxYValue = 100
+            }
+        } else {
+            if (props.directCompareConfig.maxValue) {
+                maxYValue = props.directCompareConfig.maxValue
+            }
+            if (expand100 === true && (maxYValue === undefined || maxYValue < 100)) {
+                maxYValue = 100
+            }
+        }
+
+        return getBarChartOptions(title, "%", maxYValue);
     }
 
-    const renderFormLine = () => {
-        const label_portion = `${applicationStrings.label_portion[lang]} (${props.selectedFoodItem.portion.amount} g)`;
+    const renderChartConfigurationForm = () => {
+        const barChartProps = {
+            selectedFoodItem: props.selectedFoodItem,
+            portionType: portionType,
+            expand100: expand100,
+            handleRadioButtonClick: handleRadioButtonClick,
+            handleExpandCheckboxClick: handleExpandCheckbox
+        }
 
-        return (
-            <div className="container-fluid form-main">
-                <div className="row foodDataPageHeader">
-                    <form className="form-inline form-group">
-                        <Form.Label className={"form-elements"}>
-                            <b>{applicationStrings.label_reference[lang]}:</b>
-                        </Form.Label>
-                        <Form.Check type="radio"
-                                    inline={true}
-                                    label={"100g"}
-                                    value={GRAM}
-                                    checked={(portionType === GRAM)}
-                                    onChange={handleRadioButtonClick}
-                        />
-                        <Form.Check type="radio"
-                                    inline={true}
-                                    style={{paddingRight: "48px"}}
-                                    label={label_portion}
-                                    value={AMOUNT_PORTION}
-                                    checked={portionType === AMOUNT_PORTION}
-                                    onChange={handleRadioButtonClick}
-                        />
-                        <Form.Check className="form-radiobutton"
-                                    inline={true}
-                                    label={applicationStrings.checkbox_expand100g[lang]}
-                                    checked={expand100}
-                                    onChange={handleExpandCheckbox}>
-                        </Form.Check>
-                    </form>
-                </div>
-            </div>
-        )
+        return <BarChartConfigurationForm {...barChartProps} />
     }
 
     const data = createProteinChartData();
-    if(!data) {
+    if (!data) {
         return <div/>
     }
 
@@ -201,28 +212,33 @@ export default function ProteinDataChart(props: ChartProps) {
     const options = getOptions(applicationStrings.label_charttype_proteins[lang], maxValue);
     const dataExists = data.datasets && data.datasets[0].data && data.datasets[0].data.length > 0
 
+    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                 <div className="col-12">
                     {dataExists &&
                     <Bar
                         data={data}
-                        height={ChartConfig.default_chart_height}
+                        key={'chart ' + chartHeight}
+                        height={chartHeight}
                         options={options}
                         type={"bar"}
                     />
                     }
                     {!dataExists &&
-                    <p className="text-center" style={{ height: ChartConfig.default_chart_height }}>
+                    <p className="text-center" style={{height: ChartConfig.default_chart_height}}>
                         {applicationStrings.label_noData[lang]}
                     </p>
                     }
                 </div>
             </div>
+            {props.directCompareUse !== true &&
             <div className="row chartFormLine">
-                {renderFormLine()}
+                {renderChartConfigurationForm()}
             </div>
+            }
         </div>
     )
 

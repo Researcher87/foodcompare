@@ -31,6 +31,10 @@ export const applicationStrings = {
         de: 'Übernehmen',
         en: 'Submit'
     },
+    button_update: {
+        de: "Aktualisieren",
+        en: "Update"
+    },
     button_yes: {
         de: 'Ja',
         en: 'Yes'
@@ -55,10 +59,18 @@ export const applicationStrings = {
         de: 'Deutsch',
         en: 'German'
     },
+    checkbox_synchronize: {
+        de: 'Synchronisieren',
+        en: 'Synchronize'
+    },
     confirm_close_all_tabs: {
         de: 'Sollen wirklich alle Lebensmittel-Tabs geschlossen werden?',
         en: 'Really close all food tabs?'
     },
+    direct_compare_text: {
+        de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, um diese miteinander zu vergleichen.',
+        en: 'Pick two food elements from the two selectors in order to compare them with each other.'
+      },
     home_carousel_0: {
         de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
         en: 'Vitamins in food compared to daily requirements'
@@ -90,6 +102,10 @@ export const applicationStrings = {
     home_text_2: {
         de: 'Das Hauptaugenmerk von Food Compare gilt jedoch nicht nur der Veranschaulichung einzelner Nahrungsmittel, sondern der Vergleichbarkeit von Nährstoffen, Vitaminen und Mineralen in Lebensmittels. Dazu können beliebig viele Tabs geöffnet und Lebensmittel damit leicht miteinander verglichen werden. So lassen sich bspw. auf einfache Weise der Vitamingehalt von einzelnen Obstsorten vergleichen, oder die Aufteilung von Kohlenhydraten, Fetten und Eiweißen zwischen Grundnahrungsmitteln. Dabei erlaubt die Anwendung auch das Zusammenstellen von komplexen Menüs, deren Gesamtgehalt an Nährstoffen, Vitaminen und Mineralstoffen dann berechnet wird.',
         en: 'The primary focus of Food Compare is to visually compare the composition and contents of different foods, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
+    },
+    home_text_3: {
+        de: 'Um die Nährstoffdiagramme zweier Lebensmittel auf einen Blick miteinander vergleichen zu können, gibt es seit der Version 1.2 nun auch einen zusätzlichen Bereich, in denen die Diagramme entsprechend nebeneinander angeordnet sind. Einige Datenseiten wie Vitamine und Mineralstoffe lassen sich dabei auch synchronisieren, so dass eine einheitliche Skalierung der Diagramme stattfindet und nur die Daten angezeigt werden, welche für beide Lebensmittel vorliegen.',
+        en: 'In order to compare nutrient charts of two foods at a glance, an additional page was added in version 1.2 where nutrient charts are placed next to each other. Some data pages like vitamins and minerals can also be synchronized, which means that the charts use a unique scaling and only display data that is available in both food elements.'
     },
     label_amount: {
         de: 'Menge (Gramm)',
@@ -148,8 +164,8 @@ export const applicationStrings = {
         en: 'Minerals (compared to dietary requirements)'
     },
     label_charttype_proteins: {
-        de: 'Proteine',
-        en: 'Proteins'
+        de: 'Proteine (im Vgl. zum Tagesbedarf)',
+        en: 'Proteins  (compared to dietary requirements)'
     },
     label_charttype_vitamins: {
         de: 'Vitamine (im Vgl. zum Tagesbedarf)',
@@ -174,6 +190,10 @@ export const applicationStrings = {
     label_datatype: {
         de: 'Datentyp',
         en: 'Data type'
+    },
+    label_food: {
+        de: "Lebensmittel",
+        en: "Food"
     },
     label_foodclass: {
         de: 'Lebensmittel',
@@ -560,8 +580,8 @@ export const applicationStrings = {
         en: 'pregnant'
     },
     label_userSettings_sex: {
-        de: 'Geschlecht',
-        en: 'Sex'
+        de: 'Geschlecht:',
+        en: 'Sex:'
     },
     label_userSettings_sex_male: {
         de: 'männlich',
@@ -582,6 +602,10 @@ export const applicationStrings = {
     menu_food_data_panel: {
         de: 'Lebensmittel analysieren',
         en: 'Food data analyzer'
+    },
+    menu_direct_compare: {
+        de: 'Direktvergleich',
+        en: 'Direct comparison'
     },
     menu_home: {
         de: 'Home',
@@ -704,8 +728,8 @@ export const applicationStrings = {
         en: 'All rights reserved.'
     },
     text_contact_disclaimer2: {
-        de: 'Food Compare basiert auf freien Datenquellen, die im Quellenabschnitt weiter unten aufgelistet sind. Es besteht keinerlei Garantie für die Korrektheit oder Zuverlässigkeit der ins Projekt geladenen und im Projekt verwendeten Daten. Vinus ist ein freies Programm zur Visualisierung von Nährwerten in Lebensmitteln, das in keiner Weise medizinische oder biologische Befunde ersetzt, sondern lediglich bestehende Nährwertdaten und -quellen grafisch aufbereitet darstellt.',
-        en: 'Food Compare is based upon free data sources listed in the sources section below. There is no warranty for the correctness or reliability of the data imported to and used within the project. Vinus is a free visualization tool for food nutrients, which does not replace in any way medical or biological food and nutrient data sources and will merely supplement existing food nutrient sources for laypeople that are interested in this matter.'
+        de: 'Food Compare basiert auf freien Datenquellen, die im Quellenabschnitt weiter unten aufgelistet sind. Es besteht keinerlei Garantie für die Korrektheit oder Zuverlässigkeit der ins Projekt geladenen und im Projekt verwendeten Daten. Food Compare ist ein freies Programm zur Visualisierung von Nährwerten in Lebensmitteln, das in keiner Weise medizinische oder biologische Befunde ersetzt, sondern lediglich bestehende Nährwertdaten und -quellen grafisch aufbereitet darstellt.',
+        en: 'Food Compare is based upon free data sources listed in the sources section below. There is no warranty for the correctness or reliability of the data imported to and used within the project. Food Compare is a free visualization tool for food nutrients, which does not replace in any way medical or biological food and nutrient data sources and will merely supplement existing food nutrient sources for laypeople that are interested in this matter.'
     },
     text_contact_source1: {
         de: 'Quellen:',

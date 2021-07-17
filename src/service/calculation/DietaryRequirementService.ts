@@ -13,8 +13,8 @@ import {SEX_MALE} from "../../config/Constants";
  * userData: The user data object containing the user data.
  */
 export function determineDailyRequirement(dailyRequirementObject: RequirementData, userData: UserData) {
-
     let ageGroupRequirements
+
     if (userData.age >= 65) {
         ageGroupRequirements = dailyRequirementObject.senior;
     } else if (userData.age >= 51) {

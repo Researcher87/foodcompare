@@ -9,6 +9,7 @@ export default interface SelectedFoodItem {
     component?: JSX.Element
     id?: number
     compositeSubElements?: Array<CompositeFoodElement>
+    resolvedName?: string | null
 }
 
 export interface CompositeFoodElement {

@@ -1,50 +1,72 @@
-import {ChartProps} from "../ChartPanel";
 import {useContext, useEffect, useState} from "react";
 
 import * as ChartConfig from "../../../config/ChartConfig"
-import {default_chart_height} from "../../../config/ChartConfig"
+import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
-import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants"
+import {CHART_TYPE_BAR, CHART_TYPE_PIE, LIPIDS_DATA_BASE} from "../../../config/Constants"
 import {Bar, Pie} from "react-chartjs-2";
-import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
+import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartConfigurationService";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {autoRound} from "../../../service/calculation/MathService";
 import {applicationStrings} from "../../../static/labels";
 import {OmegaData} from "../../../types/nutrientdata/FoodItem";
 import {initialChartConfigData, minimalOmegaRatio} from "../../../config/ApplicationSetting";
-import {CustomLegend} from "./helper/CustomLegend";
-import {ChartOptionSelector} from "./helper/ChartOptionSelector.";
+import {CustomLegend} from "../../charthelper/CustomLegend";
+import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
+import {LipidsDataChartProps} from "../../../types/livedata/ChartPropsData";
+import {
+    calculateChartContainerHeight,
+    calculateChartHeight
+} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {useWindowDimension} from "../../../service/WindowDimension";
 
-export default function LipidsDataChart(props: ChartProps) {
+export default function LipidsDataChart(props: LipidsDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
-    const chartConfig = applicationContext
-        ? applicationContext.applicationData.foodDataPanel.chartConfigData.lipidsChartConfig
-        : initialChartConfigData.lipidsChartConfig
+    let chartConfig = props.directCompareConfig
+        ? props.directCompareConfig
+        : applicationContext
+            ? applicationContext.applicationData.foodDataPanel.chartConfigData.lipidsChartConfig
+            : initialChartConfigData.lipidsChartConfig
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [chartSelection, setChartSelection] = useState<string>(chartConfig.subChart)
+    const [subChart, setSubChart] = useState<string>(chartConfig.subChart  ? chartConfig.subChart : LIPIDS_DATA_BASE)
+
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
+        if (props.directCompareConfig) {
+            setChartType(chartConfig.chartType)
+            setShowLegend(chartConfig.showLegend)
+            setSubChart(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
+        }
+
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, chartSelection])
+    }, [chartType, showLegend, subChart, chartHeight, windowSize, props])
 
     const updateChartConfig = () => {
-        if (applicationContext) {
-            const newChartConfig = {
-                ...applicationContext.applicationData.foodDataPanel.chartConfigData,
-                lipidsChartConfig: {
-                    chartType: chartType,
-                    showLegend: showLegend,
-                    subChart: chartSelection
+        if (applicationContext && !props.directCompareConfig) {
+            const currentConfig = applicationContext.applicationData.foodDataPanel.chartConfigData.lipidsChartConfig
+            if (chartType !== currentConfig.chartType
+                || subChart !== currentConfig.subChart
+                || showLegend !== currentConfig.showLegend) {
+                const newChartConfig = {
+                    ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                    lipidsChartConfig: {
+                        chartType: chartType,
+                        showLegend: showLegend,
+                        subChart: subChart
+                    }
                 }
+                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
             }
-            applicationContext.updateChartConfig(newChartConfig)
         }
     }
 
@@ -52,7 +74,11 @@ export default function LipidsDataChart(props: ChartProps) {
     const totalLipidsAmount = props.selectedFoodItem.foodItem.nutrientDataList[0].baseData.lipids;
 
     const handleChartSelectionChange = (event: any) => {
-        setChartSelection(event.target.value)
+        if (props.directCompareConfig && props.directCompareConfig.handleSubchartChange) {
+            props.directCompareConfig.handleSubchartChange(event)
+        } else {
+            setSubChart(event.target.value)
+        }
     }
 
     const createTotalChartData = (totalAmount: number, saturated: number, unsaturatedMono: number, unsaturatedPoly: number): any => {
@@ -122,7 +148,6 @@ export default function LipidsDataChart(props: ChartProps) {
 
 
     const getLegendBaseChart = () => {
-
         return [
             {
                 item: applicationStrings.label_nutrient_lipids_saturated[lang],
@@ -170,7 +195,6 @@ export default function LipidsDataChart(props: ChartProps) {
         setShowLegend(!showLegend)
     }
 
-
     const lipidData = props.selectedFoodItem.foodItem.nutrientDataList[0].lipidData;
 
     let omegaDataAvailabe = false
@@ -183,9 +207,9 @@ export default function LipidsDataChart(props: ChartProps) {
     const getOptions = () => {
         let title;
 
-        if (chartSelection === Constants.LIPIDS_DATA_BASE) {
+        if (subChart === Constants.LIPIDS_DATA_BASE) {
             title = applicationStrings.label_charttype_lipids_base_title[lang]
-        } else if (chartSelection === Constants.LIPIDS_DATA_OMEGA) {
+        } else if (subChart === Constants.LIPIDS_DATA_OMEGA) {
             title = applicationStrings.label_charttype_lipids_omega_title[lang];
         }
 
@@ -206,14 +230,14 @@ export default function LipidsDataChart(props: ChartProps) {
                             label={applicationStrings.label_charttype_lipids_base[lang]}
                             type="radio"
                             value={Constants.LIPIDS_DATA_BASE}
-                            checked={chartSelection === Constants.LIPIDS_DATA_BASE}
+                            checked={subChart === Constants.LIPIDS_DATA_BASE}
                             onChange={handleChartSelectionChange}>
                 </Form.Check>
                 <Form.Check inline={false}
                             label={applicationStrings.label_charttype_lipids_omega[lang]}
                             type="radio"
                             value={Constants.LIPIDS_DATA_OMEGA}
-                            checked={chartSelection === Constants.LIPIDS_DATA_OMEGA}
+                            checked={subChart === Constants.LIPIDS_DATA_OMEGA}
                             onChange={handleChartSelectionChange}>
                 </Form.Check>
             </Form>
@@ -243,20 +267,20 @@ export default function LipidsDataChart(props: ChartProps) {
             return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
         }
 
-        console.log('Oh')
-
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie data={data}
-                     height={ChartConfig.default_chart_height}
+                     key={'chart ' + chartHeight}
+                     height={chartHeight}
                      options={getOptions()}
                      type="pie"
                 />
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar data={data}
-                     height={ChartConfig.default_chart_height}
+                     key={'chart ' + chartHeight}
+                     height={chartHeight}
                      options={getOptions()}
                      type="bar"
                 />
@@ -266,40 +290,45 @@ export default function LipidsDataChart(props: ChartProps) {
     }
 
 
+    //const height = props.directCompareUse === true ? direct_compare_chartheight : default_chart_height
+    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
+
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row" style={{height: containerHeight}} key={"lipids container " + containerHeight}>
                 <div className="col-3 text-align-center">
                     {renderChartSelector()}
                 </div>
                 <div className={chartColType}>
-                    {chartSelection === Constants.LIPIDS_DATA_BASE &&
+                    {subChart === Constants.LIPIDS_DATA_BASE &&
                     renderChart(Constants.LIPIDS_DATA_BASE)
                     }
-                    {omegaDataAvailabe && chartSelection === Constants.LIPIDS_DATA_OMEGA &&
+                    {omegaDataAvailabe && subChart === Constants.LIPIDS_DATA_OMEGA &&
                     renderChart(Constants.LIPIDS_DATA_OMEGA)
                     }
-                    {!omegaDataAvailabe && chartSelection === Constants.LIPIDS_DATA_OMEGA &&
+                    {!omegaDataAvailabe && subChart === Constants.LIPIDS_DATA_OMEGA &&
                     <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
                     }
                 </div>
 
                 {showLegend && chartType === CHART_TYPE_PIE &&
                 <div className="col-3">
-                    {chartSelection === Constants.LIPIDS_DATA_BASE &&
+                    {subChart === Constants.LIPIDS_DATA_BASE &&
                     <CustomLegend legendData={getLegendBaseChart()}/>
                     }
-                    {chartSelection === Constants.LIPIDS_DATA_OMEGA &&
+                    {subChart === Constants.LIPIDS_DATA_OMEGA &&
                     <CustomLegend legendData={getLegendOmegaChart()}/>
                     }
                 </div>
                 }
             </div>
             <div className="row chartFormLine">
-                <ChartOptionSelector chartType={chartType}
-                                     showLegend={showLegend}
-                                     handleRadioButtonClick={handleRadioButtonClick}
-                                     handleLegendCheckboxClick={handleLegendCheckbox}/>
+                {!props.directCompareConfig &&
+                <PieChartConfigurationForm chartType={chartType}
+                                           showLegend={showLegend}
+                                           handleRadioButtonClick={handleRadioButtonClick}
+                                           handleLegendCheckboxClick={handleLegendCheckbox}/>
+                }
             </div>
         </div>
     );

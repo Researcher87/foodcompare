@@ -73,7 +73,7 @@ export function Home() {
                 <button type="button"
                         className="btn btn-warning button-apply media app"
                         style={{minWidth: "150px"}}>
-					<span style={{fontWeight: "bold"}}>
+					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted[languageContext.language]}
 					</span>
                 </button>
@@ -88,8 +88,11 @@ export function Home() {
                 <div className="row">
                     <div className={"col-5"}>
                         <p>{applicationStrings.home_text_1[languageContext.language]}</p>
+                        <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
+                            {renderStartButton()}
+                        </div>
                         <p>{applicationStrings.home_text_2[languageContext.language]}</p>
-                        {renderStartButton()}
+                        <p>{applicationStrings.home_text_3[languageContext.language]}</p>
                     </div>
                     <div className={"col-7"} style={{paddingLeft: "45px"}}>
                         {renderCarousel()}

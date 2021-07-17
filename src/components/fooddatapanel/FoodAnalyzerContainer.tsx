@@ -17,11 +17,12 @@ interface FoodAnalyzerContainerProps {
 }
 
 export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps) {
-    const applicationData = useContext(ApplicationDataContextStore)
+    const ApplicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(false)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(false)
+
 
     const onHide = (): void => {
         setShowFoodSelector(false)
@@ -29,13 +30,13 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     }
 
     const onSelectFoodItemSubmit = (selectedFoodItem: SelectedFoodItem): void => {
-        if (applicationData === null) {
+        if (ApplicationContext === null) {
             return
         }
 
         let foodName
         if(selectedFoodItem.foodItem.nameId) {
-            foodName = getNameFromFoodNameList(applicationData.foodDataCorpus.foodNames,
+            foodName = getNameFromFoodNameList(ApplicationContext.foodDataCorpus.foodNames,
                 selectedFoodItem.foodItem.nameId, languageContext.language)
         } else {
             foodName = 'Individual'
@@ -49,9 +50,9 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
         selectedFoodItem.component = <FoodDataPage selectedFoodItem={selectedFoodItem}/>
         selectedFoodItem.tab = foodName
         selectedFoodItem.id = selectedFoodItem.foodItem.id
-        applicationData?.addItemToFoodDataPanel(selectedFoodItem)
+        ApplicationContext?.applicationData.foodDataPanel.addItemToFoodDataPanel(selectedFoodItem)
 
-        if (applicationData?.debug) {
+        if (ApplicationContext?.debug) {
             console.log('FoodAnalyzerContainer: Set new selected item and execute callback. Selected item = ', selectedFoodItem)
         }
 
@@ -65,15 +66,15 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             applicationStrings.button_no[languageContext.language],
             {}
         )) {
-            applicationData?.removeAllItemsFromFoodDataPanel()
+            ApplicationContext?.applicationData.foodDataPanel.removeAllItemsFromFoodDataPanel()
         }
     }
 
-    if (applicationData?.debug) {
+    if (ApplicationContext?.debug) {
         console.log('FoodAnalyzerContainer: Render')
     }
 
-    const selectedFoodItems = applicationData?.applicationData.foodDataPanel.selectedFoodItems
+    const selectedFoodItems = ApplicationContext?.applicationData.foodDataPanel.selectedFoodItems
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
 
     ReactTooltip.rebuild()

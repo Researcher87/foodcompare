@@ -1,3 +1,11 @@
+/* Bootstrap Overwrites */
+
+.form-control-sm {
+    padding: 0px !important;
+}
+
+
+
 /* Initial styles for very small screens */
 
 .app {
@@ -6,6 +14,16 @@
 
 .foodDataPanel {
     padding-top: 16px;
+}
+
+.form-label {
+    color: #999999;
+    font-weight: bold;
+    font-size: 1.0em;
+}
+
+.form-section {
+    padding-bottom: 6px;
 }
 
 .header-link {
@@ -45,6 +63,12 @@
     .app {
         font-size: 0.8em;
     }
+    .form-label {
+        font-size: 0.8em;
+    }
+    .form-section {
+        padding-bottom: 6px;
+    }
     .home {
         width: 630px;
     }
@@ -64,6 +88,9 @@
     }
     .foodDataPanel {
         padding-top: 24px;
+    }
+    .form-section {
+        padding-bottom: 8px;
     }
     .header-link {
         margin-top: 14px;
@@ -87,6 +114,12 @@
     .app {
         font-size: 1.0em;
     }
+    .form-label {
+        font-size: 0.9em;
+    }
+    .form-section {
+        padding-bottom: 10px;
+    }
     .header-link {
         margin-top: 12px;
         min-width: 68px;
@@ -107,6 +140,12 @@
 @media (min-width: 1280px) {
     .app {
         font-size: 1.1em;
+    }
+    .form-label {
+        font-size: 1.0em;
+    }
+    .form-section {
+        padding-bottom: 12px;
     }
     .header-link {
         margin-top: 8px;
@@ -129,6 +168,9 @@
     .app {
         font-size: 1.2em;
     }
+    .form-section {
+        padding-bottom: 14px;
+    }
     .header-link {
         margin-top: 4px;
         min-width: 84px;
@@ -142,6 +184,12 @@
 }
 
 @media (min-width: 1920px) {
+    .form-label {
+        font-size: 1.1em;
+    }
+    .form-section {
+        padding-bottom: 16px;
+    }
     .header-link {
         margin-top: -2px;
         min-width: 96px;
@@ -158,6 +206,12 @@
     .app {
         font-size: 1.3em;
     }
+    .form-label {
+        font-size: 1.2em;
+    }
+    .form-section {
+        padding-bottom: 18px;
+    }
     .header-link {
         margin-top: -8px;
         min-width: 112px;
@@ -167,6 +221,44 @@
     }
     .mobile-app-img {
         max-height: 880px;
+    }
+}
+
+
+
+/* Adapted styles for gradually becoming larger screens (height). */
+
+.direct-compare-panel {
+    height: 320px;
+}
+
+@media (min-height: 590px) {
+    .direct-compare-panel {
+        height: 400px;
+    }
+}
+
+@media (min-height: 750px) {
+    .direct-compare-panel {
+        height: 540px;
+    }
+}
+
+@media (min-height: 890px) {
+    .direct-compare-panel {
+        height: 620px;
+    }
+}
+
+@media (min-height: 1000px) {
+    .direct-compare-panel {
+        height: 750px;
+    }
+}
+
+@media (min-height: 1200px) {
+    .direct-compare-panel {
+        height: 850px;
     }
 }
 
@@ -232,11 +324,6 @@
     margin-left: 16px;
 }
 
-.form-label {
-    color: #999999;
-    font-weight: bold;
-}
-
 .form-elements {
     margin-right: 20px;
 }
@@ -263,10 +350,6 @@
 
 .form-row-indent {
     margin-left: 24px;
-}
-
-.form-section {
-    padding-bottom: 16px;
 }
 
 .header {
@@ -325,4 +408,15 @@
 
 .tableHeaderClass {
     display: none !important;
+}
+
+
+.vertical-label {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-align: center;
+    text-orientation: mixed;
 }
