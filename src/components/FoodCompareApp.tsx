@@ -23,10 +23,10 @@ export function FoodCompareApp() {
                 {applicationStrings.text_foodcompareapp_1[languageContext.language]}
                 <div className="text-center" style={{paddingTop: "32px"}}>
                     <button type="button"
-                            className="btn btn-warning button-apply media app"
+                            className="btn btn-warning btn-small button-apply media app"
                             onClick={linkToPlayStore}
                             style={{minWidth: "250px"}}>
-					<span style={{fontWeight: "bold"}}>
+					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.text_foodcompareapp_2[languageContext.language]}
 					</span>
                     </button>

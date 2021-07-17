@@ -73,7 +73,7 @@ export function Home() {
                 <button type="button"
                         className="btn btn-warning button-apply media app"
                         style={{minWidth: "150px"}}>
-					<span style={{fontWeight: "bold"}}>
+					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted[languageContext.language]}
 					</span>
                 </button>

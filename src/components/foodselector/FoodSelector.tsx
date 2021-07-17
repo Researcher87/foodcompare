@@ -9,12 +9,13 @@ import ReactSelectOption, {
 } from "../../types/ReactSelectOption";
 import {getCategorySelectList} from "../../service/nutrientdata/CategoryService";
 import {getFoodClassSelectList} from "../../service/nutrientdata/FoodClassService";
-import {getFoodItem, getFoodItemsSelectList} from "../../service/nutrientdata/FoodItemsService";
+import {getFoodItemsSelectList} from "../../service/nutrientdata/FoodItemsService";
 import FoodItem, {PortionData} from "../../types/nutrientdata/FoodItem";
 import {getDefaultPortionData, getPortionReactSelectList} from "../../service/nutrientdata/PortionDataService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodClass from "../../types/nutrientdata/FoodClass";
 import {LanguageContext} from "../../contexts/LangContext";
+import {isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -43,6 +44,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
+
+    const windowSize = useWindowDimension()
 
     useEffect(() => {
         const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
@@ -234,12 +237,16 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const amount_label = props.smallVariant ? `${applicationStrings.label_amount_short[language]}:` : `${applicationStrings.label_amount[language]}:`
     const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
 
+    const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
+    const inputClass =  isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
+
     return <div>
         <div className="container">
             {props.noCategorySelect !== true &&
             <div className="column select-menu form-section">
                 <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
-                <Select options={categoriesList}
+                <Select className={selectClass}
+                        options={categoriesList}
                         value={selectedCategory ? selectedCategory : categoriesList[0]}
                         onChange={(value) => handleCategoryChange(value)}
                 />
@@ -247,14 +254,16 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             }
             <div className="column select-menu form-section">
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
-                <Select options={foodClassesList}
+                <Select className={selectClass}
+                        options={foodClassesList}
                         value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
                 />
             </div>
             <div className="column select-menu form-section">
                 <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
-                <Select options={foodItemsList}
+                <Select className={selectClass}
+                        options={foodItemsList}
                         value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
                         onChange={handleFoodItemChange}
                 />
@@ -263,15 +272,16 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 <div className={"row"}>
                     <div className={"col-lg-8 col-xl-9"}>
                         <span
-                            className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
-                        <Select options={portionsList}
+                            className={'form-label'}>{applicationStrings.label_portion[language]}:</span>
+                        <Select className={selectClass}
+                                options={portionsList}
                                 value={selectedPortion ? selectedPortion : portionsList[0]}
                                 onChange={(value) => handlePortionChange(value)}/>
                     </div>
                     <div className={"col-lg-4 col-xl-3"}>
                         <span
                             className={'form-label'}>{amount_label}</span>
-                        <input className="form-control inputfield"
+                        <input className={inputClass}
                                disabled={selectedPortion?.value.portionType !== 0}
                                value={portionAmount}
                                onChange={handlePortionAmountChange}

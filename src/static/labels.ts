@@ -572,8 +572,8 @@ export const applicationStrings = {
         en: 'pregnant'
     },
     label_userSettings_sex: {
-        de: 'Geschlecht',
-        en: 'Sex'
+        de: 'Geschlecht:',
+        en: 'Sex:'
     },
     label_userSettings_sex_male: {
         de: 'männlich',

@@ -1,5 +1,6 @@
 import {AMOUNT_PORTION, CARBS_DATA_BASE, CHART_TYPE_PIE, LIPIDS_DATA_BASE, SEX_MALE} from "./Constants";
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
+import {WindowDimension} from "../service/WindowDimension";
 
 export const release = "1.1"
 export const buildDate = "2021-07-07"
@@ -9,6 +10,11 @@ export const mobileAppPath = "https://play.google.com/store/apps/details?id=com.
 export const minimalOmegaRatio = 0.3
 export const maximalPortionSize = 5000
 export const defaultPanelHeight = '468px'
+
+export const smallFormsScreenSize: WindowDimension = {
+    width: 1200,
+    height: 800
+}
 
 export const initialUserDataAge = 35
 export const initialUserDataSize = 175

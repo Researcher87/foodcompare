@@ -93,7 +93,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     return <div>
         {renderFoodSelectorCard(1)}
         {renderFoodSelectorCard(2)}
-        <div style={{paddingTop: "20px"}}>
+        <div style={{paddingTop: "20px", paddingBottom: "64px"}}>
             <Button className={"form-button float-end"}
                     disabled={displayStatus === STATUS_NOT_UPDATED}
                     onClick={onSubmit}>
