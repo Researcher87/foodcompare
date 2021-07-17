@@ -350,7 +350,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             </div>
             {props.directCompareUse !== true &&
             <div className="row chartFormLine">
-                renderChartConfigurationForm()
+                {renderChartConfigurationForm()}
             </div>
             }
         </div>
