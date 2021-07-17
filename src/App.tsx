@@ -29,12 +29,9 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Switch from "react-bootstrap/Switch";
 import DirectCompareContainer from "./components/directcompare/DirectCompareContainer";
 
-
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
 
 function App(): JSX.Element {
-    const ga = useGA4React();
-
     useEffect(() => {
         ReactTooltip.rebuild()
     })
@@ -68,6 +65,7 @@ function App(): JSX.Element {
 (async () => {
     try {   // NOTE: uBlock Origin may cause a crash here
         await ga4react.initialize();
+        ga4react.pageview('path')
     } catch (e) {
         console.error(e)
     }

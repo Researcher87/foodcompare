@@ -1,5 +1,4 @@
 export const AMOUNT_PORTION = "amount portion"
-export const AMOUNT_100g = "amount 100g"
 
 export const CHART_TYPE_PIE = "pie chart"
 export const CHART_TYPE_BAR = "bar chart"
@@ -55,9 +54,6 @@ export const LANGUAGE_EN = "en";
 
 export const SEX_MALE = "sex male"
 export const SEX_FEMALE = "sex female"
-
-export const SUBCHART_VITAMIN = "vitamin subchart"
-export const SUBCHART_MINERAL = "mineral subchart"
 
 export const TAB_BASE_DATA = "tab_base_data"
 export const TAB_ENERGY_DATA = "tab_energy_data"
