@@ -65,7 +65,6 @@ function App(): JSX.Element {
 (async () => {
     try {   // NOTE: uBlock Origin may cause a crash here
         await ga4react.initialize();
-        ga4react.pageview('path')
     } catch (e) {
         console.error(e)
     }
