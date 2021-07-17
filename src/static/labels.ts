@@ -103,6 +103,10 @@ export const applicationStrings = {
         de: 'Das Hauptaugenmerk von Food Compare gilt jedoch nicht nur der Veranschaulichung einzelner Nahrungsmittel, sondern der Vergleichbarkeit von Nährstoffen, Vitaminen und Mineralen in Lebensmittels. Dazu können beliebig viele Tabs geöffnet und Lebensmittel damit leicht miteinander verglichen werden. So lassen sich bspw. auf einfache Weise der Vitamingehalt von einzelnen Obstsorten vergleichen, oder die Aufteilung von Kohlenhydraten, Fetten und Eiweißen zwischen Grundnahrungsmitteln. Dabei erlaubt die Anwendung auch das Zusammenstellen von komplexen Menüs, deren Gesamtgehalt an Nährstoffen, Vitaminen und Mineralstoffen dann berechnet wird.',
         en: 'The primary focus of Food Compare is to visually compare the composition and contents of different foods, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
     },
+    home_text_3: {
+        de: 'Um die Nährstoffdiagramme zweier Lebensmittel auf einen Blick miteinander vergleichen zu können, gibt es seit der Version 1.2 nun auch einen zusätzlichen Bereich, in denen die Diagramme entsprechend nebeneinander angeordnet sind. Einige Datenseiten wie Vitamine und Mineralstoffe lassen sich dabei auch synchronisieren, so dass eine einheitliche Skalierung der Diagramme stattfindet und nur die Daten angezeigt werden, welche für beide Lebensmittel vorliegen.',
+        en: 'In order to compare nutrient charts of two foods at a glance, an additional page was added in version 1.2 where nutrient charts are placed next to each other. Some data pages like vitamins and minerals can also be synchronized, which means that the charts use a unique scaling and only display data that is available in both food elements.'
+    },
     label_amount: {
         de: 'Menge (Gramm)',
         en: 'Amount (gram)'
@@ -160,8 +164,8 @@ export const applicationStrings = {
         en: 'Minerals (compared to dietary requirements)'
     },
     label_charttype_proteins: {
-        de: 'Proteine',
-        en: 'Proteins'
+        de: 'Proteine (im Vgl. zum Tagesbedarf)',
+        en: 'Proteins  (compared to dietary requirements)'
     },
     label_charttype_vitamins: {
         de: 'Vitamine (im Vgl. zum Tagesbedarf)',
