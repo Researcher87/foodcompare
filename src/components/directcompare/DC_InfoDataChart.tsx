@@ -1,11 +1,12 @@
 import {Card} from "react-bootstrap";
-import EnergyDataChart from "../fooddatapanel/charts/EnergyDataChart";
+import {InfoData} from "../fooddatapanel/charts/InfoData";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {useEffect, useState} from "react";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 
-export function DC_EnergyChart(props: DirectCompareDataPanelProps) {
+
+export function DC_InfoDataChart(props: DirectCompareDataPanelProps) {
     const windowSize = useWindowDimension()
     const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, true))
 
@@ -13,18 +14,16 @@ export function DC_EnergyChart(props: DirectCompareDataPanelProps) {
         setContainerHeight(calculateChartContainerHeight(windowSize, true))
     }, [containerHeight])
 
-    return <div className={"direct-compare-panel"}>
+
+    return <div>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
-                <EnergyDataChart selectedFoodItem={props.selectedFoodItem1} directCompareUse={true}/>
+                <InfoData selectedFoodItem={props.selectedFoodItem1} directCompare={true}/>
             </div>
         </Card>
-
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
-                <EnergyDataChart selectedFoodItem={props.selectedFoodItem2} directCompareUse={true}/>
+                <InfoData selectedFoodItem={props.selectedFoodItem2} directCompare={true}/>
             </div>
         </Card>
     </div>

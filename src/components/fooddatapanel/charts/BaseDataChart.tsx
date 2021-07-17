@@ -3,20 +3,23 @@ import {LanguageContext} from "../../../contexts/LangContext";
 import {applicationStrings} from "../../../static/labels";
 import {autoRound} from "../../../service/calculation/MathService";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
+import {CHART_TYPE_BAR, CHART_TYPE_PIE, TAB_BASE_DATA} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
-import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
+import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartConfigurationService";
 import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
 import {CustomLegend} from "../../charthelper/CustomLegend";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
+import {useWindowDimension} from "../../../service/WindowDimension";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
     const chartConfig = props.directCompareConfig
         ? props.directCompareConfig
@@ -30,11 +33,10 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig.showDetails
             : initialChartConfigData.baseChartConfig.showDetails
 
-    console.log('BASE Chart Config:', props.directCompareConfig, applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart)
-
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
     const [showDetails, setShowDetails] = useState<boolean>(showDetailsProp)
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse, TAB_BASE_DATA))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -43,8 +45,9 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             setShowDetails(showDetailsProp)
         }
 
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse, TAB_BASE_DATA))
         updateChartConfig()
-    }, [chartType, showDetails, showLegend, props])
+    }, [chartType, showDetails, showLegend, chartHeight, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
@@ -228,14 +231,13 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             return <div/>
         }
 
-        const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.basedata_chart_height
-
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie
                     data={chartData}
-                    height={height}
+                    key={'chart ' + chartHeight}
+                    height={chartHeight}
                     width={ChartConfig.basedata_piechart_width}
                     options={getOptions(title)}
                     type={"pie"}/>
@@ -243,7 +245,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 {chartType === CHART_TYPE_BAR &&
                 <Bar
                     data={chartData}
-                    height={height}
+                    key={'chart ' + chartHeight}
+                    height={chartHeight}
                     width={ChartConfig.basedata_barchart_width}
                     options={getOptions(title)}
                     type={"bar"}/>
@@ -259,13 +262,14 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const totalChartDataTitle = applicationStrings.label_chart_totalComposition[lang]
     const nutrientChartDataTitle = applicationStrings.label_chart_nutrientComposition[lang]
 
-    const height = props.directCompareConfig ? direct_compare_chartheight : default_chart_height
+    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+    const justifyContent = props.directCompareUse ? "center" : "left"
 
     return (
         <div className="container-fluid">
-            <div className="d-flex text-align-center" style={{justifyContent: "center"}}>
+            <div className="d-flex text-align-center" style={{justifyContent: justifyContent}}>
                 <div className="d-inline-block">
-                    <div className="row" style={{height: height}}>
+                    <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                         <div className="col-6">
                             <div>{renderSubChart(totalChartDataTitle, totalChartData)}</div>
                         </div>
@@ -280,7 +284,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 </div>
                 }
             </div>
-            {!props.directCompareUse ?
+            {!props.directCompareUse &&
                 <div className="row chartFormLine">
                     <PieChartConfigurationForm chartType={chartType}
                                                showLegend={showLegend}
@@ -290,8 +294,6 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                                                handleLegendCheckboxClick={handleLegendCheckboxClick}
                                                handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
                 </div>
-                :
-                <div className="row chartFormLine"></div>
             }
         </div>
     )

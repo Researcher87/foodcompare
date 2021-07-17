@@ -9,7 +9,7 @@ import {
     LIPIDS_DATA_OMEGA
 } from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
-import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartService";
+import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartConfigurationService";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {autoRound} from "../../../service/calculation/MathService";
 import {applicationStrings} from "../../../static/labels";
@@ -21,11 +21,14 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
 import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
+import {useWindowDimension} from "../../../service/WindowDimension";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 
 export default function CarbsDataChart(props: CarbDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
     let chartConfig = props.directCompareConfig
         ? props.directCompareConfig
@@ -36,6 +39,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
     const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -44,8 +48,9 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             setSubChart(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
         }
 
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, subChart, props])
+    }, [chartType, showLegend, subChart, chartHeight, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
@@ -379,14 +384,16 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             <div>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie data={data}
-                     height={height}
+                     key={'chart ' + chartHeight}
+                     height={chartHeight}
                      options={getOptions()}
                      type="pie"
                 />
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar data={data}
-                     height={height}
+                     key={'chart ' + chartHeight}
+                     height={chartHeight}
                      options={getOptions()}
                      type={"bar"}
                 />
@@ -400,11 +407,11 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const detailChartData = createDetailChartData()
     const basicChartData = createBasicChartData()
 
-    const height = props.directCompareUse === true ? direct_compare_chartheight : default_chart_height
+    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
 
     return (
         <div className="container-fluid">
-            <div className="row" style={{height: height}}>
+            <div className="row" style={{height: containerHeight}} key={"carbs container " + containerHeight}>
                 <div className="col-3" style={{display: "block"}}>
                     {renderChartSelector()}
                 </div>
@@ -433,14 +440,15 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                 </div>
                 }
             </div>
+            {!props.directCompareConfig &&
             <div className="row chartFormLine">
-                {!props.directCompareConfig &&
                 <PieChartConfigurationForm chartType={chartType}
                                            showLegend={showLegend}
                                            handleRadioButtonClick={handleRadioButtonClick}
                                            handleLegendCheckboxClick={handleLegendCheckbox}/>
-                }
+
             </div>
+            }
         </div>
     );
 

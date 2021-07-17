@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import SelectedFoodItem from "../../../types/livedata/SelectedFoodItem";
@@ -8,6 +8,9 @@ import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
 import {defaultPanelHeight} from "../../../config/ApplicationSetting";
 import {direct_compare_chartheight} from "../../../config/ChartConfig";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {TAB_BASE_DATA} from "../../../config/Constants";
+import {useWindowDimension} from "../../../service/WindowDimension";
 
 interface InfoDataProps {
     selectedFoodItem: SelectedFoodItem,
@@ -24,6 +27,12 @@ export function InfoData(props: InfoDataProps) {
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
+    const windowSize = useWindowDimension()
+    const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, props.directCompare))
+
+    useEffect(() => {
+        setContainerHeight(calculateChartContainerHeight(windowSize, props.directCompare))
+    }, [containerHeight])
 
     const createRow = (key, value): RowElement => {
         return {
@@ -133,10 +142,8 @@ export function InfoData(props: InfoDataProps) {
         );
     }
 
-    const height = props.directCompare !== true ? defaultPanelHeight : direct_compare_chartheight + 20
-
     return (
-        <div style={{height: height, maxHeight: height, overflowY: "auto", padding: "15px"}}>
+        <div style={{height: containerHeight, maxHeight: containerHeight, overflowY: "auto", padding: "15px"}}>
             {props.selectedFoodItem.foodItem.foodClass !== 0 &&
             <div>
                 <div>

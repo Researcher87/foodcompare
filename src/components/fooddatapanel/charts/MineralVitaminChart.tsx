@@ -5,16 +5,19 @@ import {CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
 import {determineFoodRequirementRatio} from "../../../service/calculation/DietaryRequirementService";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
-import {getBarChartOptions} from "../../../service/ChartService"
+import {getBarChartOptions} from "../../../service/ChartConfigurationService"
 import {Bar} from "react-chartjs-2";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {MineralVitaminChartProps} from "../../../types/livedata/ChartPropsData";
+import {useWindowDimension} from "../../../service/WindowDimension";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
     const chartConfigVitamins = props.directCompareConfig
         ? props.directCompareConfig
@@ -32,6 +35,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(chartConfigVitamins.expand100)
     const [chartType_minerals, setChartType_minerals] = useState<string>(chartConfigMinerals.portionType)
     const [expand100_minerals, setExpand100_minerals] = useState<boolean>(chartConfigMinerals.expand100)
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -41,8 +45,9 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             setExpand100_minerals(chartConfigMinerals.expand100)
         }
 
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [portionType_vitamins, chartType_minerals, expand100_vitamins, expand100_minerals, props])
+    }, [portionType_vitamins, chartType_minerals, expand100_vitamins, expand100_minerals, chartHeight, props])
 
 
     if (!applicationContext || applicationContext.foodDataCorpus.dietaryRequirements === null) {
@@ -328,25 +333,26 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         applicationStrings.label_charttype_minerals[lang];
 
     const options = getOptions(title, maxValue);
-    const height = props.directCompareConfig ? ChartConfig.direct_compare_chartheight : ChartConfig.default_chart_height
+    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
 
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                 <div className={"col-12"}>
                     <Bar
                         data={data}
-                        height={height}
+                        key={'chart ' + chartHeight}
+                        height={chartHeight}
                         options={options}
                         type={"bar"}
                     />
                 </div>
             </div>
+            {props.directCompareUse !== true &&
             <div className="row chartFormLine">
-                {props.directCompareUse !== true &&
                 renderChartConfigurationForm()
-                }
             </div>
+            }
         </div>
     )
 

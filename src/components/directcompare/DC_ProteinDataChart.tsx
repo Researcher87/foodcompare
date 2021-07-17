@@ -12,9 +12,12 @@ import {
     DirectCompareDataPanelProps,
     ProteinDataChartProps
 } from "../../types/livedata/ChartPropsData";
+import {useWindowDimension} from "../../service/WindowDimension";
+import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 
 export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
+    const windowSize = useWindowDimension()
 
     const chartConfig = applicationContext
         ? applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.proteinChartConfig
@@ -24,9 +27,12 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
     const [expand100, setExpand100] = useState<boolean>(chartConfig.expand100)
     const [synchronize, setSynchronize] = useState<boolean>(chartConfig.synchronize)
 
+    const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, true))
+
     useEffect(() => {
         updateChartConfig()
-    }, [portionType, expand100, synchronize])
+        setContainerHeight(calculateChartContainerHeight(windowSize, true))
+    }, [portionType, expand100, synchronize, containerHeight])
 
     if (!applicationContext) {
         return <div/>
@@ -102,13 +108,17 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
 
     return <div className={"direct-compare-panel"}>
         <Card>
-            <ProteinDataChart selectedFoodItem={props.selectedFoodItem1}
-                              directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <ProteinDataChart selectedFoodItem={props.selectedFoodItem1}
+                                  directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
+            </div>
         </Card>
 
         <Card>
-            <ProteinDataChart selectedFoodItem={props.selectedFoodItem2}
-                              directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <ProteinDataChart selectedFoodItem={props.selectedFoodItem2}
+                                  directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
+            </div>
         </Card>
         <Card.Footer>
             {renderChartConfigurationForm()}

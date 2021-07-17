@@ -107,7 +107,6 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
         }
 
         return <div/>
-
     }
 
     return <div>

@@ -23,12 +23,17 @@ import {
     DirectCompareChartConfigData,
     GeneralChartConfigDirectCompareWithSubCharts, GeneralChartConfigWithDetails, GeneralChartConfigWithSubCharts
 } from "../../types/livedata/ChartConfigData";
+import {
+    calculateChartContainerHeight
+} from "../../service/nutrientdata/ChartSizeCalculation";
+import {useWindowDimension} from "../../service/WindowDimension";
 
 /**
  * Re-usable direct compare chart component for pie-chart data pages (Lipids, Carbs, Base Data)
  */
 export function DC_PieChart(props: PieChartDirectCompareProp) {
     const applicationContext = useContext(ApplicationDataContextStore)
+    const windowSize = useWindowDimension()
 
     let initialConfig
     switch (props.dataPage) {
@@ -55,6 +60,8 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
     const [subChart1, setSubChart1] = useState<string>(initialConfig.subChart1)
     const [subChart2, setSubChart2] = useState<string>(initialConfig.subChart2)
 
+    const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, true))
+
     console.log('Chart Type:', props.dataPage, applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig)
     console.log('Chart Type 2:', chartType)
 
@@ -80,7 +87,9 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
                 updateChartConfig()
             }
         }
-    }, [chartType, showDetails, showLegend, subChart1, subChart2])
+
+        setContainerHeight(calculateChartContainerHeight(windowSize, true))
+    }, [chartType, showDetails, showLegend, subChart1, subChart2, containerHeight])
 
     if (!applicationContext) {
         return <div/>
@@ -235,14 +244,14 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
 
     return <div className={"direct-compare-panel"}>
         <Card>
-            <div className={"d-flex"}>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}} key={"directcompare container" + containerHeight}>
                 <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
                 {getChartComponent(props.selectedFoodItem1, 1)}
             </div>
         </Card>
 
         <Card>
-            <div className={"d-flex"}>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}} key={"directcompare container" + containerHeight}>
                 <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
                 {getChartComponent(props.selectedFoodItem2, 2)}
             </div>

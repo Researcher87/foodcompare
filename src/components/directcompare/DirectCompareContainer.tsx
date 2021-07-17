@@ -4,9 +4,11 @@ import React, {useContext, useState} from "react";
 import ApplicationDataContextProvider, {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanel} from "./DirectCompareDataPanel";
+import {applicationStrings} from "../../static/labels";
 
 export default function DirectCompareContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
+    const languageContext = useContext(LanguageContext)
 
     const initialFoodItem1 = applicationContext?.applicationData.directCompareDataPanel.selectedFoodItem1
         ? applicationContext?.applicationData.directCompareDataPanel.selectedFoodItem1
@@ -37,9 +39,10 @@ export default function DirectCompareContainer() {
                     <DirectCompareSelector updateSelectedFoodItems={updateSelectedFoodItems}/>
                 </div>
                 <div className={"col-8"} style={{padding: "32px"}}>
-                    {selectedFoodItem1 !== null && selectedFoodItem2 !== null &&
+                    {selectedFoodItem1 !== null && selectedFoodItem2 !== null ?
                     <DirectCompareDataPanel selectedFoodItem1={selectedFoodItem1}
                                             selectedFoodItem2={selectedFoodItem2}/>
+                        : <div className={"app"}><i>{applicationStrings.direct_compare_text[languageContext.language]}</i></div>
                     }
                 </div>
             </div>

@@ -9,9 +9,12 @@ import {direct_compare_color1, direct_compare_color2} from "../../config/ChartCo
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {Card} from "react-bootstrap";
 import {DC_MineralVitaminChartProps} from "../../types/livedata/ChartPropsData";
+import {useWindowDimension} from "../../service/WindowDimension";
+import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 
 export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
+    const windowSize = useWindowDimension()
 
     const chartConfigVitamins = applicationContext
         ? applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.vitaminChartConfig
@@ -28,9 +31,12 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const [synchronizeVitamins, setSynchronizeVitamins] = useState<boolean>(chartConfigVitamins.synchronize)
     const [synchronizeMinerals, setSynchronizeMinerals] = useState<boolean>(chartConfigMinerals.synchronize)
 
+    const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, true))
+
     useEffect(() => {
         updateChartConfig()
-    }, [portionType_minerals, portionType_vitamins, synchronizeVitamins, synchronizeMinerals, expand100_vitamins, expand100_minerals])
+        setContainerHeight(calculateChartContainerHeight(windowSize, true))
+    }, [portionType_minerals, portionType_vitamins, synchronizeVitamins, synchronizeMinerals, expand100_vitamins, expand100_minerals, containerHeight])
 
     if (!applicationContext) {
         return <div/>
@@ -133,13 +139,19 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
     return <div className={"direct-compare-panel"}>
         <Card>
-            <MineralVitaminChart selectedSubChart={props.selectedSubChart} selectedFoodItem={props.selectedFoodItem1}
-                                 directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <MineralVitaminChart selectedSubChart={props.selectedSubChart}
+                                     selectedFoodItem={props.selectedFoodItem1}
+                                     directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
+            </div>
         </Card>
 
         <Card>
-            <MineralVitaminChart selectedSubChart={props.selectedSubChart} selectedFoodItem={props.selectedFoodItem2}
-                                 directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <MineralVitaminChart selectedSubChart={props.selectedSubChart}
+                                     selectedFoodItem={props.selectedFoodItem2}
+                                     directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
+            </div>
         </Card>
         <Card.Footer>
             {renderChartConfigurationForm()}

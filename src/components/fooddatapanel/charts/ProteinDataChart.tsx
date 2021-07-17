@@ -5,16 +5,19 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {applicationStrings} from "../../../static/labels";
 import {determineProteinRequirementRatio} from "../../../service/calculation/DietaryRequirementService";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {getBarChartOptions} from "../../../service/ChartService"
+import {getBarChartOptions} from "../../../service/ChartConfigurationService"
 import {Bar} from "react-chartjs-2";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
+import {useWindowDimension} from "../../../service/WindowDimension";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 
 export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
+    const windowSize = useWindowDimension()
 
     const chartConfig = props.directCompareConfig
         ? props.directCompareConfig
@@ -24,6 +27,7 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
 
     const [portionType, setPortionType] = useState<string>(chartConfig.portionType)
     const [expand100, setExpand100] = useState<boolean>(chartConfig.expand100)
+    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -31,8 +35,9 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
             setPortionType(chartConfig.portionType)
         }
 
+        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [portionType, expand100, props])
+    }, [portionType, expand100, chartHeight, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
@@ -207,17 +212,17 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
     const options = getOptions(applicationStrings.label_charttype_proteins[lang], maxValue);
     const dataExists = data.datasets && data.datasets[0].data && data.datasets[0].data.length > 0
 
-    const height = props.directCompareConfig ? ChartConfig.direct_compare_chartheight : ChartConfig.default_chart_height
-
+    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
 
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                 <div className="col-12">
                     {dataExists &&
                     <Bar
                         data={data}
-                        height={height}
+                        key={'chart ' + chartHeight}
+                        height={chartHeight}
                         options={options}
                         type={"bar"}
                     />
@@ -229,11 +234,11 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
                     }
                 </div>
             </div>
+            {props.directCompareUse !== true &&
             <div className="row chartFormLine">
-                {props.directCompareUse !== true &&
                 renderChartConfigurationForm()
-                }
             </div>
+            }
         </div>
     )
 
