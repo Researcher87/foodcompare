@@ -178,11 +178,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
 
     const updateSourcesList = (foodItem: FoodItem) => {
-        const sourceNames: Array<ReactSelectOption> = foodItem.nutrientDataList.map(nutrientDataObject => {
-            const SourceName = getSourceName(nutrientDataObject.source.id)
-            return {label: SourceName, value: nutrientDataObject.source.id}
-        })
-
+        const sourceNames = getSourceNames(foodItem)
         setSourcesList(sourceNames)
 
         if(sourceNames.length === 1) {
@@ -202,6 +198,14 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 setSelectedSource(sourceNames[0])
             }
         }
+    }
+
+
+    const getSourceNames = (foodItem: FoodItem) => {
+        return foodItem.nutrientDataList.map(nutrientDataObject => {
+            const SourceName = getSourceName(nutrientDataObject.source.id)
+            return {label: SourceName, value: nutrientDataObject.source.id}
+        })
     }
 
 
@@ -251,6 +255,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 if (foodItem && foodItem.value && foodItem.value.portionData) {
                     setSelectedFoodItem(foodItem)
 
+                    const sourceNames = getSourceNames(foodItem.value)
+                    setSourcesList(sourceNames)
+                    const selected = sourceNames.find(sourceElement => sourceElement.value === props.selectedFoodItem?.selectedSource)
+                    if(selected) {
+                        setSelectedSource(selected)
+                    }
+
                     const portionDataList = getPortionReactSelectList(foodItem.value.portionData, portionTypes, language)
                     setPortionsList(portionDataList)
 
@@ -263,6 +274,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         const amount = predefinedFoodObject.portion.amount
                         setPortionAmount(amount)
                     }
+
                 }
             }
 
