@@ -25,7 +25,7 @@ import {HelpModal} from "../HelpModal";
 import {getHelpText, HelpText} from "../../service/HelpService";
 import getName from "../../service/LanguageService";
 import {ChartMenuPanel} from "./ChartMenuPanel";
-import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
+import {getNutrientData, getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 
 
 interface FoodDataPageHeaderProps {
@@ -119,7 +119,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     }
 
     const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
-    const sourceString = props.selectedFoodItem.selectedSource === 0 ? "SR Legacy" : "FNDDS"
+    const sourceString = getSourceName(props.selectedFoodItem.selectedSource)
 
     return (
         <div style={{paddingBottom: "6px"}}>

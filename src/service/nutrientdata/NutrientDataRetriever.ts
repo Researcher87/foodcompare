@@ -5,6 +5,14 @@ import {applicationStrings} from "../../static/labels";
 import {SOURCE_SRLEGACY} from "../../config/Constants";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 
+export function getSourceName(sourceId: number) {
+    switch(sourceId) {
+        case 0: return "SR Legacy"
+        case 1: return "FNDDS"
+        default: return "unknown"
+    }
+}
+
 export function getNutrientData(selectedFoodItem: SelectedFoodItem): NutrientData {
     return getNutrientDataForFoodItem(selectedFoodItem.foodItem, selectedFoodItem.selectedSource)
 }

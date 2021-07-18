@@ -11,6 +11,7 @@ import {direct_compare_chartheight} from "../../../config/ChartConfig";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {TAB_BASE_DATA} from "../../../config/Constants";
 import {useWindowDimension} from "../../../service/WindowDimension";
+import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 interface InfoDataProps {
     selectedFoodItem: SelectedFoodItem,
@@ -52,9 +53,11 @@ export function InfoData(props: InfoDataProps) {
         const foodClass = props.selectedFoodItem.foodClass;
         const foodClassNameId = foodClass ? foodClass.nameKey : null
 
-        const sourceItemId = " - / - "  // ToDo: Add the correct number
+        const sourceName = getSourceName(props.selectedFoodItem.selectedSource)
+        const sourceItemId = getNutrientData(props.selectedFoodItem).sourceItemId
+
         const source = `United States Department of Agriculture (USDA)`;
-        const sourceLine2 = `ID = ${sourceItemId}`;
+        const sourceLine2 = `${sourceName}, ID = ${sourceItemId}`;
         const foodClassName = foodClassNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodClassNameId, lang) : null;
 
         const categoryId = foodClass ? foodClass.category : null
@@ -142,6 +145,9 @@ export function InfoData(props: InfoDataProps) {
         );
     }
 
+    const sourceItemId = getNutrientData(props.selectedFoodItem).sourceItemId
+    const usdaLink = `https://fdc.nal.usda.gov/fdc-app.html#/food-details/${sourceItemId}/nutrients`
+
     return (
         <div style={{height: containerHeight, maxHeight: containerHeight, overflowY: "auto", padding: "15px"}}>
             {props.selectedFoodItem.foodItem.foodClass !== 0 &&
@@ -162,6 +168,9 @@ export function InfoData(props: InfoDataProps) {
             </div>
             }
 
+            <div style={{paddingTop: "20px", paddingBottom: "12px"}}>
+                <a href={usdaLink}>See the nutrient data at USDA</a>
+            </div>
         </div>
     );
 

@@ -17,6 +17,7 @@ import FoodClass from "../../types/nutrientdata/FoodClass";
 import {LanguageContext} from "../../contexts/LangContext";
 import {isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
 import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
+import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -178,13 +179,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     const updateSourcesList = (foodItem: FoodItem) => {
         const sourceNames: Array<ReactSelectOption> = foodItem.nutrientDataList.map(nutrientDataObject => {
-            if(nutrientDataObject.source.id === 0) {
-                return {label: "SR Legacy", value: 0}
-            } else if(nutrientDataObject.source.id === 1) {
-                return {label: "FNDDS", value: 1}
-            } else {
-                return {label: "", value: -1}
-            }
+            const SourceName = getSourceName(nutrientDataObject.source.id)
+            return {label: SourceName, value: nutrientDataObject.source.id}
         })
 
         setSourcesList(sourceNames)
