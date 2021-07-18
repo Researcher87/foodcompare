@@ -36,7 +36,15 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     useEffect(() => {
         updateChartConfig()
         setContainerHeight(calculateChartContainerHeight(windowSize, true))
-    }, [portionType_minerals, portionType_vitamins, synchronizeVitamins, synchronizeMinerals, expand100_vitamins, expand100_minerals, containerHeight])
+    }, [portionType_minerals,
+        portionType_vitamins,
+        synchronizeVitamins,
+        synchronizeMinerals,
+        expand100_vitamins,
+        expand100_minerals,
+        containerHeight,
+        windowSize.height]
+    )
 
     if (!applicationContext) {
         return <div/>

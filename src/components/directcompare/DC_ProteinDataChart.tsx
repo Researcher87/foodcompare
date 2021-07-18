@@ -32,7 +32,7 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
     useEffect(() => {
         updateChartConfig()
         setContainerHeight(calculateChartContainerHeight(windowSize, true))
-    }, [portionType, expand100, synchronize, containerHeight])
+    }, [portionType, expand100, synchronize, containerHeight, windowSize.height])
 
     if (!applicationContext) {
         return <div/>

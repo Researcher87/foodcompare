@@ -20,12 +20,10 @@ import {
 } from "../../types/livedata/ChartPropsData";
 import CarbsDataChart from "../fooddatapanel/charts/CarbsDataChart";
 import {
-    DirectCompareChartConfigData,
-    GeneralChartConfigDirectCompareWithSubCharts, GeneralChartConfigWithDetails, GeneralChartConfigWithSubCharts
+    GeneralChartConfigDirectCompareWithSubCharts,
+    GeneralChartConfigWithDetails
 } from "../../types/livedata/ChartConfigData";
-import {
-    calculateChartContainerHeight
-} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 import {useWindowDimension} from "../../service/WindowDimension";
 
 /**
@@ -89,7 +87,7 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
         }
 
         setContainerHeight(calculateChartContainerHeight(windowSize, true))
-    }, [chartType, showDetails, showLegend, subChart1, subChart2, containerHeight])
+    }, [chartType, showDetails, showLegend, subChart1, subChart2, containerHeight, windowSize.height])
 
     if (!applicationContext) {
         return <div/>
@@ -241,6 +239,8 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
                                    directCompareConfig={preconfig}/>
         }
     }
+
+    console.log('Container height:', windowSize.height, containerHeight)
 
     return <div className={"direct-compare-panel"}>
         <Card>
