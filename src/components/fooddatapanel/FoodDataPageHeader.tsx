@@ -119,11 +119,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     }
 
     const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
-
-    const preferredSource = applicationContext.applicationData.preferredSource
-    const sourceForObject = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).source.id
-    const sourceString = sourceForObject === 0 ? "SR Legacy" : "FNDDS"
-
+    const sourceString = props.selectedFoodItem.selectedSource === 0 ? "SR Legacy" : "FNDDS"
 
     return (
         <div style={{paddingBottom: "6px"}}>

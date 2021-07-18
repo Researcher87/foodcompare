@@ -59,8 +59,7 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
 
 
     const createProteinChartData = () => {
-        const preferredSource = applicationContext?.applicationData.preferredSource
-        const proteinData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).proteinData;
+        const proteinData = getNutrientData(props.selectedFoodItem).proteinData;
         if (!proteinData || !applicationContext) {
             return null;
         }

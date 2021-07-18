@@ -152,7 +152,7 @@ export default function Header() {
             <div className="form-language text-right" style={{paddingLeft: "25px"}}>
                 <form className="form-group">
                     <label className="form-elements">
-                        <b>{applicationStrings.label_source[language]}</b>
+                        <b>{applicationStrings.label_preferred_source[language]}</b>
                     </label>
                     <label className="form-elements">
                         <input className="form-radiobutton"

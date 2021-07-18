@@ -71,9 +71,8 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         }
     }
 
-    const preferredSource = applicationContext?.applicationData.preferredSource
-    const lipidsData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).lipidData;
-    const totalLipidsAmount = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).baseData.lipids;
+    const lipidsData = getNutrientData(props.selectedFoodItem).lipidData;
+    const totalLipidsAmount = getNutrientData(props.selectedFoodItem).baseData.lipids;
 
     const handleChartSelectionChange = (event: any) => {
         if (props.directCompareConfig && props.directCompareConfig.handleSubchartChange) {
@@ -197,7 +196,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         setShowLegend(!showLegend)
     }
 
-    const lipidData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).lipidData;
+    const lipidData = getNutrientData(props.selectedFoodItem).lipidData;
 
     let omegaDataAvailabe = false
     if (lipidData.omegaData && lipidData.omegaData.uncertainRatio && lipidData.omegaData.uncertainRatio <= minimalOmegaRatio) {

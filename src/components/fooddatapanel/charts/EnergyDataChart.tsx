@@ -19,8 +19,7 @@ export default function EnergyDataChart(props: ChartProps) {
     const lang = languageContext.language
     const windowSize = useWindowDimension()
 
-    const preferredSource = applicationContext?.applicationData.preferredSource
-    const nutrientData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource);
+    const nutrientData = getNutrientData(props.selectedFoodItem);
     const energy100g = nutrientData.baseData.energy;
 
     Chart.register(annotationPlugin)

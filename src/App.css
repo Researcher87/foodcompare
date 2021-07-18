@@ -19,7 +19,7 @@
 .form-label {
     color: #999999;
     font-weight: bold;
-    font-size: 1.0em;
+    font-size: 0.8em !important;
 }
 
 .form-section {
@@ -67,7 +67,7 @@
         font-size: 0.8em;
     }
     .form-section {
-        padding-bottom: 6px;
+        padding-bottom: 4px;
     }
     .home {
         width: 630px;
@@ -90,7 +90,7 @@
         padding-top: 24px;
     }
     .form-section {
-        padding-bottom: 8px;
+        padding-bottom: 5px;
     }
     .header-link {
         margin-top: 14px;
@@ -118,7 +118,7 @@
         font-size: 0.9em;
     }
     .form-section {
-        padding-bottom: 10px;
+        padding-bottom: 6px;
     }
     .header-link {
         margin-top: 12px;
@@ -145,7 +145,7 @@
         font-size: 1.0em;
     }
     .form-section {
-        padding-bottom: 12px;
+        padding-bottom: 8px;
     }
     .header-link {
         margin-top: 8px;
@@ -169,7 +169,7 @@
         font-size: 1.2em;
     }
     .form-section {
-        padding-bottom: 14px;
+        padding-bottom: 10px;
     }
     .header-link {
         margin-top: 4px;
@@ -188,7 +188,7 @@
         font-size: 1.1em;
     }
     .form-section {
-        padding-bottom: 16px;
+        padding-bottom: 12px;
     }
     .header-link {
         margin-top: -2px;
@@ -210,7 +210,7 @@
         font-size: 1.2em;
     }
     .form-section {
-        padding-bottom: 18px;
+        padding-bottom: 14px;
     }
     .header-link {
         margin-top: -8px;

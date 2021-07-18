@@ -99,9 +99,8 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
         return <BarChartConfigurationForm {...barChartProps}/>
     }
 
-    const preferredSource = applicationContext.applicationData.preferredSource
-    const nutrientData1 = getNutrientData(props.selectedFoodItem1.foodItem, preferredSource)
-    const nutrientData2 = getNutrientData(props.selectedFoodItem2.foodItem, preferredSource)
+    const nutrientData1 = getNutrientData(props.selectedFoodItem1)
+    const nutrientData2 = getNutrientData(props.selectedFoodItem2)
 
     const dataSet1 = props.selectedSubChart === CHART_VITAMINS ? nutrientData1.vitaminData : nutrientData1.mineralData
     const dataSet2 = props.selectedSubChart === CHART_VITAMINS ? nutrientData2.vitaminData : nutrientData2.mineralData

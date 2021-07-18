@@ -3,15 +3,21 @@ import {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {applicationStrings} from "../../static/labels";
 import {SOURCE_SRLEGACY} from "../../config/Constants";
+import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 
-export function getNutrientData(foodItem: FoodItem, preferredSource?: string): NutrientData {
-    if(!preferredSource || foodItem.nutrientDataList.length === 1) {
+export function getNutrientData(selectedFoodItem: SelectedFoodItem): NutrientData {
+    return getNutrientDataForFoodItem(selectedFoodItem.foodItem, selectedFoodItem.selectedSource)
+}
+
+export function getNutrientDataForFoodItem(foodItem: FoodItem, sourceToUse?: number): NutrientData {
+    if(!sourceToUse || foodItem.nutrientDataList.length === 1) {
         return foodItem.nutrientDataList[0]
     } else {
-        if(foodItem.nutrientDataList[0].source.id === 0 && preferredSource === SOURCE_SRLEGACY) {
-            return foodItem.nutrientDataList[0]
+        const nutrientData = foodItem.nutrientDataList.find(nutrientDataObject => nutrientDataObject.source.id === sourceToUse)
+        if(nutrientData) {
+            return nutrientData
         } else {
-            return foodItem.nutrientDataList[1]
+            return foodItem.nutrientDataList[0]
         }
     }
 }

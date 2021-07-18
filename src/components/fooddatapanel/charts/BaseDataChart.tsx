@@ -70,8 +70,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     }
 
     const createTotalChartData = () => {
-        const preferredSource = applicationContext?.applicationData.preferredSource
-        const nutrientData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource);
+        const nutrientData = getNutrientData(props.selectedFoodItem);
 
         return {
             labels: [applicationStrings.label_nutrient_water[lang],
@@ -102,8 +101,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
 
 
     const createNutrientChartData = () => {
-        const preferredSource = applicationContext?.applicationData.preferredSource
-        const nutrientData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource);
+        const nutrientData = getNutrientData(props.selectedFoodItem);
         const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids + nutrientData.baseData.proteins;
 
         const sugar = nutrientData.carbohydrateData?.sugar ? nutrientData.carbohydrateData.sugar : 0

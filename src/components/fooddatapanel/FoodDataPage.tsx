@@ -66,19 +66,19 @@ export default function FoodDataPage(props: FoodDataPageProps) {
         const preferredSource = applicationContext.applicationData.preferredSource
 
         if (selectedDataTab === TAB_BASE_DATA) {
-            tableDataList = createBaseDataTable(foodItem, portion.amount, language, preferredSource);
+            tableDataList = createBaseDataTable(props.selectedFoodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_ENERGY_DATA) {
-            tableDataList = createEnergyTable(foodItem, portion.amount, language, preferredSource);
+            tableDataList = createEnergyTable(props.selectedFoodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_VITAMIN_DATA) {
-            tableDataList = createVitaminTable(foodItem, portion.amount, language, preferredSource);
+            tableDataList = createVitaminTable(props.selectedFoodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_MINERAL_DATA) {
-            tableDataList = createMineralTable(foodItem, portion.amount, language, preferredSource);
+            tableDataList = createMineralTable(props.selectedFoodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_LIPIDS_DATA) {
-            tableDataList = createLipidsTable(foodItem, portion.amount, language, preferredSource);
+            tableDataList = createLipidsTable(props.selectedFoodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_CARBS_DATA) {
-            tableDataList = createCarbsTable(foodItem, portion.amount, language, preferredSource);
+            tableDataList = createCarbsTable(props.selectedFoodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_PROTEINS_DATA) {
-            tableDataList = createProteinTable(foodItem, portion.amount, language, preferredSource);
+            tableDataList = createProteinTable(props.selectedFoodItem, portion.amount, language, preferredSource);
         }
 
         setTableData(tableDataList)

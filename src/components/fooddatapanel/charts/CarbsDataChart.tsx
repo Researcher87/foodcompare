@@ -72,8 +72,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         }
     }
 
-    const preferredSource = applicationContext?.applicationData.preferredSource
-    const carbohydrateData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).carbohydrateData;
+    const carbohydrateData = getNutrientData(props.selectedFoodItem).carbohydrateData;
 
     const handleChartSelectionChange = (event: any) => {
         if (applicationContext && props.directCompareConfig) {
@@ -104,8 +103,8 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     }
 
     const createBasicChartData = () => {
-        const totalCarbsAmount = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).baseData.carbohydrates;
-        const dietaryFibers = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).baseData.dietaryFibers;
+        const totalCarbsAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
+        const dietaryFibers = getNutrientData(props.selectedFoodItem).baseData.dietaryFibers;
         const sugar = carbohydrateData.sugar
 
         if (!sugar || !dietaryFibers) {
@@ -149,8 +148,8 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
 
     const createDetailChartData = () => {
-        const carbohydrateData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).carbohydrateData;
-        const totalAmount = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).baseData.carbohydrates;
+        const carbohydrateData = getNutrientData(props.selectedFoodItem).carbohydrateData;
+        const totalAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
 
         const valueGlucose = carbohydrateData.glucose !== null ? autoRound(carbohydrateData.glucose / totalAmount * 100) : null;
         const valueFructose = carbohydrateData.fructose !== null ? autoRound(carbohydrateData.fructose / totalAmount * 100) : null;

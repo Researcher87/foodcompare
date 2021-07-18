@@ -10,6 +10,7 @@ export default interface SelectedFoodItem {
     id?: number
     compositeSubElements?: Array<CompositeFoodElement>
     resolvedName?: string | null
+    selectedSource: number
 }
 
 export interface CompositeFoodElement {

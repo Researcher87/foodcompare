@@ -1,14 +1,14 @@
 import * as MathService from './calculation/MathService';
 import {applicationStrings} from "../static/labels";
 import {FoodTableDataObject} from "../types/livedata/SelectedFoodItemData";
-import FoodItem from "../types/nutrientdata/FoodItem";
 import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
+import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 
-export function createBaseDataTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
 
-    const {water, carbohydrates, lipids, proteins, dietaryFibers, ash} = getNutrientData(foodItem, preferredSource).baseData
-    const {sugar}  = getNutrientData(foodItem, preferredSource).carbohydrateData
+    const {water, carbohydrates, lipids, proteins, dietaryFibers, ash} = getNutrientData(selectedFoodItem).baseData
+    const {sugar}  = getNutrientData(selectedFoodItem).carbohydrateData
 
     if(water) {
         tableData.push(createTableObject(
@@ -71,10 +71,9 @@ export function createBaseDataTable(foodItem: FoodItem, portion: number, languag
 
 
 
-export function createVitaminTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
-
-    const nutrientData = getNutrientData(foodItem, preferredSource)
+    const nutrientData = getNutrientData(foodItem)
     
     if(nutrientData.vitaminData.a != null) {
         tableData.push(createTableObject(
@@ -176,10 +175,10 @@ export function createVitaminTable(foodItem: FoodItem, portion: number, language
 }
 
 
-export function createMineralTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createMineralTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    const firstNutrientData = getNutrientData(foodItem, preferredSource);
+    const firstNutrientData = getNutrientData(foodItem);
 
     if(firstNutrientData.mineralData.calcium != null) {
         tableData.push(createTableObject(
@@ -265,9 +264,9 @@ export function createMineralTable(foodItem: FoodItem, portion: number, language
 }
 
 
-export function createLipidsTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
-    const firstNutrientData = getNutrientData(foodItem, preferredSource);
+    const firstNutrientData = getNutrientData(foodItem);
 
     if(firstNutrientData.lipidData.saturated != null) {
         tableData.push(createTableObject(
@@ -331,10 +330,10 @@ export function createLipidsTable(foodItem: FoodItem, portion: number, language:
 }
 
 
-export function createEnergyTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createEnergyTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    const nutrientData = getNutrientData(foodItem, preferredSource)
+    const nutrientData = getNutrientData(foodItem)
     const energy = nutrientData.baseData.energy !== null ? nutrientData.baseData.energy : 0;
 
     tableData.push(createTableObject(
@@ -354,10 +353,10 @@ export function createEnergyTable(foodItem: FoodItem, portion: number, language:
 
 
 
-export function createCarbsTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    const firstNutrientData = getNutrientData(foodItem, preferredSource);
+    const firstNutrientData = getNutrientData(foodItem);
 
     tableData.push(createTableObject(
         applicationStrings.label_nutrient_carbohydrates[language],
@@ -442,10 +441,10 @@ export function createCarbsTable(foodItem: FoodItem, portion: number, language: 
 
 
 
-export function createProteinTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createProteinTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    const proteinData = getNutrientData(foodItem, preferredSource).proteinData;
+    const proteinData = getNutrientData(foodItem).proteinData;
     if(!proteinData) {
         return tableData;
     }
