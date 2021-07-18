@@ -14,6 +14,7 @@ import {
 } from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 
 export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -82,8 +83,9 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
         return <BarChartConfigurationForm {...barChartProps}/>
     }
 
-    const dataSet1 = props.selectedFoodItem1.foodItem.nutrientDataList[0].proteinData
-    const dataSet2 = props.selectedFoodItem2.foodItem.nutrientDataList[0].proteinData
+    const preferredSource = applicationContext.applicationData.preferredSource
+    const dataSet1 = getNutrientData(props.selectedFoodItem1.foodItem, preferredSource).proteinData
+    const dataSet2 = getNutrientData(props.selectedFoodItem2.foodItem, preferredSource).proteinData
 
     const maxValue1 = getMaximumValue(dataSet1, props.selectedFoodItem1.portion.amount, requirementData, applicationContext.userData, true)
     const maxValue2 = getMaximumValue(dataSet2, props.selectedFoodItem2.portion.amount, requirementData, applicationContext.userData, true)

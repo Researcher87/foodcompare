@@ -29,11 +29,11 @@ interface FoodDataPageProps {
 }
 
 export default function FoodDataPage(props: FoodDataPageProps) {
-    const applicationData = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
-    const initialDataPage = applicationData?.applicationData.foodDataPanel.selectedDataPage
-        ? applicationData.applicationData.foodDataPanel.selectedDataPage
+    const initialDataPage = applicationContext?.applicationData.foodDataPanel.selectedDataPage
+        ? applicationContext.applicationData.foodDataPanel.selectedDataPage
         : TAB_BASE_DATA
 
     const [displayMode, setDisplayMode] = useState<string>(DISPLAYMODE_CHART)
@@ -42,15 +42,15 @@ export default function FoodDataPage(props: FoodDataPageProps) {
 
     useEffect(() => {
         updatePage()
-    }, [displayMode, selectedDataTab, props.selectedFoodItem])
+    }, [displayMode, selectedDataTab, props.selectedFoodItem, applicationContext?.applicationData.preferredSource])
 
-    if (!applicationData) {
+    if (!applicationContext) {
         return <div/>
     }
 
     const onNewDataPage = (datapage: string) => {
         setSelectedDataTab(datapage)
-        applicationData.applicationData.foodDataPanel.setSelectedDataPage(datapage)
+        applicationContext.applicationData.foodDataPanel.setSelectedDataPage(datapage)
         updatePage()
     }
 
@@ -63,26 +63,28 @@ export default function FoodDataPage(props: FoodDataPageProps) {
         let tableDataList: Array<FoodTableDataObject> = [];
         const {foodItem, portion} = props.selectedFoodItem
 
+        const preferredSource = applicationContext.applicationData.preferredSource
+
         if (selectedDataTab === TAB_BASE_DATA) {
-            tableDataList = createBaseDataTable(foodItem, portion.amount, language);
+            tableDataList = createBaseDataTable(foodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_ENERGY_DATA) {
-            tableDataList = createEnergyTable(foodItem, portion.amount, language);
+            tableDataList = createEnergyTable(foodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_VITAMIN_DATA) {
-            tableDataList = createVitaminTable(foodItem, portion.amount, language);
+            tableDataList = createVitaminTable(foodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_MINERAL_DATA) {
-            tableDataList = createMineralTable(foodItem, portion.amount, language);
+            tableDataList = createMineralTable(foodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_LIPIDS_DATA) {
-            tableDataList = createLipidsTable(foodItem, portion.amount, language);
+            tableDataList = createLipidsTable(foodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_CARBS_DATA) {
-            tableDataList = createCarbsTable(foodItem, portion.amount, language);
+            tableDataList = createCarbsTable(foodItem, portion.amount, language, preferredSource);
         } else if (selectedDataTab === TAB_PROTEINS_DATA) {
-            tableDataList = createProteinTable(foodItem, portion.amount, language);
+            tableDataList = createProteinTable(foodItem, portion.amount, language, preferredSource);
         }
 
         setTableData(tableDataList)
     }
 
-    if (applicationData.debug) {
+    if (applicationContext.debug) {
         console.log('FoodDataPage: Render, tabledata = ', tableData)
     }
 

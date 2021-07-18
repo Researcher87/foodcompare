@@ -14,6 +14,7 @@ import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -69,7 +70,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     }
 
     const createTotalChartData = () => {
-        const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList[0];
+        const preferredSource = applicationContext?.applicationData.preferredSource
+        const nutrientData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource);
 
         return {
             labels: [applicationStrings.label_nutrient_water[lang],
@@ -100,7 +102,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
 
 
     const createNutrientChartData = () => {
-        const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList[0];
+        const preferredSource = applicationContext?.applicationData.preferredSource
+        const nutrientData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource);
         const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids + nutrientData.baseData.proteins;
 
         const sugar = nutrientData.carbohydrateData?.sugar ? nutrientData.carbohydrateData.sugar : 0

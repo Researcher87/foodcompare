@@ -5,7 +5,7 @@ import {applicationStrings} from "../../static/labels";
 import {FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/all";
 import {
     DISPLAYMODE_CHART,
-    DISPLAYMODE_TABLE,
+    DISPLAYMODE_TABLE, SOURCE_SRLEGACY,
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
@@ -25,6 +25,7 @@ import {HelpModal} from "../HelpModal";
 import {getHelpText, HelpText} from "../../service/HelpService";
 import getName from "../../service/LanguageService";
 import {ChartMenuPanel} from "./ChartMenuPanel";
+import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 
 
 interface FoodDataPageHeaderProps {
@@ -119,6 +120,11 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
 
+    const preferredSource = applicationContext.applicationData.preferredSource
+    const sourceForObject = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).source.id
+    const sourceString = sourceForObject === 0 ? "SR Legacy" : "FNDDS"
+
+
     return (
         <div style={{paddingBottom: "6px"}}>
             {helpText !== null &&
@@ -127,8 +133,13 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             <div className={"row d-flex flex-nowrap"}>
                 <div className="col-md-2 col-sm-3">
                     <div className={"card"}>
-                        <div className="card-body" style={{paddingRight: "30px"}}>
+                        <div className="card-body" style={{paddingRight: "16px"}}>
                             <ChartMenuPanel dataPage={props.dataPage} verticalArrangement={true} setDataPage={props.setDataPage}/>
+                            <div className={"d-flex card"} style={{marginTop: "24px", backgroundColor: "#eeeeee"}}>
+                                <div className={"text-center"} style={{fontSize: "0.8em"}}>
+                                    {sourceString}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

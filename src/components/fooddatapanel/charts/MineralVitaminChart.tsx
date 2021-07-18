@@ -12,6 +12,7 @@ import {BarChartConfigurationForm} from "../../charthelper/BarChartConfiguration
 import {MineralVitaminChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -88,7 +89,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const createVitaminChartData = () => {
-        const vitaminData = props.selectedFoodItem.foodItem.nutrientDataList[0].vitaminData;
+        const preferredSource = applicationContext.applicationData.preferredSource
+        const vitaminData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).vitaminData;
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.vitaminRequirementData;
 
         if (!vitaminData || !requirementData) {
@@ -178,7 +180,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     }
 
     const createMineralChartData = () => {
-        const mineralData = props.selectedFoodItem.foodItem.nutrientDataList[0].mineralData;
+        const preferredSource = applicationContext.applicationData.preferredSource
+        const mineralData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource).mineralData;
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.mineralRequirementData;
 
         if (!mineralData || !requirementData) {

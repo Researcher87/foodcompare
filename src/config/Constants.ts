@@ -55,6 +55,9 @@ export const LANGUAGE_EN = "en";
 export const SEX_MALE = "sex male"
 export const SEX_FEMALE = "sex female"
 
+export const SOURCE_SRLEGACY = "srlegacy"
+export const SOURCE_FNDDS = "fndds"
+
 export const TAB_BASE_DATA = "tab_base_data"
 export const TAB_ENERGY_DATA = "tab_energy_data"
 export const TAB_VITAMIN_DATA = "tab_vitamin_data"

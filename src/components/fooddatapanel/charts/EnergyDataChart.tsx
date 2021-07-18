@@ -11,6 +11,7 @@ import annotationPlugin from 'chartjs-plugin-annotation'
 import {ChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -18,7 +19,8 @@ export default function EnergyDataChart(props: ChartProps) {
     const lang = languageContext.language
     const windowSize = useWindowDimension()
 
-    const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList[0];
+    const preferredSource = applicationContext?.applicationData.preferredSource
+    const nutrientData = getNutrientData(props.selectedFoodItem.foodItem, preferredSource);
     const energy100g = nutrientData.baseData.energy;
 
     Chart.register(annotationPlugin)

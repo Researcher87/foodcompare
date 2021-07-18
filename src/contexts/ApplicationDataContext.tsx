@@ -3,7 +3,7 @@ import * as NutrientDataImportService from "../service/NutrientDataImportService
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {ApplicationData} from "../types/livedata/ApplicationData";
-import {DISPLAYMODE_CHART, TAB_BASE_DATA} from "../config/Constants";
+import {DISPLAYMODE_CHART, SOURCE_SRLEGACY, TAB_BASE_DATA} from "../config/Constants";
 import {UserData} from "../types/livedata/UserData";
 import {
     initialChartConfigData, initialDirectCompareConfigData,
@@ -19,6 +19,7 @@ import {
 import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
+import {applicationStrings} from "../static/labels";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
@@ -190,6 +191,16 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     }
 
 
+    setPreferredSource = (source: string) => {
+        this.setState({
+            ...this.state,
+            applicationData: {
+                ...this.state.applicationData, preferredSource: source
+            }
+        })
+    }
+
+
     state: ApplicationDataContext = {
         foodDataCorpus: {
             categories: [],
@@ -224,7 +235,9 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 updateDirectCompareChartConfig: this.updateDirectCompareChartConfig,
                 setSelectedDirectCompareDataPage: this.setSelectedDirectCompareDataPage,
                 setSelectedDirectCompareItems: this.setSelectedDirectCompareItems
-            }
+            },
+            preferredSource: SOURCE_SRLEGACY,
+            setPreferredSource: this.setPreferredSource
         },
         userData: {
             age: initialUserDataAge,

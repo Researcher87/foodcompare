@@ -2,12 +2,13 @@ import * as MathService from './calculation/MathService';
 import {applicationStrings} from "../static/labels";
 import {FoodTableDataObject} from "../types/livedata/SelectedFoodItemData";
 import FoodItem from "../types/nutrientdata/FoodItem";
+import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 
-export function createBaseDataTable(foodItem: FoodItem, portion: number, language: string): Array<FoodTableDataObject> {
+export function createBaseDataTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
 
-    const {water, carbohydrates, lipids, proteins, dietaryFibers, ash} = foodItem.nutrientDataList[0].baseData
-    const {sugar}  = foodItem.nutrientDataList[0].carbohydrateData
+    const {water, carbohydrates, lipids, proteins, dietaryFibers, ash} = getNutrientData(foodItem, preferredSource).baseData
+    const {sugar}  = getNutrientData(foodItem, preferredSource).carbohydrateData
 
     if(water) {
         tableData.push(createTableObject(
@@ -70,101 +71,103 @@ export function createBaseDataTable(foodItem: FoodItem, portion: number, languag
 
 
 
-export function createVitaminTable(foodItem: FoodItem, portion: number, language: string): Array<FoodTableDataObject> {
+export function createVitaminTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    if(foodItem.nutrientDataList[0].vitaminData.a != null) {
+    const nutrientData = getNutrientData(foodItem, preferredSource)
+    
+    if(nutrientData.vitaminData.a != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_a[language],
-            foodItem.nutrientDataList[0].vitaminData.a,
+            nutrientData.vitaminData.a,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.b1 != null) {
+    if(nutrientData.vitaminData.b1 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b1[language],
-            foodItem.nutrientDataList[0].vitaminData.b1,
+            nutrientData.vitaminData.b1,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.b2 != null) {
+    if(nutrientData.vitaminData.b2 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b2[language],
-            foodItem.nutrientDataList[0].vitaminData.b2,
+            nutrientData.vitaminData.b2,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.b3 != null) {
+    if(nutrientData.vitaminData.b3 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b3[language],
-            foodItem.nutrientDataList[0].vitaminData.b3,
+            nutrientData.vitaminData.b3,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.b5 != null) {
+    if(nutrientData.vitaminData.b5 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b5[language],
-            foodItem.nutrientDataList[0].vitaminData.b5,
+            nutrientData.vitaminData.b5,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.b6 != null) {
+    if(nutrientData.vitaminData.b6 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b6[language],
-            foodItem.nutrientDataList[0].vitaminData.b6,
+            nutrientData.vitaminData.b6,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.b9 != null) {
+    if(nutrientData.vitaminData.b9 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b9[language],
-            foodItem.nutrientDataList[0].vitaminData.b9,
+            nutrientData.vitaminData.b9,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.b12 != null) {
+    if(nutrientData.vitaminData.b12 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b12[language],
-            foodItem.nutrientDataList[0].vitaminData.b12,
+            nutrientData.vitaminData.b12,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.c != null) {
+    if(nutrientData.vitaminData.c != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_c[language],
-            foodItem.nutrientDataList[0].vitaminData.c,
+            nutrientData.vitaminData.c,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.d != null) {
+    if(nutrientData.vitaminData.d != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_d[language],
-            foodItem.nutrientDataList[0].vitaminData.d,
+            nutrientData.vitaminData.d,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.e != null) {
+    if(nutrientData.vitaminData.e != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_e[language],
-            foodItem.nutrientDataList[0].vitaminData.e,
+            nutrientData.vitaminData.e,
             portion, "mg")
         );
     }
 
-    if(foodItem.nutrientDataList[0].vitaminData.k != null) {
+    if(nutrientData.vitaminData.k != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_k[language],
-            foodItem.nutrientDataList[0].vitaminData.k,
+            nutrientData.vitaminData.k,
             portion, "mg")
         );
     }
@@ -173,10 +176,10 @@ export function createVitaminTable(foodItem: FoodItem, portion: number, language
 }
 
 
-export function createMineralTable(foodItem: FoodItem, portion: number, language: string): Array<FoodTableDataObject> {
+export function createMineralTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    const firstNutrientData = foodItem.nutrientDataList[0];
+    const firstNutrientData = getNutrientData(foodItem, preferredSource);
 
     if(firstNutrientData.mineralData.calcium != null) {
         tableData.push(createTableObject(
@@ -262,9 +265,9 @@ export function createMineralTable(foodItem: FoodItem, portion: number, language
 }
 
 
-export function createLipidsTable(foodItem: FoodItem, portion: number, language: string): Array<FoodTableDataObject> {
+export function createLipidsTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
-    const firstNutrientData = foodItem.nutrientDataList[0];
+    const firstNutrientData = getNutrientData(foodItem, preferredSource);
 
     if(firstNutrientData.lipidData.saturated != null) {
         tableData.push(createTableObject(
@@ -328,9 +331,11 @@ export function createLipidsTable(foodItem: FoodItem, portion: number, language:
 }
 
 
-export function createEnergyTable(foodItem: FoodItem, portion: number, language: string): Array<FoodTableDataObject> {
+export function createEnergyTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
-    const energy = foodItem.nutrientDataList[0].baseData.energy !== null ? foodItem.nutrientDataList[0].baseData.energy : 0;
+
+    const nutrientData = getNutrientData(foodItem, preferredSource)
+    const energy = nutrientData.baseData.energy !== null ? nutrientData.baseData.energy : 0;
 
     tableData.push(createTableObject(
         "kcal",
@@ -349,10 +354,10 @@ export function createEnergyTable(foodItem: FoodItem, portion: number, language:
 
 
 
-export function createCarbsTable(foodItem: FoodItem, portion: number, language: string): Array<FoodTableDataObject> {
+export function createCarbsTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    const firstNutrientData = foodItem.nutrientDataList[0];
+    const firstNutrientData = getNutrientData(foodItem, preferredSource);
 
     tableData.push(createTableObject(
         applicationStrings.label_nutrient_carbohydrates[language],
@@ -437,10 +442,10 @@ export function createCarbsTable(foodItem: FoodItem, portion: number, language: 
 
 
 
-export function createProteinTable(foodItem: FoodItem, portion: number, language: string): Array<FoodTableDataObject> {
+export function createProteinTable(foodItem: FoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject>  = [];
 
-    const proteinData = foodItem.nutrientDataList[0].proteinData;
+    const proteinData = getNutrientData(foodItem, preferredSource).proteinData;
     if(!proteinData) {
         return tableData;
     }

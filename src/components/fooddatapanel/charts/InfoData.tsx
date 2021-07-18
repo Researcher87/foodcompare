@@ -52,7 +52,7 @@ export function InfoData(props: InfoDataProps) {
         const foodClass = props.selectedFoodItem.foodClass;
         const foodClassNameId = foodClass ? foodClass.nameKey : null
 
-        const sourceItemId = props.selectedFoodItem.foodItem.usdaId
+        const sourceItemId = " - / - "  // ToDo: Add the correct number
         const source = `United States Department of Agriculture (USDA)`;
         const sourceLine2 = `ID = ${sourceItemId}`;
         const foodClassName = foodClassNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodClassNameId, lang) : null;

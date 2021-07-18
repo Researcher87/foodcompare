@@ -8,15 +8,16 @@ import FoodItem, {
     ProteinData,
     VitaminData
 } from "../types/nutrientdata/FoodItem";
+import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 
-export default function combineFoodItems(compositeList: Array<SelectedFoodItem>): SelectedFoodItem {
+export default function combineFoodItems(compositeList: Array<SelectedFoodItem>, preferredSource): SelectedFoodItem {
     let portionSize = 0;
 
     compositeList.forEach(selectedFoodItem => {
         portionSize += selectedFoodItem.portion.amount
     })
 
-    const nutrientDataList = buildAggregatedNutrientDataList(compositeList, portionSize);
+    const nutrientDataList = buildAggregatedNutrientDataList(compositeList, portionSize, preferredSource);
     const id = new Date().getTime();
 
     const aggreatedFoodItem: FoodItem = {
@@ -39,13 +40,13 @@ export default function combineFoodItems(compositeList: Array<SelectedFoodItem>)
 }
 
 
-function buildAggregatedNutrientDataList(compositeList: Array<SelectedFoodItem>, portionSize: number): Array<NutrientData> {
-    const baseData = buildBaseDataObject(compositeList, portionSize);
-    const vitaminData = buildVitaminDataObject(compositeList, portionSize);
-    const mineralData = buildMineralDataObject(compositeList, portionSize);
-    const carbohydrateData = buildCarbohydrateData(compositeList, portionSize);
-    const lipidData = buildLipidData(compositeList, portionSize);
-    const proteinData = buildProteinData(compositeList, portionSize);
+function buildAggregatedNutrientDataList(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): Array<NutrientData> {
+    const baseData = buildBaseDataObject(compositeList, portionSize, preferredSource);
+    const vitaminData = buildVitaminDataObject(compositeList, portionSize, preferredSource);
+    const mineralData = buildMineralDataObject(compositeList, portionSize, preferredSource);
+    const carbohydrateData = buildCarbohydrateData(compositeList, portionSize, preferredSource);
+    const lipidData = buildLipidData(compositeList, portionSize, preferredSource);
+    const proteinData = buildProteinData(compositeList, portionSize, preferredSource);
 
     let nutrientObject: NutrientData = {
         sourceItemId: "0",
@@ -58,7 +59,7 @@ function buildAggregatedNutrientDataList(compositeList: Array<SelectedFoodItem>,
         proteinData: proteinData
     }
 
-    nutrientObject = removeNutrientObjectsWithNullValues(nutrientObject, compositeList);
+    nutrientObject = removeNutrientObjectsWithNullValues(nutrientObject, compositeList, preferredSource);
 
     const nutrientDataList: Array<NutrientData> = [];
     nutrientDataList.push(nutrientObject);
@@ -72,14 +73,14 @@ function buildAggregatedNutrientDataList(compositeList: Array<SelectedFoodItem>,
  * @param nutrientObject
  * @param compositeList
  */
-function removeNutrientObjectsWithNullValues(nutrientObject: NutrientData, compositeList: Array<SelectedFoodItem>) {
+function removeNutrientObjectsWithNullValues(nutrientObject: NutrientData, compositeList: Array<SelectedFoodItem>, preferredSource: string) {
     if (!compositeList) {
         return nutrientObject;
     }
 
     for (let i = 0; i < compositeList.length; i++) {
         let foodItem = compositeList[i].foodItem;
-        const nutrientData = foodItem.nutrientDataList[0];
+        const nutrientData = getNutrientData(foodItem, preferredSource)
 
         const threshold = 0.1;   // Defines the amount of base data which must exist to set a sub-value to null.
 
@@ -161,7 +162,7 @@ function removeNutrientObjectsWithNullValues(nutrientObject: NutrientData, compo
 }
 
 
-function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize: number): BaseData {
+function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): BaseData {
     let energy = 0;
     let carbohydrates = 0;
     let lipids = 0;
@@ -172,7 +173,7 @@ function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize
     let ash = 0;
 
     compositeList.forEach(selectedFoodItem => {
-        const baseData = selectedFoodItem.foodItem.nutrientDataList[0].baseData;
+        const baseData = getNutrientData(selectedFoodItem.foodItem, preferredSource).baseData;
         const userSetPortion = selectedFoodItem.portion.amount;
         const portionFactor = userSetPortion / 100;
 
@@ -200,7 +201,7 @@ function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize
 }
 
 
-function buildVitaminDataObject(compositeList: Array<SelectedFoodItem>, portionSize: number): VitaminData {
+function buildVitaminDataObject(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): VitaminData {
     let a = 0
     let b1 = 0
     let b2 = 0
@@ -216,7 +217,7 @@ function buildVitaminDataObject(compositeList: Array<SelectedFoodItem>, portionS
     let k = 0
 
     compositeList.forEach(selectedFoodItem => {
-        const vitaminData = selectedFoodItem.foodItem.nutrientDataList[0].vitaminData
+        const vitaminData = getNutrientData(selectedFoodItem.foodItem, preferredSource).vitaminData
         const userSetPortion = selectedFoodItem.portion.amount
         const portionFactor = userSetPortion / 100
 
@@ -253,7 +254,7 @@ function buildVitaminDataObject(compositeList: Array<SelectedFoodItem>, portionS
 }
 
 
-function buildMineralDataObject(compositeList: Array<SelectedFoodItem>, portionSize: number): MineralData {
+function buildMineralDataObject(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): MineralData {
     let calcium = 0;
     let iron = 0;
     let magnesium = 0;
@@ -266,7 +267,7 @@ function buildMineralDataObject(compositeList: Array<SelectedFoodItem>, portionS
     let selenium = 0;
 
     compositeList.forEach(selectedFoodItem => {
-        const mineralData = selectedFoodItem.foodItem.nutrientDataList[0].mineralData
+        const mineralData = getNutrientData(selectedFoodItem.foodItem, preferredSource).mineralData
         const userSetPortion = selectedFoodItem.portion.amount
         const portionFactor = userSetPortion / 100
 
@@ -297,7 +298,7 @@ function buildMineralDataObject(compositeList: Array<SelectedFoodItem>, portionS
 }
 
 
-function buildCarbohydrateData(compositeList: Array<SelectedFoodItem>, portionSize: number): CarbohydrateData {
+function buildCarbohydrateData(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): CarbohydrateData {
     let glucose = 0;
     let fructose = 0;
     let galactose = 0;
@@ -308,7 +309,7 @@ function buildCarbohydrateData(compositeList: Array<SelectedFoodItem>, portionSi
     let sugar = 0;
 
     compositeList.forEach(selectedFoodItem => {
-        const carbohydrateData = selectedFoodItem.foodItem.nutrientDataList[0].carbohydrateData
+        const carbohydrateData = getNutrientData(selectedFoodItem.foodItem, preferredSource).carbohydrateData
         const userSetPortion = selectedFoodItem.portion.amount
         const portionFactor = userSetPortion / 100
 
@@ -335,7 +336,7 @@ function buildCarbohydrateData(compositeList: Array<SelectedFoodItem>, portionSi
 }
 
 
-function buildProteinData(compositeList: Array<SelectedFoodItem>, portionSize: number): ProteinData {
+function buildProteinData(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): ProteinData {
     let tryptophan = 0;
     let threonine = 0;
     let isoleucine = 0;
@@ -356,7 +357,7 @@ function buildProteinData(compositeList: Array<SelectedFoodItem>, portionSize: n
     let serine = 0;
 
     compositeList.forEach(selectedFoodItem => {
-        const proteinData = selectedFoodItem.foodItem.nutrientDataList[0].proteinData
+        const proteinData = getNutrientData(selectedFoodItem.foodItem, preferredSource).proteinData
         const userSetPortion = selectedFoodItem.portion.amount
         const portionFactor = userSetPortion / 100
 
@@ -404,7 +405,7 @@ function buildProteinData(compositeList: Array<SelectedFoodItem>, portionSize: n
 }
 
 
-function buildLipidData(compositeList: Array<SelectedFoodItem>, portionSize: number): LipidData {
+function buildLipidData(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): LipidData {
     let unsaturatedMono = 0;
     let unsaturatedPoly = 0;
     let saturated = 0;
@@ -415,7 +416,7 @@ function buildLipidData(compositeList: Array<SelectedFoodItem>, portionSize: num
     let transFattyAcids = 0;
 
     compositeList.forEach(selectedFoodItem => {
-        const lipidData = selectedFoodItem.foodItem.nutrientDataList[0].lipidData
+        const lipidData = getNutrientData(selectedFoodItem.foodItem, preferredSource).lipidData
         const userSetPortion = selectedFoodItem.portion.amount
         const portionFactor = userSetPortion / 100
 
