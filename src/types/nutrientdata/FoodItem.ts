@@ -3,7 +3,8 @@ import Source from './Source'
 export default interface FoodItem {
 	id: number
 	foodClass?: number
-	usdaId?: string
+	srLegacyId?: string
+	fnddsId?: string
 	conditionId?: number
 	nameId?: number
 	defaultPortionId?: number

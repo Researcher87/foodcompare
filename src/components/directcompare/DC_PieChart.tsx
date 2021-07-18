@@ -60,9 +60,6 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
 
     const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, true))
 
-    console.log('Chart Type:', props.dataPage, applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig)
-    console.log('Chart Type 2:', chartType)
-
     useEffect(() => {
         const currentConfig = applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart
 
@@ -203,8 +200,6 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
                         ? applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig.subChart2
                         : LIPIDS_DATA_BASE
                 : LIPIDS_DATA_BASE
-
-            console.log('Get lipids data:', preconfig)
 
             preconfig = {
                 ...preconfig,

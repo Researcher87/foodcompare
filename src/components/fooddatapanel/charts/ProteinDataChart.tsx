@@ -12,6 +12,7 @@ import {BarChartConfigurationForm} from "../../charthelper/BarChartConfiguration
 import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -58,7 +59,7 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
 
 
     const createProteinChartData = () => {
-        const proteinData = props.selectedFoodItem.foodItem.nutrientDataList[0].proteinData;
+        const proteinData = getNutrientData(props.selectedFoodItem).proteinData;
         if (!proteinData || !applicationContext) {
             return null;
         }

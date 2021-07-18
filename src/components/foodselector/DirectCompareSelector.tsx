@@ -28,8 +28,6 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
         ? applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
         : null
 
-    console.log('STATUS:', initialItem1)
-
     const [selectedFoodItem1, setSelectedFoodItem1] = useState<SelectedFoodItem | null>(initialItem1)
     const [selectedFoodItem2, setSelectedFoodItem2] = useState<SelectedFoodItem | null>(initialItem2)
     const [displayStatus, setDisplayStatus] = useState<string>(STATUS_FIRST_TIME)

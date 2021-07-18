@@ -3,7 +3,7 @@ import Source from '../types/nutrientdata/Source'
 import FoodItem from '../types/nutrientdata/FoodItem'
 import DietaryRequirement from '../types/nutrientdata/DietaryRequirement'
 
-import nutrientdata from "./../static/data/nutrientdata_foodcompare.json";
+import nutrientdata from "./../static/data/nutrientdata_foodcompare_2.json";
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus"
 import FoodClass from "../types/nutrientdata/FoodClass";
 
@@ -14,7 +14,7 @@ export function loadFoodDataCorpus(): FoodDataCorpus {
 	const sources = loadSources()
 	const foodNames = loadFoodNames()
 	const foodClasses = loadFoodClasses()
-	const nutrientData = loadNutrientData()
+	const nutrientData = loadFoodItems()
 	const dietaryRequirements = loadDietaryRequirements()
 
 	return {
@@ -53,7 +53,7 @@ export function loadFoodClasses(): Array<FoodClass> {
 	return nutrientdata.foodClasses;
 }
 
-export function loadNutrientData(): Array<FoodItem> {
+export function loadFoodItems(): Array<FoodItem> {
 	return nutrientdata.foodItems;
 }
 

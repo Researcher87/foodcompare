@@ -16,6 +16,8 @@ import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodClass from "../../types/nutrientdata/FoodClass";
 import {LanguageContext} from "../../contexts/LangContext";
 import {isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
+import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
+import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -35,12 +37,14 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const [selectedFoodItem, setSelectedFoodItem] = useState<ReactSelectFoodItemOption | null>(null)
     const [selectedPortion, setSelectedPortion] = useState<ReactSelectPortionOption | null>(null)
     const [portionAmount, setPortionAmount] = useState<number>(0)
+    const [selectedSource, setSelectedSource] = useState<ReactSelectOption | null>(null)
     const [initialized, setInitialized] = useState<boolean>(false)
 
     const [categoriesList, setCategoriesList] = useState<Array<ReactSelectOption>>([])
     const [foodClassesList, setFoodClassesList] = useState<Array<ReactSelectFoodClassOption>>([])
     const [foodItemsList, setFoodItemsList] = useState<Array<ReactSelectFoodItemOption>>([])
     const [portionsList, setPortionsList] = useState<Array<ReactSelectPortionOption>>([])
+    const [sourcesList, setSourcesList] = useState<Array<ReactSelectOption>>([])
 
     const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
@@ -76,6 +80,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         const portionDataList = getPortionReactSelectList(foodItem.portionData, foodDataCorpus.portionTypes, language)
                         setPortionsList(portionDataList)
 
+                        updateSourcesList(foodItem)
+
                         const defaultPortion = getDefaultPortionData(foodItem, portionDataList)
                         setSelectedPortion(defaultPortion)
                         setPortionAmount(defaultPortion.value.amount)
@@ -91,7 +97,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             makeSelectedFoodItemObject(selectedFoodItem?.value, selectdFoodClass?.value, selectedPortion?.value)
         }
 
-    }, [selectedFoodItem, selectedPortion, selectdFoodClass, selectedCategory, portionAmount])
+    }, [selectedFoodItem, selectedPortion, selectdFoodClass, selectedCategory, selectedSource, portionAmount])
 
     if (!applicationContext) {
         return <div/>
@@ -110,11 +116,16 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const handleFoodItemChange = (foodItem: ReactSelectFoodItemOption) => {
         setSelectedFoodItem(foodItem)
         updatePortionsList(foodItem.value)
+        updateSourcesList(foodItem.value)
     }
 
     const handlePortionChange = (portion: ReactSelectPortionOption) => {
         setSelectedPortion(portion)
         setPortionAmount(portion.value.amount)
+    }
+
+    const handleSourceChange = (source: ReactSelectOption) => {
+        setSelectedSource(source)
     }
 
     const handlePortionAmountChange = (e) => {
@@ -152,6 +163,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             const foodItem = foodClassItems[0].value
             if (foodItem) {
                 updatePortionsList(foodItem)
+                updateSourcesList(foodItem)
             }
         }
     }
@@ -162,6 +174,34 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         const defaultPortion = getDefaultPortionData(foodItem, portionDataList)
         setSelectedPortion(defaultPortion)
         setPortionAmount(defaultPortion.value.amount)
+    }
+
+
+    const updateSourcesList = (foodItem: FoodItem) => {
+        const sourceNames: Array<ReactSelectOption> = foodItem.nutrientDataList.map(nutrientDataObject => {
+            const SourceName = getSourceName(nutrientDataObject.source.id)
+            return {label: SourceName, value: nutrientDataObject.source.id}
+        })
+
+        setSourcesList(sourceNames)
+
+        if(sourceNames.length === 1) {
+            setSelectedSource(sourceNames[0])
+        } else {
+            const preferredSource = applicationContext.applicationData.preferredSource
+            const matchingSource = sourceNames.find(sourceObject => {
+                if(sourceObject.value === 0 && preferredSource === SOURCE_SRLEGACY) {
+                    return sourceObject
+                } else if(sourceObject.value === 1 && preferredSource === SOURCE_FNDDS) {
+                    return sourceObject
+                }
+            })
+            if(matchingSource) {
+                setSelectedSource(matchingSource)
+            } else {
+                setSelectedSource(sourceNames[0])
+            }
+        }
     }
 
 
@@ -177,7 +217,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         const newFoodItem: SelectedFoodItem = {
             foodItem: foodItem,
             foodClass: foodClass,
-            portion: portion
+            portion: portion,
+            selectedSource: selectedSource ? selectedSource.value : foodItem.nutrientDataList[0].source.id
         }
 
         props.updateSelectedFoodItem(newFoodItem)
@@ -288,6 +329,14 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         />
                     </div>
                 </div>
+            </div>
+            <div className="column select-menu form-section">
+                <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
+                <Select className={selectClass}
+                        options={sourcesList}
+                        value={selectedSource ? selectedSource : sourcesList[0]}
+                        onChange={handleSourceChange}
+                />
             </div>
         </div>
     </div>

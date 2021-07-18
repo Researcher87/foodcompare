@@ -5,6 +5,8 @@ import NameType from "../nutrientdata/NameType";
 export interface ApplicationData {
     foodDataPanel: FoodDataPanelData
     directCompareDataPanel: DirectCompareData
+    preferredSource: string
+    setPreferredSource: (string) => void
 }
 
 export interface FoodDataPanelData {

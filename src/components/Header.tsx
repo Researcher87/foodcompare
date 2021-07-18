@@ -7,7 +7,7 @@ import {
     PATH_FOODDATA_PANEL,
     PATH_HOME,
     PATH_CONTACT,
-    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_DIRECT_COMPARE, PATH_FOODCOMPARE
+    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_DIRECT_COMPARE, PATH_FOODCOMPARE, SOURCE_SRLEGACY, SOURCE_FNDDS
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
@@ -18,17 +18,21 @@ import {useLocation} from 'react-router-dom';
 
 
 export default function Header() {
-    const applicationData = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const {language, userLanguageChange} = useContext(LanguageContext)
     const location = useLocation();
 
-    if (applicationData === null) {
+    if (applicationContext === null) {
         return <div/>
     }
 
     const handleLanguageButtonClick = (event: any): void => {
         userLanguageChange(event.target.value)
-        applicationData.applicationData.foodDataPanel.updateAllFoodItemNames(applicationData.foodDataCorpus.foodNames, event.target.value)
+        applicationContext.applicationData.foodDataPanel.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
+    }
+
+    const handleSourceButtonClick = (event: any): void => {
+        applicationContext.applicationData.setPreferredSource(event.target.value)
     }
 
     const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
@@ -140,6 +144,39 @@ export default function Header() {
         )
     }
 
+
+    const renderSourceButtons = () => {
+        const preferredSource = applicationContext.applicationData.preferredSource
+
+        return (
+            <div className="form-language text-right" style={{paddingLeft: "25px"}}>
+                <form className="form-group">
+                    <label className="form-elements">
+                        <b>{applicationStrings.label_preferred_source[language]}</b>
+                    </label>
+                    <label className="form-elements">
+                        <input className="form-radiobutton"
+                               type="radio"
+                               value={SOURCE_SRLEGACY}
+                               checked={preferredSource === SOURCE_SRLEGACY}
+                               onChange={handleSourceButtonClick}
+                        />
+                        SR Legacy
+                    </label>
+                    <label className="form-elements-largespace">
+                        <input className="form-radiobutton"
+                               type="radio"
+                               value={SOURCE_FNDDS}
+                               checked={(preferredSource === SOURCE_FNDDS)}
+                               onChange={handleSourceButtonClick}
+                        />
+                        FNDDS (Survey)
+                    </label>
+                </form>
+            </div>
+        )
+    }
+
     return (
         <div className="container-fluid">
             <div className="row header">
@@ -153,8 +190,9 @@ export default function Header() {
                             <div className="col-5 text-start" style={{paddingTop: "5px"}}>
                                 <img src={text}/>
                             </div>
-                            <div className="col text-end" style={{paddingTop: "6px"}}>
+                            <div className="d-flex col text-end" style={{paddingTop: "6px"}}>
                                 {renderLanguageButtons()}
+                                {renderSourceButtons()}
                             </div>
                         </div>
                         <div className="row" style={{marginTop: "3px"}}>

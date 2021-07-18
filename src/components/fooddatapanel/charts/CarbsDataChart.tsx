@@ -23,6 +23,7 @@ import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/lived
 import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 export default function CarbsDataChart(props: CarbDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -71,7 +72,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         }
     }
 
-    const carbohydrateData = props.selectedFoodItem.foodItem.nutrientDataList[0].carbohydrateData;
+    const carbohydrateData = getNutrientData(props.selectedFoodItem).carbohydrateData;
 
     const handleChartSelectionChange = (event: any) => {
         if (applicationContext && props.directCompareConfig) {
@@ -102,8 +103,8 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     }
 
     const createBasicChartData = () => {
-        const totalCarbsAmount = props.selectedFoodItem.foodItem.nutrientDataList[0].baseData.carbohydrates;
-        const dietaryFibers = props.selectedFoodItem.foodItem.nutrientDataList[0].baseData.dietaryFibers;
+        const totalCarbsAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
+        const dietaryFibers = getNutrientData(props.selectedFoodItem).baseData.dietaryFibers;
         const sugar = carbohydrateData.sugar
 
         if (!sugar || !dietaryFibers) {
@@ -147,9 +148,8 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
 
     const createDetailChartData = () => {
-        const carbohydrateData = props.selectedFoodItem.foodItem.nutrientDataList[0].carbohydrateData;
-
-        const totalAmount = props.selectedFoodItem.foodItem.nutrientDataList[0].baseData.carbohydrates;
+        const carbohydrateData = getNutrientData(props.selectedFoodItem).carbohydrateData;
+        const totalAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
 
         const valueGlucose = carbohydrateData.glucose !== null ? autoRound(carbohydrateData.glucose / totalAmount * 100) : null;
         const valueFructose = carbohydrateData.fructose !== null ? autoRound(carbohydrateData.fructose / totalAmount * 100) : null;

@@ -551,6 +551,14 @@ export const applicationStrings = {
         de: 'Bezug',
         en: 'Reference'
     },
+    label_preferred_source: {
+        de: 'Bevorzugte Datenquelle',
+        en: 'Preferred data source'
+    },
+    label_source: {
+        de: 'Datenquelle',
+        en: 'Data source'
+    },
     label_unknown: {
         de: 'Unbekannt',
         en: 'Unknown'

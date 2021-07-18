@@ -6,11 +6,13 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeService";
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
-import {defaultPanelHeight} from "../../../config/ApplicationSetting";
+import {defaultPanelHeight, mobileAppPath} from "../../../config/ApplicationSetting";
 import {direct_compare_chartheight} from "../../../config/ChartConfig";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {TAB_BASE_DATA} from "../../../config/Constants";
 import {useWindowDimension} from "../../../service/WindowDimension";
+import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
+import {Button} from "react-bootstrap";
 
 interface InfoDataProps {
     selectedFoodItem: SelectedFoodItem,
@@ -52,9 +54,11 @@ export function InfoData(props: InfoDataProps) {
         const foodClass = props.selectedFoodItem.foodClass;
         const foodClassNameId = foodClass ? foodClass.nameKey : null
 
-        const sourceItemId = props.selectedFoodItem.foodItem.usdaId
+        const sourceName = getSourceName(props.selectedFoodItem.selectedSource)
+        const sourceItemId = getNutrientData(props.selectedFoodItem).sourceItemId
+
         const source = `United States Department of Agriculture (USDA)`;
-        const sourceLine2 = `ID = ${sourceItemId}`;
+        const sourceLine2 = `${sourceName}, ID = ${sourceItemId}`;
         const foodClassName = foodClassNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodClassNameId, lang) : null;
 
         const categoryId = foodClass ? foodClass.category : null
@@ -142,26 +146,51 @@ export function InfoData(props: InfoDataProps) {
         );
     }
 
-    return (
-        <div style={{height: containerHeight, maxHeight: containerHeight, overflowY: "auto", padding: "15px"}}>
-            {props.selectedFoodItem.foodItem.foodClass !== 0 &&
-            <div>
-                <div>
-                    {renderSubTable(getGeneralTableData())}
-                </div>
-                <div style={{paddingTop: "30px"}}>
-                    <h5>{applicationStrings.label_info_portion[lang]}</h5>
-                    {renderSubTable(getTableDataPortion())}
-                </div>
-            </div>
-            }
-            {props.selectedFoodItem.foodItem.foodClass === 0 &&
-            <div>
-                <h5>Individual</h5>
-                {renderSubTable(getTableDataCombinedFood())}
-            </div>
-            }
+    const onLinkClick = () => {
+        const sourceItemId = getNutrientData(props.selectedFoodItem).sourceItemId
+        const usdaLink = `https://fdc.nal.usda.gov/fdc-app.html#/food-details/${sourceItemId}/nutrients`
 
+        const link = window.open(usdaLink, '_blank')
+        if (link) {
+            link.focus()
+        } else {
+            window.location.href = usdaLink
+        }
+    }
+
+
+    let height = containerHeight
+    if(!props.directCompare) {
+        height += 86
+    }
+
+    return (
+        <div>
+            <div style={{height: height, maxHeight: height, overflowY: "auto", padding: "15px"}}>
+                {props.selectedFoodItem.foodItem.foodClass !== 0 &&
+                <div>
+                    <div>
+                        {renderSubTable(getGeneralTableData())}
+                    </div>
+                    <div style={{paddingTop: "30px"}}>
+                        <h5>{applicationStrings.label_info_portion[lang]}</h5>
+                        {renderSubTable(getTableDataPortion())}
+                    </div>
+                </div>
+                }
+                {props.selectedFoodItem.foodItem.foodClass === 0 &&
+                <div>
+                    <h5>Individual</h5>
+                    {renderSubTable(getTableDataCombinedFood())}
+                </div>
+                }
+
+                <div style={{paddingTop: "20px", paddingBottom: "12px"}}>
+                    <Button variant={'link'} active={true} onClick={onLinkClick}>
+                        See the nutrient data at USDA
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 

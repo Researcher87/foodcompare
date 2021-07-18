@@ -22,13 +22,13 @@ export interface FoodSelectorModalProps {
 
 
 const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelectorModalProps) => {
-    const applicationData = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
     const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(null)
     const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>([])
 
-    if (!applicationData) {
+    if (!applicationContext) {
         return <div/>
     }
 
@@ -66,7 +66,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     const onSubmitSingleItem = () => {
         const foodItemId = selectedFoodItem ? selectedFoodItem.foodItem.id : null
         if (foodItemId) {
-            const existingItemInList = applicationData?.applicationData.foodDataPanel.selectedFoodItems.find(foodItem => foodItem.id === foodItemId)
+            const existingItemInList = applicationContext?.applicationData.foodDataPanel.selectedFoodItems.find(foodItem => foodItem.id === foodItemId)
 
             if (existingItemInList) {
                 NotificationManager.error(applicationStrings.message_error_existing_element[language])
@@ -85,7 +85,8 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const onSubmitComposite = () => {
-        const aggregatedSelectedFoodItem = combineFoodItems(compositeList)
+        const preferredSource = applicationContext.applicationData.preferredSource
+        const aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
 
         if(!aggregatedSelectedFoodItem) {
             console.error('Error while creating aggregated food item.')

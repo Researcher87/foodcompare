@@ -11,6 +11,7 @@ import {Card} from "react-bootstrap";
 import {DC_MineralVitaminChartProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 
 export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -106,9 +107,8 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
         return <BarChartConfigurationForm {...barChartProps}/>
     }
 
-
-    const nutrientData1 = props.selectedFoodItem1.foodItem.nutrientDataList[0]
-    const nutrientData2 = props.selectedFoodItem2.foodItem.nutrientDataList[0]
+    const nutrientData1 = getNutrientData(props.selectedFoodItem1)
+    const nutrientData2 = getNutrientData(props.selectedFoodItem2)
 
     const dataSet1 = props.selectedSubChart === CHART_VITAMINS ? nutrientData1.vitaminData : nutrientData1.mineralData
     const dataSet2 = props.selectedSubChart === CHART_VITAMINS ? nutrientData2.vitaminData : nutrientData2.mineralData
