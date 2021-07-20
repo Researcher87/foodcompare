@@ -1,10 +1,12 @@
 import SelectedFoodItem from "./SelectedFoodItem";
 import {ChartConfigData, DirectCompareChartConfigData} from "./ChartConfigData";
 import NameType from "../nutrientdata/NameType";
+import ReactSelectOption from "../ReactSelectOption";
 
 export interface ApplicationData {
     foodDataPanel: FoodDataPanelData
     directCompareDataPanel: DirectCompareData
+    foodSelector: FoodSelector
     preferredSource: string
     setPreferredSource: (string) => void
 }
@@ -32,4 +34,11 @@ export interface DirectCompareData {
     updateDirectCompareChartConfig: (chartConfig: DirectCompareChartConfigData) => void
     setSelectedDirectCompareItems: (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => void
     setSelectedDirectCompareDataPage: (selectedPage: string) => void
+}
+
+export interface FoodSelector {
+    selectedCategory: ReactSelectOption | null
+    sourceSupplement: boolean
+    sourceCombine: boolean
+    setFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => void
 }

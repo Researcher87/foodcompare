@@ -34,7 +34,9 @@ export default function combineFoodItems(compositeList: Array<SelectedFoodItem>,
             amount: portionSize
         },
         compositeSubElements: compositeList,
-        selectedSource: -1
+        selectedSource: -1,
+        supplementData: true,
+        combineData: false
     };
 
     return combinedFoodItem;

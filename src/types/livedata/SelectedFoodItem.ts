@@ -11,6 +11,8 @@ export default interface SelectedFoodItem {
     compositeSubElements?: Array<CompositeFoodElement>
     resolvedName?: string | null
     selectedSource: number
+    supplementData: boolean
+    combineData: boolean
 }
 
 export interface CompositeFoodElement {

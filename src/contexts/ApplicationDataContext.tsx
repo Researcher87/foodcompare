@@ -6,7 +6,8 @@ import {ApplicationData} from "../types/livedata/ApplicationData";
 import {DISPLAYMODE_CHART, SOURCE_SRLEGACY, TAB_BASE_DATA} from "../config/Constants";
 import {UserData} from "../types/livedata/UserData";
 import {
-    initialChartConfigData, initialDirectCompareConfigData,
+    initialChartConfigData,
+    initialDirectCompareConfigData,
     initialUserDataAge,
     initialUserDataBreastfeeding,
     initialUserDataLeisureSports,
@@ -19,7 +20,7 @@ import {
 import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
-import {applicationStrings} from "../static/labels";
+import ReactSelectOption from "../types/ReactSelectOption";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
@@ -115,7 +116,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             const foodName = selectedFoodItem.foodItem.nameId
                 ? getNameFromFoodNameList(foodNames, selectedFoodItem.foodItem.nameId, newLanguage)
                 : "Individual"
-            if(foodName) {
+            if (foodName) {
                 selectedFoodItem = {...selectedFoodItem, tab: foodName}
             }
             return selectedFoodItem
@@ -152,7 +153,8 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             ...this.state,
             applicationData: {
                 ...this.state.applicationData,
-                directCompareDataPanel: {...this.state.applicationData.directCompareDataPanel,
+                directCompareDataPanel: {
+                    ...this.state.applicationData.directCompareDataPanel,
                     selectedFoodItem1: selectedFoodItem1,
                     selectedFoodItem2: selectedFoodItem2
                 }
@@ -165,7 +167,10 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             ...this.state,
             applicationData: {
                 ...this.state.applicationData,
-                directCompareDataPanel: {...this.state.applicationData.directCompareDataPanel, selectedDataPage: selectedPage}
+                directCompareDataPanel: {
+                    ...this.state.applicationData.directCompareDataPanel,
+                    selectedDataPage: selectedPage
+                }
             }
         })
     }
@@ -200,6 +205,21 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         })
     }
 
+
+    setFoodSelectorConfig = (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => {
+        this.setState({
+                ...this.state,
+                applicationData: {
+                    ...this.state.applicationData, foodSelector: {
+                        ...this.state.applicationData.foodSelector,
+                        selectedCategory: selectedCategory,
+                        sourceSupplement: sourceSupplement,
+                        sourceCombine: sourceCombine
+                    }
+                }
+            }
+        )
+    }
 
     state: ApplicationDataContext = {
         foodDataCorpus: {
@@ -236,6 +256,12 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 setSelectedDirectCompareDataPage: this.setSelectedDirectCompareDataPage,
                 setSelectedDirectCompareItems: this.setSelectedDirectCompareItems
             },
+            foodSelector: {
+                selectedCategory: null,
+                sourceSupplement: true,
+                sourceCombine: false,
+                setFoodSelectorConfig: this.setFoodSelectorConfig
+            },
             preferredSource: SOURCE_SRLEGACY,
             setPreferredSource: this.setPreferredSource
         },
@@ -263,7 +289,9 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         })
     }
 
-    render(): ReactElement {
+    render()
+        :
+        ReactElement {
         return (
             <ApplicationDataContextStore.Provider value={{...this.state}}>
                 {this.props.children}

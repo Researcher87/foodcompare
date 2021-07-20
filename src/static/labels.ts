@@ -559,6 +559,22 @@ export const applicationStrings = {
         de: 'Datenquelle',
         en: 'Data source'
     },
+    label_source_supplement: {
+      de: "Unvollständige Daten ergänzen",
+      en: "Supplement incomplete data"
+    },
+    label_source_supplement_tooltip: {
+        de: "Ergänzt fehlende Daten aus einer anderen Quelle, sofern diese die entsprechenden Daten enthält",
+        en: "Supplements missing data from another source in case that source contains the relevant data"
+    },
+    label_source_combine: {
+        de: "Datenquellen kombinieren",
+        en: "Combine data sources"
+    },
+    label_source_combine_tooltip: {
+        de: "Bildet den Daten-Mittelwert aus allen Datenquellen zu dem Lebensmittel",
+        en: "Create the average data out of all available data sources to this food"
+    },
     label_unknown: {
         de: 'Unbekannt',
         en: 'Unknown'
