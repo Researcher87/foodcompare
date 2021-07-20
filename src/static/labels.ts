@@ -70,7 +70,7 @@ export const applicationStrings = {
     direct_compare_text: {
         de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, um diese miteinander zu vergleichen.',
         en: 'Pick two food elements from the two selectors in order to compare them with each other.'
-      },
+    },
     home_carousel_0: {
         de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
         en: 'Vitamins in food compared to daily requirements'
@@ -179,6 +179,10 @@ export const applicationStrings = {
         de: 'Gesamtumsatz',
         en: 'Energy Expenditure'
     },
+    label_chart_proteins: {
+        de: 'Proteine',
+        en: 'Proteins'
+    },
     label_chart_nutrientComposition: {
         de: 'Nährstoffzusammensetzung',
         en: 'Nutrient Composition'
@@ -210,6 +214,10 @@ export const applicationStrings = {
     label_foodselector_composite: {
         de: 'Zusammenstellung eines Lebensmittels',
         en: 'Composite food generation'
+    },
+    label_group: {
+        de: 'Gruppe',
+        en: 'Group'
     },
     label_info: {
         de: 'Info',
@@ -310,6 +318,10 @@ export const applicationStrings = {
     label_nutrient_lipids: {
         de: 'Fett',
         en: 'Fats'
+    },
+    label_nutrient_lipids_long: {
+        de: 'Fettsäuren',
+        en: 'Fatty acids'
     },
     label_nutrient_lipids_saturated: {
         de: 'Gesättigte Fettsäuren',
@@ -555,13 +567,17 @@ export const applicationStrings = {
         de: 'Bevorzugte Datenquelle',
         en: 'Preferred data source'
     },
+    label_ranking_dietaryRequirements: {
+        de: 'Zeige Tagesbedarf',
+        en: 'Show dietary requirements'
+    },
     label_source: {
         de: 'Datenquelle',
         en: 'Data source'
     },
     label_source_supplement: {
-      de: "Unvollständige Daten ergänzen",
-      en: "Supplement incomplete data"
+        de: "Unvollständige Daten ergänzen",
+        en: "Supplement incomplete data"
     },
     label_source_supplement_tooltip: {
         de: "Ergänzt fehlende Daten aus einer anderen Quelle, sofern diese die entsprechenden Daten enthält",
@@ -622,6 +638,10 @@ export const applicationStrings = {
     label_userSettings_weight: {
         de: 'Gewicht',
         en: 'Weight'
+    },
+    label_value: {
+        de: 'Wert',
+        en: 'Value'
     },
     menu_food_data_panel: {
         de: 'Lebensmittel analysieren',
@@ -782,6 +802,10 @@ export const applicationStrings = {
     text_foodcompareapp_2: {
         de: 'App im Playstore erhalten',
         en: 'Get the App from the Playstore'
+    },
+    text_ranking: {
+        de: "Sie können in diesem Bereich Nahrungsmittel nach einem bestimmten Nährstoff, Vitamin oder Mineralstoff sortiert anzeigen lassen. Wählen Sie dazu eine Kategorie aus, eine Gruppe und eine bestimmte Nährstoffangabe (Wert).",
+        en: "In this section you may display food items sorted by a specific nutrient, vitamin or mineral. Please select a food category, nutrient group and value to display the corresponding ranking chart."
     },
     text_setUserdata_p1: {
         de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',

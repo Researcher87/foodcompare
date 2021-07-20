@@ -6,6 +6,13 @@ export const CHART_TYPE_BAR = "bar chart"
 export const CHART_VITAMINS = "chart vitamins"
 export const CHART_MINERALS = "chart minerals"
 
+export const DATA_ASH = "data ash";
+export const DATA_ENERGY = "data energy";
+export const DATA_WATER = "data water";
+export const DATA_CARBS = "data carbs";
+export const DATA_LIPIDS = "data lipids";
+export const DATA_PROTEINS = "data proteins";
+
 export const DATA_MINERAL_CALCIUM = "data calcium";
 export const DATA_MINERAL_IRON = "data iron";
 export const DATA_MINERAL_MAGNESIUM = "data magnesium";
@@ -30,6 +37,40 @@ export const DATA_VITAMINS_D = "data d";
 export const DATA_VITAMINS_E = "data e";
 export const DATA_VITAMINS_K = "data k";
 
+export const DATA_LIPIDS_SATURATED = "data saturated";
+export const DATA_LIPIDS_MONO_UNSATURATED = "data mono unsaturated";
+export const DATA_LIPIDS_POLY_UNSATURATED = "data poly unsaturate";
+export const DATA_LIPIDS_TRANSFATTY_ACIDS = "data transfatty acids";
+
+export const DATA_CARBS_DIETARY_FIBERS = "data dietary fibers";
+export const DATA_CARBS_SUGAR = "data sugar";
+export const DATA_CARBS_GLUCOSE = "glucose";
+export const DATA_CARBS_FRUCTOSE = "fructose";
+export const DATA_CARBS_GALACTOSE = "galactose";
+export const DATA_CARBS_SUCROSE = "sucrose";
+export const DATA_CARBS_LACTOSE = "lactose";
+export const DATA_CARBS_MALTOSE = "maltose";
+export const DATA_CARBS_STARCH = "starch";
+
+export const DATA_PROTEIN_TRYPTOPHAN = "tryptophan";
+export const DATA_PROTEIN_THREONINE = "threonine";
+export const DATA_PROTEIN_ISOLEUCINE = "isoleucine";
+export const DATA_PROTEIN_LEUCINE = "leucine";
+export const DATA_PROTEIN_LYSINE = "lysine";
+export const DATA_PROTEIN_METHIONINE = "methionine";
+export const DATA_PROTEIN_CYSTINE = "cystine";
+export const DATA_PROTEIN_PHENYLALANINE = "phenylalanine";
+export const DATA_PROTEIN_TYROSINE = "tyrosine";
+export const DATA_PROTEIN_VALINE = "valine";
+export const DATA_PROTEIN_ARGININE = "arginine";
+export const DATA_PROTEIN_HISTIDINE = "histidine";
+export const DATA_PROTEIN_ALANINE = "alanine";
+export const DATA_PROTEIN_ASPARTIC_ACID = "asparticAcid";
+export const DATA_PROTEIN_GLUTAMIC_ACID= "glutamicAcid";
+export const DATA_PROTEIN_GLYCINE = "glycine";
+export const DATA_PROTEIN_PROLINE = "proline";
+export const DATA_PROTEIN_SERINE = "serine";
+
 export const DISPLAYMODE_TABLE = "displaymode table"
 export const DISPLAYMODE_CHART = "displaymode chart"
 
@@ -47,7 +88,8 @@ export const PATH_FOODDATA_PANEL = "/datapanel";
 export const PATH_HOME = "/home";
 export const PATH_CONTACT = "/contact";
 export const PATH_MOBILE_APP = "/mobileapp";
-export const PATH_USERSETTINGS= "/usersettings";
+export const PATH_USERSETTINGS = "/usersettings";
+export const PATH_RANKING = "/ranking";
 
 export const LANGUAGE_DE = "de";
 export const LANGUAGE_EN = "en";
