@@ -31,7 +31,8 @@ export function Contact() {
             <div style={{paddingTop: "50px"}}>
                 <h4>{applicationStrings.text_contact_source1[lang]}</h4>
                 <h5>{applicationStrings.text_contact_source2[lang]}</h5>
-                <p>United States Department of Agriculture (USDA)</p>
+                <p>U.S. Department of Agriculture, Agricultural Research Service.<br/>
+                FoodData Central, 2019. fdc.nal.usda.gov.</p>
                 <h5>{applicationStrings.text_contact_source3[lang]}</h5>
                 <p>Deutsche Gesellschaft für Ernährung e.V.</p>
                 <h5>{applicationStrings.text_contact_source4[lang]}</h5>

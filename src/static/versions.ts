@@ -75,5 +75,24 @@ export const versions = [
         bugfixes: [
             "A couple of display and chart configuration bugs have been solved."
         ]
+    },
+    {
+        id: "1.2.1",
+        date: "07-20-2021",
+        subject: "Applying two data sources",
+        features: [
+            "The web site allows to add data from two different USDA sources now. Besides the SR Legacy data set, which has been the default source, also data from FNDDS can be added in future. If data from two different sources is available, the user can decide which source should be used. In the direct food compare panel, data of two sources can also be compared with each other.",
+            "For the first category (fruit), additional FNDDS data sets have been added."
+        ],
+        updates: [
+            "On the info page there is a link now to the USDA website, i.e., to the data sheet of the selected food data.",
+            "Contact address and logo text have been updated.",
+            "Reference to USDA has been changed to conform with the official name."
+        ],
+        bugfixes: [
+            "Fixes the display bug in the direct compare menu, that sometimes occurred when the browser window size was changed (chart becoming larger than their container).",
+            "The info data page in the food analyzer menu has its original height again.",
+            "Some wrong condition names of food elements have been corrected."
+        ]
     }
 ]
