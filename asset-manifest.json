@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.8e64dcb4.chunk.css",
-    "main.js": "/static/js/main.d16ee4be.chunk.js",
-    "main.js.map": "/static/js/main.d16ee4be.chunk.js.map",
+    "main.css": "/static/css/main.a0c6c660.chunk.css",
+    "main.js": "/static/js/main.fc2cd0c4.chunk.js",
+    "main.js.map": "/static/js/main.fc2cd0c4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.67dbc0ec.js",
     "runtime-main.js.map": "/static/js/runtime-main.67dbc0ec.js.map",
     "static/css/2.361200c6.chunk.css": "/static/css/2.361200c6.chunk.css",
-    "static/js/2.815e6e6e.chunk.js": "/static/js/2.815e6e6e.chunk.js",
-    "static/js/2.815e6e6e.chunk.js.map": "/static/js/2.815e6e6e.chunk.js.map",
+    "static/js/2.49eff5a0.chunk.js": "/static/js/2.49eff5a0.chunk.js",
+    "static/js/2.49eff5a0.chunk.js.map": "/static/js/2.49eff5a0.chunk.js.map",
     "static/js/3.ba979cfa.chunk.js": "/static/js/3.ba979cfa.chunk.js",
     "static/js/3.ba979cfa.chunk.js.map": "/static/js/3.ba979cfa.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.361200c6.chunk.css.map": "/static/css/2.361200c6.chunk.css.map",
-    "static/css/main.8e64dcb4.chunk.css.map": "/static/css/main.8e64dcb4.chunk.css.map",
-    "static/js/2.815e6e6e.chunk.js.LICENSE.txt": "/static/js/2.815e6e6e.chunk.js.LICENSE.txt",
+    "static/css/main.a0c6c660.chunk.css.map": "/static/css/main.a0c6c660.chunk.css.map",
+    "static/js/2.49eff5a0.chunk.js.LICENSE.txt": "/static/js/2.49eff5a0.chunk.js.LICENSE.txt",
     "static/media/Img-de-1.png": "/static/media/Img-de-1.f461d8cb.png",
     "static/media/Img-de-2.png": "/static/media/Img-de-2.6f0bfc36.png",
     "static/media/Img-de-3.png": "/static/media/Img-de-3.f67e30a1.png",
@@ -27,15 +27,15 @@
     "static/media/Img-en-5.png": "/static/media/Img-en-5.afac79a2.png",
     "static/media/Img-en-6.png": "/static/media/Img-en-6.3238f1c7.png",
     "static/media/app.efc3a150.png": "/static/media/app.efc3a150.png",
-    "static/media/impressum-english.f6495d9a.png": "/static/media/impressum-english.f6495d9a.png",
+    "static/media/impressum-english.1bd33956.png": "/static/media/impressum-english.1bd33956.png",
     "static/media/impressum-german.92ba80d6.png": "/static/media/impressum-german.92ba80d6.png",
     "static/media/notifications.css": "/static/media/notification.c5d9251e.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.67dbc0ec.js",
     "static/css/2.361200c6.chunk.css",
-    "static/js/2.815e6e6e.chunk.js",
-    "static/css/main.8e64dcb4.chunk.css",
-    "static/js/main.d16ee4be.chunk.js"
+    "static/js/2.49eff5a0.chunk.js",
+    "static/css/main.a0c6c660.chunk.css",
+    "static/js/main.fc2cd0c4.chunk.js"
   ]
 }
