@@ -181,24 +181,22 @@ export default function Header() {
         <div className="container-fluid">
             <div className="row header">
                 <div className="col-1"
-                     style={{paddingLeft: "10px", paddingTop: "8px", minWidth: "120px", maxWidth: "120px"}}>
+                     style={{paddingTop: "8px", minWidth: "120px", maxWidth: "120px"}}>
                     <img src={logo}/>
                 </div>
                 <div className="col">
-                    <div className="container-fluid">
-                        <div className="row" float-start>
-                            <div className="col-5 text-start" style={{paddingTop: "5px"}}>
-                                <img src={text}/>
-                            </div>
-                            <div className="d-flex col text-end" style={{paddingTop: "6px"}}>
-                                {renderLanguageButtons()}
-                                {renderSourceButtons()}
-                            </div>
+                    <div className="d-flex flex-row justify-content-between" float-start>
+                        <div className="d-flex text-start" style={{paddingTop: "5px"}}>
+                            <img src={text}/>
                         </div>
-                        <div className="row" style={{marginTop: "3px"}}>
-                            <div className="col-md-12 text-start">
-                                {renderMenus()}
-                            </div>
+                        <div className="d-flex text-end" style={{paddingTop: "6px"}}>
+                            {renderLanguageButtons()}
+                            {renderSourceButtons()}
+                        </div>
+                    </div>
+                    <div className="row" style={{marginTop: "3px"}}>
+                        <div className="col-md-12 text-start">
+                            {renderMenus()}
                         </div>
                     </div>
                 </div>
