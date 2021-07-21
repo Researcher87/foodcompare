@@ -51,22 +51,27 @@ export function RankingChart(props: RankingChartProps) {
 
     const width = 50 * props.chartItems.length;
 
+    console.log('Chart items: ', props.chartItems)
+
     return (
-        <div className="ranking-chart" style={{overflowX: "auto", position: "absolute"}}>
-            {dataAvailable &&
-            <div style={{position: "relative", width: `${width}px`}}>
-                <Bar id="chart"
-                     data={chartData}
-                     height={500}
-                     options={options}
-                     type={"bar"}
-                />
+        <div>
+            <div className="smooth-scroll" style={{overflowX: "auto", position: "absolute", maxWidth: "1000px"}}>
+                {dataAvailable &&
+                <div style={{position: "relative", width: `${width}px`}}>
+                    <Bar id="chart"
+                         data={chartData}
+                         height={500}
+                         options={options}
+                         type={"bar"}
+                    />
+                </div>
+                }
+                {!dataAvailable &&
+                <span>{applicationStrings.label_noData[language]}</span>
+                }
             </div>
-            }
-            {!dataAvailable &&
-            <span>{applicationStrings.label_noData[language]}</span>
-            }
         </div>
+
     )
 
 }

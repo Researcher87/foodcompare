@@ -12,6 +12,7 @@ import {
     MINERAL_INDEX, PROTEIN_INDEX,
     VITAMIN_INDEX
 } from "../components/ranking/RankingSelector";
+import {getNutrientData, getNutrientDataForFoodItem} from "./nutrientdata/NutrientDataRetriever";
 
 
 export interface ChartItem {
@@ -211,7 +212,7 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
             value = getPortionValue(value, portionAmount);
         }
 
-        const name = getNameFromFoodNameList(foodNamesList, foodItem.id, language)
+        const name = getNameFromFoodNameList(foodNamesList, foodItem.nameId!!, language)
 
         const chartItem: ChartItem = {
             name: name ? name : "",
@@ -237,17 +238,18 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
 
 
 function getValueOfFoodItem(foodItem, selectedValue) {
-    let value = null;
+    let value
 
-    const baseData = foodItem.nutrientDataList[0].baseData;
-    const carbData = foodItem.nutrientDataList[0].carbohydrateData;
-    const vitaminData = foodItem.nutrientDataList[0].vitaminData;
-    const mineralData = foodItem.nutrientDataList[0].mineralData;
-    const lipidData = foodItem.nutrientDataList[0].lipidData;
-    const carbsData = foodItem.nutrientDataList[0].carbohydrateData;
-    const proteinData = foodItem.nutrientDataList[0].proteinData;
+    const nutrientData = getNutrientDataForFoodItem(foodItem, 0, true)
 
-    if (proteinData == null) {
+    const baseData = nutrientData.baseData;
+    const vitaminData = nutrientData.vitaminData;
+    const mineralData = nutrientData.mineralData;
+    const lipidData = nutrientData.lipidData;
+    const carbsData = nutrientData.carbohydrateData;
+    const proteinData = nutrientData.proteinData;
+
+    if (proteinData === null) {
         return 0;
     }
 
