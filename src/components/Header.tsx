@@ -35,7 +35,10 @@ export default function Header() {
         applicationContext.applicationData.setPreferredSource(event.target.value)
     }
 
-    const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
+    let activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
+    if(activePath.endsWith("/") && activePath.length > 1) {
+        activePath = activePath.substring(0, activePath.length -1)
+    }
 
     if (applicationContext?.debug) {
         console.log('Location:', location)
