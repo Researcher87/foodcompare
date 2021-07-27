@@ -235,8 +235,6 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
         }
     }
 
-    console.log('Container height:', windowSize.height, containerHeight)
-
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}} key={"directcompare container" + containerHeight}>

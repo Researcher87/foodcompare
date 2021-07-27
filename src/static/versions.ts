@@ -94,5 +94,19 @@ export const versions = [
             "The info data page in the food analyzer menu has its original height again.",
             "Some wrong condition names of food elements have been corrected."
         ]
+    },
+    {
+        id: "1.2.2",
+        date: "07-27-2021",
+        subject: "Combining data sources",
+        features: [
+            "Two data sources can now be combined with each other. Missing data can be supplemented by another source (if it exists) or the average data can be calculated out of two data sources."
+        ],
+        updates: [
+            "Meta data of the index.html has been changed, a new favicon has been added.",
+        ],
+        bugfixes: [
+            "",
+        ]
     }
 ]

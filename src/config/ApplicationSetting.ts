@@ -2,8 +2,8 @@ import {AMOUNT_PORTION, CARBS_DATA_BASE, CHART_TYPE_PIE, LIPIDS_DATA_BASE, SEX_M
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
 import {WindowDimension} from "../service/WindowDimension";
 
-export const release = "1.2.1"
-export const buildDate = "2021-07-20"
+export const release = "1.2.2"
+export const buildDate = "2021-07-27"
 
 export const mobileAppPath = "https://play.google.com/store/apps/details?id=com.parapps.foodcompareapp"
 
