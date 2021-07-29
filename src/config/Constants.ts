@@ -47,7 +47,10 @@ export const PATH_FOODDATA_PANEL = "/datapanel";
 export const PATH_HOME = "/home";
 export const PATH_CONTACT = "/contact";
 export const PATH_MOBILE_APP = "/mobileapp";
-export const PATH_USERSETTINGS= "/usersettings";
+export const PATH_USERSETTINGS = "/usersettings";
+
+export const PORTION_KEY_INDIVIDUAL = 0
+export const PORTION_KEY_100 = 1
 
 export const LANGUAGE_DE = "de";
 export const LANGUAGE_EN = "en";
@@ -58,11 +61,16 @@ export const SEX_FEMALE = "sex female"
 export const SOURCE_SRLEGACY = "srlegacy"
 export const SOURCE_FNDDS = "fndds"
 
-export const TAB_BASE_DATA = "tab_base_data"
-export const TAB_ENERGY_DATA = "tab_energy_data"
-export const TAB_VITAMIN_DATA = "tab_vitamin_data"
-export const TAB_MINERAL_DATA = "tab_mineral_data"
-export const TAB_LIPIDS_DATA = "tab_lipids_data"
-export const TAB_CARBS_DATA = "tab_carps_data"
-export const TAB_PROTEINS_DATA = "tab_proteins_data"
-export const TAB_INFO = "tab_info"
+
+export const TAB_BASE_DATA = "basedata"
+export const TAB_ENERGY_DATA = "energydata"
+export const TAB_VITAMIN_DATA = "vitamindata"
+export const TAB_MINERAL_DATA = "mineraldata"
+export const TAB_LIPIDS_DATA = "lipidsdata"
+export const TAB_CARBS_DATA = "carbsdata"
+export const TAB_PROTEINS_DATA = "proteinsdata"
+export const TAB_INFO = "infodata"
+
+export const QUERYKEY_DATAPANEL_ITEMS = "items"
+
+export const TAB_LIST = [TAB_BASE_DATA, TAB_ENERGY_DATA, TAB_VITAMIN_DATA, TAB_MINERAL_DATA, TAB_LIPIDS_DATA, TAB_CARBS_DATA, TAB_PROTEINS_DATA, TAB_INFO]

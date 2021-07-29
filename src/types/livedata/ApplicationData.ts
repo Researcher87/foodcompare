@@ -19,7 +19,7 @@ export interface FoodDataPanelData {
     chartConfigData: ChartConfigData
     setSelectedFoodTab: (number) => void
     setSelectedDataPage: (string) => void
-    addItemToFoodDataPanel: (number) => void
+    addItemToFoodDataPanel: (selectedFoodItem: SelectedFoodItem) => void
     removeItemFromFoodDataPanel: (number) => void
     removeAllItemsFromFoodDataPanel: () => void
     updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void

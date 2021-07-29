@@ -11,18 +11,22 @@ import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {confirmAction} from "../ConfirmationDialog";
 import ReactTooltip from "react-tooltip";
+import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 
 interface FoodAnalyzerContainerProps {
     onNewFoodItemSelected: () => void
 }
 
 export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps) {
-    const ApplicationContext = useContext(ApplicationDataContextStore)
+    const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(false)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(false)
 
+    if(!applicationContext) {
+        return <div/>
+    }
 
     const onHide = (): void => {
         setShowFoodSelector(false)
@@ -30,30 +34,19 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     }
 
     const onSelectFoodItemSubmit = (selectedFoodItem: SelectedFoodItem): void => {
-        if (ApplicationContext === null) {
+        if (applicationContext === null) {
             return
         }
 
-        let foodName
-        if(selectedFoodItem.foodItem.nameId) {
-            foodName = getNameFromFoodNameList(ApplicationContext.foodDataCorpus.foodNames,
-                selectedFoodItem.foodItem.nameId, languageContext.language)
-        } else {
-            foodName = 'Individual'
+        const selectedFoodItemWithComponent = makeFoodDataPanelComponent(
+            selectedFoodItem, applicationContext.foodDataCorpus.foodNames, languageContext.language)
+
+        if(selectedFoodItemWithComponent !== null) {
+            applicationContext.applicationData.foodDataPanel.addItemToFoodDataPanel(selectedFoodItemWithComponent)
         }
 
-        if (foodName === null) {
-            console.error('No food name available.')
-            return
-        }
-
-        selectedFoodItem.component = <FoodDataPage selectedFoodItem={selectedFoodItem}/>
-        selectedFoodItem.tab = foodName
-        selectedFoodItem.id = selectedFoodItem.foodItem.id
-        ApplicationContext?.applicationData.foodDataPanel.addItemToFoodDataPanel(selectedFoodItem)
-
-        if (ApplicationContext?.debug) {
-            console.log('FoodAnalyzerContainer: Set new selected item and execute callback. Selected item = ', selectedFoodItem)
+        if (applicationContext?.debug) {
+            console.log('FoodAnalyzerContainer: Set new selected item and execute callback. Selected item = ', selectedFoodItemWithComponent)
         }
 
         props.onNewFoodItemSelected()
@@ -66,15 +59,15 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             applicationStrings.button_no[languageContext.language],
             {}
         )) {
-            ApplicationContext?.applicationData.foodDataPanel.removeAllItemsFromFoodDataPanel()
+            applicationContext?.applicationData.foodDataPanel.removeAllItemsFromFoodDataPanel()
         }
     }
 
-    if (ApplicationContext?.debug) {
+    if (applicationContext?.debug) {
         console.log('FoodAnalyzerContainer: Render')
     }
 
-    const selectedFoodItems = ApplicationContext?.applicationData.foodDataPanel.selectedFoodItems
+    const selectedFoodItems = applicationContext?.applicationData.foodDataPanel.selectedFoodItems
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
 
     ReactTooltip.rebuild()

@@ -1,18 +1,74 @@
 import FoodAnalyzerContainer from "./FoodAnalyzerContainer";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import TabContainer from "./TabContainer";
 import {applicationStrings} from "../../static/labels";
 import {LanguageContext} from "../../contexts/LangContext";
+import {PATH_FOODDATA_PANEL, PORTION_KEY_100, QUERYKEY_DATAPANEL_ITEMS, TAB_LIST} from "../../config/Constants";
+import {useLocation} from 'react-router-dom';
+import {NotificationManager} from 'react-notifications'
+import {makeDefaultSelectedFoodItem, makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 
 
 export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
+    const location = useLocation();
+
+    const buildDataPanelPageFromURI = () => {
+        let activePath = location.pathname
+        if(activePath && activePath.includes(PATH_FOODDATA_PANEL)) {
+            const mainPathIndex = activePath.indexOf(PATH_FOODDATA_PANEL)
+            const datapage = activePath.substring(mainPathIndex+PATH_FOODDATA_PANEL.length+1)
+
+            if(!applicationContext || !datapage || !TAB_LIST.includes(datapage)) {
+                return
+            }
+
+            if(window.location.search.length <= 3) {
+                NotificationManager.error("Invalid query parameter")
+                return
+            }
+
+            const query = window.location.search.substring(1)
+            const equalOperator = query.indexOf("=")
+            const key = query.substring(0, equalOperator)
+            const value = query.substring(equalOperator+1)
+
+            if(key !== QUERYKEY_DATAPANEL_ITEMS || value.length < 1) {
+                NotificationManager.error("Invalid query key or value")
+                return
+            }
+
+            const foodItemIds = value.split("+")
+            applicationContext.applicationData.foodDataPanel.setSelectedDataPage(datapage)
+
+            foodItemIds.forEach(foodItemId => {
+                const foodItem = applicationContext.foodDataCorpus.foodItems.find(foodItem => foodItem.id === Number(foodItemId))
+                if(foodItem) {
+                    const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
+                    if(foodClass) {
+                        const selectedFoodItem = makeDefaultSelectedFoodItem(foodItem, foodClass)
+                        const selectedFoodItemWithComponent = makeFoodDataPanelComponent(selectedFoodItem,
+                            applicationContext.foodDataCorpus.foodNames, languageContext.language)
+                        if(selectedFoodItemWithComponent) {
+                            applicationContext.applicationData.foodDataPanel.addItemToFoodDataPanel(selectedFoodItemWithComponent)
+                        }
+                    }
+                }
+            })
+
+        }
+    }
+
+    useEffect(() => {
+        buildDataPanelPageFromURI()
+    }, [applicationContext?.foodDataCorpus.foodItems])
 
     if (!applicationContext || !applicationContext.ready) {
         return <div/>
     }
+
 
     const selectedFoodItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems
 
