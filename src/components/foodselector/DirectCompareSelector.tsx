@@ -6,6 +6,9 @@ import FoodSelector from "./FoodSelector";
 import {Button, Card, CardDeck} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
+import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_ITEMS, TAB_LIST} from "../../config/Constants";
+import {makeDefaultSelectedFoodItem} from "../../service/FoodDataPanelService";
+import {useLocation} from 'react-router-dom';
 
 interface DirectCompareSelectorProps {
     updateSelectedFoodItems: (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => void
@@ -32,6 +35,8 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const [selectedFoodItem2, setSelectedFoodItem2] = useState<SelectedFoodItem | null>(initialItem2)
     const [displayStatus, setDisplayStatus] = useState<string>(STATUS_FIRST_TIME)
 
+
+
     useEffect(() => {
     }, [selectedFoodItem1, selectedFoodItem2])
 
@@ -41,20 +46,20 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
 
     const updateSelectedFoodItem1 = (selectedFoodItem: SelectedFoodItem): void => {
         setSelectedFoodItem1(selectedFoodItem)
-        if(displayStatus !== STATUS_FIRST_TIME) {
+        if (displayStatus !== STATUS_FIRST_TIME) {
             setDisplayStatus(STATUS_UPDATED)
         }
     }
 
     const updateSelectedFoodItem2 = (selectedFoodItem: SelectedFoodItem): void => {
         setSelectedFoodItem2(selectedFoodItem)
-        if(displayStatus !== STATUS_FIRST_TIME) {
+        if (displayStatus !== STATUS_FIRST_TIME) {
             setDisplayStatus(STATUS_UPDATED)
         }
     }
 
     const onSubmit = () => {
-        if(selectedFoodItem1 && selectedFoodItem2) {
+        if (selectedFoodItem1 && selectedFoodItem2) {
             props.updateSelectedFoodItems(selectedFoodItem1, selectedFoodItem2)
         }
 
@@ -65,7 +70,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const renderFoodSelectorCard = (foodSelectorNumber: number) => {
         const updateSelectedFoodItem = foodSelectorNumber === 1 ? updateSelectedFoodItem1 : updateSelectedFoodItem2
         const styleClass = foodSelectorNumber === 1 ? {backgroundColor: direct_compare_color1} : {backgroundColor: direct_compare_color2}
-        const initialFoodClassToSet = foodSelectorNumber -1
+        const initialFoodClassToSet = foodSelectorNumber - 1
 
         const selectedFoodItem = foodSelectorNumber === 1 ? selectedFoodItem1 : selectedFoodItem2
 

@@ -1,4 +1,4 @@
-import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
+import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodItem, {
     BaseData,
     CarbohydrateData,
@@ -7,8 +7,8 @@ import FoodItem, {
     NutrientData,
     ProteinData,
     VitaminData
-} from "../types/nutrientdata/FoodItem";
-import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
+} from "../../types/nutrientdata/FoodItem";
+import {getNutrientData} from "../nutrientdata/NutrientDataRetriever";
 
 export default function combineFoodItems(compositeList: Array<SelectedFoodItem>, preferredSource): SelectedFoodItem {
     let portionSize = 0;

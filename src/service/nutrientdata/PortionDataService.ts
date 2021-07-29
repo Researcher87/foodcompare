@@ -3,6 +3,7 @@ import {ReactSelectPortionOption} from "../../types/ReactSelectOption";
 import FoodItem, {PortionData} from "../../types/nutrientdata/FoodItem";
 import getName from "../LanguageService";
 import {applicationStrings} from "../../static/labels";
+import {PORTION_KEY_100, PORTION_KEY_INDIVIDUAL} from "../../config/Constants";
 
 
 export function getPortionReactSelectList(portionData: Array<PortionData>, portionTypes: Array<NameType>, language: string): Array<ReactSelectPortionOption> {
@@ -21,12 +22,12 @@ export function getPortionReactSelectList(portionData: Array<PortionData>, porti
     })
 
     reactSelectOptions.push({
-        value: {amount: 100, portionType: 1},
+        value: {amount: 100, portionType: PORTION_KEY_100},
         label: applicationStrings.portion_100g[language]
     })
 
     reactSelectOptions.push({
-        value: {amount: 0, portionType: 0},
+        value: {amount: 0, portionType: PORTION_KEY_INDIVIDUAL},
         label: applicationStrings.portion_individual[language]
     })
 

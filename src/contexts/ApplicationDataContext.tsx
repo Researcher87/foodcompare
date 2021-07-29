@@ -281,7 +281,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         ready: false
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const foodDataCorpus = NutrientDataImportService.loadFoodDataCorpus()
         this.setState({
             foodDataCorpus: foodDataCorpus,
