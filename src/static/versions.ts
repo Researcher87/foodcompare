@@ -97,7 +97,7 @@ export const versions = [
     },
     {
         id: "1.2.2",
-        date: "07-27-2021",
+        date: "07-30-2021",
         subject: "Combining data sources",
         features: [
             "Two data sources can now be combined with each other. Missing data can be supplemented by another source (if it exists) or the average data can be calculated out of two data sources."
@@ -106,7 +106,7 @@ export const versions = [
             "Meta data of the index.html has been changed, a new favicon has been added.",
         ],
         bugfixes: [
-            "",
+            "Some missing (but actually available) information in the nutrient data set have been completed.",
         ]
     }
 ]

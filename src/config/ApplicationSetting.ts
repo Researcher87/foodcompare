@@ -3,7 +3,7 @@ import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/C
 import {WindowDimension} from "../service/WindowDimension";
 
 export const release = "1.2.2"
-export const buildDate = "2021-07-27"
+export const buildDate = "2021-07-30"
 
 export const mobileAppPath = "https://play.google.com/store/apps/details?id=com.parapps.foodcompareapp"
 
