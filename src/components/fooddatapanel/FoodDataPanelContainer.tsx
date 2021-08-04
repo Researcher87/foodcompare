@@ -5,65 +5,83 @@ import TabContainer from "./TabContainer";
 import {applicationStrings} from "../../static/labels";
 import {LanguageContext} from "../../contexts/LangContext";
 import {PATH_FOODDATA_PANEL, PORTION_KEY_100, QUERYKEY_DATAPANEL_ITEMS, TAB_LIST} from "../../config/Constants";
-import {useLocation} from 'react-router-dom';
+import {useLocation, useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
-import {makeDefaultSelectedFoodItem, makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
+import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
+import { UriData } from "../../types/livedata/UriData";
+import { convertUriDataJsonToCompactString, convertUriStringToObject } from "../../service/UriService";
 
 
 export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const location = useLocation();
+	const history = useHistory()
 
     const buildDataPanelPageFromURI = () => {
         let activePath = location.pathname
-        if(activePath && activePath.includes(PATH_FOODDATA_PANEL)) {
-            const mainPathIndex = activePath.indexOf(PATH_FOODDATA_PANEL)
-            const datapage = activePath.substring(mainPathIndex+PATH_FOODDATA_PANEL.length+1)
 
-            if(!applicationContext || !datapage || !TAB_LIST.includes(datapage)) {
-                return
-            }
-
-            if(window.location.search.length <= 3) {
-                NotificationManager.error("Invalid query parameter")
-                return
-            }
-
-            const query = window.location.search.substring(1)
-            const equalOperator = query.indexOf("=")
-            const key = query.substring(0, equalOperator)
-            const value = query.substring(equalOperator+1)
+		if(!applicationContext) {
+			return
+		}
+		
+		const {selectedFoodItemIndex, selectedFoodItems} = applicationContext.applicationData.foodDataPanel
+		
+		if(selectedFoodItemIndex === null || !selectedFoodItems || selectedFoodItems.length === 0) {
+			console.log('Query Block 1')
+			
+			const queryString = window.location.search.substring(1)
+			const equalOperator = queryString.indexOf("=")
+            const key = queryString.substring(0, equalOperator)
+            const value = queryString.substring(equalOperator+1)
 
             if(key !== QUERYKEY_DATAPANEL_ITEMS || value.length < 1) {
-                NotificationManager.error("Invalid query key or value")
                 return
             }
-
-            const foodItemIds = value.split("+")
-            applicationContext.applicationData.foodDataPanel.setSelectedDataPage(datapage)
-
-            foodItemIds.forEach(foodItemId => {
-                const foodItem = applicationContext.foodDataCorpus.foodItems.find(foodItem => foodItem.id === Number(foodItemId))
-                if(foodItem) {
-                    const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
-                    if(foodClass) {
-                        const selectedFoodItem = makeDefaultSelectedFoodItem(foodItem, foodClass)
-                        const selectedFoodItemWithComponent = makeFoodDataPanelComponent(selectedFoodItem,
-                            applicationContext.foodDataCorpus.foodNames, languageContext.language)
-                        if(selectedFoodItemWithComponent) {
-                            applicationContext.applicationData.foodDataPanel.addItemToFoodDataPanel(selectedFoodItemWithComponent)
-                        }
-                    }
-                }
-            })
-
-        }
+			
+			try {				
+				const uriDataObject: UriData = convertUriStringToObject(value)
+				const {addItemToFoodDataPanel, setSelectedDataPage} = applicationContext.applicationData.foodDataPanel
+				
+				console.log('Query Block 1 -- set data page:', uriDataObject.selectedDataPage)
+				setSelectedDataPage(uriDataObject.selectedDataPage)
+				applicationContext.setUserData(uriDataObject.userData)	
+				
+				const selectedFoodItemWithComponent = makeFoodDataPanelComponent(uriDataObject.selectedFoodItem, 
+				applicationContext.foodDataCorpus.foodNames, languageContext.language, uriDataObject.selectedDataPage)
+				
+				if(selectedFoodItemWithComponent) {
+					addItemToFoodDataPanel(selectedFoodItemWithComponent)
+				}
+			} catch(e) {
+				console.error(e)
+			}
+	
+		} else {
+			console.log('Query Block 2', applicationContext.applicationData.foodDataPanel.selectedDataPage)
+			
+			// set new path
+			const selectedFoodItem = selectedFoodItems[selectedFoodItemIndex]
+			const uriDataObject: UriData = {
+				selectedFoodItem: {...selectedFoodItem, component: undefined},
+				selectedDataPage: applicationContext.applicationData.foodDataPanel.selectedDataPage,
+				userData: applicationContext.userData
+			}
+			
+			const query = convertUriDataJsonToCompactString(uriDataObject)
+			history.push({
+				pathName: PATH_FOODDATA_PANEL,
+				search: `${QUERYKEY_DATAPANEL_ITEMS}=${query}`
+			})
+		}
     }
+
 
     useEffect(() => {
         buildDataPanelPageFromURI()
-    }, [applicationContext?.foodDataCorpus.foodItems])
+    }, [applicationContext?.applicationData.foodDataPanel.selectedFoodItemIndex, 
+		applicationContext?.applicationData.foodDataPanel.selectedFoodItems,
+		applicationContext?.applicationData.foodDataPanel.selectedDataPage])
 
     if (!applicationContext || !applicationContext.ready) {
         return <div/>
@@ -73,6 +91,7 @@ export default function FoodDataPanelContainer() {
     const selectedFoodItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems
 
     const onTabChange = (foodId) => {
+		buildDataPanelPageFromURI()
         for (let i = 0; i < selectedFoodItems.length; i++) {
             if (selectedFoodItems[i].id === foodId) {
                 applicationContext.applicationData.foodDataPanel.setSelectedFoodTab(i)
@@ -81,6 +100,7 @@ export default function FoodDataPanelContainer() {
     }
 
     const onNewFoodItemSelected = (): void => {
+		buildDataPanelPageFromURI()
         const newTabIndex = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
         applicationContext.applicationData.foodDataPanel.setSelectedFoodTab(newTabIndex)
     }

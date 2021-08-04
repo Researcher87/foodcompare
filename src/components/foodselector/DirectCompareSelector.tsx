@@ -7,7 +7,6 @@ import {Button, Card, CardDeck} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_ITEMS, TAB_LIST} from "../../config/Constants";
-import {makeDefaultSelectedFoodItem} from "../../service/FoodDataPanelService";
 import {useLocation} from 'react-router-dom';
 
 interface DirectCompareSelectorProps {

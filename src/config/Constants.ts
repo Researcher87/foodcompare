@@ -71,6 +71,6 @@ export const TAB_CARBS_DATA = "carbsdata"
 export const TAB_PROTEINS_DATA = "proteinsdata"
 export const TAB_INFO = "infodata"
 
-export const QUERYKEY_DATAPANEL_ITEMS = "items"
+export const QUERYKEY_DATAPANEL_ITEMS = "data"
 
 export const TAB_LIST = [TAB_BASE_DATA, TAB_ENERGY_DATA, TAB_VITAMIN_DATA, TAB_MINERAL_DATA, TAB_LIPIDS_DATA, TAB_CARBS_DATA, TAB_PROTEINS_DATA, TAB_INFO]

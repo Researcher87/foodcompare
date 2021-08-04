@@ -46,6 +46,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     }
 
     setSelectedFoodDataPanelPage = (selectedPage: string) => {
+	console.log('Query App Context:', selectedPage)
         this.setState({
             ...this.state,
             applicationData: {
@@ -56,7 +57,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     }
 
     addItemToFoodDataPanel = (foodItem: SelectedFoodItem) => {
-        const newItems = this.state.applicationData.foodDataPanel.selectedFoodItems
+        const newItems = Object.assign(this.state.applicationData.foodDataPanel.selectedFoodItems)
         newItems.push(foodItem)
         this.setState({
             ...this.state,

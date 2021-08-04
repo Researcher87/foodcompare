@@ -35,7 +35,6 @@ interface FoodDataPageHeaderProps {
     setDataPage: (id: string) => void
     selectedFoodItem: SelectedFoodItem
     tableData: Array<FoodTableDataObject>
-    selectedDataTab: string
 }
 
 export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
@@ -184,7 +183,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                     <FoodDataPageBody selectedFoodItem={props.selectedFoodItem}
                                       tableData={props.tableData}
                                       displayMode={props.displayMode}
-                                      selectedDataTab={props.selectedDataTab}
+                                      selectedDataTab={props.dataPage}
                     />
                 </div>
             </div>

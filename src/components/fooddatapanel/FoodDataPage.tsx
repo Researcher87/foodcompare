@@ -25,20 +25,21 @@ import {
 } from "../../service/TableService";
 
 interface FoodDataPageProps {
-    selectedFoodItem: SelectedFoodItem
+    selectedFoodItem: SelectedFoodItem,
+	dataPage?: string
 }
 
 export default function FoodDataPage(props: FoodDataPageProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
-    const initialDataPage = applicationContext?.applicationData.foodDataPanel.selectedDataPage
-        ? applicationContext.applicationData.foodDataPanel.selectedDataPage
-        : TAB_BASE_DATA
+			const selectedDataTab = props.dataPage ? props.dataPage : applicationContext 
+								? applicationContext.applicationData.foodDataPanel.selectedDataPage 
+								: TAB_BASE_DATA
 
     const [displayMode, setDisplayMode] = useState<string>(DISPLAYMODE_CHART)
-    const [selectedDataTab, setSelectedDataTab] = useState<string>(initialDataPage)
     const [tableData, setTableData] = useState<Array<FoodTableDataObject>>([])
+	const [dataPage, setDataPage] = useState<string>(selectedDataTab)
 
     const updatePage = () => {   // Central update method when any (radio) button was clicked
         let tableDataList: Array<FoodTableDataObject> = [];
@@ -66,16 +67,21 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     }
 
     useEffect(() => {
+		console.log('Drecksneger')
         updatePage()
-    }, [displayMode, selectedDataTab, props.selectedFoodItem, applicationContext?.applicationData.preferredSource])
+    }, [displayMode, 
+		props.selectedFoodItem, 
+		applicationContext?.applicationData.preferredSource, 
+		applicationContext?.applicationData.foodDataPanel.selectedDataPage]
+	)
 
     if (!applicationContext) {
         return <div/>
     }
 
     const onNewDataPage = (datapage: string) => {
-        setSelectedDataTab(datapage)
         applicationContext.applicationData.foodDataPanel.setSelectedDataPage(datapage)
+		setDataPage(datapage)
         updatePage()
     }
 
@@ -91,11 +97,10 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     return <div>
         <FoodDataPageHeader displayMode={displayMode}
                             setDisplayMode={onDisplayModeChange}
-                            dataPage={selectedDataTab}
+                            dataPage={dataPage}
                             setDataPage={onNewDataPage}
                             selectedFoodItem={props.selectedFoodItem}
                             tableData={tableData}
-                            selectedDataTab={selectedDataTab}
         />
     </div>
 
