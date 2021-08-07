@@ -5,7 +5,7 @@ import ApplicationDataContextProvider, {ApplicationDataContextStore} from "../..
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanel} from "./DirectCompareDataPanel";
 import {applicationStrings} from "../../static/labels";
-import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_ITEMS, TAB_LIST} from "../../config/Constants";
+import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_ITEM, TAB_LIST} from "../../config/Constants";
 import {useLocation} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 

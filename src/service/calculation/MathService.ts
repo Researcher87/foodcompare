@@ -111,3 +111,24 @@ export function roundToNextValue(chartMaxValue: number) {
 
     return round(roundUp(chartMaxValue, multiple),2)
 }
+
+
+/**
+ * Returns a number of fixed length with leading zeros.
+ */
+export function getNumberOfFixedLength(number: number, digits: number): string {
+	let numberString = `${number}`
+	while(numberString.length < digits) {
+		numberString = `0${numberString}`
+	}
+	return numberString
+}
+
+
+export function convertBooleanToDigit(value: boolean) {
+	return value === true ? 1 : 0
+}
+
+export function convertStringToBoolean(value: string) {
+	return value === "1" ? true : false
+}

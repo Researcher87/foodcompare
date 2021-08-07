@@ -4,12 +4,13 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import TabContainer from "./TabContainer";
 import {applicationStrings} from "../../static/labels";
 import {LanguageContext} from "../../contexts/LangContext";
-import {PATH_FOODDATA_PANEL, PORTION_KEY_100, QUERYKEY_DATAPANEL_ITEMS, TAB_LIST} from "../../config/Constants";
+import {PATH_FOODDATA_PANEL, PORTION_KEY_100, QUERYKEY_DATAPANEL_ITEM, QUERYKEY_DATAPANEL_AGGREGATED, TAB_LIST} from "../../config/Constants";
 import {useLocation, useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import { UriData } from "../../types/livedata/UriData";
-import { convertUriDataJsonToCompactString, convertUriStringToObject } from "../../service/UriService";
+import { convertUriDataJsonToCompactString, convertUriStringToObject, makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/UriService";
+import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 
 
 export default function FoodDataPanelContainer() {
@@ -35,44 +36,90 @@ export default function FoodDataPanelContainer() {
             const key = queryString.substring(0, equalOperator)
             const value = queryString.substring(equalOperator+1)
 
-            if(key !== QUERYKEY_DATAPANEL_ITEMS || value.length < 1) {
-                return
-            }
-			
-			try {				
-				const uriDataObject: UriData = convertUriStringToObject(value)
-				const {addItemToFoodDataPanel, setSelectedDataPage} = applicationContext.applicationData.foodDataPanel
-				
-				console.log('Query Block 1 -- set data page:', uriDataObject.selectedDataPage)
-				setSelectedDataPage(uriDataObject.selectedDataPage)
-				applicationContext.setUserData(uriDataObject.userData)	
-				
-				const selectedFoodItemWithComponent = makeFoodDataPanelComponent(uriDataObject.selectedFoodItem, 
-				applicationContext.foodDataCorpus.foodNames, languageContext.language, uriDataObject.selectedDataPage)
-				
-				if(selectedFoodItemWithComponent) {
-					addItemToFoodDataPanel(selectedFoodItemWithComponent)
+			const {addItemToFoodDataPanel, setSelectedDataPage} = applicationContext.applicationData.foodDataPanel
+
+			// Set data from an aggregated food item query
+            if(key === QUERYKEY_DATAPANEL_AGGREGATED && value.length > 1) {
+            	try {				
+					const uriDataObject: UriData = convertUriStringToObject(value)
+					
+					console.log('Query Block 1 -- set data page:', uriDataObject.selectedDataPage)
+					setSelectedDataPage(uriDataObject.selectedDataPage)
+					applicationContext.setUserData(uriDataObject.userData)	
+					
+					const selectedFoodItemWithComponent = makeFoodDataPanelComponent(uriDataObject.selectedFoodItem, 
+					applicationContext.foodDataCorpus.foodNames, languageContext.language, uriDataObject.selectedDataPage)
+					
+					if(selectedFoodItemWithComponent) {
+						addItemToFoodDataPanel(selectedFoodItemWithComponent)
+					}
+				} catch(e) {
+					console.error(e)
 				}
-			} catch(e) {
-				console.error(e)
+            }
+
+			// Set data from a simple food item (create data from query parameters)
+			if(key === QUERYKEY_DATAPANEL_ITEM && value.length > 1) {
+				const uriDataObject = parseFoodDataPanelDefaultUri(value)
+				if(uriDataObject) {
+					const foodItem = applicationContext.foodDataCorpus.foodItems.find(foodItem => foodItem.id === uriDataObject.foodItemId)
+					if(!foodItem) {
+						return
+					}
+					
+					const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
+					
+					const selectedFoodItem: SelectedFoodItem = {
+						id: 1,
+						foodItem: foodItem,
+						foodClass: foodClass,
+						portion: uriDataObject.portionData,
+						selectedSource: uriDataObject.source,
+						combineData: uriDataObject.combineData,
+						supplementData: uriDataObject.supplementData
+					}
+					
+					setSelectedDataPage(uriDataObject.selectedDataPage)
+					applicationContext.setUserData(uriDataObject.userData)	
+					
+					const selectedFoodItemWithComponent = makeFoodDataPanelComponent(selectedFoodItem, 
+						applicationContext.foodDataCorpus.foodNames, languageContext.language, uriDataObject.selectedDataPage)
+					
+					if(selectedFoodItemWithComponent) {
+						addItemToFoodDataPanel(selectedFoodItemWithComponent)
+					}
+				}
 			}
-	
-		} else {
-			console.log('Query Block 2', applicationContext.applicationData.foodDataPanel.selectedDataPage)
 			
-			// set new path
+		} else {   // Set new URI Query
 			const selectedFoodItem = selectedFoodItems[selectedFoodItemIndex]
-			const uriDataObject: UriData = {
-				selectedFoodItem: {...selectedFoodItem, component: undefined},
-				selectedDataPage: applicationContext.applicationData.foodDataPanel.selectedDataPage,
-				userData: applicationContext.userData
-			}
+			const userData = applicationContext.userData
+			const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
 			
-			const query = convertUriDataJsonToCompactString(uriDataObject)
-			history.push({
-				pathName: PATH_FOODDATA_PANEL,
-				search: `${QUERYKEY_DATAPANEL_ITEMS}=${query}`
-			})
+			// New query for aggregated food item
+			if(selectedFoodItem.compositeSubElements && selectedFoodItem.compositeSubElements.length > 0) {
+				const uriDataObject: UriData = {
+					selectedFoodItem: {...selectedFoodItem, component: undefined},
+					selectedDataPage: selectedDataPage,
+					userData: userData
+				}
+			
+				const query = convertUriDataJsonToCompactString(uriDataObject)
+			
+				history.push({
+					pathName: PATH_FOODDATA_PANEL,
+					search: `${QUERYKEY_DATAPANEL_AGGREGATED}=${query}`
+				})
+			} else {   // New query for a default food item
+				const {portion, selectedSource, supplementData, combineData} = selectedFoodItem
+				const query = makeFoodDataPanelDefaultUri(selectedFoodItem.foodItem.id, selectedSource, portion, 
+					userData, supplementData, combineData, selectedDataPage)
+					
+				history.push({
+					pathName: PATH_FOODDATA_PANEL,
+					search: `${QUERYKEY_DATAPANEL_ITEM}=${query}`
+				})	
+			}
 		}
     }
 

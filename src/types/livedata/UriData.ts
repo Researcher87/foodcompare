@@ -7,3 +7,13 @@ export interface UriData {
 	selectedDataPage: string
 	selectedFoodItem: SelectedFoodItem
 }
+
+export interface UriDataPanelData {
+	foodItemId: number
+	source: number
+	portionData: PortionData
+	userData: UserData
+	selectedDataPage: string
+	supplementData: boolean
+	combineData: boolean
+}
