@@ -33,7 +33,7 @@ export default function DirectCompareContainer() {
     const updateSelectedFoodItems = (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => {
         setSelectedFoodItem1(selectedFoodItem1)
         setSelectedFoodItem2(selectedFoodItem2)
-        applicationContext.applicationData.directCompareDataPanel.setSelectedDirectCompareItems(selectedFoodItem1, selectedFoodItem2)
+        applicationContext.setDirectCompareData.setSelectedDirectCompareItems(selectedFoodItem1, selectedFoodItem2)
     }
 
     return (

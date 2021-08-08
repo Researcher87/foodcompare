@@ -67,7 +67,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                         subChart: subChart
                     }
                 }
-                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
+                applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
             }
         }
     }
@@ -96,7 +96,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                 ...currentSettings,
                 carbsChartConfig: carbsChartConfig
             }
-            applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
+            applicationContext.setDirectCompareData.updateDirectCompareChartConfig(newChartConfig)
         } else {
             setSubChart(event.target.value)
         }

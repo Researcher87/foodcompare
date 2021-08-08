@@ -127,7 +127,7 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
             }
 
             if (newChartConfig) {
-                applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
+                applicationContext.setDirectCompareData.updateDirectCompareChartConfig(newChartConfig)
             }
         }
     }

@@ -27,45 +27,61 @@ export interface ApplicationDataContext {
     applicationData: ApplicationData
     userData: UserData
     debug: boolean
-    setUserData: (userData: UserData) => void
     ready: boolean
 }
 
-export const ApplicationDataContextStore = createContext<ApplicationDataContext | null>(null)
+export interface ApplicationContext extends ApplicationDataContext {
+	setUserData: (userData: UserData) => void
+	setPreferredSource: (string) => void
+	setFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => void
+	setFoodDataPanelData: {
+		setSelectedFoodTab: (number) => void
+		setSelectedDataPage: (string) => void
+		addItemToFoodDataPanel: (selectedFoodItem: SelectedFoodItem) => void
+		removeItemFromFoodDataPanel: (number) => void
+		removeAllItemsFromFoodDataPanel: () => void
+		updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void
+		updateFoodDataPanelChartConfig: (chartConfig: ChartConfigData) => void
+	}
+	setDirectCompareData: {
+		updateDirectCompareChartConfig: (chartConfig: DirectCompareChartConfigData) => void
+    	setSelectedDirectCompareItems: (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => void
+    	setSelectedDirectCompareDataPage: (selectedPage: string) => void
+	}
+	
+}
+
+export const ApplicationDataContextStore = createContext<ApplicationContext | null>(null)
 
 export default class ApplicationDataContextProvider extends Component<any, ApplicationDataContext> {
 
     setSelectedFoodDataPanelTab = (selectedTab: number) => {
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
-                foodDataPanel: {...this.state.applicationData.foodDataPanel, selectedFoodItemIndex: selectedTab}
+                ...prevState.applicationData,
+                foodDataPanel: {...prevState.applicationData.foodDataPanel, selectedFoodItemIndex: selectedTab}
             }
-        })
+        }))
     }
 
     setSelectedFoodDataPanelPage = (selectedPage: string) => {
-	console.log('Query App Context:', selectedPage)
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
-                foodDataPanel: {...this.state.applicationData.foodDataPanel, selectedDataPage: selectedPage}
+                ...prevState.applicationData,
+                foodDataPanel: {...prevState.applicationData.foodDataPanel, selectedDataPage: selectedPage}
             }
-        })
+        }))
     }
 
     addItemToFoodDataPanel = (foodItem: SelectedFoodItem) => {
         const newItems = Object.assign(this.state.applicationData.foodDataPanel.selectedFoodItems)
         newItems.push(foodItem)
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
-                foodDataPanel: {...this.state.applicationData.foodDataPanel, selectedFoodItems: newItems}
+                ...prevState.applicationData,
+                foodDataPanel: {...prevState.applicationData.foodDataPanel, selectedFoodItems: newItems}
             }
-        })
+        }))
     }
 
     removeItemFromFoodDataPanel = (foodItemId: number) => {
@@ -84,31 +100,29 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             }
         }
 
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
+                ...prevState.applicationData,
                 foodDataPanel: {
-                    ...this.state.applicationData.foodDataPanel,
+                    ...prevState.applicationData.foodDataPanel,
                     selectedFoodItems: newItems,
                     selectedFoodItemIndex: newIndex
                 }
             }
-        })
+        }))
     }
 
     removeAllItemsFromFoodDataPanel = () => {
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
+                ...prevState.applicationData,
                 foodDataPanel: {
-                    ...this.state.applicationData.foodDataPanel,
+                    ...prevState.applicationData.foodDataPanel,
                     selectedFoodItems: [],
                     selectedFoodItemIndex: 0
                 }
             }
-        })
+        }))
     }
 
     updateAllFoodItemNames = (foodNames: Array<NameType>, newLanguage: string) => {
@@ -123,104 +137,99 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             return selectedFoodItem
         })
 
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
+                ...prevState.applicationData,
                 foodDataPanel: {
-                    ...this.state.applicationData.foodDataPanel,
+                    ...prevState.applicationData.foodDataPanel,
                     selectedFoodItems: newFoodItems,
                 }
             }
-        })
+        }))
     }
 
     updateFoodDataPanelChartConfig = (chartConfig: ChartConfigData) => {
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
+                ...prevState.applicationData,
                 foodDataPanel: {
-                    ...this.state.applicationData.foodDataPanel,
+                    ...prevState.applicationData.foodDataPanel,
                     chartConfigData: chartConfig
                 }
             }
-        })
+        }))
     }
 
 
     setSelectedDirectCompareItems = (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => {
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
+                ...prevState.applicationData,
                 directCompareDataPanel: {
-                    ...this.state.applicationData.directCompareDataPanel,
+                    ...prevState.applicationData.directCompareDataPanel,
                     selectedFoodItem1: selectedFoodItem1,
                     selectedFoodItem2: selectedFoodItem2
                 }
             }
-        })
+        }))
     }
 
     setSelectedDirectCompareDataPage = (selectedPage: string) => {
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
+                ...prevState.applicationData,
                 directCompareDataPanel: {
-                    ...this.state.applicationData.directCompareDataPanel,
+                    ...prevState.applicationData.directCompareDataPanel,
                     selectedDataPage: selectedPage
                 }
             }
-        })
+        }))
     }
 
     updateDirectCompareChartConfig = (chartConfig: DirectCompareChartConfigData) => {
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData,
+                ...prevState.applicationData,
                 directCompareDataPanel: {
                     ...this.state.applicationData.directCompareDataPanel,
                     directCompareConfigChart: chartConfig
                 }
             }
-        })
+        }))
     }
 
     setUserData = (userData: UserData) => {
-        this.setState({
-            ...this.state,
-            userData: userData
-        })
+        this.setState(() => ({
+            userData: {
+				...userData
+			}
+        }))
     }
 
 
     setPreferredSource = (source: string) => {
-        this.setState({
-            ...this.state,
+        this.setState(prevState => ({
             applicationData: {
-                ...this.state.applicationData, preferredSource: source
+                ...prevState.applicationData, preferredSource: source
             }
-        })
+        }))
     }
 
 
     setFoodSelectorConfig = (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => {
-        this.setState({
-                ...this.state,
-                applicationData: {
-                    ...this.state.applicationData, foodSelector: {
-                        ...this.state.applicationData.foodSelector,
+        this.setState(prevState => ({
+            applicationData: {
+                ...prevState.applicationData, foodSelector: {
+                        ...prevState.applicationData.foodSelector,
                         selectedCategory: selectedCategory,
                         sourceSupplement: sourceSupplement,
                         sourceCombine: sourceCombine
                     }
                 }
             }
-        )
+        ))
     }
+
 
     state: ApplicationDataContext = {
         foodDataCorpus: {
@@ -240,31 +249,19 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 displayMode: DISPLAYMODE_CHART,
                 selectedFoodItemIndex: 0,
                 chartConfigData: initialChartConfigData,
-                setSelectedFoodTab: this.setSelectedFoodDataPanelTab,
-                setSelectedDataPage: this.setSelectedFoodDataPanelPage,
-                addItemToFoodDataPanel: this.addItemToFoodDataPanel,
-                removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
-                removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
-                updateAllFoodItemNames: this.updateAllFoodItemNames,
-                updateFoodDataPanelChartConfig: this.updateFoodDataPanelChartConfig
             },
             directCompareDataPanel: {
                 selectedFoodItem1: null,
                 selectedFoodItem2: null,
                 selectedDataPage: TAB_BASE_DATA,
-                directCompareConfigChart: initialDirectCompareConfigData,
-                updateDirectCompareChartConfig: this.updateDirectCompareChartConfig,
-                setSelectedDirectCompareDataPage: this.setSelectedDirectCompareDataPage,
-                setSelectedDirectCompareItems: this.setSelectedDirectCompareItems
+                directCompareConfigChart: initialDirectCompareConfigData
             },
             foodSelector: {
                 selectedCategory: null,
                 sourceSupplement: true,
                 sourceCombine: false,
-                setFoodSelectorConfig: this.setFoodSelectorConfig
             },
             preferredSource: SOURCE_SRLEGACY,
-            setPreferredSource: this.setPreferredSource
         },
         userData: {
             age: initialUserDataAge,
@@ -278,7 +275,6 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             initialValues: true
         },
         debug: true,
-        setUserData: this.setUserData,
         ready: false
     }
 
@@ -290,11 +286,35 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         })
     }
 
-    render()
-        :
-        ReactElement {
+    render(): ReactElement {
+		
+		const value = {
+			applicationData: this.state.applicationData,
+			foodDataCorpus: this.state.foodDataCorpus,
+			userData: this.state.userData,
+			debug: this.state.debug,
+			ready: this.state.ready,
+			setUserData: this.setUserData,
+			setPreferredSource: this.setPreferredSource,
+			setFoodDataPanelData: {
+                setSelectedFoodTab: this.setSelectedFoodDataPanelTab,
+                setSelectedDataPage: this.setSelectedFoodDataPanelPage,
+                addItemToFoodDataPanel: this.addItemToFoodDataPanel,
+                removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
+                removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
+                updateAllFoodItemNames: this.updateAllFoodItemNames,
+                updateFoodDataPanelChartConfig: this.updateFoodDataPanelChartConfig
+			},
+			setDirectCompareData: {
+                updateDirectCompareChartConfig: this.updateDirectCompareChartConfig,
+                setSelectedDirectCompareDataPage: this.setSelectedDirectCompareDataPage,
+                setSelectedDirectCompareItems: this.setSelectedDirectCompareItems				
+			},
+			setFoodSelectorConfig: this.setFoodSelectorConfig
+		}
+		
         return (
-            <ApplicationDataContextStore.Provider value={{...this.state}}>
+            <ApplicationDataContextStore.Provider value={value}>
                 {this.props.children}
             </ApplicationDataContextStore.Provider>
         )

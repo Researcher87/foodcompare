@@ -49,7 +49,7 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
                     synchronize: synchronize
                 }
             }
-            applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
+            applicationContext.setDirectCompareData.updateDirectCompareChartConfig(newChartConfig)
         }
     }
 

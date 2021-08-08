@@ -38,7 +38,7 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     }
 
     const setDataPage = (datapage: string) => {
-        applicationContext.applicationData.directCompareDataPanel.setSelectedDirectCompareDataPage(datapage)
+        applicationContext.setDirectCompareData.setSelectedDirectCompareDataPage(datapage)
         setSelectedDataTab(datapage)
     }
 

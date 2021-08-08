@@ -12,6 +12,8 @@ import {applicationStrings} from "../../static/labels";
 import {confirmAction} from "../ConfirmationDialog";
 import ReactTooltip from "react-tooltip";
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
+import {useLocation, useHistory} from 'react-router-dom';
+import { PATH_FOODDATA_PANEL } from '../../config/Constants';
 
 interface FoodAnalyzerContainerProps {
     onNewFoodItemSelected: () => void
@@ -20,6 +22,7 @@ interface FoodAnalyzerContainerProps {
 export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
+	const history = useHistory()
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(false)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(false)
@@ -42,7 +45,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             selectedFoodItem, applicationContext.foodDataCorpus.foodNames, languageContext.language)
 
         if(selectedFoodItemWithComponent !== null) {
-            applicationContext.applicationData.foodDataPanel.addItemToFoodDataPanel(selectedFoodItemWithComponent)
+            applicationContext.setFoodDataPanelData.addItemToFoodDataPanel(selectedFoodItemWithComponent)
         }
 
         if (applicationContext?.debug) {
@@ -59,7 +62,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             applicationStrings.button_no[languageContext.language],
             {}
         )) {
-            applicationContext?.applicationData.foodDataPanel.removeAllItemsFromFoodDataPanel()
+            applicationContext?.setFoodDataPanelData.removeAllItemsFromFoodDataPanel()
+			history.push({pathName: PATH_FOODDATA_PANEL})
         }
     }
 

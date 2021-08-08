@@ -43,7 +43,7 @@ export default function FoodDataPage(props: FoodDataPageProps) {
 
     const updatePage = () => {   // Central update method when any (radio) button was clicked
         let tableDataList: Array<FoodTableDataObject> = [];
-        const {foodItem, portion} = props.selectedFoodItem
+        const {portion} = props.selectedFoodItem
 
         const preferredSource = applicationContext ? applicationContext.applicationData.preferredSource : SOURCE_SRLEGACY
 
@@ -67,12 +67,12 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     }
 
     useEffect(() => {
-		console.log('Drecksneger')
         updatePage()
     }, [displayMode, 
 		props.selectedFoodItem, 
 		applicationContext?.applicationData.preferredSource, 
-		applicationContext?.applicationData.foodDataPanel.selectedDataPage]
+		applicationContext?.applicationData.foodDataPanel.selectedDataPage,
+		applicationContext?.userData]
 	)
 
     if (!applicationContext) {
@@ -80,7 +80,7 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     }
 
     const onNewDataPage = (datapage: string) => {
-        applicationContext.applicationData.foodDataPanel.setSelectedDataPage(datapage)
+        applicationContext.setFoodDataPanelData.setSelectedDataPage(datapage)
 		setDataPage(datapage)
         updatePage()
     }

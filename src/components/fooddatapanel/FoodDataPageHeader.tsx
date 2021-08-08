@@ -5,7 +5,7 @@ import {applicationStrings} from "../../static/labels";
 import {FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/all";
 import {
     DISPLAYMODE_CHART,
-    DISPLAYMODE_TABLE, SOURCE_SRLEGACY,
+    DISPLAYMODE_TABLE, PATH_FOODDATA_PANEL, SOURCE_SRLEGACY,
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
@@ -25,7 +25,8 @@ import {HelpModal} from "../HelpModal";
 import {getHelpText, HelpText} from "../../service/HelpService";
 import getName from "../../service/LanguageService";
 import {ChartMenuPanel} from "./ChartMenuPanel";
-import {getNutrientData, getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
+import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
+import {useHistory} from 'react-router-dom';
 
 
 interface FoodDataPageHeaderProps {
@@ -40,6 +41,7 @@ interface FoodDataPageHeaderProps {
 export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
+	const history = useHistory()
 
     const [helpModalId, setHelpModalId] = useState<number>(0)
 
@@ -53,7 +55,13 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
-        applicationContext.applicationData.foodDataPanel.removeItemFromFoodDataPanel(id)
+		const remainingItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
+
+        applicationContext.setFoodDataPanelData.removeItemFromFoodDataPanel(id)
+
+		if(remainingItems === 0) {
+			history.push({pathName: PATH_FOODDATA_PANEL})
+		}		
     }
 
     const help = () => {

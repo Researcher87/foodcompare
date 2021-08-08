@@ -67,7 +67,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 const currentSelectorSetting = applicationContext.applicationData.foodSelector
                 if (selectedCategory !== currentSelectorSetting.selectedCategory || supplementData !== currentSelectorSetting.sourceSupplement
                     || combineData !== currentSelectorSetting.sourceCombine) {
-                    applicationContext.applicationData.foodSelector.setFoodSelectorConfig(selectedCategory, supplementData, combineData)
+                    applicationContext.setFoodSelectorConfig(selectedCategory, supplementData, combineData)
                 }
             }
 

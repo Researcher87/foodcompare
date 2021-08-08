@@ -66,7 +66,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                         subChart: subChart
                     }
                 }
-                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
+                applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
             }
         }
     }
