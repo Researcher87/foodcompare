@@ -8,7 +8,7 @@ import {PATH_FOODDATA_PANEL, PORTION_KEY_100, QUERYKEY_DATAPANEL_ITEM, QUERYKEY_
 import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
-import { UriData } from "../../types/livedata/UriData";
+import { AggregatedFoodItemUriData, FoodItemUriData } from "../../types/livedata/UriData";
 import { makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/uri/FoodDataPanelUriService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import { convertAggregatedDataJsonToUriString, convertAggregatedUriStringToObject } from "../../service/uri/FoodDataPanelAggregatedUriService";
@@ -54,7 +54,7 @@ export default function FoodDataPanelContainer() {
 			
 			// New query for aggregated food item
 			if(selectedFoodItem.aggregated) {
-				const uriDataObject: UriData = {
+				const uriDataObject: AggregatedFoodItemUriData = {
 					selectedFoodItem: {...selectedFoodItem, component: undefined},
 					selectedDataPage: selectedDataPage,
 					userData: userData,
@@ -69,8 +69,14 @@ export default function FoodDataPanelContainer() {
 				})
 			} else {   // New query for a default food item
 				const {portion, selectedSource, supplementData, combineData} = selectedFoodItem
-				const query = makeFoodDataPanelDefaultUri(selectedFoodItem.foodItem.id, selectedSource, portion, 
-					userData, supplementData, combineData, selectedDataPage, chartConfigData)
+				const foodItemData: FoodItemUriData = {
+						foodItemId: selectedFoodItem.foodItem.id,
+						portionData: portion,
+						source: selectedSource,
+						supplementData: supplementData,
+						combineData: combineData
+				}
+				const query = makeFoodDataPanelDefaultUri(foodItemData, userData, selectedDataPage, chartConfigData)
 					
 				history.push({
 					pathName: PATH_FOODDATA_PANEL,
@@ -90,7 +96,7 @@ export default function FoodDataPanelContainer() {
 			// Set data from an aggregated food item query
             if(key === QUERYKEY_DATAPANEL_AGGREGATED && value.length > 1) {
             	try {				
-					const uriDataObject: UriData | null = convertAggregatedUriStringToObject(chartConfigData, value)
+					const uriDataObject: AggregatedFoodItemUriData | null = convertAggregatedUriStringToObject(chartConfigData, value)
 					if(!uriDataObject) {
 						return
 					}
@@ -114,7 +120,10 @@ export default function FoodDataPanelContainer() {
 			if(key === QUERYKEY_DATAPANEL_ITEM && value.length > 1) {
 				const uriDataObject = parseFoodDataPanelDefaultUri(value, chartConfigData)
 				if(uriDataObject) {
-					const foodItem = applicationContext.foodDataCorpus.foodItems.find(foodItem => foodItem.id === uriDataObject.foodItemId)
+					const foodItem = applicationContext.foodDataCorpus.foodItems.find(
+							foodItem => foodItem.id === uriDataObject.selectedFoodItem.foodItemId
+						)
+						
 					if(!foodItem) {
 						return
 					}
@@ -126,10 +135,10 @@ export default function FoodDataPanelContainer() {
 						id: 1,
 						foodItem: foodItem,
 						foodClass: foodClass,
-						portion: uriDataObject.portionData,
-						selectedSource: uriDataObject.source,
-						combineData: uriDataObject.combineData,
-						supplementData: uriDataObject.supplementData
+						portion: uriDataObject.selectedFoodItem.portionData,
+						selectedSource: uriDataObject.selectedFoodItem.source,
+						combineData: uriDataObject.selectedFoodItem.combineData,
+						supplementData: uriDataObject.selectedFoodItem.supplementData
 					}
 					
 					setSelectedDataPage(uriDataObject.selectedDataPage)

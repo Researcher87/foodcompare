@@ -1,6 +1,6 @@
 import { ChartConfigData } from "../../types/livedata/ChartConfigData"
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem"
-import { UriData } from "../../types/livedata/UriData"
+import { AggregatedFoodItemUriData } from "../../types/livedata/UriData"
 import { UserData } from "../../types/livedata/UserData"
 import { getUpdatedChartConfig, makeChartConfigUriString } from "./ChartConfigConverter"
 import { convertUserDataObjectToString, convertUserDataStringToObject } from "./FoodDataPanelUriService"
@@ -127,7 +127,7 @@ const replacements: Array<Array<Replacemet>> = [
 ]
 
 
-export function convertAggregatedDataJsonToUriString(uriData: UriData): string {	
+export function convertAggregatedDataJsonToUriString(uriData: AggregatedFoodItemUriData): string {	
 	const objectToParse: SelectedFoodItem = {...uriData.selectedFoodItem, compositeSubElements: undefined, component: undefined, foodClass: undefined}
 	let selectedFoodItemString = JSON.stringify(objectToParse)
 	
@@ -141,7 +141,7 @@ export function convertAggregatedDataJsonToUriString(uriData: UriData): string {
 	return `${uriData.selectedDataPage}${separator}${selectedFoodItemString}${separator}${userDataString}${separator}${chartConfigString}`
 }
 
-export function convertAggregatedUriStringToObject(chartConfigData: ChartConfigData, uriString: string): UriData | null {
+export function convertAggregatedUriStringToObject(chartConfigData: ChartConfigData, uriString: string): AggregatedFoodItemUriData | null {
 	const fragments = uriString.split(separator)
 	if(fragments.length !== 4) {
 		return null

@@ -1,6 +1,6 @@
 import { SEX_FEMALE, SEX_MALE } from "../../config/Constants"
 import { ChartConfigData } from "../../types/livedata/ChartConfigData"
-import { UriData, UriDataPanelData } from "../../types/livedata/UriData"
+import { FoodDataPanelUriBaseData, FoodItemUriData, SimpleFoodItemUriData } from "../../types/livedata/UriData"
 import { UserData } from "../../types/livedata/UserData"
 import { PortionData } from "../../types/nutrientdata/FoodItem"
 import { getPalCategory, getPalValue } from "./../calculation/EnergyService"
@@ -8,48 +8,67 @@ import { convertBooleanToDigit, convertStringToBoolean, getNumberOfFixedLength }
 import { convertGeneralizedChartConfigStringToObject, getUpdatedChartConfig, makeChartConfigUriString } from "./ChartConfigConverter"
 
 
-export function makeFoodDataPanelDefaultUri(foodItemId: number, source: number, portionData: PortionData, 
-		userData: UserData, supplementData: boolean, combineData: boolean, selectedDataPage: string, chartConfigData: ChartConfigData) {
-	const portionString = convertPortionDataObjectToString(portionData)
+export function makeFoodDataPanelDefaultUri(foodItemData: FoodItemUriData,
+		userData: UserData, selectedDataPage: string, chartConfigData: ChartConfigData) {
+	const foodItemDataString = makeFoodItemDefaultUri(foodItemData)
 	const userDataString = convertUserDataObjectToString(userData)
-	const supplementValue = convertBooleanToDigit(supplementData)
-	const combineValue = convertBooleanToDigit(combineData)
 	const chartConfigString = makeChartConfigUriString(chartConfigData, selectedDataPage)
-	return `${foodItemId};${source};${portionString};${userDataString};${supplementValue}${combineValue};${selectedDataPage};${chartConfigString}`
+	return `${foodItemDataString};${selectedDataPage};${userDataString};${chartConfigString}`
 }
 
-export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: ChartConfigData): UriDataPanelData | null {
+export function makeFoodItemDefaultUri(foodItemData: FoodItemUriData) {
+		const portionString = convertPortionDataObjectToString(foodItemData.portionData)	
+		const supplementValue = convertBooleanToDigit(foodItemData.supplementData)
+		const combineValue = convertBooleanToDigit(foodItemData.combineData)
+		
+		return `${foodItemData.foodItemId};${foodItemData.source};${portionString};${supplementValue}${combineValue}`
+}
+
+export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: ChartConfigData): SimpleFoodItemUriData | null {
 	const fragments = uri.split(";")
 	if(fragments.length !== 7) {
 		return null
 	}
 	
+	const selectedDataPage = fragments[4]
+	const userData = convertUserDataStringToObject(fragments[5])
+	const chartConfigString = fragments[6]
+	const foodItemUriData = getFoodItemUriData(fragments)
+	
+	if(!userData || !foodItemUriData) {
+		return null
+	}
+	
+	const newChartConfigData = getUpdatedChartConfig(chartConfigData, chartConfigString, selectedDataPage)
+	
+	return {
+		selectedFoodItem: foodItemUriData,
+		selectedDataPage: selectedDataPage,
+		userData: userData,
+		chartConfigData: newChartConfigData
+	}
+}
+
+
+export function getFoodItemUriData(fragments: Array<string>): FoodItemUriData | null {
 	const foodItemId = parseInt(fragments[0])
 	const source = parseInt(fragments[1])
 	const portionData = convertPortionDataStringToObject(fragments[2])
-	const userData = convertUserDataStringToObject(fragments[3])
-	const booleanData = fragments[4]
-	const selectedDataPage = fragments[5]
-	const chartConfigString = fragments[6]
-	
-	if(!userData || !portionData || booleanData.length < 2) {
-		return null
-	}
+	const booleanData = fragments[3]
 	
 	const supplementData = convertStringToBoolean(booleanData.substring(0,1))
 	const combineData = convertStringToBoolean(booleanData.substring(1,2))
 	
-	const newChartConfigData = getUpdatedChartConfig(chartConfigData, chartConfigString, selectedDataPage)
+	if(!portionData || booleanData.length < 2) {
+		return null
+	}
 	
 	return {
 		foodItemId: foodItemId,
 		source: source,
 		portionData: portionData,
-		userData: userData,
-		selectedDataPage: selectedDataPage,
 		supplementData: supplementData,
-		combineData: combineData,
-		chartConfigData: newChartConfigData
+		combineData: combineData
 	}
 }
 

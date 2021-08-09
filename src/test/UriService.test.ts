@@ -6,7 +6,7 @@ import { convertAggregatedDataJsonToUriString, convertAggregatedUriStringToObjec
 import { convertPortionDataObjectToString, convertPortionDataStringToObject, convertUserDataObjectToString, convertUserDataStringToObject, makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../service/uri/FoodDataPanelUriService"
 import { ChartConfigData } from "../types/livedata/ChartConfigData"
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem"
-import { UriData } from "../types/livedata/UriData"
+import { AggregatedFoodItemUriData, FoodItemUriData } from "../types/livedata/UriData"
 import FoodItem, { NutrientData, PortionData } from "../types/nutrientdata/FoodItem"
 import { userData } from "./TestHelper"
 
@@ -100,13 +100,22 @@ describe('Parsing of sub-elements in the URI', () => {
 			}
 		}
 		
-		const uriString = makeFoodDataPanelDefaultUri(foodItemId, source, portionData, userData, true, false, TAB_LIPIDS_DATA, chartConfigData)
+		const foodItemData: FoodItemUriData = {
+			foodItemId: foodItemId,
+			source: source,
+			portionData: portionData,
+			combineData: true,
+			supplementData: true
+		}
+		
+		const uriString = makeFoodDataPanelDefaultUri(foodItemData, userData, TAB_LIPIDS_DATA, chartConfigData)
 		const uriObject = parseFoodDataPanelDefaultUri(uriString, chartConfigData)
 		
 		expect(uriObject).not.toBe(null)
-		expect(uriObject?.foodItemId).toBe(foodItemId)
-		expect(uriObject?.source).toBe(source)
-		expect(uriObject?.portionData).toMatchObject(portionData)
+		expect(uriObject?.selectedFoodItem).not.toBe(null)
+		expect(uriObject?.selectedFoodItem.foodItemId).toBe(foodItemId)
+		expect(uriObject?.selectedFoodItem.source).toBe(source)
+		expect(uriObject?.selectedFoodItem.portionData).toMatchObject(portionData)
 		expect(uriObject?.userData).toMatchObject(userData)
 		expect(uriObject?.chartConfigData).toMatchObject(chartConfigData)
 	})
@@ -219,7 +228,7 @@ describe('Parsing of sub-elements in the URI', () => {
 			...initialChartConfigData.vitaminChartConfig, expand100: true
 		}}
 		
-		const uriDataObject: UriData = {
+		const uriDataObject: AggregatedFoodItemUriData = {
 			selectedFoodItem: selectedFoodItem,
 			selectedDataPage: TAB_VITAMIN_DATA,
 			chartConfigData: chartConfig,
