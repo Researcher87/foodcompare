@@ -287,7 +287,6 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     }
 
     render(): ReactElement {
-		
 		const value = {
 			applicationData: this.state.applicationData,
 			foodDataCorpus: this.state.foodDataCorpus,

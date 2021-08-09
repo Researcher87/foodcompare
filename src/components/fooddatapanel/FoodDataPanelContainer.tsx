@@ -9,14 +9,23 @@ import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import { UriData } from "../../types/livedata/UriData";
-import { convertUriDataJsonToCompactString, convertUriStringToObject, makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/UriService";
+import { convertUriDataJsonToCompactString, convertUriStringToObject, makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/uri/UriService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
+import { getUpdatedChartConfig } from "../../service/uri/ChartConfigConverter";
 
 
 export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
 	const history = useHistory()
+
+	useEffect(() => {
+        buildDataPanelPageFromURI()
+    }, [applicationContext?.applicationData.foodDataPanel.selectedFoodItemIndex, 
+		applicationContext?.applicationData.foodDataPanel.selectedFoodItems,
+		applicationContext?.applicationData.foodDataPanel.selectedDataPage,
+		applicationContext?.applicationData.foodDataPanel.chartConfigData,
+		applicationContext?.userData])
 
     const buildDataPanelPageFromURI = () => {
 		if(!applicationContext) {
@@ -26,6 +35,51 @@ export default function FoodDataPanelContainer() {
 		const {selectedFoodItemIndex, selectedFoodItems} = applicationContext.applicationData.foodDataPanel
 		
 		if(selectedFoodItemIndex === null || !selectedFoodItems || selectedFoodItems.length === 0) {			
+			createDataFromUriQuery()		
+		} else {   // Set new URI Query		
+			updateUriQuery(selectedFoodItemIndex)
+		}
+    }
+
+    if (!applicationContext || !applicationContext.ready) {
+        return <div/>
+    }
+
+	const chartConfigData = applicationContext.applicationData.foodDataPanel.chartConfigData
+
+	const updateUriQuery = (selectedFoodItemIndex: number) => {
+		const selectedFoodItem = selectedFoodItems[selectedFoodItemIndex]
+			const userData = applicationContext.userData
+			const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
+			
+			// New query for aggregated food item
+			if(selectedFoodItem.compositeSubElements && selectedFoodItem.compositeSubElements.length > 0) {
+				const uriDataObject: UriData = {
+					selectedFoodItem: {...selectedFoodItem, component: undefined},
+					selectedDataPage: selectedDataPage,
+					userData: userData,
+					chartConfigData: chartConfigData
+				}
+			
+				const query = convertUriDataJsonToCompactString(uriDataObject)
+			
+				history.push({
+					pathName: PATH_FOODDATA_PANEL,
+					search: `${QUERYKEY_DATAPANEL_AGGREGATED}=${query}`
+				})
+			} else {   // New query for a default food item
+				const {portion, selectedSource, supplementData, combineData} = selectedFoodItem
+				const query = makeFoodDataPanelDefaultUri(selectedFoodItem.foodItem.id, selectedSource, portion, 
+					userData, supplementData, combineData, selectedDataPage, chartConfigData)
+					
+				history.push({
+					pathName: PATH_FOODDATA_PANEL,
+					search: `${QUERYKEY_DATAPANEL_ITEM}=${query}`
+				})
+			}
+	}
+	
+	const createDataFromUriQuery = () => {
 			const queryString = window.location.search.substring(1)
 			const equalOperator = queryString.indexOf("=")
             const key = queryString.substring(0, equalOperator)
@@ -53,7 +107,7 @@ export default function FoodDataPanelContainer() {
 
 			// Set data from a simple food item (create data from query parameters)
 			if(key === QUERYKEY_DATAPANEL_ITEM && value.length > 1) {
-				const uriDataObject = parseFoodDataPanelDefaultUri(value)
+				const uriDataObject = parseFoodDataPanelDefaultUri(value, chartConfigData)
 				if(uriDataObject) {
 					const foodItem = applicationContext.foodDataCorpus.foodItems.find(foodItem => foodItem.id === uriDataObject.foodItemId)
 					if(!foodItem) {
@@ -81,52 +135,11 @@ export default function FoodDataPanelContainer() {
 					if(selectedFoodItemWithComponent) {
 						addItemToFoodDataPanel(selectedFoodItemWithComponent)
 					}
-				}
-			}
-			
-		} else {   // Set new URI Query		
-			const selectedFoodItem = selectedFoodItems[selectedFoodItemIndex]
-			const userData = applicationContext.userData
-			const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
-			
-			// New query for aggregated food item
-			if(selectedFoodItem.compositeSubElements && selectedFoodItem.compositeSubElements.length > 0) {
-				const uriDataObject: UriData = {
-					selectedFoodItem: {...selectedFoodItem, component: undefined},
-					selectedDataPage: selectedDataPage,
-					userData: userData
-				}
-			
-				const query = convertUriDataJsonToCompactString(uriDataObject)
-			
-				history.push({
-					pathName: PATH_FOODDATA_PANEL,
-					search: `${QUERYKEY_DATAPANEL_AGGREGATED}=${query}`
-				})
-			} else {   // New query for a default food item
-				const {portion, selectedSource, supplementData, combineData} = selectedFoodItem
-				const query = makeFoodDataPanelDefaultUri(selectedFoodItem.foodItem.id, selectedSource, portion, 
-					userData, supplementData, combineData, selectedDataPage)
 					
-				history.push({
-					pathName: PATH_FOODDATA_PANEL,
-					search: `${QUERYKEY_DATAPANEL_ITEM}=${query}`
-				})
+					applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(uriDataObject.chartConfigData)
+				}
 			}
-		}
-    }
-
-
-    useEffect(() => {
-        buildDataPanelPageFromURI()
-    }, [applicationContext?.applicationData.foodDataPanel.selectedFoodItemIndex, 
-		applicationContext?.applicationData.foodDataPanel.selectedFoodItems,
-		applicationContext?.applicationData.foodDataPanel.selectedDataPage,
-		applicationContext?.userData])
-
-    if (!applicationContext || !applicationContext.ready) {
-        return <div/>
-    }
+	}
 
 
     const selectedFoodItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems

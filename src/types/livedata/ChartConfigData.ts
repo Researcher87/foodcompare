@@ -42,3 +42,13 @@ export interface BarChartConfig {
 export interface DirectCompareBarChartConfig extends BarChartConfig {
     synchronize: boolean
 }
+
+// For URI String
+export interface GeneralizedChartConfig {
+	chartType?: string
+	showLegend?: boolean
+	showDetails?: boolean
+	expand100?: boolean
+	portionType?: string
+	subChart?: string
+}

@@ -1,9 +1,11 @@
-import { SEX_FEMALE, SEX_MALE } from "../config/Constants"
-import { UriData, UriDataPanelData } from "../types/livedata/UriData"
-import { UserData } from "../types/livedata/UserData"
-import { PortionData } from "../types/nutrientdata/FoodItem"
-import { getPalCategory, getPalValue } from "./calculation/EnergyService"
-import { convertBooleanToDigit, convertStringToBoolean, getNumberOfFixedLength } from "./calculation/MathService"
+import { SEX_FEMALE, SEX_MALE } from "../../config/Constants"
+import { ChartConfigData } from "../../types/livedata/ChartConfigData"
+import { UriData, UriDataPanelData } from "../../types/livedata/UriData"
+import { UserData } from "../../types/livedata/UserData"
+import { PortionData } from "../../types/nutrientdata/FoodItem"
+import { getPalCategory, getPalValue } from "./../calculation/EnergyService"
+import { convertBooleanToDigit, convertStringToBoolean, getNumberOfFixedLength } from "./../calculation/MathService"
+import { convertGeneralizedChartConfigStringToObject, getUpdatedChartConfig, makeChartConfigUriString } from "./ChartConfigConverter"
 
 interface Replacemet {
 	key: string
@@ -47,17 +49,18 @@ export function convertUriStringToObject(uriString: string): UriData {
 }
 
 export function makeFoodDataPanelDefaultUri(foodItemId: number, source: number, portionData: PortionData, 
-		userData: UserData, supplementData: boolean, combineData: boolean, selectedDataPage: string) {
+		userData: UserData, supplementData: boolean, combineData: boolean, selectedDataPage: string, chartConfigData: ChartConfigData) {
 	const portionString = convertPortionDataObjectToString(portionData)
 	const userDataString = convertUserDataObjectToString(userData)
 	const supplementValue = convertBooleanToDigit(supplementData)
 	const combineValue = convertBooleanToDigit(combineData)
-	return `${foodItemId};${source};${portionString};${userDataString};${supplementValue}${combineValue};${selectedDataPage}`
+	const chartConfigString = makeChartConfigUriString(chartConfigData, selectedDataPage)
+	return `${foodItemId};${source};${portionString};${userDataString};${supplementValue}${combineValue};${selectedDataPage};${chartConfigString}`
 }
 
-export function parseFoodDataPanelDefaultUri(uri: string): UriDataPanelData | null {
+export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: ChartConfigData): UriDataPanelData | null {
 	const fragments = uri.split(";")
-	if(fragments.length !== 6) {
+	if(fragments.length !== 7) {
 		return null
 	}
 	
@@ -67,6 +70,7 @@ export function parseFoodDataPanelDefaultUri(uri: string): UriDataPanelData | nu
 	const userData = convertUserDataStringToObject(fragments[3])
 	const booleanData = fragments[4]
 	const selectedDataPage = fragments[5]
+	const chartConfigString = fragments[6]
 	
 	if(!userData || !portionData || booleanData.length < 2) {
 		return null
@@ -75,6 +79,8 @@ export function parseFoodDataPanelDefaultUri(uri: string): UriDataPanelData | nu
 	const supplementData = convertStringToBoolean(booleanData.substring(0,1))
 	const combineData = convertStringToBoolean(booleanData.substring(1,2))
 	
+	const newChartConfigData = getUpdatedChartConfig(chartConfigData, chartConfigString, selectedDataPage)
+	
 	return {
 		foodItemId: foodItemId,
 		source: source,
@@ -82,7 +88,8 @@ export function parseFoodDataPanelDefaultUri(uri: string): UriDataPanelData | nu
 		userData: userData,
 		selectedDataPage: selectedDataPage,
 		supplementData: supplementData,
-		combineData: combineData
+		combineData: combineData,
+		chartConfigData: newChartConfigData
 	}
 }
 
@@ -97,7 +104,7 @@ export function convertUserDataObjectToString(userData: UserData): string {
 	const pregnant = convertBooleanToDigit(userData.pregnant)
 	const breastFeeding = convertBooleanToDigit(userData.breastFeeding)
 	const leisureSports = convertBooleanToDigit(userData.leisureSports)
-	
+		
 	return `${weight}${age}${size}${palValue}${sex}${pregnant}${breastFeeding}${leisureSports}`
 }
 

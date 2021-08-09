@@ -1,4 +1,5 @@
 export const AMOUNT_PORTION = "amount portion"
+export const GRAM = "100 gram"
 
 export const CHART_TYPE_PIE = "pie chart"
 export const CHART_TYPE_BAR = "bar chart"
@@ -32,8 +33,6 @@ export const DATA_VITAMINS_K = "data k";
 
 export const DISPLAYMODE_TABLE = "displaymode table"
 export const DISPLAYMODE_CHART = "displaymode chart"
-
-export const GRAM = "gram"
 
 export const CARBS_DATA_BASE = "carbs data base chart";
 export const CARBS_DATA_DETAIL = "carbs data detail chart"
