@@ -86,13 +86,14 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const onSubmitComposite = () => {
         const preferredSource = applicationContext.applicationData.preferredSource
-        const aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
+        let aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
 
         if(!aggregatedSelectedFoodItem) {
             console.error('Error while creating aggregated food item.')
             return
         }
 
+		aggregatedSelectedFoodItem = {...aggregatedSelectedFoodItem, aggregated: true}
         props.selectedFoodItemCallback(aggregatedSelectedFoodItem)
         props.onHide()
     }

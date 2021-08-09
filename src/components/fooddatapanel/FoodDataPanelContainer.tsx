@@ -9,9 +9,9 @@ import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import { UriData } from "../../types/livedata/UriData";
-import { convertUriDataJsonToCompactString, convertUriStringToObject, makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/uri/UriService";
+import { makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/uri/FoodDataPanelUriService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-import { getUpdatedChartConfig } from "../../service/uri/ChartConfigConverter";
+import { convertAggregatedDataJsonToUriString, convertAggregatedUriStringToObject } from "../../service/uri/FoodDataPanelAggregatedUriService";
 
 
 export default function FoodDataPanelContainer() {
@@ -53,7 +53,7 @@ export default function FoodDataPanelContainer() {
 			const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
 			
 			// New query for aggregated food item
-			if(selectedFoodItem.compositeSubElements && selectedFoodItem.compositeSubElements.length > 0) {
+			if(selectedFoodItem.aggregated) {
 				const uriDataObject: UriData = {
 					selectedFoodItem: {...selectedFoodItem, component: undefined},
 					selectedDataPage: selectedDataPage,
@@ -61,7 +61,7 @@ export default function FoodDataPanelContainer() {
 					chartConfigData: chartConfigData
 				}
 			
-				const query = convertUriDataJsonToCompactString(uriDataObject)
+				const query = convertAggregatedDataJsonToUriString(uriDataObject)
 			
 				history.push({
 					pathName: PATH_FOODDATA_PANEL,
@@ -90,13 +90,18 @@ export default function FoodDataPanelContainer() {
 			// Set data from an aggregated food item query
             if(key === QUERYKEY_DATAPANEL_AGGREGATED && value.length > 1) {
             	try {				
-					const uriDataObject: UriData = convertUriStringToObject(value)
+					const uriDataObject: UriData | null = convertAggregatedUriStringToObject(chartConfigData, value)
+					if(!uriDataObject) {
+						return
+					}
+					
+					applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(uriDataObject.chartConfigData)
 					setSelectedDataPage(uriDataObject.selectedDataPage)
-					applicationContext.setUserData(uriDataObject.userData)	
+					applicationContext.setUserData(uriDataObject.userData)
 					
 					const selectedFoodItemWithComponent = makeFoodDataPanelComponent(uriDataObject.selectedFoodItem, 
 					applicationContext.foodDataCorpus.foodNames, languageContext.language, uriDataObject.selectedDataPage)
-					
+							
 					if(selectedFoodItemWithComponent) {
 						addItemToFoodDataPanel(selectedFoodItemWithComponent)
 					}
