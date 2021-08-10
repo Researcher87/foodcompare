@@ -9,7 +9,7 @@ import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_AGGREGATED, QUERYKEY_DATAPANEL_I
 import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 import { AggregatedFoodItemUriData } from "../../types/livedata/UriData";
-import { makeDirectCompareDataUri, parseFoodDataPanelDefaultUri } from "../../service/uri/DirectCompareUriService";
+import { makeDirectCompareDataUri, parseDirectComparetUri } from "../../service/uri/DirectCompareUriService";
 
 export default function DirectCompareContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -73,7 +73,7 @@ export default function DirectCompareContainer() {
 
 			// Set data from a simple food item (create data from query parameters)
 			if(key === QUERYKEY_DATAPANEL_ITEM && value.length > 1) {
-				const uriDataObject = parseFoodDataPanelDefaultUri(value, chartConfigData)
+				const uriDataObject = parseDirectComparetUri(value, chartConfigData)
 								
 				if(uriDataObject) {
 					const foodItem1 = applicationContext.foodDataCorpus.foodItems.find(

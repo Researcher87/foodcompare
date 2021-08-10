@@ -1,14 +1,15 @@
-import { initialChartConfigData } from "../config/ApplicationSetting"
+import { initialChartConfigData, initialDirectCompareConfigData } from "../config/ApplicationSetting"
 import { CARBS_DATA_DETAIL, CHART_TYPE_BAR, CHART_TYPE_PIE, GRAM, LIPIDS_DATA_OMEGA, TAB_BASE_DATA, TAB_CARBS_DATA, TAB_LIPIDS_DATA, TAB_VITAMIN_DATA } from "../config/Constants"
 
 import { getUpdatedChartConfig, makeChartConfigUriString } from "../service/uri/ChartConfigConverter"
+import { makeDirectCompareDataUri, parseDirectComparetUri } from "../service/uri/DirectCompareUriService"
 import { convertAggregatedDataJsonToUriString, convertAggregatedUriStringToObject } from "../service/uri/FoodDataPanelAggregatedUriService"
 import { convertPortionDataObjectToString, convertPortionDataStringToObject, convertUserDataObjectToString, convertUserDataStringToObject, makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../service/uri/FoodDataPanelUriService"
 import { ChartConfigData } from "../types/livedata/ChartConfigData"
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem"
-import { AggregatedFoodItemUriData, FoodItemUriData } from "../types/livedata/UriData"
+import { AggregatedFoodItemUriData, DirectCompareUriData, FoodItemUriData } from "../types/livedata/UriData"
 import FoodItem, { NutrientData, PortionData } from "../types/nutrientdata/FoodItem"
-import { userData } from "./TestHelper"
+import { makeDefaultBaseData, makeDefaultCarbsData, makeDefaultLipidsData, makeDefaultMineralData, makeDefaultProteinData, makeDefaultSource, makeDefaultVitaminData, userData } from "./TestHelper"
 
 describe('Parsing of sub-elements in the URI', () => {
 		
@@ -123,87 +124,14 @@ describe('Parsing of sub-elements in the URI', () => {
 
 	it('should correctly convert an aggregated fooddata panel item into a corresponding URI', () => {
 		const nutrientData: NutrientData = {
-			source: {
-				id: 1,
-				name: "dummy",
-				url: "www.dummy.co"
-			},
+			source: makeDefaultSource(),
 			sourceItemId: "123",
-			baseData: {
-				energy: 12.5,
-				water: 14,
-				lipids: 30,
-				carbohydrates: 20,
-				proteins: 5,
-				ash: 7,
-				alcohol: null,
-				dietaryFibers: 0.7
-			},
-			carbohydrateData: {
-				sugar: 0.8,
-				fructose: 0.001233212,
-				glucose: 0.08123882,
-				maltose: null,
-				sucrose: null,
-				lactose: null,
-				galactose: null,
-				starch: 0
-			},
-			lipidData: {
-				saturated: 0.8,
-				unsaturatedMono: 1.9,
-				unsaturatedPoly: 0.2,
-				transFattyAcids: null,
-				omegaData: null,
-				cholesterol: 0.02
-			},
-			vitaminData: {
-				a: 0.1,
-				b1: 0.0000232,
-				b2: 0.0023122,
-				b3: null,
-				b5: null,
-				b6: 1.89,
-				b7: null,
-				b9: 2.20,
-				b12: 0,
-				c: 13.839932,
-				d: null,
-				e: 9.872721221,
-				k: 0.0762
-			},
-			mineralData: {
-				calcium: 0.9883,
-				copper: 23.883773,
-				iron: 9.827271902,
-				magnesium: 0.8721,
-				manganese: null,
-				phosphorus: 3.34432321,
-				potassium: 1.1123883,
-				selenium: null,
-				sodium: null,
-				zinc: 9.98822992
-			},
-			proteinData: {
-				tryptophan: 1.28388337,
-				threonine: null,
-				isoleucine: null,
-				leucine: null,
-				lysine: 0.0383873,
-				methionine: null,
-				cystine: null,
-				phenylalanine: null,
-				tyrosine: null,
-				valine: null,
-				arginine: null,
-				histidine: null,
-				alanine: null,
-				asparticAcid: 2.22993821,
-				glutamicAcid: null,
-				glycine: null,
-				proline: null,
-				serine: null,
-			}
+			baseData: makeDefaultBaseData(),
+			carbohydrateData: makeDefaultCarbsData(),
+			lipidData: makeDefaultLipidsData(true),
+			vitaminData: makeDefaultVitaminData(),
+			mineralData: makeDefaultMineralData(),
+			proteinData: makeDefaultProteinData()
 		}
 		
 		const foodItem: FoodItem = {
@@ -242,4 +170,88 @@ describe('Parsing of sub-elements in the URI', () => {
 		expect(reconveredObect).toMatchObject(uriDataObject)
 	
 	})
+	
+	
+	it('should correctly convert direct compare data into a corresponding URI', () => {
+		const nutrientData1: NutrientData = {
+			source: makeDefaultSource(),
+			sourceItemId: "123",
+			baseData: makeDefaultBaseData(),
+			carbohydrateData: makeDefaultCarbsData(),
+			lipidData: makeDefaultLipidsData(true),
+			vitaminData: makeDefaultVitaminData(),
+			mineralData: makeDefaultMineralData(),
+			proteinData: makeDefaultProteinData()
+		}
+		
+		const nutrientData2: NutrientData = {...nutrientData1, baseData: {
+			...nutrientData1.baseData, water: 12.74
+		}}
+		
+		const selectedFoodItem1: SelectedFoodItem = {
+			id: 1000,
+			foodItem: {
+				id: 1,
+				nutrientDataList: [nutrientData1],
+			},
+			selectedSource: 1,
+			combineData: false,
+			supplementData: true,
+			portion: {
+				portionType: 123,
+				amount: 450
+			}
+		}
+		
+		const selectedFoodItem2: SelectedFoodItem = {
+			id: 1001,
+			foodItem: {
+				id: 2,
+				nutrientDataList: [nutrientData2],
+			},
+			selectedSource: 1,
+			combineData: true,
+			supplementData: true,
+			portion: {
+				portionType: 111,
+				amount: 20
+			}
+		}
+		
+		const uriString = makeDirectCompareDataUri(selectedFoodItem1, selectedFoodItem2, userData, 
+			TAB_LIPIDS_DATA, initialDirectCompareConfigData)
+		const reconveredObject = parseDirectComparetUri(uriString, initialDirectCompareConfigData)
+		
+		const expectedFoodItemUri1: FoodItemUriData = {
+			foodItemId: 1,
+			source: 1,
+			portionData: {
+				portionType: 123,
+				amount: 450
+			},
+			combineData: false,
+			supplementData: true
+		}
+		
+		const expectedFoodItemUri2: FoodItemUriData = {
+			foodItemId: 2,
+			source: 1,
+			portionData: {
+				portionType: 111,
+				amount: 20
+			},
+			combineData: true,
+			supplementData: true
+		}
+		
+		expect(reconveredObject).not.toBe(null)
+		expect(reconveredObject?.selectedFoodItem1).toMatchObject(expectedFoodItemUri1)
+		expect(reconveredObject?.selectedFoodItem2).toMatchObject(expectedFoodItemUri2)
+	
+		expect(reconveredObject?.userData).toMatchObject(userData)
+		expect(reconveredObject?.chartConfigData).toMatchObject(initialDirectCompareConfigData)
+		expect(reconveredObject?.selectedDataPage).toBe(TAB_LIPIDS_DATA)
+	})
+	
 })
+

@@ -31,7 +31,7 @@ function makeFoodItemUriData(selectedFoodItem: SelectedFoodItem): FoodItemUriDat
 }
 
 
-export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: DirectCompareChartConfigData): DirectCompareUriData | null {
+export function parseDirectComparetUri(uri: string, chartConfigData: DirectCompareChartConfigData): DirectCompareUriData | null {
 	const fragments = uri.split(";")
 	if(fragments.length !== 11) {
 		return null
