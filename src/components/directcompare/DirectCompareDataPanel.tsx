@@ -20,7 +20,6 @@ import {DC_EnergyChart} from "./DC_EnergyChart";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
-import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
 import {InfoData} from "../fooddatapanel/charts/InfoData";
 
 export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {

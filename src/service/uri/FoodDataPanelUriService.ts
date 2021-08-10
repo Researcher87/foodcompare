@@ -50,6 +50,10 @@ export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: Chart
 }
 
 
+/**
+ * Retrieves the food item uri data from a fragments string. It will always extract those
+ * data objects from the beginning of the array, no matter how long it is.
+ */
 export function getFoodItemUriData(fragments: Array<string>): FoodItemUriData | null {
 	const foodItemId = parseInt(fragments[0])
 	const source = parseInt(fragments[1])

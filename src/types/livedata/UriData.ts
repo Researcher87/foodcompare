@@ -1,11 +1,14 @@
 import { PortionData } from "../nutrientdata/FoodItem";
-import { ChartConfigData } from "./ChartConfigData";
+import { ChartConfigData, DirectCompareChartConfigData } from "./ChartConfigData";
 import SelectedFoodItem from "./SelectedFoodItem";
 import { UserData } from "./UserData";
 
-export interface FoodDataPanelUriBaseData {
+export interface UriBaseData {
 	userData: UserData
 	selectedDataPage: string
+}
+
+export interface FoodDataPanelUriBaseData extends UriBaseData {
 	chartConfigData: ChartConfigData
 }
 
@@ -17,7 +20,8 @@ export interface SimpleFoodItemUriData extends FoodDataPanelUriBaseData {
 	selectedFoodItem: FoodItemUriData
 }
 
-export interface DirectCompareUriBaseData extends FoodDataPanelUriBaseData {
+export interface DirectCompareUriData extends UriBaseData {
+	chartConfigData: DirectCompareChartConfigData
 	selectedFoodItem1: FoodItemUriData
 	selectedFoodItem2: FoodItemUriData
 }

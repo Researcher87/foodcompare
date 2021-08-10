@@ -51,4 +51,6 @@ export interface GeneralizedChartConfig {
 	expand100?: boolean
 	portionType?: string
 	subChart?: string
+	subChart2?: string,
+	synchronize?: boolean
 }

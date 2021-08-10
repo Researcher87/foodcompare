@@ -9,6 +9,7 @@ import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_AGGREGATED, QUERYKEY_DATAPANEL_I
 import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 import { AggregatedFoodItemUriData } from "../../types/livedata/UriData";
+import { makeDirectCompareDataUri, parseFoodDataPanelDefaultUri } from "../../service/uri/DirectCompareUriService";
 
 export default function DirectCompareContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -53,16 +54,15 @@ export default function DirectCompareContainer() {
 		const userData = applicationContext.userData
 		const selectedDataPage = applicationContext.applicationData.directCompareDataPanel.selectedDataPage
 
-		/* if(selectedFoodItem1 && selectedFoodItem2) {
-			const {portion, selectedSource, supplementData, combineData} = selectedFoodItem1
-			const query = makeFoodDataPanelDefaultUri(selectedFoodItem.foodItem.id, selectedSource, portion, 
-				userData, supplementData, combineData, selectedDataPage, chartConfigData)
+		if(selectedFoodItem1 && selectedFoodItem2) {
+			const query = makeDirectCompareDataUri(selectedFoodItem1, selectedFoodItem2, userData, selectedDataPage, 
+				chartConfigData)
+				
+			history.push({
+				pathName: PATH_DIRECT_COMPARE,
+				search: `${QUERYKEY_DATAPANEL_ITEM}=${query}`
+			})
 		}
-					
-		history.push({
-			pathName: PATH_DIRECT_COMPARE,
-			search: `${QUERYKEY_DATAPANEL_ITEM}=${query}`
-		}) */
 	}
 	
 	const createDataFromUriQuery = () => {
@@ -71,64 +71,55 @@ export default function DirectCompareContainer() {
             const key = queryString.substring(0, equalOperator)
             const value = queryString.substring(equalOperator+1)
 
-			const {addItemToFoodDataPanel, setSelectedDataPage} = applicationContext.setFoodDataPanelData
-
-			// Set data from an aggregated food item query
-            if(key === QUERYKEY_DATAPANEL_AGGREGATED && value.length > 1) {
-            	try {				
-					/* const uriDataObject: AggregatedFoodItemUriData | null = convertAggregatedUriStringToObject(chartConfigData, value)
-					if(!uriDataObject) {
-						return
-					}
-					
-					applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(uriDataObject.chartConfigData)
-					setSelectedDataPage(uriDataObject.selectedDataPage)
-					applicationContext.setUserData(uriDataObject.userData)
-					
-					const selectedFoodItemWithComponent = makeFoodDataPanelComponent(uriDataObject.selectedFoodItem, 
-					applicationContext.foodDataCorpus.foodNames, languageContext.language, uriDataObject.selectedDataPage)
-							
-					if(selectedFoodItemWithComponent) {
-						addItemToFoodDataPanel(selectedFoodItemWithComponent)
-					} */
-				} catch(e) {
-					console.error(e)
-				}
-            }
-
 			// Set data from a simple food item (create data from query parameters)
 			if(key === QUERYKEY_DATAPANEL_ITEM && value.length > 1) {
-				/* const uriDataObject = parseFoodDataPanelDefaultUri(value, chartConfigData)
+				const uriDataObject = parseFoodDataPanelDefaultUri(value, chartConfigData)
+								
 				if(uriDataObject) {
-					const foodItem = applicationContext.foodDataCorpus.foodItems.find(foodItem => foodItem.id === uriDataObject.foodItemId)
-					if(!foodItem) {
+					const foodItem1 = applicationContext.foodDataCorpus.foodItems.find(
+						foodItem => foodItem.id === uriDataObject.selectedFoodItem1.foodItemId
+						)
+						
+					const foodItem2 = applicationContext.foodDataCorpus.foodItems.find(
+						foodItem => foodItem.id === uriDataObject.selectedFoodItem2.foodItemId
+						)
+						
+					if(!foodItem1 || !foodItem2) {
 						return
 					}
 					
 					applicationContext.setUserData(uriDataObject.userData)	
-					const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
+					applicationContext.setDirectCompareData.updateDirectCompareChartConfig(uriDataObject.chartConfigData)
+					applicationContext.setDirectCompareData.setSelectedDirectCompareDataPage(uriDataObject.selectedDataPage)
 					
-					const selectedFoodItem: SelectedFoodItem = {
-						id: 1,
-						foodItem: foodItem,
-						foodClass: foodClass,
-						portion: uriDataObject.portionData,
-						selectedSource: uriDataObject.source,
-						combineData: uriDataObject.combineData,
-						supplementData: uriDataObject.supplementData
+					const foodClass1 = applicationContext.foodDataCorpus.foodClasses.find(
+						foodClass => foodClass.id === foodItem1.foodClass)
+						
+					const foodClass2 = applicationContext.foodDataCorpus.foodClasses.find(
+						foodClass => foodClass.id === foodItem2.foodClass)
+					
+					const selectedFoodItem1: SelectedFoodItem = {
+						id: 1000,
+						foodItem: foodItem1,
+						foodClass: foodClass1,
+						portion: uriDataObject.selectedFoodItem1.portionData,
+						selectedSource: uriDataObject.selectedFoodItem1.source,
+						combineData: uriDataObject.selectedFoodItem1.combineData,
+						supplementData: uriDataObject.selectedFoodItem1.supplementData
 					}
 					
-					setSelectedDataPage(uriDataObject.selectedDataPage)
-					
-					const selectedFoodItemWithComponent = makeFoodDataPanelComponent(selectedFoodItem, 
-						applicationContext.foodDataCorpus.foodNames, languageContext.language, uriDataObject.selectedDataPage)
-					
-					if(selectedFoodItemWithComponent) {
-						addItemToFoodDataPanel(selectedFoodItemWithComponent)
+					const selectedFoodItem2: SelectedFoodItem = {
+						id: 1001,
+						foodItem: foodItem2,
+						foodClass: foodClass2,
+						portion: uriDataObject.selectedFoodItem2.portionData,
+						selectedSource: uriDataObject.selectedFoodItem2.source,
+						combineData: uriDataObject.selectedFoodItem2.combineData,
+						supplementData: uriDataObject.selectedFoodItem2.supplementData
 					}
-					
-					applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(uriDataObject.chartConfigData) 
-				}*/
+						
+					updateSelectedFoodItems(selectedFoodItem1, selectedFoodItem2)
+				}
 			}
 	}
 
