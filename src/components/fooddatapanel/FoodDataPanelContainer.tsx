@@ -12,6 +12,7 @@ import { AggregatedFoodItemUriData, FoodItemUriData } from "../../types/livedata
 import { makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/uri/FoodDataPanelUriService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import { convertAggregatedDataJsonToUriString, convertAggregatedUriStringToObject } from "../../service/uri/FoodDataPanelAggregatedUriService";
+import { checkUserDataValidity, USERDATA_OK } from "../../service/UserDataService";
 
 
 export default function FoodDataPanelContainer() {
@@ -125,6 +126,10 @@ export default function FoodDataPanelContainer() {
 						)
 						
 					if(!foodItem) {
+						return
+					}
+					
+					if(checkUserDataValidity(uriDataObject.userData) !== USERDATA_OK) {
 						return
 					}
 					

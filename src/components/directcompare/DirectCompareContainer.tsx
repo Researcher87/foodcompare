@@ -10,6 +10,7 @@ import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications'
 import { AggregatedFoodItemUriData } from "../../types/livedata/UriData";
 import { makeDirectCompareDataUri, parseDirectComparetUri } from "../../service/uri/DirectCompareUriService";
+import { checkUserDataValidity, USERDATA_OK } from "../../service/UserDataService";
 
 export default function DirectCompareContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -85,6 +86,10 @@ export default function DirectCompareContainer() {
 						)
 						
 					if(!foodItem1 || !foodItem2) {
+						return
+					}
+					
+					if(checkUserDataValidity(uriDataObject.userData) !== USERDATA_OK) {
 						return
 					}
 					

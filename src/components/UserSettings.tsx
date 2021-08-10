@@ -21,6 +21,7 @@ import {getPalCategories, getPalCategory} from "../service/calculation/EnergySer
 import ReactTooltip from "react-tooltip";
 import ReactSelectOption from "../types/ReactSelectOption";
 import {isSmallScreen, useWindowDimension} from "../service/WindowDimension";
+import { checkUserDataValidity, USERDATA_ERROR_AGE, USERDATA_ERROR_SIZE, USERDATA_ERROR_WEIGHT } from "../service/UserDataService";
 
 export function UserSettings() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -115,15 +116,15 @@ export function UserSettings() {
 
 
     const checkInputValidity = (userData: UserData) => {
-        const {age, size, weight} = userData
+        const validationResult = checkUserDataValidity(userData)
 
-        if (age != null && (age < 15 || age > 100)) {
+        if (validationResult === USERDATA_ERROR_AGE) {
             showMessage(applicationStrings.message_userdata_error_age[lang]);
             return false;
-        } else if (size != null && (size < 80 || size > 225)) {
+        } else if (validationResult === USERDATA_ERROR_SIZE) {
             showMessage(applicationStrings.message_userdata_error_size[lang]);
             return false;
-        } else if (weight != null && (weight < 30 || weight > 250)) {
+        } else if (validationResult === USERDATA_ERROR_WEIGHT) {
             showMessage(applicationStrings.message_userdata_error_weight[lang]);
             return false;
         }
