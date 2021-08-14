@@ -102,6 +102,10 @@ export default function FoodDataPanelContainer() {
 						return
 					}
 					
+					if(checkUserDataValidity(uriDataObject.userData) !== USERDATA_OK) {
+						return
+					}
+					
 					applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(uriDataObject.chartConfigData)
 					setSelectedDataPage(uriDataObject.selectedDataPage)
 					applicationContext.setUserData(uriDataObject.userData)
