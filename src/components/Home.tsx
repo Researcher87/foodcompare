@@ -5,7 +5,7 @@ import {applicationStrings} from "../static/labels";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
-import {PATH_FOODDATA_PANEL} from "../config/Constants";
+import {PATH_FOODDATA_PANEL, PATH_FOODDATA_PANEL_ADD} from "../config/Constants";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -69,7 +69,7 @@ export function Home() {
     const renderStartButton = () => {
         return (
             <div className="text-center">
-                <Link to={PATH_FOODDATA_PANEL}>
+                <Link to={{pathname: PATH_FOODDATA_PANEL_ADD}}>
                 <button type="button"
                         className="btn btn-warning button-apply media app"
                         style={{minWidth: "150px"}}>

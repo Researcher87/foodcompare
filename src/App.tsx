@@ -11,7 +11,7 @@ import {
     PATH_CONTACT,
     PATH_DIRECT_COMPARE,
     PATH_FOODCOMPARE,
-    PATH_FOODDATA_PANEL,
+    PATH_FOODDATA_PANEL, PATH_FOODDATA_PANEL_ADD,
     PATH_HOME,
     PATH_MOBILE_APP,
     PATH_USERSETTINGS
@@ -47,6 +47,10 @@ function App(): JSX.Element {
                         <Switch>
                             <Route path={PATH_FOODCOMPARE} component={Home}/>
                             <Route path={PATH_HOME} component={Home}/>
+                            <Route path={PATH_FOODDATA_PANEL_ADD}
+                                   render={(props) => (<FoodDataPanelContainer {...props} openSelectorModal={true}/>)
+                                   }
+                            />
                             <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
                             <Route path={PATH_DIRECT_COMPARE} component={DirectCompareContainer}/>
                             <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>

@@ -7,7 +7,13 @@ import {
     PATH_FOODDATA_PANEL,
     PATH_HOME,
     PATH_CONTACT,
-    PATH_USERSETTINGS, PATH_MOBILE_APP, PATH_DIRECT_COMPARE, PATH_FOODCOMPARE, SOURCE_SRLEGACY, SOURCE_FNDDS
+    PATH_USERSETTINGS,
+    PATH_MOBILE_APP,
+    PATH_DIRECT_COMPARE,
+    PATH_FOODCOMPARE,
+    SOURCE_SRLEGACY,
+    SOURCE_FNDDS,
+    PATH_FOODDATA_PANEL_ADD
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
@@ -62,7 +68,7 @@ export default function Header() {
                         <Button className="header-link"
                                 value={PATH_FOODDATA_PANEL}
                                 variant={'link'}
-                                active={activePath === PATH_FOODDATA_PANEL}>
+                                active={activePath === PATH_FOODDATA_PANEL || activePath === PATH_FOODDATA_PANEL_ADD}>
                             {applicationStrings.menu_food_data_panel[language]}
                         </Button>
                     </Link>

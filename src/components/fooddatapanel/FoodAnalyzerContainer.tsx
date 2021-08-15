@@ -16,6 +16,7 @@ import {useLocation, useHistory} from 'react-router-dom';
 import { PATH_FOODDATA_PANEL } from '../../config/Constants';
 
 interface FoodAnalyzerContainerProps {
+    openSelectorModal?: boolean
     onNewFoodItemSelected: () => void
 }
 
@@ -24,7 +25,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const languageContext = useContext(LanguageContext)
 	const history = useHistory()
 
-    const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(false)
+    const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(props.openSelectorModal && props.openSelectorModal === true ? true : false)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(false)
 
     if(!applicationContext) {

@@ -15,11 +15,15 @@ import { convertAggregatedDataJsonToUriString, convertAggregatedUriStringToObjec
 import { checkUserDataValidity, USERDATA_OK } from "../../service/UserDataService";
 
 
-export default function FoodDataPanelContainer() {
+interface FoodDataPanelContainerProps {
+	openSelectorModal: boolean
+}
+
+export default function FoodDataPanelContainer(props: FoodDataPanelContainerProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
 	const history = useHistory()
-
+	
 	useEffect(() => {
         buildDataPanelPageFromURI()
     }, [applicationContext?.applicationData.foodDataPanel.selectedFoodItemIndex, 
@@ -199,7 +203,7 @@ export default function FoodDataPanelContainer() {
         <div className="container-fluid" style={{paddingTop: "20px"}}>
             <div className="row">
                 <div className={"col-2"}>
-                    <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}/>
+                    <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected} openSelectorModal={props.openSelectorModal}/>
                 </div>
                 <div className="col-10 media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
                     {selectedFoodItems && selectedFoodItems.length > 0 ?
