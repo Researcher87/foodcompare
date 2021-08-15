@@ -23,7 +23,7 @@ export default function FoodDataPanelContainer(props: FoodDataPanelContainerProp
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
 	const history = useHistory()
-	
+
 	useEffect(() => {
         buildDataPanelPageFromURI()
     }, [applicationContext?.applicationData.foodDataPanel.selectedFoodItemIndex, 

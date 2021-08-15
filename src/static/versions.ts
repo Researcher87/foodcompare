@@ -108,5 +108,17 @@ export const versions = [
         bugfixes: [
             "Some missing (but actually available) information in the nutrient data set have been completed.",
         ]
+    },
+    {
+        id: "1.3",
+        date: "08-15-2021",
+        subject: "Adding URIs for selected food items",
+        features: [
+            "In the food data panel, a unique URI identifying the selected resource is now generated. This makes it possible to share a selected item as a link. This also holds for aggregated data.",
+            "A URI is generated for items in the direct compare panel accordingly."
+        ],
+        updates: [
+            "When the 'getting started' button in the home menu is clicked, the food selector will now open immediately."
+        ]
     }
 ]
