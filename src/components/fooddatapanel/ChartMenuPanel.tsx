@@ -28,6 +28,10 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
 
     const variant = "link"
 
+    const makeButtonLabel = (buttonText): JSX.Element => {
+        return <span className={"float-start"}>{buttonText}</span>
+    }
+
     return (
         <div className={"d-flex"}>
             <ButtonGroup vertical={props.verticalArrangement}>
@@ -35,49 +39,49 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
                         onClick={() => handlePageButtonClick(TAB_BASE_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_BASE_DATA}>
-                    {applicationStrings.label_overview[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_overview[languageContext.language])}
                 </Button>
                 <Button className="btn btn-link header-link header-link"
                         onClick={() => handlePageButtonClick(TAB_ENERGY_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_ENERGY_DATA}>
-                    {applicationStrings.label_nutrient_energy[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_nutrient_energy[languageContext.language])}
                 </Button>
                 <Button className="btn btn-link header-link"
                         onClick={() => handlePageButtonClick(TAB_VITAMIN_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_VITAMIN_DATA}>
-                    {applicationStrings.label_nutrient_vit[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_nutrient_vit[languageContext.language])}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_MINERAL_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_MINERAL_DATA}>
-                    {applicationStrings.label_nutrient_min[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_nutrient_min[languageContext.language])}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_LIPIDS_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_LIPIDS_DATA}>
-                    {applicationStrings.label_nutrient_lipids[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_nutrient_lipids[languageContext.language])}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_CARBS_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_CARBS_DATA}>
-                    {applicationStrings.label_nutrient_carbohydrates[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_nutrient_carbohydrates[languageContext.language])}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_PROTEINS_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_PROTEINS_DATA}>
-                    {applicationStrings.label_nutrient_proteins[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_nutrient_proteins[languageContext.language])}
                 </Button>
                 <Button className="btn btn-link page-head-button header-link"
                         onClick={() => handlePageButtonClick(TAB_INFO)}
                         variant={variant}
                         active={props.dataPage === TAB_INFO}>
-                    {applicationStrings.label_info[languageContext.language]}
+                    {makeButtonLabel(applicationStrings.label_info[languageContext.language])}
                 </Button>
             </ButtonGroup>
         </div>
