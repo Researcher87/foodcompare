@@ -4,15 +4,17 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import TabContainer from "./TabContainer";
 import {applicationStrings} from "../../static/labels";
 import {LanguageContext} from "../../contexts/LangContext";
-import {PATH_FOODDATA_PANEL, PORTION_KEY_100, QUERYKEY_DATAPANEL_ITEM, QUERYKEY_DATAPANEL_AGGREGATED, TAB_LIST} from "../../config/Constants";
+import {PATH_FOODDATA_PANEL, QUERYKEY_DATAPANEL_AGGREGATED, QUERYKEY_DATAPANEL_ITEM} from "../../config/Constants";
 import {useHistory} from 'react-router-dom';
-import {NotificationManager} from 'react-notifications'
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
-import { AggregatedFoodItemUriData, FoodItemUriData } from "../../types/livedata/UriData";
-import { makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri } from "../../service/uri/FoodDataPanelUriService";
+import {AggregatedFoodItemUriData, FoodItemUriData} from "../../types/livedata/UriData";
+import {makeFoodDataPanelDefaultUri, parseFoodDataPanelDefaultUri} from "../../service/uri/FoodDataPanelUriService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-import { convertAggregatedDataJsonToUriString, convertAggregatedUriStringToObject } from "../../service/uri/FoodDataPanelAggregatedUriService";
-import { checkUserDataValidity, USERDATA_OK } from "../../service/UserDataService";
+import {
+	convertAggregatedDataJsonToUriString,
+	convertAggregatedUriStringToObject
+} from "../../service/uri/FoodDataPanelAggregatedUriService";
+import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
 
 
 interface FoodDataPanelContainerProps {
@@ -198,12 +200,17 @@ export default function FoodDataPanelContainer(props: FoodDataPanelContainerProp
         console.log('FoodDataPanelContainer: Render, selected food item = ', selectedFoodItem)
     }
 
+	const queryString = window.location.search.substring(1)
+	const equalOperator = queryString.indexOf("=")
+	const value = queryString.substring(equalOperator+1)
+	const openSelectorModal: boolean = props.openSelectorModal && value.length === 0
+
     return <div>
         {selectedFoodItem !== null &&
         <div className="container-fluid" style={{paddingTop: "20px"}}>
             <div className="row">
                 <div className={"col-2"}>
-                    <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected} openSelectorModal={props.openSelectorModal}/>
+                    <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected} openSelectorModal={openSelectorModal}/>
                 </div>
                 <div className="col-10 media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
                     {selectedFoodItems && selectedFoodItems.length > 0 ?

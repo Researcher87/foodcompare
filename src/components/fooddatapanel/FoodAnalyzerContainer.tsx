@@ -5,15 +5,13 @@ import FoodSelectorModal from '../foodselector/FoodSelectorModal'
 import {FaLayerGroup, FaPlusSquare, FaTrash} from "react-icons/all";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
-import FoodDataPage from "./FoodDataPage";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {confirmAction} from "../ConfirmationDialog";
 import ReactTooltip from "react-tooltip";
+import {useHistory} from 'react-router-dom';
+import {PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
-import {useLocation, useHistory} from 'react-router-dom';
-import { PATH_FOODDATA_PANEL } from '../../config/Constants';
 
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
