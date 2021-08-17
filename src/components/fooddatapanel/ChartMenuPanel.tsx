@@ -29,7 +29,7 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
     const variant = "link"
 
     const makeButtonLabel = (buttonText): JSX.Element => {
-        const className = props.verticalArrangement ? "" : "float-start"
+        const className = props.verticalArrangement === true ? "float-start" : ""
         return <span className={className}>{buttonText}</span>
     }
 
