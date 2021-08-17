@@ -118,7 +118,8 @@ export const versions = [
             "A URI is generated for items in the direct compare panel accordingly."
         ],
         updates: [
-            "When the 'getting started' button in the home menu is clicked, the food selector will now open immediately."
+            "When the 'getting started' button in the home menu is clicked, the food selector will now open immediately.",
+            "The data page buttons in the food data panel haft a left alignment now."
         ]
     }
 ]
