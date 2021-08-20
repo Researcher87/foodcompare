@@ -43,7 +43,6 @@ export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
 export const PATH_DIRECT_COMPARE = "/directcompare";
 export const PATH_FOODCOMPARE = "/foodcompare"
 export const PATH_FOODDATA_PANEL = "/datapanel";
-export const PATH_FOODDATA_PANEL_ADD = "/datapanel_add";
 export const PATH_HOME = "/home";
 export const PATH_CONTACT = "/contact";
 export const PATH_MOBILE_APP = "/mobileapp";
@@ -70,6 +69,7 @@ export const TAB_CARBS_DATA = "carbsdata"
 export const TAB_PROTEINS_DATA = "proteinsdata"
 export const TAB_INFO = "infodata"
 
+export const QUERYKEY_DATAPANEL_ADD = "add"
 export const QUERYKEY_DATAPANEL_ITEM = "item"
 export const QUERYKEY_DATAPANEL_AGGREGATED = "aggregated"
 

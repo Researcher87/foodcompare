@@ -4,7 +4,12 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import TabContainer from "./TabContainer";
 import {applicationStrings} from "../../static/labels";
 import {LanguageContext} from "../../contexts/LangContext";
-import {PATH_FOODDATA_PANEL, QUERYKEY_DATAPANEL_AGGREGATED, QUERYKEY_DATAPANEL_ITEM} from "../../config/Constants";
+import {
+    PATH_FOODDATA_PANEL,
+    QUERYKEY_DATAPANEL_ADD,
+    QUERYKEY_DATAPANEL_AGGREGATED,
+    QUERYKEY_DATAPANEL_ITEM
+} from "../../config/Constants";
 import {useHistory} from 'react-router-dom';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import {AggregatedFoodItemUriData, FoodItemUriData} from "../../types/livedata/UriData";
@@ -25,6 +30,13 @@ export default function FoodDataPanelContainer(props: FoodDataPanelContainerProp
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const history = useHistory()
+
+    const queryString = window.location.search.substring(1)
+    const equalOperator = queryString.indexOf("=")
+    const key = queryString.substring(0, equalOperator)
+    const value = queryString.substring(equalOperator + 1)
+
+    const openSelectorModal = key === QUERYKEY_DATAPANEL_ADD && value === "1" ? true : false
 
     useEffect(() => {
         buildDataPanelPageFromURI()
@@ -94,11 +106,6 @@ export default function FoodDataPanelContainer(props: FoodDataPanelContainerProp
     }
 
     const createDataFromUriQuery = () => {
-        const queryString = window.location.search.substring(1)
-        const equalOperator = queryString.indexOf("=")
-        const key = queryString.substring(0, equalOperator)
-        const value = queryString.substring(equalOperator + 1)
-
         const {addItemToFoodDataPanel, setSelectedDataPage, setSelectedDisplayMode} = applicationContext.setFoodDataPanelData
 
         // Set data from an aggregated food item query
@@ -201,11 +208,6 @@ export default function FoodDataPanelContainer(props: FoodDataPanelContainerProp
     if (applicationContext.debug) {
         console.log('FoodDataPanelContainer: Render, selected food item = ', selectedFoodItem)
     }
-
-    const queryString = window.location.search.substring(1)
-    const equalOperator = queryString.indexOf("=")
-    const value = queryString.substring(equalOperator + 1)
-    const openSelectorModal: boolean = props.openSelectorModal && value.length === 0
 
     return <div>
         {selectedFoodItem !== null &&
