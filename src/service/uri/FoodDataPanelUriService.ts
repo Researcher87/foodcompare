@@ -1,19 +1,19 @@
 import {PATH_FOODDATA_PANEL, PATH_FOODDATA_PANEL_ADD, SEX_FEMALE, SEX_MALE} from "../../config/Constants"
-import { ChartConfigData } from "../../types/livedata/ChartConfigData"
-import { FoodDataPanelUriBaseData, FoodItemUriData, SimpleFoodItemUriData } from "../../types/livedata/UriData"
-import { UserData } from "../../types/livedata/UserData"
-import { PortionData } from "../../types/nutrientdata/FoodItem"
-import { getPalCategory, getPalValue } from "./../calculation/EnergyService"
-import { convertBooleanToDigit, convertStringToBoolean, getNumberOfFixedLength } from "./../calculation/MathService"
-import { convertGeneralizedChartConfigStringToObject, getUpdatedChartConfig, makeChartConfigUriString } from "./ChartConfigConverter"
+import {ChartConfigData} from "../../types/livedata/ChartConfigData"
+import {FoodItemUriData, SimpleFoodItemUriData} from "../../types/livedata/UriData"
+import {UserData} from "../../types/livedata/UserData"
+import {PortionData} from "../../types/nutrientdata/FoodItem"
+import {getPalCategory, getPalValue} from "../calculation/EnergyService"
+import {convertBooleanToDigit, convertStringToBoolean, getNumberOfFixedLength} from "../calculation/MathService"
+import {getUpdatedChartConfig, makeChartConfigUriString} from "./ChartConfigConverter"
 
 
 export function makeFoodDataPanelDefaultUri(foodItemData: FoodItemUriData,
-		userData: UserData, selectedDataPage: string, chartConfigData: ChartConfigData) {
+		userData: UserData, selectedDataPage: string, selectedDisplayMode: string, chartConfigData: ChartConfigData) {
 	const foodItemDataString = makeFoodItemDefaultUri(foodItemData)
 	const userDataString = convertUserDataObjectToString(userData)
 	const chartConfigString = makeChartConfigUriString(chartConfigData, selectedDataPage)
-	return `${foodItemDataString};${selectedDataPage};${userDataString};${chartConfigString}`
+	return `${foodItemDataString};${selectedDataPage};${selectedDisplayMode};${userDataString};${chartConfigString}`
 }
 
 export function makeFoodItemDefaultUri(foodItemData: FoodItemUriData) {
@@ -26,13 +26,14 @@ export function makeFoodItemDefaultUri(foodItemData: FoodItemUriData) {
 
 export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: ChartConfigData): SimpleFoodItemUriData | null {
 	const fragments = prepareUriForParsing(uri).split(";")
-	if(fragments.length !== 7) {
+	if(fragments.length !== 8) {
 		return null
 	}
 	
 	const selectedDataPage = fragments[4]
-	const userData = convertUserDataStringToObject(fragments[5])
-	const chartConfigString = fragments[6]
+	const displayMode = fragments[5]
+	const userData = convertUserDataStringToObject(fragments[6])
+	const chartConfigString = fragments[7]
 	const foodItemUriData = getFoodItemUriData(fragments)
 	
 	if(!userData || !foodItemUriData) {
@@ -44,6 +45,7 @@ export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: Chart
 	return {
 		selectedFoodItem: foodItemUriData,
 		selectedDataPage: selectedDataPage,
+		displayMode: displayMode,
 		userData: userData,
 		chartConfigData: newChartConfigData
 	}

@@ -10,9 +10,11 @@ export interface UriBaseData {
 
 export interface FoodDataPanelUriBaseData extends UriBaseData {
 	chartConfigData: ChartConfigData
+	displayMode: string
 }
 
-export interface AggregatedFoodItemUriData extends FoodDataPanelUriBaseData {
+export interface AggregatedFoodItemUriData extends UriBaseData {
+	chartConfigData: ChartConfigData
 	selectedFoodItem: SelectedFoodItem
 }
 

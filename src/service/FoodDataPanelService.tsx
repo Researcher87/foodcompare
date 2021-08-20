@@ -3,9 +3,6 @@ import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {getNameFromFoodNameList} from "./nutrientdata/NameTypeService";
 import FoodDataPage from "../components/fooddatapanel/FoodDataPage";
 import React from "react";
-import FoodClass from "../types/nutrientdata/FoodClass";
-import FoodItem from "../types/nutrientdata/FoodItem";
-import {PORTION_KEY_100} from "../config/Constants";
 
 /**
  * Enriches a selected food item by its JSX container to be displayed as a tab in the food data panel
@@ -14,7 +11,7 @@ import {PORTION_KEY_100} from "../config/Constants";
  * @param language The selected language
  */
 export function makeFoodDataPanelComponent(selectedFoodItem: SelectedFoodItem, foodNamesList: Array<NameType>, 
-		language: string, dataPage?: string): SelectedFoodItem | null {
+		language: string): SelectedFoodItem | null {
     let foodName
     if(selectedFoodItem.foodItem.nameId) {
         foodName = getNameFromFoodNameList(foodNamesList, selectedFoodItem.foodItem.nameId, language)
@@ -27,7 +24,7 @@ export function makeFoodDataPanelComponent(selectedFoodItem: SelectedFoodItem, f
         return null
     }
 
-    selectedFoodItem.component = <FoodDataPage key={`page component ${selectedFoodItem.id}`} selectedFoodItem={selectedFoodItem} dataPage={dataPage}/>
+    selectedFoodItem.component = <FoodDataPage key={`page component ${selectedFoodItem.id}`} selectedFoodItem={selectedFoodItem}/>
     selectedFoodItem.tab = foodName
     selectedFoodItem.id = selectedFoodItem.foodItem.id
 

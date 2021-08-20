@@ -36,7 +36,6 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
         if(applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2) {
             const {selectedFoodItem1, selectedFoodItem2} = applicationContext.applicationData.directCompareDataPanel
             if(selectedFoodItem1 && selectedFoodItem2) {
-                console.log('drecksjude', selectedFoodItem1)
                 updateSelectedFoodItem1(selectedFoodItem1)
                 updateSelectedFoodItem2(selectedFoodItem2)
             }
@@ -77,8 +76,6 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
         const initialFoodClassToSet = foodSelectorNumber - 1
 
         const selectedFoodItem = foodSelectorNumber === 1 ? selectedFoodItem1 : selectedFoodItem2
-
-        console.log('scheiß scheiß jude', selectedFoodItem)
 
         return <div style={{paddingTop: "32px"}}>
             <Card style={styleClass}>

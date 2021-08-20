@@ -37,6 +37,7 @@ export interface ApplicationContext extends ApplicationDataContext {
 	setFoodDataPanelData: {
 		setSelectedFoodTab: (number) => void
 		setSelectedDataPage: (string) => void
+        setSelectedDisplayMode: (string) => void
 		addItemToFoodDataPanel: (selectedFoodItem: SelectedFoodItem) => void
 		removeItemFromFoodDataPanel: (number) => void
 		removeAllItemsFromFoodDataPanel: () => void
@@ -60,6 +61,15 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             applicationData: {
                 ...prevState.applicationData,
                 foodDataPanel: {...prevState.applicationData.foodDataPanel, selectedFoodItemIndex: selectedTab}
+            }
+        }))
+    }
+
+    setSelectedDisplayMode = (displayMode: string) => {
+        this.setState(prevState => ({
+            applicationData: {
+                ...prevState.applicationData,
+                foodDataPanel: {...prevState.applicationData.foodDataPanel, displayMode: displayMode}
             }
         }))
     }
@@ -298,6 +308,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
 			setFoodDataPanelData: {
                 setSelectedFoodTab: this.setSelectedFoodDataPanelTab,
                 setSelectedDataPage: this.setSelectedFoodDataPanelPage,
+                setSelectedDisplayMode: this.setSelectedDisplayMode,
                 addItemToFoodDataPanel: this.addItemToFoodDataPanel,
                 removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
                 removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,

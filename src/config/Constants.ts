@@ -31,8 +31,8 @@ export const DATA_VITAMINS_D = "data d";
 export const DATA_VITAMINS_E = "data e";
 export const DATA_VITAMINS_K = "data k";
 
-export const DISPLAYMODE_TABLE = "displaymode table"
-export const DISPLAYMODE_CHART = "displaymode chart"
+export const DISPLAYMODE_TABLE = "dtb"
+export const DISPLAYMODE_CHART = "dct"
 
 export const CARBS_DATA_BASE = "carbs data base chart";
 export const CARBS_DATA_DETAIL = "carbs data detail chart"
@@ -60,7 +60,6 @@ export const SEX_FEMALE = "sex female"
 
 export const SOURCE_SRLEGACY = "srlegacy"
 export const SOURCE_FNDDS = "fndds"
-
 
 export const TAB_BASE_DATA = "basedata"
 export const TAB_ENERGY_DATA = "energydata"

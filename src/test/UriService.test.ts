@@ -1,5 +1,16 @@
 import { initialChartConfigData, initialDirectCompareConfigData } from "../config/ApplicationSetting"
-import { CARBS_DATA_DETAIL, CHART_TYPE_BAR, CHART_TYPE_PIE, GRAM, LIPIDS_DATA_OMEGA, TAB_BASE_DATA, TAB_CARBS_DATA, TAB_LIPIDS_DATA, TAB_VITAMIN_DATA } from "../config/Constants"
+import {
+	CARBS_DATA_DETAIL,
+	CHART_TYPE_BAR,
+	CHART_TYPE_PIE,
+	DISPLAYMODE_CHART,
+	GRAM,
+	LIPIDS_DATA_OMEGA,
+	TAB_BASE_DATA,
+	TAB_CARBS_DATA,
+	TAB_LIPIDS_DATA,
+	TAB_VITAMIN_DATA
+} from "../config/Constants"
 
 import { getUpdatedChartConfig, makeChartConfigUriString } from "../service/uri/ChartConfigConverter"
 import { makeDirectCompareDataUri, parseDirectComparetUri } from "../service/uri/DirectCompareUriService"
@@ -109,9 +120,9 @@ describe('Parsing of sub-elements in the URI', () => {
 			supplementData: true
 		}
 		
-		const uriString = makeFoodDataPanelDefaultUri(foodItemData, userData, TAB_LIPIDS_DATA, chartConfigData)
+		const uriString = makeFoodDataPanelDefaultUri(foodItemData, userData, TAB_LIPIDS_DATA, DISPLAYMODE_CHART, chartConfigData)
 		const uriObject = parseFoodDataPanelDefaultUri(uriString, chartConfigData)
-		
+
 		expect(uriObject).not.toBe(null)
 		expect(uriObject?.selectedFoodItem).not.toBe(null)
 		expect(uriObject?.selectedFoodItem.foodItemId).toBe(foodItemId)
@@ -119,6 +130,7 @@ describe('Parsing of sub-elements in the URI', () => {
 		expect(uriObject?.selectedFoodItem.portionData).toMatchObject(portionData)
 		expect(uriObject?.userData).toMatchObject(userData)
 		expect(uriObject?.chartConfigData).toMatchObject(chartConfigData)
+		expect(uriObject?.displayMode).toBe(DISPLAYMODE_CHART)
 	})
 
 

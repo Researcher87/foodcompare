@@ -1,6 +1,5 @@
 import SelectedFoodItem from "./SelectedFoodItem";
 import {ChartConfigData, DirectCompareChartConfigData} from "./ChartConfigData";
-import NameType from "../nutrientdata/NameType";
 import ReactSelectOption from "../ReactSelectOption";
 
 export interface ApplicationData {
