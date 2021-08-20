@@ -3,7 +3,11 @@ import SelectedFoodItem from "../../types/livedata/SelectedFoodItem"
 import { AggregatedFoodItemUriData } from "../../types/livedata/UriData"
 import { UserData } from "../../types/livedata/UserData"
 import { getUpdatedChartConfig, makeChartConfigUriString } from "./ChartConfigConverter"
-import { convertUserDataObjectToString, convertUserDataStringToObject } from "./FoodDataPanelUriService"
+import {
+	convertUserDataObjectToString,
+	convertUserDataStringToObject,
+	replaceSemiColonTransformations
+} from "./FoodDataPanelUriService"
 
 
 interface Replacemet {
@@ -169,7 +173,7 @@ export function convertAggregatedUriStringToObject(chartConfigData: ChartConfigD
 
 
 export function convertUriStringToSelectedFoodItem(uriString: string): SelectedFoodItem {
-	let stringToParse = uriString.trim()
+	let stringToParse = replaceSemiColonTransformations(uriString).trim()
 	stringToParse = stringToParse.replace(/%22/g, "\"")
 	stringToParse = stringToParse.replace(/%20/g, " ")
 	

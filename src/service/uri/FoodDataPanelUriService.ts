@@ -25,7 +25,7 @@ export function makeFoodItemDefaultUri(foodItemData: FoodItemUriData) {
 }
 
 export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: ChartConfigData): SimpleFoodItemUriData | null {
-	const fragments = uri.split(";")
+	const fragments = replaceSemiColonTransformations(uri).split(";")
 	if(fragments.length !== 7) {
 		return null
 	}
@@ -135,4 +135,9 @@ export function convertPortionDataStringToObject(portionDataString: string): Por
 		portionType: parseInt(fragments[0]),
 		amount: parseInt(fragments[1])
 	}
+}
+
+// Some websites like youtube transform the semicolons in the URL to %3B, which later need to be translated back to semicolons
+export function replaceSemiColonTransformations(uri: string): string {
+	return uri.replace(/%3B/g, ";")
 }

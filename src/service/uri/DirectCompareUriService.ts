@@ -3,7 +3,13 @@ import SelectedFoodItem from "../../types/livedata/SelectedFoodItem"
 import { DirectCompareUriData, FoodItemUriData } from "../../types/livedata/UriData"
 import { UserData } from "../../types/livedata/UserData"
 import { getUpdatedDirectCompareChartConfig, makeChartConfigUriString } from "./ChartConfigConverter"
-import { convertUserDataObjectToString, convertUserDataStringToObject, getFoodItemUriData, makeFoodItemDefaultUri } from "./FoodDataPanelUriService"
+import {
+	convertUserDataObjectToString,
+	convertUserDataStringToObject,
+	getFoodItemUriData,
+	makeFoodItemDefaultUri,
+	replaceSemiColonTransformations
+} from "./FoodDataPanelUriService"
 
 export function makeDirectCompareDataUri(selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem, 
 		userData: UserData, selectedDataPage: string, chartConfigData: DirectCompareChartConfigData): string {
@@ -32,7 +38,7 @@ function makeFoodItemUriData(selectedFoodItem: SelectedFoodItem): FoodItemUriDat
 
 
 export function parseDirectComparetUri(uri: string, chartConfigData: DirectCompareChartConfigData): DirectCompareUriData | null {
-	const fragments = uri.split(";")
+	const fragments = replaceSemiColonTransformations(uri).split(";")
 	if(fragments.length !== 11) {
 		return null
 	}
