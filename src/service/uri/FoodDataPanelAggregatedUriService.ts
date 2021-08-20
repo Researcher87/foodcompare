@@ -6,7 +6,7 @@ import { getUpdatedChartConfig, makeChartConfigUriString } from "./ChartConfigCo
 import {
 	convertUserDataObjectToString,
 	convertUserDataStringToObject,
-	replaceSemiColonTransformations
+	prepareUriForParsing
 } from "./FoodDataPanelUriService"
 
 
@@ -173,7 +173,7 @@ export function convertAggregatedUriStringToObject(chartConfigData: ChartConfigD
 
 
 export function convertUriStringToSelectedFoodItem(uriString: string): SelectedFoodItem {
-	let stringToParse = replaceSemiColonTransformations(uriString).trim()
+	let stringToParse = prepareUriForParsing(uriString).trim()
 	stringToParse = stringToParse.replace(/%22/g, "\"")
 	stringToParse = stringToParse.replace(/%20/g, " ")
 	

@@ -8,7 +8,7 @@ import {
 	convertUserDataStringToObject,
 	getFoodItemUriData,
 	makeFoodItemDefaultUri,
-	replaceSemiColonTransformations
+	prepareUriForParsing
 } from "./FoodDataPanelUriService"
 
 export function makeDirectCompareDataUri(selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem, 
@@ -38,7 +38,7 @@ function makeFoodItemUriData(selectedFoodItem: SelectedFoodItem): FoodItemUriDat
 
 
 export function parseDirectComparetUri(uri: string, chartConfigData: DirectCompareChartConfigData): DirectCompareUriData | null {
-	const fragments = replaceSemiColonTransformations(uri).split(";")
+	const fragments = prepareUriForParsing(uri).split(";")
 	if(fragments.length !== 11) {
 		return null
 	}

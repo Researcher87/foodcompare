@@ -1,4 +1,4 @@
-import { SEX_FEMALE, SEX_MALE } from "../../config/Constants"
+import {PATH_FOODDATA_PANEL, PATH_FOODDATA_PANEL_ADD, SEX_FEMALE, SEX_MALE} from "../../config/Constants"
 import { ChartConfigData } from "../../types/livedata/ChartConfigData"
 import { FoodDataPanelUriBaseData, FoodItemUriData, SimpleFoodItemUriData } from "../../types/livedata/UriData"
 import { UserData } from "../../types/livedata/UserData"
@@ -25,7 +25,7 @@ export function makeFoodItemDefaultUri(foodItemData: FoodItemUriData) {
 }
 
 export function parseFoodDataPanelDefaultUri(uri: string, chartConfigData: ChartConfigData): SimpleFoodItemUriData | null {
-	const fragments = replaceSemiColonTransformations(uri).split(";")
+	const fragments = prepareUriForParsing(uri).split(";")
 	if(fragments.length !== 7) {
 		return null
 	}
@@ -137,7 +137,16 @@ export function convertPortionDataStringToObject(portionDataString: string): Por
 	}
 }
 
-// Some websites like youtube transform the semicolons in the URL to %3B, which later need to be translated back to semicolons
-export function replaceSemiColonTransformations(uri: string): string {
-	return uri.replace(/%3B/g, ";")
+
+export function prepareUriForParsing(uri: string): string {
+	// Some websites like youtube transform the semicolons in the URL to %3B, which later need to be translated back to semicolons
+	let preparedUri = uri.replace(/%3B/g, ";")
+
+	// Never call the add page from a URI, as we don't want the selector modal to automatically open here
+	if(preparedUri.includes(PATH_FOODDATA_PANEL_ADD)) {
+		preparedUri = preparedUri.replace(PATH_FOODDATA_PANEL_ADD, PATH_FOODDATA_PANEL)
+	}
+
+	return preparedUri
 }
+
