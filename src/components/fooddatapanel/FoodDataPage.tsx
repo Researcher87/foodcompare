@@ -101,7 +101,7 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     }
 
     return <div>
-        <FoodDataPageHeader displayMode={displayMode}
+        <FoodDataPageHeader displayMode={applicationContext.applicationData.foodDataPanel.displayMode}
                             setDisplayMode={onDisplayModeChange}
                             dataPage={dataPage}
                             setDataPage={onNewDataPage}

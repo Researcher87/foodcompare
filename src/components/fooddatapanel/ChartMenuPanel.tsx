@@ -36,49 +36,49 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
     return (
         <div className={"d-flex"}>
             <ButtonGroup vertical={props.verticalArrangement}>
-                <Button className="btn btn-link header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_BASE_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_BASE_DATA}>
                     {makeButtonLabel(applicationStrings.label_overview[languageContext.language])}
                 </Button>
-                <Button className="btn btn-link header-link header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_ENERGY_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_ENERGY_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_energy[languageContext.language])}
                 </Button>
-                <Button className="btn btn-link header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_VITAMIN_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_VITAMIN_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_vit[languageContext.language])}
                 </Button>
-                <Button className="btn btn-link page-head-button header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_MINERAL_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_MINERAL_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_min[languageContext.language])}
                 </Button>
-                <Button className="btn btn-link page-head-button header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_LIPIDS_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_LIPIDS_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_lipids[languageContext.language])}
                 </Button>
-                <Button className="btn btn-link page-head-button header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_CARBS_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_CARBS_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_carbohydrates[languageContext.language])}
                 </Button>
-                <Button className="btn btn-link page-head-button header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_PROTEINS_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_PROTEINS_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_proteins[languageContext.language])}
                 </Button>
-                <Button className="btn btn-link page-head-button header-link"
+                <Button className="btn header-link"
                         onClick={() => handlePageButtonClick(TAB_INFO)}
                         variant={variant}
                         active={props.dataPage === TAB_INFO}>

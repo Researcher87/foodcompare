@@ -12,6 +12,11 @@
     font-size: 0.8em;
 }
 
+.btn-link {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .button-apply {
     font-size: 0.8em !important;
 }
@@ -28,14 +33,6 @@
 
 .form-section {
     padding-bottom: 6px;
-}
-
-.header-link {
-    font-size: 0.9em;
-}
-
-.header-link.active {
-    color: white;
 }
 
 .header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
@@ -312,11 +309,11 @@
     font-size: 0.9em;
 }
 
-.btn-link {
+.header-link {
     color: #969696 !important;
 }
 
-.btn-link.active {
+.header-link.active {
     color: #0064ff !important;
     text-decoration: underline;
 }

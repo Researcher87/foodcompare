@@ -7,6 +7,10 @@ export const applicationStrings = {
         de: 'Abbrechen',
         en: 'Cancel'
     },
+    button_change_to_chart_mode: {
+        de: 'Daten als Diagramm anzeigen',
+        en: 'Display data as chart'
+    },
     button_close: {
         de: 'Schließen',
         en: 'Close'
