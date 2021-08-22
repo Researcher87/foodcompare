@@ -1,16 +1,16 @@
-import {getHelpText, HelpText} from "../../service/HelpService";
-import {HelpModal} from "../HelpModal";
 import {Button, ButtonGroup} from "react-bootstrap";
 import {
-    TAB_BASE_DATA, TAB_CARBS_DATA,
-    TAB_ENERGY_DATA, TAB_INFO,
+    TAB_BASE_DATA,
+    TAB_CARBS_DATA,
+    TAB_ENERGY_DATA,
+    TAB_INFO,
     TAB_LIPIDS_DATA,
-    TAB_MINERAL_DATA, TAB_PROTEINS_DATA,
+    TAB_MINERAL_DATA,
+    TAB_PROTEINS_DATA,
     TAB_VITAMIN_DATA
 } from "../../config/Constants";
 import {applicationStrings} from "../../static/labels";
 import {useContext} from "react";
-import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 
 interface ChartMenuPanelProps {
@@ -29,7 +29,7 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
     const variant = "link"
 
     const makeButtonLabel = (buttonText): JSX.Element => {
-        const className = props.verticalArrangement === true ? "float-start" : ""
+        const className = props.verticalArrangement ? "float-start" : ""
         return <span className={className}>{buttonText}</span>
     }
 

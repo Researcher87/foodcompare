@@ -15,30 +15,38 @@ import MineralVitaminChart from "./charts/MineralVitaminChart";
 import LipidsDataChart from "./charts/LipidsDataChart";
 import ProteinDataChart from "./charts/ProteinDataChart";
 import CarbsDataChart from "./charts/CarbsDataChart";
-import {ChartPanelProps} from "../../types/livedata/ChartPropsData";
+import {ChartProps} from "../../types/livedata/ChartPropsData";
+import {useContext} from "react";
+import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 
-export function ChartPanel(props: ChartPanelProps) {
+export function ChartPanel(props: ChartProps) {
+    const applicationContext = useContext(ApplicationDataContextStore)
+    if (!applicationContext) {
+        return <div/>
+    }
 
-        let chart = <div>Nothing to show</div>;
-        if(props.selectedDataTab === TAB_BASE_DATA) {
-            chart = <BaseDataChart selectedFoodItem={props.selectedFoodItem} />
-        } else if(props.selectedDataTab === TAB_ENERGY_DATA) {
-            chart = <EnergyDataChart selectedFoodItem={props.selectedFoodItem} />
-        } else if(props.selectedDataTab === TAB_VITAMIN_DATA) {
-            chart = <MineralVitaminChart selectedFoodItem={props.selectedFoodItem} selectedSubChart={CHART_VITAMINS} />
-        } else if(props.selectedDataTab === TAB_MINERAL_DATA) {
-            chart = <MineralVitaminChart selectedFoodItem={props.selectedFoodItem} selectedSubChart={CHART_MINERALS} />
-        } else if(props.selectedDataTab === TAB_LIPIDS_DATA) {
-            chart = <LipidsDataChart selectedFoodItem={props.selectedFoodItem}  />
-        } else if(props.selectedDataTab === TAB_CARBS_DATA) {
-            chart = <CarbsDataChart selectedFoodItem={props.selectedFoodItem}  />
-        } else if(props.selectedDataTab === TAB_PROTEINS_DATA) {
-            chart = <ProteinDataChart selectedFoodItem={props.selectedFoodItem}  />
-        }
+    const selectedDataTab = applicationContext.applicationData.foodDataPanel.selectedDataPage
 
-        return(
-            <div style={{paddingTop: "24px"}}>
-                {chart}
-            </div>
-        )
+    let chart = <div>Nothing to show</div>;
+    if (selectedDataTab === TAB_BASE_DATA) {
+        chart = <BaseDataChart selectedFoodItem={props.selectedFoodItem}/>
+    } else if (selectedDataTab === TAB_ENERGY_DATA) {
+        chart = <EnergyDataChart selectedFoodItem={props.selectedFoodItem}/>
+    } else if (selectedDataTab === TAB_VITAMIN_DATA) {
+        chart = <MineralVitaminChart selectedFoodItem={props.selectedFoodItem} selectedSubChart={CHART_VITAMINS}/>
+    } else if (selectedDataTab === TAB_MINERAL_DATA) {
+        chart = <MineralVitaminChart selectedFoodItem={props.selectedFoodItem} selectedSubChart={CHART_MINERALS}/>
+    } else if (selectedDataTab === TAB_LIPIDS_DATA) {
+        chart = <LipidsDataChart selectedFoodItem={props.selectedFoodItem}/>
+    } else if (selectedDataTab === TAB_CARBS_DATA) {
+        chart = <CarbsDataChart selectedFoodItem={props.selectedFoodItem}/>
+    } else if (selectedDataTab === TAB_PROTEINS_DATA) {
+        chart = <ProteinDataChart selectedFoodItem={props.selectedFoodItem}/>
+    }
+
+    return (
+        <div style={{paddingTop: "24px"}}>
+            {chart}
+        </div>
+    )
 }

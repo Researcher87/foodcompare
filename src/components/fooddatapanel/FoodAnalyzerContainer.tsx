@@ -23,7 +23,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const languageContext = useContext(LanguageContext)
 	const history = useHistory()
 
-    const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(props.openSelectorModal && props.openSelectorModal === true ? true : false)
+    const showFoodSelectorInitialState = props.openSelectorModal === true && props.openSelectorModal
+    const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(false)
 
     if(!applicationContext) {

@@ -5,7 +5,7 @@ import {LanguageContext} from "../../contexts/LangContext";
 import FoodDataPageHeader from "./FoodDataPageHeader";
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
 import {
-    DISPLAYMODE_CHART, SOURCE_SRLEGACY,
+    SOURCE_SRLEGACY,
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
@@ -37,13 +37,7 @@ export default function FoodDataPage(props: FoodDataPageProps) {
         ? applicationContext.applicationData.foodDataPanel.selectedDataPage
         : TAB_BASE_DATA
 
-    const selectedDisplayMode = applicationContext && applicationContext.applicationData.foodDataPanel.displayMode
-        ? applicationContext.applicationData.foodDataPanel.displayMode
-        : DISPLAYMODE_CHART
-
-    const [displayMode, setDisplayMode] = useState<string>(selectedDisplayMode)
     const [tableData, setTableData] = useState<Array<FoodTableDataObject>>([])
-    const [dataPage, setDataPage] = useState<string>(selectedDataTab)
 
     const updatePage = () => {   // Central update method when any (radio) button was clicked
         let tableDataList: Array<FoodTableDataObject> = [];
@@ -72,8 +66,7 @@ export default function FoodDataPage(props: FoodDataPageProps) {
 
     useEffect(() => {
             updatePage()
-        }, [displayMode,
-            props.selectedFoodItem,
+        }, [props.selectedFoodItem,
             applicationContext?.applicationData.preferredSource,
             applicationContext?.applicationData.foodDataPanel.selectedDataPage,
             applicationContext?.applicationData.foodDataPanel.displayMode,
@@ -86,13 +79,11 @@ export default function FoodDataPage(props: FoodDataPageProps) {
 
     const onNewDataPage = (datapage: string) => {
         applicationContext.setFoodDataPanelData.setSelectedDataPage(datapage)
-        setDataPage(datapage)
         updatePage()
     }
 
     const onDisplayModeChange = (newMode: string) => {
         applicationContext.setFoodDataPanelData.setSelectedDisplayMode(newMode)
-        setDisplayMode(newMode)
         updatePage()
     }
 
@@ -101,9 +92,7 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     }
 
     return <div>
-        <FoodDataPageHeader displayMode={applicationContext.applicationData.foodDataPanel.displayMode}
-                            setDisplayMode={onDisplayModeChange}
-                            dataPage={dataPage}
+        <FoodDataPageHeader setDisplayMode={onDisplayModeChange}
                             setDataPage={onNewDataPage}
                             selectedFoodItem={props.selectedFoodItem}
                             tableData={tableData}
