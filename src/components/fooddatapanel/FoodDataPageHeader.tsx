@@ -49,6 +49,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     }
 
     const displayMode = applicationContext.applicationData.foodDataPanel.displayMode
+    const dataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
 
     const handleRadioButtonClick = (value: string) => {
         props.setDisplayMode(value)
@@ -66,7 +67,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     }
 
     const help = () => {
-        switch (displayMode) {
+        console.log('Help', displayMode)
+
+        switch (dataPage) {
             case TAB_BASE_DATA:
                 setHelpModalId(1)
                 return;
@@ -129,6 +132,8 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
     const sourceString = getSourceName(props.selectedFoodItem.selectedSource)
     const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
+
+    console.log('Help modal ID:', helpText)
 
     return (
         <div style={{paddingBottom: "6px"}}>
