@@ -121,5 +121,21 @@ export const versions = [
             "When the 'getting started' button in the home menu is clicked, the food selector will now open immediately.",
             "The data page buttons in the food data panel haft a left alignment now."
         ]
+    },
+    {
+        id: "1.3.1",
+        date: "08-26-2021",
+        subject: "Updated contact form",
+        features: [
+            "The layout of the contacts page has been updated.",
+            "A contact form is provided now."
+        ],
+        updates: [
+            "The display mode (chart or table) is temporarily saved now.",
+            "A link has been added to the table data mode to switch directly to chart mode."
+        ],
+        bugfix: [
+            "Redirect bug from home menu to food data panel resulting in a frozen food data selected was solved."
+        ]
     }
 ]

@@ -821,7 +821,7 @@ export const applicationStrings = {
     },
     text_contact_disclaimer2: {
         de: 'Food Compare basiert auf freien Datenquellen, die im Quellen-Tab näher beschrieben sind. Die Lebensmitteldaten stammen von Food Data Central, einem Teilprojekt des United States Department of Agriculture. Im Info-Tab des Daten-Panels existiert für jedes Lebensmittel ein Link zu den abgegriffenen Daten.',
-        en: 'Food Compare is based upon free data sources listed in the sources section below. Food data used in the project originates from Food Data Central as part of the United States Department of Agriculture. There is a direct link to the original source data of each food element in the info data page of the food data panel.'
+        en: 'Food Compare is based upon free data sources specified in the sources tab. Food data used in the project originates from Food Data Central as part of the United States Department of Agriculture. There is a direct link to the original source data of each food element in the info data page of the food data panel.'
     },
     text_contact_disclaimer3: {
         de: 'Die für die Berechnung des Tagesbedarfs verwendeten Einstellungen entstammen der Deutschen Gesellschaft für Ernährung (DGE).',
