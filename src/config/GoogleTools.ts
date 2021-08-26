@@ -1,4 +1,0 @@
-export const ANALYTICS_MESS_ID = 'G-DXHX3Y13KZ'
-
-export const ADSENSE_TRACKING_ID = 'ca-pub-2335013571820161'
-

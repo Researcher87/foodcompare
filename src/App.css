@@ -21,6 +21,10 @@
     font-size: 0.8em !important;
 }
 
+.contact [type="radio"] {
+    display: none;
+}
+
 .foodDataPanel {
     padding-top: 16px;
 }

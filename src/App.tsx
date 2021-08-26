@@ -18,10 +18,10 @@ import {
 } from "./config/Constants";
 import {LanguageProvider} from "./contexts/LangContext";
 import {UserSettings} from "./components/UserSettings";
-import {Contact} from "./components/Contact";
+import {ContactContainer} from "./components/contact/ContactContainer";
 import ReactTooltip from "react-tooltip";
 import GA4React, {useGA4React} from "ga-4-react";
-import {ANALYTICS_MESS_ID} from "./config/GoogleTools";
+import {ANALYTICS_MESS_ID} from "./config/ApplicationKeys";
 import {render} from "react-dom";
 import {Home} from "./components/Home";
 import {FoodCompareApp} from "./components/FoodCompareApp";
@@ -51,7 +51,7 @@ function App(): JSX.Element {
                             <Route path={PATH_DIRECT_COMPARE} component={DirectCompareContainer}/>
                             <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>
                             <Route path={PATH_USERSETTINGS} component={UserSettings}/>
-                            <Route path={PATH_CONTACT} component={Contact}/>
+                            <Route path={PATH_CONTACT} component={ContactContainer}/>
                             <Route exact path={"/"} component={Home}/>
                         </Switch>
                     </Router>

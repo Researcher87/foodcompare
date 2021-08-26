@@ -86,7 +86,7 @@ export const versions = [
         ],
         updates: [
             "On the info page there is a link now to the USDA website, i.e., to the data sheet of the selected food data.",
-            "Contact address and logo text have been updated.",
+            "ContactContainer address and logo text have been updated.",
             "Reference to USDA has been changed to conform with the official name."
         ],
         bugfixes: [
