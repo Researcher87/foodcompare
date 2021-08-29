@@ -6,7 +6,6 @@ import {applicationStrings} from "../static/labels";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
 import {PATH_FOODDATA_PANEL} from "../config/Constants";
-import MobileDeviceCheck from "./MobileDeviceCheck";
 
 const images = require.context('../static/image/carousel', true);
 

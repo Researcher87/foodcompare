@@ -18,7 +18,8 @@ export default function MobileDeviceCheck() {
                 message,
                 applicationStrings.button_yes[language],
                 applicationStrings.button_no[language],
-                {}
+                {},
+                true
             )) {
                 applicationContext?.setMobileUsage(true)
                 return true
