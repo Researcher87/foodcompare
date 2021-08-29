@@ -28,7 +28,6 @@ export function getPalCategories(language: string): Array<PalCategory> {
  * value: The PAL value, e.g. 1.4 or 1.6.
  */
 export function getPalCategory(value: number): number {
-
     switch(value) {
         case EnergyConstants.PAL_CATEGORY_1:
             return 1
@@ -48,6 +47,29 @@ export function getPalCategory(value: number): number {
             return 1
     }
 }
+
+
+export function getPalValue(palCategory: number): number {
+	switch(palCategory) {
+        case 1:
+            return EnergyConstants.PAL_CATEGORY_1
+        case 2:
+            return EnergyConstants.PAL_CATEGORY_2
+        case 3:
+            return EnergyConstants.PAL_CATEGORY_3
+        case 4:
+            return EnergyConstants.PAL_CATEGORY_4
+        case 5:
+            return EnergyConstants.PAL_CATEGORY_5
+        case 6:
+            return EnergyConstants.PAL_CATEGORY_6
+        case 7:
+            return EnergyConstants.PAL_CATEGORY_7
+        default:
+            return EnergyConstants.PAL_CATEGORY_1
+    }
+}
+
 
 function createPalCategoryName(language, category): string {
     const languageLabel = `palcat_name_${category}`;

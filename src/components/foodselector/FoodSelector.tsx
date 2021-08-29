@@ -67,7 +67,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 const currentSelectorSetting = applicationContext.applicationData.foodSelector
                 if (selectedCategory !== currentSelectorSetting.selectedCategory || supplementData !== currentSelectorSetting.sourceSupplement
                     || combineData !== currentSelectorSetting.sourceCombine) {
-                    applicationContext.applicationData.foodSelector.setFoodSelectorConfig(selectedCategory, supplementData, combineData)
+                    applicationContext.setFoodSelectorConfig(selectedCategory, supplementData, combineData)
                 }
             }
 
@@ -114,7 +114,15 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 }
             } else {
                 // Update data for outer component whenever render is triggered
-                makeSelectedFoodItemObject(selectedFoodItem?.value, selectdFoodClass?.value, selectedPortion?.value)
+                if(selectedFoodItem && selectdFoodClass && selectedPortion) {
+                    const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectdFoodClass.value, selectedPortion.value)
+                    if(newFoodItem) {
+                        props.updateSelectedFoodItem(newFoodItem)
+                    }
+                } else if(props.selectedFoodItem) {
+                    const {foodItem, foodClass, portion} = props.selectedFoodItem
+                    makeSelectedFoodItemObject(foodItem, foodClass, portion)
+                }
             }
 
         }, [selectedFoodItem,
@@ -124,7 +132,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             selectedSource,
             portionAmount,
             supplementData,
-            combineData]
+            combineData
+        ]
     )
 
     if (!applicationContext) {
@@ -237,9 +246,9 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
 
-    const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined, portion: PortionData | undefined) => {
+    const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined, portion: PortionData | undefined): SelectedFoodItem | null => {
         if (!foodItem || !foodClass || !portion) {
-            return
+            return null
         }
 
         if (portion.portionType === 0) {
@@ -255,9 +264,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             combineData: combineData
         }
 
-        props.updateSelectedFoodItem(newFoodItem)
+        return newFoodItem
     }
-
 
     const setInitialFoodElement = () => {
         if (!foodClassesList || foodClassesList.length === 0) {

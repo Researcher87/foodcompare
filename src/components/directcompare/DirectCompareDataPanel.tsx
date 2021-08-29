@@ -2,14 +2,16 @@ import {ChartMenuPanel} from "../fooddatapanel/ChartMenuPanel";
 import {
     CHART_MINERALS,
     CHART_VITAMINS,
-    TAB_BASE_DATA, TAB_CARBS_DATA,
-    TAB_ENERGY_DATA, TAB_INFO,
+    TAB_BASE_DATA,
+    TAB_CARBS_DATA,
+    TAB_ENERGY_DATA,
+    TAB_INFO,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
     TAB_VITAMIN_DATA
 } from "../../config/Constants";
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {DC_MineralVitaminChart} from "./DC_MineralVitaminChart";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
@@ -20,26 +22,18 @@ import {DC_EnergyChart} from "./DC_EnergyChart";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
-import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
 import {InfoData} from "../fooddatapanel/charts/InfoData";
 
 export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
 
-    const initialPage = applicationContext?.applicationData.directCompareDataPanel.selectedDataPage
-        ? applicationContext?.applicationData.directCompareDataPanel.selectedDataPage
-        : TAB_BASE_DATA
-
-    const [selectedDataTab, setSelectedDataTab] = useState<string>(initialPage)
-
     if (!applicationContext) {
         return <div/>
     }
 
     const setDataPage = (datapage: string) => {
-        applicationContext.applicationData.directCompareDataPanel.setSelectedDirectCompareDataPage(datapage)
-        setSelectedDataTab(datapage)
+        applicationContext.setDirectCompareData.setSelectedDirectCompareDataPage(datapage)
     }
 
     const foodNames = applicationContext.foodDataCorpus.foodNames
@@ -53,8 +47,10 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     const selectedFoodItem1: SelectedFoodItem = {...props.selectedFoodItem1, resolvedName: name1}
     const selectedFoodItem2: SelectedFoodItem = {...props.selectedFoodItem2, resolvedName: name2}
 
+    const selectedDataPage = applicationContext.applicationData.directCompareDataPanel.selectedDataPage
+
     const renderCharts = () => {
-        switch (selectedDataTab) {
+        switch (selectedDataPage) {
             case TAB_BASE_DATA:
                 return <DC_PieChart key={TAB_BASE_DATA}
                                     selectedFoodItem1={selectedFoodItem1}
@@ -111,7 +107,7 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
 
     return <div>
         <Card.Header>
-            <ChartMenuPanel dataPage={selectedDataTab} verticalArrangement={false} setDataPage={setDataPage}/>
+            <ChartMenuPanel dataPage={selectedDataPage} verticalArrangement={false} setDataPage={setDataPage}/>
         </Card.Header>
         {renderCharts()}
     </div>

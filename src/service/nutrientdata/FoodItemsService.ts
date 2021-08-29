@@ -42,7 +42,6 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
     return reactSelectOptions
 }
 
-
 function getFoodItemsOfFoodclass(foodItems: Array<FoodItem>, foodClassId: number): Array<FoodItem> {
     return foodItems.filter(foodItem => {
         if(foodItem.foodClass === foodClassId) {

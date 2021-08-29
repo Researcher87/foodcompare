@@ -21,11 +21,11 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const language = languageContext.language
 
     const initialItem1 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1
-        ? applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1
+        ? applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1
         : null
 
     const initialItem2 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
-        ? applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
+        ? applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
         : null
 
     const [selectedFoodItem1, setSelectedFoodItem1] = useState<SelectedFoodItem | null>(initialItem1)
@@ -33,28 +33,36 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const [displayStatus, setDisplayStatus] = useState<string>(STATUS_FIRST_TIME)
 
     useEffect(() => {
-    }, [selectedFoodItem1, selectedFoodItem2])
+        if(applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2) {
+            const {selectedFoodItem1, selectedFoodItem2} = applicationContext.applicationData.directCompareDataPanel
+            if(selectedFoodItem1 && selectedFoodItem2) {
+                updateSelectedFoodItem1(selectedFoodItem1)
+                updateSelectedFoodItem2(selectedFoodItem2)
+            }
+        }
+
+    }, [applicationContext?.applicationData.directCompareDataPanel])
 
     if (!applicationContext) {
         return <div/>
     }
 
     const updateSelectedFoodItem1 = (selectedFoodItem: SelectedFoodItem): void => {
-        setSelectedFoodItem1(selectedFoodItem)
-        if(displayStatus !== STATUS_FIRST_TIME) {
+        setSelectedFoodItem1({...selectedFoodItem})
+        if (displayStatus !== STATUS_FIRST_TIME) {
             setDisplayStatus(STATUS_UPDATED)
         }
     }
 
     const updateSelectedFoodItem2 = (selectedFoodItem: SelectedFoodItem): void => {
         setSelectedFoodItem2(selectedFoodItem)
-        if(displayStatus !== STATUS_FIRST_TIME) {
+        if (displayStatus !== STATUS_FIRST_TIME) {
             setDisplayStatus(STATUS_UPDATED)
         }
     }
 
     const onSubmit = () => {
-        if(selectedFoodItem1 && selectedFoodItem2) {
+        if (selectedFoodItem1 && selectedFoodItem2) {
             props.updateSelectedFoodItems(selectedFoodItem1, selectedFoodItem2)
         }
 
@@ -65,7 +73,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const renderFoodSelectorCard = (foodSelectorNumber: number) => {
         const updateSelectedFoodItem = foodSelectorNumber === 1 ? updateSelectedFoodItem1 : updateSelectedFoodItem2
         const styleClass = foodSelectorNumber === 1 ? {backgroundColor: direct_compare_color1} : {backgroundColor: direct_compare_color2}
-        const initialFoodClassToSet = foodSelectorNumber -1
+        const initialFoodClassToSet = foodSelectorNumber - 1
 
         const selectedFoodItem = foodSelectorNumber === 1 ? selectedFoodItem1 : selectedFoodItem2
 

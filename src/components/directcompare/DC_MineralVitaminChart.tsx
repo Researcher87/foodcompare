@@ -66,7 +66,7 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
                     synchronize: synchronizeMinerals
                 }
             }
-            applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
+            applicationContext.setDirectCompareData.updateDirectCompareChartConfig(newChartConfig)
         }
     }
 

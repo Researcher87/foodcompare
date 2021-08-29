@@ -5,7 +5,8 @@ import {applicationStrings} from "../../static/labels";
 import {FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/all";
 import {
     DISPLAYMODE_CHART,
-    DISPLAYMODE_TABLE, SOURCE_SRLEGACY,
+    DISPLAYMODE_TABLE,
+    PATH_FOODDATA_PANEL,
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
@@ -25,22 +26,21 @@ import {HelpModal} from "../HelpModal";
 import {getHelpText, HelpText} from "../../service/HelpService";
 import getName from "../../service/LanguageService";
 import {ChartMenuPanel} from "./ChartMenuPanel";
-import {getNutrientData, getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
+import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
+import {useHistory} from 'react-router-dom';
 
 
 interface FoodDataPageHeaderProps {
-    displayMode: string
     setDisplayMode: (id: string) => void
-    dataPage: string
     setDataPage: (id: string) => void
     selectedFoodItem: SelectedFoodItem
     tableData: Array<FoodTableDataObject>
-    selectedDataTab: string
 }
 
 export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
+	const history = useHistory()
 
     const [helpModalId, setHelpModalId] = useState<number>(0)
 
@@ -48,17 +48,25 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         return <div/>
     }
 
+    const displayMode = applicationContext.applicationData.foodDataPanel.displayMode
+
     const handleRadioButtonClick = (value: string) => {
         props.setDisplayMode(value)
     }
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
-        applicationContext.applicationData.foodDataPanel.removeItemFromFoodDataPanel(id)
+		const remainingItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
+
+        applicationContext.setFoodDataPanelData.removeItemFromFoodDataPanel(id)
+
+		if(remainingItems === 0) {
+			history.push({pathName: PATH_FOODDATA_PANEL})
+		}		
     }
 
     const help = () => {
-        switch (props.dataPage) {
+        switch (displayMode) {
             case TAB_BASE_DATA:
                 setHelpModalId(1)
                 return;
@@ -91,10 +99,10 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const enabledDisplayButtonClasses = "btn button-displaymode-enabled"
     const disabledDisplayButtonClasses = "btn button-displaymode-disabled"
 
-    const chartButtonClasses = props.displayMode === DISPLAYMODE_CHART ? enabledDisplayButtonClasses
+    const chartButtonClasses = displayMode === DISPLAYMODE_CHART ? enabledDisplayButtonClasses
         : disabledDisplayButtonClasses;
 
-    const tablesButtonClasses = props.displayMode === DISPLAYMODE_TABLE ? enabledDisplayButtonClasses
+    const tablesButtonClasses = displayMode === DISPLAYMODE_TABLE ? enabledDisplayButtonClasses
         : disabledDisplayButtonClasses;
 
     const foodNamesList = applicationContext.foodDataCorpus.foodNames;
@@ -120,17 +128,18 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
     const sourceString = getSourceName(props.selectedFoodItem.selectedSource)
+    const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
 
     return (
         <div style={{paddingBottom: "6px"}}>
             {helpText !== null &&
-            <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}></HelpModal>
+            <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}/>
             }
             <div className={"row d-flex flex-nowrap"}>
                 <div className="col-md-2 col-sm-3">
                     <div className={"card"}>
                         <div className="card-body" style={{paddingRight: "16px"}}>
-                            <ChartMenuPanel dataPage={props.dataPage} verticalArrangement={true} setDataPage={props.setDataPage}/>
+                            <ChartMenuPanel verticalArrangement={true} setDataPage={props.setDataPage} dataPage={selectedDataPage}/>
                             <div className={"d-flex card"} style={{marginTop: "24px", backgroundColor: "#eeeeee"}}>
                                 <div className={"text-center"} style={{fontSize: "0.8em"}}>
                                     {sourceString}
@@ -151,14 +160,14 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                 <div className="btn-group" role="group">
                                     <Button className={chartButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
-                                            active={props.displayMode === DISPLAYMODE_CHART}
+                                            active={displayMode === DISPLAYMODE_CHART}
                                             data-tip={applicationStrings.tooltip_icon_charts[languageContext.language]}>
                                         <ReactTooltip/>
                                         <FaChartBar/>
                                     </Button>
                                     <Button className={tablesButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_TABLE)}
-                                            active={props.displayMode === DISPLAYMODE_TABLE}
+                                            active={displayMode === DISPLAYMODE_TABLE}
                                             data-tip={applicationStrings.tooltip_icon_table[languageContext.language]}>
                                         <FaThList/>
                                     </Button>
@@ -167,7 +176,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                 <div className="btn-group" role="group" style={{paddingLeft: "24px"}}>
                                     <Button className={"btn-primary button-foodPanelHead"}
                                             onClick={help}
-                                            active={props.displayMode === DISPLAYMODE_CHART}>
+                                            active={displayMode === DISPLAYMODE_CHART}>
                                         <ReactTooltip/>
                                         <FaQuestionCircle/>
                                     </Button>
@@ -183,8 +192,6 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                     </div>
                     <FoodDataPageBody selectedFoodItem={props.selectedFoodItem}
                                       tableData={props.tableData}
-                                      displayMode={props.displayMode}
-                                      selectedDataTab={props.selectedDataTab}
                     />
                 </div>
             </div>

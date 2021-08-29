@@ -12,8 +12,8 @@ import {SEX_MALE} from "../../config/Constants";
  * dailyRequirementObject: A vitamin or mineral requirement object (e.g. for Vitamin C or Iron).
  * userData: The user data object containing the user data.
  */
-export function determineDailyRequirement(dailyRequirementObject: RequirementData, userData: UserData) {
-    let ageGroupRequirements
+export function determineDailyRequirement(dailyRequirementObject: RequirementData, userData: UserData): number {
+    let ageGroupRequirements: RequirementAgeGroupData
 
     if (userData.age >= 65) {
         ageGroupRequirements = dailyRequirementObject.senior;
@@ -29,14 +29,14 @@ export function determineDailyRequirement(dailyRequirementObject: RequirementDat
         ageGroupRequirements = dailyRequirementObject.youth;   // Default case (should not occur!)
     }
 
-    let value
+    let value: number
     if (userData.sex === SEX_MALE) {
         value = ageGroupRequirements.male;
     } else {
         if (userData.pregnant) {
-            value = ageGroupRequirements.femalePregnant!!;
+            value = ageGroupRequirements.femalePregnant ? ageGroupRequirements.femalePregnant : ageGroupRequirements.female;
         } else if (userData.breastFeeding) {
-            value = ageGroupRequirements.femaleBreastFeeding!!;
+            value = ageGroupRequirements.femaleBreastFeeding ? ageGroupRequirements.femaleBreastFeeding : ageGroupRequirements.female;
         } else {
             value = ageGroupRequirements.female;
         }
@@ -57,7 +57,7 @@ export function determineDailyRequirement(dailyRequirementObject: RequirementDat
  */
 export function determineFoodRequirementRatio(dailyRequirementObject: RequirementData, amountInFood: number, portionSize: number, userData: UserData): number {
     const dailyRequirement = determineDailyRequirement(dailyRequirementObject, userData);
-    if (portionSize == 100) {
+    if (portionSize === 100) {
         return Math.round(amountInFood / dailyRequirement * 1000) / 10;
     } else {   // Calculate ration for a special amount (portion):
         return Math.round(amountInFood / dailyRequirement * (portionSize * 10)) / 10;
@@ -78,7 +78,7 @@ export function determineFoodRequirementRatio(dailyRequirementObject: Requiremen
 export function determineProteinRequirementRatio(requirement: number, amountInFood: number, portionSize: number, userData: UserData) {
     const dailyRequirement = (requirement * userData.weight) / 1000;
 
-    if (portionSize == 100) {
+    if (portionSize === 100) {
         return Math.round(amountInFood / dailyRequirement * 1000) / 10;
     } else {   // Calculate ration for a special amount (portion):
         return Math.round(amountInFood / dailyRequirement * (portionSize * 10)) / 10;

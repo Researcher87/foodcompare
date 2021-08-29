@@ -64,7 +64,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                         showLegend: showLegend
                     }
                 }
-                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
+                applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
             }
         }
     }

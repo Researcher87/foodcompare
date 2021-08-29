@@ -12,8 +12,8 @@ import {
     PATH_DIRECT_COMPARE,
     PATH_FOODCOMPARE,
     SOURCE_SRLEGACY,
-    SOURCE_FNDDS,
-    PATH_RANKING
+    PATH_RANKING,
+    SOURCE_FNDDS
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
@@ -34,14 +34,21 @@ export default function Header() {
 
     const handleLanguageButtonClick = (event: any): void => {
         userLanguageChange(event.target.value)
-        applicationContext.applicationData.foodDataPanel.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
+        applicationContext.setFoodDataPanelData.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
     }
 
     const handleSourceButtonClick = (event: any): void => {
-        applicationContext.applicationData.setPreferredSource(event.target.value)
+        applicationContext.setPreferredSource(event.target.value)
     }
 
-    const activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
+    let activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
+    if(activePath.endsWith("/") && activePath.length > 1) {
+        activePath = activePath.substring(0, activePath.length-1)
+    }
+
+    if (applicationContext?.debug) {
+        console.log('Path:', activePath)
+    }
 
     const renderMenus = () => {
         return (

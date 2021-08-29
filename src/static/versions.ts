@@ -86,13 +86,56 @@ export const versions = [
         ],
         updates: [
             "On the info page there is a link now to the USDA website, i.e., to the data sheet of the selected food data.",
-            "Contact address and logo text have been updated.",
+            "ContactContainer address and logo text have been updated.",
             "Reference to USDA has been changed to conform with the official name."
         ],
         bugfixes: [
             "Fixes the display bug in the direct compare menu, that sometimes occurred when the browser window size was changed (chart becoming larger than their container).",
             "The info data page in the food analyzer menu has its original height again.",
             "Some wrong condition names of food elements have been corrected."
+        ]
+    },
+    {
+        id: "1.2.2",
+        date: "07-30-2021",
+        subject: "Combining data sources",
+        features: [
+            "Two data sources can now be combined with each other. Missing data can be supplemented by another source (if it exists) or the average data can be calculated out of two data sources."
+        ],
+        updates: [
+            "Meta data of the index.html has been changed, a new favicon has been added.",
+        ],
+        bugfixes: [
+            "Some missing (but actually available) information in the nutrient data set have been completed.",
+        ]
+    },
+    {
+        id: "1.3",
+        date: "08-15-2021",
+        subject: "Adding URIs for selected food items",
+        features: [
+            "In the food data panel, a unique URI identifying the selected resource is now generated. This makes it possible to share a selected item as a link. This also holds for aggregated data.",
+            "A URI is generated for items in the direct compare panel accordingly."
+        ],
+        updates: [
+            "When the 'getting started' button in the home menu is clicked, the food selector will now open immediately.",
+            "The data page buttons in the food data panel haft a left alignment now."
+        ]
+    },
+    {
+        id: "1.3.1",
+        date: "08-26-2021",
+        subject: "Updated contact form",
+        features: [
+            "The layout of the contacts page has been updated.",
+            "A contact form is provided now."
+        ],
+        updates: [
+            "The display mode (chart or table) is temporarily saved now.",
+            "A link has been added to the table data mode to switch directly to chart mode."
+        ],
+        bugfix: [
+            "Redirect bug from home menu to food data panel resulting in a frozen food data selected was solved."
         ]
     }
 ]

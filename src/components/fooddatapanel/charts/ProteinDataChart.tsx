@@ -51,8 +51,7 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
                         expand100: expand100
                     }
                 }
-                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
-
+                applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
             }
         }
     }

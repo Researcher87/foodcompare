@@ -127,7 +127,7 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
             }
 
             if (newChartConfig) {
-                applicationContext.applicationData.directCompareDataPanel.updateDirectCompareChartConfig(newChartConfig)
+                applicationContext.setDirectCompareData.updateDirectCompareChartConfig(newChartConfig)
             }
         }
     }
@@ -234,8 +234,6 @@ export function DC_PieChart(props: PieChartDirectCompareProp) {
                                    directCompareConfig={preconfig}/>
         }
     }
-
-    console.log('Container height:', windowSize.height, containerHeight)
 
     return <div className={"direct-compare-panel"}>
         <Card>

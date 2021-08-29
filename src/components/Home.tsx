@@ -69,7 +69,7 @@ export function Home() {
     const renderStartButton = () => {
         return (
             <div className="text-center">
-                <Link to={PATH_FOODDATA_PANEL}>
+                <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
                 <button type="button"
                         className="btn btn-warning button-apply media app"
                         style={{minWidth: "150px"}}>

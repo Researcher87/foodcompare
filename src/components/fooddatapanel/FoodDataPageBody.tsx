@@ -4,27 +4,34 @@ import {ChartPanel} from "./ChartPanel";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {FoodDataTable} from "./FoodDataTable";
 import {InfoData} from "./charts/InfoData";
+import {useContext} from "react";
+import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 
 interface FoodDataPageBodyProps {
     tableData: Array<FoodTableDataObject>
-    displayMode: string
-    selectedDataTab: string
     selectedFoodItem: SelectedFoodItem
 }
 
 export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
+    const applicationContext = useContext(ApplicationDataContextStore)
+
+    if(!applicationContext) {
+        return <div/>
+    }
+
+    const {displayMode, selectedDataPage}  = applicationContext.applicationData.foodDataPanel
 
     const renderDataPage = () => {
         return (
             <div>
-                {props.displayMode === DISPLAYMODE_TABLE &&
+                {displayMode === DISPLAYMODE_TABLE &&
                 <div className="col">
                     <FoodDataTable tableData={props.tableData}/>
                 </div>
                 }
-                {props.displayMode === DISPLAYMODE_CHART &&
+                {displayMode === DISPLAYMODE_CHART &&
                 <div className="col">
-                    <ChartPanel selectedFoodItem={props.selectedFoodItem} selectedDataTab={props.selectedDataTab}/>
+                    <ChartPanel selectedFoodItem={props.selectedFoodItem} />
                 </div>
                 }
             </div>
@@ -33,10 +40,10 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
 
     return (
         <div className={"form-main"} style={{maxWidth: "1200px", minWidth: "850px"}}>
-            {props.selectedDataTab === TAB_INFO &&
+            {selectedDataPage === TAB_INFO &&
             <InfoData selectedFoodItem={props.selectedFoodItem}/>
             }
-            {props.selectedDataTab !== TAB_INFO &&
+            {selectedDataPage !== TAB_INFO &&
             renderDataPage()
             }
         </div>

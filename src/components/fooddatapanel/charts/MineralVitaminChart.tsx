@@ -82,7 +82,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
                     }
                 }
 
-                applicationContext.applicationData.foodDataPanel.updateFoodDataPanelChartConfig(newChartConfig)
+                applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
             }
         }
     }

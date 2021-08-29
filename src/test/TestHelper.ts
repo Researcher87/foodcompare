@@ -1,3 +1,5 @@
+import { SEX_FEMALE } from "../config/Constants";
+import { UserData } from "../types/livedata/UserData";
 import {
     BaseData,
     CarbohydrateData,
@@ -7,6 +9,19 @@ import {
     VitaminData
 } from "../types/nutrientdata/FoodItem";
 import Source from "../types/nutrientdata/Source";
+
+
+export const userData: UserData = {
+			weight: 70,
+			size: 205,
+			age: 20,
+			sex: SEX_FEMALE,
+			palValue: 1.6,
+			pregnant: false,
+			breastFeeding: false,
+			leisureSports: true,
+			initialValues: false
+	}
 
 export function makeDefaultBaseData(): BaseData {
     return {
@@ -117,7 +132,6 @@ export function makeDefaultOmegaData(): OmegaData {
         uncertainRatio: 0.7972
     }
 }
-
 
 
 export function makeDefaultSource(): Source {

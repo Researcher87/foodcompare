@@ -5,7 +5,7 @@ import {LanguageContext} from "../../contexts/LangContext";
 import FoodDataPageHeader from "./FoodDataPageHeader";
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
 import {
-    DISPLAYMODE_CHART,
+    SOURCE_SRLEGACY,
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
@@ -25,45 +25,25 @@ import {
 } from "../../service/TableService";
 
 interface FoodDataPageProps {
-    selectedFoodItem: SelectedFoodItem
+    selectedFoodItem: SelectedFoodItem,
+    dataPage?: string
 }
 
 export default function FoodDataPage(props: FoodDataPageProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
-    const initialDataPage = applicationContext?.applicationData.foodDataPanel.selectedDataPage
+    const selectedDataTab = applicationContext
         ? applicationContext.applicationData.foodDataPanel.selectedDataPage
         : TAB_BASE_DATA
 
-    const [displayMode, setDisplayMode] = useState<string>(DISPLAYMODE_CHART)
-    const [selectedDataTab, setSelectedDataTab] = useState<string>(initialDataPage)
     const [tableData, setTableData] = useState<Array<FoodTableDataObject>>([])
-
-    useEffect(() => {
-        updatePage()
-    }, [displayMode, selectedDataTab, props.selectedFoodItem, applicationContext?.applicationData.preferredSource])
-
-    if (!applicationContext) {
-        return <div/>
-    }
-
-    const onNewDataPage = (datapage: string) => {
-        setSelectedDataTab(datapage)
-        applicationContext.applicationData.foodDataPanel.setSelectedDataPage(datapage)
-        updatePage()
-    }
-
-    const onDisplayModeChange = (newMode: string) => {
-        setDisplayMode(newMode)
-        updatePage()
-    }
 
     const updatePage = () => {   // Central update method when any (radio) button was clicked
         let tableDataList: Array<FoodTableDataObject> = [];
-        const {foodItem, portion} = props.selectedFoodItem
+        const {portion} = props.selectedFoodItem
 
-        const preferredSource = applicationContext.applicationData.preferredSource
+        const preferredSource = applicationContext ? applicationContext.applicationData.preferredSource : SOURCE_SRLEGACY
 
         if (selectedDataTab === TAB_BASE_DATA) {
             tableDataList = createBaseDataTable(props.selectedFoodItem, portion.amount, language, preferredSource);
@@ -84,18 +64,38 @@ export default function FoodDataPage(props: FoodDataPageProps) {
         setTableData(tableDataList)
     }
 
+    useEffect(() => {
+            updatePage()
+        }, [props.selectedFoodItem,
+            applicationContext?.applicationData.preferredSource,
+            applicationContext?.applicationData.foodDataPanel.selectedDataPage,
+            applicationContext?.applicationData.foodDataPanel.displayMode,
+            applicationContext?.userData]
+    )
+
+    if (!applicationContext) {
+        return <div/>
+    }
+
+    const onNewDataPage = (datapage: string) => {
+        applicationContext.setFoodDataPanelData.setSelectedDataPage(datapage)
+        updatePage()
+    }
+
+    const onDisplayModeChange = (newMode: string) => {
+        applicationContext.setFoodDataPanelData.setSelectedDisplayMode(newMode)
+        updatePage()
+    }
+
     if (applicationContext.debug) {
         console.log('FoodDataPage: Render, tabledata = ', tableData)
     }
 
     return <div>
-        <FoodDataPageHeader displayMode={displayMode}
-                            setDisplayMode={onDisplayModeChange}
-                            dataPage={selectedDataTab}
+        <FoodDataPageHeader setDisplayMode={onDisplayModeChange}
                             setDataPage={onNewDataPage}
                             selectedFoodItem={props.selectedFoodItem}
                             tableData={tableData}
-                            selectedDataTab={selectedDataTab}
         />
     </div>
 

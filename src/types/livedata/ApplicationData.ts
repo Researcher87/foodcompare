@@ -1,6 +1,5 @@
 import SelectedFoodItem from "./SelectedFoodItem";
 import {ChartConfigData, DirectCompareChartConfigData} from "./ChartConfigData";
-import NameType from "../nutrientdata/NameType";
 import ReactSelectOption from "../ReactSelectOption";
 
 export interface ApplicationData {
@@ -8,7 +7,6 @@ export interface ApplicationData {
     directCompareDataPanel: DirectCompareData
     foodSelector: FoodSelector
     preferredSource: string
-    setPreferredSource: (string) => void
 }
 
 export interface FoodDataPanelData {
@@ -17,13 +15,6 @@ export interface FoodDataPanelData {
     selectedDataPage: string
     displayMode: string
     chartConfigData: ChartConfigData
-    setSelectedFoodTab: (number) => void
-    setSelectedDataPage: (string) => void
-    addItemToFoodDataPanel: (number) => void
-    removeItemFromFoodDataPanel: (number) => void
-    removeAllItemsFromFoodDataPanel: () => void
-    updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void
-    updateFoodDataPanelChartConfig: (chartConfig: ChartConfigData) => void
 }
 
 export interface DirectCompareData {
@@ -31,14 +22,10 @@ export interface DirectCompareData {
     selectedFoodItem2: SelectedFoodItem | null
     selectedDataPage: string
     directCompareConfigChart: DirectCompareChartConfigData
-    updateDirectCompareChartConfig: (chartConfig: DirectCompareChartConfigData) => void
-    setSelectedDirectCompareItems: (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => void
-    setSelectedDirectCompareDataPage: (selectedPage: string) => void
 }
 
 export interface FoodSelector {
     selectedCategory: ReactSelectOption | null
     sourceSupplement: boolean
     sourceCombine: boolean
-    setFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => void
 }

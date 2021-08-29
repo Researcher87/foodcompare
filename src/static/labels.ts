@@ -7,6 +7,10 @@ export const applicationStrings = {
         de: 'Abbrechen',
         en: 'Cancel'
     },
+    button_change_to_chart_mode: {
+        de: 'Daten als Diagramm anzeigen',
+        en: 'Display data as chart'
+    },
     button_close: {
         de: 'Schließen',
         en: 'Close'
@@ -26,6 +30,10 @@ export const applicationStrings = {
     button_show: {
         de: 'Anzeigen',
         en: 'Show'
+    },
+    button_send: {
+        de: "Senden",
+        en: "Send"
     },
     button_submit: {
         de: 'Übernehmen',
@@ -258,6 +266,46 @@ export const applicationStrings = {
     label_language: {
         de: 'Sprache',
         en: 'Language'
+    },
+    label_mail_name: {
+      de: "Name",
+      en: "Name"
+    },
+    label_mail_address: {
+        de: "Mail-Adresse",
+        en: "Mail address"
+    },
+    label_mail_message: {
+        de: "Ihre Nachricht",
+        en: "Your message"
+    },
+    label_mail_characters_left: {
+        de: "Noch /xx/ Zeichen verbleibend",
+        en: "/xx/ characters left"
+    },
+    label_mail_too_long: {
+        de: "Nachricht ist zu lang",
+        en: "Message too long"
+    },
+    label_mail_error_name: {
+        de: "Geben Sie bitte einen gültigen Namen ein.",
+        en: "Please enter a valid name."
+    },
+    label_mail_error_mailaddress: {
+        de: "Geben Sie bitte eine gültige Mail-Adresse ein.",
+        en: "Please enter a valid mail address."
+    },
+    label_mail_error_nocontent: {
+        de: "Geben Sie bitte eine Nachricht ein.",
+        en: "Please specify a message."
+    },
+    label_mail_error_content_too_long: {
+        de: "Die eingegebene Nachricht ist zu lang.",
+        en: "The specified message is too long."
+    },
+    label_mail_error_verification: {
+        de: "Bitte verifizieren, dass Sie kein Roboter sind.",
+        en: "Please verify that you are not a robot."
     },
     label_noData: {
         de: 'Keine Daten vorhanden',
@@ -671,6 +719,26 @@ export const applicationStrings = {
         de: 'Kontakt',
         en: 'Contact'
     },
+    menu_contact_sources: {
+        de: 'Quellen',
+        en: 'Sources'
+    },
+    menu_contact_versions: {
+        de: 'Versionen',
+        en: 'Versions'
+    },
+    menu_contact_impressum: {
+        de: 'Impressum',
+        en: 'Impressum'
+    },
+    message_email_success: {
+        de: 'Ihre Nachricht wurde versendet.',
+        en: 'Your message has been sent.'
+    },
+    message_email_error: {
+        de: 'Beim Versenden der Nachricht trat ein Fehler auf.',
+        en: 'Error while trying to send message.'
+    },
     message_error_existing_element: {
         de: 'Das ausgewählte Element befindet sich bereits im Datenbereich. Ein Lebensmittel darf nur einmal hinzugefügt werden.',
         en: 'The selected food item already exists in your list. A food item can be added only once.'
@@ -772,8 +840,16 @@ export const applicationStrings = {
         en: 'All rights reserved.'
     },
     text_contact_disclaimer2: {
-        de: 'Food Compare basiert auf freien Datenquellen, die im Quellenabschnitt weiter unten aufgelistet sind. Es besteht keinerlei Garantie für die Korrektheit oder Zuverlässigkeit der ins Projekt geladenen und im Projekt verwendeten Daten. Food Compare ist ein freies Programm zur Visualisierung von Nährwerten in Lebensmitteln, das in keiner Weise medizinische oder biologische Befunde ersetzt, sondern lediglich bestehende Nährwertdaten und -quellen grafisch aufbereitet darstellt.',
-        en: 'Food Compare is based upon free data sources listed in the sources section below. There is no warranty for the correctness or reliability of the data imported to and used within the project. Food Compare is a free visualization tool for food nutrients, which does not replace in any way medical or biological food and nutrient data sources and will merely supplement existing food nutrient sources for laypeople that are interested in this matter.'
+        de: 'Food Compare basiert auf freien Datenquellen, die im Quellen-Tab näher beschrieben sind. Die Lebensmitteldaten stammen von Food Data Central, einem Teilprojekt des United States Department of Agriculture. Im Info-Tab des Daten-Panels existiert für jedes Lebensmittel ein Link zu den abgegriffenen Daten.',
+        en: 'Food Compare is based upon free data sources specified in the sources tab. Food data used in the project originates from Food Data Central as part of the United States Department of Agriculture. There is a direct link to the original source data of each food element in the info data page of the food data panel.'
+    },
+    text_contact_disclaimer3: {
+        de: 'Die für die Berechnung des Tagesbedarfs verwendeten Einstellungen entstammen der Deutschen Gesellschaft für Ernährung (DGE).',
+        en: 'For the computation of daily dietary requirements, data from the German Nutrition Society (DGE) is used.'
+    },
+    text_contact_form: {
+        de: 'Bitte benutzen Sie das Kontaktformular, wenn Sie Frage oder Feedback zu Food Compare haben.',
+        en: 'Please use the contact form below if you have questions of feedback about Food Compare.'
     },
     text_contact_source1: {
         de: 'Quellen:',
