@@ -15,9 +15,13 @@ export const applicationStrings = {
         de: 'Schließen',
         en: 'Close'
     },
-    button_getstarted: {
+    button_getstarted_1: {
         de: 'Lebensmittel analysieren',
-        en: 'Get started'
+        en: 'Analyze food'
+    },
+    button_getstarted_2: {
+        de: 'Lebensmittel vergleichen',
+        en: 'Compare foods'
     },
     button_no: {
         de: 'Nein',

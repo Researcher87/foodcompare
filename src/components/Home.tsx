@@ -5,8 +5,7 @@ import {applicationStrings} from "../static/labels";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
-import {PATH_FOODDATA_PANEL} from "../config/Constants";
-import MobileDeviceCheck from "./MobileDeviceCheck";
+import {PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL} from "../config/Constants";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -67,7 +66,7 @@ export function Home() {
     }
 
 
-    const renderStartButton = () => {
+    const renderStartButtons = () => {
         return (
             <div className="text-center">
                 <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
@@ -75,7 +74,16 @@ export function Home() {
                             className="btn btn-warning button-apply media app"
                             style={{minWidth: "150px"}}>
 					<span className={"media app"} style={{fontWeight: "bold"}}>
-						{applicationStrings.button_getstarted[languageContext.language]}
+						{applicationStrings.button_getstarted_1[languageContext.language]}
+					</span>
+                    </button>
+                </Link>
+                <Link to={PATH_DIRECT_COMPARE}>
+                    <button type="button"
+                            className="btn btn-warning button-apply media app"
+                            style={{minWidth: "150px"}}>
+					<span className={"media app"} style={{fontWeight: "bold"}}>
+						{applicationStrings.button_getstarted_2[languageContext.language]}
 					</span>
                     </button>
                 </Link>
@@ -90,7 +98,7 @@ export function Home() {
                     <div className={"col-5"}>
                         <p>{applicationStrings.home_text_1[languageContext.language]}</p>
                         <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
-                            {renderStartButton()}
+                            {renderStartButtons()}
                         </div>
                         <p>{applicationStrings.home_text_2[languageContext.language]}</p>
                         <p>{applicationStrings.home_text_3[languageContext.language]}</p>
