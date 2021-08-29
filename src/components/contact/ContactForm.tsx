@@ -131,6 +131,7 @@ export function ContactForm() {
                 <div>
                     <span className={'form-label'}>{applicationStrings.label_mail_message[language]}</span>
                     <textarea className={"form-control input"}
+                              rows={8}
                               value={message}
                               onChange={updateMessage}
                     />

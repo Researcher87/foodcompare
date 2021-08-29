@@ -181,15 +181,15 @@ export const applicationStrings = {
     },
     label_charttype_minerals: {
         de: 'Minerale (im Vgl. zum Tagesbedarf)',
-        en: 'Minerals (compared to dietary requirements)'
+        en: 'Minerals (related to daily requirements)'
     },
     label_charttype_proteins: {
         de: 'Proteine (im Vgl. zum Tagesbedarf)',
-        en: 'Proteins  (compared to dietary requirements)'
+        en: 'Proteins  (related to daily requirements)'
     },
     label_charttype_vitamins: {
         de: 'Vitamine (im Vgl. zum Tagesbedarf)',
-        en: 'Vitamins (compared to dietary requirements)'
+        en: 'Vitamins (related to daily requirements)'
     },
     label_chart_bmr: {
         de: 'Grundumsatz',
