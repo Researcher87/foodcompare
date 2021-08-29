@@ -75,6 +75,14 @@ export const applicationStrings = {
         de: 'Sollen wirklich alle Lebensmittel-Tabs geschlossen werden?',
         en: 'Really close all food tabs?'
     },
+    device_detection_hint: {
+        de: 'Die Website Food Compare ist nicht für Mobilgeräte und sehr kleine Bildschirmgrößen geeignet. Stattdessen bieten wir eine App für Android-Geräte, welche einen Großteil der Funktionalität von Food Compare umfasst.',
+        en: 'This website is not designed for mobile devices and very small screen sizes. Instead, we provide an app for Android devices that comprises most of the functionality provided by the website.',
+    },
+    device_detection_question: {
+        de: 'Möchten Sie die Android App verwenden?',
+        en: 'Do you want to use the Android App?',
+    },
     direct_compare_text: {
         de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, um diese miteinander zu vergleichen.',
         en: 'Pick two food elements from the two selectors in order to compare them with each other.'
