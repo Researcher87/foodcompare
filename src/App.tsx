@@ -5,7 +5,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import {NotificationContainer} from 'react-notifications'
 import ApplicationDataContextProvider from "./contexts/ApplicationDataContext";
 import FoodDataPanelContainer from "./components/fooddatapanel/FoodDataPanelContainer";
-import React, {useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Header from "./components/Header";
 import {
     PATH_CONTACT,
@@ -16,7 +16,7 @@ import {
     PATH_MOBILE_APP,
     PATH_USERSETTINGS
 } from "./config/Constants";
-import {LanguageProvider} from "./contexts/LangContext";
+import {LanguageContext, LanguageProvider} from "./contexts/LangContext";
 import {UserSettings} from "./components/UserSettings";
 import {ContactContainer} from "./components/contact/ContactContainer";
 import ReactTooltip from "react-tooltip";
@@ -29,12 +29,26 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Switch from "react-bootstrap/Switch";
 import DirectCompareContainer from "./components/directcompare/DirectCompareContainer";
 
+import MobileDeviceCheck from "./components/MobileDeviceCheck";
+
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
+
+function initializeGA4() {
+    (async () => {
+        try {   // NOTE: uBlock Origin may cause a crash here
+            await ga4react.initialize();
+        } catch (e) {
+            console.error(e)
+        }
+    })();
+}
 
 function App(): JSX.Element {
     useEffect(() => {
         ReactTooltip.rebuild()
     })
+
+    initializeGA4()
 
     return (
         <div className="App">
@@ -42,6 +56,7 @@ function App(): JSX.Element {
             <ReactTooltip/>
             <LanguageProvider>
                 <ApplicationDataContextProvider>
+                    <MobileDeviceCheck/>
                     <Router>
                         <Header/>
                         <Switch>
@@ -62,18 +77,6 @@ function App(): JSX.Element {
 
 }
 
-(async () => {
-    try {   // NOTE: uBlock Origin may cause a crash here
-        await ga4react.initialize();
-    } catch (e) {
-        console.error(e)
-    }
-    render(
-        <React.StrictMode>
-            <App/>
-        </React.StrictMode>,
-        document.getElementById("root")
-    );
-})();
+
 
 export default App;

@@ -6,6 +6,7 @@ import {applicationStrings} from "../static/labels";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
 import {PATH_FOODDATA_PANEL} from "../config/Constants";
+import MobileDeviceCheck from "./MobileDeviceCheck";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -70,13 +71,13 @@ export function Home() {
         return (
             <div className="text-center">
                 <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
-                <button type="button"
-                        className="btn btn-warning button-apply media app"
-                        style={{minWidth: "150px"}}>
+                    <button type="button"
+                            className="btn btn-warning button-apply media app"
+                            style={{minWidth: "150px"}}>
 					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted[languageContext.language]}
 					</span>
-                </button>
+                    </button>
                 </Link>
             </div>
         )

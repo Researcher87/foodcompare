@@ -28,11 +28,13 @@ export interface ApplicationDataContext {
     userData: UserData
     debug: boolean
     ready: boolean
+    useAsMobile: Boolean | null
 }
 
 export interface ApplicationContext extends ApplicationDataContext {
 	setUserData: (userData: UserData) => void
 	setPreferredSource: (string) => void
+    setMobileUsage: (boolean) => void
 	setFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => void
 	setFoodDataPanelData: {
 		setSelectedFoodTab: (number) => void
@@ -285,7 +287,8 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             initialValues: true
         },
         debug: true,
-        ready: false
+        ready: false,
+        useAsMobile: null
     }
 
     componentWillMount() {
@@ -303,8 +306,10 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
 			userData: this.state.userData,
 			debug: this.state.debug,
 			ready: this.state.ready,
+            useAsMobile: this.state.useAsMobile,
 			setUserData: this.setUserData,
 			setPreferredSource: this.setPreferredSource,
+            setMobileUsage: (usage: boolean) => {this.setState({...this.state, useAsMobile: usage})},
 			setFoodDataPanelData: {
                 setSelectedFoodTab: this.setSelectedFoodDataPanelTab,
                 setSelectedDataPage: this.setSelectedFoodDataPanelPage,
