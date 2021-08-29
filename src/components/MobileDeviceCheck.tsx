@@ -1,4 +1,4 @@
-import {MobileView} from "react-device-detect";
+import {MobileView, BrowserView, isMobile} from "react-device-detect";
 import React, {useContext} from "react";
 import {applicationStrings} from "../static/labels";
 import {confirmAction} from "./ConfirmationDialog";
@@ -38,7 +38,11 @@ export default function MobileDeviceCheck() {
     }
 
     return <div>
-
+        {applicationContext?.useAsMobile === null && isMobile &&
+        < div>
+            {showQuestionModal()}
+        </div>
+        }
     </div>
 
 }
