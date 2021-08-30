@@ -68,26 +68,32 @@ export function Home() {
 
     const renderStartButtons = () => {
         return (
-            <div className="text-center">
-                <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
-                    <button type="button"
-                            className="btn btn-warning button-apply media app"
-                            style={{minWidth: "150px"}}>
+            <div>
+                {applicationStrings.label_getStarted[languageContext.language]}
+                <div style={{paddingLeft: "20px"}}>
+                    <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
+                        <button type="button"
+                                className="btn btn-link media app"
+                                style={{minWidth: "150px"}}>
 					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted_1[languageContext.language]}
 					</span>
-                    </button>
-                </Link>
-                <Link to={PATH_DIRECT_COMPARE}>
-                    <button type="button"
-                            className="btn btn-warning button-apply media app"
-                            style={{minWidth: "150px"}}>
+                        </button>
+                    </Link>
+                </div>
+                <div style={{paddingLeft: "20px"}}>
+                    <Link to={PATH_DIRECT_COMPARE}>
+                        <button type="button"
+                                className="btn btn-link button-apply media app"
+                                style={{minWidth: "150px"}}>
 					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted_2[languageContext.language]}
 					</span>
-                    </button>
-                </Link>
+                        </button>
+                    </Link>
+                </div>
             </div>
+
         )
     }
 

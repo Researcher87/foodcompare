@@ -16,12 +16,12 @@ export const applicationStrings = {
         en: 'Close'
     },
     button_getstarted_1: {
-        de: 'Lebensmittel analysieren',
-        en: 'Analyze food'
+        de: 'verschiedene Lebensmittel zu analysieren',
+        en: 'analyze different food elements'
     },
     button_getstarted_2: {
-        de: 'Lebensmittel vergleichen',
-        en: 'Compare foods'
+        de: 'zwei Lebensmittel gegenüber zu stellen',
+        en: 'to compare two food elements with each other'
     },
     button_no: {
         de: 'Nein',
@@ -230,6 +230,10 @@ export const applicationStrings = {
     label_foodselector_composite: {
         de: 'Zusammenstellung eines Lebensmittels',
         en: 'Composite food generation'
+    },
+    label_getStarted: {
+      de: "Die Anwendung ermöglicht im Wesentlichen...",
+      en: "The web app basically allows..."
     },
     label_info: {
         de: 'Info',
