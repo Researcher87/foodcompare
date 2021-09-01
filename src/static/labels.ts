@@ -232,8 +232,8 @@ export const applicationStrings = {
         en: 'Composite food generation'
     },
     label_getStarted: {
-      de: "Die Anwendung ermöglicht im Wesentlichen...",
-      en: "The web app basically allows..."
+      de: "Beginnen...",
+      en: "Get started..."
     },
     label_info: {
         de: 'Info',
