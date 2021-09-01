@@ -84,7 +84,7 @@ export function Home() {
                 <div style={{paddingLeft: "20px"}}>
                     <Link to={PATH_DIRECT_COMPARE}>
                         <button type="button"
-                                className="btn btn-link button-apply media app"
+                                className="btn btn-link media app"
                                 style={{minWidth: "150px"}}>
 					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted_2[languageContext.language]}
