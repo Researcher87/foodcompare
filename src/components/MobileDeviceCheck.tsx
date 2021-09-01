@@ -20,11 +20,12 @@ export default function MobileDeviceCheck() {
     }
 
     const showQuestionModal2 = () => {
-        const message=applicationStrings.device_detection_hint[language]
-
         return <div className={"mobile-device-message"}>
             <div style={{margin: "15px"}}>
-                {message}
+                {applicationStrings.device_detection_hint[language]}
+            </div>
+            <div className={"d-flex justify-content-center"} style={{margin: "15px"}}>
+                {applicationStrings.device_detection_question[language]}
             </div>
             <div className={"d-flex justify-content-center"}>
                 <Button style={{minWidth: "80px", marginRight: "40px"}}
