@@ -137,7 +137,6 @@ export default function EnergyDataChart(props: ChartProps) {
                             key={'chart ' + chartHeight}
                             height={chartHeight}
                             options={getOptions()}
-                            type={"bar"}
                         />
                     </div>
                 </div>

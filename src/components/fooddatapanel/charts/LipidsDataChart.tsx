@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 
 import * as ChartConfig from "../../../config/ChartConfig"
-import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig"
+import {default_chart_height} from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
 import {CHART_TYPE_BAR, CHART_TYPE_PIE, LIPIDS_DATA_BASE} from "../../../config/Constants"
 import {Bar, Pie} from "react-chartjs-2";
@@ -16,10 +16,7 @@ import {PieChartConfigurationForm} from "../../charthelper/PieChartConfiguration
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LipidsDataChartProps} from "../../../types/livedata/ChartPropsData";
-import {
-    calculateChartContainerHeight,
-    calculateChartHeight
-} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
@@ -275,7 +272,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                      key={'chart ' + chartHeight}
                      height={chartHeight}
                      options={getOptions()}
-                     type="pie"
                 />
                 }
                 {chartType === CHART_TYPE_BAR &&
@@ -283,7 +279,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                      key={'chart ' + chartHeight}
                      height={chartHeight}
                      options={getOptions()}
-                     type="bar"
                 />
                 }
             </div>

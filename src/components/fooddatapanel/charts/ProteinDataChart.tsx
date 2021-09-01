@@ -224,7 +224,6 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
                         key={'chart ' + chartHeight}
                         height={chartHeight}
                         options={options}
-                        type={"bar"}
                     />
                     }
                     {!dataExists &&

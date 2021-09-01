@@ -31,32 +31,29 @@ class ConfirmationDialog extends React.Component<ConfirmationDialogProps> {
         const size = small ? "sm" : "lg"
 
         return (
-            <div className="static-modal">
-                <Modal
-                    show={show}
-                    onHide={() => proceed(false)}
-                    backdrop={enableEscape ? true : "static"}
-                    keyboard={enableEscape}
-                    size={size}
-                >
-                    <Modal.Header>
-                        <Modal.Title>{title}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{confirmation}</Modal.Body>
-                    <Modal.Footer>
-                        <Button style={{minWidth: "80px"}}
-                                onClick={() => proceed(false)}>
-                            {cancelLabel}
-                        </Button>
-                        <Button
-                            style={{minWidth: "80px"}}
-                            className="primary button-l"
-                            onClick={() => proceed(true)}>
-                            {okLabel}
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
+            <Modal
+                show={show}
+                onHide={() => proceed(false)}
+                backdrop={enableEscape ? true : "static"}
+                keyboard={enableEscape}
+                fullscreen={true}>
+                <Modal.Header>
+                    <Modal.Title>{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{confirmation}</Modal.Body>
+                <Modal.Footer>
+                    <Button style={{minWidth: "80px"}}
+                            onClick={() => proceed(false)}>
+                        {cancelLabel}
+                    </Button>
+                    <Button
+                        style={{minWidth: "80px"}}
+                        className="primary button-l"
+                        onClick={() => proceed(true)}>
+                        {okLabel}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         );
     }
 
