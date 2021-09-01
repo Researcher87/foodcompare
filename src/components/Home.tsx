@@ -73,22 +73,18 @@ export function Home() {
                 <div style={{paddingTop: "20px"}}>
                     <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
                         <button type="button"
-                                className="btn btn-warning btn-small media app"
+                                className="btn btn-warning btn-small"
                                 style={{minWidth: "150px"}}>
-					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted_1[languageContext.language]}
-					</span>
                         </button>
                     </Link>
                 </div>
                 <div style={{paddingTop: "20px"}}>
                     <Link to={PATH_DIRECT_COMPARE}>
                         <button type="button"
-                                className="btn btn-warning btn-small media app"
+                                className="btn btn-warning btn-small"
                                 style={{minWidth: "150px"}}>
-					<span className={"media app"} style={{fontWeight: "bold"}}>
 						{applicationStrings.button_getstarted_2[languageContext.language]}
-					</span>
                         </button>
                     </Link>
                 </div>
