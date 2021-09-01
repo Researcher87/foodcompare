@@ -42,7 +42,7 @@ export default function MobileDeviceCheck() {
     }
 
     return <div>
-        {applicationContext?.useAsMobile === null &&
+        {applicationContext?.useAsMobile === null && isMobile &&
         < div>
             {showQuestionModal2()}
         </div>
