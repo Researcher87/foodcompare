@@ -41,8 +41,8 @@ export default function Header() {
     }
 
     let activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
-    if(activePath.endsWith("/") && activePath.length > 1) {
-        activePath = activePath.substring(0, activePath.length-1)
+    if (activePath.endsWith("/") && activePath.length > 1) {
+        activePath = activePath.substring(0, activePath.length - 1)
     }
 
     if (applicationContext?.debug) {
@@ -190,26 +190,23 @@ export default function Header() {
     }
 
     return (
-        <div className="container-fluid">
-            <div className="row header">
-                <div className="col-1"
-                     style={{paddingTop: "8px", minWidth: "120px", maxWidth: "120px"}}>
-                    <img src={logo}/>
-                </div>
-                <div className="col">
-                    <div className="d-flex flex-row justify-content-between" float-start>
-                        <div className="d-flex text-start" style={{paddingTop: "5px"}}>
-                            <img src={text}/>
-                        </div>
-                        <div className="d-flex text-end" style={{paddingTop: "6px"}}>
-                            {renderLanguageButtons()}
-                            {renderSourceButtons()}
-                        </div>
+        <div className="d-flex d-row header">
+            <div style={{paddingTop: "8px", paddingLeft: "8px", minWidth: "90px", maxWidth: "90px"}}>
+                <img src={logo}/>
+            </div>
+            <div className={"d-flex flex-column w-100"}>
+                <div className="d-flex d-row align-items-center justify-content-between">
+                    <div style={{paddingTop: "5px"}}>
+                        <img src={text}/>
                     </div>
-                    <div className="row" style={{marginTop: "3px"}}>
-                        <div className="col-md-12 text-start">
-                            {renderMenus()}
-                        </div>
+                    <div className="d-flex d-row justify-content-end" style={{paddingTop: "6px"}}>
+                        {renderLanguageButtons()}
+                        {renderSourceButtons()}
+                    </div>
+                </div>
+                <div className="d-row" style={{marginTop: "3px"}}>
+                    <div className="col-md-12 text-start">
+                        {renderMenus()}
                     </div>
                 </div>
             </div>
