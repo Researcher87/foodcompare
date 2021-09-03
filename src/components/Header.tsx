@@ -135,6 +135,7 @@ export default function Header() {
                     </label>
                     <label className="form-elements">
                         <input className="form-radiobutton"
+                               name={"user language"}
                                type="radio"
                                value={LANGUAGE_EN}
                                checked={language === LANGUAGE_EN}
@@ -144,6 +145,7 @@ export default function Header() {
                     </label>
                     <label className="form-elements-largespace">
                         <input className="form-radiobutton"
+                               name={"user language"}
                                type="radio"
                                value={LANGUAGE_DE}
                                checked={language === LANGUAGE_DE}
