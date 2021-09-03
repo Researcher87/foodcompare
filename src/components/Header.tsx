@@ -45,7 +45,7 @@ export default function Header() {
         activePath = activePath.substring(0, activePath.length - 1)
     }
 
-    if (applicationContext?.debug) {
+    if (applicationContext.debug) {
         console.log('Path:', activePath)
     }
 
@@ -146,7 +146,7 @@ export default function Header() {
                         <input className="form-radiobutton"
                                type="radio"
                                value={LANGUAGE_DE}
-                               checked={(language === LANGUAGE_DE)}
+                               checked={language === LANGUAGE_DE}
                                onChange={handleLanguageButtonClick}
                         />
                         {applicationStrings.checkbox_german[language]}

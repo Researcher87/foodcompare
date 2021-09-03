@@ -45,9 +45,9 @@
 }
 
 .home {
-    padding-top: 25px;
-    width: 550px;
-    font-size: 0.8em;
+    padding-top: 15px;
+    padding-left: 50px;
+    font-size: 0.7em;
 }
 
 .legendItem {
@@ -75,7 +75,7 @@
         padding-bottom: 4px;
     }
     .home {
-        width: 630px;
+        font-size: 0.7em;
     }
     .legendItem {
         width: 14px;
@@ -102,7 +102,7 @@
         min-width: 64px;
     }
     .home {
-        width: 780px;
+        font-size: 0.8em;
     }
     .legendItem {
         width: 16px;
@@ -130,7 +130,7 @@
         min-width: 68px;
     }
     .home {
-        width: 950px;
+        font-size: 0.9em;
     }
     .legendItem {
         width: 18px;
@@ -160,7 +160,7 @@
         min-width: 76px;
     }
     .home {
-        width: 1150px;
+        font-size: 1.0em;
     }
     .legendItem {
         width: 20px;
@@ -184,7 +184,7 @@
         min-width: 84px;
     }
     .home {
-        width: 1450px;
+        font-size: 1.0em;
     }
     .mobile-app-img {
         max-height: 680px;
@@ -206,7 +206,7 @@
         min-width: 96px;
     }
     .home {
-        width: 1700px;
+        font-size: 1.1em;
     }
     .mobile-app-img {
         max-height: 740px;
@@ -228,7 +228,7 @@
         min-width: 112px;
     }
     .home {
-        width: 2000px;
+        font-size: 1.1em;
     }
     .mobile-app-img {
         max-height: 880px;

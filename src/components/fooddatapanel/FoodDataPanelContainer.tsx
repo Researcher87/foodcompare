@@ -6,7 +6,7 @@ import {applicationStrings} from "../../static/labels";
 import {LanguageContext} from "../../contexts/LangContext";
 import {
     PATH_FOODDATA_PANEL,
-    QUERYKEY_DATAPANEL_ADD,
+    QUERYKEY_DATAPANEL_ADD, QUERYKEY_DATAPANEL_ADD_COMPOSITE,
     QUERYKEY_DATAPANEL_AGGREGATED,
     QUERYKEY_DATAPANEL_ITEM
 } from "../../config/Constants";
@@ -36,7 +36,8 @@ export default function FoodDataPanelContainer(props: FoodDataPanelContainerProp
     const key = queryString.substring(0, equalOperator)
     const value = queryString.substring(equalOperator + 1)
 
-    const openSelectorModal = key === QUERYKEY_DATAPANEL_ADD && value === "1" ? true : false
+    const openSelectorModal = key === QUERYKEY_DATAPANEL_ADD && value === "1"
+    const openCompositeSelectorModal = key === QUERYKEY_DATAPANEL_ADD_COMPOSITE && value === "1"
 
     useEffect(() => {
         buildDataPanelPageFromURI()
@@ -215,7 +216,9 @@ export default function FoodDataPanelContainer(props: FoodDataPanelContainerProp
             <div className="row">
                 <div className={"col-2"}>
                     <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
-                                           openSelectorModal={openSelectorModal}/>
+                                           openSelectorModal={openSelectorModal}
+                                           openCompositeSelectorModal={openCompositeSelectorModal}
+                    />
                 </div>
                 <div className="col-10 media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
                     {selectedFoodItems && selectedFoodItems.length > 0 ?

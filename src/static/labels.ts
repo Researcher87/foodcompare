@@ -16,12 +16,16 @@ export const applicationStrings = {
         en: 'Close'
     },
     button_getstarted_1: {
-        de: 'verschiedene Lebensmittel zu analysieren',
-        en: 'analyze different food elements'
+        de: 'Verschiedene Lebensmittel analysieren',
+        en: 'Analyze different foods'
     },
     button_getstarted_2: {
-        de: 'zwei Lebensmittel gegenüber zu stellen',
-        en: 'to compare two food elements with each other'
+        de: 'Komplexe Lebensmittel zusammenstellen',
+        en: 'Create a composite food list'
+    },
+    button_getstarted_3: {
+        de: 'Zwei Lebensmittel gegenüberstellen',
+        en: 'Compare two foods with each other'
     },
     button_no: {
         de: 'Nein',
@@ -112,8 +116,8 @@ export const applicationStrings = {
         en: 'Amino acids conainted in foods'
     },
     home_carousel_5: {
-        de: 'Zusammenstellung von Menüs (aggregierte Daten)',
-        en: 'Composite menus (aggregated data)'
+        de: 'Gegenüberstellung zweier Lebensmittel',
+        en: 'Comparing two foods'
     },
     home_text_1: {
         de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
@@ -232,7 +236,7 @@ export const applicationStrings = {
         en: 'Composite food generation'
     },
     label_getStarted: {
-      de: "Beginnen...",
+      de: "Jetzt beginnen...",
       en: "Get started..."
     },
     label_info: {
