@@ -16,9 +16,9 @@ export function LanguageProvider({ children }) {
     const preferredLanguage = userLanguage === 'de' || userLanguage === 'de-DE' ? LANGUAGE_DE : LANGUAGE_EN
     const [language, setLanguage] = useState(preferredLanguage);
 
-
     const userLanguageChange = (selectedLanaguage: string): void => {
         const newLanguage = selectedLanaguage ? selectedLanaguage : LANGUAGE_EN
+        console.log('bug set new lang:', selectedLanaguage)
         setLanguage(newLanguage);
     }
 
