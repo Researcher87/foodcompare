@@ -7,7 +7,7 @@ import {getElementsOfRankingGroup, getRankingGroups} from "../../service/Ranking
 import {applicationStrings} from "../../static/labels";
 import {Form} from "react-bootstrap";
 import Select from 'react-select';
-import {PATH_RANKING, QUERYKEY_DATAPANEL_AGGREGATED, QUERYKEY_DATAPANEL_RANKING} from "../../config/Constants";
+import {PATH_RANKING, QUERYKEY_DATAPANEL_RANKING} from "../../config/Constants";
 import {makeRankingPanelDataUri, parseRankingPanelDataUri} from "../../service/uri/RankingPanelUriService";
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
 
@@ -34,13 +34,6 @@ export function RankingSelector(props: RankingSelectorProps) {
         if (applicationContext) {
             const newElements = buildElementsList(applicationContext.applicationData.rankingPanelData.selectedGroup)
             setElementsList(newElements)
-            if (newElements) {
-                applicationContext.setRankingPanelData({
-                    ...applicationContext.applicationData.rankingPanelData, selectedElement:
-                        null
-                })
-                resetChart()
-            }
         }
     }, [applicationContext?.applicationData.rankingPanelData.selectedGroup])
 
@@ -54,7 +47,8 @@ export function RankingSelector(props: RankingSelectorProps) {
     }, [applicationContext?.applicationData.rankingPanelData.selectedFoodCategory,
         applicationContext?.applicationData.rankingPanelData.selectedElement,
         applicationContext?.applicationData.rankingPanelData.use100gram,
-        applicationContext?.applicationData.rankingPanelData.showDietaryRequirements
+        applicationContext?.applicationData.rankingPanelData.showDietaryRequirements,
+        elementsList
     ])
 
     if (!applicationContext) {
@@ -114,7 +108,8 @@ export function RankingSelector(props: RankingSelectorProps) {
         setInitialized(true)
         const newRankingData = {
             ...applicationContext.applicationData.rankingPanelData,
-            selectedGroup: selectedOption
+            selectedGroup: selectedOption,
+            selectedElement: null
         }
         applicationContext.setRankingPanelData(newRankingData)
     }
