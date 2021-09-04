@@ -387,7 +387,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                      key={'chart ' + chartHeight}
                      height={chartHeight}
                      options={getOptions()}
-                     type="pie"
                 />
                 }
                 {chartType === CHART_TYPE_BAR &&
@@ -395,7 +394,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                      key={'chart ' + chartHeight}
                      height={chartHeight}
                      options={getOptions()}
-                     type={"bar"}
                 />
                 }
             </div>

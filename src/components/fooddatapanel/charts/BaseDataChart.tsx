@@ -240,8 +240,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                     key={'chart ' + chartHeight}
                     height={chartHeight}
                     width={ChartConfig.basedata_piechart_width}
-                    options={getOptions(title)}
-                    type={"pie"}/>
+                    options={getOptions(title)}/>
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar
@@ -249,8 +248,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                     key={'chart ' + chartHeight}
                     height={chartHeight}
                     width={ChartConfig.basedata_barchart_width}
-                    options={getOptions(title)}
-                    type={"bar"}/>
+                    options={getOptions(title)}/>
                 }
             </div>
         )

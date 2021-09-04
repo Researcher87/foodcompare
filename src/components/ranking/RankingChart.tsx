@@ -62,7 +62,6 @@ export function RankingChart(props: RankingChartProps) {
                          data={chartData}
                          height={500}
                          options={options}
-                         type={"bar"}
                     />
                 </div>
                 }

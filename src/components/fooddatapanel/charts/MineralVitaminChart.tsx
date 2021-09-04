@@ -345,7 +345,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
                         key={'chart ' + chartHeight}
                         height={chartHeight}
                         options={options}
-                        type={"bar"}
                     />
                 </div>
             </div>
