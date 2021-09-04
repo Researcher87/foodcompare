@@ -27,8 +27,13 @@ export function RankingSelector(props: RankingSelectorProps) {
     const {language} = useContext(LanguageContext)
     const history = useHistory()
 
+    const rankingPanelData = applicationContext?.applicationData.rankingPanelData
+
+    const initializeState = rankingPanelData && rankingPanelData.selectedFoodCategory
+                                && rankingPanelData.selectedGroup && rankingPanelData.selectedElement ? true : false
+
     const [elementsList, setElementsList] = useState<any>()
-    const [initialized, setInitialized] = useState(false)
+    const [initialized, setInitialized] = useState<boolean>(initializeState)
 
     useEffect(() => {
         if (applicationContext) {
@@ -41,7 +46,7 @@ export function RankingSelector(props: RankingSelectorProps) {
         if (selectedFoodCategory && selectedGroup && selectedElement && initialized) {
             updateUriQuery()
             openChart()
-        } else if(!initialized) {
+        } else if (!initialized) {
             buildRankingPanelPageFromURI()
         }
     }, [applicationContext?.applicationData.rankingPanelData.selectedFoodCategory,
@@ -112,6 +117,7 @@ export function RankingSelector(props: RankingSelectorProps) {
             selectedElement: null
         }
         applicationContext.setRankingPanelData(newRankingData)
+        props.openChart(null, null, false, false);
     }
 
     const handleValueChange = (selectedOption) => {
@@ -164,10 +170,6 @@ export function RankingSelector(props: RankingSelectorProps) {
         const transformToDietaryRequirements = mineralOrVitaminCategory ? showDietaryRequirements : false;
 
         props.openChart(selectedFoodCategory, selectedElement, use100gram, transformToDietaryRequirements);
-    }
-
-    const resetChart = () => {
-        props.openChart(null, null, false, false);
     }
 
     const renderPortionForm = () => {
