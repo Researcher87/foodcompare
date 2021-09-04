@@ -37,7 +37,6 @@ export function ContactContainer() {
     const buttonStyle = {width: "175px"}
 
     const renderSubMenu = () => {
-        console.log('render:', selectedMenu)
         switch (selectedMenu) {
             case menu_contact:
                 return <ContactForm/>

@@ -22,11 +22,7 @@ import {
 import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
 
 
-interface FoodDataPanelContainerProps {
-    openSelectorModal: boolean
-}
-
-export default function FoodDataPanelContainer(props: FoodDataPanelContainerProps) {
+export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const history = useHistory()

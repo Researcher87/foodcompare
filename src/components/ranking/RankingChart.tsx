@@ -49,7 +49,7 @@ export function RankingChart(props: RankingChartProps) {
     const options = getOptions(title);
     const dataAvailable = chartData.datasets.length > 0 && chartData.datasets[0].data.length > 0;
 
-    const width = 50 * props.chartItems.length;
+    const width = 50 * props.chartItems.length + 150;
 
     console.log('Chart items: ', props.chartItems)
 

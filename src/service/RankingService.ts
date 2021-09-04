@@ -13,6 +13,7 @@ import {
     VITAMIN_INDEX
 } from "../components/ranking/RankingSelector";
 import {getNutrientData, getNutrientDataForFoodItem} from "./nutrientdata/NutrientDataRetriever";
+import getName from "./LanguageService";
 
 
 export interface ChartItem {
@@ -23,7 +24,7 @@ export interface ChartItem {
 /**
  * Returns a list of all ranking categories.
  */
-export function getRankingCategories(language: string) {
+export function getRankingGroups(language: string) {
     return [
         {value: BASE_DATA_INDEX, label: applicationStrings.label_chart_nutrientComposition[language]},
         {value: VITAMIN_INDEX, label: applicationStrings.label_nutrient_vit[language]},
@@ -187,8 +188,27 @@ export function getProteinCategoryValues(language: string) {
 }
 
 
+export function getElementsOfRankingGroup(rankingGroup: number, language: string) {
+    switch (rankingGroup) {
+        case BASE_DATA_INDEX:
+            return getBaseCategoryValues(language)
+        case VITAMIN_INDEX:
+            return getVitaminCategoryValues(language)
+        case MINERAL_INDEX:
+            return getMineralCategoryValues(language)
+        case LIPIDS_INDEX:
+            return getLipidCategoryValues(language)
+        case CARBS_INDEX:
+            return getCarbohydrateCategoryValues(language)
+        case PROTEIN_INDEX:
+            return getProteinCategoryValues(language)
+    }
+}
+
+
 export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: Array<FoodClass>, selectedCategory: number,
-                                   selectedValue: any, portionAmount: number, language: string, foodNamesList: Array<NameType>) {
+                                   selectedValue: any, portionAmount: number, language: string, foodNamesList: Array<NameType>,
+                                   conditions: Array<NameType>) {
     let chartItems: Array<ChartItem> = [];
 
     for (let i = 0; i < foodList.length; i++) {
@@ -212,7 +232,15 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
             value = getPortionValue(value, portionAmount);
         }
 
-        const name = getNameFromFoodNameList(foodNamesList, foodItem.nameId!!, language)
+        let name = getNameFromFoodNameList(foodNamesList, foodItem.nameId!!, language)
+
+        if(foodItem.conditionId !== 100) {
+            const condition = conditions.find(condition => condition.id === foodItem.conditionId)
+            if(condition) {
+                const conditionName = getName(condition, language)
+                name = name + ", " + conditionName
+            }
+        }
 
         const chartItem: ChartItem = {
             name: name ? name : "",

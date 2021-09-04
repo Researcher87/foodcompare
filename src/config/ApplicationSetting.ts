@@ -8,6 +8,7 @@ export const buildDate = "2021-08-24"
 export const mobileAppPath = "https://play.google.com/store/apps/details?id=com.parapps.foodcompareapp"
 
 export const maxMessageCharacters = 5000
+export const maxElementsInRankingChart = 50
 
 export const minimalOmegaRatio = 0.3
 export const maximalPortionSize = 5000

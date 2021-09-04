@@ -7,6 +7,7 @@ import * as Constants from "./../../config/Constants";
 import {applicationStrings} from "../../static/labels";
 import {RankingSelector} from "./RankingSelector";
 import {RankingChart} from "./RankingChart";
+import {maxElementsInRankingChart} from "../../config/ApplicationSetting";
 
 export function RankingContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -20,6 +21,11 @@ export function RankingContainer() {
     }
 
     const openChart = (selectedCategory, selectedValue, portionAmount, transformToDietaryRequirements) => {
+        if (!selectedValue) {
+            setChartItems([])
+            return
+        }
+
         let category = 0;
         if (selectedCategory) {
             category = selectedCategory.value;
@@ -28,8 +34,9 @@ export function RankingContainer() {
         const {foodItems, foodClasses, dietaryRequirements} = applicationContext.foodDataCorpus
         const userData = applicationContext.userData
 
-        const orderedChartItems = getOrderedFoodList(foodItems, foodClasses, category,
-            selectedValue.value, portionAmount, language, applicationContext?.foodDataCorpus.foodNames);
+        let orderedChartItems = getOrderedFoodList(foodItems, foodClasses, category,
+            selectedValue.value, portionAmount, language, applicationContext?.foodDataCorpus.foodNames,
+            applicationContext?.foodDataCorpus.conditions);
 
         if (transformToDietaryRequirements && dietaryRequirements) {
             for (let i = 0; i < orderedChartItems.length; i++) {
@@ -44,6 +51,10 @@ export function RankingContainer() {
         }
 
         const unit = getUnit(selectedValue.value, transformToDietaryRequirements)
+
+        if (orderedChartItems.length > maxElementsInRankingChart) {
+            orderedChartItems = orderedChartItems.slice(0, maxElementsInRankingChart + 1)
+        }
 
         setChartItems(orderedChartItems)
         setUnit(unit)
@@ -91,14 +102,17 @@ export function RankingContainer() {
                 <div className="col-3">
                     <RankingSelector openChart={openChart}/>
                 </div>
-                {chartItems &&
+                {chartItems && chartItems.length > 0 &&
                 <div className="col-9">
                     <RankingChart chartItems={chartItems}
                                   unit={unit}/>
                 </div>
                 }
-                {!chartItems || chartItems.length === 0 &&
+                {!chartItems &&
                 renderHelpText()
+                }
+                {chartItems && chartItems.length === 0 &&
+                applicationStrings.label_noData[language]
                 }
             </div>
         </div>
