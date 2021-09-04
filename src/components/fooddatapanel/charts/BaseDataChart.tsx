@@ -11,7 +11,6 @@ import {CustomLegend} from "../../charthelper/CustomLegend";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
-import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
@@ -254,21 +253,21 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         )
     }
 
-
     const totalChartData = createTotalChartData();
     const nutrientChartData = createNutrientChartData();
 
     const totalChartDataTitle = applicationStrings.label_chart_totalComposition[lang]
     const nutrientChartDataTitle = applicationStrings.label_chart_nutrientComposition[lang]
 
-    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
     const justifyContent = props.directCompareUse ? "center" : "left"
 
     return (
         <div className="container-fluid">
             <div className="d-flex text-align-center" style={{justifyContent: justifyContent}}>
                 <div className="d-inline-block">
-                    <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
+                    <div className="row" style={{height: containerHeight}}
+                         key={"base chart container " + containerHeight}>
                         <div className="col-6">
                             <div>{renderSubChart(totalChartDataTitle, totalChartData)}</div>
                         </div>
@@ -284,15 +283,15 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 }
             </div>
             {!props.directCompareUse &&
-                <div className="row chartFormLine">
-                    <PieChartConfigurationForm chartType={chartType}
-                                               showLegend={showLegend}
-                                               showDetails={showDetails}
-                                               detailsCheckboxAvailable={true}
-                                               handleRadioButtonClick={handleRadioButtonClick}
-                                               handleLegendCheckboxClick={handleLegendCheckboxClick}
-                                               handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
-                </div>
+            <div className="row chartFormLine">
+                <PieChartConfigurationForm chartType={chartType}
+                                           showLegend={showLegend}
+                                           showDetails={showDetails}
+                                           detailsCheckboxAvailable={true}
+                                           handleRadioButtonClick={handleRadioButtonClick}
+                                           handleLegendCheckboxClick={handleLegendCheckboxClick}
+                                           handleDetailsCheckboxClick={handleDetailsCheckboxClick}/>
+            </div>
             }
         </div>
     )

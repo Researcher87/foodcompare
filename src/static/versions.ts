@@ -137,5 +137,20 @@ export const versions = [
         bugfix: [
             "Redirect bug from home menu to food data panel resulting in a frozen food data selected was solved."
         ]
+    },
+    {
+        id: "1.3.2",
+        date: "09-02-2021",
+        subject: "General styling improvement",
+        features: [
+            "Some new food elements were added to the database."
+        ],
+        updates: [
+            "Updates the home page styling and content.",
+            "If entered with a mobile device, a confirmation dialog will now suggest to use the app version."
+        ],
+        bugfix: [
+            "In Chrome, the German language has not automatically been detected. This bug is now solved."
+        ]
     }
 ]

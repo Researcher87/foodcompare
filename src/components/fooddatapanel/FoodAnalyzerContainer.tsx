@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 
 import FoodSelectorModal from '../foodselector/FoodSelectorModal'
@@ -15,6 +15,7 @@ import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
+    openCompositeSelectorModal?: boolean
     onNewFoodItemSelected: () => void
 }
 
@@ -23,9 +24,15 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const languageContext = useContext(LanguageContext)
 	const history = useHistory()
 
-    const showFoodSelectorInitialState = props.openSelectorModal === true && props.openSelectorModal
+    const showFoodSelectorInitialState = props.openSelectorModal === true
+    const showCompositeFoodSelectorInitialState = props.openCompositeSelectorModal === true
+
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
-    const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(false)
+    const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
+
+    useEffect(() => {
+        ReactTooltip.rebuild()
+    })
 
     if(!applicationContext) {
         return <div/>

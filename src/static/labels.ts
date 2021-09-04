@@ -15,9 +15,17 @@ export const applicationStrings = {
         de: 'Schließen',
         en: 'Close'
     },
-    button_getstarted: {
-        de: 'Lebensmittel analysieren',
-        en: 'Get started'
+    button_getstarted_1: {
+        de: 'Verschiedene Lebensmittel analysieren',
+        en: 'Analyze different foods'
+    },
+    button_getstarted_2: {
+        de: 'Komplexe Lebensmittel zusammenstellen',
+        en: 'Create a composite food list'
+    },
+    button_getstarted_3: {
+        de: 'Zwei Lebensmittel gegenüberstellen',
+        en: 'Compare two foods with each other'
     },
     button_no: {
         de: 'Nein',
@@ -75,6 +83,14 @@ export const applicationStrings = {
         de: 'Sollen wirklich alle Lebensmittel-Tabs geschlossen werden?',
         en: 'Really close all food tabs?'
     },
+    device_detection_hint: {
+        de: 'Die Website Food Compare ist nicht für Mobilgeräte und sehr kleine Bildschirmgrößen geeignet. Stattdessen bieten wir eine App für Android-Geräte, welche einen Großteil der Funktionalität von Food Compare umfasst.',
+        en: 'This website is not designed for mobile devices and very small screen sizes. Instead, we provide an app for Android devices that comprises most of the functionality provided by the website.',
+    },
+    device_detection_question: {
+        de: 'Möchten Sie die Android App verwenden?',
+        en: 'Do you want to use the Android App?',
+    },
     direct_compare_text: {
         de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, um diese miteinander zu vergleichen.',
         en: 'Pick two food elements from the two selectors in order to compare them with each other.'
@@ -100,12 +116,12 @@ export const applicationStrings = {
         en: 'Amino acids conainted in foods'
     },
     home_carousel_5: {
-        de: 'Zusammenstellung von Menüs (aggregierte Daten)',
-        en: 'Composite menus (aggregated data)'
+        de: 'Gegenüberstellung zweier Lebensmittel',
+        en: 'Comparing two foods'
     },
     home_text_1: {
         de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
-        en: 'FoodCompare is a web project to visually display information about food composition. While conventional resources commonly display nutrient data in tables, Food Compare provides charts and graphics to allow users a better understanding of the containing nutrients (carbohydrates, lipids, proteins) as well as vitamins and minerals.'
+        en: 'Food Compare is a web project to visually display information about food composition. While conventional resources commonly display nutrient data in tables, Food Compare provides charts and graphics to allow users a better understanding of the containing nutrients (carbohydrates, lipids, proteins) as well as vitamins and minerals.'
     },
     home_text_2: {
         de: 'Das Hauptaugenmerk von Food Compare gilt jedoch nicht nur der Veranschaulichung einzelner Nahrungsmittel, sondern der Vergleichbarkeit von Nährstoffen, Vitaminen und Mineralen in Lebensmittels. Dazu können beliebig viele Tabs geöffnet und Lebensmittel damit leicht miteinander verglichen werden. So lassen sich bspw. auf einfache Weise der Vitamingehalt von einzelnen Obstsorten vergleichen, oder die Aufteilung von Kohlenhydraten, Fetten und Eiweißen zwischen Grundnahrungsmitteln. Dabei erlaubt die Anwendung auch das Zusammenstellen von komplexen Menüs, deren Gesamtgehalt an Nährstoffen, Vitaminen und Mineralstoffen dann berechnet wird.',
@@ -169,15 +185,15 @@ export const applicationStrings = {
     },
     label_charttype_minerals: {
         de: 'Minerale (im Vgl. zum Tagesbedarf)',
-        en: 'Minerals (compared to dietary requirements)'
+        en: 'Minerals (related to daily requirements)'
     },
     label_charttype_proteins: {
         de: 'Proteine (im Vgl. zum Tagesbedarf)',
-        en: 'Proteins  (compared to dietary requirements)'
+        en: 'Proteins  (related to daily requirements)'
     },
     label_charttype_vitamins: {
         de: 'Vitamine (im Vgl. zum Tagesbedarf)',
-        en: 'Vitamins (compared to dietary requirements)'
+        en: 'Vitamins (related to daily requirements)'
     },
     label_chart_bmr: {
         de: 'Grundumsatz',
@@ -226,6 +242,10 @@ export const applicationStrings = {
     label_group: {
         de: 'Gruppe',
         en: 'Group'
+    },
+    label_getStarted: {
+      de: "Jetzt beginnen...",
+      en: "Get started..."
     },
     label_info: {
         de: 'Info',

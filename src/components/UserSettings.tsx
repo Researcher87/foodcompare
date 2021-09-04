@@ -22,6 +22,7 @@ import ReactTooltip from "react-tooltip";
 import ReactSelectOption from "../types/ReactSelectOption";
 import {isSmallScreen, useWindowDimension} from "../service/WindowDimension";
 import { checkUserDataValidity, USERDATA_ERROR_AGE, USERDATA_ERROR_SIZE, USERDATA_ERROR_WEIGHT } from "../service/UserDataService";
+import MobileDeviceCheck from "./MobileDeviceCheck";
 
 export function UserSettings() {
     const applicationContext = useContext(ApplicationDataContextStore)

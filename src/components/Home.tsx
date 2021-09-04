@@ -3,12 +3,21 @@ import {LanguageContext} from "../contexts/LangContext";
 import {Carousel} from 'react-responsive-carousel';
 import {applicationStrings} from "../static/labels";
 
+import homeText1 from "../static/hometext1.json";
+import homeText2 from "../static/hometext2.json";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
-import {PATH_FOODDATA_PANEL} from "../config/Constants";
+import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL} from "../config/Constants";
+import {FaAngleDoubleRight} from "react-icons/fa";
 
 const images = require.context('../static/image/carousel', true);
 
+interface HomeTextElement {
+    type: string
+    de: string
+    en: string
+}
 
 export function Home() {
     const languageContext = useContext(LanguageContext)
@@ -32,12 +41,14 @@ export function Home() {
         const imageCaption = applicationStrings[captionAttribute][languageContext.language];
 
         return (
-            <div style={{paddingTop: "20px", paddingBottom: "50px"}}>
+            <div style={{ paddingBottom: "40px"}}>
                 <Carousel showArrows={true}
                           infiniteLoop={true} autoPlay={true}
                           interval={6000}
                           transitionTime={800}
                           selectedItem={displayedImage}
+                          showThumbs={false}
+                          showStatus={false}
                           onChange={imageChanged}>
                     <div>
                         <img src={pic1}/>
@@ -66,20 +77,78 @@ export function Home() {
     }
 
 
-    const renderStartButton = () => {
+    const renderStartButtons = () => {
         return (
-            <div className="text-center">
-                <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
-                <button type="button"
-                        className="btn btn-warning button-apply media app"
-                        style={{minWidth: "150px"}}>
-					<span className={"media app"} style={{fontWeight: "bold"}}>
-						{applicationStrings.button_getstarted[languageContext.language]}
-					</span>
-                </button>
-                </Link>
+            <div style={{paddingTop: "16px"}}>
+                <b>{applicationStrings.label_getStarted[languageContext.language]}</b>
+                <div className={"text-center"}>
+                    <div style={{paddingTop: "20px"}}>
+                        <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
+                            <button type="button"
+                                    className="btn btn-small"
+                                    style={{width: "75%", backgroundColor: "#f9e79f"}}>
+                                {applicationStrings.button_getstarted_1[languageContext.language]}
+                            </button>
+                        </Link>
+                    </div>
+                    <div style={{paddingTop: "20px"}}>
+                        <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
+                            <button type="button"
+                                    className="btn btn-small"
+                                    style={{width: "75%", backgroundColor: "#d5f5e3"}}>
+                                {applicationStrings.button_getstarted_2[languageContext.language]}
+                            </button>
+                        </Link>
+                    </div>
+                    <div style={{paddingTop: "20px"}}>
+                        <Link to={PATH_DIRECT_COMPARE}>
+                            <button type="button"
+                                    className="btn btn-small"
+                                    style={{width: "75%", backgroundColor: "#fadbd8"}}>
+                                {applicationStrings.button_getstarted_3[languageContext.language]}
+                            </button>
+                        </Link>
+                    </div>
+                </div>
             </div>
         )
+    }
+
+
+    const renderHomeText = (textElements: HomeTextElement[]): any => {
+        return textElements.map(textElement => renderTextElement(textElement))
+    }
+
+    const renderTextElement = (textElement: HomeTextElement): JSX.Element => {
+        const text = languageContext.language === LANGUAGE_DE ? textElement.de : textElement.en
+
+        switch (textElement.type) {
+            case "paragraph":
+                return <p>{text}</p>
+            case "subheading":
+                return (
+                    <>
+                        <br/>
+                        <h3>
+                            {text}
+                        </h3>
+                        <hr/>
+                    </>
+                )
+            case "paragraph-before-itemization":
+                return <p><b>{text}</b></p>
+            case "fancy-item":
+                return (
+                    <div>
+                        <span style={{paddingLeft: "10px", paddingRight: "10px"}}>
+                            <FaAngleDoubleRight/>
+                        </span>
+                        {text}
+                    </div>
+                )
+            default:
+                return <p>{text}</p>
+        }
     }
 
     return (
@@ -87,16 +156,18 @@ export function Home() {
             <div className={"container-fluid"}>
                 <div className="row">
                     <div className={"col-5"}>
-                        <p>{applicationStrings.home_text_1[languageContext.language]}</p>
+                        {renderHomeText(homeText1)}
                         <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
-                            {renderStartButton()}
+                            {renderStartButtons()}
                         </div>
-                        <p>{applicationStrings.home_text_2[languageContext.language]}</p>
-                        <p>{applicationStrings.home_text_3[languageContext.language]}</p>
                     </div>
                     <div className={"col-7"} style={{paddingLeft: "45px"}}>
                         {renderCarousel()}
                     </div>
+                </div>
+                <hr/>
+                <div className="card-header" style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                    {renderHomeText(homeText2)}
                 </div>
             </div>
         </div>

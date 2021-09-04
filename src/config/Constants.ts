@@ -114,6 +114,7 @@ export const TAB_PROTEINS_DATA = "proteinsdata"
 export const TAB_INFO = "infodata"
 
 export const QUERYKEY_DATAPANEL_ADD = "add"
+export const QUERYKEY_DATAPANEL_ADD_COMPOSITE = "composite"
 export const QUERYKEY_DATAPANEL_ITEM = "item"
 export const QUERYKEY_DATAPANEL_AGGREGATED = "aggregated"
 

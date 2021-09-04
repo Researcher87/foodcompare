@@ -1,13 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import * as ChartConfig from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
-import {
-    CARBS_DATA_BASE,
-    CARBS_DATA_DETAIL,
-    CHART_TYPE_BAR,
-    CHART_TYPE_PIE,
-    LIPIDS_DATA_OMEGA
-} from "../../../config/Constants";
+import {CARBS_DATA_BASE, CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants"
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartConfigurationService";
 import {LanguageContext} from "../../../contexts/LangContext";
@@ -20,7 +14,6 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
-import {default_chart_height, direct_compare_chartheight} from "../../../config/ChartConfig";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
