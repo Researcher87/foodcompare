@@ -8,7 +8,7 @@ import homeText2 from "../static/hometext2.json";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
-import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL} from "../config/Constants";
+import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
 
 const images = require.context('../static/image/carousel', true);
@@ -36,6 +36,7 @@ export function Home() {
         const pic4 = images(`./Img-${langKey}-4.png`).default;
         const pic5 = images(`./Img-${langKey}-5.png`).default;
         const pic6 = images(`./Img-${langKey}-6.png`).default;
+        const pic7 = images(`./Img-${langKey}-7.png`).default;
 
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][languageContext.language];
@@ -67,6 +68,9 @@ export function Home() {
                     </div>
                     <div>
                         <img src={pic6}/>
+                    </div>
+                    <div>
+                        <img src={pic7}/>
                     </div>
                 </Carousel>
                 <div style={{textAlign: "center", fontStyle: "oblique"}}>
@@ -106,6 +110,15 @@ export function Home() {
                                     className="btn btn-small"
                                     style={{width: "75%", backgroundColor: "#fadbd8"}}>
                                 {applicationStrings.button_getstarted_3[languageContext.language]}
+                            </button>
+                        </Link>
+                    </div>
+                    <div style={{paddingTop: "20px"}}>
+                        <Link to={PATH_RANKING}>
+                            <button type="button"
+                                    className="btn btn-small"
+                                    style={{width: "75%", backgroundColor: "#aed6f1"}}>
+                                {applicationStrings.button_getstarted_4[languageContext.language]}
                             </button>
                         </Link>
                     </div>

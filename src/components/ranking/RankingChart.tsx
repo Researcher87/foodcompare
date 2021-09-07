@@ -10,6 +10,7 @@ import {applicationStrings} from "../../static/labels";
 interface RankingChartProps {
     chartItems: Array<ChartItem>
     unit: string
+    selectedElement: string
 }
 
 export function RankingChart(props: RankingChartProps) {
@@ -21,7 +22,9 @@ export function RankingChart(props: RankingChartProps) {
 
         for (let i = 0; i < props.chartItems.length; i++) {
             const chartItem = props.chartItems[i];
-            labels.push(chartItem.name);
+
+            const name = chartItem.name
+            labels.push(name);
             data.push(chartItem.value);
         }
 
@@ -40,7 +43,16 @@ export function RankingChart(props: RankingChartProps) {
     }
 
     const getOptions = (title) => {
-        return getBarChartOptionsForRanking("Ranking", props.unit);
+        let options = getBarChartOptionsForRanking(props.selectedElement, props.unit)
+        options = {
+            ...options, plugins: {
+                ...options.plugins, title: {
+                    ...options.plugins.title,
+                    position: "left"
+                }
+            }
+        }
+        return options
     }
 
 

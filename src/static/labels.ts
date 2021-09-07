@@ -27,6 +27,10 @@ export const applicationStrings = {
         de: 'Zwei Lebensmittel gegenüberstellen',
         en: 'Compare two foods with each other'
     },
+    button_getstarted_4: {
+        de: 'Lebensmittel nach Werten sortieren',
+        en: 'Rank foods by a nutrient value'
+    },
     button_no: {
         de: 'Nein',
         en: 'No'
@@ -118,6 +122,10 @@ export const applicationStrings = {
     home_carousel_5: {
         de: 'Gegenüberstellung zweier Lebensmittel',
         en: 'Comparing two foods'
+    },
+    home_carousel_6: {
+        de: 'Nach Nährstoffwert sortierte Lebensmittel',
+        en: 'Foods ranked by a specific nutrient value'
     },
     home_text_1: {
         de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
@@ -728,7 +736,7 @@ export const applicationStrings = {
         en: 'Mobile App'
     },
     menu_ranking: {
-        de: 'Lebensmittel Ranking',
+        de: 'Ranking',
         en: 'Food ranking'
     },
     menu_settings: {

@@ -8,6 +8,7 @@ import {applicationStrings} from "../../static/labels";
 import {RankingSelector} from "./RankingSelector";
 import {RankingChart} from "./RankingChart";
 import {maxElementsInRankingChart} from "../../config/ApplicationSetting";
+import ReactSelectOption from "../../types/ReactSelectOption";
 
 export function RankingContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -15,12 +16,13 @@ export function RankingContainer() {
 
     const [chartItems, setChartItems] = useState<Array<ChartItem>>([])
     const [unit, setUnit] = useState<string>("g")
+    const [selectedValue, setSelectedValue] = useState<ReactSelectOption | null>(null)
 
     if (!applicationContext) {
         return <div/>
     }
 
-    const openChart = (selectedCategory, selectedValue, portionAmount, transformToDietaryRequirements) => {
+    const openChart = (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => {
         if (!selectedValue) {
             setChartItems([])
             return
@@ -31,11 +33,13 @@ export function RankingContainer() {
             category = selectedCategory.value;
         }
 
+        setSelectedValue(selectedValue)
+
         const {foodItems, foodClasses, dietaryRequirements} = applicationContext.foodDataCorpus
         const userData = applicationContext.userData
 
         let orderedChartItems = getOrderedFoodList(foodItems, foodClasses, category,
-            selectedValue.value, portionAmount, language, applicationContext?.foodDataCorpus.foodNames,
+            selectedValue.value, use100gram, language, applicationContext?.foodDataCorpus.foodNames,
             applicationContext?.foodDataCorpus.conditions);
 
         if (transformToDietaryRequirements && dietaryRequirements) {
@@ -105,7 +109,8 @@ export function RankingContainer() {
                 {chartItems && chartItems.length > 0 &&
                 <div className="col-9">
                     <RankingChart chartItems={chartItems}
-                                  unit={unit}/>
+                                  unit={unit}
+                    selectedElement={selectedValue ? selectedValue.label : ""}/>
                 </div>
                 }
                 {!chartItems &&

@@ -207,7 +207,7 @@ export function getElementsOfRankingGroup(rankingGroup: number, language: string
 
 
 export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: Array<FoodClass>, selectedCategory: number,
-                                   selectedValue: any, portionAmount: number, language: string, foodNamesList: Array<NameType>,
+                                   selectedValue: any, use100gram: number, language: string, foodNamesList: Array<NameType>,
                                    conditions: Array<NameType>) {
     let chartItems: Array<ChartItem> = [];
 
@@ -225,10 +225,12 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
             continue;  // Skip all food items, which do not have the specified value
         }
 
-        if (portionAmount) {
+        let portionAmount
+
+        if (!use100gram) {
             const defaultPortion = foodItem.defaultPortionId
             const portionObject = foodItem.portionData?.find(portionObject => portionObject.portionType === defaultPortion)
-            const portionAmount = portionObject ? portionObject.amount : 100
+            portionAmount = portionObject ? portionObject.amount : 100
             value = getPortionValue(value, portionAmount);
         }
 
@@ -240,6 +242,10 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
                 const conditionName = getName(condition, language)
                 name = name + ", " + conditionName
             }
+        }
+
+        if(!use100gram) {
+            name = name + " (" + portionAmount + "g )"
         }
 
         const chartItem: ChartItem = {

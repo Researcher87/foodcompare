@@ -13,15 +13,13 @@ export function Versions() {
         </h6>
 
         <p style={{paddingTop: "24px"}}>
-            <b>New features in Version 1.3</b>
+            <b>New features in Version 1.4</b>
             <ul>
-                <li>Direct comparison between two food elements</li>
-                <li>Forward from front page to the food selector modal within the food data panel</li>
-                <li>New data sources added for some fruits and vegetables (FNDDS)</li>
-                <li>Restyling of contact menu</li>
-                <li>New data settings: Supplementing or combining data if two data sources are available</li>
-                <li>Storing display mode temporarily when data tabs or menus are changed</li>
-                <li>General layout update and fixing of styling issues</li>
+                <li>Food ranking data panel</li>
+                <li>Redesign of home menu</li>
+                <li>New food data (now about 175 different food items)</li>
+                <li>Extension and redesign of contact menu</li>
+                <li>General layout update and fixing of style issues</li>
             </ul>
         </p>
 

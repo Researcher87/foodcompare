@@ -12,7 +12,7 @@ import {makeRankingPanelDataUri, parseRankingPanelDataUri} from "../../service/u
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
 
 interface RankingSelectorProps {
-    openChart: (selectedCategory, selectedValue, portionAmount, transformToDietaryRequirements) => void
+    openChart: (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => void
 }
 
 export const BASE_DATA_INDEX = 0
@@ -181,7 +181,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                     <label className="form-elements">
                         <input className="form-radiobutton"
                                type="radio"
-                               checked={(!use100gram)}
+                               checked={(use100gram)}
                                onChange={handlePortionAmountChange}
                         />
                         100 g
@@ -189,7 +189,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                     <label className="form-elements-largespace">
                         <input className="form-radiobutton"
                                type="radio"
-                               checked={use100gram}
+                               checked={!use100gram}
                                onChange={handlePortionAmountChange}
                         />
                         {applicationStrings.label_portion[language]}
