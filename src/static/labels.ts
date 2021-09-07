@@ -27,6 +27,10 @@ export const applicationStrings = {
         de: 'Zwei Lebensmittel gegenüberstellen',
         en: 'Compare two foods with each other'
     },
+    button_getstarted_4: {
+        de: 'Lebensmittel nach Werten sortieren',
+        en: 'Rank foods by a nutrient value'
+    },
     button_no: {
         de: 'Nein',
         en: 'No'
@@ -94,7 +98,7 @@ export const applicationStrings = {
     direct_compare_text: {
         de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, um diese miteinander zu vergleichen.',
         en: 'Pick two food elements from the two selectors in order to compare them with each other.'
-      },
+    },
     home_carousel_0: {
         de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
         en: 'Vitamins in food compared to daily requirements'
@@ -118,6 +122,10 @@ export const applicationStrings = {
     home_carousel_5: {
         de: 'Gegenüberstellung zweier Lebensmittel',
         en: 'Comparing two foods'
+    },
+    home_carousel_6: {
+        de: 'Nach Nährstoffwert sortierte Lebensmittel',
+        en: 'Foods ranked by a specific nutrient value'
     },
     home_text_1: {
         de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
@@ -203,6 +211,10 @@ export const applicationStrings = {
         de: 'Gesamtumsatz',
         en: 'Energy Expenditure'
     },
+    label_chart_proteins: {
+        de: 'Proteine',
+        en: 'Proteins'
+    },
     label_chart_nutrientComposition: {
         de: 'Nährstoffzusammensetzung',
         en: 'Nutrient Composition'
@@ -234,6 +246,10 @@ export const applicationStrings = {
     label_foodselector_composite: {
         de: 'Zusammenstellung eines Lebensmittels',
         en: 'Composite food generation'
+    },
+    label_group: {
+        de: 'Gruppe',
+        en: 'Group'
     },
     label_getStarted: {
       de: "Jetzt beginnen...",
@@ -378,6 +394,10 @@ export const applicationStrings = {
     label_nutrient_lipids: {
         de: 'Fett',
         en: 'Fats'
+    },
+    label_nutrient_lipids_long: {
+        de: 'Fettsäuren',
+        en: 'Fatty acids'
     },
     label_nutrient_lipids_saturated: {
         de: 'Gesättigte Fettsäuren',
@@ -623,13 +643,17 @@ export const applicationStrings = {
         de: 'Bevorzugte Datenquelle',
         en: 'Preferred data source'
     },
+    label_ranking_dietaryRequirements: {
+        de: 'Zeige Tagesbedarf',
+        en: 'Show dietary requirements'
+    },
     label_source: {
         de: 'Datenquelle',
         en: 'Data source'
     },
     label_source_supplement: {
-      de: "Unvollständige Daten ergänzen",
-      en: "Supplement incomplete data"
+        de: "Unvollständige Daten ergänzen",
+        en: "Supplement incomplete data"
     },
     label_source_supplement_tooltip: {
         de: "Ergänzt fehlende Daten aus einer anderen Quelle, sofern diese die entsprechenden Daten enthält",
@@ -691,6 +715,10 @@ export const applicationStrings = {
         de: 'Gewicht',
         en: 'Weight'
     },
+    label_value: {
+        de: 'Wert',
+        en: 'Value'
+    },
     menu_food_data_panel: {
         de: 'Lebensmittel analysieren',
         en: 'Food data analyzer'
@@ -708,7 +736,7 @@ export const applicationStrings = {
         en: 'Mobile App'
     },
     menu_ranking: {
-        de: 'Lebensmittel Ranking',
+        de: 'Ranking',
         en: 'Food ranking'
     },
     menu_settings: {
@@ -878,6 +906,10 @@ export const applicationStrings = {
     text_foodcompareapp_2: {
         de: 'App im Playstore erhalten',
         en: 'Get the App from the Playstore'
+    },
+    text_ranking: {
+        de: "Sie können in diesem Bereich Nahrungsmittel nach einem bestimmten Nährstoff, Vitamin oder Mineralstoff sortiert anzeigen lassen. Wählen Sie dazu eine Kategorie aus, eine Gruppe und eine bestimmte Nährstoffangabe (Wert).",
+        en: "In this section you may display food items sorted by a specific nutrient, vitamin or mineral. Please select a food category, nutrient group and value to display the corresponding ranking chart."
     },
     text_setUserdata_p1: {
         de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',

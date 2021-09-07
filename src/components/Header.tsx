@@ -12,6 +12,7 @@ import {
     PATH_DIRECT_COMPARE,
     PATH_FOODCOMPARE,
     SOURCE_SRLEGACY,
+    PATH_RANKING,
     SOURCE_FNDDS
 } from "../config/Constants";
 import {useContext} from "react";
@@ -85,15 +86,16 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
-                {/*<div className="header-menu">*/}
-                {/*    <Button className="blink header-link"*/}
-                {/*            value={MENU_RANKING}*/}
-                {/*            variant={'link'}*/}
-                {/*            active={props.selectedMenu === MENU_RANKING}*/}
-                {/*            onClick={props.changeMenu}>*/}
-                {/*        {applicationStrings.menu_ranking[language]}*/}
-                {/*    </Button>*/}
-                {/*</div>*/}
+                <div className="header-menu">
+                    <Link to={PATH_RANKING}>
+                        <Button className="header-link"
+                                value={PATH_RANKING}
+                                variant={'link'}
+                                active={activePath === PATH_RANKING}>
+                            {applicationStrings.menu_ranking[language]}
+                        </Button>
+                    </Link>
+                </div>
                 <div className="header-menu">
                     <Link to={PATH_MOBILE_APP}>
                         <Button className="header-link"

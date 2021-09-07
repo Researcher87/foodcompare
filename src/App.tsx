@@ -5,13 +5,16 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import {NotificationContainer} from 'react-notifications'
 import ApplicationDataContextProvider from "./contexts/ApplicationDataContext";
 import React, {useEffect} from "react";
+
 import {LanguageProvider} from "./contexts/LangContext";
 import ReactTooltip from "react-tooltip";
 import GA4React from "ga-4-react";
 import {ANALYTICS_MESS_ID} from "./config/ApplicationKeys";
 
+
 import MobileDeviceCheck from "./components/MobileDeviceCheck";
 import {WebPageContainer} from "./components/WebPageContainer";
+
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
 

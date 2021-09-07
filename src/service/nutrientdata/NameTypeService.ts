@@ -31,6 +31,7 @@ export function getNameFromFoodNameList(foodNameList: Array<NameType>, id: numbe
     if(nameType) {
         return getName(nameType, language)
     } else {
+        console.error('Could not resolve name for food with name id = ', id)
         return null
     }
 }
