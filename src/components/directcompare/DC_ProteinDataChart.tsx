@@ -110,6 +110,7 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem1}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
             </div>
@@ -117,6 +118,7 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
 
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem2}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
             </div>

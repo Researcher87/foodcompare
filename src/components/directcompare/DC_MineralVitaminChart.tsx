@@ -152,6 +152,7 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem1}
                                      directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
@@ -160,6 +161,7 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+                <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem2}
                                      directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
