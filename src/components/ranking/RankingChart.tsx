@@ -63,8 +63,6 @@ export function RankingChart(props: RankingChartProps) {
 
     const width = 50 * props.chartItems.length + 150;
 
-    console.log('Chart items: ', props.chartItems)
-
     return (
         <div>
             <div className="smooth-scroll" style={{overflowX: "auto", position: "absolute", maxWidth: "1000px"}}>

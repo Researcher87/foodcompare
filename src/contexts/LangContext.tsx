@@ -18,7 +18,6 @@ export function LanguageProvider({ children }) {
 
     const userLanguageChange = (selectedLanaguage: string): void => {
         const newLanguage = selectedLanaguage ? selectedLanaguage : LANGUAGE_EN
-        console.log('bug set new lang:', selectedLanaguage)
         setLanguage(newLanguage);
     }
 

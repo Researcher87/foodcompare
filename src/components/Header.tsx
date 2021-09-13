@@ -32,10 +32,7 @@ export default function Header() {
         return <div/>
     }
 
-    console.log('bug header: render with language:', language)
-
     const handleLanguageButtonClick = (event: any): void => {
-        console.log('bug header: handle language button click -- new = :', event.target.value)
         userLanguageChange(event.target.value)
         applicationContext.setFoodDataPanelData.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
     }

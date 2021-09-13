@@ -23,8 +23,6 @@ export function Home() {
     const languageContext = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
 
-    console.log('bug home: render with language:', languageContext.language)
-
     const imageChanged = (image) => {
         setDisplayedImage(image)
     }

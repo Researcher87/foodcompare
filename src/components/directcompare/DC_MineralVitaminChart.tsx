@@ -1,5 +1,5 @@
 import MineralVitaminChart from "../fooddatapanel/charts/MineralVitaminChart";
-import {CHART_VITAMINS} from "../../config/Constants";
+import {AMOUNT_PORTION, CHART_VITAMINS} from "../../config/Constants";
 import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {BarChartConfigurationForm} from "../charthelper/BarChartConfigurationForm";
@@ -90,8 +90,9 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
         props.selectedSubChart === CHART_VITAMINS ? setSynchronizeVitamins(!synchronizeVitamins) : setSynchronizeMinerals(!synchronizeMinerals)
     }
 
+    const portionType = props.selectedSubChart === CHART_VITAMINS ? portionType_vitamins : portionType_minerals
+
     const renderChartConfigurationForm = () => {
-        const portionType = props.selectedSubChart === CHART_VITAMINS ? portionType_vitamins : portionType_minerals
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals
         const synchronize = props.selectedSubChart === CHART_VITAMINS ? synchronizeVitamins : synchronizeMinerals
 
@@ -113,8 +114,11 @@ export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const dataSet1 = props.selectedSubChart === CHART_VITAMINS ? nutrientData1.vitaminData : nutrientData1.mineralData
     const dataSet2 = props.selectedSubChart === CHART_VITAMINS ? nutrientData2.vitaminData : nutrientData2.mineralData
 
-    const maxValue1 = getMaximumValue(dataSet1, props.selectedFoodItem1.portion.amount, requirementData, applicationContext.userData)
-    const maxValue2 = getMaximumValue(dataSet2, props.selectedFoodItem2.portion.amount, requirementData, applicationContext.userData)
+    const portion1 = portionType === AMOUNT_PORTION ? props.selectedFoodItem1.portion.amount : 100
+    const portion2 = portionType === AMOUNT_PORTION ? props.selectedFoodItem2.portion.amount : 100
+
+    const maxValue1 = getMaximumValue(dataSet1, portion1, requirementData, applicationContext.userData)
+    const maxValue2 = getMaximumValue(dataSet2, portion2, requirementData, applicationContext.userData)
     const maxValue = Math.max(maxValue1, maxValue2)
 
     const synchronize = props.selectedSubChart === CHART_VITAMINS ? synchronizeVitamins : synchronizeMinerals
