@@ -303,7 +303,40 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             }
         }
 
-        return getBarChartOptions(title, "%", maxYValue);
+        const getScientificVitaminName = (vitamin: string): string | null => {
+            const labelName = "label_nutrient_vit_scientific_" + vitamin.toLowerCase()
+            if(applicationStrings[labelName]) {
+                return applicationStrings[labelName][lang]
+            } else {
+                return null
+            }
+        }
+
+        let barChartOptions = getBarChartOptions(title, "%", maxYValue);
+
+        if (props.selectedSubChart === CHART_VITAMINS) {
+            barChartOptions = {
+                ...barChartOptions, plugins: {
+                    ...barChartOptions.plugins, tooltip: {
+                        ...barChartOptions.plugins.tooltip, callbacks: {
+                            ...barChartOptions.plugins.tooltip.callbacks,
+                            title: function (context) {
+                                if (context && context.length > 0) {
+                                    const scientificName = getScientificVitaminName(context[0].label)
+                                    let title = `Vitamin ${context[0].label}`
+                                    if(scientificName) {
+                                        title = `${title}  (${scientificName})`
+                                    }
+                                    return title
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return barChartOptions
     }
 
 

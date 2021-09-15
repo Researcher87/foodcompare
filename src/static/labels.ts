@@ -619,6 +619,46 @@ export const applicationStrings = {
         de: 'Vitamin K',
         en: 'Vitamin K'
     },
+    label_nutrient_vit_scientific_b1: {
+        de: 'Thiamine',
+        en: 'Thiamine'
+    },
+    label_nutrient_vit_scientific_b2: {
+        de: 'Riboflavin',
+        en: 'Riboflavin'
+    },
+    label_nutrient_vit_scientific_b3: {
+        de: 'Niacin',
+        en: 'Niacin'
+    },
+    label_nutrient_vit_scientific_b5: {
+        de: 'Pantothensäure',
+        en: 'Pantothenic acid'
+    },
+    label_nutrient_vit_scientific_b9: {
+        de: 'Folsäure',
+        en: 'Folate'
+    },
+    label_nutrient_vit_scientific_b12: {
+        de: 'Cobalamin',
+        en: 'Cobalamin '
+    },
+    label_nutrient_vit_scientific_c: {
+        de: 'Ascorbinsäure',
+        en: 'Ascorbic acid'
+    },
+    label_nutrient_vit_scientific_d: {
+        de: 'Vitamin D',
+        en: 'Vitamin D'
+    },
+    label_nutrient_vit_scientific_e: {
+        de: 'Tocopherol',
+        en: 'Tocopherol'
+    },
+    label_nutrient_vit_scientific_k: {
+        de: 'Vitamin K',
+        en: 'Vitamin K'
+    },
     label_nutrient_water: {
         de: 'Wasser',
         en: 'Water'
