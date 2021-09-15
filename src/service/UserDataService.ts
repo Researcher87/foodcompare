@@ -8,11 +8,11 @@ export const USERDATA_OK = "userdata ok"
 export function checkUserDataValidity(userData: UserData): string {
 	const {age, size, weight} = userData
 
-	if (age != null && (age < 15 || age > 100)) {
+	if (age != null && (age < 15 || age > 100 || isNaN(age))) {
 		return USERDATA_ERROR_AGE
-    } else if (size != null && (size < 80 || size > 225)) {
+    } else if (size != null && (size < 80 || size > 225 || isNaN(size))) {
 		return USERDATA_ERROR_SIZE
-	} else if (weight != null && (weight < 30 || weight > 250)) {
+	} else if (weight != null && (weight < 30 || weight > 250 || isNaN(weight))) {
 		return USERDATA_ERROR_WEIGHT
     }
 
