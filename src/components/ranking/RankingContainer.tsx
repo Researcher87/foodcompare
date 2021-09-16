@@ -44,13 +44,12 @@ export function RankingContainer() {
 
         if (transformToDietaryRequirements && dietaryRequirements) {
             for (let i = 0; i < orderedChartItems.length; i++) {
-                const dailyRequirementValue = convertAbsoluteValueToDailyRequirement(
+                orderedChartItems[i].value = convertAbsoluteValueToDailyRequirement(
                     dietaryRequirements,
                     selectedValue.value,
                     orderedChartItems[i].value,
                     userData
                 );
-                orderedChartItems[i].value = dailyRequirementValue;
             }
         }
 

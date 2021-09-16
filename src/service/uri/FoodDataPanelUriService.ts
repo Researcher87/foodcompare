@@ -1,4 +1,4 @@
-import {PATH_FOODDATA_PANEL, SEX_FEMALE, SEX_MALE} from "../../config/Constants"
+import {SEX_FEMALE, SEX_MALE} from "../../config/Constants"
 import {ChartConfigData} from "../../types/livedata/ChartConfigData"
 import {FoodItemUriData, SimpleFoodItemUriData} from "../../types/livedata/UriData"
 import {UserData} from "../../types/livedata/UserData"

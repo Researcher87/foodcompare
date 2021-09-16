@@ -1,7 +1,6 @@
-import * as Constants from '../../config/Constants';
+import {SEX_MALE} from '../../config/Constants';
 import {applicationStrings} from "../../static/labels";
 import * as EnergyConstants from '../../config/EnergyConstants'
-import {SEX_MALE} from "../../config/Constants";
 import {PalCategory} from "../../types/livedata/PalCategory";
 
 

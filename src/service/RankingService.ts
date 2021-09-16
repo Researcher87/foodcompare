@@ -9,10 +9,11 @@ import {
     BASE_DATA_INDEX,
     CARBS_INDEX,
     LIPIDS_INDEX,
-    MINERAL_INDEX, PROTEIN_INDEX,
+    MINERAL_INDEX,
+    PROTEIN_INDEX,
     VITAMIN_INDEX
 } from "../components/ranking/RankingSelector";
-import {getNutrientData, getNutrientDataForFoodItem} from "./nutrientdata/NutrientDataRetriever";
+import {getNutrientDataForFoodItem} from "./nutrientdata/NutrientDataRetriever";
 import getName from "./LanguageService";
 
 
@@ -216,7 +217,7 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
         const foodClassId = foodClassesList.find(foodClass => foodClass.id === foodItem.foodClass)
         const category = foodClassId ? foodClassId.category : foodClassId
 
-        if (selectedCategory != 0 && (category != selectedCategory)) {
+        if (selectedCategory !== 0 && (category !== selectedCategory)) {
             continue;  // Skip this food item, as it does not belong to the selected category
         }
 

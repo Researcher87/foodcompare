@@ -1,6 +1,5 @@
 import {ChartItem} from "../../service/RankingService";
 import {useContext} from "react";
-import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import {color_green} from "../../config/ChartConfig";
 import {getBarChartOptionsForRanking} from "../../service/ChartConfigurationService";
@@ -28,7 +27,7 @@ export function RankingChart(props: RankingChartProps) {
             data.push(chartItem.value);
         }
 
-        const chartData = {
+        return {
             labels: labels,
             datasets: [{
                 data: data,
@@ -36,13 +35,10 @@ export function RankingChart(props: RankingChartProps) {
                 borderWidth: 2,
                 borderColor: '#555',
             }]
-
-        }
-
-        return chartData;
+        };
     }
 
-    const getOptions = (title) => {
+    const getOptions = () => {
         let options = getBarChartOptionsForRanking(props.selectedElement, props.unit)
         options = {
             ...options, plugins: {
@@ -57,8 +53,7 @@ export function RankingChart(props: RankingChartProps) {
 
 
     const chartData: any = createChartData();
-    const title = "Title?";
-    const options = getOptions(title);
+    const options = getOptions();
     const dataAvailable = chartData.datasets.length > 0 && chartData.datasets[0].data.length > 0;
 
     const width = 50 * props.chartItems.length + 150;

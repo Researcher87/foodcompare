@@ -371,8 +371,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             )
         }
 
-        const height = props.directCompareUse ? ChartConfig.direct_compare_chartheight : ChartConfig.default_chart_height
-
         return (
             <div>
                 {chartType === CHART_TYPE_PIE &&

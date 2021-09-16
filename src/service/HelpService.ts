@@ -7,8 +7,6 @@ export interface HelpText {
 
 export function getHelpText(helpModalId: number, languageId: string): HelpText | null {
     const helpFile = require("../static/help/help.json");
-
-    let helpEntry = 0;
     const entry = helpFile.entries.find( (entry) => entry.id === helpModalId);
 
     if(entry) {

@@ -13,7 +13,7 @@ import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 
-export function DC_MineralVitaminChart(props: DC_MineralVitaminChartProps) {
+export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const windowSize = useWindowDimension()
 

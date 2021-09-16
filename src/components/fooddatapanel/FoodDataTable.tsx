@@ -1,15 +1,11 @@
-import FoodItem from "../../types/nutrientdata/FoodItem";
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
-import {minimal_table_height} from "../../config/ChartConfig";
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import {defaultPanelHeight} from "../../config/ApplicationSetting";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {DISPLAYMODE_CHART, PATH_FOODDATA_PANEL, QUERYKEY_DATAPANEL_ITEM} from "../../config/Constants";
-import {useHistory} from 'react-router-dom';
+import {DISPLAYMODE_CHART} from "../../config/Constants";
 
 interface FoodDataTableProps {
     tableData: Array<FoodTableDataObject>
@@ -19,15 +15,9 @@ export function FoodDataTable(props: FoodDataTableProps) {
     const dataExists = props.tableData && props.tableData.length > 0;
     const applicationContext = useContext(ApplicationDataContextStore)
     const language = useContext(LanguageContext)
-    const history = useHistory()
 
     const changeToChartMode = () => {
         applicationContext?.setFoodDataPanelData.setSelectedDisplayMode(DISPLAYMODE_CHART)
-
-        // history.push({
-        //     pathName: PATH_FOODDATA_PANEL,
-        //     search: ""
-        // })
     }
 
     return (

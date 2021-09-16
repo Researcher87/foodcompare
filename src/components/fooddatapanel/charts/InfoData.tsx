@@ -6,10 +6,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeService";
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
-import {defaultPanelHeight, mobileAppPath} from "../../../config/ApplicationSetting";
-import {direct_compare_chartheight} from "../../../config/ChartConfig";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
-import {TAB_BASE_DATA} from "../../../config/Constants";
+import {calculateChartContainerHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";

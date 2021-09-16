@@ -9,7 +9,6 @@ import {Impressum} from "./Impressum";
 
 export function ContactContainer() {
     const languageContext = useContext(LanguageContext)
-    const lang = languageContext.language
 
     const menu_contact = 1
     const menu_sources = 2
@@ -17,23 +16,6 @@ export function ContactContainer() {
     const menu_impressum = 4
 
     const [selectedMenu, setSelectedMenu] = useState(menu_contact)
-
-    const renderDisclaimer = () => {
-        return (
-            <div>
-                <p>
-                    <b>{applicationStrings.text_contact_disclaimer1[lang]}</b>
-                </p>
-                <p>
-                    <i>
-                        {applicationStrings.text_contact_disclaimer2[lang]}
-                    </i>
-                </p>
-            </div>
-        )
-    }
-
-
     const buttonStyle = {width: "175px"}
 
     const renderSubMenu = () => {

@@ -1,5 +1,4 @@
 import {MailData} from "../types/livedata/MailData";
-import emailjs from "emailjs-com"
 import {
     MAIL_INVALID_ADDRESS,
     MAIL_CONTENT_TO_LONG,

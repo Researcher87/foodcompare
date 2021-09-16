@@ -7,16 +7,12 @@ import {roundToNextValue} from "../../service/calculation/MathService";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 import {Card} from "react-bootstrap";
 import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
-import {
-    BarChartDirectCompareConfig,
-    DirectCompareDataPanelProps,
-    ProteinDataChartProps
-} from "../../types/livedata/ChartPropsData";
+import {BarChartDirectCompareConfig, DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 
-export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
+export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const windowSize = useWindowDimension()
 
@@ -55,7 +51,7 @@ export function DC_ProteinDataChart(props: DirectCompareDataPanelProps) {
 
     const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.proteinRequirementData
     if (!requirementData) {
-        return <div></div>
+        return <div/>
     }
 
     const handleRadioButtonClick = (event: any): void => {

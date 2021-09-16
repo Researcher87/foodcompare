@@ -13,12 +13,12 @@ import {
 } from "../../config/Constants";
 import {useContext} from "react";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-import {DC_MineralVitaminChart} from "./DC_MineralVitaminChart";
+import {DcMineralVitaminChart} from "./DcMineralVitaminChart";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {Card} from "react-bootstrap";
-import {DC_PieChart} from "./DC_PieChart";
-import {DC_ProteinDataChart} from "./DC_ProteinDataChart";
-import {DC_EnergyChart} from "./DC_EnergyChart";
+import {DcPieChart} from "./DcPieChart";
+import {DcProteinDataChart} from "./DcProteinDataChart";
+import {DcEnergyChart} from "./DcEnergyChart";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
@@ -52,43 +52,43 @@ export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     const renderCharts = () => {
         switch (selectedDataPage) {
             case TAB_BASE_DATA:
-                return <DC_PieChart key={TAB_BASE_DATA}
-                                    selectedFoodItem1={selectedFoodItem1}
-                                    selectedFoodItem2={selectedFoodItem2}
-                                    dataPage={TAB_BASE_DATA}
+                return <DcPieChart key={TAB_BASE_DATA}
+                                   selectedFoodItem1={selectedFoodItem1}
+                                   selectedFoodItem2={selectedFoodItem2}
+                                   dataPage={TAB_BASE_DATA}
                 />
             case TAB_ENERGY_DATA:
-                return <DC_EnergyChart selectedFoodItem1={selectedFoodItem1}
-                                       selectedFoodItem2={selectedFoodItem2}
+                return <DcEnergyChart selectedFoodItem1={selectedFoodItem1}
+                                      selectedFoodItem2={selectedFoodItem2}
                 />
 
             case TAB_VITAMIN_DATA:
-                return <DC_MineralVitaminChart key={TAB_VITAMIN_DATA}
-                                               selectedFoodItem1={selectedFoodItem1}
-                                               selectedFoodItem2={selectedFoodItem2}
-                                               selectedSubChart={CHART_VITAMINS}
+                return <DcMineralVitaminChart key={TAB_VITAMIN_DATA}
+                                              selectedFoodItem1={selectedFoodItem1}
+                                              selectedFoodItem2={selectedFoodItem2}
+                                              selectedSubChart={CHART_VITAMINS}
                 />
             case TAB_MINERAL_DATA:
-                return <DC_MineralVitaminChart key={TAB_MINERAL_DATA}
-                                               selectedFoodItem1={selectedFoodItem1}
-                                               selectedFoodItem2={selectedFoodItem2}
-                                               selectedSubChart={CHART_MINERALS}
+                return <DcMineralVitaminChart key={TAB_MINERAL_DATA}
+                                              selectedFoodItem1={selectedFoodItem1}
+                                              selectedFoodItem2={selectedFoodItem2}
+                                              selectedSubChart={CHART_MINERALS}
                 />
             case TAB_LIPIDS_DATA:
-                return <DC_PieChart key={TAB_LIPIDS_DATA}
-                                    selectedFoodItem1={selectedFoodItem1}
-                                    selectedFoodItem2={selectedFoodItem2}
-                                    dataPage={TAB_LIPIDS_DATA}
+                return <DcPieChart key={TAB_LIPIDS_DATA}
+                                   selectedFoodItem1={selectedFoodItem1}
+                                   selectedFoodItem2={selectedFoodItem2}
+                                   dataPage={TAB_LIPIDS_DATA}
                 />
             case TAB_CARBS_DATA:
-                return <DC_PieChart key={TAB_CARBS_DATA}
-                                    selectedFoodItem1={selectedFoodItem1}
-                                    selectedFoodItem2={selectedFoodItem2}
-                                    dataPage={TAB_CARBS_DATA}
+                return <DcPieChart key={TAB_CARBS_DATA}
+                                   selectedFoodItem1={selectedFoodItem1}
+                                   selectedFoodItem2={selectedFoodItem2}
+                                   dataPage={TAB_CARBS_DATA}
                 />
             case TAB_PROTEINS_DATA:
-                return <DC_ProteinDataChart selectedFoodItem1={selectedFoodItem1}
-                                            selectedFoodItem2={selectedFoodItem2}
+                return <DcProteinDataChart selectedFoodItem1={selectedFoodItem1}
+                                           selectedFoodItem2={selectedFoodItem2}
                 />
             case TAB_INFO:
                 return <div>

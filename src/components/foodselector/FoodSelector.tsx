@@ -20,7 +20,6 @@ import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
 import {Form} from "react-bootstrap";
-import {HelpModal} from "../HelpModal";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -228,6 +227,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     return sourceObject
                 } else if (sourceObject.value === 1 && preferredSource === SOURCE_FNDDS) {
                     return sourceObject
+                } else {
+                    return null
                 }
             })
             if (matchingSource) {
@@ -256,7 +257,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             portion.amount = portionAmount
         }
 
-        const newFoodItem: SelectedFoodItem = {
+        return {
             foodItem: foodItem,
             foodClass: foodClass,
             portion: portion,
@@ -264,8 +265,6 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             supplementData: supplementData,
             combineData: combineData
         }
-
-        return newFoodItem
     }
 
     const setInitialFoodElement = () => {
@@ -338,7 +337,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         const sourceSelectBox = (
             <Select className={selectClass}
                     options={sourcesList}
-                    isDisabled={sourcesList.length <= 1 || combineData === true}
+                    isDisabled={sourcesList.length <= 1 || combineData}
                     value={selectedSource ? selectedSource : sourcesList[0]}
                     onChange={handleSourceChange}
             />
@@ -351,7 +350,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     <ReactTooltip/>
                     <Form.Check inline className="form-radiobutton"
                                 label={applicationStrings.label_source_supplement[language]}
-                                checked={supplementData === true}
+                                checked={supplementData}
                                 disabled={sourcesList.length <= 1}
                                 onClick={onCheckSupplementCheckbox}>
                     </Form.Check>
@@ -361,7 +360,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     <ReactTooltip/>
                     <Form.Check inline className="form-radiobutton"
                                 label={applicationStrings.label_source_combine[language]}
-                                checked={combineData === true}
+                                checked={combineData}
                                 disabled={sourcesList.length <= 1}
                                 onClick={onCheckCombineCheckbox}>
                     </Form.Check>
@@ -371,7 +370,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         return <div>
             <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
-            {props.smallVariant !== true ?
+            {!props.smallVariant ?
                 <div className={"row"}>
                     <div className="col-4 column select-menu form-section">
                         {sourceSelectBox}

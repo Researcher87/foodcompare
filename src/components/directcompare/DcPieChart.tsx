@@ -29,7 +29,7 @@ import {useWindowDimension} from "../../service/WindowDimension";
 /**
  * Re-usable direct compare chart component for pie-chart data pages (Lipids, Carbs, Base Data)
  */
-export function DC_PieChart(props: PieChartDirectCompareProp) {
+export function DcPieChart(props: PieChartDirectCompareProp) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const windowSize = useWindowDimension()
 

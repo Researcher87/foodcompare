@@ -152,5 +152,23 @@ export const versions = [
         bugfix: [
             "In Chrome, the German language has not automatically been detected. This bug is now solved."
         ]
+    },
+    {
+        id: "1.4",
+        date: "09-06-2021",
+        subject: "Ranking chart and new homepage styling",
+        features: [
+            "A new menu for ranking foods by specific values has been added.",
+            "The home page has been re-styled and extended.",
+            "New foods were added"
+        ]
+    },
+    {
+        id: "1.4.1",
+        date: "09-16-2021",
+        subject: "Ranking chart and new homepage styling",
+        bugfixes: [
+            "",
+        ]
     }
 ]

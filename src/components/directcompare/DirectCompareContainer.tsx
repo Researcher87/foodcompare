@@ -1,16 +1,14 @@
 import {DirectCompareSelector} from "../foodselector/DirectCompareSelector";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import React, {useContext, useEffect, useState} from "react";
-import ApplicationDataContextProvider, {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
+import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanel} from "./DirectCompareDataPanel";
 import {applicationStrings} from "../../static/labels";
-import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_AGGREGATED, QUERYKEY_DATAPANEL_ITEM, TAB_LIST} from "../../config/Constants";
+import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_ITEM} from "../../config/Constants";
 import {useHistory} from 'react-router-dom';
-import {NotificationManager} from 'react-notifications'
-import { AggregatedFoodItemUriData } from "../../types/livedata/UriData";
-import { makeDirectCompareDataUri, parseDirectComparetUri } from "../../service/uri/DirectCompareUriService";
-import { checkUserDataValidity, USERDATA_OK } from "../../service/UserDataService";
+import {makeDirectCompareDataUri, parseDirectComparetUri} from "../../service/uri/DirectCompareUriService";
+import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
 
 export default function DirectCompareContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
