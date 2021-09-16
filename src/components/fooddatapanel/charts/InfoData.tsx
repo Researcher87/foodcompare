@@ -187,7 +187,7 @@ export function InfoData(props: InfoDataProps) {
 
                 <div style={{paddingTop: "20px", paddingBottom: "12px"}}>
                     <Button variant={'link'} active={true} onClick={onLinkClick}>
-                        See the nutrient data at USDA
+                        {applicationStrings.label_usda_reference[lang]}
                     </Button>
                 </div>
             </div>

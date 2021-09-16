@@ -130,6 +130,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const helpText: HelpText | null = helpModalId > 0 ? getHelpText(helpModalId, languageContext.language) : null
     const sourceString = getSourceName(props.selectedFoodItem.selectedSource)
     const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
+    const sourceToolTip = `${applicationStrings.tooltip_source[languageContext.language]} ${sourceString}`
 
     return (
         <div style={{paddingBottom: "6px"}}>
@@ -142,8 +143,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                         <div className="card-body" style={{paddingRight: "16px"}}>
                             <ChartMenuPanel verticalArrangement={true} setDataPage={props.setDataPage} dataPage={selectedDataPage}/>
                             <div className={"d-flex card"} style={{marginTop: "24px", backgroundColor: "#eeeeee"}}>
-                                <div className={"text-center"} style={{fontSize: "0.8em"}}>
+                                <div className={"text-center"} style={{fontSize: "0.8em"}} data-tip={sourceToolTip}>
                                     {sourceString}
+                                    <ReactTooltip/>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +175,6 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                         <FaThList/>
                                     </Button>
                                 </div>
-
                                 <div className="btn-group" role="group" style={{paddingLeft: "24px"}}>
                                     <Button className={"btn-primary button-foodPanelHead"}
                                             onClick={help}

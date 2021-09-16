@@ -711,6 +711,10 @@ export const applicationStrings = {
         de: 'Unbekannt',
         en: 'Unknown'
     },
+    label_usda_reference: {
+        de: 'Daten auf Food Data Central ansehen',
+        en: 'See the nutrient data at Food Data Central'
+    },
     label_userSettings_age: {
         de: 'Alter',
         en: 'Age'
@@ -940,8 +944,8 @@ export const applicationStrings = {
         en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
     text_foodcompareapp_1: {
-        de: 'Für Androidgeräte bieten wir eine Mobilversion von Food Compare an, welche dieselben Funktionen wie die Website beinhaltet. Zusätzlich können Lebensmittel dort auch nach einem bestimmten Nährstoff, Vitamin oder Mineralstoff sortiert werden. So lassen sich leicht Lebensmittel mit den höchsten Werten von einer Gruppe identifizieren.',
-        en: 'For Android devices we also provide a mobile app containing the same functionality as the website. Additionally, the mobile app also allows you to rank food by specific nutrients, vitamins or minerals to support users in identifying food elements that have the highest amount of a specific nutrient aspect.',
+        de: 'Für Androidgeräte bieten wir eine Mobilversion von Food Compare an, welche weitgehend dieselben Funktionen wie die Website beinhaltet. Die App ist für Geräte ab Android 5.0 verfügbar.',
+        en: 'For Android devices we also provide a mobile app containing the same functionality as the website. The app is available for gadgets running Android 5.0 and higher.',
     },
     text_foodcompareapp_2: {
         de: 'App im Playstore erhalten',
@@ -986,5 +990,9 @@ export const applicationStrings = {
     tooltip_icon_table: {
         de: 'Tabellen-Modus',
         en: 'Table mode'
+    },
+    tooltip_source: {
+        de: 'Verwendete Quelle: ',
+        en: 'Used source: '
     }
 }
