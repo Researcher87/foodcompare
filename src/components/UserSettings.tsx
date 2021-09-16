@@ -196,7 +196,6 @@ export function UserSettings() {
                 </div>
                 <div>
                     <Form.Check inline className="form-radiobutton"
-                                checked={breastFeeding === true}
                                 disabled={sex === SEX_MALE}
                                 label={applicationStrings.label_userSettings_breastfeeding[lang]}
                                 onClick={changeBreastFeeding}>
@@ -255,8 +254,8 @@ export function UserSettings() {
                     <ReactTooltip/>
                     <Form.Check inline className="form-radiobutton"
                                 label={applicationStrings.label_userSettings_leisureSports[lang]}
-                                checked={leisureSport === true}
-                                onClick={changeAdditionalPalPorts}>
+                                checked={leisureSport}
+                                onChange={changeAdditionalPalPorts}>
                     </Form.Check>
                 </label>
             </div>

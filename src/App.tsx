@@ -23,7 +23,7 @@ function initializeGA4() {
         try {   // NOTE: uBlock Origin may cause a crash here
             await ga4react.initialize();
         } catch (e) {
-            console.error(e)
+            console.log("GA4 React initialization error ", e)
         }
     })();
 }

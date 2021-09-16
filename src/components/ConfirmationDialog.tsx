@@ -25,10 +25,7 @@ class ConfirmationDialog extends React.Component<ConfirmationDialogProps> {
             show,
             proceed,
             enableEscape = true,
-            small
         } = this.props;
-
-        const size = small ? "sm" : "lg"
 
         return (
             <Modal

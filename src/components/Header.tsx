@@ -140,7 +140,7 @@ export default function Header() {
                                name={"user language"}
                                type="radio"
                                value={LANGUAGE_EN}
-                               checked={language === LANGUAGE_EN}
+                               defaultChecked={language === LANGUAGE_EN}
                                onClick={handleLanguageButtonClick}
                         />
                         {applicationStrings.checkbox_english[language]}
@@ -150,7 +150,7 @@ export default function Header() {
                                name={"user language"}
                                type="radio"
                                value={LANGUAGE_DE}
-                               checked={language === LANGUAGE_DE}
+                               defaultChecked={language === LANGUAGE_DE}
                                onClick={handleLanguageButtonClick}
                         />
                         {applicationStrings.checkbox_german[language]}

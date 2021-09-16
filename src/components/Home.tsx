@@ -129,30 +129,30 @@ export function Home() {
 
 
     const renderHomeText = (textElements: HomeTextElement[]): any => {
-        return textElements.map(textElement => renderTextElement(textElement))
+        return textElements.map((textElement, index) => renderTextElement(textElement, index))
     }
 
-    const renderTextElement = (textElement: HomeTextElement): JSX.Element => {
+    const renderTextElement = (textElement: HomeTextElement, index: number): JSX.Element => {
         const text = languageContext.language === LANGUAGE_DE ? textElement.de : textElement.en
 
         switch (textElement.type) {
             case "paragraph":
-                return <p>{text}</p>
+                return <p key={`homeitem ${index}`}>{text}</p>
             case "subheading":
                 return (
-                    <>
+                    <div key={`homeitem ${index}`}>
                         <br/>
                         <h3>
                             {text}
                         </h3>
                         <hr/>
-                    </>
+                    </div>
                 )
             case "paragraph-before-itemization":
-                return <p><b>{text}</b></p>
+                return <p key={`homeitem ${index}`}><b>{text}</b></p>
             case "fancy-item":
                 return (
-                    <div>
+                    <div key={`homeitem ${index}`}>
                         <span style={{paddingLeft: "10px", paddingRight: "10px"}}>
                             <FaAngleDoubleRight/>
                         </span>

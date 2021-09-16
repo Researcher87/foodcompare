@@ -299,12 +299,12 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             leisureSports: initialUserDataLeisureSports,
             initialValues: true
         },
-        debug: true,
+        debug: false,
         ready: false,
         useAsMobile: null
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const foodDataCorpus = NutrientDataImportService.loadFoodDataCorpus()
         this.setState({
             foodDataCorpus: foodDataCorpus,

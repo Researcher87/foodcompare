@@ -4,7 +4,6 @@ import {applicationStrings} from "../static/labels";
 
 import appPath from '../static/image/app.png';
 import {mobileAppPath} from "../config/ApplicationSetting";
-import MobileDeviceCheck from "./MobileDeviceCheck";
 
 export function FoodCompareApp() {
     const languageContext = useContext(LanguageContext)
