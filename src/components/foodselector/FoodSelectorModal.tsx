@@ -13,6 +13,9 @@ import {LanguageContext} from "../../contexts/LangContext";
 import {CompositeFoodList} from "./CompositeFoodList";
 import {maximalPortionSize} from "../../config/ApplicationSetting";
 import combineFoodItems from "../../service/calculation/FoodDataAggregationService";
+import {FaQuestionCircle} from "react-icons/all";
+import {HelpModal} from "../HelpModal";
+import {getHelpText} from "../../service/HelpService";
 
 export interface FoodSelectorModalProps {
     onHide: () => void,
@@ -27,6 +30,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(null)
     const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>([])
+    const [showHelpModal, setShowHelpModal] = useState<boolean>(false)
 
     if (!applicationContext) {
         return <div/>
@@ -38,7 +42,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const addCompositeElement = () => {
         if (selectedFoodItem !== null) {
-            if(selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
+            if (selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
                 NotificationManager.error(applicationStrings.message_error_invalid_portion[language])
                 return;
             }
@@ -88,12 +92,12 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         const preferredSource = applicationContext.applicationData.preferredSource
         let aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
 
-        if(!aggregatedSelectedFoodItem) {
+        if (!aggregatedSelectedFoodItem) {
             console.error('Error while creating aggregated food item.')
             return
         }
 
-		aggregatedSelectedFoodItem = {...aggregatedSelectedFoodItem, aggregated: true}
+        aggregatedSelectedFoodItem = {...aggregatedSelectedFoodItem, aggregated: true}
         props.selectedFoodItemCallback(aggregatedSelectedFoodItem)
         props.onHide()
     }
@@ -102,7 +106,12 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         props.onHide()
     }
 
+    const onOpenHelpModal = () => {
+        setShowHelpModal(true)
+    }
+
     const title = props.compositeSelector ? applicationStrings.label_foodselector_composite[language] : applicationStrings.label_foodselector[language]
+    const helpText = props.compositeSelector ? getHelpText(10, language) : getHelpText(9, language)
 
     return (
         <Modal size={'lg'} show={true} onHide={props.onHide}>
@@ -110,6 +119,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                 <b>{title}</b>
             </Modal.Header>
             <Modal.Body>
+                {showHelpModal && helpText !== null &&
+                <HelpModal helpText={helpText} closeHelpModal={() => setShowHelpModal(false)}/>
+                }
                 <div>
                     {!props.compositeSelector ?
                         <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem} smallVariant={false}/>
@@ -129,29 +141,33 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                     }
                 </div>
             </Modal.Body>
-            <Modal.Footer>
-                <div className={"container-fluid"}>
+            <Modal.Footer className={"justify-content-between"}>
+                <div>
+                    <Button className={"btn btn-secondary"} onClick={onOpenHelpModal}>
+                        <FaQuestionCircle/>
+                    </Button>
+                </div>
+                <div className={"d-flex d-row justify-content-end"}>
+                    <Button className={"btn-secondary form-button"} onClick={onCancel}>
+                        {applicationStrings.button_cancel[language]}
+                    </Button>
                     {props.compositeSelector ?
-                        <Button className={"form-button float-end"}
+                        <Button className={"form-button"}
                                 onClick={onSubmit}
                                 disabled={!compositeList || compositeList.length < 1}>
                             {applicationStrings.button_show[language]}
                         </Button>
                         :
-                        <Button className={"form-button float-end"} onClick={onSubmit}>
+                        <Button className={"form-button"} onClick={onSubmit}>
                             {applicationStrings.button_select[language]}
                         </Button>
                     }
 
                     {props.compositeSelector &&
-                    <Button className={"form-button float-end"} onClick={addCompositeElement}>
+                    <Button className={"form-button"} onClick={addCompositeElement}>
                         {applicationStrings.button_add[language]}
                     </Button>
                     }
-
-                    <Button className={"btn-secondary form-button float-end"} onClick={onCancel}>
-                        {applicationStrings.button_cancel[language]}
-                    </Button>
                 </div>
             </Modal.Footer>
         </Modal>
