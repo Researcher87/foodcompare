@@ -97,21 +97,24 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                             className={"btn"}
                             style={{marginRight: "12px"}}
                             data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
-                        <FaPlusSquare/>
-                        <ReactTooltip/>
+                        <FaPlusSquare>
+                            <ReactTooltip/>
+                        </FaPlusSquare>
                     </Button>
                     <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
                             className={"btn"}
                             style={{marginRight: "12px"}}
                             data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
-                        <FaLayerGroup/>
-                        <ReactTooltip/>
+                        <FaLayerGroup>
+                            <ReactTooltip/>
+                        </FaLayerGroup>
                     </Button>
                     <Button onClick={() => onCloseAllTabs()}
                             disabled={deleteIconEnabled === false}
                             data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>
-                        <FaTrash/>
-                        <ReactTooltip/>
+                        <FaTrash>
+                            <ReactTooltip/>
+                        </FaTrash>
                     </Button>
                 </div>
             </div>
