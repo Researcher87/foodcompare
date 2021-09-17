@@ -33,10 +33,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     useEffect(() => {
         ReactTooltip.rebuild()
     })
-
-    useEffect(() => {
-        ReactTooltip.rebuild()
-    }, [])
+    
+    ReactTooltip.rebuild()
 
     if(!applicationContext) {
         return <div/>
