@@ -152,5 +152,39 @@ export const versions = [
         bugfix: [
             "In Chrome, the German language has not automatically been detected. This bug is now solved."
         ]
+    },
+    {
+        id: "1.4",
+        date: "09-06-2021",
+        subject: "Ranking chart and new homepage styling",
+        features: [
+            "A new menu for ranking foods by specific values has been added.",
+            "The home page has been re-styled and extended.",
+            "New foods have been added."
+        ]
+    },
+    {
+        id: "1.4.1",
+        date: "09-16-2021",
+        subject: "Ranking chart and new homepage styling",
+        features: [
+            "Help texts have been added to the food selector modal.",
+        ],
+        updates: [
+            "Mobile app page has been changed.",
+            "Some tooltips and additional labels (direct compare site) have been added to the data panels."
+        ],
+        bugfixes: [
+            "Some charts showed incorrect vitamin D daily dietary values. This bug has been fixed.",
+            "Rendering bugs when synchronizing data on the direct compare site have been fixed."
+        ]
+    },
+    {
+        id: "1.4.2",
+        date: "09-??-2021",
+        subject: "Adding beverages",
+        features: [
+            "A new category beverages has been added, including basic and everyday beverages to analyze.",
+        ]
     }
 ]
