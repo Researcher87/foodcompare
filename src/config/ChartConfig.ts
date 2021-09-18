@@ -44,6 +44,7 @@ export const color_carbs = color_green;
 export const color_carbs_sugar = color_green_light;
 export const color_carbs_dietaryFibers = color_chart_green_1;
 export const color_carbs_misc = color_gray;
+export const color_alcohol = color_green;
 
 export const color_proteins = color_red;
 

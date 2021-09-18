@@ -71,33 +71,48 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const createTotalChartData = () => {
         const nutrientData = getNutrientData(props.selectedFoodItem);
 
+        const alcoholValuePerc = nutrientData.baseData.alcohol !== null
+            ? autoRound(nutrientData.baseData.alcohol)
+            : null
+
+        const data = [autoRound(nutrientData.baseData.water),
+            autoRound(nutrientData.baseData.carbohydrates),
+            autoRound(nutrientData.baseData.lipids),
+            autoRound(nutrientData.baseData.proteins),
+            autoRound(nutrientData.baseData.ash)
+        ]
+
+        const labels = [applicationStrings.label_nutrient_water[lang],
+            applicationStrings.label_nutrient_carbohydrates_short[lang],
+            applicationStrings.label_nutrient_lipids[lang],
+            applicationStrings.label_nutrient_proteins[lang],
+            applicationStrings.label_nutrient_ash[lang]]
+
+        const backgroundColors = [
+            ChartConfig.color_water,
+            ChartConfig.color_carbs,
+            ChartConfig.color_lipids,
+            ChartConfig.color_proteins,
+            ChartConfig.color_ash,
+        ]
+
+        if(alcoholValuePerc !== null) {
+            data.push(alcoholValuePerc)
+            labels.push(applicationStrings.label_nutrient_alcohol[lang])
+            backgroundColors.push(ChartConfig.color_chart_yellow_1)
+        }
+
         return {
-            labels: [applicationStrings.label_nutrient_water[lang],
-                applicationStrings.label_nutrient_carbohydrates_short[lang],
-                applicationStrings.label_nutrient_lipids[lang],
-                applicationStrings.label_nutrient_proteins[lang],
-                applicationStrings.label_nutrient_ash[lang]],
+            labels: labels,
             datasets: [{
                 label: applicationStrings.label_chart_totalComposition[lang],
-                data: [autoRound(nutrientData.baseData.water),
-                    autoRound(nutrientData.baseData.carbohydrates),
-                    autoRound(nutrientData.baseData.lipids),
-                    autoRound(nutrientData.baseData.proteins),
-                    autoRound(nutrientData.baseData.ash)
-                ],
-                backgroundColor: [
-                    ChartConfig.color_water,
-                    ChartConfig.color_carbs,
-                    ChartConfig.color_lipids,
-                    ChartConfig.color_proteins,
-                    ChartConfig.color_ash,
-                ],
+                data: data,
+                backgroundColor: backgroundColors,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
         }
     }
-
 
     const createNutrientChartData = () => {
         const nutrientData = getNutrientData(props.selectedFoodItem);
@@ -118,18 +133,32 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         const dietaryFibersPerc = autoRound(dietaryFibers / totalValue * 100)
         const lipidValuePerc = autoRound(nutrientData.baseData.lipids / totalValue * 100)
         const proteinsValuePerc = autoRound(nutrientData.baseData.proteins / totalValue * 100)
+        const alcoholValuePerc = nutrientData.baseData.alcohol !== null
+            ? autoRound(nutrientData.baseData.alcohol / totalValue * 100)
+            : null
 
         const labels = [applicationStrings.label_nutrient_lipids[lang],
             applicationStrings.label_nutrient_proteins[lang],
             applicationStrings.label_nutrient_carbohydrates_short[lang]]
 
+        if (alcoholValuePerc !== null) {
+            labels.push(applicationStrings.label_nutrient_alcohol[lang])
+        }
+
         const values = [lipidValuePerc, proteinsValuePerc, carbValuePerc];
+        if (alcoholValuePerc !== null) {
+            values.push(alcoholValuePerc)
+        }
 
         const backgroundColors = [
             ChartConfig.color_lipids,
             ChartConfig.color_proteins,
             ChartConfig.color_carbs
         ];
+
+        if (alcoholValuePerc !== null) {
+            backgroundColors.push(ChartConfig.color_chart_yellow_1)
+        }
 
         if (showDetails) {
             if (sugarValuePerc > 0) {
@@ -175,6 +204,10 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             {
                 item: applicationStrings.label_nutrient_carbohydrates_short[lang],
                 color: ChartConfig.color_carbs,
+            },
+            {
+                item: applicationStrings.label_nutrient_alcohol[lang],
+                color: ChartConfig.color_chart_yellow_1,
             }
         ];
 

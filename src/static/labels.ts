@@ -339,6 +339,10 @@ export const applicationStrings = {
         de: 'Keine Daten vorhanden',
         en: 'No data available'
     },
+    label_nutrient_alcohol: {
+        de: 'Alkohol',
+        en: 'Alcohol'
+    },
     label_nutrient_ash: {
         de: 'Reststoffe',
         en: 'Ash'

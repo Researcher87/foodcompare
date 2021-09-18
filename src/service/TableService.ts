@@ -7,7 +7,7 @@ import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
 
-    const {water, carbohydrates, lipids, proteins, dietaryFibers, ash} = getNutrientData(selectedFoodItem).baseData
+    const {water, carbohydrates, lipids, proteins, dietaryFibers, ash, alcohol} = getNutrientData(selectedFoodItem).baseData
     const {sugar}  = getNutrientData(selectedFoodItem).carbohydrateData
 
     if(water) {
@@ -54,6 +54,14 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins[language],
             proteins,
+            portion, "g")
+        );
+    }
+
+    if(alcohol) {
+        tableData.push(createTableObjectAlcohol(
+            applicationStrings.label_nutrient_alcohol[language],
+            alcohol,
             portion, "g")
         );
     }
@@ -606,10 +614,30 @@ function createTableObject(label: string, value_100g: number, portion: number, u
     }
 }
 
+function createTableObjectAlcohol(label: string, value_100g: number, portion: number, unit: String): FoodTableDataObject {
+    const valuePortion = calculatePortionData(value_100g, portion);
+    if(valuePortion === null) {
+        return {
+            label: label,
+            value_100g: "n/a",
+            value_portion: "n/a",
+        }
+    }
 
-function calculatePortionData(value: number | null, portionSize: number) {
+    const valueVolumePortion = valuePortion * 1.267
+    const valueVolume100gram = value_100g * 1.267
+
+    return {
+        label: label,
+        value_100g: `${MathService.autoRound(value_100g)} ${unit}   ( = ${MathService.autoRound(valueVolume100gram)} Vol % )`,
+        value_portion: `${MathService.autoRound(valuePortion)} ${unit}   ( = ${MathService.autoRound(valueVolume100gram)} Vol % )`
+    }
+}
+
+
+function calculatePortionData(value: number | null, portionSize: number): number | null {
     if(value === null || value === undefined) {
-        return "n/a";
+        return null;
     } else if(value === 0) {
         return 0;
     }
