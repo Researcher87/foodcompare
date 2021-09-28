@@ -33,6 +33,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     useEffect(() => {
         ReactTooltip.rebuild()
     })
+    
+    ReactTooltip.rebuild()
 
     if(!applicationContext) {
         return <div/>
@@ -111,6 +113,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                         <FaTrash/>
                     </Button>
                 </div>
+                <ReactTooltip/>
             </div>
         </div>
     )

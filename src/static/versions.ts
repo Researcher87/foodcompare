@@ -165,6 +165,22 @@ export const versions = [
     },
     {
         id: "1.4.1",
+        date: "09-16-2021",
+        subject: "Post-fixes for version 1.4",
+        features: [
+            "Help texts have been added to the food selector modal.",
+        ],
+        updates: [
+            "Mobile app page has been changed.",
+            "Some tooltips and additional labels (direct compare site) have been added to the data panels."
+        ],
+        bugfixes: [
+            "Some charts showed incorrect vitamin D daily dietary values. This bug has been fixed.",
+            "Rendering bugs when synchronizing data on the direct compare site have been fixed."
+        ]
+    },
+    {
+        id: "1.4.2",
         date: "09-28-2021",
         subject: "Beverages",
         features: [
@@ -175,7 +191,6 @@ export const versions = [
         ],
         bugfixes: [
             "Typos have been fixed.",
-            "Incorrect Vitamin D values in some food elements have been fixed."
-        ]
-    }
+            "Incorrect Vitamin D values in some food elements have been fixed."]
+    },
 ]
