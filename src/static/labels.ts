@@ -497,7 +497,7 @@ export const applicationStrings = {
     },
     label_nutrient_proteins_arginine: {
         de: 'Arginin',
-        en: 'Arginin'
+        en: 'Arginine'
     },
     label_nutrient_proteins_asparticAcid: {
         de: 'Asparaginsäure',
@@ -505,7 +505,7 @@ export const applicationStrings = {
     },
     label_nutrient_proteins_cystine: {
         de: 'Cystein',
-        en: 'Cystein'
+        en: 'Cysteine'
     },
     label_nutrient_proteins_glysine: {
         de: 'Glysin',
@@ -520,12 +520,12 @@ export const applicationStrings = {
         en: 'Histidine'
     },
     label_nutrient_proteins_isoleucine: {
-        de: 'Isoleucin',
-        en: 'Isoleucin'
+        de: 'Isoleucine',
+        en: 'Isoleucine'
     },
     label_nutrient_proteins_leucine: {
         de: 'Leucin',
-        en: 'Leucin'
+        en: 'Leucine'
     },
     label_nutrient_proteins_lysine: {
         de: 'Lysin',
@@ -533,11 +533,11 @@ export const applicationStrings = {
     },
     label_nutrient_proteins_methionine: {
         de: 'Methionin',
-        en: 'Methionin'
+        en: 'Methionine'
     },
     label_nutrient_proteins_phenylalanine: {
         de: 'Phenylalanin',
-        en: 'Phenylalanin'
+        en: 'Phenylalanine'
     },
     label_nutrient_proteins_proline: {
         de: 'Prolin',
@@ -557,11 +557,11 @@ export const applicationStrings = {
     },
     label_nutrient_proteins_tyrosine: {
         de: 'Tyrosin',
-        en: 'Tyrosin'
+        en: 'Tyrosine'
     },
     label_nutrient_proteins_valine: {
         de: 'Valin',
-        en: 'Valin'
+        en: 'Valine'
     },
     label_nutrient_remainder: {
         de: 'Rest',
