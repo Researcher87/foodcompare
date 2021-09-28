@@ -21,6 +21,8 @@ import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
 import ReactSelectOption from "../types/ReactSelectOption";
+import {Chart} from "react-chartjs-2";
+import annotationPlugin from "chartjs-plugin-annotation";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus

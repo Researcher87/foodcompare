@@ -20,6 +20,8 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {isMobile} from "react-device-detect";
 import { RankingContainer } from "./ranking/RankingContainer";
+import {Chart} from "chart.js";
+import annotationPlugin from "chartjs-plugin-annotation";
 
 export function WebPageContainer() {
 
@@ -28,6 +30,8 @@ export function WebPageContainer() {
     if (!applicationContext) {
         return <div/>
     }
+
+    Chart.register(annotationPlugin)
 
     // NOTE: If the user is on a mobile device, we only render the page after he decided whether he wants to stay or not
 

@@ -21,9 +21,6 @@ export default function EnergyDataChart(props: ChartProps) {
 
     const nutrientData = getNutrientData(props.selectedFoodItem);
     const energy100g = nutrientData.baseData.energy;
-
-    Chart.register(annotationPlugin)
-
     const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
@@ -80,6 +77,7 @@ export default function EnergyDataChart(props: ChartProps) {
         const annotation = {
             annotations: {
                 line1: {
+                    drawTime: 'afterDatasetsDraw',
                     type: 'line',
                     mode: 'horizontal',
                     scaleID: 'y-axis-0',
@@ -90,10 +88,11 @@ export default function EnergyDataChart(props: ChartProps) {
                     label: {
                         enabled: true,
                         content: applicationStrings.label_chart_bmr[lang]
-                    }
+                    },
                 },
                 line2:
                     {
+                        drawTime: 'afterDatasetsDraw',
                         type: 'line',
                         mode: 'horizontal',
                         scaleID: 'y-axis-0',

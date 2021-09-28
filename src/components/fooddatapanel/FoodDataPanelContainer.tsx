@@ -20,6 +20,8 @@ import {
     convertAggregatedUriStringToObject
 } from "../../service/uri/FoodDataPanelAggregatedUriService";
 import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
+import {Chart} from "react-chartjs-2";
+import annotationPlugin from "chartjs-plugin-annotation";
 
 
 export default function FoodDataPanelContainer() {
