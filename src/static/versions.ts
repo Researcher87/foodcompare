@@ -160,15 +160,22 @@ export const versions = [
         features: [
             "A new menu for ranking foods by specific values has been added.",
             "The home page has been re-styled and extended.",
-            "New foods were added"
+            "New foods were added."
         ]
     },
     {
         id: "1.4.1",
-        date: "09-16-2021",
-        subject: "Ranking chart and new homepage styling",
+        date: "09-28-2021",
+        subject: "Beverages",
+        features: [
+            "A new category of common beverages was added to Food Compare. Also, some new foods were added.",
+            "Alcohol amount is now included in the food composition chart and table.",
+            "Help texts were added to the food selector.",
+            "The scientific name of vitamins have been added to the chart tooltips."
+        ],
         bugfixes: [
-            "",
+            "Typos have been fixed.",
+            "Incorrect Vitamin D values in some food elements have been fixed."
         ]
     }
 ]

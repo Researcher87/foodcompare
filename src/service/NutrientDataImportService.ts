@@ -3,7 +3,7 @@ import Source from '../types/nutrientdata/Source'
 import FoodItem from '../types/nutrientdata/FoodItem'
 import DietaryRequirement from '../types/nutrientdata/DietaryRequirement'
 
-import nutrientdata from "./../static/data/nutrientdata_foodcompare_2.json";
+import nutrientdata from "../static/data/nutrientdata_foodcompare.json";
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus"
 import FoodClass from "../types/nutrientdata/FoodClass";
 
