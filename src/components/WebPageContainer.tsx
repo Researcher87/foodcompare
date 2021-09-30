@@ -31,7 +31,10 @@ export function WebPageContainer() {
         return <div/>
     }
 
-    Chart.register(annotationPlugin)
+    // Registering requires some time and should only be performed when the real site is loaded.
+    if(isMobile === false || applicationContext.useAsMobile !== null) {
+        Chart.register(annotationPlugin)
+    }
 
     // NOTE: If the user is on a mobile device, we only render the page after he decided whether he wants to stay or not
 
