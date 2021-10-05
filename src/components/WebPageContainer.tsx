@@ -18,10 +18,11 @@ import {ContactContainer} from "./contact/ContactContainer";
 import React, {useContext} from "react";
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
-import {isMobile} from "react-device-detect";
+import {isMobile, BrowserView} from "react-device-detect";
 import { RankingContainer } from "./ranking/RankingContainer";
 import {Chart} from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
+import * as path from "path";
 
 export function WebPageContainer() {
 
@@ -41,20 +42,22 @@ export function WebPageContainer() {
     return (
         <div>
             {(isMobile === false || applicationContext.useAsMobile !== null) &&
-            <Router>
-                <Header/>
-                <Switch>
-                    <Route path={PATH_FOODCOMPARE} component={Home}/>
-                    <Route path={PATH_HOME} component={Home}/>
-                    <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
-                    <Route path={PATH_DIRECT_COMPARE} component={DirectCompareContainer}/>
-                    <Route path={PATH_RANKING} component={RankingContainer}/>
-                    <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>
-                    <Route path={PATH_USERSETTINGS} component={UserSettings}/>
-                    <Route path={PATH_CONTACT} component={ContactContainer}/>
-                    <Route exact path={"/"} component={Home}/>
-                </Switch>
-            </Router>
+                <BrowserView>
+                    <Router>
+                        <Header/>
+                        <Switch>
+                            <Route path={PATH_FOODCOMPARE} component={Home}/>
+                            <Route path={PATH_HOME} component={Home}/>
+                            <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
+                            <Route path={PATH_DIRECT_COMPARE} component={DirectCompareContainer}/>
+                            <Route path={PATH_RANKING} component={RankingContainer}/>
+                            <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>
+                            <Route path={PATH_USERSETTINGS} component={UserSettings}/>
+                            <Route path={PATH_CONTACT} component={ContactContainer}/>
+                            <Route exact path={"/"} component={Home}/>
+                        </Switch>
+                    </Router>
+                </BrowserView>
             }
         </div>
     )
