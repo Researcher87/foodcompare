@@ -20,6 +20,10 @@ export const color_chart_yellow_1 = "rgba(212, 172, 13)";		// Dark yellow
 export const color_chart_yellow_2 = "rgba(244, 208, 63)";	// Normal yellow
 export const color_chart_yellow_3 = "rgba(249, 231, 159)";		// Light yellow
 
+export const color_chart_yellow_4 = "rgba(255, 202, 40)";
+export const color_chart_yellow_green_1 ="rgba(174, 213, 129)"
+export const color_chart_yellow_green_2 ="rgba(76, 175, 80)"
+
 export const color_chart_orange = "rgba(230, 126, 34)";
 export const color_chart_misc = color_gray;
 
@@ -48,12 +52,12 @@ export const color_alcohol = color_green;
 
 export const color_proteins = color_red;
 
-export const color_lipids_saturated = color_brown;
-export const color_lipids_unsaturated_mono = color_chart_yellow_2;
-export const color_lipids_unsaturated_poly = color_chart_yellow_3;
+export const color_lipids_saturated = color_chart_yellow_4;
+export const color_lipids_unsaturated_mono = color_chart_yellow_green_1;
+export const color_lipids_unsaturated_poly = color_chart_yellow_green_2;
 
-export const color_lipids_omega3 = color_chart_yellow_2;
-export const color_lipids_omega6 = color_brown;
+export const color_lipids_omega3 = color_chart_green_1;
+export const color_lipids_omega6 = color_chart_yellow_2;
 
 export const color_lipids_misc = color_gray;
 

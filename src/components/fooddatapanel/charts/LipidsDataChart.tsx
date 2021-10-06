@@ -93,9 +93,9 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         }
 
         return {
-            labels: [applicationStrings.label_nutrient_lipids_saturated[lang],
-                applicationStrings.label_nutrient_lipids_unsaturated_mono[lang],
-                applicationStrings.label_nutrient_lipids_unsaturated_poly[lang],
+            labels: [applicationStrings.label_nutrient_lipids_saturated_short[lang],
+                applicationStrings.label_nutrient_lipids_unsaturated_mono_short[lang],
+                applicationStrings.label_nutrient_lipids_unsaturated_poly_short[lang],
                 applicationStrings.label_nutrient_remainder[lang]],
             datasets: [{
                 data: [valueSaturated,

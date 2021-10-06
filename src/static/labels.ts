@@ -407,6 +407,10 @@ export const applicationStrings = {
         de: 'Gesättigte Fettsäuren',
         en: 'Saturated fatty acids'
     },
+    label_nutrient_lipids_saturated_short: {
+        de: 'Gesättigt',
+        en: 'Saturated'
+    },
     label_nutrient_lipids_unsaturated: {
         de: 'Ungesättigte Fettsäuren',
         en: 'Unsaturated fatty acids'
@@ -415,9 +419,17 @@ export const applicationStrings = {
         de: 'Einfach ungesättigte Fettsäuren',
         en: 'Mono-unsaturated fatty acids'
     },
+    label_nutrient_lipids_unsaturated_mono_short: {
+        de: 'Einfach ungesättigt',
+        en: 'Mono-unsaturated'
+    },
     label_nutrient_lipids_unsaturated_poly: {
         de: 'Mehrfach ungesättigte Fettsäuren',
         en: 'Poly-unsaturated fatty acids'
+    },
+    label_nutrient_lipids_unsaturated_poly_short: {
+        de: 'Mehrfach unges.',
+        en: 'Poly-unsaturated'
     },
     label_nutrient_lipids_transfattyAcids: {
         de: 'Transfettsäuren',

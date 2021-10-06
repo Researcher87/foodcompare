@@ -233,6 +233,8 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
             const portionObject = foodItem.portionData?.find(portionObject => portionObject.portionType === defaultPortion)
             portionAmount = portionObject ? portionObject.amount : 100
             value = getPortionValue(value, portionAmount);
+        } else {
+            value = autoRound(value)
         }
 
         let name = getNameFromFoodNameList(foodNamesList, foodItem.nameId!!, language)
