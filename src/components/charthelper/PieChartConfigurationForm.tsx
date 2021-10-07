@@ -55,19 +55,5 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
         </div>
     )
 
-    // const [neger, setNeger] = useState<boolean>(false)
-    // const [jude, setJude] = useState<boolean>(false)
     //
-    // return (
-    //     <div>
-    //         <div className="row">
-    //             <form className="form-inline form-group">
-    //                 <label>Jude!</label>
-    //                 <input type={"checkbox"} checked={neger} onChange={() => {setNeger(!neger)}} />
-    //                 <label>Neger!</label>
-    //                 <input type={"checkbox"} checked={jude} onChange={() => {setJude(!jude)}}/>
-    //             </form>
-    //         </div>
-    //     </div>
-    // )
 }

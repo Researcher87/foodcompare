@@ -100,7 +100,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         if(alcoholValuePerc !== null) {
             data.push(alcoholValuePerc)
             labels.push(applicationStrings.label_nutrient_alcohol[lang])
-            backgroundColors.push(ChartConfig.color_brown)
+            backgroundColors.push(ChartConfig.color_turquoise)
         }
 
         return {

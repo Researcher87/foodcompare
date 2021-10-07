@@ -142,7 +142,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
 
     const createDetailChartData = () => {
-        const carbohydrateData = getNutrientData(props.selectedFoodItem).carbohydrateData;
+        const {carbohydrateData, baseData} = getNutrientData(props.selectedFoodItem)
         const totalAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
 
         const valueGlucose = carbohydrateData.glucose !== null ? autoRound(carbohydrateData.glucose / totalAmount * 100) : null;
@@ -152,6 +152,8 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         const valueLactose = carbohydrateData.lactose !== null ? autoRound(carbohydrateData.lactose / totalAmount * 100) : null;
         const valueMaltose = carbohydrateData.maltose !== null ? autoRound(carbohydrateData.maltose / totalAmount * 100) : null;
         const valueStarch = carbohydrateData.starch !== null ? autoRound(carbohydrateData.starch / totalAmount * 100) : null;
+
+        const valueDietaryFibers = baseData.dietaryFibers !== null ? autoRound(baseData.dietaryFibers / totalAmount * 100) : null;
 
         if (!valueMaltose && !valueSucrose && !valueLactose && !valueGlucose && !valueFructose && !valueGalactose) {
             return null
@@ -203,6 +205,13 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             labels.push(applicationStrings.label_nutrient_carbohydrates_starch[lang])
             values.push(valueStarch)
             colors.push(ChartConfig.color_carbs_starch)
+        }
+
+        if (valueDietaryFibers) {
+            valueMisc -= valueDietaryFibers
+            labels.push(applicationStrings.label_nutrient_dietaryFibers[lang])
+            values.push(valueDietaryFibers)
+            colors.push(ChartConfig.color_carbs_dietaryFibers)
         }
 
         valueMisc = autoRound(valueMisc);
@@ -299,6 +308,13 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_starch[lang],
                 color: ChartConfig.color_carbs_starch,
+            })
+        }
+
+        if (labels.includes(applicationStrings.label_nutrient_dietaryFibers[lang])) {
+            legendData.push({
+                item: applicationStrings.label_nutrient_dietaryFibers[lang],
+                color: ChartConfig.color_carbs_dietaryFibers,
             })
         }
 
