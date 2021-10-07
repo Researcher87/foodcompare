@@ -14,6 +14,7 @@ import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
+import {color_alcohol} from "../../../config/ChartConfig";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -99,7 +100,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         if(alcoholValuePerc !== null) {
             data.push(alcoholValuePerc)
             labels.push(applicationStrings.label_nutrient_alcohol[lang])
-            backgroundColors.push(ChartConfig.color_chart_yellow_1)
+            backgroundColors.push(ChartConfig.color_brown)
         }
 
         return {
@@ -157,7 +158,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         ];
 
         if (alcoholValuePerc !== null) {
-            backgroundColors.push(ChartConfig.color_chart_yellow_1)
+            backgroundColors.push(ChartConfig.color_alcohol)
         }
 
         if (showDetails) {
@@ -207,7 +208,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             },
             {
                 item: applicationStrings.label_nutrient_alcohol[lang],
-                color: ChartConfig.color_chart_yellow_1,
+                color: ChartConfig.color_alcohol,
             }
         ];
 

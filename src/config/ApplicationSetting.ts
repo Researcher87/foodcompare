@@ -45,6 +45,7 @@ export const initialChartConfigData: ChartConfigData = {
     lipidsChartConfig: {
         chartType: CHART_TYPE_PIE,
         showLegend: true,
+        hideRemainders: false,
         subChart: LIPIDS_DATA_BASE
     },
     carbsChartConfig: {
@@ -77,6 +78,7 @@ export const initialDirectCompareConfigData: DirectCompareChartConfigData = {
     lipidsChartConfig: {
         chartType: CHART_TYPE_PIE,
         showLegend: false,
+        hideRemainders: false,
         subChart1: LIPIDS_DATA_BASE,
         subChart2: LIPIDS_DATA_BASE
     },

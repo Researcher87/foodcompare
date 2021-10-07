@@ -19,6 +19,7 @@ export interface DirectCompareChartConfigData {
 export interface GeneralChartConfig {
     chartType: string
     showLegend: boolean
+    hideRemainders?: boolean
 }
 
 export interface GeneralChartConfigWithDetails extends GeneralChartConfig {

@@ -34,25 +34,27 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [subChart, setSubChart] = useState<string>(chartConfig.subChart  ? chartConfig.subChart : LIPIDS_DATA_BASE)
-
+    const [hideRemainders, setShowHideRemainders] = useState<boolean>(chartConfig.hideRemainders ? chartConfig.hideRemainders : false)
+    const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
     const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
         if (props.directCompareConfig) {
             setChartType(chartConfig.chartType)
             setShowLegend(chartConfig.showLegend)
+            setShowHideRemainders(chartConfig.hideRemainders ? chartConfig.hideRemainders : false)
             setSubChart(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
         }
 
         setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, subChart, chartHeight, windowSize, props])
+    }, [chartType, showLegend, hideRemainders, subChart, chartHeight, windowSize, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
             const currentConfig = applicationContext.applicationData.foodDataPanel.chartConfigData.lipidsChartConfig
             if (chartType !== currentConfig.chartType
+                || hideRemainders !== currentConfig.hideRemainders
                 || subChart !== currentConfig.subChart
                 || showLegend !== currentConfig.showLegend) {
                 const newChartConfig = {
@@ -60,7 +62,8 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                     lipidsChartConfig: {
                         chartType: chartType,
                         showLegend: showLegend,
-                        subChart: subChart
+                        subChart: subChart,
+                        hideRemainders: hideRemainders
                     }
                 }
                 applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
@@ -89,25 +92,37 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
         if (valueRemainder < 0) {
             console.error("Fatty acids sum is erroneous. Food-Obj: ", props.selectedFoodItem);
-            valueRemainder = 0;
+            valueRemainder = 0
+        }
+
+        const labels: string[] = [applicationStrings.label_nutrient_lipids_saturated_short[lang],
+            applicationStrings.label_nutrient_lipids_unsaturated_mono_short[lang],
+            applicationStrings.label_nutrient_lipids_unsaturated_poly_short[lang]]
+
+        if(!hideRemainders) {
+            labels.push(applicationStrings.label_nutrient_remainder[lang])
+        }
+
+        const colors: string[] = [
+            ChartConfig.color_lipids_saturated,
+            ChartConfig.color_lipids_unsaturated_mono,
+            ChartConfig.color_lipids_unsaturated_poly]
+
+        const data: any[] = [valueSaturated,
+            valueUnsaturatedMono,
+            valueUnsaturatedPoly]
+
+        if(!hideRemainders) {
+            labels.push(applicationStrings.label_nutrient_remainder[lang])
+            colors.push(ChartConfig.color_lipids_misc)
+            data.push(valueRemainder)
         }
 
         return {
-            labels: [applicationStrings.label_nutrient_lipids_saturated_short[lang],
-                applicationStrings.label_nutrient_lipids_unsaturated_mono_short[lang],
-                applicationStrings.label_nutrient_lipids_unsaturated_poly_short[lang],
-                applicationStrings.label_nutrient_remainder[lang]],
+            labels: labels,
             datasets: [{
-                data: [valueSaturated,
-                    valueUnsaturatedMono,
-                    valueUnsaturatedPoly,
-                    valueRemainder],
-                backgroundColor: [
-                    ChartConfig.color_lipids_saturated,
-                    ChartConfig.color_lipids_unsaturated_mono,
-                    ChartConfig.color_lipids_unsaturated_poly,
-                    ChartConfig.color_lipids_misc,
-                ],
+                data: data,
+                backgroundColor: colors,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
@@ -124,19 +139,28 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         const valueOmega6 = autoRound(omegaData.omega6 / totalAmount * 100);
         const valueUncertain = autoRound(omegaData.uncertain / totalAmount * 100);
 
+        const labels: string[] = [applicationStrings.label_nutrient_omega3[lang],
+            applicationStrings.label_nutrient_omega6[lang]]
+
+        const data: any[] = [valueOmega3,
+            valueOmega6]
+
+        const colors: string[] = [
+            ChartConfig.color_lipids_omega3,
+            ChartConfig.color_lipids_omega6
+        ]
+
+        if(!hideRemainders) {
+            labels.push(applicationStrings.label_unknown[lang])
+            colors.push(ChartConfig.color_lipids_misc)
+            data.push(valueUncertain)
+        }
+
         return {
-            labels: [applicationStrings.label_nutrient_omega3[lang],
-                applicationStrings.label_nutrient_omega6[lang],
-                applicationStrings.label_unknown[lang]],
+            labels: labels,
             datasets: [{
-                data: [valueOmega3,
-                    valueOmega6,
-                    valueUncertain],
-                backgroundColor: [
-                    ChartConfig.color_lipids_omega3,
-                    ChartConfig.color_lipids_omega6,
-                    ChartConfig.color_lipids_misc,
-                ],
+                data: data,
+                backgroundColor: colors,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
@@ -191,6 +215,10 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
     const handleLegendCheckbox = () => {
         setShowLegend(!showLegend)
+    }
+
+    const handleHideRemaindersCheckbox = () => {
+        setShowHideRemainders(!hideRemainders)
     }
 
     const lipidData = getNutrientData(props.selectedFoodItem).lipidData;
@@ -318,14 +346,17 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                 </div>
                 }
             </div>
+            {!props.directCompareConfig &&
             <div className="row chartFormLine">
-                {!props.directCompareConfig &&
-                <PieChartConfigurationForm chartType={chartType}
+                <PieChartConfigurationForm key={"Config Lipids Chart"}
+                                           chartType={chartType}
                                            showLegend={showLegend}
+                                           hideRemainders={hideRemainders}
+                                           handleHideRemaindersCheckbox={handleHideRemaindersCheckbox}
                                            handleRadioButtonClick={handleRadioButtonClick}
                                            handleLegendCheckboxClick={handleLegendCheckbox}/>
-                }
             </div>
+            }
         </div>
     );
 

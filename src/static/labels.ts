@@ -59,6 +59,10 @@ export const applicationStrings = {
         de: 'Ja',
         en: 'Yes'
     },
+    checkbox_chartoption_hideRemainders: {
+        de: 'Rest ausblenden',
+        en: 'Hide remainders'
+    },
     checkbox_chartoption_showLegend: {
         de: 'Legende anzeigen',
         en: 'Show legend'

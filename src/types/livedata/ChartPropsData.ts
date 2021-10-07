@@ -43,12 +43,14 @@ export interface BarChartDirectCompareConfig {
     expand100: boolean,
     barChartColor: string,
     synchronize?: boolean
+    hideRemainders?: boolean
 }
 
 export interface PieChartDirectCompareConfig {
     chartType: string,
     showLegend: boolean
     showDetails?: boolean
+    hideRemainders?: boolean
     subChart?: string
     chartIndex?: number
     handleSubchartChange?: (event: any) => void
@@ -74,10 +76,12 @@ export interface PieChartConfigurationProps {
     chartType: string
     showLegend: boolean
     showDetails?: boolean
+    hideRemainders?: boolean
     detailsCheckboxAvailable?: boolean
     handleRadioButtonClick: (event: any) => void
     handleLegendCheckboxClick: () => void
     handleDetailsCheckboxClick?: () => void
+    handleHideRemaindersCheckbox?: () => void
 }
 
 export interface BarChartConfigurationProps {

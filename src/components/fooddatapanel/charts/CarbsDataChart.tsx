@@ -17,6 +17,7 @@ import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/lived
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
+import {color_carbs_mono_glucose} from "../../../config/ChartConfig";
 
 export default function CarbsDataChart(props: CarbDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -159,61 +160,61 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         let valueMisc = 100
         const labels: Array<String> = []
         const values: Array<number> = []
+        const colors: Array<String> = []
 
         if (valueGlucose) {
             valueMisc -= valueGlucose
             labels.push(applicationStrings.label_nutrient_carbohydrates_glucose[lang])
             values.push(valueGlucose)
+            colors.push(ChartConfig.color_carbs_mono_glucose)
         }
         if (valueFructose) {
             valueMisc -= valueFructose
             labels.push(applicationStrings.label_nutrient_carbohydrates_fructose[lang])
             values.push(valueFructose)
+            colors.push(ChartConfig.color_carbs_mono_fructose)
         }
         if (valueGalactose) {
             valueMisc -= valueGalactose
             labels.push(applicationStrings.label_nutrient_carbohydrates_galactose[lang])
             values.push(valueGalactose)
+            colors.push(ChartConfig.color_carbs_mono_galactose)
         }
         if (valueSucrose) {
             valueMisc -= valueSucrose
             labels.push(applicationStrings.label_nutrient_carbohydrates_sucrose[lang])
             values.push(valueSucrose)
+            colors.push(ChartConfig.color_carbs_di_sucrose)
         }
         if (valueLactose) {
             valueMisc -= valueLactose
             labels.push(applicationStrings.label_nutrient_carbohydrates_lactose[lang])
             values.push(valueLactose)
+            colors.push(ChartConfig.color_carbs_di_lactose)
         }
         if (valueMaltose) {
             valueMisc -= valueMaltose
             labels.push(applicationStrings.label_nutrient_carbohydrates_maltose[lang])
             values.push(valueMaltose)
+            colors.push(ChartConfig.color_carbs_di_maltose)
         }
         if (valueStarch) {
             valueMisc -= valueStarch
             labels.push(applicationStrings.label_nutrient_carbohydrates_starch[lang])
             values.push(valueStarch)
+            colors.push(ChartConfig.color_carbs_starch)
         }
 
         valueMisc = autoRound(valueMisc);
         labels.push(applicationStrings.label_nutrient_remainder[lang])
         values.push(valueMisc)
+        colors.push(ChartConfig.color_chart_misc)
 
         return {
             labels: labels,
             datasets: [{
                 data: values,
-                backgroundColor: [
-                    ChartConfig.color_chart_green_1,
-                    ChartConfig.color_chart_green_2,
-                    ChartConfig.color_chart_green_3,
-                    ChartConfig.color_chart_yellow_1,
-                    ChartConfig.color_chart_yellow_2,
-                    ChartConfig.color_chart_yellow_3,
-                    ChartConfig.color_chart_orange,
-                    ChartConfig.color_chart_misc
-                ],
+                backgroundColor: colors,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
@@ -255,49 +256,49 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         if (labels.includes(applicationStrings.label_nutrient_carbohydrates_glucose[lang])) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_glucose[lang],
-                color: ChartConfig.color_chart_green_1,
+                color: ChartConfig.color_carbs_mono_glucose,
             })
         }
 
         if (labels.includes(applicationStrings.label_nutrient_carbohydrates_fructose[lang])) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_fructose[lang],
-                color: ChartConfig.color_chart_green_2,
+                color: ChartConfig.color_carbs_mono_fructose,
             })
         }
 
         if (labels.includes(applicationStrings.label_nutrient_carbohydrates_galactose[lang])) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_galactose[lang],
-                color: ChartConfig.color_chart_green_3,
+                color: ChartConfig.color_carbs_mono_galactose,
             })
         }
 
         if (labels.includes(applicationStrings.label_nutrient_carbohydrates_sucrose[lang])) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_sucrose[lang],
-                color: ChartConfig.color_chart_yellow_1,
+                color: ChartConfig.color_carbs_di_sucrose,
             })
         }
 
         if (labels.includes(applicationStrings.label_nutrient_carbohydrates_lactose[lang])) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_lactose[lang],
-                color: ChartConfig.color_chart_yellow_2,
+                color: ChartConfig.color_carbs_di_lactose,
             })
         }
 
         if (labels.includes(applicationStrings.label_nutrient_carbohydrates_maltose[lang])) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_maltose[lang],
-                color: ChartConfig.color_chart_yellow_3,
+                color: ChartConfig.color_carbs_di_maltose,
             })
         }
 
         if (labels.includes(applicationStrings.label_nutrient_carbohydrates_starch[lang])) {
             legendData.push({
                 item: applicationStrings.label_nutrient_carbohydrates_starch[lang],
-                color: ChartConfig.color_chart_orange,
+                color: ChartConfig.color_carbs_starch,
             })
         }
 
