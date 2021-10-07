@@ -99,10 +99,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
             applicationStrings.label_nutrient_lipids_unsaturated_mono_short[lang],
             applicationStrings.label_nutrient_lipids_unsaturated_poly_short[lang]]
 
-        if(!hideRemainders) {
-            labels.push(applicationStrings.label_nutrient_remainder[lang])
-        }
-
         const colors: string[] = [
             ChartConfig.color_lipids_saturated,
             ChartConfig.color_lipids_unsaturated_mono,
