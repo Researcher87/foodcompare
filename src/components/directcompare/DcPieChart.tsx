@@ -54,7 +54,6 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
 
     const [chartType, setChartType] = useState<string>(initialConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(initialConfig.showLegend)
-    const [hideRemainders, setHideRemainders] = useState<boolean>(initialConfig.hideRemainders)
     const [showDetails, setShowDetails] = useState<boolean>(initialConfig.showDetails)
     const [subChart1, setSubChart1] = useState<string>(initialConfig.subChart1)
     const [subChart2, setSubChart2] = useState<string>(initialConfig.subChart2)
@@ -73,8 +72,8 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
                 ? currentConfig.lipidsChartConfig
                 : currentConfig.carbsChartConfig
 
-            if (chartType !== configObject.chartType || showLegend !== configObject.showLegend || hideRemainders !== configObject.hideRemainders
-                || subChart1 !== configObject.subChart1 || subChart2 !== configObject.subChart2) {
+            if (chartType !== configObject.chartType || showLegend !== configObject.showLegend
+                 || subChart1 !== configObject.subChart1 || subChart2 !== configObject.subChart2) {
                 updateChartConfig()
             }
         } else if (props.dataPage === TAB_BASE_DATA) {
@@ -85,7 +84,7 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         }
 
         setContainerHeight(calculateChartContainerHeight(windowSize, true))
-    }, [chartType, showDetails, showLegend, hideRemainders, subChart1, subChart2, containerHeight, windowSize.height])
+    }, [chartType, showDetails, showLegend, subChart1, subChart2, containerHeight, windowSize.height])
 
     if (!applicationContext) {
         return <div/>
@@ -107,23 +106,27 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
                     baseChartConfig: pieChartConfig
                 }
             } else {
-                const pieChartConfig: GeneralChartConfigDirectCompareWithSubCharts = {
-                    chartType: chartType,
-                    showLegend: showLegend,
-                    hideRemainders: hideRemainders,
-                    subChart1: subChart1,
-                    subChart2: subChart2
-                }
-
                 if (props.dataPage === TAB_LIPIDS_DATA) {
                     newChartConfig = {
                         ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart,
-                        lipidsChartConfig: pieChartConfig
+                        lipidsChartConfig: {
+                            ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig,
+                            chartType: chartType,
+                            showLegend: showLegend,
+                            subChart1: subChart1,
+                            subChart2: subChart2
+                        }
                     }
                 } else if (props.dataPage === TAB_CARBS_DATA) {
                     newChartConfig = {
                         ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart,
-                        carbsChartConfig: pieChartConfig
+                        carbsChartConfig: {
+                            ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig,
+                            chartType: chartType,
+                            showLegend: showLegend,
+                            subChart1: subChart1,
+                            subChart2: subChart2
+                        }
                     }
                 }
             }
@@ -142,10 +145,6 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         setShowLegend(!showLegend)
     }
 
-    const handleHideRemaindersCheckbox = () => {
-        setHideRemainders(!hideRemainders)
-    }
-
     const handleShowDetailsCheckbox = () => {
         setShowDetails(!showDetails)
     }
@@ -160,17 +159,15 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
 
     const renderChartConfigurationForm = () => {
         const chartProps = getConfigurationProps()
-        return <PieChartConfigurationForm key = {`Config DirectCompare ${props.dataPage}`} {...chartProps}/>
+        return <PieChartConfigurationForm key={`Config DirectCompare ${props.dataPage}`} {...chartProps}/>
     }
 
     const getConfigurationProps = (): PieChartConfigurationProps => {
         let chartProps: PieChartConfigurationProps = {
             chartType: chartType,
             showLegend: showLegend,
-            hideRemainders: hideRemainders,
             handleRadioButtonClick: handleRadioButtonClick,
             handleLegendCheckboxClick: handleShowLegendCheckbox,
-            handleHideRemaindersCheckbox: handleHideRemaindersCheckbox
         }
 
         if (props.dataPage === TAB_BASE_DATA) {
@@ -190,12 +187,12 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         let preconfig: PieChartDirectCompareConfig = {
             chartType: chartType,
             showLegend: showLegend,
-            hideRemainders: hideRemainders,
             showDetails: showDetails,
         }
 
         if (props.dataPage === TAB_BASE_DATA) {
-            return <BaseDataChart key = {`${TAB_BASE_DATA} ${index}`} selectedFoodItem={selectedFoodItem} directCompareUse={true}
+            return <BaseDataChart key={`${TAB_BASE_DATA} ${index}`} selectedFoodItem={selectedFoodItem}
+                                  directCompareUse={true}
                                   directCompareConfig={preconfig}/>
         }
 
@@ -217,7 +214,8 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
                 chartIndex: index
             }
 
-            return <LipidsDataChart key = {`${TAB_LIPIDS_DATA} ${index}`} selectedFoodItem={selectedFoodItem} directCompareUse={true}
+            return <LipidsDataChart key={`${TAB_LIPIDS_DATA} ${index}`} selectedFoodItem={selectedFoodItem}
+                                    directCompareUse={true}
                                     directCompareConfig={preconfig}/>
         }
 
@@ -239,23 +237,24 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
                 handleSubchartChange: index === 1 ? handleSubchart1Change : handleSubchart2Change
             }
 
-            return <CarbsDataChart key = {`${TAB_CARBS_DATA} ${index}`} selectedFoodItem={selectedFoodItem} directCompareUse={true}
+            return <CarbsDataChart key={`${TAB_CARBS_DATA} ${index}`} selectedFoodItem={selectedFoodItem}
+                                   directCompareUse={true}
                                    directCompareConfig={preconfig}/>
         }
     }
 
-    console.log('Render dc data chart')
-
     return <div className={"direct-compare-panel"}>
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}} key={"directcompare container" + containerHeight}>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}}
+                 key={"directcompare container" + containerHeight}>
                 <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
                 {getChartComponent(props.selectedFoodItem1, 1)}
             </div>
         </Card>
 
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}} key={"directcompare container" + containerHeight}>
+            <div className={"d-flex"} style={{maxHeight: containerHeight}}
+                 key={"directcompare container" + containerHeight}>
                 <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
                 {getChartComponent(props.selectedFoodItem2, 2)}
             </div>

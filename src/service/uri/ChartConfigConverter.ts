@@ -63,6 +63,7 @@ export function getUpdatedChartConfig(chartConfigData: ChartConfigData, chartCon
 		}
 
 		return {...chartConfigData, lipidsChartConfig: {
+				...chartConfigData.lipidsChartConfig,
 				chartType: chartType,
 				showLegend: showLegend,
 				subChart: subChart
@@ -76,6 +77,7 @@ export function getUpdatedChartConfig(chartConfigData: ChartConfigData, chartCon
 		}
 
 		return {...chartConfigData, carbsChartConfig: {
+				...chartConfigData.carbsChartConfig,
 				chartType: chartType,
 				showLegend: showLegend,
 				subChart: subChart
@@ -135,10 +137,11 @@ export function getUpdatedDirectCompareChartConfig(chartConfigData: DirectCompar
 		}
 
 		return {...chartConfigData, lipidsChartConfig: {
+				...chartConfigData.lipidsChartConfig,
 				chartType: chartType,
 				showLegend: showLegend,
 				subChart1: subChart,
-				subChart2: subChart2
+				subChart2: subChart2,
 			}
 		}
 	}
@@ -149,10 +152,12 @@ export function getUpdatedDirectCompareChartConfig(chartConfigData: DirectCompar
 		}
 
 		return {...chartConfigData, carbsChartConfig: {
+				...chartConfigData.carbsChartConfig,
 				chartType: chartType,
 				showLegend: showLegend,
 				subChart1: subChart,
-				subChart2: subChart2
+				subChart2: subChart2,
+				hideRemainders: false
 			}
 		}
 	}

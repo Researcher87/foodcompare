@@ -19,7 +19,6 @@ export interface DirectCompareChartConfigData {
 export interface GeneralChartConfig {
     chartType: string
     showLegend: boolean
-    hideRemainders?: boolean
 }
 
 export interface GeneralChartConfigWithDetails extends GeneralChartConfig {
@@ -28,11 +27,15 @@ export interface GeneralChartConfigWithDetails extends GeneralChartConfig {
 
 export interface GeneralChartConfigWithSubCharts extends GeneralChartConfig {
     subChart: string
+    expand100: boolean
+    hideRemainders: boolean
 }
 
 export interface GeneralChartConfigDirectCompareWithSubCharts extends GeneralChartConfig {
     subChart1: string
     subChart2: string
+    hideRemainders: boolean
+    expand100: boolean
 }
 
 export interface BarChartConfig {
@@ -54,4 +57,5 @@ export interface GeneralizedChartConfig {
 	subChart?: string
 	subChart2?: string,
 	synchronize?: boolean
+    hideRemainders?: boolean
 }
