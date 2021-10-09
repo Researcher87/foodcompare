@@ -47,9 +47,4 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
             </div>
         </div>
     )
-<<<<<<< HEAD
-
-    //
-=======
->>>>>>> feature/101-restyling-lipids-and-carbs-chart
 }
