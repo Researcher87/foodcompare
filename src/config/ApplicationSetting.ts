@@ -46,12 +46,15 @@ export const initialChartConfigData: ChartConfigData = {
         chartType: CHART_TYPE_PIE,
         showLegend: true,
         hideRemainders: false,
-        subChart: LIPIDS_DATA_BASE
+        subChart: LIPIDS_DATA_BASE,
+        expand100: false
     },
     carbsChartConfig: {
         chartType: CHART_TYPE_PIE,
         showLegend: true,
-        subChart: CARBS_DATA_BASE
+        subChart: CARBS_DATA_BASE,
+        hideRemainders: false,
+        expand100: false
     },
     proteinChartConfig: {
         portionType: AMOUNT_PORTION,
@@ -79,12 +82,15 @@ export const initialDirectCompareConfigData: DirectCompareChartConfigData = {
         chartType: CHART_TYPE_PIE,
         showLegend: false,
         hideRemainders: false,
+        expand100: false,
         subChart1: LIPIDS_DATA_BASE,
         subChart2: LIPIDS_DATA_BASE
     },
     carbsChartConfig: {
         chartType: CHART_TYPE_PIE,
         showLegend: false,
+        hideRemainders: false,
+        expand100: false,
         subChart1: CARBS_DATA_BASE,
         subChart2: CARBS_DATA_BASE
     },

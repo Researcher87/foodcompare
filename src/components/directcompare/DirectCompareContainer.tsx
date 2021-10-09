@@ -90,7 +90,7 @@ export default function DirectCompareContainer() {
 					if(checkUserDataValidity(uriDataObject.userData) !== USERDATA_OK) {
 						return
 					}
-					
+
 					applicationContext.setUserData(uriDataObject.userData)	
 					applicationContext.setDirectCompareData.updateDirectCompareChartConfig(uriDataObject.chartConfigData)
 					applicationContext.setDirectCompareData.setSelectedDirectCompareDataPage(uriDataObject.selectedDataPage)

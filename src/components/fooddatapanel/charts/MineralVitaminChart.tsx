@@ -288,7 +288,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
                 maxYValue = 100
             }
         } else {
-
             if (props.directCompareConfig.maxValue) {
                 maxYValue = props.directCompareConfig.maxValue
             }

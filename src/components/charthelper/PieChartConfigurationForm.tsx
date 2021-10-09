@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../config/Constants";
@@ -43,17 +43,8 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
                                 onClick={props.handleDetailsCheckboxClick}>
                     </Form.Check>
                     }
-                    {props.hideRemainders !== undefined &&
-                    <Form.Check inline={true}
-                                label={applicationStrings.checkbox_chartoption_hideRemainders[languageContext.language]}
-                                defaultChecked={props.hideRemainders}
-                                onClick={props.handleHideRemaindersCheckbox}>
-                    </Form.Check>
-                    }
                 </form>
             </div>
         </div>
     )
-
-    //
 }

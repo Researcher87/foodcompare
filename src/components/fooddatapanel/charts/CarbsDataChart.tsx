@@ -31,8 +31,18 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.carbsChartConfig
             : initialChartConfigData.carbsChartConfig
 
+    const initialExpand100 =  props.directCompareConfig
+        ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.expand100
+        : chartConfig.expand100
+
+    const initialHideRemainders =  props.directCompareConfig
+        ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.hideRemainders
+        : chartConfig.hideRemainders
+
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
+    const [hideRemainders, setShowHideRemainders] = useState<boolean>(initialHideRemainders ? initialHideRemainders : false)
+    const [expand100, setExpand100] = useState<boolean>(initialExpand100 ? initialExpand100 : false)
     const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
     const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
@@ -45,25 +55,44 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
         setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, subChart, chartHeight, props])
+    }, [chartType, showLegend, hideRemainders, expand100, subChart, chartHeight, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
             const currentConfig = applicationContext.applicationData.foodDataPanel.chartConfigData.carbsChartConfig
             if (chartType !== currentConfig.chartType
                 || subChart !== currentConfig.subChart
+                || hideRemainders !== currentConfig.hideRemainders
+                || expand100 !== currentConfig.expand100
                 || showLegend !== currentConfig.showLegend) {
                 const newChartConfig = {
                     ...applicationContext.applicationData.foodDataPanel.chartConfigData,
                     carbsChartConfig: {
                         chartType: chartType,
                         showLegend: showLegend,
+                        hideRemainders: hideRemainders,
+                        expand100: expand100,
                         subChart: subChart
                     }
                 }
                 applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
             }
+        } else if(applicationContext) {
+            const currentConfig = applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig
+            if (hideRemainders !== currentConfig.hideRemainders
+                || expand100 !== currentConfig.expand100) {
+                applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.expand100 = expand100
+                applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.hideRemainders = hideRemainders
+            }
         }
+    }
+
+    const handleExpand100Change = () => {
+        setExpand100(!expand100)
+    }
+
+    const handleHideRemaindersCheckbox = () => {
+        setShowHideRemainders(!hideRemainders)
     }
 
     const carbohydrateData = getNutrientData(props.selectedFoodItem).carbohydrateData;
@@ -76,12 +105,16 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                 ? {
                     chartType: chartType,
                     showLegend: showLegend,
+                    hideRemainders: true,
+                    expand100: true,
                     subChart1: event.target.value,
                     subChart2: currentSettings.carbsChartConfig.subChart2
                 }
                 : {
                     chartType: chartType,
                     showLegend: showLegend,
+                    hideRemainders: true,
+                    expand100: true,
                     subChart1: currentSettings.carbsChartConfig.subChart1,
                     subChart2: event.target.value
                 }
@@ -120,20 +153,29 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             valueMisc = 0;
         }
 
+        const labels = [applicationStrings.label_nutrient_sugar[lang],
+            applicationStrings.label_nutrient_dietaryFibers[lang],
+        ]
+
+        const data = [valueSugar,
+            valueDietaryFibers]
+
+        const colors = [
+            ChartConfig.color_chart_green_3,
+            ChartConfig.color_chart_green_2,
+        ]
+
+        if(!hideRemainders) {
+            labels.push(applicationStrings.label_nutrient_remainder[lang])
+            colors.push(ChartConfig.color_chart_misc)
+            data.push(valueMisc)
+        }
+
         return {
-            labels: [applicationStrings.label_nutrient_sugar[lang],
-                applicationStrings.label_nutrient_dietaryFibers[lang],
-                applicationStrings.label_nutrient_remainder[lang]
-            ],
+            labels: labels,
             datasets: [{
-                data: [valueSugar,
-                    valueDietaryFibers,
-                    valueMisc],
-                backgroundColor: [
-                    ChartConfig.color_chart_green_3,
-                    ChartConfig.color_chart_green_2,
-                    ChartConfig.color_chart_misc,
-                ],
+                data: data,
+                backgroundColor: colors,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
@@ -161,68 +203,71 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
         let valueMisc = 100
         const labels: Array<String> = []
-        const values: Array<number> = []
+        const data: Array<number> = []
         const colors: Array<String> = []
 
         if (valueGlucose) {
             valueMisc -= valueGlucose
             labels.push(applicationStrings.label_nutrient_carbohydrates_glucose[lang])
-            values.push(valueGlucose)
+            data.push(valueGlucose)
             colors.push(ChartConfig.color_carbs_mono_glucose)
         }
         if (valueFructose) {
             valueMisc -= valueFructose
             labels.push(applicationStrings.label_nutrient_carbohydrates_fructose[lang])
-            values.push(valueFructose)
+            data.push(valueFructose)
             colors.push(ChartConfig.color_carbs_mono_fructose)
         }
         if (valueGalactose) {
             valueMisc -= valueGalactose
             labels.push(applicationStrings.label_nutrient_carbohydrates_galactose[lang])
-            values.push(valueGalactose)
+            data.push(valueGalactose)
             colors.push(ChartConfig.color_carbs_mono_galactose)
         }
         if (valueSucrose) {
             valueMisc -= valueSucrose
             labels.push(applicationStrings.label_nutrient_carbohydrates_sucrose[lang])
-            values.push(valueSucrose)
+            data.push(valueSucrose)
             colors.push(ChartConfig.color_carbs_di_sucrose)
         }
         if (valueLactose) {
             valueMisc -= valueLactose
             labels.push(applicationStrings.label_nutrient_carbohydrates_lactose[lang])
-            values.push(valueLactose)
+            data.push(valueLactose)
             colors.push(ChartConfig.color_carbs_di_lactose)
         }
         if (valueMaltose) {
             valueMisc -= valueMaltose
             labels.push(applicationStrings.label_nutrient_carbohydrates_maltose[lang])
-            values.push(valueMaltose)
+            data.push(valueMaltose)
             colors.push(ChartConfig.color_carbs_di_maltose)
         }
         if (valueStarch) {
             valueMisc -= valueStarch
             labels.push(applicationStrings.label_nutrient_carbohydrates_starch[lang])
-            values.push(valueStarch)
+            data.push(valueStarch)
             colors.push(ChartConfig.color_carbs_starch)
         }
 
         if (valueDietaryFibers) {
             valueMisc -= valueDietaryFibers
             labels.push(applicationStrings.label_nutrient_dietaryFibers[lang])
-            values.push(valueDietaryFibers)
+            data.push(valueDietaryFibers)
             colors.push(ChartConfig.color_carbs_dietaryFibers)
         }
 
         valueMisc = autoRound(valueMisc);
-        labels.push(applicationStrings.label_nutrient_remainder[lang])
-        values.push(valueMisc)
-        colors.push(ChartConfig.color_chart_misc)
+
+        if(!hideRemainders) {
+            labels.push(applicationStrings.label_nutrient_remainder[lang])
+            data.push(valueMisc)
+            colors.push(ChartConfig.color_chart_misc)
+        }
 
         return {
             labels: labels,
             datasets: [{
-                data: values,
+                data: data,
                 backgroundColor: colors,
                 borderWidth: 2,
                 borderColor: '#555',
@@ -347,7 +392,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         }
 
         if (chartType === CHART_TYPE_BAR) {
-            return getBarChartOptions(title, "%");
+            return expand100 ? getBarChartOptions(title, "%", 100) : getBarChartOptions(title, "%");
         } else {
             return getPieChartOptions(title, "%");
         }
@@ -374,6 +419,23 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                             checked={subChart === Constants.CARBS_DATA_DETAIL}
                             onChange={handleChartSelectionChange}>
                 </Form.Check>
+                <hr/>
+                <Form>
+                    <Form.Check inline={false}
+                                label={applicationStrings.checkbox_expand100g[lang]}
+                                type="checkbox"
+                                disabled={chartType === Constants.CHART_TYPE_PIE}
+                                checked={expand100 === true}
+                                onChange={handleExpand100Change}>
+                    </Form.Check>
+                    <Form.Check inline={false}
+                                label={applicationStrings.checkbox_chartoption_hideRemainders[lang]}
+                                type="checkbox"
+                                disabled={subChart === Constants.CARBS_DATA_DETAIL}
+                                checked={hideRemainders === true}
+                                onChange={handleHideRemaindersCheckbox}>
+                    </Form.Check>
+                </Form>
             </Form>
         )
     }

@@ -7,7 +7,7 @@ export const color_blue = "rgba(133, 193, 233, 1.0)";   // Default for Water
 export const color_purple = "rgba(213, 205, 237, 1.0)"; // Default color for a blue line
 
 export const color_turquoise = "rgba(0, 172, 193)";
-export const color_chart_brown = "rgba(141, 110, 99)";		// Dark green
+export const color_chart_brown = "rgba(188, 170, 164)";		// brown
 
 export const color_gray = "rgba(235, 235, 235, 1.0)"; // Default color for a blue line
 export const color_line_blue = "rgba(0, 107, 215, 1.0)"; // Default color for a blue line

@@ -26,15 +26,24 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
     const lang = languageContext.language
     const windowSize = useWindowDimension()
 
-    let chartConfig = props.directCompareConfig
+    const chartConfig = props.directCompareConfig
         ? props.directCompareConfig
         : applicationContext
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.lipidsChartConfig
             : initialChartConfigData.lipidsChartConfig
 
+    const initialExpand100 =  props.directCompareConfig
+        ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig.expand100
+        : chartConfig.expand100
+
+    const initialHideRemainders =  props.directCompareConfig
+        ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig.hideRemainders
+        : chartConfig.hideRemainders
+
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [hideRemainders, setShowHideRemainders] = useState<boolean>(chartConfig.hideRemainders ? chartConfig.hideRemainders : false)
+    const [hideRemainders, setShowHideRemainders] = useState<boolean>(initialHideRemainders ? initialHideRemainders : false)
+    const [expand100, setExpand100] = useState<boolean>(initialExpand100 ? initialExpand100 : false)
     const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
     const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
@@ -42,19 +51,19 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         if (props.directCompareConfig) {
             setChartType(chartConfig.chartType)
             setShowLegend(chartConfig.showLegend)
-            setShowHideRemainders(chartConfig.hideRemainders ? chartConfig.hideRemainders : false)
             setSubChart(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
         }
 
         setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, hideRemainders, subChart, chartHeight, windowSize, props])
+    }, [chartType, showLegend, hideRemainders, expand100, subChart, chartHeight, windowSize, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
             const currentConfig = applicationContext.applicationData.foodDataPanel.chartConfigData.lipidsChartConfig
             if (chartType !== currentConfig.chartType
                 || hideRemainders !== currentConfig.hideRemainders
+                || expand100 !== currentConfig.expand100
                 || subChart !== currentConfig.subChart
                 || showLegend !== currentConfig.showLegend) {
                 const newChartConfig = {
@@ -63,10 +72,18 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                         chartType: chartType,
                         showLegend: showLegend,
                         subChart: subChart,
-                        hideRemainders: hideRemainders
+                        hideRemainders: hideRemainders,
+                        expand100: expand100
                     }
                 }
                 applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
+            }
+        } else if(applicationContext) {
+            const currentConfig = applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig
+            if (hideRemainders !== currentConfig.hideRemainders
+                || expand100 !== currentConfig.expand100) {
+                applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig.expand100 = expand100
+                applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.lipidsChartConfig.hideRemainders = hideRemainders
             }
         }
     }
@@ -80,6 +97,14 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         } else {
             setSubChart(event.target.value)
         }
+    }
+
+    const handleExpand100Change = () => {
+        setExpand100(!expand100)
+    }
+
+    const handleHideRemaindersCheckbox = () => {
+        setShowHideRemainders(!hideRemainders)
     }
 
     const createTotalChartData = (totalAmount: number, saturated: number, unsaturatedMono: number, unsaturatedPoly: number): any => {
@@ -213,10 +238,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         setShowLegend(!showLegend)
     }
 
-    const handleHideRemaindersCheckbox = () => {
-        setShowHideRemainders(!hideRemainders)
-    }
-
     const lipidData = getNutrientData(props.selectedFoodItem).lipidData;
 
     let omegaDataAvailabe = false
@@ -236,7 +257,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         }
 
         if (chartType === CHART_TYPE_BAR) {
-            return getBarChartOptions(title, "%");
+            return expand100 ? getBarChartOptions(title, "%", 100) : getBarChartOptions(title, "%");
         } else {
             return getPieChartOptions(title, "%");
         }
@@ -244,25 +265,44 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
     const renderChartSelector = () => {
         return (
-            <Form>
-                <Form.Label>
-                    <b>{applicationStrings.label_datatype[languageContext.language]}:</b>
-                </Form.Label>
-                <Form.Check inline={false}
-                            label={applicationStrings.label_charttype_lipids_base[lang]}
-                            type="radio"
-                            value={Constants.LIPIDS_DATA_BASE}
-                            checked={subChart === Constants.LIPIDS_DATA_BASE}
-                            onChange={handleChartSelectionChange}>
-                </Form.Check>
-                <Form.Check inline={false}
-                            label={applicationStrings.label_charttype_lipids_omega[lang]}
-                            type="radio"
-                            value={Constants.LIPIDS_DATA_OMEGA}
-                            checked={subChart === Constants.LIPIDS_DATA_OMEGA}
-                            onChange={handleChartSelectionChange}>
-                </Form.Check>
-            </Form>
+            <div>
+                <Form>
+                    <Form.Label>
+                        <b>{applicationStrings.label_datatype[languageContext.language]}:</b>
+                    </Form.Label>
+                    <Form.Check inline={false}
+                                label={applicationStrings.label_charttype_lipids_base[lang]}
+                                type="radio"
+                                value={Constants.LIPIDS_DATA_BASE}
+                                checked={subChart === Constants.LIPIDS_DATA_BASE}
+                                onChange={handleChartSelectionChange}>
+                    </Form.Check>
+                    <Form.Check inline={false}
+                                label={applicationStrings.label_charttype_lipids_omega[lang]}
+                                type="radio"
+                                value={Constants.LIPIDS_DATA_OMEGA}
+                                checked={subChart === Constants.LIPIDS_DATA_OMEGA}
+                                onChange={handleChartSelectionChange}>
+                    </Form.Check>
+                </Form>
+                <hr/>
+                <Form>
+                    <Form.Check inline={false}
+                                label={applicationStrings.checkbox_expand100g[lang]}
+                                type="checkbox"
+                                disabled={chartType === Constants.CHART_TYPE_PIE}
+                                checked={expand100 === true}
+                                onChange={handleExpand100Change}>
+                    </Form.Check>
+                    <Form.Check inline={false}
+                                label={applicationStrings.checkbox_chartoption_hideRemainders[lang]}
+                                type="checkbox"
+                                disabled={subChart === Constants.LIPIDS_DATA_OMEGA}
+                                checked={hideRemainders === true}
+                                onChange={handleHideRemaindersCheckbox}>
+                    </Form.Check>
+                </Form>
+            </div>
         )
     }
 
@@ -347,8 +387,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                 <PieChartConfigurationForm key={"Config Lipids Chart"}
                                            chartType={chartType}
                                            showLegend={showLegend}
-                                           hideRemainders={hideRemainders}
-                                           handleHideRemaindersCheckbox={handleHideRemaindersCheckbox}
                                            handleRadioButtonClick={handleRadioButtonClick}
                                            handleLegendCheckboxClick={handleLegendCheckbox}/>
             </div>
