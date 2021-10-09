@@ -3,7 +3,6 @@ import {AMOUNT_PORTION} from "../../../config/Constants";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {applicationStrings} from "../../../static/labels";
-import {determineProteinRequirementRatio} from "../../../service/calculation/DietaryRequirementService";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {getBarChartOptions} from "../../../service/ChartConfigurationService"
 import {Bar} from "react-chartjs-2";
@@ -13,6 +12,7 @@ import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
+import {getProteinChartData} from "../../../service/chartdata/ProteinChartDataService";
 
 export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -69,90 +69,18 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
         }
 
         const userData = applicationContext.userData;
-        const amount = portionType === AMOUNT_PORTION ? props.selectedFoodItem.portion.amount : 100;
-
-        const labels: Array<string> = [];
-        const data: Array<number> = [];
-
-        if (proteinData.histidine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_histidine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.histidine, proteinData.histidine, amount, userData)
-            )
-        }
-
-        if (proteinData.isoleucine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_isoleucine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.isoleucine, proteinData.isoleucine, amount, userData)
-            )
-        }
-
-        if (proteinData.leucine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_leucine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.leucine, proteinData.leucine, amount, userData)
-            )
-        }
-
-        if (proteinData.lysine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_lysine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.lysine, proteinData.lysine, amount, userData)
-            )
-        }
-
-        if (proteinData.methionine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_methionine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.methionine, proteinData.methionine, amount, userData)
-            )
-        }
-
-        if (proteinData.phenylalanine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_phenylalanine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.phenylalanine, proteinData.phenylalanine, amount, userData)
-            )
-        }
-
-        if (proteinData.threonine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_threonine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.threonine, proteinData.threonine, amount, userData)
-            )
-        }
-
-        if (proteinData.tryptophan !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_tryptophan[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.tryptophan, proteinData.tryptophan, amount, userData)
-            )
-        }
-
-        if (proteinData.valine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_valine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.valine, proteinData.valine, amount, userData)
-            )
-        }
-
-        if (proteinData.cystine !== null) {
-            labels.push(applicationStrings.label_nutrient_proteins_cystine[lang]);
-            data.push(determineProteinRequirementRatio(
-                requirementData.cystine, proteinData.cystine, amount, userData)
-            )
-        }
+        const portionAmount = portionType === AMOUNT_PORTION ? props.selectedFoodItem.portion.amount : 100;
+        const chartDisplayData = getProteinChartData(proteinData, requirementData, userData, portionAmount, lang)
 
         const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
             ? props.directCompareConfig.barChartColor
             : ChartConfig.color_proteins
 
         return {
-            labels: labels,
+            labels: chartDisplayData.labels,
             datasets: [{
                 label: applicationStrings.label_charttype_proteins[lang],
-                data: data,
+                data: chartDisplayData.values,
                 backgroundColor: chartColor,
                 borderWidth: 2,
                 borderColor: '#555',
@@ -183,8 +111,14 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
             if (props.directCompareConfig.maxValue) {
                 maxYValue = props.directCompareConfig.maxValue
             }
-            if (expand100 === true && (maxYValue === undefined || maxYValue < 100)) {
-                maxYValue = 100
+            if (expand100) {
+                if (maxYValue === undefined) {
+                    if (overallMaxValue < 100) {
+                        maxYValue = 100
+                    }
+                } else if (maxYValue < 100) {
+                    maxYValue = 100
+                }
             }
         }
 

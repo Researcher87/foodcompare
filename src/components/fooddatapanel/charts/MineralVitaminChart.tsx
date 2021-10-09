@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
-import {determineFoodRequirementRatio} from "../../../service/calculation/DietaryRequirementService";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartConfigurationService"
@@ -13,6 +12,7 @@ import {MineralVitaminChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
+import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -91,173 +91,57 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const createVitaminChartData = () => {
         const vitaminData = getNutrientData(props.selectedFoodItem).vitaminData;
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.vitaminRequirementData;
+        const userData = applicationContext.userData
+        const portionAmount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         if (!vitaminData || !requirementData) {
             return null
         }
 
-        const amount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
-
-        const labels: Array<string> = [];
-        const data: Array<number> = [];
-
-        if (vitaminData.a !== null) {
-            labels.push("A");
-            data.push(determineFoodRequirementRatio(requirementData.a, vitaminData.a, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.b1 !== null) {
-            labels.push("B1");
-            data.push(determineFoodRequirementRatio(requirementData.b1, vitaminData.b1, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.b2 !== null) {
-            labels.push("B2");
-            data.push(determineFoodRequirementRatio(requirementData.b2, vitaminData.b2, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.b3 !== null) {
-            labels.push("B3");
-            data.push(determineFoodRequirementRatio(requirementData.b3, vitaminData.b3, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.b5 !== null) {
-            labels.push("B5");
-            data.push(determineFoodRequirementRatio(requirementData.b5, vitaminData.b5, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.b6 !== null) {
-            labels.push("B6");
-            data.push(determineFoodRequirementRatio(requirementData.b6, vitaminData.b6, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.b9 !== null) {
-            labels.push("B9");
-            data.push(determineFoodRequirementRatio(requirementData.b9, vitaminData.b9, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.b12 !== null) {
-            labels.push("B12");
-            data.push(determineFoodRequirementRatio(requirementData.b12, vitaminData.b12, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.c !== null) {
-            labels.push("C");
-            data.push(determineFoodRequirementRatio(requirementData.c, vitaminData.c, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.d !== null) {
-            labels.push("D");
-            data.push(determineFoodRequirementRatio(requirementData.d, vitaminData.d, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.e !== null) {
-            labels.push("E");
-            data.push(determineFoodRequirementRatio(requirementData.e, vitaminData.e, amount, applicationContext.userData));
-        }
-
-        if (vitaminData.k !== null) {
-            labels.push("K");
-            data.push(determineFoodRequirementRatio(requirementData.k, vitaminData.k, amount, applicationContext.userData));
-        }
+        const chartDisplayData = getVitaminChartData(vitaminData, requirementData, userData, portionAmount)
 
         const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
             ? props.directCompareConfig.barChartColor
             : ChartConfig.color_chart_green_3
 
         return {
-            labels: labels,
+            labels: chartDisplayData.labels,
             datasets: [{
                 label: applicationStrings.label_charttype_vitamins[lang],
-                data: data,
+                data: chartDisplayData.values,
                 backgroundColor: chartColor,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
-
         }
     }
 
     const createMineralChartData = () => {
         const mineralData = getNutrientData(props.selectedFoodItem).mineralData;
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.mineralRequirementData;
+        const userData = applicationContext.userData
+        const portionAmount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         if (!mineralData || !requirementData) {
             return null
         }
 
-        const amount = chartType_minerals === GRAM ? 100 : props.selectedFoodItem.portion.amount
-
-        const labels: Array<string> = [];
-        const data: Array<number> = [];
-
-        if (mineralData.calcium !== null) {
-            labels.push(applicationStrings.label_nutrient_min_calcium[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.calcium, mineralData.calcium, amount, applicationContext.userData));
-        }
-
-        if (mineralData.iron !== null) {
-            labels.push(applicationStrings.label_nutrient_min_iron[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.iron, mineralData.iron, amount, applicationContext.userData));
-        }
-
-        if (mineralData.magnesium !== null) {
-            labels.push(applicationStrings.label_nutrient_min_magnesium[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.magnesium, mineralData.magnesium, amount, applicationContext.userData));
-        }
-
-        if (mineralData.phosphorus !== null) {
-            labels.push(applicationStrings.label_nutrient_min_phosphorus[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.phosphorus, mineralData.phosphorus, amount, applicationContext.userData));
-        }
-
-        if (mineralData.potassium !== null) {
-            labels.push(applicationStrings.label_nutrient_min_potassimum[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.potassium, mineralData.potassium, amount, applicationContext.userData));
-        }
-
-        if (mineralData.sodium !== null) {
-            labels.push(applicationStrings.label_nutrient_min_sodium[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.sodium, mineralData.sodium, amount, applicationContext.userData));
-        }
-
-        if (mineralData.zinc !== null) {
-            labels.push(applicationStrings.label_nutrient_min_zinc[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.zinc, mineralData.zinc, amount, applicationContext.userData));
-        }
-
-        if (mineralData.copper !== null) {
-            labels.push(applicationStrings.label_nutrient_min_copper[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.copper, mineralData.copper, amount, applicationContext.userData));
-        }
-
-        if (mineralData.manganese !== null) {
-            labels.push(applicationStrings.label_nutrient_min_manganese[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.manganese, mineralData.manganese, amount, applicationContext.userData));
-        }
-
-        if (mineralData.selenium !== null) {
-            labels.push(applicationStrings.label_nutrient_min_selenium[lang]);
-            data.push(determineFoodRequirementRatio(requirementData.selenium, mineralData.selenium, amount, applicationContext.userData));
-        }
+        const chartDisplayData = getMineralsChartData(mineralData, requirementData, userData, portionAmount, lang)
 
         const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
             ? props.directCompareConfig.barChartColor
             : ChartConfig.color_purple
 
-        const chartData = {
-            labels: labels,
+        return {
+            labels: chartDisplayData.labels,
             datasets: [{
                 label: applicationStrings.label_charttype_minerals[lang],
-                data: data,
+                data: chartDisplayData.values,
                 backgroundColor: chartColor,
                 borderWidth: 2,
                 borderColor: '#555',
             }]
-
-        }
-
-        return chartData;
+        };
     }
 
     const handleRadioButtonClick = (event: any): void => {
@@ -291,7 +175,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             if (props.directCompareConfig.maxValue) {
                 maxYValue = props.directCompareConfig.maxValue
             }
-            if (expand100 === true) {
+            if (expand100) {
                 if (maxYValue === undefined) {
                     if (overallMaxValue < 100) {
                         maxYValue = 100
