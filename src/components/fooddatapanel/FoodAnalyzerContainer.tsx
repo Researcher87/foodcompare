@@ -72,7 +72,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             {}
         )) {
             applicationContext?.setFoodDataPanelData.removeAllItemsFromFoodDataPanel()
-			history.push({pathName: PATH_FOODDATA_PANEL})
         }
     }
 
@@ -82,7 +81,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const selectedFoodItems = applicationContext?.applicationData.foodDataPanel.selectedFoodItems
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
-
     ReactTooltip.rebuild()
 
     return (

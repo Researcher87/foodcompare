@@ -56,7 +56,11 @@ export default function FoodDataPanelContainer() {
         if (selectedFoodItemIndex === null || !selectedFoodItems || selectedFoodItems.length === 0) {
             createDataFromUriQuery()
         } else {   // Set new URI Query
-            updateUriQuery(selectedFoodItemIndex)
+            if(selectedFoodItem === null) {
+                updateUriQuery(selectedFoodItemIndex)
+            } else {
+                history.push(PATH_FOODDATA_PANEL)
+            }
         }
     }
 
