@@ -56,11 +56,7 @@ export default function FoodDataPanelContainer() {
         if (selectedFoodItemIndex === null || !selectedFoodItems || selectedFoodItems.length === 0) {
             createDataFromUriQuery()
         } else {   // Set new URI Query
-            if(selectedFoodItem === null) {
-                updateUriQuery(selectedFoodItemIndex)
-            } else {
-                history.push(PATH_FOODDATA_PANEL)
-            }
+            updateUriQuery(selectedFoodItemIndex)
         }
     }
 
@@ -109,7 +105,11 @@ export default function FoodDataPanelContainer() {
     }
 
     const createDataFromUriQuery = () => {
-        const {addItemToFoodDataPanel, setSelectedDataPage, setSelectedDisplayMode} = applicationContext.setFoodDataPanelData
+        const {
+            addItemToFoodDataPanel,
+            setSelectedDataPage,
+            setSelectedDisplayMode
+        } = applicationContext.setFoodDataPanelData
 
         // Set data from an aggregated food item query
         if (key === QUERYKEY_DATAPANEL_AGGREGATED && value.length > 1) {
@@ -137,6 +137,8 @@ export default function FoodDataPanelContainer() {
                 console.error(e)
             }
         }
+
+        console.log('Create from query:', value)
 
         // Set data from a simple food item (create data from query parameters)
         if (key === QUERYKEY_DATAPANEL_ITEM && value.length > 1) {

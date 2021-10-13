@@ -71,6 +71,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             applicationStrings.button_no[languageContext.language],
             {}
         )) {
+            history.push(PATH_FOODDATA_PANEL)
             applicationContext?.setFoodDataPanelData.removeAllItemsFromFoodDataPanel()
         }
     }

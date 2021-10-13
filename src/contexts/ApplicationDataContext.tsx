@@ -3,7 +3,7 @@ import * as NutrientDataImportService from "../service/NutrientDataImportService
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {ApplicationData, RankingPanelData} from "../types/livedata/ApplicationData";
-import {DISPLAYMODE_CHART, SOURCE_SRLEGACY, TAB_BASE_DATA} from "../config/Constants";
+import {DISPLAYMODE_CHART, PATH_FOODDATA_PANEL, SOURCE_SRLEGACY, TAB_BASE_DATA} from "../config/Constants";
 import {UserData} from "../types/livedata/UserData";
 import {
     initialChartConfigData,
@@ -57,7 +57,6 @@ export interface ApplicationContext extends ApplicationDataContext {
 export const ApplicationDataContextStore = createContext<ApplicationContext | null>(null)
 
 export default class ApplicationDataContextProvider extends Component<any, ApplicationDataContext> {
-
     setSelectedFoodDataPanelTab = (selectedTab: number) => {
         this.setState(prevState => ({
             applicationData: {
