@@ -10,16 +10,15 @@ export default function MobileDeviceCheck() {
     const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
-
     const setMobileStatus = (status: boolean) => {
-        if(status === true) {
+        if(status) {
             window.location.href = mobileAppPath
         } else {
             applicationContext?.setMobileUsage(status)
         }
     }
 
-    const showQuestionModal2 = () => {
+    const showQuestionModal = () => {
         return <div className={"mobile-device-message"}>
             <div style={{margin: "15px"}}>
                 {applicationStrings.device_detection_hint[language]}
@@ -43,9 +42,9 @@ export default function MobileDeviceCheck() {
     }
 
     return <div>
-        {applicationContext?.useAsMobile === null && isMobile &&
+        {(applicationContext === null || applicationContext.useAsMobile === null) && isMobile &&
         < div>
-            {showQuestionModal2()}
+            {showQuestionModal()}
         </div>
         }
     </div>

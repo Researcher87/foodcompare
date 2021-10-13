@@ -193,4 +193,22 @@ export const versions = [
             "Typos have been fixed.",
             "Incorrect Vitamin D values in some food elements have been fixed."]
     },
+    {
+        id: "1.4.3",
+        date: "10-13-2021",
+        subject: "Chart Styling",
+        features: [
+            "Additional settings have been added to the carbs and lipids chart (hide remainders, expand to 100 %).",
+            "Some new food elements have been added, some older data has been replaced by newer data."
+        ],
+        updates: [
+            "Some colors of the charts have been changed.",
+            "Some long chart labels have been abbreviated for the sake of a better visualization.",
+        ],
+        bugfixes: [
+            "The 'close all' button had left the last tab open. This bug has been fixed.",
+            "Incorrect rounding of numbers in the ranking chart has been solved.",
+            "Some occasional display problems in the energy chart have been solved.",
+            "The calculation of the carbs remainder was corrected."]
+    },
 ]

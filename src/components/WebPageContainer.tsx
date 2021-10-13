@@ -22,7 +22,6 @@ import {isMobile, BrowserView} from "react-device-detect";
 import { RankingContainer } from "./ranking/RankingContainer";
 import {Chart} from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
-import * as path from "path";
 
 export function WebPageContainer() {
 
@@ -33,7 +32,7 @@ export function WebPageContainer() {
     }
 
     // Registering requires some time and should only be performed when the real site is loaded.
-    if(isMobile === false || applicationContext.useAsMobile !== null) {
+    if(!isMobile || applicationContext.useAsMobile !== null) {
         Chart.register(annotationPlugin)
     }
 
@@ -41,7 +40,7 @@ export function WebPageContainer() {
 
     return (
         <div>
-            {(isMobile === false || applicationContext.useAsMobile !== null) &&
+            {(!isMobile || applicationContext.useAsMobile !== null) &&
                 <BrowserView>
                     <Router>
                         <Header/>
