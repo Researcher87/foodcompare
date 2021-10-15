@@ -36,7 +36,7 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
 
     if(dietaryFibers) {
         tableData.push(createTableObject(
-            ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_dietaryFibers[language]}`,
+            applicationStrings.label_nutrient_dietaryFibers[language],
             dietaryFibers,
             portion, "g")
         );
