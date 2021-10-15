@@ -36,7 +36,7 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
 
     if(dietaryFibers) {
         tableData.push(createTableObject(
-            applicationStrings.label_nutrient_dietaryFibers[language],
+            ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_dietaryFibers[language]}`,
             dietaryFibers,
             portion, "g")
         );
@@ -382,10 +382,10 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
 
     if(firstNutrientData.baseData.dietaryFibers != null) {
         tableData.push(createTableObject(
-            applicationStrings.label_nutrient_dietaryFibers[language],
+            ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_dietaryFibers[language]}`,
             firstNutrientData.baseData.dietaryFibers,
             portion, "g")
-        )
+        );
     }
 
     if(firstNutrientData.carbohydrateData.glucose != null) {
