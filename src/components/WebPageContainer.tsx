@@ -40,9 +40,9 @@ export function WebPageContainer() {
 
     return (
         <div>
+            {(!isMobile || applicationContext.useAsMobile !== null) &&
             <Router>
                 <Header/>
-                {(!isMobile || applicationContext.useAsMobile !== null) &&
                 <Switch>
                     <Route path={PATH_FOODCOMPARE} component={Home}/>
                     <Route path={PATH_HOME} component={Home}/>
@@ -54,8 +54,8 @@ export function WebPageContainer() {
                     <Route path={PATH_CONTACT} component={ContactContainer}/>
                     <Route exact path={"/"} component={Home}/>
                 </Switch>
-                }
             </Router>
+            }
         </div>
     )
 
