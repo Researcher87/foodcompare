@@ -10,6 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
 import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
+import MobileDeviceCheck from "./MobileDeviceCheck";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -165,6 +166,8 @@ export function Home() {
     }
 
     return (
+        <div>
+            <MobileDeviceCheck/>
         <div className="media home app" style={{margin: "0 auto"}}>
             <div className={"container-fluid"}>
                 <div className="row">
@@ -183,6 +186,7 @@ export function Home() {
                     {renderHomeText(homeText2)}
                 </div>
             </div>
+        </div>
         </div>
     );
 
