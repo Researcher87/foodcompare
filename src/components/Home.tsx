@@ -11,6 +11,8 @@ import {Link} from 'react-router-dom';
 import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
 import MobileDeviceCheck from "./MobileDeviceCheck";
+import {isMobile} from "react-device-detect";
+import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -21,6 +23,7 @@ interface HomeTextElement {
 }
 
 export function Home() {
+    const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
 
@@ -43,7 +46,7 @@ export function Home() {
         const imageCaption = applicationStrings[captionAttribute][languageContext.language];
 
         return (
-            <div style={{ paddingBottom: "40px"}}>
+            <div style={{paddingBottom: "40px"}}>
                 <Carousel showArrows={true}
                           infiniteLoop={true} autoPlay={true}
                           interval={6000}
@@ -167,26 +170,26 @@ export function Home() {
 
     return (
         <div>
-            <MobileDeviceCheck/>
-        <div className="media home app" style={{margin: "0 auto"}}>
-            <div className={"container-fluid"}>
-                <div className="row">
-                    <div className={"col-5"}>
-                        {renderHomeText(homeText1)}
-                        <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
-                            {renderStartButtons()}
+            <div className="media home app" style={{margin: "0 auto"}}>
+                <div className={"container-fluid"}>
+                    <div className="row">
+                        <div className={"col-5"}>
+                            {renderHomeText(homeText1)}
+                            <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
+                                {renderStartButtons()}
+                            </div>
+                        </div>
+                        <div className={"col-7"} style={{paddingLeft: "45px"}}>
+                            {renderCarousel()}
                         </div>
                     </div>
-                    <div className={"col-7"} style={{paddingLeft: "45px"}}>
-                        {renderCarousel()}
+                    <hr/>
+                    <div className="card-header"
+                         style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                        {renderHomeText(homeText2)}
                     </div>
                 </div>
-                <hr/>
-                <div className="card-header" style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
-                    {renderHomeText(homeText2)}
-                </div>
             </div>
-        </div>
         </div>
     );
 

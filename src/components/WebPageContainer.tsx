@@ -24,7 +24,6 @@ import {Chart} from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
 
 export function WebPageContainer() {
-
     const applicationContext = useContext(ApplicationDataContextStore)
 
     if (!applicationContext) {
@@ -40,22 +39,22 @@ export function WebPageContainer() {
 
     return (
         <div>
-            {(!isMobile || applicationContext.useAsMobile !== null) &&
-            <Router>
-                <Header/>
-                <Switch>
-                    <Route path={PATH_FOODCOMPARE} component={Home}/>
-                    <Route path={PATH_HOME} component={Home}/>
-                    <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
-                    <Route path={PATH_DIRECT_COMPARE} component={DirectCompareContainer}/>
-                    <Route path={PATH_RANKING} component={RankingContainer}/>
-                    <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>
-                    <Route path={PATH_USERSETTINGS} component={UserSettings}/>
-                    <Route path={PATH_CONTACT} component={ContactContainer}/>
-                    <Route exact path={"/"} component={Home}/>
-                </Switch>
-            </Router>
-            }
+            <div>
+                <Router>
+                    <Header/>
+                    <Switch>
+                        <Route path={PATH_FOODCOMPARE} component={Home}/>
+                        <Route path={PATH_HOME} component={Home}/>
+                        <Route path={PATH_FOODDATA_PANEL} component={FoodDataPanelContainer}/>
+                        <Route path={PATH_DIRECT_COMPARE} component={DirectCompareContainer}/>
+                        <Route path={PATH_RANKING} component={RankingContainer}/>
+                        <Route path={PATH_MOBILE_APP} component={FoodCompareApp}/>
+                        <Route path={PATH_USERSETTINGS} component={UserSettings}/>
+                        <Route path={PATH_CONTACT} component={ContactContainer}/>
+                        <Route exact path={"/"} component={Home}/>
+                    </Switch>
+                </Router>
+            </div>
         </div>
     )
 

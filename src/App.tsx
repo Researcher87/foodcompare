@@ -3,8 +3,8 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import {NotificationContainer} from 'react-notifications'
-import ApplicationDataContextProvider from "./contexts/ApplicationDataContext";
-import React, {useEffect} from "react";
+import ApplicationDataContextProvider, {ApplicationDataContextStore} from "./contexts/ApplicationDataContext";
+import React, {useContext, useEffect} from "react";
 
 import {LanguageProvider} from "./contexts/LangContext";
 import ReactTooltip from "react-tooltip";
@@ -14,6 +14,7 @@ import {ANALYTICS_MESS_ID} from "./config/ApplicationKeys";
 
 import MobileDeviceCheck from "./components/MobileDeviceCheck";
 import {WebPageContainer} from "./components/WebPageContainer";
+import {isMobile} from "react-device-detect";
 
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
