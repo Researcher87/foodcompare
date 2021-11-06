@@ -39,6 +39,7 @@ export function WebPageContainer() {
 
     return (
         <div>
+            {(!isMobile || applicationContext.useAsMobile !== null) &&
             <div>
                 <Router>
                     <Header/>
@@ -55,6 +56,7 @@ export function WebPageContainer() {
                     </Switch>
                 </Router>
             </div>
+            }
         </div>
     )
 
