@@ -21,6 +21,7 @@ import {applicationStrings} from "../static/labels";
 import {LanguageContext} from "../contexts/LangContext";
 import {Link} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
+import {isMobileDevice} from "../service/WindowDimension";
 
 
 export default function Header() {
@@ -51,11 +52,15 @@ export default function Header() {
     }
 
     const renderMenus = () => {
+        const menuNameAnalyze = isMobileDevice() ? applicationStrings.menu_food_data_panel_m[language] : applicationStrings.menu_food_data_panel[language]
+        const menuNameDirectCompare = isMobileDevice() ? applicationStrings.menu_direct_compare_m[language] : applicationStrings.menu_direct_compare[language]
+        const menuNameSettings = isMobileDevice() ? applicationStrings.menu_settings_m[language] : applicationStrings.menu_settings[language]
+
         return (
-            <div className="btn-group" role="group">
+            <div className="btn-group flex flex-wrap" role="group">
                 <div className="header-menu">
                     <Link to={PATH_HOME}>
-                        <Button className="header-link"
+                        <Button className="media header-link"
                                 value={PATH_HOME}
                                 variant={'link'}
                                 active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
@@ -65,27 +70,27 @@ export default function Header() {
                 </div>
                 <div className="header-menu">
                     <Link to={PATH_FOODDATA_PANEL}>
-                        <Button className="header-link"
+                        <Button className="media header-link"
                                 value={PATH_FOODDATA_PANEL}
                                 variant={'link'}
                                 active={activePath === PATH_FOODDATA_PANEL}>
-                            {applicationStrings.menu_food_data_panel[language]}
+                            {menuNameAnalyze}
                         </Button>
                     </Link>
                 </div>
                 <div className="header-menu">
                     <Link to={PATH_DIRECT_COMPARE}>
-                        <Button className="header-link"
+                        <Button className="media header-link"
                                 value={PATH_DIRECT_COMPARE}
                                 variant={'link'}
                                 active={activePath === PATH_DIRECT_COMPARE}>
-                            {applicationStrings.menu_direct_compare[language]}
+                            {menuNameDirectCompare}
                         </Button>
                     </Link>
                 </div>
                 <div className="header-menu">
                     <Link to={PATH_RANKING}>
-                        <Button className="header-link"
+                        <Button className="media header-link"
                                 value={PATH_RANKING}
                                 variant={'link'}
                                 active={activePath === PATH_RANKING}>
@@ -93,9 +98,10 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
+                {!isMobileDevice() &&
                 <div className="header-menu">
                     <Link to={PATH_MOBILE_APP}>
-                        <Button className="header-link"
+                        <Button className="media header-link"
                                 value={PATH_MOBILE_APP}
                                 variant={'link'}
                                 active={activePath === PATH_MOBILE_APP}>
@@ -103,13 +109,14 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
+                }
                 <div className="header-menu">
                     <Link to={PATH_USERSETTINGS}>
                         <Button className="link header-link"
                                 value={PATH_USERSETTINGS}
                                 variant={'link'}
                                 active={activePath === PATH_USERSETTINGS}>
-                            {applicationStrings.menu_settings[language]}
+                            {menuNameSettings}
                         </Button>
                     </Link>
                 </div>
@@ -193,28 +200,59 @@ export default function Header() {
         )
     }
 
-    return (
-        <div className="d-flex d-row header">
-            <div style={{paddingTop: "8px", paddingLeft: "8px", minWidth: "90px", maxWidth: "90px"}}>
-                <img src={logo}/>
-            </div>
-            <div className={"d-flex flex-column w-100"}>
-                <div className="d-flex d-row align-items-center justify-content-between">
-                    <div style={{paddingTop: "5px"}}>
-                        <img src={text}/>
+    const makeHeaderDesktop = () => {
+        return (
+            <div className="d-flex flex-row header">
+                <div style={{paddingTop: "8px", paddingLeft: "8px", minWidth: "90px", maxWidth: "90px"}}>
+                    <img src={logo}/>
+                </div>
+                <div className={"d-flex flex-column w-100"}>
+                    <div className="d-flex flex-row align-items-center justify-content-between">
+                        <div style={{paddingTop: "5px"}}>
+                            <img src={text}/>
+                        </div>
+                        <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
+                            {renderLanguageButtons()}
+                            {renderSourceButtons()}
+                        </div>
                     </div>
-                    <div className="d-flex d-row justify-content-end" style={{paddingTop: "6px"}}>
-                        {renderLanguageButtons()}
-                        {renderSourceButtons()}
+                    <div className="d-flex flex-row" style={{marginTop: "3px"}}>
+                        <div className="col-md-12 text-start">
+                            {renderMenus()}
+                        </div>
                     </div>
                 </div>
-                <div className="d-row" style={{marginTop: "3px"}}>
-                    <div className="col-md-12 text-start">
-                        {renderMenus()}
-                    </div>
-                </div>
             </div>
-        </div>
-    );
+        );
+    }
 
+
+    const makeHeaderMobile = () => {
+        return (
+            <div className="d-flex flex-column header" style={{overflowX: "hidden"}}>
+                <div className={"d-flex flex-row justify-content-between"}>
+                    <div className={"d-flex flex-row"}>
+                        <div style={{paddingTop: "4px", paddingLeft: "4px", minWidth: "40px", maxWidth: "40px"}}>
+                            <img src={logo} width={"32px"}/>
+                        </div>
+                        <div style={{paddingTop: "8px"}}>
+                            <img src={text} width={"67px"}/>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="d-flex flex-row align-items-center justify-content-between">
+                            <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
+                                {renderLanguageButtons()}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex row" style={{marginTop: "3px"}}>
+                    {renderMenus()}
+                </div>
+            </div>
+        );
+    }
+
+    return isMobileDevice() ? makeHeaderMobile() : makeHeaderDesktop()
 }

@@ -38,6 +38,12 @@
     padding-bottom: 6px;
 }
 
+.header-link {
+    margin-top: 10px;
+    font-size: 0.7em !important;
+    padding-right: 10px !important;
+}
+
 .header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
     outline: none !important;
     box-shadow: none !important;
@@ -73,6 +79,10 @@
     .form-section {
         padding-bottom: 4px;
     }
+    .header-link {
+        margin-top: 10px;
+        font-size: 0.7em !important;
+    }
     .home {
         font-size: 0.7em;
     }
@@ -97,8 +107,8 @@
         padding-bottom: 5px;
     }
     .header-link {
-        margin-top: 14px;
-        min-width: 64px;
+        margin-top: 11px;
+        font-size: 0.7em !important;
     }
     .home {
         font-size: 0.8em;
@@ -126,7 +136,8 @@
     }
     .header-link {
         margin-top: 12px;
-        min-width: 68px;
+        font-size: 0.8em !important;
+        padding-right: 16px !important;
     }
     .home {
         font-size: 0.9em;
@@ -156,7 +167,8 @@
     }
     .header-link {
         margin-top: 8px;
-        min-width: 76px;
+        font-size: 0.9em !important;
+        padding-right: 20px !important;
     }
     .home {
         font-size: 1.0em;
@@ -180,7 +192,8 @@
     }
     .header-link {
         margin-top: 4px;
-        min-width: 84px;
+        font-size: 1.0em !important;
+        padding-right: 24px !important;
     }
     .home {
         font-size: 1.0em;
@@ -202,7 +215,8 @@
     }
     .header-link {
         margin-top: -2px;
-        min-width: 96px;
+        font-size: 1.0em !important;
+        padding-right: 32px !important;
     }
     .home {
         font-size: 1.1em;
@@ -224,7 +238,8 @@
     }
     .header-link {
         margin-top: -8px;
-        min-width: 112px;
+        font-size: 1.0em !important;
+        padding-right: 40px !important;
     }
     .home {
         font-size: 1.1em;
@@ -366,11 +381,6 @@
     background: #d5ce9c;
     min-height: 50px;
 }
-
-.header-menu {
-    padding-right: 12px;
-}
-
 
 .mainPanel {
     background: #f2f5fd;

@@ -785,11 +785,19 @@ export const applicationStrings = {
     },
     menu_food_data_panel: {
         de: 'Lebensmittel analysieren',
-        en: 'Food data analyzer'
+        en: 'Food analyzer'
+    },
+    menu_food_data_panel_m: {
+        de: 'Analysieren',
+        en: 'Analyze'
     },
     menu_direct_compare: {
         de: 'Direktvergleich',
         en: 'Direct comparison'
+    },
+    menu_direct_compare_m: {
+        de: 'Vergleichen',
+        en: 'Compare'
     },
     menu_home: {
         de: 'Home',
@@ -806,6 +814,10 @@ export const applicationStrings = {
     menu_settings: {
         de: 'User Einstellungen',
         en: 'User settings'
+    },
+    menu_settings_m: {
+        de: 'Optionen',
+        en: 'Settings'
     },
     menu_contact: {
         de: 'Kontakt',

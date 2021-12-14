@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {smallFormsScreenSize} from "../config/ApplicationSetting";
+import {isMobile} from "react-device-detect";
 
 export interface WindowDimension {
     width: number
@@ -27,4 +28,8 @@ export function useWindowDimension() {
 
 export function isSmallScreen(windowDimension: WindowDimension) {
     return windowDimension.width < smallFormsScreenSize.width || windowDimension.height < smallFormsScreenSize.height
+}
+
+export function isMobileDevice() {
+    return isMobile
 }
