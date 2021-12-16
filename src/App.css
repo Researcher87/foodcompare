@@ -24,6 +24,10 @@
     display: none;
 }
 
+.container-scroll {
+    overflow-x: hidden;
+}
+
 .foodDataPanel {
     padding-top: 16px;
 }
@@ -45,6 +49,11 @@
 }
 
 .header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.sidebar-link.focus, .sidebar-link:focus, .sidebar-link.active, .sidebar-link:active, .sidebar-link:active:focus, .sidebar-link.active:focus, .sidebar-link.active.focus {
     outline: none !important;
     box-shadow: none !important;
 }
@@ -73,6 +82,9 @@
     .app {
         font-size: 0.8em;
     }
+    .container-scroll {
+        overflow-x: auto;
+    }
     .form-label {
         font-size: 0.8em;
     }
@@ -100,6 +112,9 @@
     .app {
         font-size: 0.9em;
     }
+    .container-scroll {
+        overflow-x: auto;
+    }
     .foodDataPanel {
         padding-top: 24px;
     }
@@ -109,6 +124,10 @@
     .header-link {
         margin-top: 11px;
         font-size: 0.7em !important;
+    }
+    .sidebar-link {
+        margin-top: 14px;
+        min-width: 64px;
     }
     .home {
         font-size: 0.8em;
@@ -128,6 +147,9 @@
     .app {
         font-size: 1.0em;
     }
+    .container-scroll {
+        overflow-x: auto;
+    }
     .form-label {
         font-size: 0.9em;
     }
@@ -138,6 +160,10 @@
         margin-top: 12px;
         font-size: 0.8em !important;
         padding-right: 16px !important;
+    }
+    .sidebar-link {
+        margin-top: 12px;
+        min-width: 68px;
     }
     .home {
         font-size: 0.9em;
@@ -159,6 +185,9 @@
     .button-apply {
         font-size: 0.9em;
     }
+    .container-scroll {
+        overflow-x: hidden;
+    }
     .form-label {
         font-size: 1.0em;
     }
@@ -169,6 +198,10 @@
         margin-top: 8px;
         font-size: 0.9em !important;
         padding-right: 20px !important;
+    }
+    .sidebar-link {
+        margin-top: 8px;
+        min-width: 76px;
     }
     .home {
         font-size: 1.0em;
@@ -195,6 +228,10 @@
         font-size: 1.0em !important;
         padding-right: 24px !important;
     }
+    .sidebar-link {
+        margin-top: 4px;
+        min-width: 84px;
+    }
     .home {
         font-size: 1.0em;
     }
@@ -218,6 +255,10 @@
         font-size: 1.0em !important;
         padding-right: 32px !important;
     }
+    .sidebar-link {
+        margin-top: -2px;
+        min-width: 96px;
+    }
     .home {
         font-size: 1.1em;
     }
@@ -240,6 +281,10 @@
         margin-top: -8px;
         font-size: 1.0em !important;
         padding-right: 40px !important;
+    }
+    .sidebar-link {
+        margin-top: -8px;
+        min-width: 112px;
     }
     .home {
         font-size: 1.1em;
@@ -332,6 +377,15 @@
 }
 
 .header-link.active {
+    color: #0064ff !important;
+    text-decoration: underline;
+}
+
+.sidebar-link {
+    color: #969696 !important;
+}
+
+.sidebar-link.active {
     color: #0064ff !important;
     text-decoration: underline;
 }

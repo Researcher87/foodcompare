@@ -20,9 +20,6 @@ import {
     convertAggregatedUriStringToObject
 } from "../../service/uri/FoodDataPanelAggregatedUriService";
 import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
-import {Chart} from "react-chartjs-2";
-import annotationPlugin from "chartjs-plugin-annotation";
-
 
 export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -216,15 +213,15 @@ export default function FoodDataPanelContainer() {
 
     return <div>
         {selectedFoodItem !== null &&
-        <div className="container-fluid" style={{paddingTop: "20px"}}>
-            <div className="row">
-                <div className={"col-2"}>
+        <div className="container-fluid container-scroll" style={{paddingTop: "20px"}}>
+            <div className="d-flex flex-row">
+                <div className={""}>
                     <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
                                            openSelectorModal={openSelectorModal}
                                            openCompositeSelectorModal={openCompositeSelectorModal}
                     />
                 </div>
-                <div className="col-10 media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
+                <div className="col media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
                     {selectedFoodItems && selectedFoodItems.length > 0 ?
                         <div>
                             <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>

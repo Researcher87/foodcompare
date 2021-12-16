@@ -296,8 +296,8 @@ export const applicationStrings = {
         en: 'Source'
     },
     label_language: {
-        de: 'Sprache',
-        en: 'Language'
+        de: 'Sprache:',
+        en: 'Language:'
     },
     label_mail_name: {
       de: "Name",

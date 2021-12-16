@@ -12,6 +12,7 @@ import ReactTooltip from "react-tooltip";
 import {useHistory} from 'react-router-dom';
 import {PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
+import {isNarrowScreen, useWindowDimension} from "../../service/WindowDimension";
 
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
@@ -29,6 +30,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
+
+    const windowSize = useWindowDimension()
 
     useEffect(() => {
         ReactTooltip.rebuild()
@@ -84,6 +87,11 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
     ReactTooltip.rebuild()
 
+    const buttonRowClass = isNarrowScreen(windowSize) ? "d-flex flex-column align-items-center mr-4" : "d-flex flex-row justify-content-center"
+    const buttonRowStyle = isNarrowScreen(windowSize) ? {paddingTop: "16px", marginLeft: "16px"} : {marginLeft: "30px", marginRight: "30px", paddingTop: "16px"}
+    const buttonClass = isNarrowScreen(windowSize) ? "btn mb-4" : "btn"
+    const buttonStyle = isNarrowScreen(windowSize) ? {marginRight: "32px"} : {marginRight: "24px"}
+
     return (
         <div>
             <div>
@@ -93,21 +101,23 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                 { showFoodAggregatedFoodSelector &&
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={true}/>
                 }
-                <div className={"text-center"} style={{paddingTop: "16px"}}>
+                <div className={buttonRowClass} style={buttonRowStyle}>
                     <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
-                            className={"btn"}
-                            style={{marginRight: "12px"}}
+                            className={buttonClass}
+                            style = {buttonStyle}
                             data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
                         <FaPlusSquare/>
                     </Button>
                     <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
-                            className={"btn"}
-                            style={{marginRight: "12px"}}
+                            className={buttonClass}
+                            style = {buttonStyle}
                             data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
                         <FaLayerGroup/>
                     </Button>
                     <Button onClick={() => onCloseAllTabs()}
                             disabled={deleteIconEnabled === false}
+                            className={buttonClass}
+                            style = {buttonStyle}
                             data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>
                         <FaTrash/>
                     </Button>

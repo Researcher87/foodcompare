@@ -30,6 +30,10 @@ export function isSmallScreen(windowDimension: WindowDimension) {
     return windowDimension.width < smallFormsScreenSize.width || windowDimension.height < smallFormsScreenSize.height
 }
 
+export function isNarrowScreen(windowDimension: WindowDimension) {
+    return windowDimension.width < smallFormsScreenSize.width
+}
+
 export function isMobileDevice() {
     return isMobile
 }

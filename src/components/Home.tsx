@@ -13,6 +13,7 @@ import {FaAngleDoubleRight} from "react-icons/fa";
 import MobileDeviceCheck from "./MobileDeviceCheck";
 import {isMobile} from "react-device-detect";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
+import {isMobileDevice} from "../service/WindowDimension";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -168,20 +169,24 @@ export function Home() {
         }
     }
 
+    const colSizeLeft = isMobileDevice() ? "col-12" : "col-5"
+
     return (
         <div>
             <div className="media home app" style={{margin: "0 auto"}}>
                 <div className={"container-fluid"}>
                     <div className="row">
-                        <div className={"col-5"}>
+                        <div className={colSizeLeft}>
                             {renderHomeText(homeText1)}
                             <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
                                 {renderStartButtons()}
                             </div>
                         </div>
+                        {!isMobileDevice() &&
                         <div className={"col-7"} style={{paddingLeft: "45px"}}>
                             {renderCarousel()}
                         </div>
+                        }
                     </div>
                     <hr/>
                     <div className="card-header"

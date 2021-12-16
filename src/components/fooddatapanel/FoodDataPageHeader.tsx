@@ -137,7 +137,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             {helpText !== null &&
             <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}/>
             }
-            <div className={"row d-flex flex-nowrap"}>
+            <div className={"d-flex flex-nowrap"}>
                 <div className="col-md-2 col-sm-3">
                     <div className={"card"}>
                         <div className="card-body" style={{paddingRight: "16px"}}>
@@ -152,14 +152,14 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                     </div>
                 </div>
                 <div className={"col"}>
-                    <div className="row d-flex flex-nowrap" style={{marginTop: "10px"}}>
-                        <div className="col-md-8" style={{paddingTop: "6px", paddingLeft: "32px"}}>
-                            <div style={{borderBottom: "1px solid #BBBBBB", paddingLeft: "12px"}}>
+                    <div className="d-flex flex-row justify-content-between" style={{marginTop: "10px"}}>
+                        <div style={{paddingTop: "6px", paddingLeft: "32px"}}>
+                            <div style={{borderBottom: "1px solid #BBBBBB", paddingLeft: "12px", paddingRight: "12px"}}>
                                 <b>{fullName}</b>
                             </div>
                         </div>
-                        <div className="col-md-auto">
-                            <div style={{width: "200px", padding: "0px !important", margin: "0px !important"}}>
+                        <div style={{paddingRight: "24px"}}>
+                            <div style={{padding: "0px !important", margin: "0px !important"}}>
                                 <div className="btn-group" role="group">
                                     <Button className={chartButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
