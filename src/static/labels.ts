@@ -75,6 +75,10 @@ export const applicationStrings = {
         de: 'Englisch',
         en: 'English'
     },
+    checkbox_english_m: {
+        de: 'EN',
+        en: 'EN'
+    },
     checkbox_expand100g: {
         de: 'Auf 100 % erweitern',
         en: 'Expand to 100 %'
@@ -82,6 +86,10 @@ export const applicationStrings = {
     checkbox_german: {
         de: 'Deutsch',
         en: 'German'
+    },
+    checkbox_german_m: {
+        de: 'DE',
+        en: 'DE'
     },
     checkbox_synchronize: {
         de: 'Synchronisieren',

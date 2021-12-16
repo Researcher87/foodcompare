@@ -134,6 +134,8 @@ export default function Header() {
         )
     }
 
+    const language_en = isMobileDevice() ? applicationStrings.checkbox_english_m[language] : applicationStrings.checkbox_english[language]
+    const language_de = isMobileDevice() ? applicationStrings.checkbox_german_m[language] : applicationStrings.checkbox_german[language]
 
     const renderLanguageButtons = () => {
         return (
@@ -150,7 +152,7 @@ export default function Header() {
                                defaultChecked={language === LANGUAGE_EN}
                                onClick={handleLanguageButtonClick}
                         />
-                        {applicationStrings.checkbox_english[language]}
+                        {language_en}
                     </label>
                     <label className="form-elements-largespace">
                         <input className="form-radiobutton"
@@ -160,7 +162,7 @@ export default function Header() {
                                defaultChecked={language === LANGUAGE_DE}
                                onClick={handleLanguageButtonClick}
                         />
-                        {applicationStrings.checkbox_german[language]}
+                        {language_de}
                     </label>
                 </form>
             </div>
