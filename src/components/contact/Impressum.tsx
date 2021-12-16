@@ -30,7 +30,7 @@ export function Impressum() {
             </div>
             <div style={{paddingTop: "20px"}}>
                 <div style={{height: '180px'}}>
-                    <img src={impressumPath} style={{height: '180px'}}/>
+                    <img src={impressumPath} alt={"Impressumtext"} style={{height: '180px'}}/>
                 </div>
             </div>
         </div>

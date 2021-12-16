@@ -131,11 +131,9 @@ export default function FoodDataPanelContainer() {
                     addItemToFoodDataPanel(selectedFoodItemWithComponent)
                 }
             } catch (e) {
-                console.error(e)
+                console.log(e)
             }
         }
-
-        console.log('Create from query:', value)
 
         // Set data from a simple food item (create data from query parameters)
         if (key === QUERYKEY_DATAPANEL_ITEM && value.length > 1) {

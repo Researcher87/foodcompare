@@ -57,25 +57,25 @@ export function Home() {
                           showStatus={false}
                           onChange={imageChanged}>
                     <div>
-                        <img src={pic1}/>
+                        <img src={pic1} alt={"Caroussel image 1"}/>
                     </div>
                     <div>
-                        <img src={pic2}/>
+                        <img src={pic2} alt={"Caroussel image 2"}/>
                     </div>
                     <div>
-                        <img src={pic3}/>
+                        <img src={pic3} alt={"Caroussel image 3"}/>
                     </div>
                     <div>
-                        <img src={pic4}/>
+                        <img src={pic4} alt={"Caroussel image 4"}/>
                     </div>
                     <div>
-                        <img src={pic5}/>
+                        <img src={pic5} alt={"Caroussel image 5"}/>
                     </div>
                     <div>
-                        <img src={pic6}/>
+                        <img src={pic6} alt={"Caroussel image 6"}/>
                     </div>
                     <div>
-                        <img src={pic7}/>
+                        <img src={pic7} alt={"Caroussel image 7"}/>
                     </div>
                 </Carousel>
                 <div style={{textAlign: "center", fontStyle: "oblique"}}>

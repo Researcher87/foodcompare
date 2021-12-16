@@ -204,12 +204,12 @@ export default function Header() {
         return (
             <div className="d-flex flex-row header">
                 <div style={{paddingTop: "8px", paddingLeft: "8px", minWidth: "90px", maxWidth: "90px"}}>
-                    <img src={logo}/>
+                    <img src={logo} alt={"Food Compare Logo"}/>
                 </div>
                 <div className={"d-flex flex-column w-100"}>
                     <div className="d-flex flex-row align-items-center justify-content-between">
                         <div style={{paddingTop: "5px"}}>
-                            <img src={text}/>
+                            <img src={text} alt={"Food Compare Logo Text"}/>
                         </div>
                         <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
                             {renderLanguageButtons()}
@@ -233,10 +233,10 @@ export default function Header() {
                 <div className={"d-flex flex-row justify-content-between"}>
                     <div className={"d-flex flex-row"}>
                         <div style={{paddingTop: "4px", paddingLeft: "4px", minWidth: "40px", maxWidth: "40px"}}>
-                            <img src={logo} width={"32px"}/>
+                            <img src={logo} width={"32px"} alt={"Food Compare Logo (mobile)"}/>
                         </div>
                         <div style={{paddingTop: "8px"}}>
-                            <img src={text} width={"67px"}/>
+                            <img src={text} width={"67px"} alt={"Food Compare Logo text (mobile)"}/>
                         </div>
                     </div>
                     <div>

@@ -215,7 +215,6 @@ export function UserSettings() {
         if (!palValue) {   // Initialize pal value first time
             let userDataPalValue = palCategories.find(palObject => palObject.value === userData.palValue)
             if (!userDataPalValue) {
-                console.error('Error: Pal object could not be determined.')
                 userDataPalValue = palCategories[0]
             }
             setPalValue(userDataPalValue)
