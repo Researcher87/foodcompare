@@ -31,10 +31,11 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
 
-    const windowSize = useWindowDimension()
+    let windowSize
 
     useEffect(() => {
         ReactTooltip.rebuild()
+        windowSize = useWindowDimension()
     })
     
     ReactTooltip.rebuild()
@@ -86,6 +87,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const selectedFoodItems = applicationContext?.applicationData.foodDataPanel.selectedFoodItems
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
     ReactTooltip.rebuild()
+
+    console.log('Window size:', windowSize)
 
     const buttonRowClass = isNarrowScreen(windowSize) ? "d-flex flex-column align-items-center mr-4" : "d-flex flex-row justify-content-center"
     const buttonRowStyle = isNarrowScreen(windowSize) ? {paddingTop: "16px", marginLeft: "16px"} : {marginLeft: "30px", marginRight: "30px", paddingTop: "16px"}
