@@ -31,11 +31,10 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
 
-    let windowSize
+    let windowSize = useWindowDimension()
 
     useEffect(() => {
         ReactTooltip.rebuild()
-        windowSize = useWindowDimension()
     })
     
     ReactTooltip.rebuild()
@@ -90,10 +89,10 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     console.log('Window size:', windowSize)
 
-    const buttonRowClass = isNarrowScreen(windowSize) ? "d-flex flex-column align-items-center mr-4" : "d-flex flex-row justify-content-center"
-    const buttonRowStyle = isNarrowScreen(windowSize) ? {paddingTop: "16px", marginLeft: "16px"} : {marginLeft: "30px", marginRight: "30px", paddingTop: "16px"}
-    const buttonClass = isNarrowScreen(windowSize) ? "btn mb-4" : "btn"
-    const buttonStyle = isNarrowScreen(windowSize) ? {marginRight: "32px"} : {marginRight: "24px"}
+    const buttonRowClass = !isNarrowScreen(windowSize) ?  "d-flex flex-row justify-content-center" : "d-flex flex-column align-items-center mr-4"
+    const buttonRowStyle = !isNarrowScreen(windowSize) ?  {marginLeft: "30px", marginRight: "30px", paddingTop: "16px"} : {paddingTop: "16px", marginLeft: "16px"}
+    const buttonClass = !isNarrowScreen(windowSize) ? "btn" : "btn mb-4"
+    const buttonStyle = !isNarrowScreen(windowSize) ?  {marginRight: "24px"} : {marginRight: "32px"}
 
     return (
         <div>
