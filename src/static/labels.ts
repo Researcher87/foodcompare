@@ -604,7 +604,7 @@ export const applicationStrings = {
         en: 'Vitamin A (Retinol, Retinal, ...)'
     },
     label_nutrient_vit_b1: {
-        de: 'Vitamin B1 (Thiamine)',
+        de: 'Vitamin B1 (Thiamin)',
         en: 'Vitamin B1 (Thiamine)'
     },
     label_nutrient_vit_b2: {
