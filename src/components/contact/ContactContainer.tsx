@@ -72,34 +72,4 @@ export function ContactContainer() {
         </div>
     )
 
-
-    // return(
-    //     <div className="container-fluid"  style={{paddingLeft: "50px", paddingTop: "20px"}}>
-    //         <div className="row">
-    //             <div className="col-6" style={{paddingBottom: "40px", paddingRight: "80px"}}>
-    //                 <div>
-    //                     <h1>
-    //                         Food Compare
-    //                     </h1>
-    //                     <h6>
-    //                         Version {release}
-    //                     </h6>
-    //                     <h6>
-    //                         Build time: {buildDate}
-    //                     </h6>
-    //                 </div>
-    //                 <div style={{paddingTop: "50px"}}>
-    //                     {renderDisclaimer()}
-    //                     {renderSources()}
-    //                 </div>
-    //             </div>
-    //             <div className="col-6">
-    //                 <div style={{height: '180px'}}>
-    //                     <img src={impressumPath} style={{height: '180px'}} />
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    //    )
-
 }

@@ -33,7 +33,7 @@ export function FoodCompareApp() {
                 </div>
             </div>
             <div className={"col-6"}>
-                <img src={appPath} className={"media mobile-app-img"}/>
+                <img src={appPath} alt="Screenshot of FoodCompare App" className={"media mobile-app-img"}/>
             </div>
         </div>
     </div>
