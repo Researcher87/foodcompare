@@ -55,15 +55,18 @@ export default function EnergyDataChart(props: ChartProps) {
 
     const renderUserDataInfoPage = () => {
         return (
-            <div style={{paddingLeft: "50px", paddingTop: "50px"}}>
-                {applicationContext.userData.initialValues ?
-                    (<div>
-                        <p>{applicationStrings.text_setUserdata_p1[lang]}</p>
-                        <p>{applicationStrings.text_setUserdata_p2[lang]}</p>
-                    </div>)
-                    :
-                    <p>{applicationStrings.text_setUserdata_p3[lang]}</p>
-                }
+            <div style={{paddingLeft: "50px", paddingTop: "20px"}}>
+                <h5><b>{`${energy100g}`} kcal / 100 g</b></h5>
+                <div style={{paddingTop: "30px"}}>
+                    {applicationContext.userData.initialValues === true ?
+                        (<div>
+                            <p>{applicationStrings.text_setUserdata_p1[lang]}</p>
+                            <p>{applicationStrings.text_setUserdata_p2[lang]}</p>
+                        </div>)
+                        :
+                        <p>{applicationStrings.text_setUserdata_p3[lang]}</p>
+                    }
+                </div>
             </div>
         )
     }

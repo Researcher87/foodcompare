@@ -996,7 +996,7 @@ export const applicationStrings = {
         en: "In this section you may display food items sorted by a specific nutrient, vitamin or mineral. Please select a food category, nutrient group and value to display the corresponding ranking chart."
     },
     text_setUserdata_p1: {
-        de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',
+        de: 'Es werden aktuell Referenzwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',
         en: 'You are currently seeing the reference data for an average adult (male, 35 years).'
     },
     text_setUserdata_p2: {
