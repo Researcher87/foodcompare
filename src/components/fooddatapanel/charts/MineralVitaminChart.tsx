@@ -89,7 +89,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const createVitaminChartData = () => {
-        const vitaminData = getNutrientData(props.selectedFoodItem).vitaminData;
+        const vitaminData = props.precalculatedData !== undefined ? props.precalculatedData : getNutrientData(props.selectedFoodItem).vitaminData;
+
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.vitaminRequirementData;
         const userData = applicationContext.userData
         const portionAmount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
@@ -117,7 +118,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     }
 
     const createMineralChartData = () => {
-        const mineralData = getNutrientData(props.selectedFoodItem).mineralData;
+        const mineralData = props.precalculatedData !== undefined ? props.precalculatedData : getNutrientData(props.selectedFoodItem).mineralData;
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.mineralRequirementData;
         const userData = applicationContext.userData
         const portionAmount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount

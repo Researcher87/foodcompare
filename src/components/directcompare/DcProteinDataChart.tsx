@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../charthelper/BarChartConfigurationForm";
-import {getMaximumValue, nullifyIncompleValues} from "../../service/calculation/NutrientCalculationService";
 import {roundToNextValue} from "../../service/calculation/MathService";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 import {Card} from "react-bootstrap";
@@ -11,6 +10,11 @@ import {BarChartDirectCompareConfig, DirectCompareDataPanelProps} from "../../ty
 import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
+import {
+    getMaximumValue,
+    getOverlappingValues,
+    nullifyNonOverlappingValues
+} from "../../service/calculation/NutrientCalculationService";
 
 export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -79,17 +83,18 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
         return <BarChartConfigurationForm {...barChartProps}/>
     }
 
-    const dataSet1 = getNutrientData(props.selectedFoodItem1).proteinData
-    const dataSet2 = getNutrientData(props.selectedFoodItem2).proteinData
+    let dataSet1 = getNutrientData(props.selectedFoodItem1).proteinData
+    let dataSet2 = getNutrientData(props.selectedFoodItem2).proteinData
+
+    if (synchronize) {
+        const overlappingAttributes = getOverlappingValues(dataSet1, dataSet2)
+        dataSet1 = nullifyNonOverlappingValues(dataSet1, overlappingAttributes)
+        dataSet2 = nullifyNonOverlappingValues(dataSet2, overlappingAttributes)
+    }
 
     const maxValue1 = getMaximumValue(dataSet1, props.selectedFoodItem1.portion.amount, requirementData, applicationContext.userData, true)
     const maxValue2 = getMaximumValue(dataSet2, props.selectedFoodItem2.portion.amount, requirementData, applicationContext.userData, true)
     const maxValue = Math.max(maxValue1, maxValue2)
-
-    if (synchronize) {
-        nullifyIncompleValues(dataSet1, dataSet2)
-    }
-
     const maxY = synchronize ? roundToNextValue(maxValue) : undefined
 
     const preconfig: BarChartDirectCompareConfig = {
@@ -108,6 +113,7 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
                 <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem1}
+                                  precalculatedData={dataSet1}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
             </div>
         </Card>
@@ -116,6 +122,7 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
                 <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem2}
+                                  precalculatedData={dataSet2}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
             </div>
         </Card>

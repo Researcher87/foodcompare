@@ -1,4 +1,5 @@
 import SelectedFoodItem from "./SelectedFoodItem";
+import {MineralData, ProteinData, VitaminData} from "../nutrientdata/FoodItem";
 
 // BASIC CHARTS COMPONENTS:
 
@@ -21,12 +22,14 @@ export interface CarbDataChartProps extends ChartProps {
 export interface ProteinDataChartProps extends ChartProps {
     directCompareUse?: boolean
     directCompareConfig?: BarChartDirectCompareConfig
+    precalculatedData?: any
 }
 
 export interface MineralVitaminChartProps extends ChartProps {
     selectedSubChart: string
     directCompareUse?: boolean
     directCompareConfig?: BarChartDirectCompareConfig
+    precalculatedData?: any
 }
 
 

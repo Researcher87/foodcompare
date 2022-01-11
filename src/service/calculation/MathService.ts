@@ -52,66 +52,31 @@ export function round(value, digits) {
     return (Math.round(value * roundFactor)) / roundFactor;
 }
 
-export function roundToNextValue(chartMaxValue: number) {
+/**
+ * Rounds any given value to the next sensible round or half-round value. Between a range of 10 and 100, everything
+ * below 30 will be rounded to the next odden number, everthing above 30 to the next 5-round number.
+ * @param value The value to round
+ *
+ * Examples:
+ * 22.5 -> 24
+ * 61.3 -> 65
+ *
+ * 0.00232 -> 0.024
+ * 1226 -> 1400
+ */
+export function roundToNextValue(value: number): number {
+    const multiplier = 10000000000
+    const nextEvenNumber = (number) => 2 * Math.ceil(number / 2)
+    const nextNumberFive = (number) => 5 * Math.ceil(number / 5)
 
-    const roundUp = (value: number, multiple: number) => {
-        const remainder = value % multiple
-        if (remainder === 0) {
-            return value
-        } else {
-            return value + multiple - remainder
-        }
-    }
+    // Multiply vylue with a high value to prevent logarithmiting illegal values below 1
+    const ordinaryValue = value * multiplier
+    const numberOfDigits = Math.ceil(Math.log10(ordinaryValue))
+    const standardValue = (ordinaryValue / Math.pow(10, numberOfDigits)) * 100
 
-    let multiple
-    if (chartMaxValue < 0.2) {
-        multiple = 0.1
-    } else if (chartMaxValue < 0.5) {
-        multiple = 0.2
-    } else if (chartMaxValue < 1) {
-        multiple = 0.5
-    } else if (chartMaxValue < 2) {
-        multiple = 1
-    } else if (chartMaxValue < 5) {
-        multiple = 2
-    } else if (chartMaxValue < 10) {
-        multiple = 5
-    } else if (chartMaxValue < 20) {
-        multiple = 10
-    } else if (chartMaxValue < 50) {
-        multiple = 20
-    } else if (chartMaxValue < 100) {
-        multiple = 50
-    } else if (chartMaxValue < 200) {
-        multiple = 100
-    } else if (chartMaxValue < 500) {
-        multiple = 200
-    } else if (chartMaxValue < 1000) {
-        multiple = 500
-    } else if (chartMaxValue < 2000) {
-        multiple = 1000
-    } else if (chartMaxValue < 5000) {
-        multiple = 2000
-    } else if (chartMaxValue < 10000) {
-        multiple = 5000
-    } else if (chartMaxValue < 20000) {
-        multiple = 10000
-    } else if (chartMaxValue < 50000) {
-        multiple = 20000
-    } else if (chartMaxValue < 100000) {
-        multiple = 50000
-    } else if (chartMaxValue < 200000) {
-        multiple = 100000
-    } else {
-        multiple = 200000
-    }
-
-    // Add 1 % buffer to the maximum value
-    chartMaxValue = chartMaxValue * 1.01
-
-    return round(roundUp(chartMaxValue, multiple),2)
+    const nextRoundValue = standardValue < 30 ? nextEvenNumber(standardValue) : nextNumberFive(standardValue)
+    return nextRoundValue / Math.pow(10, 12-numberOfDigits)
 }
-
 
 /**
  * Returns a number of fixed length with leading zeros.

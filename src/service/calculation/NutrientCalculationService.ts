@@ -1,5 +1,6 @@
 import {determineFoodRequirementRatio, determineProteinRequirementRatio} from "./DietaryRequirementService";
 import {UserData} from "../../types/livedata/UserData";
+import {MineralData, VitaminData} from "../../types/nutrientdata/FoodItem";
 
 /**
  * Determines the maximum vitamin or mineral or protein value of a food item (referring to the daily dietary requirements).
@@ -19,27 +20,36 @@ export function getMaximumValue(dataSet: any, amount: number, requirementData: a
     return maxValue
 }
 
+
 /**
- * Given two data sets of vitamins, minerals or proteins, this method nullifies each value if it does not occur in
- * both data sets. This can be used as part of the synchronization process where two bar charts should contain the
- * exact same amount of columns.
+ * Given two data sets of values, this method determines the attributes that has values for both objects. It
+ * can be used to remove all data attributes (columns) where at least one of the two data sets does not provide
+ * a value.
+ * @param dataSet1
+ * @param dataSet2
  */
-export function nullifyIncompleValues(dataSet1: any, dataSet2: any) {
-    for (let dataSetKey in dataSet1) {
+export function getOverlappingValues(dataSet1: any, dataSet2: any): string[] {
+    const overlapping: string[] = []
+    for (const dataSetKey in dataSet1) {
         const value = dataSet1[dataSetKey]
-        if(value === null && dataSet2[dataSetKey]) {
-            dataSet2[dataSetKey] = null
-        } else if(value !== null && (dataSet2[dataSetKey] === null || dataSet2[dataSetKey] === undefined)) {
-            dataSet1[dataSetKey] = null
+        if((value !== null && value !== undefined) && (dataSet2[dataSetKey] !== null && dataSet2[dataSetKey] !== undefined)) {
+            overlapping.push(dataSetKey)
         }
     }
 
-    for (let dataSetKey in dataSet2) {
-        const value = dataSet2[dataSetKey]
-        if(value === null && dataSet2[dataSetKey]) {
-            dataSet2[dataSetKey] = null
-        } else if(value !== null && (dataSet1[dataSetKey] === null || dataSet1[dataSetKey] === undefined)) {
-            dataSet2[dataSetKey] = null
+    return overlapping
+}
+
+
+export function nullifyNonOverlappingValues(dataSet: any, overlappingAttributes: string[]): any {
+    const newDataset: any = {}
+    for (const dataSetKey in dataSet) {
+        if(!overlappingAttributes.includes(dataSetKey)) {
+            newDataset[dataSetKey] = null
+        } else {
+            newDataset[dataSetKey] = dataSet[dataSetKey]
         }
     }
+
+    return newDataset
 }

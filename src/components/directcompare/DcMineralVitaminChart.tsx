@@ -4,7 +4,11 @@ import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {BarChartConfigurationForm} from "../charthelper/BarChartConfigurationForm";
 import {roundToNextValue} from "../../service/calculation/MathService";
-import {getMaximumValue, nullifyIncompleValues} from "../../service/calculation/NutrientCalculationService";
+import {
+    getMaximumValue,
+    getOverlappingValues,
+    nullifyNonOverlappingValues
+} from "../../service/calculation/NutrientCalculationService";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {Card} from "react-bootstrap";
@@ -111,8 +115,16 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const nutrientData1 = getNutrientData(props.selectedFoodItem1)
     const nutrientData2 = getNutrientData(props.selectedFoodItem2)
 
-    const dataSet1 = props.selectedSubChart === CHART_VITAMINS ? nutrientData1.vitaminData : nutrientData1.mineralData
-    const dataSet2 = props.selectedSubChart === CHART_VITAMINS ? nutrientData2.vitaminData : nutrientData2.mineralData
+    let dataSet1 = props.selectedSubChart === CHART_VITAMINS ? nutrientData1.vitaminData : nutrientData1.mineralData
+    let dataSet2 = props.selectedSubChart === CHART_VITAMINS ? nutrientData2.vitaminData : nutrientData2.mineralData
+
+    const synchronize = props.selectedSubChart === CHART_VITAMINS ? synchronizeVitamins : synchronizeMinerals
+
+    if (synchronize) {
+        const overlappingAttributes = getOverlappingValues(dataSet1, dataSet2)
+        dataSet1 = nullifyNonOverlappingValues(dataSet1, overlappingAttributes)
+        dataSet2 = nullifyNonOverlappingValues(dataSet2, overlappingAttributes)
+    }
 
     const portion1 = portionType === AMOUNT_PORTION ? props.selectedFoodItem1.portion.amount : 100
     const portion2 = portionType === AMOUNT_PORTION ? props.selectedFoodItem2.portion.amount : 100
@@ -120,12 +132,6 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const maxValue1 = getMaximumValue(dataSet1, portion1, requirementData, applicationContext.userData)
     const maxValue2 = getMaximumValue(dataSet2, portion2, requirementData, applicationContext.userData)
     const maxValue = Math.max(maxValue1, maxValue2)
-
-    const synchronize = props.selectedSubChart === CHART_VITAMINS ? synchronizeVitamins : synchronizeMinerals
-
-    if (synchronize) {
-        nullifyIncompleValues(dataSet1, dataSet2)
-    }
 
     const maxY = synchronize
         ? roundToNextValue(maxValue) : undefined
@@ -149,12 +155,15 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const preconfigFoodItem1 = {...preconfig, barChartColor: direct_compare_color1}
     const preconfigFoodItem2 = {...preconfig, barChartColor: direct_compare_color2}
 
+    console.log('ABC:', dataSet1, dataSet2)
+
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
                 <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem1}
+                                     precalculatedData={dataSet1}
                                      directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
             </div>
         </Card>
@@ -164,6 +173,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
                 <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem2}
+                                     precalculatedData={dataSet2}
                                      directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>
             </div>
         </Card>
