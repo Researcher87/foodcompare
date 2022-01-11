@@ -31,11 +31,10 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
 
-    let windowSize
+    let windowSize = useWindowDimension()
 
     useEffect(() => {
         ReactTooltip.rebuild()
-        windowSize = useWindowDimension()
     })
     
     ReactTooltip.rebuild()
