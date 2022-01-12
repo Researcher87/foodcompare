@@ -54,6 +54,15 @@ export interface VitaminData {
 	d: number | null
 	e: number | null
 	k: number | null
+	carotenoidData: CarotenoidData | null
+}
+
+export interface CarotenoidData {
+	caroteneAlpha: number | null
+	caroteneBeta: number | null
+	cryptoxanthin: number | null
+	lycopene: number | null
+	lutein: number | null
 }
 
 export interface MineralData {

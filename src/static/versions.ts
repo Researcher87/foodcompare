@@ -211,4 +211,20 @@ export const versions = [
             "Some occasional display problems in the energy chart have been solved.",
             "The calculation of the carbs remainder was corrected."]
     },
+    {
+        id: "1.5",
+        date: "11-01-2022",
+        subject: "Layout Change",
+        features: [
+            "Some layouts have been improved to fit better on small deviced and mobile devices.",
+            "The energy chart page also shows the energy data next to the chart now."
+        ],
+        updates: [
+            "The synchronization of charts in the direct comparison view has been improved. The charts will only display data that is available in both selected foods. This leads to a clearer layout (data columns of the two foods appear in one line now).",
+        ],
+        bugfixes: [
+            "Some typos have been fixed.",
+            "Code smells have been removed.",
+            ]
+    },
 ]

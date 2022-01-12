@@ -100,6 +100,14 @@ const vitaminDataReplacement: Array<Replacemet> = [
 	{key: "k", short: "_vL"}
 ]
 
+const carotenoidDataReplacement: Array<Replacemet> = [
+	{key: "caroteneAlpha", short: "_xA"},
+	{key: "caroteneBeta", short: "_xB"},
+	{key: "cryptoxanthin", short: "_xC"},
+	{key: "lycopene", short: "_xD"},
+	{key: "lutein", short: "_xE"},
+]
+
 const proteinDataReplacement: Array<Replacemet> = [
 	{key: "tryptophan", short: "_bA"},
 	{key: "threonine", short: "_bB"},
@@ -127,6 +135,7 @@ const replacements: Array<Array<Replacemet>> = [
 	lipidsDataReplacements,
 	mineralDataReplacement,
 	vitaminDataReplacement,
+	carotenoidDataReplacement,
 	proteinDataReplacement
 ]
 

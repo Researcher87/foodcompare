@@ -3,6 +3,7 @@ import {applicationStrings} from "../static/labels";
 import {FoodTableDataObject} from "../types/livedata/SelectedFoodItemData";
 import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
+import {getTotalAmountOfCarotenoids} from "./calculation/CarotenoidCalculationService";
 
 export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
@@ -89,6 +90,38 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
             nutrientData.vitaminData.a,
             portion, "mg")
         );
+    }
+
+    const {carotenoidData} = nutrientData.vitaminData
+
+    if(carotenoidData != null) {
+        const totalCaretoneoid = getTotalAmountOfCarotenoids(carotenoidData)
+
+        if(totalCaretoneoid !== null) {
+            tableData.push(createTableObject(
+                applicationStrings.label_nutrient_vit_carotenoid[language],
+                totalCaretoneoid,
+                portion, "mg")
+            );
+
+            if(carotenoidData.caroteneAlpha !== null) {
+                tableData.push(createTableObject(
+                    applicationStrings.label_nutrient_vit_carotenoid_alpha[language],
+                    carotenoidData.caroteneAlpha,
+                    portion, "mg")
+                );
+            }
+
+            if(carotenoidData.caroteneBeta !== null) {
+                tableData.push(createTableObject(
+                    applicationStrings.label_nutrient_vit_carotenoid_beta[language],
+                    carotenoidData.caroteneBeta,
+                    portion, "mg")
+                );
+            }
+
+        }
+
     }
 
     if(nutrientData.vitaminData.b1 != null) {
