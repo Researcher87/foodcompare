@@ -1,7 +1,7 @@
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodItem, {
     BaseData,
-    CarbohydrateData,
+    CarbohydrateData, CarotenoidData,
     LipidData,
     MineralData,
     NutrientData,
@@ -423,6 +423,38 @@ function buildVitaminDataObject(compositeList: Array<SelectedFoodItem>, portionS
         d: createFinalValue(d, portionSize),
         e: createFinalValue(e, portionSize),
         k: createFinalValue(k, portionSize),
+        carotenoidData: buildCarotenoidDataObject(compositeList, portionSize, preferredSource)
+    }
+}
+
+
+function buildCarotenoidDataObject(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): CarotenoidData {
+    let alpha = 0
+    let beta = 0
+    let cryptoxanthin = 0
+    let lycopene = 0
+    let lutein = 0
+
+    compositeList.forEach(selectedFoodItem => {
+        const carotenoidData = getNutrientData(selectedFoodItem).vitaminData.carotenoidData
+        const userSetPortion = selectedFoodItem.portion.amount
+        const portionFactor = userSetPortion / 100
+
+        if(carotenoidData !== null) {
+            alpha += (carotenoidData.caroteneAlpha ? carotenoidData.caroteneAlpha : 0) * portionFactor
+            beta += (carotenoidData.caroteneBeta ? carotenoidData.caroteneBeta : 0) * portionFactor
+            cryptoxanthin += (carotenoidData.cryptoxanthin ? carotenoidData.cryptoxanthin : 0) * portionFactor
+            lycopene += (carotenoidData.lycopene ? carotenoidData.lycopene : 0) * portionFactor
+            lutein += (carotenoidData.lutein ? carotenoidData.lutein : 0) * portionFactor
+        }
+    })
+
+    return {
+        caroteneAlpha: createFinalValue(alpha, portionSize),
+        caroteneBeta: createFinalValue(beta, portionSize),
+        cryptoxanthin: createFinalValue(cryptoxanthin, portionSize),
+        lycopene: createFinalValue(lycopene, portionSize),
+        lutein: createFinalValue(lutein, portionSize)
     }
 }
 

@@ -51,7 +51,14 @@ export function makeDefaultVitaminData(): VitaminData {
         c: 50,
         d: 0.002,
         e: null,
-        k: 0
+        k: 0,
+        carotenoidData: {
+            caroteneAlpha: 0.5,
+            caroteneBeta: 12,
+            cryptoxanthin: 10,
+            lycopene: 0,
+            lutein: null
+        }
     }
 
 }

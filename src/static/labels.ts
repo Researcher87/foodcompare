@@ -600,8 +600,8 @@ export const applicationStrings = {
         en: 'Vitamins'
     },
     label_nutrient_vit_a: {
-        de: 'Vitamin A (Retinol, Retinal, ...)',
-        en: 'Vitamin A (Retinol, Retinal, ...)'
+        de: 'Vitamin A (Retinol / Retinal)',
+        en: 'Vitamin A (Retinol / Retinal)'
     },
     label_nutrient_vit_b1: {
         de: 'Vitamin B1 (Thiamin)',
@@ -646,6 +646,22 @@ export const applicationStrings = {
     label_nutrient_vit_k: {
         de: 'Vitamin K',
         en: 'Vitamin K'
+    },
+    label_nutrient_vit_carotenoid: {
+        de: 'Provitamin A (Carotine)',
+        en: 'Carotene (total)'
+    },
+    label_nutrient_vit_carotenoid_alpha: {
+        de: '... davon Alpha-Carotin',
+        en: '... hereof Alpha-Carotene'
+    },
+    label_nutrient_vit_carotenoid_beta: {
+        de: '... davon Beta-Carotin',
+        en: '... hereof Beta-Carotene'
+    },
+    label_nutrient_vit_scientific_a: {
+        de: 'inkl. Provitamin A / Carotine',
+        en: 'incl. caraotene'
     },
     label_nutrient_vit_scientific_b1: {
         de: 'Thiamine',
