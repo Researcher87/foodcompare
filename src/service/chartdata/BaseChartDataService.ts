@@ -3,8 +3,9 @@ import {autoRound} from "../calculation/MathService";
 import {applicationStrings} from "../../static/labels";
 import * as ChartConfig from "../../config/ChartConfig";
 import {ChartDisplayData, LegendData} from "../../types/livedata/ChartDisplayData";
+import {CATEGORY_BEVERAGE} from "../../config/Constants";
 
-export function getTotalChartData(nutrientData: NutrientData, language: string): ChartDisplayData {
+export function getTotalChartData(nutrientData: NutrientData, language: string, category: number | undefined): ChartDisplayData {
     const alcoholValuePerc = nutrientData.baseData.alcohol !== null
         ? autoRound(nutrientData.baseData.alcohol)
         : null
@@ -30,10 +31,10 @@ export function getTotalChartData(nutrientData: NutrientData, language: string):
         ChartConfig.color_ash,
     ]
 
-    if(alcoholValuePerc !== null) {
+    if(alcoholValuePerc !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
         data.push(alcoholValuePerc)
         labels.push(applicationStrings.label_nutrient_alcohol[language])
-        colors.push(ChartConfig.color_turquoise)
+        colors.push(ChartConfig.color_alcohol)
     }
 
     return {
@@ -44,7 +45,8 @@ export function getTotalChartData(nutrientData: NutrientData, language: string):
 }
 
 
-export function getNutrientChartData(nutrientData: NutrientData, language: string, showDetails: boolean): ChartDisplayData {
+export function getNutrientChartData(nutrientData: NutrientData, language: string, showDetails: boolean,
+                                     category: number | undefined): ChartDisplayData {
     const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids + nutrientData.baseData.proteins;
 
     const sugar = nutrientData.carbohydrateData?.sugar ? nutrientData.carbohydrateData.sugar : 0
@@ -70,14 +72,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         applicationStrings.label_nutrient_proteins[language],
         applicationStrings.label_nutrient_carbohydrates_short[language]]
 
-    if (alcoholValuePerc !== null) {
-        labels.push(applicationStrings.label_nutrient_alcohol[language])
-    }
-
     const values = [lipidValuePerc, proteinsValuePerc, carbValuePerc];
-    if (alcoholValuePerc !== null) {
-        values.push(alcoholValuePerc)
-    }
 
     const colors = [
         ChartConfig.color_lipids,
@@ -85,7 +80,11 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         ChartConfig.color_carbs
     ];
 
-    if (alcoholValuePerc !== null) {
+    console.log('Alcohol', category)
+
+    if (alcoholValuePerc !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
+        labels.push(applicationStrings.label_nutrient_alcohol[language])
+        values.push(alcoholValuePerc)
         colors.push(ChartConfig.color_alcohol)
     }
 
@@ -109,7 +108,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
     }
 }
 
-export function getBaseChartLegendData(lang: string, showDetails: boolean): LegendData[] {
+export function getBaseChartLegendData(lang: string, showDetails: boolean, category: number | undefined): LegendData[] {
     const legendData: LegendData[] = [
         {
             item: applicationStrings.label_nutrient_water[lang],
@@ -127,12 +126,15 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean): Lege
         {
             item: applicationStrings.label_nutrient_carbohydrates_short[lang],
             color: ChartConfig.color_carbs,
-        },
-        {
-            item: applicationStrings.label_nutrient_alcohol[lang],
-            color: ChartConfig.color_alcohol,
         }
     ];
+
+    if(category === CATEGORY_BEVERAGE || category === undefined) {
+        legendData.push({
+            item: applicationStrings.label_nutrient_alcohol[lang],
+            color: ChartConfig.color_alcohol,
+        })
+    }
 
     if (showDetails) {
         legendData.push(

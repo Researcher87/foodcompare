@@ -7,6 +7,8 @@ export const CHART_TYPE_BAR = "bar chart"
 export const CHART_VITAMINS = "chart vitamins"
 export const CHART_MINERALS = "chart minerals"
 
+export const CATEGORY_BEVERAGE = 10
+
 export const DATA_ASH = "d_ash";
 export const DATA_ENERGY = "d_energy";
 export const DATA_WATER = "d_water";

@@ -20,23 +20,46 @@ export function FoodDataTable(props: FoodDataTableProps) {
         applicationContext?.setFoodDataPanelData.setSelectedDisplayMode(DISPLAYMODE_CHART)
     }
 
-    return (
-        <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
-            <div>
-                {dataExists &&
-                <BootstrapTable className="table-sm" data={props.tableData} striped hover>
-                    <TableHeaderColumn isKey dataField='label'>Element</TableHeaderColumn>
-                    <TableHeaderColumn dataField='value_100g'>per 100 g</TableHeaderColumn>
-                    <TableHeaderColumn dataField='value_portion'>per Portion</TableHeaderColumn>
-                </BootstrapTable>
+    const formatDataCell = (cell, row) => {
+        if (!cell.includes("&&")) {
+            return cell
+        }
+
+        const firstLineStype = {paddingBottom: "6px", display: 'block'}
+        const indentStyle = {paddingLeft: "8px"}
+
+        return <div>{cell.split("&&").map((element, index) => (<div>
+                {index > 0 ?
+                    <span style={indentStyle}>
+                    {element}
+                </span>
+                    :
+                    <span style={firstLineStype}>
+                    {element}
+                </span>
                 }
-                {!dataExists &&
-                <div className="text-center">{applicationStrings.label_noData[language.language]}</div>
-                }
-            </div>
-            <div style={{paddingTop: "25px"}}>
-                <button className={"btn btn-link"} onClick={changeToChartMode}>Zur Diagrammansicht wechseln</button>
-            </div>
+            </div>)
+        )}</div>
+    }
+
+return (
+    <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
+        <div>
+            {dataExists &&
+            <BootstrapTable className="table-sm" data={props.tableData} striped hover>
+                <TableHeaderColumn isKey dataField='label' dataFormat={formatDataCell}>Element</TableHeaderColumn>
+                <TableHeaderColumn dataField='value_100g' dataFormat={formatDataCell}>per 100 g</TableHeaderColumn>
+                <TableHeaderColumn dataField='value_portion' dataFormat={formatDataCell}>per
+                    Portion</TableHeaderColumn>
+            </BootstrapTable>
+            }
+            {!dataExists &&
+            <div className="text-center">{applicationStrings.label_noData[language.language]}</div>
+            }
         </div>
-    );
+        <div style={{paddingTop: "25px"}}>
+            <button className={"btn btn-link"} onClick={changeToChartMode}>Zur Diagrammansicht wechseln</button>
+        </div>
+    </div>
+);
 }

@@ -4,14 +4,23 @@ import {FoodTableDataObject} from "../types/livedata/SelectedFoodItemData";
 import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {getTotalAmountOfCarotenoids} from "./calculation/CarotenoidCalculationService";
+import {CATEGORY_BEVERAGE} from "../config/Constants";
 
 export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
 
-    const {water, carbohydrates, lipids, proteins, dietaryFibers, ash, alcohol} = getNutrientData(selectedFoodItem).baseData
-    const {sugar}  = getNutrientData(selectedFoodItem).carbohydrateData
+    const {
+        water,
+        carbohydrates,
+        lipids,
+        proteins,
+        dietaryFibers,
+        ash,
+        alcohol
+    } = getNutrientData(selectedFoodItem).baseData
+    const {sugar} = getNutrientData(selectedFoodItem).carbohydrateData
 
-    if(water) {
+    if (water !== null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_water[language],
             water,
@@ -19,31 +28,12 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
         );
     }
 
-    if(carbohydrates) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_carbohydrates[language],
-            carbohydrates,
-            portion, "g")
-        );
+    if (carbohydrates  !== null) {
+        const carbObject = makeCarbsTableObject(carbohydrates, sugar, dietaryFibers, portion, language)
+        tableData.push(carbObject)
     }
 
-    if(sugar) {
-        tableData.push(createTableObject(
-            ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_sugar[language]}`,
-            sugar,
-            portion, "g")
-        );
-    }
-
-    if(dietaryFibers) {
-        tableData.push(createTableObject(
-            ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_dietaryFibers[language]}`,
-            dietaryFibers,
-            portion, "g")
-        );
-    }
-
-    if(lipids) {
+    if (lipids !== null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids[language],
             lipids,
@@ -51,7 +41,7 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
         );
     }
 
-    if(proteins) {
+    if (proteins !== null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins[language],
             proteins,
@@ -59,7 +49,8 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
         );
     }
 
-    if(alcohol) {
+    // We display alcohol content only if the food class is beverage or unknown
+    if (alcohol !== null && (selectedFoodItem.foodClass?.category === CATEGORY_BEVERAGE || selectedFoodItem.foodClass === null)) {
         tableData.push(createTableObjectAlcohol(
             applicationStrings.label_nutrient_alcohol[language],
             alcohol,
@@ -67,7 +58,7 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
         );
     }
 
-    if(ash) {
+    if (ash !== null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_ash[language],
             ash,
@@ -79,12 +70,11 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
 }
 
 
-
 export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
-    let tableData: Array<FoodTableDataObject>  = [];
+    let tableData: Array<FoodTableDataObject> = [];
     const nutrientData = getNutrientData(foodItem)
-    
-    if(nutrientData.vitaminData.a != null) {
+
+    if (nutrientData.vitaminData.a != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_a[language],
             nutrientData.vitaminData.a,
@@ -94,37 +84,30 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
 
     const {carotenoidData} = nutrientData.vitaminData
 
-    if(carotenoidData != null) {
-        const totalCaretoneoid = getTotalAmountOfCarotenoids(carotenoidData)
+    if (carotenoidData != null) {
+        const totalCarotenoid = getTotalAmountOfCarotenoids(carotenoidData)
 
-        if(totalCaretoneoid !== null) {
-            tableData.push(createTableObject(
+        if (totalCarotenoid !== null) {
+            let carotenoidTableObject = createTableObject(
                 applicationStrings.label_nutrient_vit_carotenoid[language],
-                totalCaretoneoid,
+                totalCarotenoid,
                 portion, "mg")
-            );
 
-            if(carotenoidData.caroteneAlpha !== null) {
-                tableData.push(createTableObject(
-                    applicationStrings.label_nutrient_vit_carotenoid_alpha[language],
-                    carotenoidData.caroteneAlpha,
-                    portion, "mg")
-                );
+            if (carotenoidData.caroteneAlpha !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_carotenoid_alpha[language]}`
+                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneAlpha, portion, "g")
             }
 
-            if(carotenoidData.caroteneBeta !== null) {
-                tableData.push(createTableObject(
-                    applicationStrings.label_nutrient_vit_carotenoid_beta[language],
-                    carotenoidData.caroteneBeta,
-                    portion, "mg")
-                );
+            if (carotenoidData.caroteneBeta !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_carotenoid_beta[language]}`
+                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneBeta, portion, "g")
             }
 
+            tableData.push(carotenoidTableObject)
         }
-
     }
 
-    if(nutrientData.vitaminData.b1 != null) {
+    if (nutrientData.vitaminData.b1 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b1[language],
             nutrientData.vitaminData.b1,
@@ -132,7 +115,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.b2 != null) {
+    if (nutrientData.vitaminData.b2 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b2[language],
             nutrientData.vitaminData.b2,
@@ -140,7 +123,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.b3 != null) {
+    if (nutrientData.vitaminData.b3 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b3[language],
             nutrientData.vitaminData.b3,
@@ -148,7 +131,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.b5 != null) {
+    if (nutrientData.vitaminData.b5 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b5[language],
             nutrientData.vitaminData.b5,
@@ -156,7 +139,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.b6 != null) {
+    if (nutrientData.vitaminData.b6 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b6[language],
             nutrientData.vitaminData.b6,
@@ -164,7 +147,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.b9 != null) {
+    if (nutrientData.vitaminData.b9 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b9[language],
             nutrientData.vitaminData.b9,
@@ -172,7 +155,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.b12 != null) {
+    if (nutrientData.vitaminData.b12 != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_b12[language],
             nutrientData.vitaminData.b12,
@@ -180,7 +163,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.c != null) {
+    if (nutrientData.vitaminData.c != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_c[language],
             nutrientData.vitaminData.c,
@@ -188,7 +171,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.d != null) {
+    if (nutrientData.vitaminData.d != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_d[language],
             nutrientData.vitaminData.d,
@@ -196,7 +179,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.e != null) {
+    if (nutrientData.vitaminData.e != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_e[language],
             nutrientData.vitaminData.e,
@@ -204,7 +187,7 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(nutrientData.vitaminData.k != null) {
+    if (nutrientData.vitaminData.k != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_vit_k[language],
             nutrientData.vitaminData.k,
@@ -217,11 +200,11 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
 
 
 export function createMineralTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
-    let tableData: Array<FoodTableDataObject>  = [];
+    let tableData: Array<FoodTableDataObject> = [];
 
     const firstNutrientData = getNutrientData(foodItem);
 
-    if(firstNutrientData.mineralData.calcium != null) {
+    if (firstNutrientData.mineralData.calcium != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_calcium[language],
             firstNutrientData.mineralData.calcium,
@@ -229,7 +212,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.iron != null) {
+    if (firstNutrientData.mineralData.iron != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_iron[language],
             firstNutrientData.mineralData.iron,
@@ -237,7 +220,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.magnesium != null) {
+    if (firstNutrientData.mineralData.magnesium != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_magnesium[language],
             firstNutrientData.mineralData.magnesium,
@@ -245,7 +228,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.phosphorus != null) {
+    if (firstNutrientData.mineralData.phosphorus != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_phosphorus[language],
             firstNutrientData.mineralData.phosphorus,
@@ -253,7 +236,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.potassium != null) {
+    if (firstNutrientData.mineralData.potassium != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_potassimum[language],
             firstNutrientData.mineralData.potassium,
@@ -261,7 +244,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.sodium != null) {
+    if (firstNutrientData.mineralData.sodium != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_sodium[language],
             firstNutrientData.mineralData.sodium,
@@ -269,7 +252,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.zinc != null) {
+    if (firstNutrientData.mineralData.zinc != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_zinc[language],
             firstNutrientData.mineralData.zinc,
@@ -277,7 +260,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.copper != null) {
+    if (firstNutrientData.mineralData.copper != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_copper[language],
             firstNutrientData.mineralData.copper,
@@ -285,7 +268,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.manganese != null) {
+    if (firstNutrientData.mineralData.manganese != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_manganese[language],
             firstNutrientData.mineralData.manganese,
@@ -293,7 +276,7 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(firstNutrientData.mineralData.selenium != null) {
+    if (firstNutrientData.mineralData.selenium != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_min_selenium[language],
             firstNutrientData.mineralData.selenium,
@@ -306,10 +289,10 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
 
 
 export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
-    let tableData: Array<FoodTableDataObject>  = [];
+    let tableData: Array<FoodTableDataObject> = [];
     const firstNutrientData = getNutrientData(foodItem);
 
-    if(firstNutrientData.lipidData.saturated != null) {
+    if (firstNutrientData.lipidData.saturated != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_saturated[language],
             firstNutrientData.lipidData.saturated,
@@ -317,7 +300,7 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
         );
     }
 
-    if(firstNutrientData.lipidData.unsaturatedMono != null) {
+    if (firstNutrientData.lipidData.unsaturatedMono != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_unsaturated_mono[language],
             firstNutrientData.lipidData.unsaturatedMono,
@@ -325,7 +308,7 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
         );
     }
 
-    if(firstNutrientData.lipidData.unsaturatedPoly != null) {
+    if (firstNutrientData.lipidData.unsaturatedPoly != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_unsaturated_poly[language],
             firstNutrientData.lipidData.unsaturatedPoly,
@@ -333,8 +316,8 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
         );
     }
 
-    if(firstNutrientData.lipidData.omegaData) {
-        if(firstNutrientData.lipidData.omegaData.omega3 != null) {
+    if (firstNutrientData.lipidData.omegaData) {
+        if (firstNutrientData.lipidData.omegaData.omega3 != null) {
             tableData.push(createTableObject(
                 `${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega3[language]}`,
                 firstNutrientData.lipidData.omegaData.omega3,
@@ -342,7 +325,7 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
             );
         }
 
-        if(firstNutrientData.lipidData.omegaData.omega6 != null) {
+        if (firstNutrientData.lipidData.omegaData.omega6 != null) {
             tableData.push(createTableObject(
                 `${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega6[language]}`,
                 firstNutrientData.lipidData.omegaData.omega6,
@@ -351,7 +334,7 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
         }
     }
 
-    if(firstNutrientData.lipidData.transFattyAcids != null) {
+    if (firstNutrientData.lipidData.transFattyAcids != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_transfattyAcids[language],
             firstNutrientData.lipidData.transFattyAcids,
@@ -359,7 +342,7 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
         );
     }
 
-    if(firstNutrientData.lipidData.cholesterol != null) {
+    if (firstNutrientData.lipidData.cholesterol != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_cholesterol[language],
             firstNutrientData.lipidData.cholesterol,
@@ -372,7 +355,7 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
 
 
 export function createEnergyTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
-    let tableData: Array<FoodTableDataObject>  = [];
+    let tableData: Array<FoodTableDataObject> = [];
 
     const nutrientData = getNutrientData(foodItem)
     const energy = nutrientData.baseData.energy !== null ? nutrientData.baseData.energy : 0;
@@ -393,35 +376,19 @@ export function createEnergyTable(foodItem: SelectedFoodItem, portion: number, l
 }
 
 
-
 export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
-    let tableData: Array<FoodTableDataObject>  = [];
+    let tableData: Array<FoodTableDataObject> = [];
 
     const firstNutrientData = getNutrientData(foodItem);
+    const {carbohydrates, dietaryFibers} = firstNutrientData.baseData
+    const {sugar} = firstNutrientData.carbohydrateData
 
-    tableData.push(createTableObject(
-        applicationStrings.label_nutrient_carbohydrates[language],
-        firstNutrientData.baseData.carbohydrates,
-        portion, "g")
-    );
-
-    if(firstNutrientData.carbohydrateData.sugar != null) {
-        tableData.push(createTableObject(
-            ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_sugar[language]}`,
-            firstNutrientData.carbohydrateData.sugar,
-            portion, "g")
-        );
+    if (carbohydrates) {
+        const carbObject = makeCarbsTableObject(carbohydrates, sugar, dietaryFibers, portion, language)
+        tableData.push(carbObject)
     }
 
-    if(firstNutrientData.baseData.dietaryFibers != null) {
-        tableData.push(createTableObject(
-            ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_dietaryFibers[language]}`,
-            firstNutrientData.baseData.dietaryFibers,
-            portion, "g")
-        );
-    }
-
-    if(firstNutrientData.carbohydrateData.glucose != null) {
+    if (firstNutrientData.carbohydrateData.glucose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_glucose[language],
             firstNutrientData.carbohydrateData.glucose,
@@ -429,7 +396,7 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
         );
     }
 
-    if(firstNutrientData.carbohydrateData.fructose != null) {
+    if (firstNutrientData.carbohydrateData.fructose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_fructose[language],
             firstNutrientData.carbohydrateData.fructose,
@@ -437,7 +404,7 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
         );
     }
 
-    if(firstNutrientData.carbohydrateData.galactose != null) {
+    if (firstNutrientData.carbohydrateData.galactose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_galactose[language],
             firstNutrientData.carbohydrateData.galactose,
@@ -445,7 +412,7 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
         );
     }
 
-    if(firstNutrientData.carbohydrateData.sucrose != null) {
+    if (firstNutrientData.carbohydrateData.sucrose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_sucrose[language],
             firstNutrientData.carbohydrateData.sucrose,
@@ -453,7 +420,7 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
         );
     }
 
-    if(firstNutrientData.carbohydrateData.lactose != null) {
+    if (firstNutrientData.carbohydrateData.lactose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_lactose[language],
             firstNutrientData.carbohydrateData.lactose,
@@ -461,7 +428,7 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
         );
     }
 
-    if(firstNutrientData.carbohydrateData.maltose != null) {
+    if (firstNutrientData.carbohydrateData.maltose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_maltose[language],
             firstNutrientData.carbohydrateData.maltose,
@@ -469,7 +436,7 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
         );
     }
 
-    if(firstNutrientData.carbohydrateData.starch != null) {
+    if (firstNutrientData.carbohydrateData.starch != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_starch[language],
             firstNutrientData.carbohydrateData.starch,
@@ -481,16 +448,15 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
 }
 
 
-
 export function createProteinTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
-    let tableData: Array<FoodTableDataObject>  = [];
+    let tableData: Array<FoodTableDataObject> = [];
 
     const proteinData = getNutrientData(foodItem).proteinData;
-    if(!proteinData) {
+    if (!proteinData) {
         return tableData;
     }
 
-    if(proteinData.tryptophan != null) {
+    if (proteinData.tryptophan != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_tryptophan[language],
             proteinData.tryptophan,
@@ -498,7 +464,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.threonine != null) {
+    if (proteinData.threonine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_threonine[language],
             proteinData.threonine,
@@ -506,7 +472,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.isoleucine != null) {
+    if (proteinData.isoleucine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_isoleucine[language],
             proteinData.isoleucine,
@@ -514,7 +480,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.leucine != null) {
+    if (proteinData.leucine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_leucine[language],
             proteinData.leucine,
@@ -522,7 +488,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.lysine != null) {
+    if (proteinData.lysine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_lysine[language],
             proteinData.lysine,
@@ -530,7 +496,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.methionine != null) {
+    if (proteinData.methionine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_methionine[language],
             proteinData.methionine,
@@ -538,7 +504,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.cystine != null) {
+    if (proteinData.cystine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_cystine[language],
             proteinData.cystine,
@@ -546,7 +512,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.phenylalanine != null) {
+    if (proteinData.phenylalanine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_phenylalanine[language],
             proteinData.phenylalanine,
@@ -554,7 +520,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.tyrosine != null) {
+    if (proteinData.tyrosine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_tyrosine[language],
             proteinData.tyrosine,
@@ -562,7 +528,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.valine != null) {
+    if (proteinData.valine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_valine[language],
             proteinData.valine,
@@ -570,7 +536,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.arginine != null) {
+    if (proteinData.arginine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_arginine[language],
             proteinData.arginine,
@@ -578,7 +544,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.histidine != null) {
+    if (proteinData.histidine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_histidine[language],
             proteinData.histidine,
@@ -586,7 +552,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.alanine != null) {
+    if (proteinData.alanine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_alanine[language],
             proteinData.alanine,
@@ -594,7 +560,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.asparticAcid != null) {
+    if (proteinData.asparticAcid != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_asparticAcid[language],
             proteinData.asparticAcid,
@@ -602,7 +568,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.glutamicAcid != null) {
+    if (proteinData.glutamicAcid != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_glutamicAcid[language],
             proteinData.glutamicAcid,
@@ -610,7 +576,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.glycine != null) {
+    if (proteinData.glycine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_glysine[language],
             proteinData.glycine,
@@ -618,7 +584,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.proline != null) {
+    if (proteinData.proline != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_proline[language],
             proteinData.proline,
@@ -626,7 +592,7 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
         );
     }
 
-    if(proteinData.serine != null) {
+    if (proteinData.serine != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_proteins_serine[language],
             proteinData.serine,
@@ -649,7 +615,7 @@ function createTableObject(label: string, value_100g: number, portion: number, u
 
 function createTableObjectAlcohol(label: string, value_100g: number, portion: number, unit: String): FoodTableDataObject {
     const valuePortion = calculatePortionData(value_100g, portion);
-    if(valuePortion === null) {
+    if (valuePortion === null) {
         return {
             label: label,
             value_100g: "n/a",
@@ -669,10 +635,44 @@ function createTableObjectAlcohol(label: string, value_100g: number, portion: nu
 
 
 function calculatePortionData(value: number | null, portionSize: number): number | null {
-    if(value === null || value === undefined) {
+    if (value === null || value === undefined) {
         return null;
-    } else if(value === 0) {
+    } else if (value === 0) {
         return 0;
     }
     return (value / 100) * portionSize;
+}
+
+
+function makeCarbsTableObject(carbohydrates: number, sugar: number | null, dietaryFibers: number | null,
+                              portion: number, language: string): FoodTableDataObject {
+    let carbObject = createTableObject(
+        applicationStrings.label_nutrient_carbohydrates[language],
+        carbohydrates,
+        portion, "g")
+
+    if (sugar !== null) {
+        const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_sugar[language]}`
+        carbObject = appendTableDataObject(carbObject, language, label, sugar, portion, "g")
+    }
+
+    if (dietaryFibers !== null) {
+        const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_dietaryFibers[language]}`
+        carbObject = appendTableDataObject(carbObject, language, label, dietaryFibers, portion, "g")
+    }
+
+    return carbObject
+}
+
+
+function appendTableDataObject(object: FoodTableDataObject, language: string, label: string, value: number, portion: number, unit: string): FoodTableDataObject {
+    const appendedObject = {...object}
+
+    const extension = createTableObject(label, value, portion, unit)
+
+    appendedObject.label = appendedObject.label + '&&' + extension.label
+    appendedObject.value_100g = appendedObject.value_100g + '&&' + extension.value_100g
+    appendedObject.value_portion = appendedObject.value_portion + '&&' + extension.value_portion
+
+    return appendedObject
 }
