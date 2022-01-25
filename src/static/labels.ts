@@ -652,12 +652,12 @@ export const applicationStrings = {
         en: 'Carotene (total)'
     },
     label_nutrient_vit_carotenoid_alpha: {
-        de: '... davon Alpha-Carotin',
-        en: '... hereof Alpha-Carotene'
+        de: 'Alpha-Carotin',
+        en: 'Alpha-Carotene'
     },
     label_nutrient_vit_carotenoid_beta: {
-        de: '... davon Beta-Carotin',
-        en: '... hereof Beta-Carotene'
+        de: 'Beta-Carotin',
+        en: 'Beta-Carotene'
     },
     label_nutrient_vit_scientific_a: {
         de: 'inkl. Provitamin A / Carotine',
