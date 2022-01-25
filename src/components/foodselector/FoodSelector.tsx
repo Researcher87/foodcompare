@@ -24,11 +24,13 @@ import {correspondingSelectElementStyle, customSelectStyles} from "../../config/
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
+    updateFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, supplementData: boolean, combineData: boolean) => void
     smallVariant: boolean
     noCategorySelect?: boolean
     initialFoodClassToSet?: number
     selectedFoodItem?: SelectedFoodItem | null
     defaultFoodClass?: number
+    directCompareSelectorNumber?: number
 }
 
 /**
@@ -43,8 +45,21 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         ? applicationContext.applicationData.foodSelector.selectedCategory
         : null
 
-    const initialSupplementValue = applicationContext?.applicationData.foodSelector.sourceSupplement || false
-    const initialCombineValue = applicationContext?.applicationData.foodSelector.sourceCombine || false
+    const foodSelectorConfig = applicationContext?.applicationData.foodSelector
+    const directCompareSelectorConfig1 = applicationContext?.applicationData.directCompareDataPanel.foodSelector1
+    const directCompareSelectorConfig2 = applicationContext?.applicationData.directCompareDataPanel.foodSelector2
+
+    const initialSupplementValue = props.directCompareSelectorNumber === undefined
+        ? foodSelectorConfig?.sourceSupplement || false
+        : props.directCompareSelectorNumber === 1
+            ? directCompareSelectorConfig1?.sourceSupplement || false
+            : directCompareSelectorConfig2?.sourceSupplement || false
+
+    const initialCombineValue = props.directCompareSelectorNumber === undefined
+        ? foodSelectorConfig?.sourceCombine || false
+        : props.directCompareSelectorNumber === 1
+            ? directCompareSelectorConfig1?.sourceCombine || false
+            : directCompareSelectorConfig2?.sourceCombine || false
 
     const [selectedCategory, setSelectedCategory] = useState<ReactSelectOption | null>(initialCategory)
     const [selectdFoodClass, setSelectedFoodClass] = useState<ReactSelectFoodClassOption | null>(null)
@@ -65,13 +80,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const windowSize = useWindowDimension()
 
     const getInitialFoodClassNumber = (foodClassOptions: ReactSelectFoodClassOption[]): number => {
-        if(props.initialFoodClassToSet !== undefined && props.initialFoodClassToSet !== null) {
+        if (props.initialFoodClassToSet !== undefined && props.initialFoodClassToSet !== null) {
             return props.initialFoodClassToSet
         }
 
-        if(props.defaultFoodClass !== undefined) {
+        if (props.defaultFoodClass !== undefined) {
             const index = foodClassOptions.findIndex(foodClassOption => foodClassOption.value.id === props.defaultFoodClass)
-            if(index !== -1) {
+            if (index !== -1) {
                 return index
             }
         }
@@ -80,16 +95,6 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     useEffect(() => {
-            if (applicationContext) {
-                const currentSelectorSetting = applicationContext.applicationData.foodSelector
-                if (selectedCategory !== currentSelectorSetting.selectedCategory || supplementData !== currentSelectorSetting.sourceSupplement
-                    || combineData !== currentSelectorSetting.sourceCombine) {
-                    applicationContext.setFoodSelectorConfig(selectedCategory, supplementData, combineData)
-                }
-            }
-
-
-
             if (applicationContext && applicationContext.foodDataCorpus && categoriesList.length === 0) {
                 const foodDataCorpus = applicationContext.foodDataCorpus
 
@@ -104,8 +109,6 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     setFoodClassesList(foodClasses)
 
                     const initialFoodClass = getInitialFoodClassNumber(foodClasses)
-                    console.log('Initial:', initialFoodClass)
-
                     const foodClass = foodClasses[initialFoodClass]
                     setSelectedFoodClass(foodClass)
 
@@ -139,6 +142,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectdFoodClass.value, selectedPortion.value)
                     if (newFoodItem) {
                         props.updateSelectedFoodItem(newFoodItem)
+                        props.updateFoodSelectorConfig(selectedCategory, supplementData, combineData)
                     }
                 } else if (props.selectedFoodItem) {
                     const {foodItem, foodClass, portion} = props.selectedFoodItem
@@ -393,14 +397,14 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         return <div>
             <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
-                <div className={"d-flex row"}>
-                    <div className="col-4 column select-menu form-section">
-                        {sourceSelectBox}
-                    </div>
-                    <div className={"col-8"}>
-                        {checkboxes}
-                    </div>
+            <div className={"d-flex row"}>
+                <div className="col-4 column select-menu form-section">
+                    {sourceSelectBox}
                 </div>
+                <div className={"col-8"}>
+                    {checkboxes}
+                </div>
+            </div>
         </div>
 
     }
@@ -418,59 +422,59 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     return <div>
         <div className="container">
-                {props.noCategorySelect !== true &&
-                <div className={formClass}>
-                    <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
-                    <Select className={selectClass}
-                            options={categoriesList}
-                            value={selectedCategory ? selectedCategory : categoriesList[0]}
-                            onChange={(value) => handleCategoryChange(value)}
-                            styles={customSelectStyles}
-                    />
-                </div>
-                }
-                <div className={formClass}>
-                    <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
-                    <Select className={selectClass}
-                            options={foodClassesList}
-                            value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
-                            onChange={(value) => handleFoodClassChange(value)}
-                            styles={customSelectStyles}
-                    />
-                </div>
-                <div className={formClass}>
-                    <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
-                    <Select className={selectClass}
-                            options={foodItemsList}
-                            value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
-                            onChange={handleFoodItemChange}
-                            styles={customSelectStyles}
-                    />
-                </div>
-                <div className={formClass}>
-                    <div className={"row"}>
-                        <div className={"col-lg-8 col-xl-9"}>
+            {props.noCategorySelect !== true &&
+            <div className={formClass}>
+                <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
+                <Select className={selectClass}
+                        options={categoriesList}
+                        value={selectedCategory ? selectedCategory : categoriesList[0]}
+                        onChange={(value) => handleCategoryChange(value)}
+                        styles={customSelectStyles}
+                />
+            </div>
+            }
+            <div className={formClass}>
+                <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
+                <Select className={selectClass}
+                        options={foodClassesList}
+                        value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
+                        onChange={(value) => handleFoodClassChange(value)}
+                        styles={customSelectStyles}
+                />
+            </div>
+            <div className={formClass}>
+                <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
+                <Select className={selectClass}
+                        options={foodItemsList}
+                        value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
+                        onChange={handleFoodItemChange}
+                        styles={customSelectStyles}
+                />
+            </div>
+            <div className={formClass}>
+                <div className={"row"}>
+                    <div className={"col-lg-8 col-xl-9"}>
                         <span
                             className={'form-label'}>{applicationStrings.label_portion[language]}:</span>
-                            <Select className={selectClass}
-                                    options={portionsList}
-                                    styles={customSelectStyles}
-                                    value={selectedPortion ? selectedPortion : portionsList[0]}
-                                    onChange={(value) => handlePortionChange(value)}/>
-                        </div>
-                        <div className={"col-lg-4 col-xl-3"}>
+                        <Select className={selectClass}
+                                options={portionsList}
+                                styles={customSelectStyles}
+                                value={selectedPortion ? selectedPortion : portionsList[0]}
+                                onChange={(value) => handlePortionChange(value)}/>
+                    </div>
+                    <div className={"col-lg-4 col-xl-3"}>
                         <span
                             className={'form-label'}>{amount_label}</span>
-                            <input className={inputClass}
-                                   disabled={selectedPortion?.value.portionType !== 0}
-                                   value={portionAmount}
-                                   style={correspondingSelectElementStyle}
-                                   onChange={handlePortionAmountChange}
-                            />
-                        </div>
+                        <input className={inputClass}
+                               disabled={selectedPortion?.value.portionType !== 0}
+                               value={portionAmount}
+                               style={correspondingSelectElementStyle}
+                               onChange={handlePortionAmountChange}
+                        />
                     </div>
                 </div>
-                {renderSourceLine()}
+            </div>
+            {renderSourceLine()}
         </div>
     </div>
 

@@ -36,6 +36,8 @@ export interface ApplicationContext extends ApplicationDataContext {
     setPreferredSource: (string) => void
     setMobileUsage: (boolean) => void
     setFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => void
+    setDirectCompareFoodSelector1: (sourceSupplement: boolean, sourceCombine: boolean) => void
+    setDirectCompareFoodSelector2: (sourceSupplement: boolean, sourceCombine: boolean) => void
     setFoodDataPanelData: {
         setSelectedFoodTab: (number) => void
         setSelectedDataPage: (string) => void
@@ -52,6 +54,7 @@ export interface ApplicationContext extends ApplicationDataContext {
         setSelectedDirectCompareDataPage: (selectedPage: string) => void
     }
     setRankingPanelData: (RankingPanelData) => void
+
 }
 
 export const ApplicationDataContextStore = createContext<ApplicationContext | null>(null)
@@ -239,6 +242,36 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         ))
     }
 
+    setDirectCompareFoodSelectorConfig1 = (sourceSupplement: boolean, sourceCombine: boolean) => {
+        this.setState(prevState => ({
+                applicationData: {
+                    ...prevState.applicationData, directCompareDataPanel: {
+                        ...prevState.applicationData.directCompareDataPanel,
+                        foodSelector1: {
+                            sourceSupplement: sourceSupplement,
+                            sourceCombine: sourceCombine
+                        }
+                    }
+                }
+            }
+        ))
+    }
+
+    setDirectCompareFoodSelectorConfig2 = (sourceSupplement: boolean, sourceCombine: boolean) => {
+        this.setState(prevState => ({
+                applicationData: {
+                    ...prevState.applicationData, directCompareDataPanel: {
+                        ...prevState.applicationData.directCompareDataPanel,
+                        foodSelector2: {
+                            sourceSupplement: sourceSupplement,
+                            sourceCombine: sourceCombine
+                        }
+                    }
+                }
+            }
+        ))
+    }
+
     setRankingPanelData = (rankingPanelData: RankingPanelData): void => {
         this.setState(prevState => ({
                 applicationData: {
@@ -271,7 +304,15 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 selectedFoodItem1: null,
                 selectedFoodItem2: null,
                 selectedDataPage: TAB_BASE_DATA,
-                directCompareConfigChart: initialDirectCompareConfigData
+                directCompareConfigChart: initialDirectCompareConfigData,
+                foodSelector1: {
+                    sourceSupplement: true,
+                    sourceCombine: false
+                },
+                foodSelector2: {
+                    sourceSupplement: true,
+                    sourceCombine: false
+                }
             },
             rankingPanelData: {
                 selectedFoodCategory: null,
@@ -340,7 +381,9 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 setSelectedDirectCompareItems: this.setSelectedDirectCompareItems
             },
             setFoodSelectorConfig: this.setFoodSelectorConfig,
-            setRankingPanelData: this.setRankingPanelData
+            setRankingPanelData: this.setRankingPanelData,
+            setDirectCompareFoodSelector1: this.setDirectCompareFoodSelectorConfig1,
+            setDirectCompareFoodSelector2: this.setDirectCompareFoodSelectorConfig2
         }
 
         return (

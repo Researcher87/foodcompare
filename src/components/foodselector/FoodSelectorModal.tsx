@@ -16,6 +16,7 @@ import combineFoodItems from "../../service/calculation/FoodDataAggregationServi
 import {FaQuestionCircle} from "react-icons/all";
 import {HelpModal} from "../HelpModal";
 import {getHelpText} from "../../service/HelpService";
+import ReactSelectOption from "../../types/ReactSelectOption";
 
 export interface FoodSelectorModalProps {
     onHide: () => void,
@@ -101,6 +102,16 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         props.onHide()
     }
 
+    const updateFoodSelectorConfig = (selectedCategory: ReactSelectOption | null, supplementData: boolean, combineData: boolean) => {
+        if (applicationContext) {
+            const currentSelectorSetting = applicationContext.applicationData.foodSelector
+            if (selectedCategory !== currentSelectorSetting.selectedCategory || supplementData !== currentSelectorSetting.sourceSupplement
+                || combineData !== currentSelectorSetting.sourceCombine) {
+                applicationContext.setFoodSelectorConfig(selectedCategory, supplementData, combineData)
+            }
+        }
+    }
+
     const onCancel = () => {
         props.onHide()
     }
@@ -123,14 +134,20 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                 }
                 <div>
                     {!props.compositeSelector ?
-                        <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem} defaultFoodClass={initialFoodClassId} smallVariant={false}/>
+                        <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
+                                      defaultFoodClass={initialFoodClassId}
+                                      smallVariant={false}
+                                      updateFoodSelectorConfig={updateFoodSelectorConfig}
+                        />
                         :
                         <div className={"container"}>
                             <div className={"row"}>
                                 <div className={"col-6"}>
                                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
+                                                  updateFoodSelectorConfig={updateFoodSelectorConfig}
                                                   defaultFoodClass={initialFoodClassId}
-                                                  smallVariant={true}/>
+                                                  smallVariant={true}
+                                    />
                                 </div>
                                 <div className={"col-6"}>
                                     <CompositeFoodList selectedFoodItems={compositeList}
