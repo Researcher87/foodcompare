@@ -1,9 +1,9 @@
 /*** 1. Variables ***/
 
 $fontsize-text: calc(0.8rem + 0.3vw);   // Font size for texts, such as on the home screen
-$fontsize-forms: 1.75vh;                // Default font unsed in forms
-$fontsize-label: 1.5vh;                 // Font size of form labels
-$fontsize-small: 1.3vh;                 // Font size for small components
+$fontsize-forms: calc(0.6rem + 0.3vw);                // Default font unsed in forms
+$fontsize-label: calc(0.6rem + 0.3vw);                // Font size of form labels
+$fontsize-small: calc(0.5rem + 0.3vw);                 // Font size for small components
 
 $usersettings-palwidth: 60ch;
 
