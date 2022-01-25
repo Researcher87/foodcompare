@@ -281,7 +281,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         return {
             foodItem: foodItem,
             foodClass: foodClass,
-            portion: portion,
+            portion: {...portion},
             selectedSource: selectedSource ? selectedSource.value : foodItem.nutrientDataList[0].source.id,
             supplementData: supplementData,
             combineData: combineData
