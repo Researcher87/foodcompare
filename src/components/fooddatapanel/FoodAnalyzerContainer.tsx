@@ -12,7 +12,6 @@ import ReactTooltip from "react-tooltip";
 import {useHistory} from 'react-router-dom';
 import {PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
-import {isNarrowScreen, useWindowDimension} from "../../service/WindowDimension";
 
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
@@ -30,8 +29,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
-
-    let windowSize = useWindowDimension()
 
     useEffect(() => {
         ReactTooltip.rebuild()

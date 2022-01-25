@@ -3,7 +3,7 @@ import FoodClass from "../../types/nutrientdata/FoodClass";
 import getName from "../LanguageService";
 import NameType from "../../types/nutrientdata/NameType";
 
-export function getFoodClassSelectList(foodClasses: Array<FoodClass>, category: number, foodNames: Array<NameType>, language: string): Array<ReactSelectFoodClassOption> {
+export function getFoodClassSelectList(foodClasses: Array<FoodClass>, category: number, foodNames: Array<NameType>, language: string): ReactSelectFoodClassOption[] {
     const filteredFoodClasses = getFoodClassesOfCategory(foodClasses, category)
 
     if(!filteredFoodClasses || filteredFoodClasses.length === 0) {

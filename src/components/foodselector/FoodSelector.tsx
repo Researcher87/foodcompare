@@ -28,6 +28,7 @@ export interface FoodSelectorProps {
     noCategorySelect?: boolean
     initialFoodClassToSet?: number
     selectedFoodItem?: SelectedFoodItem | null
+    defaultFoodClass?: number
 }
 
 /**
@@ -63,6 +64,21 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     const windowSize = useWindowDimension()
 
+    const getInitialFoodClassNumber = (foodClassOptions: ReactSelectFoodClassOption[]): number => {
+        if(props.initialFoodClassToSet !== undefined && props.initialFoodClassToSet !== null) {
+            return props.initialFoodClassToSet
+        }
+
+        if(props.defaultFoodClass !== undefined) {
+            const index = foodClassOptions.findIndex(foodClassOption => foodClassOption.value.id === props.defaultFoodClass)
+            if(index !== -1) {
+                return index
+            }
+        }
+
+        return 0   // Use the first food class in the list if no other parameter indicates the food class to select
+    }
+
     useEffect(() => {
             if (applicationContext) {
                 const currentSelectorSetting = applicationContext.applicationData.foodSelector
@@ -72,7 +88,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 }
             }
 
-            const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
+
 
             if (applicationContext && applicationContext.foodDataCorpus && categoriesList.length === 0) {
                 const foodDataCorpus = applicationContext.foodDataCorpus
@@ -86,6 +102,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     const category = selectedCategory ? selectedCategory.value : 0
                     const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, category, applicationContext.foodDataCorpus.foodNames, language)
                     setFoodClassesList(foodClasses)
+
+                    const initialFoodClass = getInitialFoodClassNumber(foodClasses)
+                    console.log('Initial:', initialFoodClass)
+
                     const foodClass = foodClasses[initialFoodClass]
                     setSelectedFoodClass(foodClass)
 
@@ -389,7 +409,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const amount_label = props.smallVariant
         ? `${applicationStrings.label_amount_short[language]}:`
         : `${applicationStrings.label_amount[language]}:`
-    const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
+    const initialFoodClass = getInitialFoodClassNumber(foodClassesList)
 
     const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
     const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm" : "form-control"

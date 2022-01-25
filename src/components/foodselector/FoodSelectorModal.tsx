@@ -11,7 +11,7 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";
 import {CompositeFoodList} from "./CompositeFoodList";
-import {maximalPortionSize} from "../../config/ApplicationSetting";
+import {initialFoodClassId, maximalPortionSize} from "../../config/ApplicationSetting";
 import combineFoodItems from "../../service/calculation/FoodDataAggregationService";
 import {FaQuestionCircle} from "react-icons/all";
 import {HelpModal} from "../HelpModal";
@@ -123,12 +123,13 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                 }
                 <div>
                     {!props.compositeSelector ?
-                        <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem} smallVariant={false}/>
+                        <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem} defaultFoodClass={initialFoodClassId} smallVariant={false}/>
                         :
                         <div className={"container"}>
                             <div className={"row"}>
                                 <div className={"col-6"}>
                                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
+                                                  defaultFoodClass={initialFoodClassId}
                                                   smallVariant={true}/>
                                 </div>
                                 <div className={"col-6"}>

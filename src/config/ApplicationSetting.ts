@@ -10,6 +10,12 @@ export const mobileAppPath = "https://play.google.com/store/apps/details?id=com.
 export const maxMessageCharacters = 5000
 export const maxElementsInRankingChart = 50
 
+// The food class to be initially displayed in the food selector
+export const initialFoodClassId = 1
+
+// The food class to be initially displayed as the comparator in the direct comparison menu (second element)
+export const initialComparisonFoodClassId = 7
+
 export const minimalOmegaRatio = 0.3
 export const maximalPortionSize = 5000
 export const defaultPanelHeight = '468px'
