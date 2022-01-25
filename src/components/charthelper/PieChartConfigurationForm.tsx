@@ -9,13 +9,14 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)
 
     return (
-        <div className="container form-main">
+        <div className="container">
             <div className="row">
                 <form className="form-inline form-group">
                     <Form.Label className="form-elements">
                         <b>{applicationStrings.label_charttype[languageContext.language]}:</b>
                     </Form.Label>
                     <Form.Check inline={true}
+                                className="form-radiobutton"
                                 label={applicationStrings.label_charttype_pie[languageContext.language]}
                                 type="radio"
                                 value={CHART_TYPE_PIE}
@@ -23,6 +24,7 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
                                 onChange={props.handleRadioButtonClick}>
                     </Form.Check>
                     <Form.Check inline={true}
+                                className="form-radiobutton"
                                 style={{paddingRight: "48px"}}
                                 label={applicationStrings.label_charttype_bar[languageContext.language]}
                                 type="radio"
@@ -31,6 +33,7 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
                                 onChange={props.handleRadioButtonClick}>
                     </Form.Check>
                     <Form.Check inline={true}
+                                className="form-radiobutton"
                                 label={applicationStrings.checkbox_chartoption_showLegend[languageContext.language]}
                                 defaultChecked={props.showLegend}
                                 disabled={props.chartType === CHART_TYPE_BAR}
@@ -38,6 +41,7 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
                     </Form.Check>
                     {props.detailsCheckboxAvailable &&
                     <Form.Check inline={true}
+                                className="form-radiobutton"
                                 label={applicationStrings.checkbox_chartoption_showDetails[languageContext.language]}
                                 defaultChecked={props.showDetails}
                                 onClick={props.handleDetailsCheckboxClick}>

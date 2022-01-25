@@ -136,8 +136,8 @@ export function InfoData(props: InfoDataProps) {
         return (
             <div>
                 <BootstrapTable bordered={false} data={data}>
-                    <TableHeaderColumn className="tableHeaderClass" dataField='key' isKey width="200px"/>
-                    <TableHeaderColumn className="tableHeaderClass" dataField='value'/>
+                    <TableHeaderColumn className="table-header-no-top-border" dataField='key' isKey width="200px"/>
+                    <TableHeaderColumn className="table-header-no-top-border" dataField='value'/>
                 </BootstrapTable>
             </div>
         );

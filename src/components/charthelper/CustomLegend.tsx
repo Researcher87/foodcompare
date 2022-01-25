@@ -19,7 +19,7 @@ export function CustomLegend(props: CustomLegendProps) {
                 <div key={id} className="row" style={{marginLeft: indent, marginBottom: verticalSpace}}>
                     <div style={{display: "flex"}}>
                         <div className="legendItem" style={{background: element.color}}></div>
-                        <p style={{marginTop: "-3px"}}>{element.item}</p>
+                        <p className={"legendItemLabel"}>{element.item}</p>
                     </div>
                 </div>
             );
@@ -30,7 +30,7 @@ export function CustomLegend(props: CustomLegendProps) {
 
 
     return (
-        <div className={"form-main"} style={{borderLeft: "1px solid #aaaaaa", paddingLeft: "5px"}}>
+        <div style={{borderLeft: "1px solid #aaaaaa", paddingLeft: "5px"}}>
             <div style={{paddingTop: "4px"}}>
                 {renderLegend()}
             </div>

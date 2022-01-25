@@ -184,6 +184,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                         <b>{applicationStrings.label_datatype[languageContext.language]}:</b>
                     </Form.Label>
                     <Form.Check inline={false}
+                                className="form-radiobutton"
                                 label={applicationStrings.label_charttype_lipids_base[lang]}
                                 type="radio"
                                 value={Constants.LIPIDS_DATA_BASE}
@@ -191,6 +192,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                                 onChange={handleChartSelectionChange}>
                     </Form.Check>
                     <Form.Check inline={false}
+                                className="form-radiobutton"
                                 label={applicationStrings.label_charttype_lipids_omega[lang]}
                                 type="radio"
                                 value={Constants.LIPIDS_DATA_OMEGA}
@@ -201,6 +203,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                 <hr/>
                 <Form>
                     <Form.Check inline={false}
+                                className="form-radiobutton"
                                 label={applicationStrings.checkbox_expand100g[lang]}
                                 type="checkbox"
                                 disabled={chartType === Constants.CHART_TYPE_PIE}
@@ -208,6 +211,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                                 onChange={handleExpand100Change}>
                     </Form.Check>
                     <Form.Check inline={false}
+                                className="form-radiobutton"
                                 label={applicationStrings.checkbox_chartoption_hideRemainders[lang]}
                                 type="checkbox"
                                 disabled={subChart === Constants.LIPIDS_DATA_OMEGA}
@@ -296,7 +300,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                 }
             </div>
             {!props.directCompareConfig &&
-            <div className="row chartFormLine">
+            <div className="row chart-control-button-bar">
                 <PieChartConfigurationForm key={"Config Lipids Chart"}
                                            chartType={chartType}
                                            showLegend={showLegend}

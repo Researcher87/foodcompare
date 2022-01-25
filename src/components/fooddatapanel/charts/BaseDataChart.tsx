@@ -183,7 +183,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 }
             </div>
             {!props.directCompareUse &&
-            <div className="row chartFormLine">
+            <div className="row chart-control-button-bar">
                 <PieChartConfigurationForm chartType={chartType}
                                            showLegend={showLegend}
                                            showDetails={showDetails}

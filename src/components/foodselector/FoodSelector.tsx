@@ -20,6 +20,7 @@ import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
 import {Form} from "react-bootstrap";
+import {correspondingSelectElementStyle, customSelectStyles} from "../../config/UI_Config";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -114,12 +115,12 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 }
             } else {
                 // Update data for outer component whenever render is triggered
-                if(selectedFoodItem && selectdFoodClass && selectedPortion) {
+                if (selectedFoodItem && selectdFoodClass && selectedPortion) {
                     const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectdFoodClass.value, selectedPortion.value)
-                    if(newFoodItem) {
+                    if (newFoodItem) {
                         props.updateSelectedFoodItem(newFoodItem)
                     }
-                } else if(props.selectedFoodItem) {
+                } else if (props.selectedFoodItem) {
                     const {foodItem, foodClass, portion} = props.selectedFoodItem
                     makeSelectedFoodItemObject(foodItem, foodClass, portion)
                 }
@@ -340,6 +341,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     isDisabled={sourcesList.length <= 1 || combineData}
                     value={selectedSource ? selectedSource : sourcesList[0]}
                     onChange={handleSourceChange}
+                    styles={customSelectStyles}
             />
         )
 
@@ -358,7 +360,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 <label className="form-elements"
                        data-tip={applicationStrings.label_source_combine_tooltip[language]}>
                     <ReactTooltip/>
-                    <Form.Check inline className="form-radiobutton"
+                    <Form.Check className="form-radiobutton"
+                                style={{minHeight: "1rem"}}
                                 label={applicationStrings.label_source_combine[language]}
                                 checked={combineData}
                                 disabled={sourcesList.length <= 1}
@@ -370,8 +373,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         return <div>
             <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
-            {!props.smallVariant ?
-                <div className={"row"}>
+                <div className={"d-flex row"}>
                     <div className="col-4 column select-menu form-section">
                         {sourceSelectBox}
                     </div>
@@ -379,17 +381,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         {checkboxes}
                     </div>
                 </div>
-                :
-                <div>
-                    <div>
-                        {sourceSelectBox}
-                    </div>
-                    <div style={{paddingLeft: "24px", paddingTop: "8px"}}>
-                        {checkboxes}
-                    </div>
-                </div>
-            }
         </div>
+
     }
 
 
@@ -399,58 +392,65 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
 
     const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
-    const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
+    const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm" : "form-control"
+    const formClass = props.smallVariant ? "form-section-small" : "form-section"
+
 
     return <div>
         <div className="container">
-            {props.noCategorySelect !== true &&
-            <div className="column select-menu form-section">
-                <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
-                <Select className={selectClass}
-                        options={categoriesList}
-                        value={selectedCategory ? selectedCategory : categoriesList[0]}
-                        onChange={(value) => handleCategoryChange(value)}
-                />
-            </div>
-            }
-            <div className="column select-menu form-section">
-                <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
-                <Select className={selectClass}
-                        options={foodClassesList}
-                        value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
-                        onChange={(value) => handleFoodClassChange(value)}
-                />
-            </div>
-            <div className="column select-menu form-section">
-                <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
-                <Select className={selectClass}
-                        options={foodItemsList}
-                        value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
-                        onChange={handleFoodItemChange}
-                />
-            </div>
-            <div className="column select-menu form-section">
-                <div className={"row"}>
-                    <div className={"col-lg-8 col-xl-9"}>
+                {props.noCategorySelect !== true &&
+                <div className={formClass}>
+                    <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
+                    <Select className={selectClass}
+                            options={categoriesList}
+                            value={selectedCategory ? selectedCategory : categoriesList[0]}
+                            onChange={(value) => handleCategoryChange(value)}
+                            styles={customSelectStyles}
+                    />
+                </div>
+                }
+                <div className={formClass}>
+                    <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
+                    <Select className={selectClass}
+                            options={foodClassesList}
+                            value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
+                            onChange={(value) => handleFoodClassChange(value)}
+                            styles={customSelectStyles}
+                    />
+                </div>
+                <div className={formClass}>
+                    <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
+                    <Select className={selectClass}
+                            options={foodItemsList}
+                            value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
+                            onChange={handleFoodItemChange}
+                            styles={customSelectStyles}
+                    />
+                </div>
+                <div className={formClass}>
+                    <div className={"row"}>
+                        <div className={"col-lg-8 col-xl-9"}>
                         <span
                             className={'form-label'}>{applicationStrings.label_portion[language]}:</span>
-                        <Select className={selectClass}
-                                options={portionsList}
-                                value={selectedPortion ? selectedPortion : portionsList[0]}
-                                onChange={(value) => handlePortionChange(value)}/>
-                    </div>
-                    <div className={"col-lg-4 col-xl-3"}>
+                            <Select className={selectClass}
+                                    options={portionsList}
+                                    styles={customSelectStyles}
+                                    value={selectedPortion ? selectedPortion : portionsList[0]}
+                                    onChange={(value) => handlePortionChange(value)}/>
+                        </div>
+                        <div className={"col-lg-4 col-xl-3"}>
                         <span
                             className={'form-label'}>{amount_label}</span>
-                        <input className={inputClass}
-                               disabled={selectedPortion?.value.portionType !== 0}
-                               value={portionAmount}
-                               onChange={handlePortionAmountChange}
-                        />
+                            <input className={inputClass}
+                                   disabled={selectedPortion?.value.portionType !== 0}
+                                   value={portionAmount}
+                                   style={correspondingSelectElementStyle}
+                                   onChange={handlePortionAmountChange}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-            {renderSourceLine()}
+                {renderSourceLine()}
         </div>
     </div>
 

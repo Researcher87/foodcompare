@@ -209,6 +209,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                     <b>{applicationStrings.label_datatype[lang]}:</b>
                 </Form.Label>
                 <Form.Check inline={false}
+                            className={"form-radiobutton"}
                             label={applicationStrings.label_charttype_carbs_base[lang]}
                             type="radio"
                             value={Constants.CARBS_DATA_BASE}
@@ -216,6 +217,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                             onChange={handleChartSelectionChange}>
                 </Form.Check>
                 <Form.Check inline={false}
+                            className={"form-radiobutton"}
                             label={applicationStrings.label_charttype_carbs_detail[lang]}
                             type="radio"
                             value={Constants.CARBS_DATA_DETAIL}
@@ -225,6 +227,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                 <hr/>
                 <Form>
                     <Form.Check inline={false}
+                                className="form-radiobutton"
                                 label={applicationStrings.checkbox_expand100g[lang]}
                                 type="checkbox"
                                 disabled={chartType === Constants.CHART_TYPE_PIE}
@@ -232,6 +235,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                                 onChange={handleExpand100Change}>
                     </Form.Check>
                     <Form.Check inline={false}
+                                className="form-radiobutton"
                                 label={applicationStrings.checkbox_chartoption_hideRemainders[lang]}
                                 type="checkbox"
                                 disabled={subChart === Constants.CARBS_DATA_DETAIL}
@@ -312,7 +316,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                 }
             </div>
             {!props.directCompareConfig &&
-            <div className="row chartFormLine">
+            <div className="row chart-control-button-bar">
                 <PieChartConfigurationForm chartType={chartType}
                                            showLegend={showLegend}
                                            handleRadioButtonClick={handleRadioButtonClick}

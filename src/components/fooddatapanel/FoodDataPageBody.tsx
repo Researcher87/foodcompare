@@ -39,7 +39,7 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
     }
 
     return (
-        <div className={"form-main"} style={{maxWidth: "1200px", minWidth: "850px"}}>
+        <div style={{maxWidth: "1200px", minWidth: "850px"}}>
             {selectedDataPage === TAB_INFO &&
             <InfoData selectedFoodItem={props.selectedFoodItem}/>
             }

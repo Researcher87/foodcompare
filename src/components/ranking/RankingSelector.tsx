@@ -10,6 +10,7 @@ import Select from 'react-select';
 import {PATH_RANKING, QUERYKEY_DATAPANEL_RANKING} from "../../config/Constants";
 import {makeRankingPanelDataUri, parseRankingPanelDataUri} from "../../service/uri/RankingPanelUriService";
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
+import {customSelectStyles} from "../../config/UI_Config";
 
 interface RankingSelectorProps {
     openChart: (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => void
@@ -178,7 +179,7 @@ export function RankingSelector(props: RankingSelectorProps) {
         return (
             <div className="column select-menu" style={{paddingLeft: "20px", paddingTop: "10px"}}>
                 <form className="form-inline form-group">
-                    <label className="form-elements">
+                    <label className="form-elements form-label">
                         <input className="form-radiobutton"
                                type="radio"
                                checked={(use100gram)}
@@ -186,7 +187,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                         />
                         100 g
                     </label>
-                    <label className="form-elements-largespace">
+                    <label className="form-elements-largespace form-label">
                         <input className="form-radiobutton"
                                type="radio"
                                checked={!use100gram}
@@ -196,9 +197,9 @@ export function RankingSelector(props: RankingSelectorProps) {
                     </label>
                     {(rankingCategory === VITAMIN_INDEX || rankingCategory === MINERAL_INDEX) &&
                     <Form.Label className="form-elements">
-                        <Form.Check inline={true}
+                        <Form.Check className="form-radiobutton"
+                                    inline={true}
                                     label={applicationStrings.label_ranking_dietaryRequirements[language]}
-                                    className="form-radiobutton"
                                     defaultChecked={showDietaryRequirements}
                                     onClick={handleDietaryRequirementsCheckbox}>
                         </Form.Check>
@@ -215,23 +216,29 @@ export function RankingSelector(props: RankingSelectorProps) {
     return (
         <div className="container">
             <div className="column select-menu form-section">
-                <i>{applicationStrings.label_category[language]}:</i>
-                <Select options={getFoodCategoryList()}
+                <span className={"form-label"}>{applicationStrings.label_category[language]}:</span>
+                <Select className="form-control-sm"
+                        options={getFoodCategoryList()}
                         value={selectedFoodCategory}
+                        styles={customSelectStyles}
                         onChange={handleFoodCategoryChange}
                 />
             </div>
             <div className="column select-menu form-section">
-                <i>{applicationStrings.label_group[language]}:</i>
-                <Select options={rankingList}
+                <span className={"form-label"}>{applicationStrings.label_group[language]}:</span>
+                <Select className="form-control-sm"
+                        options={rankingList}
                         value={selectedGroup}
+                        styles={customSelectStyles}
                         onChange={handleGroupChange}
                 />
             </div>
             <div className="column select-menu form-section">
-                <i>{applicationStrings.label_value[language]}:</i>
-                <Select options={elementsList}
+                <span className={"form-label"}>{applicationStrings.label_value[language]}:</span>
+                <Select className="form-control-sm"
+                        options={elementsList}
                         value={selectedElement}
+                        styles={customSelectStyles}
                         onChange={handleValueChange}
                 />
             </div>

@@ -211,7 +211,7 @@ export default function FoodDataPanelContainer() {
 
     return <div>
         {selectedFoodItem !== null &&
-        <div className="container-fluid container-scroll" style={{paddingTop: "20px"}}>
+        <div className="container-fluid container-scroll" style={{paddingTop: "4vh"}}>
             <div className="d-flex flex-row">
                 <div className={""}>
                     <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
@@ -225,7 +225,7 @@ export default function FoodDataPanelContainer() {
                             <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
                         </div>
                         :
-                        <div style={{padding: "24px"}}>
+                        <div className={"form-text"} style={{padding: "24px"}}>
                             <i>
                                 {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
                             </i>

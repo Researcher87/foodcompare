@@ -1,0 +1,282 @@
+/*** 1. Variables ***/
+
+$fontsize-text: calc(0.8rem + 0.3vw);   // Font size for texts, such as on the home screen
+$fontsize-forms: 1.75vh;                // Default font unsed in forms
+$fontsize-label: 1.5vh;                 // Font size of form labels
+$fontsize-small: 1.3vh;                 // Font size for small components
+
+$usersettings-palwidth: 60ch;
+
+/*** 2. Bootstrap Overwrites ***/
+
+.btn {
+    font-size: $fontsize-forms !important;
+}
+
+.btn-link {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.form-text {
+    font-size: $fontsize-text !important;
+}
+
+.form-control-sm {
+    font-size: $fontsize-forms !important;
+    padding: 0 !important;
+}
+
+.form-label {
+    color: #999999;
+    font-weight: bolder;
+    font-size: $fontsize-label !important;
+}
+
+.form-radiobutton {
+    font-size: $fontsize-forms !important;
+    margin-right: 5px;
+}
+
+
+/*** 3. Global Form Styles ***/
+
+.form-section {
+    padding-bottom: 1.0vh;
+}
+
+.form-section-small {
+    padding-bottom: 0.5vh;
+}
+
+.form-button {
+    min-width: 128px;
+    margin-left: 16px;
+}
+
+.form-elements {
+    margin-right: 20px;
+}
+
+.form-elements-largespace {
+    margin-right: 50px;
+}
+
+.form-small {
+    font-size: $fontsize-small;
+}
+
+.form-row, .form-row-indent {
+    padding-bottom: 20px;
+}
+
+.form-row-indent {
+    margin-left: 24px;
+}
+
+.button-apply {
+    font-size: $fontsize-forms;
+}
+
+.button-displaymode, .button-displaymode-enabled, .button-displaymode-disabled {
+    width: 40px;
+    color: white;
+}
+
+.button-displaymode-enabled {
+    background: #bf0f17;
+}
+
+.button-displaymode-disabled {
+    background: rgba(191, 15, 23, 0.5);
+}
+
+.button-foodPanelHead, .button-closeTab {
+    width: 40px;
+    font-size: $fontsize-small;
+}
+
+.container-scroll {
+    overflow-x: auto;
+}
+
+@media (min-width: 1220px) {
+    .container-scroll {
+        overflow-x: hidden;
+    }
+}
+
+.chart-control-button-bar {
+    padding-top: 32px;
+}
+
+
+
+/*** 4. Custom Form Styles ***/
+
+.contact [type="radio"] {
+    display: none;
+}
+
+
+
+/*** 5. Header ***/
+
+.header {
+    background: #d5ce9c;
+}
+
+.header-link {
+    margin-top: 1.0vh;
+    font-size: $fontsize-forms;
+    padding-right: 2.5vh !important;
+    color: #969696 !important;
+}
+
+// Remove the annoying border/shadow when the header link has the focus:
+.header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+    color: #0064ff !important;
+    text-decoration: underline;
+}
+
+
+/*** 6. Home Menu ***/
+
+.home {
+    padding-top: 1vw;
+    padding-left: 2.5vw;
+    font-size: $fontsize-text;
+}
+
+
+
+/*** Food Analyzer / Direct Compare Menu ***/
+
+.foodanalyzer-button {
+    width: 7vmin;
+    height: 7vmin;
+}
+
+.foodanalyzer-buttonbar {
+    padding-top: 1.6vw;
+    padding-left: 0.8vw;
+    padding-right: 5vw;
+}
+
+.sidebar-link {
+    margin-top: 0.5vw;
+    min-width: 4vw;
+    color: #969696 !important;
+}
+
+.sidebar-link.focus, .sidebar-link:focus, .sidebar-link.active, .sidebar-link:active, .sidebar-link:active:focus, .sidebar-link.active:focus, .sidebar-link.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.sidebar-link.active {
+    color: #0064ff !important;
+    text-decoration: underline;
+}
+
+.legendItem {
+    width: 1vw;
+    height: 1vw;
+    min-width: 1vw;
+    margin-top: 0.1vw;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+.legendItemLabel {
+    font-size: 0.8vw;
+}
+
+.direct-compare-panel {
+    height: 60vh;
+}
+
+.vertical-label {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-align: center;
+    text-orientation: mixed;
+}
+
+.mainPanel {
+    background: #f2f5fd;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding-top: 4px;
+}
+
+.tab-panel {
+    padding: 5px 24px !important;
+    background: #b6c9f1 !important;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom: 1px solid black !important;
+}
+
+.tab-sidebar {
+    background: rgba(182, 201, 241, 0.68) !important;
+}
+
+.tab-panel button.tab {
+    border: 1px solid black !important;
+    font-weight: normal;
+    background: #d5e0f7 !important;
+}
+
+.tab-panel button.tab.active {
+    background: #006ab9 !important;
+    color: white;
+    font-weight: bold;
+}
+
+.tab-content {
+    padding: 0px !important;
+}
+
+.table-header-no-top-border {
+    display: none !important;
+}
+
+
+/*** App Menu ***/
+
+.mobile-app-img {
+    max-height: 75vh;
+    max-width: 50vw;
+}
+
+.mobile-device-message {
+    position: absolute;
+    padding: 20px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 100;
+}
+
+
+
+/*** User Settings ***/
+
+.usersettings-pal {
+    width: $usersettings-palwidth;
+    padding-top: 3vh;
+}
+
+.usersettings-pal-text {
+    width: $usersettings-palwidth;
+    font-size: $fontsize-label;
+    padding-top: 0.75vh;
+    color: grey;
+}
