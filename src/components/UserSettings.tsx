@@ -27,6 +27,7 @@ import {
     USERDATA_ERROR_SIZE,
     USERDATA_ERROR_WEIGHT
 } from "../service/UserDataService";
+import {customSelectStyles} from "../config/UI_Config";
 
 export function UserSettings() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -141,7 +142,6 @@ export function UserSettings() {
         NotificationManager.error(message)
     }
 
-    const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
     const inputClass =  isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
 
     const renderTextField = (label, value, callback) => {
@@ -229,15 +229,16 @@ export function UserSettings() {
 
         return (
             <div className="form-row">
-                <div style={{width: "450px", paddingTop: "30px"}}>
+                <div className={"usersettings-pal"}>
                     <label className="form-label">{applicationStrings.label_userSettings_palValue[lang]}:</label>
-                    <Select className={selectClass}
+                    <Select className="form-control-sm"
                             options={palCategories}
                             value={palValue}
+                            styles={customSelectStyles}
                             onChange={(value) => changePalValue(value)}
                     />
                 </div>
-                <p className="app media">
+                <p className="usersettings-pal-text">
                     {description}
                 </p>
             </div>
@@ -265,7 +266,8 @@ export function UserSettings() {
         return (
             <div className="text-center">
                 <button type="button"
-                        className="btn btn-primary button-base"
+                        className="btn btn-primary"
+                        style={{marginBottom: "5vh"}}
                         onClick={() => submitUserData()}>
                     {applicationStrings.button_submit[lang]}
                 </button>

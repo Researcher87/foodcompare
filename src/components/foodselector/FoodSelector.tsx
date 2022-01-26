@@ -20,13 +20,17 @@ import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
 import {Form} from "react-bootstrap";
+import {correspondingSelectElementStyle, customSelectStyles} from "../../config/UI_Config";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
+    updateFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, supplementData: boolean, combineData: boolean) => void
     smallVariant: boolean
     noCategorySelect?: boolean
     initialFoodClassToSet?: number
     selectedFoodItem?: SelectedFoodItem | null
+    defaultFoodClass?: number
+    directCompareSelectorNumber?: number
 }
 
 /**
@@ -41,8 +45,21 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         ? applicationContext.applicationData.foodSelector.selectedCategory
         : null
 
-    const initialSupplementValue = applicationContext?.applicationData.foodSelector.sourceSupplement || false
-    const initialCombineValue = applicationContext?.applicationData.foodSelector.sourceCombine || false
+    const foodSelectorConfig = applicationContext?.applicationData.foodSelector
+    const directCompareSelectorConfig1 = applicationContext?.applicationData.directCompareDataPanel.foodSelector1
+    const directCompareSelectorConfig2 = applicationContext?.applicationData.directCompareDataPanel.foodSelector2
+
+    const initialSupplementValue = props.directCompareSelectorNumber === undefined
+        ? foodSelectorConfig?.sourceSupplement || false
+        : props.directCompareSelectorNumber === 1
+            ? directCompareSelectorConfig1?.sourceSupplement || false
+            : directCompareSelectorConfig2?.sourceSupplement || false
+
+    const initialCombineValue = props.directCompareSelectorNumber === undefined
+        ? foodSelectorConfig?.sourceCombine || false
+        : props.directCompareSelectorNumber === 1
+            ? directCompareSelectorConfig1?.sourceCombine || false
+            : directCompareSelectorConfig2?.sourceCombine || false
 
     const [selectedCategory, setSelectedCategory] = useState<ReactSelectOption | null>(initialCategory)
     const [selectdFoodClass, setSelectedFoodClass] = useState<ReactSelectFoodClassOption | null>(null)
@@ -62,17 +79,22 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     const windowSize = useWindowDimension()
 
-    useEffect(() => {
-            if (applicationContext) {
-                const currentSelectorSetting = applicationContext.applicationData.foodSelector
-                if (selectedCategory !== currentSelectorSetting.selectedCategory || supplementData !== currentSelectorSetting.sourceSupplement
-                    || combineData !== currentSelectorSetting.sourceCombine) {
-                    applicationContext.setFoodSelectorConfig(selectedCategory, supplementData, combineData)
-                }
+    const getInitialFoodClassNumber = (foodClassOptions: ReactSelectFoodClassOption[]): number => {
+        if (props.initialFoodClassToSet !== undefined && props.initialFoodClassToSet !== null) {
+            return props.initialFoodClassToSet
+        }
+
+        if (props.defaultFoodClass !== undefined) {
+            const index = foodClassOptions.findIndex(foodClassOption => foodClassOption.value.id === props.defaultFoodClass)
+            if (index !== -1) {
+                return index
             }
+        }
 
-            const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
+        return 0   // Use the first food class in the list if no other parameter indicates the food class to select
+    }
 
+    useEffect(() => {
             if (applicationContext && applicationContext.foodDataCorpus && categoriesList.length === 0) {
                 const foodDataCorpus = applicationContext.foodDataCorpus
 
@@ -85,6 +107,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     const category = selectedCategory ? selectedCategory.value : 0
                     const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, category, applicationContext.foodDataCorpus.foodNames, language)
                     setFoodClassesList(foodClasses)
+
+                    const initialFoodClass = getInitialFoodClassNumber(foodClasses)
                     const foodClass = foodClasses[initialFoodClass]
                     setSelectedFoodClass(foodClass)
 
@@ -114,12 +138,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 }
             } else {
                 // Update data for outer component whenever render is triggered
-                if(selectedFoodItem && selectdFoodClass && selectedPortion) {
+                if (selectedFoodItem && selectdFoodClass && selectedPortion) {
                     const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectdFoodClass.value, selectedPortion.value)
-                    if(newFoodItem) {
+                    if (newFoodItem) {
                         props.updateSelectedFoodItem(newFoodItem)
+                        props.updateFoodSelectorConfig(selectedCategory, supplementData, combineData)
                     }
-                } else if(props.selectedFoodItem) {
+                } else if (props.selectedFoodItem) {
                     const {foodItem, foodClass, portion} = props.selectedFoodItem
                     makeSelectedFoodItemObject(foodItem, foodClass, portion)
                 }
@@ -260,7 +285,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         return {
             foodItem: foodItem,
             foodClass: foodClass,
-            portion: portion,
+            portion: {...portion},
             selectedSource: selectedSource ? selectedSource.value : foodItem.nutrientDataList[0].source.id,
             supplementData: supplementData,
             combineData: combineData
@@ -340,6 +365,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     isDisabled={sourcesList.length <= 1 || combineData}
                     value={selectedSource ? selectedSource : sourcesList[0]}
                     onChange={handleSourceChange}
+                    styles={customSelectStyles}
             />
         )
 
@@ -358,7 +384,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 <label className="form-elements"
                        data-tip={applicationStrings.label_source_combine_tooltip[language]}>
                     <ReactTooltip/>
-                    <Form.Check inline className="form-radiobutton"
+                    <Form.Check className="form-radiobutton"
+                                style={{minHeight: "1rem"}}
                                 label={applicationStrings.label_source_combine[language]}
                                 checked={combineData}
                                 disabled={sourcesList.length <= 1}
@@ -370,72 +397,68 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         return <div>
             <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
-            {!props.smallVariant ?
-                <div className={"row"}>
-                    <div className="col-4 column select-menu form-section">
-                        {sourceSelectBox}
-                    </div>
-                    <div className={"col-8"}>
-                        {checkboxes}
-                    </div>
+            <div className={"d-flex row"}>
+                <div className="col-4 column select-menu form-section">
+                    {sourceSelectBox}
                 </div>
-                :
-                <div>
-                    <div>
-                        {sourceSelectBox}
-                    </div>
-                    <div style={{paddingLeft: "24px", paddingTop: "8px"}}>
-                        {checkboxes}
-                    </div>
+                <div className={"col-8"}>
+                    {checkboxes}
                 </div>
-            }
+            </div>
         </div>
+
     }
 
 
     const amount_label = props.smallVariant
         ? `${applicationStrings.label_amount_short[language]}:`
         : `${applicationStrings.label_amount[language]}:`
-    const initialFoodClass = props.initialFoodClassToSet ? props.initialFoodClassToSet : 0
+    const initialFoodClass = getInitialFoodClassNumber(foodClassesList)
 
     const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
-    const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
+    const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm" : "form-control"
+    const formClass = props.smallVariant ? "form-section-small" : "form-section"
+
 
     return <div>
         <div className="container">
             {props.noCategorySelect !== true &&
-            <div className="column select-menu form-section">
+            <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
                 <Select className={selectClass}
                         options={categoriesList}
                         value={selectedCategory ? selectedCategory : categoriesList[0]}
                         onChange={(value) => handleCategoryChange(value)}
+                        styles={customSelectStyles}
                 />
             </div>
             }
-            <div className="column select-menu form-section">
+            <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select className={selectClass}
                         options={foodClassesList}
                         value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
+                        styles={customSelectStyles}
                 />
             </div>
-            <div className="column select-menu form-section">
+            <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
                 <Select className={selectClass}
                         options={foodItemsList}
                         value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
                         onChange={handleFoodItemChange}
+                        styles={customSelectStyles}
                 />
             </div>
-            <div className="column select-menu form-section">
+            <div className={formClass}>
                 <div className={"row"}>
                     <div className={"col-lg-8 col-xl-9"}>
                         <span
                             className={'form-label'}>{applicationStrings.label_portion[language]}:</span>
                         <Select className={selectClass}
                                 options={portionsList}
+                                styles={customSelectStyles}
                                 value={selectedPortion ? selectedPortion : portionsList[0]}
                                 onChange={(value) => handlePortionChange(value)}/>
                     </div>
@@ -445,6 +468,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         <input className={inputClass}
                                disabled={selectedPortion?.value.portionType !== 0}
                                value={portionAmount}
+                               style={correspondingSelectElementStyle}
                                onChange={handlePortionAmountChange}
                         />
                     </div>

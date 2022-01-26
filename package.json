@@ -39,6 +39,7 @@
     "react-select": "^4.3.1",
     "react-snap": "^1.23.0",
     "react-tooltip": "^4.2.21",
+    "sass": "^1.48.0",
     "typescript": "^4.4.2",
     "web-vitals": "^1.1.2"
   },

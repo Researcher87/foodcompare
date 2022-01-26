@@ -138,7 +138,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}/>
             }
             <div className={"d-flex flex-nowrap"}>
-                <div className="col-md-2 col-sm-3">
+                <div className="col">
                     <div className={"card"}>
                         <div className="card-body" style={{paddingRight: "16px"}}>
                             <ChartMenuPanel verticalArrangement={true} setDataPage={props.setDataPage} dataPage={selectedDataPage}/>

@@ -144,7 +144,7 @@ export default function DirectCompareContainer() {
                     {selectedFoodItem1 !== null && selectedFoodItem2 !== null ?
                     <DirectCompareDataPanel selectedFoodItem1={selectedFoodItem1}
                                             selectedFoodItem2={selectedFoodItem2}/>
-                        : <div className={"app"}><i>{applicationStrings.direct_compare_text[languageContext.language]}</i></div>
+                        : <div className={"form-text"}><i>{applicationStrings.direct_compare_text[languageContext.language]}</i></div>
                     }
                 </div>
             </div>

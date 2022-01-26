@@ -6,6 +6,8 @@ import FoodSelector from "./FoodSelector";
 import {Button, Card, CardDeck} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
 import {direct_compare_color1, direct_compare_color2} from "../../config/ChartConfig";
+import {initialComparisonFoodClassId, initialFoodClassId} from "../../config/ApplicationSetting";
+import ReactSelectOption from "../../types/ReactSelectOption";
 
 interface DirectCompareSelectorProps {
     updateSelectedFoodItems: (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => void
@@ -20,11 +22,18 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const languageContext = useContext(LanguageContext)
     const language = languageContext.language
 
-    const initialItem1 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1
+    // Checkbox states (needed to update global configuration)
+    const [supplementData1, setSupplementData1] = useState<boolean>(true)
+    const [combineData1, setCombineData1] = useState<boolean>(false)
+
+    const [supplementData2, setSupplementData2] = useState<boolean>(true)
+    const [combineData2, setCombineData2] = useState<boolean>(false)
+
+    const initialItem1 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1 !== null
         ? applicationContext.applicationData.directCompareDataPanel.selectedFoodItem1
         : null
 
-    const initialItem2 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
+    const initialItem2 = applicationContext && applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2 !== null
         ? applicationContext.applicationData.directCompareDataPanel.selectedFoodItem2
         : null
 
@@ -41,7 +50,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
             }
         }
 
-    }, [applicationContext?.applicationData.directCompareDataPanel])
+    }, [applicationContext?.applicationData.directCompareDataPanel, supplementData1, combineData1, supplementData2, combineData2 ])
 
     if (!applicationContext) {
         return <div/>
@@ -61,9 +70,33 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
         }
     }
 
+    const updateFoodSelectorConfig1 = (selectedCategory: ReactSelectOption | null, supplementData: boolean, combineData: boolean) => {
+        setSupplementData1(supplementData)
+        setCombineData1(combineData)
+    }
+
+    const updateFoodSelectorConfig2 = (selectedCategory: ReactSelectOption | null, supplementData: boolean, combineData: boolean) => {
+        setSupplementData2(supplementData)
+        setCombineData2(combineData)
+    }
+
     const onSubmit = () => {
         if (selectedFoodItem1 && selectedFoodItem2) {
             props.updateSelectedFoodItems(selectedFoodItem1, selectedFoodItem2)
+
+            if (applicationContext) {
+                const currentSelectorSetting1 = applicationContext.applicationData.directCompareDataPanel.foodSelector1
+                if (supplementData1 !== currentSelectorSetting1.sourceSupplement
+                    || combineData1 !== currentSelectorSetting1.sourceCombine) {
+                    applicationContext.setDirectCompareFoodSelector1(supplementData1, combineData1)
+                }
+
+                const currentSelectorSetting2 = applicationContext.applicationData.directCompareDataPanel.foodSelector2
+                if (supplementData2 !== currentSelectorSetting2.sourceSupplement
+                    || combineData2 !== currentSelectorSetting2.sourceCombine) {
+                    applicationContext.setDirectCompareFoodSelector2(supplementData2, combineData2)
+                }
+            }
         }
 
         setDisplayStatus(STATUS_NOT_UPDATED)
@@ -73,9 +106,10 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     const renderFoodSelectorCard = (foodSelectorNumber: number) => {
         const updateSelectedFoodItem = foodSelectorNumber === 1 ? updateSelectedFoodItem1 : updateSelectedFoodItem2
         const styleClass = foodSelectorNumber === 1 ? {backgroundColor: direct_compare_color1} : {backgroundColor: direct_compare_color2}
-        const initialFoodClassToSet = foodSelectorNumber - 1
+        const initialFoodClassToSet = foodSelectorNumber === 1 ? initialFoodClassId : initialComparisonFoodClassId
 
         const selectedFoodItem = foodSelectorNumber === 1 ? selectedFoodItem1 : selectedFoodItem2
+        const updateFoodSelectorConfig = foodSelectorNumber === 1 ? updateFoodSelectorConfig1 : updateFoodSelectorConfig2
 
         return <div style={{paddingTop: "32px"}}>
             <Card style={styleClass}>
@@ -84,10 +118,12 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
                 </Card.Header>
                 <CardDeck>
                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
+                                  updateFoodSelectorConfig={updateFoodSelectorConfig}
                                   smallVariant={true}
                                   noCategorySelect={true}
-                                  initialFoodClassToSet={initialFoodClassToSet}
                                   selectedFoodItem={selectedFoodItem}
+                                  defaultFoodClass={initialFoodClassToSet}
+                                  directCompareSelectorNumber={foodSelectorNumber}
                     />
                 </CardDeck>
             </Card>

@@ -14,20 +14,22 @@ export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
         : applicationStrings.label_portion[lang]
 
     return (
-        <div className="container-fluid form-main">
-            <div className="row foodDataPageHeader">
+        <div className="container-fluid">
+            <div className="row">
                 <form className="form-inline form-group">
                     <Form.Label className={"form-elements"}>
                         <b>{applicationStrings.label_reference[lang]}:</b>
                     </Form.Label>
-                    <Form.Check type="radio"
+                    <Form.Check className="form-radiobutton"
+                                type="radio"
                                 inline={true}
                                 label={"100g"}
                                 value={GRAM}
                                 checked={(props.portionType === GRAM)}
                                 onChange={props.handleRadioButtonClick}
                     />
-                    <Form.Check type="radio"
+                    <Form.Check className="form-radiobutton"
+                                type="radio"
                                 inline={true}
                                 style={{paddingRight: "48px"}}
                                 label={label_portion}

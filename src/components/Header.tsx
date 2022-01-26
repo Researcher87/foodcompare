@@ -60,7 +60,7 @@ export default function Header() {
             <div className="btn-group flex flex-wrap" role="group">
                 <div className="header-menu">
                     <Link to={PATH_HOME}>
-                        <Button className="media header-link"
+                        <Button className="header-link"
                                 value={PATH_HOME}
                                 variant={'link'}
                                 active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
@@ -70,7 +70,7 @@ export default function Header() {
                 </div>
                 <div className="header-menu">
                     <Link to={PATH_FOODDATA_PANEL}>
-                        <Button className="media header-link"
+                        <Button className="header-link"
                                 value={PATH_FOODDATA_PANEL}
                                 variant={'link'}
                                 active={activePath === PATH_FOODDATA_PANEL}>
@@ -80,7 +80,7 @@ export default function Header() {
                 </div>
                 <div className="header-menu">
                     <Link to={PATH_DIRECT_COMPARE}>
-                        <Button className="media header-link"
+                        <Button className="header-link"
                                 value={PATH_DIRECT_COMPARE}
                                 variant={'link'}
                                 active={activePath === PATH_DIRECT_COMPARE}>
@@ -90,7 +90,7 @@ export default function Header() {
                 </div>
                 <div className="header-menu">
                     <Link to={PATH_RANKING}>
-                        <Button className="media header-link"
+                        <Button className="header-link"
                                 value={PATH_RANKING}
                                 variant={'link'}
                                 active={activePath === PATH_RANKING}>
@@ -101,7 +101,7 @@ export default function Header() {
                 {!isMobileDevice() &&
                 <div className="header-menu">
                     <Link to={PATH_MOBILE_APP}>
-                        <Button className="media header-link"
+                        <Button className="header-link"
                                 value={PATH_MOBILE_APP}
                                 variant={'link'}
                                 active={activePath === PATH_MOBILE_APP}>
@@ -112,7 +112,7 @@ export default function Header() {
                 }
                 <div className="header-menu">
                     <Link to={PATH_USERSETTINGS}>
-                        <Button className="link header-link"
+                        <Button className="header-link"
                                 value={PATH_USERSETTINGS}
                                 variant={'link'}
                                 active={activePath === PATH_USERSETTINGS}>
@@ -139,7 +139,7 @@ export default function Header() {
 
     const renderLanguageButtons = () => {
         return (
-            <div className="form-language text-right">
+            <div className="form-small text-right">
                 <form className="form-group">
                     <label className="form-elements">
                         <b>{applicationStrings.label_language[language]}</b>
@@ -174,7 +174,7 @@ export default function Header() {
         const preferredSource = applicationContext.applicationData.preferredSource
 
         return (
-            <div className="form-language text-right" style={{paddingLeft: "25px"}}>
+            <div className="form-small text-right" style={{paddingLeft: "25px"}}>
                 <form className="form-group">
                     <label className="form-elements">
                         <b>{applicationStrings.label_preferred_source[language]}</b>

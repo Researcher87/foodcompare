@@ -168,7 +168,7 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
                 </div>
             </div>
             {props.directCompareUse !== true &&
-            <div className="row chartFormLine">
+            <div className="row chart-control-button-bar">
                 {renderChartConfigurationForm()}
             </div>
             }

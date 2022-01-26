@@ -12,7 +12,6 @@ import ReactTooltip from "react-tooltip";
 import {useHistory} from 'react-router-dom';
 import {PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
-import {isNarrowScreen, useWindowDimension} from "../../service/WindowDimension";
 
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
@@ -30,8 +29,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
-
-    let windowSize = useWindowDimension()
 
     useEffect(() => {
         ReactTooltip.rebuild()
@@ -87,15 +84,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
     ReactTooltip.rebuild()
 
-    console.log('Window size:', windowSize)
-
-    const buttonRowClass = !isNarrowScreen(windowSize) ?  "d-flex flex-row justify-content-center" : "d-flex flex-column align-items-center mr-4"
-    const buttonRowStyle = !isNarrowScreen(windowSize) ?  {marginLeft: "30px", marginRight: "30px", paddingTop: "16px"} : {paddingTop: "16px", marginLeft: "16px"}
-    const buttonClass = !isNarrowScreen(windowSize) ? "btn" : "btn mb-4"
-    const buttonStyle = !isNarrowScreen(windowSize) ?  {marginRight: "24px"} : {marginRight: "32px"}
-
     return (
-        <div>
+        <div className={"foodanalyzer-buttonbar"}>
             <div>
                 {showFoodSelector &&
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={false}/>
@@ -103,23 +93,20 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                 { showFoodAggregatedFoodSelector &&
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={true}/>
                 }
-                <div className={buttonRowClass} style={buttonRowStyle}>
+                <div className={"d-flex flex-column align-items-center"}>
                     <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
-                            className={buttonClass}
-                            style = {buttonStyle}
+                            className={"btn mb-4 foodanalyzer-button"}
                             data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
                         <FaPlusSquare/>
                     </Button>
                     <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
-                            className={buttonClass}
-                            style = {buttonStyle}
+                            className={"btn mb-4 foodanalyzer-button"}
                             data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
                         <FaLayerGroup/>
                     </Button>
                     <Button onClick={() => onCloseAllTabs()}
                             disabled={deleteIconEnabled === false}
-                            className={buttonClass}
-                            style = {buttonStyle}
+                            className={"btn mb-4 foodanalyzer-button"}
                             data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>
                         <FaTrash/>
                     </Button>

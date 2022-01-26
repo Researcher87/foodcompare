@@ -23,6 +23,8 @@ export interface DirectCompareData {
     selectedFoodItem2: SelectedFoodItem | null
     selectedDataPage: string
     directCompareConfigChart: DirectCompareChartConfigData
+    foodSelector1: DirectCompareFoodSelector
+    foodSelector2: DirectCompareFoodSelector
 }
 
 export interface RankingPanelData {
@@ -33,8 +35,11 @@ export interface RankingPanelData {
     showDietaryRequirements: boolean
 }
 
-export interface FoodSelector {
-    selectedCategory: ReactSelectOption | null
+export interface DirectCompareFoodSelector {
     sourceSupplement: boolean
     sourceCombine: boolean
+}
+
+export interface FoodSelector extends DirectCompareFoodSelector{
+    selectedCategory: ReactSelectOption | null
 }
