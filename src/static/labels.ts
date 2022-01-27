@@ -711,9 +711,25 @@ export const applicationStrings = {
         de: 'Übersicht',
         en: 'Overview'
     },
+    label_per_100g: {
+        de: 'je 100 g',
+        en: 'per 100 g'
+    },
+    label_per_portion: {
+        de: 'je Portion',
+        en: 'per portion'
+    },
     label_portion: {
         de: 'Portion',
         en: 'Portion'
+    },
+    label_portion_selected: {
+        de: 'Ausgewählte Portion',
+        en: 'Selected portion'
+    },
+    label_portion_common: {
+        de: 'Typische Portion',
+        en: 'Typical portion'
     },
     label_prefix_hereof: {
         de: 'davon',

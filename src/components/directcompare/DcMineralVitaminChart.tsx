@@ -16,6 +16,9 @@ import {DC_MineralVitaminChartProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
+import getName from "../../service/LanguageService";
+import {LanguageContext} from "../../contexts/LangContext";
+import {VerticalLabel} from "./VerticalLabel";
 
 export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -155,12 +158,10 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const preconfigFoodItem1 = {...preconfig, barChartColor: direct_compare_color1}
     const preconfigFoodItem2 = {...preconfig, barChartColor: direct_compare_color2}
 
-    console.log('ABC:', dataSet1, dataSet2)
-
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem1}
                                      precalculatedData={dataSet1}
@@ -170,7 +171,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem2}
                                      precalculatedData={dataSet2}

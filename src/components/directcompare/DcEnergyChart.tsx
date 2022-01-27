@@ -4,6 +4,7 @@ import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {useEffect, useState} from "react";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {VerticalLabel} from "./VerticalLabel";
 
 export function DcEnergyChart(props: DirectCompareDataPanelProps) {
     const windowSize = useWindowDimension()
@@ -16,14 +17,14 @@ export function DcEnergyChart(props: DirectCompareDataPanelProps) {
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
                 <EnergyDataChart selectedFoodItem={props.selectedFoodItem1} directCompareUse={true}/>
             </div>
         </Card>
 
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
                 <EnergyDataChart selectedFoodItem={props.selectedFoodItem2} directCompareUse={true}/>
             </div>
         </Card>

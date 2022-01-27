@@ -193,7 +193,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                                checked={!use100gram}
                                onChange={handlePortionAmountChange}
                         />
-                        {applicationStrings.label_portion[language]}
+                        {applicationStrings.label_portion_common[language]}
                     </label>
                     {(rankingCategory === VITAMIN_INDEX || rankingCategory === MINERAL_INDEX) &&
                     <Form.Label className="form-elements">

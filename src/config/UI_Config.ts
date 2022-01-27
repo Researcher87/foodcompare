@@ -12,7 +12,8 @@ export const customSelectStyles = {
         ...provided,
         height: selectHeight,
         minHeight: selectHeight,
-        padding: '0 2px'
+        padding: '0 2px',
+        fontsize: fontsize
     }),
     dropdownIndicator: (styles) => ({
         ...styles,

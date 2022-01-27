@@ -15,6 +15,7 @@ import {
     getOverlappingValues,
     nullifyNonOverlappingValues
 } from "../../service/calculation/NutrientCalculationService";
+import {VerticalLabel} from "./VerticalLabel";
 
 export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -111,7 +112,7 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem1}
                                   precalculatedData={dataSet1}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
@@ -120,7 +121,7 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
 
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem2}
                                   precalculatedData={dataSet2}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>

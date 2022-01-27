@@ -9,6 +9,7 @@ import {DISPLAYMODE_CHART} from "../../config/Constants";
 
 interface FoodDataTableProps {
     tableData: Array<FoodTableDataObject>
+    portionSize: number
 }
 
 export function FoodDataTable(props: FoodDataTableProps) {
@@ -42,24 +43,27 @@ export function FoodDataTable(props: FoodDataTableProps) {
         )}</div>
     }
 
-return (
-    <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
-        <div>
-            {dataExists &&
-            <BootstrapTable className="table-sm" data={props.tableData} striped hover>
-                <TableHeaderColumn isKey dataField='label' dataFormat={formatDataCell}>Element</TableHeaderColumn>
-                <TableHeaderColumn dataField='value_100g' dataFormat={formatDataCell}>per 100 g</TableHeaderColumn>
-                <TableHeaderColumn dataField='value_portion' dataFormat={formatDataCell}>per
-                    Portion</TableHeaderColumn>
-            </BootstrapTable>
-            }
-            {!dataExists &&
-            <div className="text-center">{applicationStrings.label_noData[language.language]}</div>
-            }
+    const labelPortion = `${applicationStrings.label_per_portion[language.language]} (${props.portionSize} g)`
+
+    return (
+        <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
+            <div>
+                {dataExists &&
+                <BootstrapTable className="table-sm" data={props.tableData} striped hover>
+                    <TableHeaderColumn isKey dataField='label' dataFormat={formatDataCell}>Element</TableHeaderColumn>
+                    <TableHeaderColumn dataField='value_100g'
+                                       dataFormat={formatDataCell}>{applicationStrings.label_per_100g[language.language]}</TableHeaderColumn>
+                    <TableHeaderColumn dataField='value_portion'
+                                       dataFormat={formatDataCell}>{labelPortion}</TableHeaderColumn>
+                </BootstrapTable>
+                }
+                {!dataExists &&
+                <div className="text-center">{applicationStrings.label_noData[language.language]}</div>
+                }
+            </div>
+            <div style={{paddingTop: "25px"}}>
+                <button className={"btn btn-link"} onClick={changeToChartMode}>Zur Diagrammansicht wechseln</button>
+            </div>
         </div>
-        <div style={{paddingTop: "25px"}}>
-            <button className={"btn btn-link"} onClick={changeToChartMode}>Zur Diagrammansicht wechseln</button>
-        </div>
-    </div>
-);
+    );
 }

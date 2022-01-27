@@ -26,7 +26,7 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
             <div>
                 {displayMode === DISPLAYMODE_TABLE &&
                 <div className="col">
-                    <FoodDataTable tableData={props.tableData}/>
+                    <FoodDataTable tableData={props.tableData} portionSize={props.selectedFoodItem.portion.amount}/>
                 </div>
                 }
                 {displayMode === DISPLAYMODE_CHART &&
