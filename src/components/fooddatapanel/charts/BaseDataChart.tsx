@@ -28,7 +28,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig
             : initialChartConfigData.baseChartConfig
 
-    const showDetailsProp = chartConfig.showDetails
+    const showDetailsProp = chartConfig.showDetails !== undefined
         ? chartConfig.showDetails
         : applicationContext
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig.showDetails
@@ -49,6 +49,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         setChartHeight(calculateChartHeight(windowSize, props.directCompareUse, TAB_BASE_DATA))
         updateChartConfig()
     }, [chartType, showDetails, showLegend, chartHeight, props])
+
+    console.log('Props:', props)
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
