@@ -105,7 +105,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
                 if (foodDataCorpus.foodClasses) {
                     const category = selectedCategory ? selectedCategory.value : 0
-                    const foodClasses = getFoodClassSelectList(foodDataCorpus.foodClasses, category, applicationContext.foodDataCorpus.foodNames, language)
+                    const foodClasses = getFoodClassSelectList(foodDataCorpus, category, applicationContext.foodDataCorpus.foodNames, language)
                     setFoodClassesList(foodClasses)
 
                     const initialFoodClass = getInitialFoodClassNumber(foodClasses)
@@ -204,10 +204,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updateFoodClasses = (category: ReactSelectOption) => {
-        const foodClasses = applicationContext.foodDataCorpus.foodClasses
+        const foodDataCorpus = applicationContext.foodDataCorpus
 
-        if (foodClasses) {
-            const foodClassItems = getFoodClassSelectList(foodClasses, category.value, applicationContext.foodDataCorpus.foodNames, language)
+        if (foodDataCorpus) {
+            const foodClassItems = getFoodClassSelectList(foodDataCorpus, category.value, applicationContext.foodDataCorpus.foodNames, language)
             setFoodClassesList(foodClassItems)
             setSelectedFoodClass(foodClassItems[0])
             updateFoodItem(foodClassItems[0])
@@ -419,6 +419,15 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm" : "form-control"
     const formClass = props.smallVariant ? "form-section-small" : "form-section"
 
+    // Remove hidden food class information in the label, which is only used to facilitate user search (e.g. find 'Cheese' for term 'Gouda')
+    const foodclassFormatter = (option) => {
+        const label = option.label
+        if(label.includes("||")) {
+            const pos = label.indexOf("||")
+            return label.substring(0, pos)
+        }
+        return label
+    }
 
     return <div>
         <div className="container">
@@ -437,6 +446,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select className={selectClass}
                         options={foodClassesList}
+                        formatOptionLabel={foodclassFormatter}
                         value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
                         styles={customSelectStyles}
