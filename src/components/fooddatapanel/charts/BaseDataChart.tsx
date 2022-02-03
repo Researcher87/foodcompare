@@ -50,8 +50,6 @@ export default function BaseDataChart(props: BaseDataChartProps) {
         updateChartConfig()
     }, [chartType, showDetails, showLegend, chartHeight, props])
 
-    console.log('Props:', props)
-
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
             const currentConfig = applicationContext.applicationData.foodDataPanel.chartConfigData

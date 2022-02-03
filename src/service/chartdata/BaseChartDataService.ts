@@ -79,9 +79,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         ChartConfig.color_proteins,
         ChartConfig.color_carbs
     ];
-
-    console.log('Alcohol', category)
-
+    
     if (alcoholValuePerc !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
         labels.push(applicationStrings.label_nutrient_alcohol[language])
         values.push(alcoholValuePerc)
