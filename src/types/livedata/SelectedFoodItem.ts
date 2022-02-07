@@ -14,6 +14,7 @@ export default interface SelectedFoodItem {
     supplementData: boolean
     combineData: boolean
 	aggregated?: boolean
+    title?: string
 }
 
 export interface CompositeFoodElement {

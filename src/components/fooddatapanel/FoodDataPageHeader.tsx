@@ -113,7 +113,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     if (props.selectedFoodItem.foodItem.nameId) {
         foodName = getNameFromFoodNameList(foodNamesList, props.selectedFoodItem.foodItem.nameId, languageContext.language)
     } else {
-        foodName = 'Individual'
+        foodName = props.selectedFoodItem.title !== undefined ? props.selectedFoodItem.title : 'Individual'
     }
 
     let fullName

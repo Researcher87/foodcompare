@@ -16,7 +16,7 @@ export function makeFoodDataPanelComponent(selectedFoodItem: SelectedFoodItem, f
     if(selectedFoodItem.foodItem.nameId) {
         foodName = getNameFromFoodNameList(foodNamesList, selectedFoodItem.foodItem.nameId, language)
     } else {
-        foodName = 'Individual'
+        foodName = selectedFoodItem.title ?? 'Unknown'
     }
 
     if (foodName === null) {

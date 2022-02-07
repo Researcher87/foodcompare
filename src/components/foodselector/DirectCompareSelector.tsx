@@ -119,7 +119,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
                 <CardDeck>
                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
                                   updateFoodSelectorConfig={updateFoodSelectorConfig}
-                                  smallVariant={true}
+                                  compositeSelector={false}
                                   noCategorySelect={true}
                                   selectedFoodItem={selectedFoodItem}
                                   defaultFoodClass={initialFoodClassToSet}

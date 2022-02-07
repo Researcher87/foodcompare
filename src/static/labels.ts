@@ -151,6 +151,10 @@ export const applicationStrings = {
         de: 'Um die Nährstoffdiagramme zweier Lebensmittel auf einen Blick miteinander vergleichen zu können, gibt es seit der Version 1.2 nun auch einen zusätzlichen Bereich, in denen die Diagramme entsprechend nebeneinander angeordnet sind. Einige Datenseiten wie Vitamine und Mineralstoffe lassen sich dabei auch synchronisieren, so dass eine einheitliche Skalierung der Diagramme stattfindet und nur die Daten angezeigt werden, welche für beide Lebensmittel vorliegen.',
         en: 'In order to compare nutrient charts of two foods at a glance, an additional page was added in version 1.2 where nutrient charts are placed next to each other. Some data pages like vitamins and minerals can also be synchronized, which means that the charts use a unique scaling and only display data that is available in both food elements.'
     },
+    input_compositelist_title: {
+        de: 'Individuelle Liste',
+        en: 'Individual list'
+    },
     label_amount: {
         de: 'Menge (Gramm)',
         en: 'Amount (gram)'
@@ -270,6 +274,10 @@ export const applicationStrings = {
     label_info: {
         de: 'Info',
         en: 'Info'
+    },
+    label_info_composite: {
+        de: 'Enthaltene Lebensmittel',
+        en: 'Contained food elements'
     },
     label_info_category: {
         de: 'Kategorie',
@@ -750,6 +758,10 @@ export const applicationStrings = {
     label_source_combine_tooltip: {
         de: "Bildet den Daten-Mittelwert aus allen Datenquellen zu dem Lebensmittel",
         en: "Create the average data out of all available data sources to this food"
+    },
+    label_title: {
+        de: 'Titel',
+        en: 'Title'
     },
     label_unknown: {
         de: 'Unbekannt',

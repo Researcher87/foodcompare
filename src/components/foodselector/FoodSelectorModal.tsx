@@ -30,6 +30,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     const {language} = useContext(LanguageContext)
 
     const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(null)
+    const [compositeTitle, setCompositeTitle] = useState<string | null>(null)
     const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>([])
     const [showHelpModal, setShowHelpModal] = useState<boolean>(false)
 
@@ -39,6 +40,10 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const updateSelectedFoodItem = (selectedFoodItem: SelectedFoodItem): void => {
         setSelectedFoodItem(selectedFoodItem)
+    }
+
+    const updateCompositeTitle = (title: string): void => {
+        setCompositeTitle(title)
     }
 
     const addCompositeElement = () => {
@@ -93,6 +98,13 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         const preferredSource = applicationContext.applicationData.preferredSource
         let aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
 
+        if (compositeTitle !== null && compositeTitle.trim().length > 0) {
+            const titleToShow = compositeTitle.length < 24 ? compositeTitle.trim() : compositeTitle.substring(0, 21).trim() + "..."
+            aggregatedSelectedFoodItem.title = titleToShow
+        } else {
+            aggregatedSelectedFoodItem.title = applicationStrings.input_compositelist_title[language]
+        }
+
         if (!aggregatedSelectedFoodItem) {
             return
         }
@@ -136,7 +148,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                     {!props.compositeSelector ?
                         <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
                                       defaultFoodClass={initialFoodClassId}
-                                      smallVariant={false}
+                                      compositeSelector={false}
                                       updateFoodSelectorConfig={updateFoodSelectorConfig}
                         />
                         :
@@ -146,7 +158,8 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
                                                   updateFoodSelectorConfig={updateFoodSelectorConfig}
                                                   defaultFoodClass={initialFoodClassId}
-                                                  smallVariant={true}
+                                                  updateCompositeTitle={updateCompositeTitle}
+                                                  compositeSelector={true}
                                     />
                                 </div>
                                 <div className={"col-6"}>

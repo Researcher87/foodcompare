@@ -10,6 +10,7 @@ import {calculateChartContainerHeight} from "../../../service/nutrientdata/Chart
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";
+import {getFoodItem, getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
 
 interface InfoDataProps {
     selectedFoodItem: SelectedFoodItem,
@@ -33,7 +34,7 @@ export function InfoData(props: InfoDataProps) {
         setContainerHeight(calculateChartContainerHeight(windowSize, props.directCompare))
     }, [containerHeight])
 
-    const createRow = (key, value): RowElement => {
+    const createRow = (key: string, value: any): RowElement => {
         return {
             key: key,
             value: value
@@ -118,17 +119,32 @@ export function InfoData(props: InfoDataProps) {
     }
 
 
-    const getTableDataCombinedFood = () => {
-        // const individualList = props.foodItem.individualData;
-        // const tableData = [];
-        //
-        // for(let i=0; i < individualList.length; i++) {
-        //     tableData.push(
-        //         createRow(`${individualList[i].name}:`, `${individualList[i].portion} g`)
-        //     );
-        // }
-        //
-        // return tableData;
+    const makeTableDataCombinedFood = () => {
+        if (!applicationContext) {
+            return
+        }
+
+        const compositeList = props.selectedFoodItem?.compositeSubElements ?? []
+        const tableData: Array<RowElement> = []
+        const {foodNames} = applicationContext.foodDataCorpus
+
+        for (let i = 0; i < compositeList.length; i++) {
+            const foodItem = compositeList[i].foodItem
+            let name = getFoodItemName(foodItem, foodNames, lang)
+            const portion = compositeList[i].portion.amount
+            const conditionId = compositeList[i].foodItem.conditionId
+
+            if (conditionId !== 100) {
+                const condition = applicationContext.foodDataCorpus.conditions.find(condition => condition.id === conditionId)
+                const conditionName = condition ? getName(condition, lang) : null;
+                name += ` (${conditionName})`
+            }
+            tableData.push(
+                createRow(`${name}:`, `${portion} g`)
+            )
+        }
+
+        return tableData;
     }
 
 
@@ -157,36 +173,39 @@ export function InfoData(props: InfoDataProps) {
 
 
     let height = containerHeight
-    if(!props.directCompare) {
+    if (!props.directCompare) {
         height += 86
     }
+
+    const isCompositeFoodElement = props.selectedFoodItem.aggregated === true
 
     return (
         <div>
             <div style={{height: height, maxHeight: height, overflowY: "auto", padding: "15px"}}>
-                {props.selectedFoodItem.foodItem.foodClass !== 0 &&
+                {!isCompositeFoodElement &&
                 <div>
                     <div>
-                        {renderSubTable(getGeneralTableData())}
+                        <div>
+                            {renderSubTable(getGeneralTableData())}
+                        </div>
+                        <div style={{paddingTop: "30px"}}>
+                            <h5>{applicationStrings.label_info_portion[lang]}</h5>
+                            {renderSubTable(getTableDataPortion())}
+                        </div>
                     </div>
-                    <div style={{paddingTop: "30px"}}>
-                        <h5>{applicationStrings.label_info_portion[lang]}</h5>
-                        {renderSubTable(getTableDataPortion())}
+                    <div style={{paddingTop: "20px", paddingBottom: "12px"}}>
+                        <Button variant={'link'} active={true} onClick={onLinkClick}>
+                            {applicationStrings.label_usda_reference[lang]}
+                        </Button>
                     </div>
                 </div>
                 }
-                {props.selectedFoodItem.foodItem.foodClass === 0 &&
+                {isCompositeFoodElement &&
                 <div>
-                    <h5>Individual</h5>
-                    {renderSubTable(getTableDataCombinedFood())}
+                    <h5>{applicationStrings.label_info_composite[lang]}</h5>
+                    {renderSubTable(makeTableDataCombinedFood())}
                 </div>
                 }
-
-                <div style={{paddingTop: "20px", paddingBottom: "12px"}}>
-                    <Button variant={'link'} active={true} onClick={onLinkClick}>
-                        {applicationStrings.label_usda_reference[lang]}
-                    </Button>
-                </div>
             </div>
         </div>
     );

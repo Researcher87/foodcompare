@@ -217,16 +217,20 @@ export const versions = [
         subject: "Layout Change",
         features: [
             "Some layouts have been improved to fit better on small devices and mobile devices.",
+            "Font sizes are more dynamic now and respect manual browser font settings.",
             "The energy chart page also shows the energy data next to the chart now.",
-            "Carotenoids (carotene) is now also displayed in the vitamin data tables. Charts also consider those elements in the vitamin A data now."
+            "Carotenoids (carotene) is now also displayed in the vitamin data tables. Charts also consider those elements in the vitamin A data now.",
+            "Users can enter a title for composite lists and the tab is named after it accordingly.",
         ],
         updates: [
             "The synchronization of charts in the direct comparison view has been improved. The charts will only display data that is available in both selected foods. This leads to a clearer layout (data columns of the two foods appear in one line now).",
-            "Data tables allow multi-line rows now for a better visibility."
+            "Data tables allow multi-line rows now for a better visibility.",
+            "The info page now lists all elements in a composite list. The broken link to the USDA website was removed."
         ],
         bugfixes: [
             "Some typos have been fixed.",
             "Code smells have been removed.",
+            "The 100 gram / amount radio buttons in the mineral chart view were broken. Has been fixed."
             ]
     },
 ]

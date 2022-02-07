@@ -25,7 +25,8 @@ import {correspondingSelectElementStyle, customSelectStyles} from "../../config/
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
     updateFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, supplementData: boolean, combineData: boolean) => void
-    smallVariant: boolean
+    updateCompositeTitle?: (compositeTitle: string) => void
+    compositeSelector: boolean
     noCategorySelect?: boolean
     initialFoodClassToSet?: number
     selectedFoodItem?: SelectedFoodItem | null
@@ -66,6 +67,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const [selectedFoodItem, setSelectedFoodItem] = useState<ReactSelectFoodItemOption | null>(null)
     const [selectedPortion, setSelectedPortion] = useState<ReactSelectPortionOption | null>(null)
     const [portionAmount, setPortionAmount] = useState<number>(0)
+    const [title, setTitle] = useState<string>(applicationStrings.input_compositelist_title[language])
     const [selectedSource, setSelectedSource] = useState<ReactSelectOption | null>(null)
     const [supplementData, setSupplementData] = useState<boolean>(initialSupplementValue)
     const [combineData, setCombineData] = useState<boolean>(initialCombineValue)
@@ -156,6 +158,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             selectedCategory,
             selectedSource,
             portionAmount,
+            title,
             supplementData,
             combineData
         ]
@@ -184,6 +187,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const handlePortionChange = (portion: ReactSelectPortionOption) => {
         setSelectedPortion(portion)
         setPortionAmount(portion.value.amount)
+    }
+
+    const handleTitleChange = (event) => {
+        setTitle((event.target.value))
+        if(props.updateCompositeTitle !== undefined) {
+            props.updateCompositeTitle(event.target.value)
+        }
     }
 
     const handleSourceChange = (source: ReactSelectOption) => {
@@ -410,18 +420,37 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
 
-    const amount_label = props.smallVariant
+    const amount_label = props.compositeSelector
         ? `${applicationStrings.label_amount_short[language]}:`
         : `${applicationStrings.label_amount[language]}:`
     const initialFoodClass = getInitialFoodClassNumber(foodClassesList)
 
     const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
     const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm" : "form-control"
-    const formClass = props.smallVariant ? "form-section-small" : "form-section"
+    const formClass = props.compositeSelector ? "form-section-small" : "form-section"
 
+    // Remove hidden food class information in the label, which is only used to facilitate user search (e.g. find 'Cheese' for term 'Gouda')
+    const foodclassFormatter = (option) => {
+        const label = option.label
+        if (label.includes("||")) {
+            const pos = label.indexOf("||")
+            return label.substring(0, pos)
+        }
+        return label
+    }
 
     return <div>
         <div className="container">
+            {props.compositeSelector === true &&
+            <div>
+                <span className={'form-label'}>{applicationStrings.label_title[language]}:</span>
+                <input className={inputClass}
+                       value={title}
+                       style={correspondingSelectElementStyle}
+                       onChange={handleTitleChange}
+                />
+            </div>
+            }
             {props.noCategorySelect !== true &&
             <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>

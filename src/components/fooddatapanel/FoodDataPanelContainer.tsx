@@ -128,6 +128,7 @@ export default function FoodDataPanelContainer() {
                     applicationContext.foodDataCorpus.foodNames, languageContext.language)
 
                 if (selectedFoodItemWithComponent) {
+                    selectedFoodItemWithComponent.aggregated = true
                     addItemToFoodDataPanel(selectedFoodItemWithComponent)
                 }
             } catch (e) {
