@@ -25,6 +25,7 @@ import {
 } from "../../types/livedata/ChartConfigData";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 import {useWindowDimension} from "../../service/WindowDimension";
+import {VerticalLabel} from "./VerticalLabel";
 
 /**
  * Re-usable direct compare chart component for pie-chart data pages (Lipids, Carbs, Base Data)
@@ -247,7 +248,7 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}
                  key={"directcompare container" + containerHeight}>
-                <div className={"vertical-label"}>{props.selectedFoodItem1.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
                 {getChartComponent(props.selectedFoodItem1, 1)}
             </div>
         </Card>
@@ -255,7 +256,7 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}
                  key={"directcompare container" + containerHeight}>
-                <div className={"vertical-label"}>{props.selectedFoodItem2.resolvedName}</div>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
                 {getChartComponent(props.selectedFoodItem2, 2)}
             </div>
         </Card>

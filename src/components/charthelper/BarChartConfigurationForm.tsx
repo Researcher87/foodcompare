@@ -9,9 +9,11 @@ export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
+    console.log('Selected food item:', props.selectedFoodItem)
+
     const label_portion = props.selectedFoodItem
         ?`${applicationStrings.label_portion[lang]} (${props.selectedFoodItem.portion.amount} g)`
-        : applicationStrings.label_portion[lang]
+        : applicationStrings.label_portion_selected[lang]
 
     return (
         <div className="container-fluid">
@@ -20,7 +22,7 @@ export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
                     <Form.Label className={"form-elements"}>
                         <b>{applicationStrings.label_reference[lang]}:</b>
                     </Form.Label>
-                    <Form.Check className="form-radiobutton"
+                    <Form.Check className="form-radiobutton mr-4"
                                 type="radio"
                                 inline={true}
                                 label={"100g"}
@@ -28,10 +30,9 @@ export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
                                 checked={(props.portionType === GRAM)}
                                 onChange={props.handleRadioButtonClick}
                     />
-                    <Form.Check className="form-radiobutton"
+                    <Form.Check className="form-radiobutton form-horizontal-separation"
                                 type="radio"
                                 inline={true}
-                                style={{paddingRight: "48px"}}
                                 label={label_portion}
                                 value={AMOUNT_PORTION}
                                 checked={props.portionType === AMOUNT_PORTION}

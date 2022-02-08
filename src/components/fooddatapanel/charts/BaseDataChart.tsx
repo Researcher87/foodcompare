@@ -28,7 +28,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig
             : initialChartConfigData.baseChartConfig
 
-    const showDetailsProp = chartConfig.showDetails
+    const showDetailsProp = chartConfig.showDetails !== undefined
         ? chartConfig.showDetails
         : applicationContext
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.baseChartConfig.showDetails

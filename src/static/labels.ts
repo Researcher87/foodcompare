@@ -719,9 +719,25 @@ export const applicationStrings = {
         de: 'Übersicht',
         en: 'Overview'
     },
+    label_per_100g: {
+        de: 'je 100 g',
+        en: 'per 100 g'
+    },
+    label_per_portion: {
+        de: 'je Portion',
+        en: 'per portion'
+    },
     label_portion: {
         de: 'Portion',
         en: 'Portion'
+    },
+    label_portion_selected: {
+        de: 'Ausgewählte Portion',
+        en: 'Selected portion'
+    },
+    label_portion_common: {
+        de: 'Typische Portion',
+        en: 'Typical portion'
     },
     label_prefix_hereof: {
         de: 'davon',
@@ -1024,7 +1040,7 @@ export const applicationStrings = {
         en: "In this section you may display food items sorted by a specific nutrient, vitamin or mineral. Please select a food category, nutrient group and value to display the corresponding ranking chart."
     },
     text_setUserdata_p1: {
-        de: 'Es werden aktuell Standardwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',
+        de: 'Es werden aktuell Referenzwerte für einen durchschnittlichen Erwachsenen (männlich, 35 Jahre) angezeigt.',
         en: 'You are currently seeing the reference data for an average adult (male, 35 years).'
     },
     text_setUserdata_p2: {

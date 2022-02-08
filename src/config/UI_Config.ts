@@ -1,5 +1,5 @@
-const fontsize = "1.75vh"
-const selectHeight = "3.75vh"
+const fontsize = "calc(0.5rem + 0.3vw)"
+const selectHeight = "calc(0.5rem + 0.3vw)*2.2"
 
 export const customSelectStyles = {
     control: base => ({
@@ -12,7 +12,8 @@ export const customSelectStyles = {
         ...provided,
         height: selectHeight,
         minHeight: selectHeight,
-        padding: '0 2px'
+        padding: '0 2px',
+        fontsize: fontsize
     }),
     dropdownIndicator: (styles) => ({
         ...styles,

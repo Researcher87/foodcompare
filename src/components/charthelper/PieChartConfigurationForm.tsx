@@ -24,8 +24,7 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
                                 onChange={props.handleRadioButtonClick}>
                     </Form.Check>
                     <Form.Check inline={true}
-                                className="form-radiobutton"
-                                style={{paddingRight: "48px"}}
+                                className="form-radiobutton form-horizontal-separation"
                                 label={applicationStrings.label_charttype_bar[languageContext.language]}
                                 type="radio"
                                 value={CHART_TYPE_BAR}
