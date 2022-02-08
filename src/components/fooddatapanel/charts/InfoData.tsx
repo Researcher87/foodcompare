@@ -47,7 +47,7 @@ export function InfoData(props: InfoDataProps) {
         }
 
         const foodNameId = props.selectedFoodItem.foodItem.nameId
-        const foodName = foodNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodNameId, lang) : ''
+        const foodName = foodNameId ? getNameFromFoodNameList(applicationContext.foodDataCorpus.foodNames, foodNameId, lang, true) : ''
 
         const foodClass = props.selectedFoodItem.foodClass;
         const foodClassNameId = foodClass ? foodClass.nameKey : null
@@ -130,7 +130,7 @@ export function InfoData(props: InfoDataProps) {
 
         for (let i = 0; i < compositeList.length; i++) {
             const foodItem = compositeList[i].foodItem
-            let name = getFoodItemName(foodItem, foodNames, lang)
+            let name = getFoodItemName(foodItem, foodNames, lang, true)
             const portion = compositeList[i].portion.amount
             const conditionId = compositeList[i].foodItem.conditionId
 

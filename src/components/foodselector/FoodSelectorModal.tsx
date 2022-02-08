@@ -99,7 +99,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         let aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
 
         if (compositeTitle !== null && compositeTitle.trim().length > 0) {
-            const titleToShow = compositeTitle.length < 24 ? compositeTitle.trim() : compositeTitle.substring(0, 21).trim() + "..."
+            const titleToShow = compositeTitle.length <= 32 ? compositeTitle.trim() : compositeTitle.substring(0, 29).trim() + "..."
             aggregatedSelectedFoodItem.title = titleToShow
         } else {
             aggregatedSelectedFoodItem.title = applicationStrings.input_compositelist_title[language]

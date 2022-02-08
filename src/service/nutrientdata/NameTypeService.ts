@@ -25,11 +25,11 @@ export function getReactSelectOptionsList(nameTypeList: Array<NameType>, languag
 }
 
 
-export function getNameFromFoodNameList(foodNameList: Array<NameType>, id: number, language: string): string | null {
+export function getNameFromFoodNameList(foodNameList: Array<NameType>, id: number, language: string, verbose = false): string | null {
     const nameType = foodNameList.find(nameType => nameType.id === id)
 
     if(nameType) {
-        return getName(nameType, language)
+        return getName(nameType, language, verbose)
     } else {
         console.error('Could not resolve name for food with name id = ', id)
         return null
