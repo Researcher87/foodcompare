@@ -14,7 +14,7 @@ import {ANALYTICS_MESS_ID} from "./config/ApplicationKeys";
 
 import MobileDeviceCheck from "./components/MobileDeviceCheck";
 import {WebPageContainer} from "./components/WebPageContainer";
-import {isMobile} from "react-device-detect";
+import {parseFoodCompareUri} from "./service/uri/BaseUriService";
 
 
 const ga4react = new GA4React(ANALYTICS_MESS_ID);
@@ -34,7 +34,10 @@ function App(): JSX.Element {
         ReactTooltip.rebuild()
     })
 
-    initializeGA4()
+    const uriData: string | null = parseFoodCompareUri()
+    if(uriData !== "test" && uriData !== "debug") {
+        initializeGA4()  // Initialize Google Analytics Tool if the app is not run in test/debug mode
+    }
 
     return (
         <div className="App">
