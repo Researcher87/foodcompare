@@ -130,7 +130,7 @@ export function InfoData(props: InfoDataProps) {
 
         for (let i = 0; i < compositeList.length; i++) {
             const foodItem = compositeList[i].foodItem
-            let name = getFoodItemName(foodItem, foodNames, lang, true)
+            let name = getFoodItemName(foodItem, foodNames, lang)
             const portion = compositeList[i].portion.amount
             const conditionId = compositeList[i].foodItem.conditionId
 
