@@ -427,14 +427,12 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
     const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm" : "form-control"
-
     const formClass = props.compositeSelector ? "form-section-small" : "form-section"
 
     // Remove hidden food class information in the label, which is only used to facilitate user search (e.g. find 'Cheese' for term 'Gouda')
     const foodclassFormatter = (option) => {
         const label = option.label
-
-        if(label.includes("||")) {
+        if (label.includes("||")) {
             const pos = label.indexOf("||")
             return label.substring(0, pos)
         }
