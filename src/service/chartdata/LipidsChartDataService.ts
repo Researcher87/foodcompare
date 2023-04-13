@@ -16,7 +16,6 @@ export function getTotalLipidsChartData(lipidsData: LipidData, hideRemainders: b
     valueRemainder = autoRound(valueRemainder / portionAmount * 100);
 
     if (valueRemainder < 0) {
-        console.error("Fatty acids sum is erroneous.")
         valueRemainder = 0
     }
 

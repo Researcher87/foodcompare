@@ -9,8 +9,6 @@ export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
 
-    console.log('Selected food item:', props.selectedFoodItem)
-
     const label_portion = props.selectedFoodItem
         ?`${applicationStrings.label_portion[lang]} (${props.selectedFoodItem.portion.amount} g)`
         : applicationStrings.label_portion_selected[lang]

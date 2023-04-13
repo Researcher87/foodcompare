@@ -17,7 +17,6 @@ export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category:
     filteredFoodClasses.forEach(foodClass => {
         const nameId = foodClass.nameKey
         if (nameId > foodNames.length) {
-            console.error(`Illegal food name Id in food class having ID=${foodClass.id}`)
             return
         }
         const nameType = foodNames[nameId - 1]

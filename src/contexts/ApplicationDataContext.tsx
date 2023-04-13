@@ -21,6 +21,7 @@ import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
 import ReactSelectOption from "../types/ReactSelectOption";
+import {parseFoodCompareUri} from "../service/uri/BaseUriService";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
@@ -60,6 +61,15 @@ export interface ApplicationContext extends ApplicationDataContext {
 export const ApplicationDataContextStore = createContext<ApplicationContext | null>(null)
 
 export default class ApplicationDataContextProvider extends Component<any, ApplicationDataContext> {
+    setDebugState = (debug: boolean) => {
+        this.setState(prevState => ({
+            applicationData: {
+                ...prevState.applicationData,
+                    debug: debug
+            }
+        }))
+    }
+
     setSelectedFoodDataPanelTab = (selectedTab: number) => {
         this.setState(prevState => ({
             applicationData: {
@@ -281,6 +291,11 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         )
     }
 
+    isDebugMode(): boolean {
+        const uriData: string | null = parseFoodCompareUri()
+        return uriData !== "test" && uriData !== "debug" ? false : true
+    }
+
     state: ApplicationDataContext = {
         foodDataCorpus: {
             categories: [],
@@ -339,7 +354,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             leisureSports: initialUserDataLeisureSports,
             initialValues: true
         },
-        debug: false,
+        debug: this.isDebugMode(),
         ready: false,
         useAsMobile: null
     }

@@ -20,7 +20,6 @@ export function makeFoodDataPanelComponent(selectedFoodItem: SelectedFoodItem, f
     }
 
     if (foodName === null) {
-        console.error('No food name available.')
         return null
     }
 

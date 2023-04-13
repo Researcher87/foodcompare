@@ -178,7 +178,6 @@ export function convertAbsoluteValueToDailyRequirement(dailyRequirements: Dietar
     }
 
     if (!dailyRequirementObject) {
-        console.error('No requirement data object generated.')
         return 0
     }
 

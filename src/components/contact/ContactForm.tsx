@@ -15,9 +15,11 @@ import {
 } from "../../config/ErrorMessageCodes";
 import {RECAPTCHA_KEY, SERVICE_ID, TEMPLATE_ID, USER_ID} from "../../config/ApplicationKeys";
 import emailjs from "emailjs-com";
+import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 
 export function ContactForm() {
     const language = useContext(LanguageContext).language
+    const applicationContext = useContext(ApplicationDataContextStore)
 
     const [name, setName] = useState("")
     const [mailAddress, setMailAdress] = useState("")
@@ -100,7 +102,9 @@ export function ContactForm() {
                 setMailAdress("")
                 setCharacters(0)
             }, (error) => {
-                console.log(error.text);
+                if(applicationContext.debug) {
+                    console.log(error.text);
+                }
                 NotificationManager.info(applicationStrings.message_email_error[language])
             });
     }

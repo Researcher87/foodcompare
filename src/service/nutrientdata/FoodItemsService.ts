@@ -60,7 +60,6 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
 export function getFoodItemName(foodItem: FoodItem, foodNames: Array<NameType>, language: string, verbose = false): string | null {
     const nameId = foodItem.nameId!!
     if(nameId > foodNames.length) {
-        console.error(`Illegal food name Id in food item having ID=${foodItem.id}`)
         return null
     }
     const nameType = foodNames[nameId-1]

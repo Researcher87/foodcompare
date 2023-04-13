@@ -132,7 +132,9 @@ export default function FoodDataPanelContainer() {
                     addItemToFoodDataPanel(selectedFoodItemWithComponent)
                 }
             } catch (e) {
-                console.log(e)
+                if(applicationContext.debug) {
+                    console.log(e)
+                }
             }
         }
 
