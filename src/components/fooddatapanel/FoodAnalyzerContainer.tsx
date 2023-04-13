@@ -12,6 +12,7 @@ import ReactTooltip from "react-tooltip";
 import {useHistory} from 'react-router-dom';
 import {PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
+import {isMobileDevice} from "../../service/WindowDimension";
 
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
@@ -22,7 +23,7 @@ interface FoodAnalyzerContainerProps {
 export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
-	const history = useHistory()
+    const history = useHistory()
 
     const showFoodSelectorInitialState = props.openSelectorModal === true
     const showCompositeFoodSelectorInitialState = props.openCompositeSelectorModal === true
@@ -33,10 +34,10 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     useEffect(() => {
         ReactTooltip.rebuild()
     })
-    
+
     ReactTooltip.rebuild()
 
-    if(!applicationContext) {
+    if (!applicationContext) {
         return <div/>
     }
 
@@ -53,7 +54,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
         const selectedFoodItemWithComponent = makeFoodDataPanelComponent(
             selectedFoodItem, applicationContext.foodDataCorpus.foodNames, languageContext.language)
 
-        if(selectedFoodItemWithComponent !== null) {
+        if (selectedFoodItemWithComponent !== null) {
             applicationContext.setFoodDataPanelData.addItemToFoodDataPanel(selectedFoodItemWithComponent)
         }
 
@@ -84,29 +85,34 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
     ReactTooltip.rebuild()
 
+    const buttonClass = isMobileDevice() ? "btn mb-4" : "btn mb-4 foodanalyzer-button"
+
     return (
         <div className={"foodanalyzer-buttonbar"}>
             <div>
                 {showFoodSelector &&
-                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={false}/>
+                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit}
+                                   compositeSelector={false}/>
                 }
-                { showFoodAggregatedFoodSelector &&
-                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit} compositeSelector={true}/>
+                {showFoodAggregatedFoodSelector &&
+                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit}
+                                   compositeSelector={true}/>
                 }
                 <div className={"d-flex flex-column align-items-center"}>
                     <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
-                            className={"btn mb-4 foodanalyzer-button"}
+                            className={buttonClass}
                             data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
                         <FaPlusSquare/>
                     </Button>
                     <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
-                            className={"btn mb-4 foodanalyzer-button"}
+                            className={buttonClass}
+                            disabled={isMobileDevice()}
                             data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
                         <FaLayerGroup/>
                     </Button>
                     <Button onClick={() => onCloseAllTabs()}
                             disabled={deleteIconEnabled === false}
-                            className={"btn mb-4 foodanalyzer-button"}
+                            className={buttonClass}
                             data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>
                         <FaTrash/>
                     </Button>

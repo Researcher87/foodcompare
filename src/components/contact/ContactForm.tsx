@@ -102,7 +102,7 @@ export function ContactForm() {
                 setMailAdress("")
                 setCharacters(0)
             }, (error) => {
-                if(applicationContext.debug) {
+                if(applicationContext?.debug) {
                     console.log(error.text);
                 }
                 NotificationManager.info(applicationStrings.message_email_error[language])
