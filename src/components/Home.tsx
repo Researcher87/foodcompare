@@ -5,14 +5,12 @@ import {applicationStrings} from "../static/labels";
 
 import homeText1 from "../static/hometext1.json";
 import homeText2 from "../static/hometext2.json";
+import homeText3 from "../static/hometext3.json";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Link} from 'react-router-dom';
 import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
-import MobileDeviceCheck from "./MobileDeviceCheck";
-import {isMobile} from "react-device-detect";
-import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {isMobileDevice} from "../service/WindowDimension";
 
 const images = require.context('../static/image/carousel', true);
@@ -24,8 +22,7 @@ interface HomeTextElement {
 }
 
 export function Home() {
-    const applicationContext = useContext(ApplicationDataContextStore)
-    const languageContext = useContext(LanguageContext)
+    const {language} = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
 
     const imageChanged = (image) => {
@@ -33,18 +30,16 @@ export function Home() {
     }
 
     const renderCarousel = () => {
-        let langKey = languageContext.language
-
-        const pic1 = images(`./Img-${langKey}-1.png`).default;
-        const pic2 = images(`./Img-${langKey}-2.png`).default;
-        const pic3 = images(`./Img-${langKey}-3.png`).default;
-        const pic4 = images(`./Img-${langKey}-4.png`).default;
-        const pic5 = images(`./Img-${langKey}-5.png`).default;
-        const pic6 = images(`./Img-${langKey}-6.png`).default;
-        const pic7 = images(`./Img-${langKey}-7.png`).default;
+        const pic1 = images(`./Img-${language}-1.png`).default;
+        const pic2 = images(`./Img-${language}-2.png`).default;
+        const pic3 = images(`./Img-${language}-3.png`).default;
+        const pic4 = images(`./Img-${language}-4.png`).default;
+        const pic5 = images(`./Img-${language}-5.png`).default;
+        const pic6 = images(`./Img-${language}-6.png`).default;
+        const pic7 = images(`./Img-${language}-7.png`).default;
 
         const captionAttribute = `home_carousel_${displayedImage}`;
-        const imageCaption = applicationStrings[captionAttribute][languageContext.language];
+        const imageCaption = applicationStrings[captionAttribute][language];
 
         return (
             <div style={{paddingBottom: "40px"}}>
@@ -85,18 +80,21 @@ export function Home() {
         );
     }
 
+    // const buttonColors = ["#f9e79f", "#d5f5e3", "#fadbd8", "#aed6f1"];
+    const buttonBgColor = "#2952a3"
+    const buttonTextColor = "#FFFFFF"
 
     const renderStartButtons = () => {
         return (
             <div style={{paddingTop: "16px"}}>
-                <b>{applicationStrings.label_getStarted[languageContext.language]}</b>
+                <b>{applicationStrings.label_getStarted[language]}</b>
                 <div className={"text-center"}>
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
                             <button type="button"
                                     className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: "#f9e79f"}}>
-                                {applicationStrings.button_getstarted_1[languageContext.language]}
+                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                {applicationStrings.button_getstarted_1[language]}
                             </button>
                         </Link>
                     </div>
@@ -104,8 +102,8 @@ export function Home() {
                         <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
                             <button type="button"
                                     className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: "#d5f5e3"}}>
-                                {applicationStrings.button_getstarted_2[languageContext.language]}
+                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                {applicationStrings.button_getstarted_2[language]}
                             </button>
                         </Link>
                     </div>
@@ -113,8 +111,8 @@ export function Home() {
                         <Link to={PATH_DIRECT_COMPARE}>
                             <button type="button"
                                     className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: "#fadbd8"}}>
-                                {applicationStrings.button_getstarted_3[languageContext.language]}
+                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                {applicationStrings.button_getstarted_3[language]}
                             </button>
                         </Link>
                     </div>
@@ -122,8 +120,8 @@ export function Home() {
                         <Link to={PATH_RANKING}>
                             <button type="button"
                                     className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: "#aed6f1"}}>
-                                {applicationStrings.button_getstarted_4[languageContext.language]}
+                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                {applicationStrings.button_getstarted_4[language]}
                             </button>
                         </Link>
                     </div>
@@ -138,7 +136,7 @@ export function Home() {
     }
 
     const renderTextElement = (textElement: HomeTextElement, index: number): JSX.Element => {
-        const text = languageContext.language === LANGUAGE_DE ? textElement.de : textElement.en
+        const text = language === LANGUAGE_DE ? textElement.de : textElement.en
 
         switch (textElement.type) {
             case "paragraph":
@@ -147,9 +145,9 @@ export function Home() {
                 return (
                     <div key={`homeitem ${index}`}>
                         <br/>
-                        <h3>
+                        <h4>
                             {text}
-                        </h3>
+                        </h4>
                         <hr/>
                     </div>
                 )
@@ -181,6 +179,7 @@ export function Home() {
                             <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
                                 {renderStartButtons()}
                             </div>
+                            {renderHomeText(homeText2)}
                         </div>
                         {!isMobileDevice() &&
                         <div className={"col-7"} style={{paddingLeft: "45px"}}>
@@ -189,9 +188,12 @@ export function Home() {
                         }
                     </div>
                     <hr/>
-                    <div className="card-header"
-                         style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
-                        {renderHomeText(homeText2)}
+                    <div style={{paddingTop: "30px"}}>
+                        <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
+                        <div className="card-header"
+                             style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                            {renderHomeText(homeText3)}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -54,13 +54,16 @@ export default function Header() {
     const renderMenus = () => {
         const menuNameAnalyze = isMobileDevice() ? applicationStrings.menu_food_data_panel_m[language] : applicationStrings.menu_food_data_panel[language]
         const menuNameDirectCompare = isMobileDevice() ? applicationStrings.menu_direct_compare_m[language] : applicationStrings.menu_direct_compare[language]
+        const menuNameRanking = isMobileDevice() ? applicationStrings.menu_ranking_m[language] : applicationStrings.menu_ranking[language]
         const menuNameSettings = isMobileDevice() ? applicationStrings.menu_settings_m[language] : applicationStrings.menu_settings[language]
+
+        const buttonContainerClass = isMobileDevice() ? "link header-link-mobile" : "link header-link"
 
         return (
             <div className="btn-group flex flex-wrap" role="group">
                 <div className="header-menu">
                     <Link to={PATH_HOME}>
-                        <Button className="header-link"
+                        <Button className={buttonContainerClass}
                                 value={PATH_HOME}
                                 variant={'link'}
                                 active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
@@ -68,9 +71,9 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
-                <div className="header-menu">
+                <div>
                     <Link to={PATH_FOODDATA_PANEL}>
-                        <Button className="header-link"
+                        <Button className={buttonContainerClass}
                                 value={PATH_FOODDATA_PANEL}
                                 variant={'link'}
                                 active={activePath === PATH_FOODDATA_PANEL}>
@@ -78,9 +81,9 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
-                <div className="header-menu">
+                <div>
                     <Link to={PATH_DIRECT_COMPARE}>
-                        <Button className="header-link"
+                        <Button className={buttonContainerClass}
                                 value={PATH_DIRECT_COMPARE}
                                 variant={'link'}
                                 active={activePath === PATH_DIRECT_COMPARE}>
@@ -88,20 +91,20 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
-                <div className="header-menu">
+                <div>
                     <Link to={PATH_RANKING}>
-                        <Button className="header-link"
+                        <Button className={buttonContainerClass}
                                 value={PATH_RANKING}
                                 variant={'link'}
                                 active={activePath === PATH_RANKING}>
-                            {applicationStrings.menu_ranking[language]}
+                            {menuNameRanking}
                         </Button>
                     </Link>
                 </div>
                 {!isMobileDevice() &&
-                <div className="header-menu">
+                <div>
                     <Link to={PATH_MOBILE_APP}>
-                        <Button className="header-link"
+                        <Button className={buttonContainerClass}
                                 value={PATH_MOBILE_APP}
                                 variant={'link'}
                                 active={activePath === PATH_MOBILE_APP}>
@@ -110,9 +113,9 @@ export default function Header() {
                     </Link>
                 </div>
                 }
-                <div className="header-menu">
+                <div>
                     <Link to={PATH_USERSETTINGS}>
-                        <Button className="header-link"
+                        <Button className={buttonContainerClass}
                                 value={PATH_USERSETTINGS}
                                 variant={'link'}
                                 active={activePath === PATH_USERSETTINGS}>
@@ -120,9 +123,9 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
-                <div className="header-menu">
+                <div>
                     <Link to={PATH_CONTACT}>
-                        <Button className="link header-link"
+                        <Button className={buttonContainerClass}
                                 variant={'link'}
                                 value={PATH_CONTACT}
                                 active={activePath === PATH_CONTACT}>

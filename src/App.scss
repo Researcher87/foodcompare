@@ -133,9 +133,15 @@ $usersettings-palwidth: 60ch;
 }
 
 .header-link {
-    margin-top: 1.0vh;
+    margin-top: 0.3vh;
+    padding-right: 1.2vw !important;
     font-size: $fontsize-forms;
-    padding-right: 2.5vh !important;
+    color: #969696 !important;
+}
+
+.header-link-mobile {
+    font-size: $fontsize-forms;
+    padding-right: 0.5vw !important;
     color: #969696 !important;
 }
 
@@ -146,6 +152,14 @@ $usersettings-palwidth: 60ch;
     color: #0064ff !important;
     text-decoration: underline;
 }
+
+.header-link-mobile .focus, .header-link-mobile:focus, .header-link-mobile.active, .header-link-mobile:active, .header-link-mobile:active:focus, .header-link-mobile.active:focus, .header-link-mobile.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+    color: #0064ff !important;
+    text-decoration: underline;
+}
+
 
 
 /*** 6. Home Menu ***/

@@ -151,6 +151,10 @@ export const applicationStrings = {
         de: 'Um die Nährstoffdiagramme zweier Lebensmittel auf einen Blick miteinander vergleichen zu können, gibt es seit der Version 1.2 nun auch einen zusätzlichen Bereich, in denen die Diagramme entsprechend nebeneinander angeordnet sind. Einige Datenseiten wie Vitamine und Mineralstoffe lassen sich dabei auch synchronisieren, so dass eine einheitliche Skalierung der Diagramme stattfindet und nur die Daten angezeigt werden, welche für beide Lebensmittel vorliegen.',
         en: 'In order to compare nutrient charts of two foods at a glance, an additional page was added in version 1.2 where nutrient charts are placed next to each other. Some data pages like vitamins and minerals can also be synchronized, which means that the charts use a unique scaling and only display data that is available in both food elements.'
     },
+    home_foodcompare_overview: {
+      de: 'Food Compare im Überblick',
+      en: 'Food Compare at a Glance'
+    },
     input_compositelist_title: {
         de: 'Individuelle Liste',
         en: 'Individual list'
@@ -840,7 +844,7 @@ export const applicationStrings = {
         en: 'Food analyzer'
     },
     menu_food_data_panel_m: {
-        de: 'Analysieren',
+        de: 'Analyse',
         en: 'Analyze'
     },
     menu_direct_compare: {
@@ -848,7 +852,7 @@ export const applicationStrings = {
         en: 'Direct comparison'
     },
     menu_direct_compare_m: {
-        de: 'Vergleichen',
+        de: 'Vergleich',
         en: 'Compare'
     },
     menu_home: {
@@ -862,6 +866,10 @@ export const applicationStrings = {
     menu_ranking: {
         de: 'Ranking',
         en: 'Food ranking'
+    },
+    menu_ranking_m: {
+        de: 'Ranking',
+        en: 'Ranking'
     },
     menu_settings: {
         de: 'User Einstellungen',

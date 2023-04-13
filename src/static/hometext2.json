@@ -1,72 +1,42 @@
 [
   {
-    "type": "subheading",
-    "de": "Lebensmittel analysieren",
-    "en": "Food Analysis"
-  },
-  {
-    "type": "paragraph",
-    "de": "Food Compare umfasst mehr als 170 Lebensmittel, die händisch ausgewählt und zusammengestellt wurden. Die Daten entstammen der USDA, welche die weltweit größte Datenbank für detaillierte Lebensmitteldaten bereitstellt.",
-    "en": "Food Compare contains more than 170 foods that were manually selected and added to the web project. The USDA has served as our primary source, which provides the world-largest nutrient database."
-  },
-  {
-    "type": "paragraph",
-    "de": "Die Anwendung erlaubt es, beliebig viele Lebensmittel auszuwählen, die in separaten Tabs des Datenbereichs angezeigt werden. Der Datenbereich enthält verschiedene Rubriken, die einzelne Informationen zu dem Lebensmittel umfassen, z.B. die Gesamtzusammensetzung, Energiegehalt, Vitamine, Fettsäuren etc.",
-    "en": "The application allows the selection of multiple foods that will be displayed in separate data tabs. The data panel comprises several sections that contain separate pieces of informationen, such as the total nutrient composition, energy amount, vitamins, fatty acids and the like."
-  },
-  {
-    "type": "subheading",
-    "de": "Zusammenstellung von Lebensmitteln",
-    "en": "Composite Food Data"
-  },
-  {
-    "type": "paragraph",
-    "de": "Die Anwendung erlaubt es auch, komplexe Lebensmittel oder Mahlzeiten zusammenzustellen und die Gesamtzahl an Inhaltsstoffen dafür anzuzeigen. Diese Funktion ist nützlich, wenn der Nährstoffgehalt von Menüs berechnet werden soll, die aus verschiedenen Lebensmitteln bestehen, oder wenn ermitteln werden soll, wie viele Nährstoffe man in einem bestimmten Zeitraum, z.B. einem Tag, zu sich genommen hat.",
-    "en": "Additionally, Food Compare allows you to combine different foods to composite food elements. This feature seems useful for people who are interested in the composition of menus consisting of different foods, or who want to determine the total amount of nutrients they consumed within a specific time, like a day."
-  },
-  {
-    "type": "paragraph",
-    "de": "Um eine solche Kombination an Lebensmitteln vorzunehmen, klickt man im Analyse-Bereich auf das Stapel-Icon und kann dann verschiedene Lebensmittel in frei definierbaren Portionsgrößen zusammenstellen. Klickt man auf Anzeigen, so öffnet sich im Datenbereich ein neues Tab mit dem zusammengestellten Menü.",
-    "en": "In order to create a composite food, click the stack button on the food analyze page and add foods to your composite list. Individual portion sizes can be set. Once you have clicked the show button, the composite food will be added to the food data panel as a new tab."
-  },
-  {
-    "type": "subheading",
-    "de": "Direktvergleich",
-    "en": "Direct Comparison"
-  },
-  {
-    "type": "paragraph",
-    "de": "Um die Inhaltsstoffe zweier Lebensmittel gegenüberzustellen, kann man im Menü Direktvergleich zwei beliebige Lebensmittel auswählen und die Nährstoffdaten entsprechend miteinander vergleichen. So lassen sich bspw. die Zusammensetzung oder die Vitamindaten zweier Lebensmittel auf einen Blick erfassen. Bei manchen Diagrammen steht auch die Funktion „synchronisieren“ bereit, so dass die Skalierung der Diagramme bei beiden Lebensmitteln identisch ist – dies erleichtert den schnellen Vergleich.",
-    "en": "For the juxtaposition of food data between two foods, the direct comparison page allows you to pick two foods and compare the data with each other. This allows you to see and compare the nutrient composition or vitamins of two foods on one glance. Some data pages also allow to synchronize the charts, which means that they are scaled the same way; this may additionally help to quickly compare food data."
-  },
-  {
     "type": "paragraph-before-itemization",
-    "de": "Beispiele für Direktvergleiche:",
-    "en": "Examples for direct comparison:"
+    "de": "Was Food Compare zu klassischen Nährstofftabellen unterscheidet:",
+    "en": "Key features of Food Compare:"
   },
   {
     "type": "fancy-item",
-    "de": "Zwei Lebensmittel einer Kategorie, z.B. Apfel und Birne",
-    "en": "Two foods within a category, such as apple and orange"
+    "de": "Darstellung von Nährwertangaben in Diagrammen",
+    "en": "Displaying food data in charts"
   },
   {
     "type": "fancy-item",
-    "de": "Zwei Typen eines Lebensmittel, z.B. Süßkirsche und Sauerkirsche",
-    "en": "Two types of a food, like sweet cherry and sour cherry"
+    "de": "Angaben zu Vitaminen und Mineralstoffen in Bezug zum Tagesbedarf",
+    "en": "Displaying vitamin and mineral data related to daily requirements"
   },
   {
     "type": "fancy-item",
-    "de": "Zwei Zubereitungsarten eines Lebensmittels, z.B. gekochter oder roher Blumenkohl",
-    "en": "Two preparation types of a food, such as cooked cauliflower and raw cauliflower"
+    "de": "Verwendung von typischen Portionsgrößen",
+    "en": "Providing common portion sizes"
   },
   {
-    "type": "subheading",
-    "de": "Ranking von Lebensmitteln",
-    "en": "Food Ranking"
+    "type": "fancy-item",
+    "de": "Mehrfachauswahl von Lebensmitteln (Anzeige in Tabs)",
+    "en": "Allowing multiple selection of food elements (tab view)"
   },
   {
-    "type": "paragraph",
-    "de": "Food Compare ermöglicht es ebenfalls, Lebensmittel nach einem bestimmten Wert, z.B. einen bestimmten Vitamin oder Nährstoff, zu sortieren. Die Anwendung zeigt dabei absteigend sortiert die Lebensmittel der Food Compare Datenbank an, welche die höchsten Vorkommen besitzen. Es können dabei alle Lebensmittel berücksichtigt werden oder die einer bestimmten Lebensmittelkategorie. Zudem kann zwischen einheitlichen 100-Gramm-Portionen und der in Food Compare verwendeten Standardportion unterschieden werden.",
-    "en": "Food Compare also allows you to rank foods by a certain value, such as a specific vitamin or nutrient. The resulting chart will show those food items of the Food Compare database containing the largest amount of that value in a descending order. Either all foods of the application can be taken into account or just the foods of a specific category. Additionally, users can distinguish between the standardized 100 gram portion sizes or the default portion sizes used in the application."
+    "type": "fancy-item",
+    "de": "Gegenüberstellung von Lebensmitteldaten",
+    "en": "Juxtaposition of food data (direct comparison)"
+  },
+  {
+    "type": "fancy-item",
+    "de": "Zusammenstellung von komplexen Lebensmitteln oder Menüs",
+    "en": "Combining different food elements to complex menus"
+  },
+  {
+    "type": "fancy-item",
+    "de": "Freie Konfigurierbarkeit der Portionsgrößen und Anzeigeptionen",
+    "en": "Allowing configuration of portion sizes and view options"
   }
 ]
