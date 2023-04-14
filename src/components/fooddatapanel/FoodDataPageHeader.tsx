@@ -18,7 +18,7 @@ import {
 } from "../../config/Constants";
 import {LanguageContext} from "../../contexts/LangContext";
 import ReactTooltip from "react-tooltip";
-import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
+import {getNameFromFoodNameList, shortenName} from "../../service/nutrientdata/NameTypeService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodDataPageBody from "./FoodDataPageBody";
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
@@ -28,6 +28,7 @@ import getName from "../../service/LanguageService";
 import {ChartMenuPanel} from "./ChartMenuPanel";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import {useHistory} from 'react-router-dom';
+import {isMobileDevice} from "../../service/WindowDimension";
 
 
 interface FoodDataPageHeaderProps {
@@ -122,6 +123,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     if (!props.selectedFoodItem.foodItem.aggregated) {
         const condition = applicationContext.foodDataCorpus.conditions.find(condition => condition.id === props.selectedFoodItem.foodItem.conditionId)
         const conditionName = condition ? getName(condition, languageContext.language) : ""
+        if(isMobileDevice()) {
+            foodName = shortenName(foodName, 16)
+        }
         fullName = `${foodName} (${conditionName}, ${portionSize} g)`
     } else {
         fullName = `${foodName} (${portionSize} g)`
@@ -132,13 +136,15 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
     const sourceToolTip = `${applicationStrings.tooltip_source[languageContext.language]} ${sourceString}`
 
+    const headerLabel = isMobileDevice() ? "header-label-m" : "header-label";
+
     return (
         <div style={{paddingBottom: "6px"}}>
             {helpText !== null &&
             <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}/>
             }
             <div className={"d-flex flex-nowrap"}>
-                <div className="col">
+                <div className="col-2">
                     <div className={"card"}>
                         <div className="card-body" style={{paddingRight: "16px"}}>
                             <ChartMenuPanel verticalArrangement={true} setDataPage={props.setDataPage} dataPage={selectedDataPage}/>
@@ -151,10 +157,10 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                         </div>
                     </div>
                 </div>
-                <div className={"col"}>
+                <div className={"col-10"}>
                     <div className="d-flex flex-row justify-content-between" style={{marginTop: "10px"}}>
                         <div style={{paddingTop: "6px", paddingLeft: "32px"}}>
-                            <div style={{borderBottom: "1px solid #BBBBBB", paddingLeft: "12px", paddingRight: "12px"}}>
+                            <div className={headerLabel}>
                                 <b>{fullName}</b>
                             </div>
                         </div>

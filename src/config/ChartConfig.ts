@@ -30,18 +30,21 @@ export const color_x = "rgba(51, 204, 204)"
 
 export const color_chart_misc = color_gray;
 
-export const basedata_chart_height = 300;
-export const basedata_piechart_width = 300;
-export const basedata_barchart_width = 380;
+// Chart sizes:
 
 export const default_chart_height = 380;
-export const default_chart_width = 800;
+export const default_chart_height_m = 190;
 
-export const direct_compare_chartheight = 300;
+export const basedata_piechart_width = 300;
+export const basedata_piechart_width_m = 200;
 
-export const energy_chart_height = 413;
+export const basedata_barchart_width = 380;
+export const basedata_barchart_width_m = 253;
 
-export const minimal_table_height = energy_chart_height;
+// Food data panel container size:
+
+export const datapanel_container_min_width = 850
+export const datapanel_container_min_width_m = 500
 
 export const max_portion = 5000;
 

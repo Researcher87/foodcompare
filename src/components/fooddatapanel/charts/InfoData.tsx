@@ -7,7 +7,7 @@ import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeSer
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
 import {calculateChartContainerHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
-import {useWindowDimension} from "../../../service/WindowDimension";
+import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";
 import {getFoodItem, getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
@@ -147,11 +147,12 @@ export function InfoData(props: InfoDataProps) {
         return tableData;
     }
 
+    const tableClass = isMobileDevice() ? "table-style-m" : "table-style"
 
     const renderSubTable = (data) => {
         return (
             <div>
-                <BootstrapTable bordered={false} data={data}>
+                <BootstrapTable trClassName={tableClass} bordered={false} data={data}>
                     <TableHeaderColumn className="table-header-no-top-border" dataField='key' isKey width="200px"/>
                     <TableHeaderColumn className="table-header-no-top-border" dataField='value'/>
                 </BootstrapTable>
@@ -209,6 +210,5 @@ export function InfoData(props: InfoDataProps) {
             </div>
         </div>
     );
-
 
 }

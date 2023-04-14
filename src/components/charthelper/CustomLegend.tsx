@@ -1,4 +1,5 @@
 import {ReactElement} from "react";
+import {isMobileDevice} from "../../service/WindowDimension";
 
 interface CustomLegendProps {
     legendData: Array<any>
@@ -15,11 +16,13 @@ export function CustomLegend(props: CustomLegendProps) {
             const verticalSpace = element.separateNextElement ? "15px" : "0px";
             const id = `legendrow ${i}`;
 
+            const legendItemLabelClass = isMobileDevice() ? "legendItemLabel-mobile" : "legendItemLabel"
+
             legend.push(
                 <div key={id} className="row" style={{marginLeft: indent, marginBottom: verticalSpace}}>
-                    <div style={{display: "flex"}}>
+                    <div style={{display: "flex"}} className="align-items-baseline">
                         <div className="legendItem" style={{background: element.color}}></div>
-                        <p className={"legendItemLabel"}>{element.item}</p>
+                        <p className={legendItemLabelClass}>{element.item}</p>
                     </div>
                 </div>
             );

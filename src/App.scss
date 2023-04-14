@@ -7,7 +7,25 @@ $fontsize-small: calc(0.5rem + 0.3vw);                 // Font size for small co
 
 $usersettings-palwidth: 60ch;
 
-/*** 2. Bootstrap Overwrites ***/
+
+/*** 2. Mobile Device Main Settings ***/
+
+// Force Rotation to Landscape mode on mobile devices
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+    html {
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        height: 100vw;
+        overflow-x: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+}
+
+
+/*** 3. Bootstrap Overwrites ***/
 
 .btn {
     font-size: $fontsize-forms !important;
@@ -39,7 +57,7 @@ $usersettings-palwidth: 60ch;
 }
 
 
-/*** 3. Global Form Styles ***/
+/*** 4. Global Form Styles ***/
 
 .form-horizontal-separation {
     padding-right: 2vw;
@@ -116,9 +134,7 @@ $usersettings-palwidth: 60ch;
 
 
 
-
-
-/*** 4. Custom Form Styles ***/
+/*** 5. Custom Form Styles ***/
 
 .contact [type="radio"] {
     display: none;
@@ -126,10 +142,24 @@ $usersettings-palwidth: 60ch;
 
 
 
-/*** 5. Header ***/
+/*** 6. Header ***/
 
 .header {
     background: #d5ce9c;
+}
+
+.header-label {
+    font-size: max(1.0vw, 1.8vh);
+    borderBottom: "1px solid #BBBBBB";
+    paddingLeft: "12px";
+    paddingRight: "12px"
+}
+
+.header-label-m {
+    font-size: max(1.2vw, 1.2vh);
+    borderBottom: "1px solid #BBBBBB";
+    paddingLeft: "6px";
+    paddingRight: "6px"
 }
 
 .header-link {
@@ -162,7 +192,7 @@ $usersettings-palwidth: 60ch;
 
 
 
-/*** 6. Home Menu ***/
+/*** 7. Home Menu ***/
 
 .home {
     padding-top: 1vw;
@@ -172,7 +202,7 @@ $usersettings-palwidth: 60ch;
 
 
 
-/*** Food Analyzer / Direct Compare Menu ***/
+/*** 8. Food Analyzer / Direct Compare Menu ***/
 
 .foodanalyzer-button {
     width: 7vmin;
@@ -211,11 +241,23 @@ $usersettings-palwidth: 60ch;
 }
 
 .legendItemLabel {
-    font-size: 0.8vw;
+    font-size:0.8vw;
+}
+
+.legendItemLabel-mobile {
+    font-size: max(1.2vw, 1.2vh);
 }
 
 .direct-compare-panel {
     height: 60vh;
+}
+
+.table-style {
+    font-size: 16px;
+}
+
+.table-style-m {
+    font-size: 12px;
 }
 
 .vertical-label {
@@ -280,7 +322,7 @@ $usersettings-palwidth: 60ch;
 }
 
 
-/*** App Menu ***/
+/*** 9. App Menu ***/
 
 .mobile-app-img {
     max-height: 75vh;
@@ -299,7 +341,7 @@ $usersettings-palwidth: 60ch;
 
 
 
-/*** User Settings ***/
+/*** 10. User Settings ***/
 
 .usersettings-pal {
     width: $usersettings-palwidth;

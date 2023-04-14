@@ -6,6 +6,7 @@ import {applicationStrings} from "../../static/labels";
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {DISPLAYMODE_CHART} from "../../config/Constants";
+import {isMobileDevice} from "../../service/WindowDimension";
 
 interface FoodDataTableProps {
     tableData: Array<FoodTableDataObject>
@@ -44,12 +45,13 @@ export function FoodDataTable(props: FoodDataTableProps) {
     }
 
     const labelPortion = `${applicationStrings.label_per_portion[language.language]} (${props.portionSize} g)`
+    const tableClass = isMobileDevice() ? "table-style-m" : "table-style"
 
     return (
         <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
             <div>
                 {dataExists &&
-                <BootstrapTable className="table-sm" data={props.tableData} striped hover>
+                <BootstrapTable  trClassName={tableClass} data={props.tableData} striped hover>
                     <TableHeaderColumn isKey dataField='label' dataFormat={formatDataCell}>Element</TableHeaderColumn>
                     <TableHeaderColumn dataField='value_100g'
                                        dataFormat={formatDataCell}>{applicationStrings.label_per_100g[language.language]}</TableHeaderColumn>

@@ -6,6 +6,7 @@ import {FoodDataTable} from "./FoodDataTable";
 import {InfoData} from "./charts/InfoData";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
+import {calculateMinimalDataPanelWidth} from "../../service/nutrientdata/ChartSizeCalculation";
 
 interface FoodDataPageBodyProps {
     tableData: Array<FoodTableDataObject>
@@ -39,12 +40,12 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
     }
 
     return (
-        <div style={{maxWidth: "1200px", minWidth: "850px"}}>
+        <div style={{maxWidth: "1200px", minWidth: calculateMinimalDataPanelWidth()}}>
             {selectedDataPage === TAB_INFO &&
-            <InfoData selectedFoodItem={props.selectedFoodItem}/>
+                 <InfoData selectedFoodItem={props.selectedFoodItem}/>
             }
             {selectedDataPage !== TAB_INFO &&
-            renderDataPage()
+                renderDataPage()
             }
         </div>
     )
