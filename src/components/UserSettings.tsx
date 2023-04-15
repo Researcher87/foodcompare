@@ -20,7 +20,7 @@ import Select from 'react-select';
 import {getPalCategories, getPalCategory} from "../service/calculation/EnergyService";
 import ReactTooltip from "react-tooltip";
 import ReactSelectOption from "../types/ReactSelectOption";
-import {isSmallScreen, useWindowDimension} from "../service/WindowDimension";
+import {isMobileDevice, isSmallScreen, useWindowDimension} from "../service/WindowDimension";
 import {
     checkUserDataValidity,
     USERDATA_ERROR_AGE,
@@ -28,6 +28,7 @@ import {
     USERDATA_ERROR_WEIGHT
 } from "../service/UserDataService";
 import {customSelectStyles} from "../config/UI_Config";
+import {FaLightbulb} from "react-icons/all";
 
 export function UserSettings() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -46,7 +47,7 @@ export function UserSettings() {
     const windowSize = useWindowDimension()
 
     useEffect(() => {
-        if(applicationContext) {
+        if (applicationContext) {
             setAge(applicationContext.userData.age)
             setSize(applicationContext.userData.size)
             setWeight(applicationContext.userData.weight)
@@ -142,11 +143,13 @@ export function UserSettings() {
         NotificationManager.error(message)
     }
 
-    const inputClass =  isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
+    const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
 
     const renderTextField = (label, value, callback) => {
+        const classRow = isMobileDevice() ? "form-row-m" : "form-row"
+
         return (
-            <div className="form-row">
+            <div className={classRow}>
                 <Form.Label className="form-label">{label}:</Form.Label>
                 <FormControl
                     className={inputClass}
@@ -159,9 +162,10 @@ export function UserSettings() {
     }
 
     const renderSexRadioButtons = () => {
+        const classRow = isMobileDevice() ? "form-row-indent-m" : "form-row-indent"
+
         return (
-            <div className="form-row-indent">
-                <Form.Label className="form-elements">
+            <div className={classRow}>
                     <Form.Check type="radio"
                                 inline={true}
                                 label={applicationStrings.label_userSettings_sex_male[lang]}
@@ -169,8 +173,6 @@ export function UserSettings() {
                                 checked={(sex === SEX_MALE)}
                                 onChange={handleRadioButtonClick}
                     />
-                </Form.Label>
-                <Form.Label className="form-elements-largespace">
                     <Form.Check type="radio"
                                 inline={true}
                                 label={applicationStrings.label_userSettings_sex_female[lang]}
@@ -178,14 +180,13 @@ export function UserSettings() {
                                 checked={(sex !== SEX_MALE)}
                                 onChange={handleRadioButtonClick}
                     />
-                </Form.Label>
             </div>
         )
     }
 
     const renderFemaleCheckboxes = () => {
         return (
-            <div className="form" style={{marginLeft: "48px", marginBottom: "10px"}}>
+            <div className="form" style={{marginLeft: "100px"}}>
                 <div>
                     <Form.Check inline className="form-radiobutton"
                                 checked={pregnant === true}
@@ -284,32 +285,37 @@ export function UserSettings() {
     const value_weight = (weight != null) ? weight : initialUserDataWeight
 
     return (
-        <div className="container" style={{paddingTop: "24px"}}>
-            <div className="row userDataSettings">
-                <div className="col-12">
-                    <form>
-                        <FormGroup controlId="formBasicText">
-                            <div className="row">
-                                <div className="col-6">
-                                    {renderTextField(applicationStrings.label_userSettings_age[lang], value_age, changeAge)}
-                                    {renderTextField(applicationStrings.label_userSettings_size[lang], value_size, changeSize)}
-                                    {renderTextField(applicationStrings.label_userSettings_weight[lang], value_weight, changeWeight)}
+        <div>
+            <div className={"m-3"}>
+               <FaLightbulb/> {applicationStrings.label_userSettings_intro[lang]}
+            </div>
+            <div className="container" style={{paddingTop: "24px"}}>
+                <div className="row userDataSettings">
+                    <div className="col-12">
+                        <form>
+                            <FormGroup controlId="formBasicText">
+                                <div className="row">
+                                    <div className="col-6">
+                                        {renderTextField(applicationStrings.label_userSettings_age[lang], value_age, changeAge)}
+                                        {renderTextField(applicationStrings.label_userSettings_size[lang], value_size, changeSize)}
+                                        {renderTextField(applicationStrings.label_userSettings_weight[lang], value_weight, changeWeight)}
+                                    </div>
+                                    <div className="col-6">
+                                        <Form.Label className="form-label" style={{paddingLeft: "20px"}}>
+                                            {applicationStrings.label_userSettings_sex[lang]}
+                                        </Form.Label>
+                                        {renderSexRadioButtons()}
+                                        {renderFemaleCheckboxes()}
+                                    </div>
                                 </div>
-                                <div className="col-6">
-                                    <Form.Label className="form-label" style={{paddingLeft: "20px"}}>
-                                        {applicationStrings.label_userSettings_sex[lang]}
-                                    </Form.Label>
-                                    {renderSexRadioButtons()}
-                                    {renderFemaleCheckboxes()}
+                                <div className="row">
+                                    {renderPalList(applicationContext.userData)}
+                                    {renderActivityCheckboxes()}
                                 </div>
-                            </div>
-                            <div className="row">
-                                {renderPalList(applicationContext.userData)}
-                                {renderActivityCheckboxes()}
-                            </div>
-                        </FormGroup>
-                        {renderSubmitButton()}
-                    </form>
+                            </FormGroup>
+                            {renderSubmitButton()}
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

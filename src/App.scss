@@ -88,12 +88,22 @@ $usersettings-palwidth: 60ch;
     font-size: $fontsize-small;
 }
 
-.form-row, .form-row-indent {
+.form-row {
     padding-bottom: 20px;
+}
+
+.form-row-m {
+    padding-bottom: 10px;
 }
 
 .form-row-indent {
     margin-left: 24px;
+    padding-bottom: 10px;
+}
+
+.form-row-indent-m {
+    margin-left: 16px;
+    padding-bottom: 6px;
 }
 
 .button-apply {

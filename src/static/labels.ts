@@ -792,12 +792,16 @@ export const applicationStrings = {
         en: 'See the nutrient data at Food Data Central'
     },
     label_userSettings_age: {
-        de: 'Alter',
-        en: 'Age'
+        de: 'Alter (Jahre)',
+        en: 'Age (years)'
     },
     label_userSettings_breastfeeding: {
         de: 'stillend',
         en: 'breast-feeding'
+    },
+    label_userSettings_intro: {
+        de: 'Die User-Einstellungen (Körpergröße, Gewicht, Geschlecht etc.) werden zur Berechnung bestimmter Werte verwendet, z.B. Grundumsatz oder Tagesbedarf an Vitaminen.',
+        en: 'User settings such as size, weight and sex are used for different nutrient calculations, e.g., basal metabolic rate or daily requirements of vitamins and the like.'
     },
     label_userSettings_leisureSports: {
         de: 'Freizeitsport',
@@ -828,12 +832,12 @@ export const applicationStrings = {
         en: 'female'
     },
     label_userSettings_size: {
-        de: 'Körpergröße',
-        en: 'Size'
+        de: 'Körpergröße (cm)',
+        en: 'Size (cm)'
     },
     label_userSettings_weight: {
-        de: 'Gewicht',
-        en: 'Weight'
+        de: 'Gewicht (kg)',
+        en: 'Weight (kg)'
     },
     label_value: {
         de: 'Wert',
