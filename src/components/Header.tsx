@@ -8,7 +8,6 @@ import {
     PATH_HOME,
     PATH_CONTACT,
     PATH_USERSETTINGS,
-    PATH_MOBILE_APP,
     PATH_DIRECT_COMPARE,
     PATH_FOODCOMPARE,
     SOURCE_SRLEGACY,
@@ -101,18 +100,6 @@ export default function Header() {
                         </Button>
                     </Link>
                 </div>
-                {!isMobileDevice() &&
-                <div>
-                    <Link to={PATH_MOBILE_APP}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_MOBILE_APP}
-                                variant={'link'}
-                                active={activePath === PATH_MOBILE_APP}>
-                            {applicationStrings.menu_mobile_app[language]}
-                        </Button>
-                    </Link>
-                </div>
-                }
                 <div>
                     <Link to={PATH_USERSETTINGS}>
                         <Button className={buttonContainerClass}

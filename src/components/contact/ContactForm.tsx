@@ -116,7 +116,7 @@ export function ContactForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className={"container"}>
+            <div className={"container"} style={{paddingBottom: "30px"}}>
                 <p>{applicationStrings.text_contact_form[language]}</p>
                 <div>
                     <span className={'form-label'}>{applicationStrings.label_mail_name[language]}</span>

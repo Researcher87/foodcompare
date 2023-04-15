@@ -6,13 +6,12 @@ import {NotificationContainer} from 'react-notifications'
 import ApplicationDataContextProvider, {ApplicationDataContextStore} from "./contexts/ApplicationDataContext";
 import React, {useContext, useEffect} from "react";
 
-import {LanguageProvider} from "./contexts/LangContext";
+import {LanguageContext, LanguageProvider} from "./contexts/LangContext";
 import ReactTooltip from "react-tooltip";
 import GA4React from "ga-4-react";
 import {ANALYTICS_MESS_ID} from "./config/ApplicationKeys";
 
 
-import MobileDeviceCheck from "./components/MobileDeviceCheck";
 import {WebPageContainer} from "./components/WebPageContainer";
 import {parseFoodCompareUri} from "./service/uri/BaseUriService";
 
@@ -39,13 +38,13 @@ function App(): JSX.Element {
         initializeGA4()  // Initialize Google Analytics Tool if the app is not run in test/debug mode
     }
 
+
     return (
         <div className="App">
             <NotificationContainer/>
             <ReactTooltip/>
             <LanguageProvider>
                 <ApplicationDataContextProvider>
-                    <MobileDeviceCheck/>
                     <WebPageContainer/>
                 </ApplicationDataContextProvider>
             </LanguageProvider>

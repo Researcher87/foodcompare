@@ -1,10 +1,18 @@
 import {buildDate, release} from "../../config/ApplicationSetting";
+import {isMobileDevice} from "../../service/WindowDimension";
 
 export function Versions() {
     return <div className={"container"}>
-        <h1>
-            Food Compare
-        </h1>
+        {isMobileDevice() ?
+            <h3>
+                Food Compare
+            </h3>
+            :
+            <h1>
+                Food Compare
+            </h1>
+        }
+
         <h6>
             Version {release}
         </h6>

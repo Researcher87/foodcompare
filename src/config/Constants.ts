@@ -88,9 +88,7 @@ export const PATH_FOODCOMPARE = "/foodcompare"
 export const PATH_FOODDATA_PANEL = "/datapanel";
 export const PATH_HOME = "/home";
 export const PATH_CONTACT = "/contact";
-export const PATH_MOBILE_APP = "/mobileapp";
 export const PATH_USERSETTINGS = "/usersettings";
-
 
 export const PATH_RANKING = "/ranking";
 

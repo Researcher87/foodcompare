@@ -9,6 +9,7 @@ import {RankingSelector} from "./RankingSelector";
 import {RankingChart} from "./RankingChart";
 import {maxElementsInRankingChart} from "../../config/ApplicationSetting";
 import ReactSelectOption from "../../types/ReactSelectOption";
+import {isMobileDevice} from "../../service/WindowDimension";
 
 export function RankingContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -99,17 +100,43 @@ export function RankingContainer() {
         );
     }
 
-    return (
-        <div className="container-fluid" style={{paddingTop: "24px"}}>
-            <div className="row">
-                <div className="col-3">
-                    <RankingSelector openChart={openChart}/>
+    const renderWebsite = () => {
+        return (
+            <div className="container-fluid" style={{paddingTop: "24px"}}>
+                <div className="row">
+                    <div className="col-3">
+                        <RankingSelector openChart={openChart} useHorizontalLayout={false}/>
+                    </div>
+                    {chartItems && chartItems.length > 0 &&
+                    <div className="col-9">
+                        <RankingChart chartItems={chartItems}
+                                      unit={unit}
+                                      selectedElement={selectedValue ? selectedValue.label : ""}/>
+                    </div>
+                    }
+                    {!chartItems &&
+                    renderHelpText()
+                    }
+                    {chartItems && chartItems.length === 0 &&
+                    applicationStrings.label_noData[language]
+                    }
                 </div>
+            </div>
+        );
+    }
+
+    const renderMobile = () => {
+        return (
+            <div className="container-fluid" style={{paddingTop: "24px"}}>
+                <div>
+                    <RankingSelector openChart={openChart} useHorizontalLayout={isMobileDevice()}/>
+                </div>
+                <hr/>
                 {chartItems && chartItems.length > 0 &&
-                <div className="col-9">
+                <div>
                     <RankingChart chartItems={chartItems}
                                   unit={unit}
-                    selectedElement={selectedValue ? selectedValue.label : ""}/>
+                                  selectedElement={selectedValue ? selectedValue.label : ""}/>
                 </div>
                 }
                 {!chartItems &&
@@ -119,8 +146,9 @@ export function RankingContainer() {
                 applicationStrings.label_noData[language]
                 }
             </div>
-        </div>
-    );
+        );
+    }
 
+    return isMobileDevice() ? renderMobile() : renderWebsite()
 
 }

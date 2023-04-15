@@ -13,7 +13,8 @@ import {RankingPanelData} from "../../types/livedata/ApplicationData";
 import {customSelectStyles} from "../../config/UI_Config";
 
 interface RankingSelectorProps {
-    openChart: (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => void
+    openChart: (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => void,
+    useHorizontalLayout: boolean
 }
 
 export const BASE_DATA_INDEX = 0
@@ -213,9 +214,12 @@ export function RankingSelector(props: RankingSelectorProps) {
 
     const rankingList = getRankingGroupsList()
 
+    const containerClass = props.useHorizontalLayout ? "container row" : "container"
+    const selectorClass = props.useHorizontalLayout ? "col-4 select-menu form-section" : "column select-menu form-section"
+
     return (
-        <div className="container">
-            <div className="column select-menu form-section">
+        <div className={containerClass}>
+            <div className={selectorClass}>
                 <span className={"form-label"}>{applicationStrings.label_category[language]}:</span>
                 <Select className="form-control-sm"
                         options={getFoodCategoryList()}
@@ -224,7 +228,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                         onChange={handleFoodCategoryChange}
                 />
             </div>
-            <div className="column select-menu form-section">
+            <div className={selectorClass}>
                 <span className={"form-label"}>{applicationStrings.label_group[language]}:</span>
                 <Select className="form-control-sm"
                         options={rankingList}
@@ -233,7 +237,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                         onChange={handleGroupChange}
                 />
             </div>
-            <div className="column select-menu form-section">
+            <div className={selectorClass}>
                 <span className={"form-label"}>{applicationStrings.label_value[language]}:</span>
                 <Select className="form-control-sm"
                         options={elementsList}

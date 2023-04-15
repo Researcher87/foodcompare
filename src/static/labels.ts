@@ -108,8 +108,8 @@ export const applicationStrings = {
         en: 'Do you want to use the Android App?',
     },
     direct_compare_text: {
-        de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, um diese miteinander zu vergleichen.',
-        en: 'Pick two food elements from the two selectors in order to compare them with each other.'
+        de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, die miteinander verglichen werden sollen, und klicken Sie dann den Anzeigen-Button.',
+        en: 'Pick two food elements from the two selectors that should be compared with each other. Then click the Show button.'
     },
     home_carousel_0: {
         de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
@@ -859,10 +859,6 @@ export const applicationStrings = {
         de: 'Home',
         en: 'Home'
     },
-    menu_mobile_app: {
-        de: 'Mobile App',
-        en: 'Mobile App'
-    },
     menu_ranking: {
         de: 'Ranking',
         en: 'Food ranking'
@@ -914,6 +910,10 @@ export const applicationStrings = {
     message_error_invalid_portion: {
         de: 'Geben Sie bitte eine Portion zwischen 1 und 5000 Gramm an.',
         en: 'Please specify a portion amount between 1 and 5000 gram.'
+    },
+    message_mobile_app: {
+        de: 'Einige Funktionen von Food Compare stehen auf Mobilgeräten nur eingeschränkt zur Verfügung.',
+        en: 'Some functionality of Food Compare are limited on mobile devices.'
     },
     message_userdata_success: {
         de: 'Änderungen wurden gespeichert.',
@@ -1035,13 +1035,9 @@ export const applicationStrings = {
         de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann agezeigt werden.',
         en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
-    text_foodcompareapp_1: {
-        de: 'Für Androidgeräte bieten wir eine Mobilversion von Food Compare an, welche weitgehend dieselben Funktionen wie die Website beinhaltet. Die App ist für Geräte ab Android 5.0 verfügbar.',
-        en: 'For Android devices we also provide a mobile app containing the same functionality as the website. The app is available for gadgets running Android 5.0 and higher.',
-    },
-    text_foodcompareapp_2: {
-        de: 'App im Playstore erhalten',
-        en: 'Get the App from the Playstore'
+    text_empty_fooddatapanel_mobileInfo: {
+        de: 'Das Erstellen komplexer Lebensmittel wird auf Mobilgeräten aktuell nicht unterstützt.',
+        en: 'Presently, complex menus cannot be created on mobile devices.'
     },
     text_ranking: {
         de: "Sie können in diesem Bereich Nahrungsmittel nach einem bestimmten Nährstoff, Vitamin oder Mineralstoff sortiert anzeigen lassen. Wählen Sie dazu eine Kategorie aus, eine Gruppe und eine bestimmte Nährstoffangabe (Wert).",

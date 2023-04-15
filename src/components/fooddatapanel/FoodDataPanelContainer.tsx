@@ -20,6 +20,8 @@ import {
     convertAggregatedUriStringToObject
 } from "../../service/uri/FoodDataPanelAggregatedUriService";
 import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
+import {isMobileDevice} from "../../service/WindowDimension";
+import {FaExclamationTriangle} from "react-icons/all";
 
 export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -229,9 +231,14 @@ export default function FoodDataPanelContainer() {
                         </div>
                         :
                         <div className={"form-text"} style={{padding: "24px"}}>
-                            <i>
-                                {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
-                            </i>
+                            <p>
+                                <i>
+                                    {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
+                                </i>
+                            </p>
+                            {isMobileDevice() &&
+                             <p><FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}</p>
+                            }
                         </div>
                     }
                 </div>

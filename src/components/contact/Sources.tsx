@@ -7,7 +7,7 @@ export function Sources() {
 
     return (
         <div className={"container"}>
-            <h4>{applicationStrings.text_contact_source1[language]}</h4>
+            <h4><b>{applicationStrings.text_contact_source1[language]}</b></h4>
             <h5>{applicationStrings.text_contact_source2[language]}</h5>
             <p>U.S. Department of Agriculture, Agricultural Research Service.<br/>
                 FoodData Central, 2021.</p>

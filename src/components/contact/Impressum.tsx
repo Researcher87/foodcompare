@@ -5,15 +5,17 @@ import impressum_de from '../../static/image/impressum-german.png';
 import impressum_en from '../../static/image/impressum-english.png';
 import {applicationStrings} from "../../static/labels";
 import {LANGUAGE_DE} from "../../config/Constants";
+import {isMobileDevice} from "../../service/WindowDimension";
 
 export function Impressum() {
     const lang = useContext(LanguageContext).language
 
     const impressumPath = lang === LANGUAGE_DE ? impressum_de : impressum_en;
+    const columnClass = isMobileDevice() ? "col-10" : "col-6"
 
     return (
-        <div className={"container"}>
-            <div className={"col-6"}>
+        <div className={"container"} style={{paddingBottom: "30px"}}>
+            <div className={columnClass}>
                 <p>
                     <b>{applicationStrings.text_contact_disclaimer1[lang]}</b>
                 </p>
