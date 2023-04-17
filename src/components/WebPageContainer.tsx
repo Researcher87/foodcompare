@@ -18,7 +18,7 @@ import React, {useContext, useState} from "react";
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {RankingContainer} from "./ranking/RankingContainer";
-import {Chart} from "chart.js";
+import {Chart, ArcElement} from 'chart.js'
 import annotationPlugin from "chartjs-plugin-annotation";
 import {isMobileDevice} from "../service/WindowDimension";
 import {applicationStrings} from "../static/labels";
@@ -38,6 +38,7 @@ export function WebPageContainer() {
 
     // Registering requires some time and should only be performed when the real site is loaded.
     Chart.register(annotationPlugin)
+    Chart.register(ArcElement);
 
     if(isMobileDevice() && !mobileWarningWasShown) {
         NotificationManager.info(applicationStrings.message_mobile_app[language])

@@ -4,7 +4,7 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {Button} from "react-bootstrap";
-import {FaTrash} from "react-icons/all";
+import {FaTrash} from "react-icons/fa";
 
 export interface CompositeFoodListProps {
     selectedFoodItems: Array<SelectedFoodItem>

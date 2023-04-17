@@ -9,7 +9,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {default_chart_height} from "../../../config/ChartConfig";
 import annotationPlugin from 'chartjs-plugin-annotation'
 import {ChartProps} from "../../../types/livedata/ChartPropsData";
-import {useWindowDimension} from "../../../service/WindowDimension";
+import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
@@ -54,11 +54,18 @@ export default function EnergyDataChart(props: ChartProps) {
 
 
     const renderUserDataInfoPage = () => {
+        const showInfotext = !(isMobileDevice() && props.directCompareUse)
+
         return (
             <div style={{paddingLeft: "50px", paddingTop: "20px"}}>
-                <h5><b>{`${energy100g}`} kcal / 100 g</b></h5>
+                {!isMobileDevice()
+                    ? <h5><b>{`${energy100g}`} kcal / 100 g</b></h5>
+                    : <h6><b>{`${energy100g}`} kcal / 100 g</b></h6>
+                }
+
+                {showInfotext &&
                 <div style={{paddingTop: "30px"}}>
-                    {applicationContext.userData.initialValues === true ?
+                    {applicationContext.userData.initialValues ?
                         (<div>
                             <p>{applicationStrings.text_setUserdata_p1[lang]}</p>
                             <p>{applicationStrings.text_setUserdata_p2[lang]}</p>
@@ -67,6 +74,7 @@ export default function EnergyDataChart(props: ChartProps) {
                         <p>{applicationStrings.text_setUserdata_p3[lang]}</p>
                     }
                 </div>
+                }
             </div>
         )
     }
@@ -77,37 +85,45 @@ export default function EnergyDataChart(props: ChartProps) {
         const bmr = calculateBMR(age, size, weight, sex);
         const totalEnergy = calculateTotalEnergyConsumption(bmr, palValue, leisureSports);
 
+        if (props.directCompareUse) {
+
+        }
+
+        const annotation1 = {
+            drawTime: 'afterDatasetsDraw',
+            type: 'line',
+            mode: 'horizontal',
+            scaleID: 'y-axis-0',
+            yMin: bmr,
+            yMax: bmr,
+            borderColor: ChartConfig.color_line_red,
+            borderWidth: 4,
+            label: {
+                enabled: true,
+                content: applicationStrings.label_chart_bmr[lang]
+            },
+        }
+
+        const annotation2 =
+            {
+                drawTime: 'afterDatasetsDraw',
+                type: 'line',
+                mode: 'horizontal',
+                scaleID: 'y-axis-0',
+                yMin: totalEnergy,
+                yMax: totalEnergy,
+                borderColor: ChartConfig.color_line_blue,
+                borderWidth: 4,
+                label: {
+                    enabled: true,
+                    content: applicationStrings.label_chart_energyExpenditure[lang]
+                }
+            }
+
         const annotation = {
             annotations: {
-                line1: {
-                    drawTime: 'afterDatasetsDraw',
-                    type: 'line',
-                    mode: 'horizontal',
-                    scaleID: 'y-axis-0',
-                    yMin: bmr,
-                    yMax: bmr,
-                    borderColor: ChartConfig.color_line_red,
-                    borderWidth: 4,
-                    label: {
-                        enabled: true,
-                        content: applicationStrings.label_chart_bmr[lang]
-                    },
-                },
-                line2:
-                    {
-                        drawTime: 'afterDatasetsDraw',
-                        type: 'line',
-                        mode: 'horizontal',
-                        scaleID: 'y-axis-0',
-                        yMin: totalEnergy,
-                        yMax: totalEnergy,
-                        borderColor: ChartConfig.color_line_blue,
-                        borderWidth: 4,
-                        label: {
-                            enabled: true,
-                            content: applicationStrings.label_chart_energyExpenditure[lang]
-                        }
-                    },
+                line1: annotation1,
+                line2: !(props.directCompareUse && isMobileDevice()) ? annotation2 : undefined,
             }
         }
 
@@ -127,10 +143,10 @@ export default function EnergyDataChart(props: ChartProps) {
         return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
     }
 
-    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
 
     return (
-        <div className="container-fluid" >
+        <div className="container-fluid">
             <div className="row " style={{height: containerHeight}} key={"energy container " + containerHeight}>
                 <div className="col-6">
                     <div>

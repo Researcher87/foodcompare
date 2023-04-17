@@ -13,7 +13,7 @@ import {LanguageContext} from "../../contexts/LangContext";
 import {CompositeFoodList} from "./CompositeFoodList";
 import {initialFoodClassId, maximalPortionSize} from "../../config/ApplicationSetting";
 import combineFoodItems from "../../service/calculation/FoodDataAggregationService";
-import {FaQuestionCircle} from "react-icons/all";
+import {FaQuestionCircle} from "react-icons/fa";
 import {HelpModal} from "../HelpModal";
 import {getHelpText} from "../../service/HelpService";
 import ReactSelectOption from "../../types/ReactSelectOption";

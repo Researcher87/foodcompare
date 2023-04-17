@@ -84,7 +84,9 @@ describe('Parsing of sub-elements in the URI', () => {
 		const chartConfigDataCarbs: ChartConfigData = {...initialChartConfigData, carbsChartConfig: {
 				subChart: CARBS_DATA_DETAIL,
 				showLegend: true,
-				chartType: CHART_TYPE_BAR
+				chartType: CHART_TYPE_BAR,
+				expand100: false,
+				hideRemainders: false
 			}
 		}
 		
@@ -108,7 +110,9 @@ describe('Parsing of sub-elements in the URI', () => {
 		const chartConfigData: ChartConfigData = {...initialChartConfigData, lipidsChartConfig: {
 				subChart: LIPIDS_DATA_OMEGA,
 				chartType: CHART_TYPE_PIE,
-				showLegend: false
+				showLegend: false,
+				expand100: false,
+				hideRemainders: false
 			}
 		}
 		

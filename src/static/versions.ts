@@ -257,16 +257,19 @@ export const versions = [
     },
     {
         id: "1.6",
-        date: "xx-xx-2023",
-        subject: "Layout Change (Responsiveness)",
+        date: "08-04-2023",
+        subject: "Layout Revision / Mobile Device Support",
         features: [
-
+            "The Layout has been revised in several menus.",
+            "Food Compare is now also applicable on mobile devices, though some functionality is still limited.",
+            "New food items have been added."
         ],
         updates: [
-
+            "Expected units in the user data settings are shown in the form."
         ],
         bugfixes: [
-
+            "Some typos have been removed",
+            "Some code smells have been removed."
         ]
     },
 ]

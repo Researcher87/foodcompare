@@ -38,6 +38,8 @@ export function Home() {
         const pic6 = images(`./Img-${language}-6.png`).default;
         const pic7 = images(`./Img-${language}-7.png`).default;
 
+        console.log('PIC', images(`./Img-${language}-1.png`))
+
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][language];
 
@@ -98,15 +100,17 @@ export function Home() {
                             </button>
                         </Link>
                     </div>
-                    <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
-                            <button type="button"
-                                    className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                {applicationStrings.button_getstarted_2[language]}
-                            </button>
-                        </Link>
-                    </div>
+                    {!isMobileDevice() &&
+                        <div style={{paddingTop: "20px"}}>
+                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
+                                <button type="button"
+                                        className="btn btn-small"
+                                        style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                    {applicationStrings.button_getstarted_2[language]}
+                                </button>
+                            </Link>
+                        </div>
+                    }
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_DIRECT_COMPARE}>
                             <button type="button"

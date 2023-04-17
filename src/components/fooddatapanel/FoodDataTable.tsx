@@ -32,11 +32,11 @@ export function FoodDataTable(props: FoodDataTableProps) {
 
         return <div>{cell.split("&&").map((element, index) => (<div>
                 {index > 0 ?
-                    <span style={indentStyle}>
+                    <span key={`cellindex-${index}`} style={indentStyle}>
                     {element}
                 </span>
                     :
-                    <span style={firstLineStype}>
+                    <span key={`cellindex-${index}`} style={firstLineStype}>
                     {element}
                 </span>
                 }
@@ -51,12 +51,14 @@ export function FoodDataTable(props: FoodDataTableProps) {
         <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
             <div>
                 {dataExists &&
-                <BootstrapTable  trClassName={tableClass} data={props.tableData} striped hover>
+                <BootstrapTable trClassName={tableClass} data={props.tableData} striped hover>
                     <TableHeaderColumn isKey dataField='label' dataFormat={formatDataCell}>Element</TableHeaderColumn>
                     <TableHeaderColumn dataField='value_100g'
-                                       dataFormat={formatDataCell}>{applicationStrings.label_per_100g[language.language]}</TableHeaderColumn>
+                                       dataFormat={formatDataCell}>{applicationStrings.label_per_100g[language.language]}
+                    </TableHeaderColumn>
                     <TableHeaderColumn dataField='value_portion'
-                                       dataFormat={formatDataCell}>{labelPortion}</TableHeaderColumn>
+                                       dataFormat={formatDataCell}>{labelPortion}
+                    </TableHeaderColumn>
                 </BootstrapTable>
                 }
                 {!dataExists &&
@@ -64,7 +66,9 @@ export function FoodDataTable(props: FoodDataTableProps) {
                 }
             </div>
             <div style={{paddingTop: "25px"}}>
-                <button className={"btn btn-link"} onClick={changeToChartMode}>Zur Diagrammansicht wechseln</button>
+                <button className={"btn btn-link"} onClick={changeToChartMode}>
+                    {applicationStrings.label_chart_view[language.language]}
+                </button>
             </div>
         </div>
     );

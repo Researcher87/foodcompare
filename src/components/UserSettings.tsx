@@ -28,7 +28,7 @@ import {
     USERDATA_ERROR_WEIGHT
 } from "../service/UserDataService";
 import {customSelectStyles} from "../config/UI_Config";
-import {FaLightbulb} from "react-icons/all";
+import {FaLightbulb} from "react-icons/fa";
 
 export function UserSettings() {
     const applicationContext = useContext(ApplicationDataContextStore)

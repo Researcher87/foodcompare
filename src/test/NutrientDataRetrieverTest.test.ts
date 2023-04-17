@@ -30,7 +30,8 @@ describe('The nutrient data retriever should calculated missing data or combined
             c: 50,
             d: 10,
             e: 20,
-            k: null
+            k: null,
+            carotenoidData: null
         }
     }
 
@@ -48,7 +49,8 @@ describe('The nutrient data retriever should calculated missing data or combined
             c: null,
             d: 0,
             e: 0,
-            k: null
+            k: null,
+            carotenoidData: null
         }
     }
 

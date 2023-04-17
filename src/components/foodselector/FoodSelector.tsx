@@ -15,7 +15,7 @@ import {getDefaultPortionData, getPortionReactSelectList} from "../../service/nu
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodClass from "../../types/nutrientdata/FoodClass";
 import {LanguageContext} from "../../contexts/LangContext";
-import {isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
+import {isMobileDevice, isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
 import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
@@ -27,7 +27,7 @@ export interface FoodSelectorProps {
     updateFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, supplementData: boolean, combineData: boolean) => void
     updateCompositeTitle?: (compositeTitle: string) => void
     compositeSelector: boolean
-    noCategorySelect?: boolean
+    directCompareSelector?: boolean
     initialFoodClassToSet?: number
     selectedFoodItem?: SelectedFoodItem | null
     defaultFoodClass?: number
@@ -379,6 +379,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             />
         )
 
+        const x = props.directCompareSelector ? "a" : "b"
+
         const checkboxes = (
             <div>
                 <label className="form-elements"
@@ -405,16 +407,29 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             </div>
         )
 
-        return <div>
-            <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
+        if(props.directCompareSelector && !isMobileDevice()) {  // Direct Compare Selector uses column layout for Checkboxes/Source box
+            return <div>
+                <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
+                <div className={"d-flex row"}>
+                    <div className="col-4 column select-menu form-section">
+                        {sourceSelectBox}
+                    </div>
+                    <div className={"col-8"}>
+                        {checkboxes}
+                    </div>
+                </div>
+            </div>
+        } else {
+            return <div>
+                <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
                 <div className="select-menu form-section">
                     {sourceSelectBox}
                 </div>
                 <div>
                     {checkboxes}
                 </div>
-        </div>
-
+            </div>
+        }
     }
 
 
@@ -451,7 +466,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 />
             </div>
             }
-            {props.noCategorySelect !== true &&
+            {props.directCompareSelector !== true &&
             <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
                 <Select className={selectClass}
@@ -483,7 +498,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             </div>
             <div className={formClass}>
                 <div className={"row"}>
-                    <div className={"col-lg-8 col-xl-9"}>
+                    <div className={"col-8"}>
                         <span
                             className={'form-label'}>{applicationStrings.label_portion[language]}:</span>
                         <Select className={selectClass}
@@ -492,7 +507,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                                 value={selectedPortion ? selectedPortion : portionsList[0]}
                                 onChange={(value) => handlePortionChange(value)}/>
                     </div>
-                    <div className={"col-lg-4 col-xl-3"}>
+                    <div className={"col-4"}>
                         <span
                             className={'form-label'}>{amount_label}</span>
                         <input className={inputClass}

@@ -21,7 +21,7 @@ import {
 } from "../../service/uri/FoodDataPanelAggregatedUriService";
 import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
 import {isMobileDevice} from "../../service/WindowDimension";
-import {FaExclamationTriangle} from "react-icons/all";
+import {FaExclamationTriangle} from "react-icons/fa";
 
 export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)

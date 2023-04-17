@@ -21,13 +21,11 @@ export function Versions() {
         </h6>
 
         <p style={{paddingTop: "24px"}}>
-            <b>New features in Version 1.4</b>
+            <b>New features in Version {release}</b>
             <ul>
-                <li>Food ranking data panel</li>
-                <li>Redesign of home menu</li>
-                <li>New food data (now about 175 different food items)</li>
-                <li>Extension and redesign of contact menu</li>
-                <li>General layout update and fixing of style issues</li>
+                <li>The layout of several menus has been revised</li>
+                <li>Food Compare fits better on mobile devices now, though some functionality remains limited</li>
+                <li>New food items have been added</li>
             </ul>
         </p>
 

@@ -120,7 +120,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
                                   updateFoodSelectorConfig={updateFoodSelectorConfig}
                                   compositeSelector={false}
-                                  noCategorySelect={true}
+                                  directCompareSelector={true}
                                   selectedFoodItem={selectedFoodItem}
                                   defaultFoodClass={initialFoodClassToSet}
                                   directCompareSelectorNumber={foodSelectorNumber}

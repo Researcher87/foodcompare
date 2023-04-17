@@ -2,8 +2,8 @@ import {AMOUNT_PORTION, CARBS_DATA_BASE, CHART_TYPE_PIE, LIPIDS_DATA_BASE, SEX_M
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
 import {WindowDimension} from "../service/WindowDimension";
 
-export const release = "1.4.3"
-export const buildDate = "2021-01-13"
+export const release = "1.6"
+export const buildDate = "2023-04-01"
 
 export const maxMessageCharacters = 5000
 export const maxElementsInRankingChart = 50

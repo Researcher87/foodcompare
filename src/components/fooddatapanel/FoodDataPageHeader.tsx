@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {Button} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
-import {FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/all";
+import {FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/fa";
 import {
     DISPLAYMODE_CHART,
     DISPLAYMODE_TABLE,
@@ -190,8 +190,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                     </Button>
                                     <Button className={"button-closeTab"}
                                             onClick={closeTab}
+                                            data-for="closeButtonTooltip"
                                             data-tip={applicationStrings.tooltip_icon_close[languageContext.language]}>
-                                        <ReactTooltip/>
+                                        <ReactTooltip id="closeButtonTooltip"/>
                                         <FaTimes/>
                                     </Button>
                                 </div>

@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 
 import FoodSelectorModal from '../foodselector/FoodSelectorModal'
-import {FaLayerGroup, FaPlusSquare, FaTrash} from "react-icons/all";
+import {FaLayerGroup, FaPlusSquare, FaTrash} from "react-icons/fa";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";

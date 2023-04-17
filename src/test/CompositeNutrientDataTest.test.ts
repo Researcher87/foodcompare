@@ -130,7 +130,8 @@ describe('The composite nutrient data service should calculate the correct amoun
 			c: 10,
 			d: null,
 			e: 10,
-			k: null
+			k: null,
+			carotenoidData: null
 		}
 		
 		const vitaminData2 = {
@@ -146,7 +147,8 @@ describe('The composite nutrient data service should calculate the correct amoun
 			c: 10,
 			d: 10,
 			e: null,
-			k: null
+			k: null,
+			carotenoidData: null
 		}
 	
 		const foodItem1: FoodItem = {

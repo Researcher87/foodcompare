@@ -67,9 +67,17 @@ export const applicationStrings = {
         de: 'Legende anzeigen',
         en: 'Show legend'
     },
+    checkbox_chartoption_showLegend_m: {
+        de: 'Legende',
+        en: 'Legend'
+    },
     checkbox_chartoption_showDetails: {
         de: 'Details anzeigen',
         en: 'Show details'
+    },
+    checkbox_chartoption_showDetails_m: {
+        de: 'Details',
+        en: 'Show'
     },
     checkbox_english: {
         de: 'Englisch',
@@ -152,16 +160,16 @@ export const applicationStrings = {
         en: 'In order to compare nutrient charts of two foods at a glance, an additional page was added in version 1.2 where nutrient charts are placed next to each other. Some data pages like vitamins and minerals can also be synchronized, which means that the charts use a unique scaling and only display data that is available in both food elements.'
     },
     home_foodcompare_overview: {
-      de: 'Food Compare im Überblick',
-      en: 'Food Compare at a Glance'
+        de: 'Food Compare im Überblick',
+        en: 'Food Compare at a Glance'
     },
     input_compositelist_title: {
         de: 'Individuelle Liste',
         en: 'Individual list'
     },
     label_amount: {
-        de: 'Menge (Gramm)',
-        en: 'Amount (gram)'
+        de: 'Menge (g)',
+        en: 'Amount (g)'
     },
     label_amount_short: {
         de: 'Gramm',
@@ -243,6 +251,10 @@ export const applicationStrings = {
         de: 'Gesamtzusammensetzung',
         en: 'Total Composition'
     },
+    label_chart_view: {
+        de: 'Zur Diagrammansicht wechseln',
+        en: 'Switch to chart view'
+    },
     label_datatype: {
         de: 'Datentyp',
         en: 'Data type'
@@ -272,8 +284,8 @@ export const applicationStrings = {
         en: 'Group'
     },
     label_getStarted: {
-      de: "Jetzt beginnen...",
-      en: "Get started..."
+        de: "Jetzt beginnen...",
+        en: "Get started..."
     },
     label_info: {
         de: 'Info',
@@ -320,8 +332,8 @@ export const applicationStrings = {
         en: 'Language:'
     },
     label_mail_name: {
-      de: "Name",
-      en: "Name"
+        de: "Name",
+        en: "Name"
     },
     label_mail_address: {
         de: "Mail-Adresse",

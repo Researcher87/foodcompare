@@ -35,6 +35,5 @@ export function isNarrowScreen(windowDimension: WindowDimension) {
 }
 
 export function isMobileDevice() {
-    return false;   // ToDo: Nur zum Testen verwenden
-    // return isMobile
+    return isMobile
 }
