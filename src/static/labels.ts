@@ -17,7 +17,7 @@ export const applicationStrings = {
     },
     button_getstarted_1: {
         de: 'Verschiedene Lebensmittel analysieren',
-        en: 'Analyze different foods'
+        en: 'Analyze different food items'
     },
     button_getstarted_2: {
         de: 'Komplexe Lebensmittel zusammenstellen',
@@ -25,11 +25,11 @@ export const applicationStrings = {
     },
     button_getstarted_3: {
         de: 'Zwei Lebensmittel gegenüberstellen',
-        en: 'Compare two foods with each other'
+        en: 'Compare two food items with each other'
     },
     button_getstarted_4: {
         de: 'Lebensmittel nach Werten sortieren',
-        en: 'Rank foods by a nutrient value'
+        en: 'Rank food items by a nutrient value'
     },
     button_no: {
         de: 'Nein',
@@ -141,11 +141,11 @@ export const applicationStrings = {
     },
     home_carousel_5: {
         de: 'Gegenüberstellung zweier Lebensmittel',
-        en: 'Comparing two foods'
+        en: 'Comparing two food items'
     },
     home_carousel_6: {
         de: 'Nach Nährstoffwert sortierte Lebensmittel',
-        en: 'Foods ranked by a specific nutrient value'
+        en: 'Food items ranked by a specific nutrient value'
     },
     home_text_1: {
         de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
@@ -153,11 +153,11 @@ export const applicationStrings = {
     },
     home_text_2: {
         de: 'Das Hauptaugenmerk von Food Compare gilt jedoch nicht nur der Veranschaulichung einzelner Nahrungsmittel, sondern der Vergleichbarkeit von Nährstoffen, Vitaminen und Mineralen in Lebensmittels. Dazu können beliebig viele Tabs geöffnet und Lebensmittel damit leicht miteinander verglichen werden. So lassen sich bspw. auf einfache Weise der Vitamingehalt von einzelnen Obstsorten vergleichen, oder die Aufteilung von Kohlenhydraten, Fetten und Eiweißen zwischen Grundnahrungsmitteln. Dabei erlaubt die Anwendung auch das Zusammenstellen von komplexen Menüs, deren Gesamtgehalt an Nährstoffen, Vitaminen und Mineralstoffen dann berechnet wird.',
-        en: 'The primary focus of Food Compare is to visually compare the composition and contents of different foods, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
+        en: 'The primary focus of Food Compare is to visually compare the composition and contents of different food items, though. Food items can be opened in different tabs so that nutrients, vitamins or minerals can be easily compare. As an example, users can compare the containing vitamins between different fruits or the nutrient composition between staple foods. In addition, the application allows to aggregate foods to more complex menus and will then calculate the overall amount of nutrients, vitamins and minerals in that menu.'
     },
     home_text_3: {
         de: 'Um die Nährstoffdiagramme zweier Lebensmittel auf einen Blick miteinander vergleichen zu können, gibt es seit der Version 1.2 nun auch einen zusätzlichen Bereich, in denen die Diagramme entsprechend nebeneinander angeordnet sind. Einige Datenseiten wie Vitamine und Mineralstoffe lassen sich dabei auch synchronisieren, so dass eine einheitliche Skalierung der Diagramme stattfindet und nur die Daten angezeigt werden, welche für beide Lebensmittel vorliegen.',
-        en: 'In order to compare nutrient charts of two foods at a glance, an additional page was added in version 1.2 where nutrient charts are placed next to each other. Some data pages like vitamins and minerals can also be synchronized, which means that the charts use a unique scaling and only display data that is available in both food elements.'
+        en: 'In order to compare nutrient charts of two food items at a glance, an additional page was added in version 1.2 where nutrient charts are placed next to each other. Some data pages like vitamins and minerals can also be synchronized, which means that the charts use a unique scaling and only display data that is available in both food elements.'
     },
     home_foodcompare_overview: {
         de: 'Food Compare im Überblick',
@@ -1048,7 +1048,7 @@ export const applicationStrings = {
         en: 'Calculation of BMR and PAL:',
     },
     text_empty_fooddatapanel: {
-        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann agezeigt werden.',
+        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
         en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
     text_empty_fooddatapanel_mobileInfo: {
