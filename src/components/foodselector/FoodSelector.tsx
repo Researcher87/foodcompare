@@ -20,7 +20,13 @@ import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
 import {Form} from "react-bootstrap";
-import {correspondingSelectElementStyle, customSelectStyles} from "../../config/UI_Config";
+import {
+    COLOR_SELECTOR_CATEGORY,
+    COLOR_SELECTOR_FOODCLASS, COLOR_SELECTOR_FOODITEM,
+    correspondingSelectElementStyle,
+    customSelectStyles,
+    getCustomSelectStyle
+} from "../../config/UI_Config";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -454,6 +460,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         return label
     }
 
+    const stylesCategory = getCustomSelectStyle(COLOR_SELECTOR_CATEGORY)
+    const stylesFoodClass = getCustomSelectStyle(COLOR_SELECTOR_FOODCLASS)
+    const stylesFoodItem = getCustomSelectStyle(COLOR_SELECTOR_FOODITEM)
+
     return <div>
         <div className="container">
             {props.compositeSelector === true &&
@@ -473,7 +483,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         options={categoriesList}
                         value={selectedCategory ? selectedCategory : categoriesList[0]}
                         onChange={(value) => handleCategoryChange(value)}
-                        styles={customSelectStyles}
+                        styles={stylesCategory}
                 />
             </div>
             }
@@ -481,10 +491,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select className={selectClass}
                         options={foodClassesList}
+                        backgroundColor={"#AAAAAA"}
                         formatOptionLabel={foodclassFormatter}
                         value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
-                        styles={customSelectStyles}
+                        styles={stylesFoodClass}
                 />
             </div>
             <div className={formClass}>
@@ -493,7 +504,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         options={foodItemsList}
                         value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
                         onChange={handleFoodItemChange}
-                        styles={customSelectStyles}
+                        styles={stylesFoodItem}
                 />
             </div>
             <div className={formClass}>

@@ -6,7 +6,7 @@ export const customSelectStyles = {
         ...base,
         height: selectHeight,
         minHeight: selectHeight,
-        fontSize: fontsize
+        fontSize: fontsize,
     }),
     valueContainer: (provided, state) => ({
         ...provided,
@@ -30,7 +30,25 @@ export const customSelectStyles = {
 };
 
 
+export function getCustomSelectStyle(backgroundColor: string): any {
+    return {
+        ...customSelectStyles,
+        control: base => ({
+            ...base,
+            height: selectHeight,
+            minHeight: selectHeight,
+            fontSize: fontsize,
+            backgroundColor: backgroundColor
+        }),
+    }
+}
+
+
 export const correspondingSelectElementStyle = {
     height: selectHeight,
     fontSize: fontsize
 }
+
+export const COLOR_SELECTOR_CATEGORY = " #fdebd0"
+export const COLOR_SELECTOR_FOODCLASS = " #85c1e9"
+export const COLOR_SELECTOR_FOODITEM = "#ebf5fb"
