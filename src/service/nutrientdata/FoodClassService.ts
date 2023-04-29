@@ -5,6 +5,8 @@ import NameType from "../../types/nutrientdata/NameType";
 import {getFoodItemName, getFoodItemsOfFoodclass} from "./FoodItemsService";
 import FoodDataCorpus from "../../types/nutrientdata/FoodDataCorpus";
 
+export const foodClassLabelSeparator = "||"
+
 export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category: number, foodNames: Array<NameType>, language: string): ReactSelectFoodClassOption[] {
     const {foodClasses, foodItems} = foodDataCorpus
     const filteredFoodClasses = getFoodClassesOfCategory(foodClasses, category)
@@ -32,7 +34,7 @@ export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category:
 
         const foodItemsOfFoodclass = getFoodItemsOfFoodclass(foodItems, foodClass.id)
         const foodItemNames: string[] = foodItemsOfFoodclass.map(foodItem => getFoodItemName(foodItem, foodNames, language)).filter(name => name !== null) as string[]
-        const label = foodName + '||' + foodItemNames.filter((element, index) => {
+        const label = foodName + foodClassLabelSeparator + foodItemNames.filter((element, index) => {
             return foodItemNames.indexOf(element) === index;
         }).join()   // Remove duplicates and then add all remaining food item names to the food class label
 

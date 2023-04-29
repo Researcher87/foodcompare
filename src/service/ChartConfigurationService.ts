@@ -20,14 +20,14 @@ export function getBarChartOptions(title: string, unit: string, maxYValue?: numb
     }
 
     const scalesObject = {y: yAxis}
-
     return getOptions(title, unit, scalesObject);
 }
 
 
 export function getBarChartOptionsForRanking(title: string, unit: string) {
     const scales = getScalesForRankingChart(unit);
-    return getOptions(title, unit, scales);
+    const fullTitle = `${title} (${unit})`
+    return getOptions(fullTitle, unit, scales);
 }
 
 
@@ -74,7 +74,7 @@ function getScalesForRankingChart(unit: string) {
 
     if (unit) {
         scaleLabel = {
-            display: true,
+            display: false,
             labelString: unit
         }
     }

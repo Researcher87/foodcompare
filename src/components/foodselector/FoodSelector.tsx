@@ -8,7 +8,7 @@ import ReactSelectOption, {
     ReactSelectPortionOption
 } from "../../types/ReactSelectOption";
 import {getCategorySelectList} from "../../service/nutrientdata/CategoryService";
-import {getFoodClassSelectList} from "../../service/nutrientdata/FoodClassService";
+import {foodClassLabelSeparator, getFoodClassSelectList} from "../../service/nutrientdata/FoodClassService";
 import {getFoodItemsSelectList} from "../../service/nutrientdata/FoodItemsService";
 import FoodItem, {PortionData} from "../../types/nutrientdata/FoodItem";
 import {getDefaultPortionData, getPortionReactSelectList} from "../../service/nutrientdata/PortionDataService";
@@ -81,6 +81,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     const [categoriesList, setCategoriesList] = useState<Array<ReactSelectOption>>([])
     const [foodClassesList, setFoodClassesList] = useState<Array<ReactSelectFoodClassOption>>([])
+    const [foodClassesTypeaheadList, setFoodClassesTypeaheadList] = useState<Array<ReactSelectFoodClassOption>>([])
+
     const [foodItemsList, setFoodItemsList] = useState<Array<ReactSelectFoodItemOption>>([])
     const [portionsList, setPortionsList] = useState<Array<ReactSelectPortionOption>>([])
     const [sourcesList, setSourcesList] = useState<Array<ReactSelectOption>>([])
@@ -115,6 +117,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     const category = selectedCategory ? selectedCategory.value : 0
                     const foodClasses = getFoodClassSelectList(foodDataCorpus, category, applicationContext.foodDataCorpus.foodNames, language)
                     setFoodClassesList(foodClasses)
+                    setFoodClassesTypeaheadList(foodClasses)  // Initially, the typeahead-list is identical with the food classes list
 
                     const initialFoodClass = getInitialFoodClassNumber(foodClasses)
                     const foodClass = foodClasses[initialFoodClass]
@@ -370,6 +373,62 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         setCombineData(!combineData)
     }
 
+    /**
+     * Manually creates a sorted typeahead list which will favor food classes starting with the search term
+     * against food classes not starting (but including) the search term. Also, the food class is favored
+     * against the food items of it, which may also include the search term (like "Cheese" is shown if "Gouda"
+     * is entered).
+     * @param value The value entered in the select input field
+     * @param action The event action
+     */
+    const handleFoodClassInputChange = (value, { action }) => {
+        if (action === 'input-change') {
+            if(value.trim().length === 0) {
+                setFoodClassesTypeaheadList(foodClassesList)
+                return
+            }
+
+            let resultList: ReactSelectFoodClassOption[] = []
+            let dictionary: string[] = []
+
+            value = value.toLowerCase().trim()
+
+            // Find add all food class elements to the typeahead list that start with the search term
+            foodClassesList.forEach(entry => {
+                let label = entry.label.toLowerCase()
+                if(label.includes(foodClassLabelSeparator)) {
+                    label = label.substring(0, label.indexOf(foodClassLabelSeparator)).trim()
+                }
+                if(label.startsWith(value)) {
+                    resultList.push(entry)
+                    dictionary.push(entry.label)
+                }
+            })
+
+            // Now add all food class elements to the typeahead list that match the search term (yet do not start with it)
+            foodClassesList.forEach(entry => {
+                let label = entry.label.toLowerCase()
+                if(label.includes(foodClassLabelSeparator)) {
+                    label = label.substring(0, label.indexOf(foodClassLabelSeparator)).trim()
+                }
+                if(label.includes(value) && !label.startsWith(value)) {
+                    resultList.push(entry)
+                    dictionary.push(entry.label)
+                }
+            })
+
+            // Finally add all labels (class or items) that contain the search term
+            foodClassesList.forEach(entry => {
+                const label = entry.label.toLowerCase()
+                if(label.includes(value) && !dictionary.includes(entry.label)) {
+                    resultList.push(entry)
+                }
+            })
+
+            setFoodClassesTypeaheadList(resultList)
+        }
+    }
+
     if (props.selectedFoodItem && !initialized) {
         setInitialFoodElement()
     }
@@ -490,8 +549,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select className={selectClass}
-                        options={foodClassesList}
-                        backgroundColor={"#AAAAAA"}
+                        options={foodClassesTypeaheadList}
+                        onInputChange={handleFoodClassInputChange}
                         formatOptionLabel={foodclassFormatter}
                         value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
