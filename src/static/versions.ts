@@ -257,7 +257,7 @@ export const versions = [
     },
     {
         id: "1.6",
-        date: "08-04-2023",
+        date: "13-04-2023",
         subject: "Layout Revision / Mobile Device Support",
         features: [
             "The Layout has been revised in several menus.",
@@ -268,8 +268,25 @@ export const versions = [
             "Expected units in the user data settings are shown in the form."
         ],
         bugfixes: [
-            "Some typos have been removed",
+            "Some typos have been removed.",
             "Some code smells have been removed."
+        ]
+    },
+    {
+        id: "1.6.1",
+        date: "30-04-2023",
+        subject: "Branded Food",
+        features: [
+            "A new category of branded food (mainly restaurant food) has been added. It consists a rather limited amount of general food such as pizza, hamburger, or some soups.",
+        ],
+        updates: [
+            "The type-ahead list of the food classes shows the most relevant elements on top now.",
+            "In the food selected, the category, food class and food item input field are now highlighted by a background color.",
+            "Units are now shown at the Y-axis of the ranking chart.",
+            "Home text has been slightly adjusted."
+        ],
+        bugfixes: [
+            "Some typos have been removes."
         ]
     },
 ]

@@ -265,7 +265,7 @@ export const applicationStrings = {
     },
     label_foodclass: {
         de: 'Lebensmittel',
-        en: 'Food Class'
+        en: 'Food class'
     },
     label_fooditem: {
         de: 'Typ',
@@ -293,7 +293,7 @@ export const applicationStrings = {
     },
     label_info_composite: {
         de: 'Enthaltene Lebensmittel',
-        en: 'Contained food elements'
+        en: 'Contained food items'
     },
     label_info_category: {
         de: 'Kategorie',

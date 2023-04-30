@@ -228,6 +228,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         if (foodDataCorpus) {
             const foodClassItems = getFoodClassSelectList(foodDataCorpus, category.value, applicationContext.foodDataCorpus.foodNames, language)
             setFoodClassesList(foodClassItems)
+            setFoodClassesTypeaheadList(foodClassItems)
             setSelectedFoodClass(foodClassItems[0])
             updateFoodItem(foodClassItems[0])
         }
@@ -519,9 +520,9 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         return label
     }
 
-    const stylesCategory = getCustomSelectStyle(COLOR_SELECTOR_CATEGORY)
-    const stylesFoodClass = getCustomSelectStyle(COLOR_SELECTOR_FOODCLASS)
-    const stylesFoodItem = getCustomSelectStyle(COLOR_SELECTOR_FOODITEM)
+    const stylesCategory = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_CATEGORY) : customSelectStyles
+    const stylesFoodClass = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODCLASS) : customSelectStyles
+    const stylesFoodItem = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODITEM) : customSelectStyles
 
     return <div>
         <div className="container">
