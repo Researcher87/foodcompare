@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {AMOUNT_PORTION} from "../../../config/Constants";
+import {AMOUNT_PORTION, TAB_PROTEINS_DATA} from "../../../config/Constants";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {applicationStrings} from "../../../static/labels";

@@ -1,0 +1,108 @@
+{
+  "vitamins": [
+    {
+      "name": {
+        "de": "Vitamin B1",
+        "en": "Vitamin B1"
+      },
+      "scientificName": {
+        "de": "Thiamin",
+        "en": "Thiamine"
+      },
+      "description": {
+        "de": "Thiamin ist ein wasserlösliches Vitamin und ist u.a. am Stoffwechsel beteiligt. Es liegt v.a. in Getreide, Reis und Hülsenfrüchten vor, wobei bei der Getreideverarbeitung zu Wei0mehlprodukten oder beim Schälen von Reis ein Großteil des Vitamins verloren geht. In manchen Ländern wird diesen Produkten daher künstlich Vitamin B1 zugeführt. Vitamin B1 ist hitzeempfindlich und wird beim Kochen zerstört. Mangelerscheinungen sind in Industriestaaten eher selten, treten in ärmeren Ländern jedoch häufiger auf. Sie führen dazu, dass Kohlenhydrate nicht mehr aus der Nahrung aufgenommen werden können, was dann über ein anderes, weniger effizientes Enzym geschieht.",
+        "en": "Thiamine is a water-soluble vitamin that is, among others, involved in metabolism. It is mainly contained by grains, rice and legumes, though grain processing (white flour products) or rice polishing can considerably lower the vitamin content. For this reason, vitamin B1 is added to those products in some countries. Vitamin B1 is vulnerable against heat and gets destroyed in the process of boiling. Deficiencies are rather rare in developed countries, yet occur more often in poorer countries. Thiamine deficiency results in carbohydrates not being efficiently absorbed in the digestive system, which will then be treated by other enzymes in a less efficient way."
+      },
+      "functionality": [
+        {
+          "de": "Beteiligung am Kohlenhydrat-Stoffwechsel",
+          "en": "Takes part in the carbohydrate metabolism"
+        },
+        {
+          "de": "Beteiligt am Nervensystem",
+          "en": "Involved in the nervous system"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Müdigkeit",
+          "en": "Fatigue"
+        },
+        {
+          "de": "Konzentrationsschwäche",
+          "en": "Lack of concentration"
+        },
+        {
+          "de": "Depressionen",
+          "en": "Depressions"
+        },
+        {
+          "de": "Reizbarkeit",
+          "en": "Irritability"
+        }
+      ],
+      "overdose": {
+        "de": "Nicht bekannt.",
+        "en": "Unknwon."
+      },
+      "dependencies": {
+        "de": "Da B1 an der Kohlenhydrat-Verstoffwechslung beteiligt ist, erhöht sich der Bedarf bei kohlenhydratlastiger Ernährung entsprechend. Der Verzehr von verarbeiteten Lebensmitteln wie geschältem Reis oder Weißmehlprodukten wirkt sich hier negativ aus, da diese Lebensmittel zwar selbst viele Kohlenhydrate, jedoch kaum mehr Vitamin B1 enthalten.",
+        "en": "Since B1 participates in the carbohydrate metabolism, carbohydrate-centric diets increase the B1 requirement accordingly. Consumption of processed food such as white wheat products or polished rice exacerbate vitamin B1 supply, as those products scarcely contain any remaining vitamin B1, yet contain a high amount of carbohydrates themselves."
+      },
+      "sources": {
+        "de": "Vollkornprodukte, Hülsenfrüchte (z.B. Weiße Bohnen, Erbsen), Kartoffeln, Zucchini, Milch, Schweinefleisch, Nüsse, best. Fischarten (z.B. Thunfisch)",
+        "en": "Whole-grain products, legumes (such as white beans, peas), potatoes, zucchini, milk, pork, nuts, some types of fish (e.g. tuna fish)"
+      },
+      "requirements": {
+        "de": "male: 1.0 .. 1.3 mg | female: 1.0 mg",
+        "en": "male: 1.0 .. 1.3 mg | female: 1.0 mg"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin B2",
+        "en": "Vitamin B2"
+      },
+      "scientificName": {
+        "de": "Ribovlamin",
+        "en": "Ribovlamine"
+      },
+      "description": {
+        "de": "Thiamin ist ein wasserlösliches Vitamin und ist u.a. am Stoffwechsel beteiligt. Es liegt v.a. in Getreide, Reis und Hülsenfrüchten vor, wobei bei der Getreideverarbeitung zu Weißmehlprodukten oder beim Schälen von Reis ein Großteil des Vitamins verloren geht. In manchen Ländern wird diesen Produkten daher künstlich Vitamin B1 zugeführt. Vitamin B1 ist hitzeempfindlich und wird beim Kochen zerstört. Mangelerscheinungen sind in Industriestaaten eher selten, treten in ärmeren Ländern jedoch häufiger auf.",
+        "en": "Thiamine is a water-soluble vitamin that is, among others, involved in metabolism. It is mainly contained by grains, rice and legumes, though grain processing (while flour products) or rice polishing can considerably lower the vitamin content. For this reason, vitamin B1 is added to those products in some countries. Vitamin B1 is vulnerable against heat and gets destroyed in the process of boiling. Deficiencies are rather rare in developed countries, yet occur more often in poorer countries."
+      },
+      "functionality": [
+        {
+          "de": "aaa",
+          "en": "aaa"
+        },
+        {
+          "de": "bbb",
+          "en": "bbb"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "",
+          "en": ""
+        }
+      ],
+      "overdose": {
+        "de": "qqq",
+        "en": "qqq"
+      },
+      "dependencies": {
+        "de": "",
+        "en": ""
+      },
+      "sources": {
+        "de": "",
+        "en": ""
+      },
+      "requirements": {
+        "de": "",
+        "en": ""
+      }
+    }
+  ]
+}

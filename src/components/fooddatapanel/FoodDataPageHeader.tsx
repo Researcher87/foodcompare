@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {Button} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
-import {FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/fa";
+import {FaBookOpen, FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/fa";
 import {
     DISPLAYMODE_CHART,
     DISPLAYMODE_TABLE,
@@ -29,6 +29,9 @@ import {ChartMenuPanel} from "./ChartMenuPanel";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import {useHistory} from 'react-router-dom';
 import {isMobileDevice} from "../../service/WindowDimension";
+import {VitaminsBook} from "./VitaminBook";
+import nutrientBook from "../../static/nutrientBook.json";
+import {BookDataEntry} from "../../types/BookData";
 
 
 interface FoodDataPageHeaderProps {
@@ -41,9 +44,10 @@ interface FoodDataPageHeaderProps {
 export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
-	const history = useHistory()
+    const history = useHistory()
 
     const [helpModalId, setHelpModalId] = useState<number>(0)
+    const [showBookModal, setShowBookModal] = useState<boolean>(false)
 
     if (applicationContext === null) {
         return <div/>
@@ -58,13 +62,13 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
-		const remainingItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
+        const remainingItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
 
         applicationContext.setFoodDataPanelData.removeItemFromFoodDataPanel(id)
 
-		if(remainingItems === 0) {
-			history.push({pathName: PATH_FOODDATA_PANEL})
-		}		
+        if (remainingItems === 0) {
+            history.push({pathName: PATH_FOODDATA_PANEL})
+        }
     }
 
     const help = () => {
@@ -98,6 +102,10 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         }
     }
 
+    const openVitaminMineralBook = () => {
+        setShowBookModal(true)
+    }
+
     const enabledDisplayButtonClasses = "btn button-displaymode-enabled"
     const disabledDisplayButtonClasses = "btn button-displaymode-disabled"
 
@@ -123,7 +131,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     if (!props.selectedFoodItem.foodItem.aggregated) {
         const condition = applicationContext.foodDataCorpus.conditions.find(condition => condition.id === props.selectedFoodItem.foodItem.conditionId)
         const conditionName = condition ? getName(condition, languageContext.language) : ""
-        if(isMobileDevice()) {
+        if (isMobileDevice()) {
             foodName = shortenName(foodName, 16)
         }
         fullName = `${foodName} (${conditionName}, ${portionSize} g)`
@@ -138,16 +146,38 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const headerLabel = isMobileDevice() ? "header-label-m" : "header-label";
 
+    let bookToolTip = null
+    let bookData: BookDataEntry[] = []
+    switch(selectedDataPage) {
+        case TAB_VITAMIN_DATA:
+            bookToolTip = applicationStrings.tooltip_icon_vitamins[languageContext.language]
+            bookData = nutrientBook.vitamins
+            break;
+        case TAB_MINERAL_DATA:
+            bookToolTip = applicationStrings.tooltip_icon_minerals[languageContext.language]
+            break;
+        case TAB_PROTEINS_DATA:
+            bookToolTip = applicationStrings.tooltip_icon_proteins[languageContext.language]
+            break;
+    }
+
+    const shouldShowBookIcon = selectedDataPage === TAB_VITAMIN_DATA || selectedDataPage == TAB_MINERAL_DATA
+                                || selectedDataPage == TAB_PROTEINS_DATA
+
     return (
         <div style={{paddingBottom: "6px"}}>
             {helpText !== null &&
             <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}/>
             }
+            {showBookModal &&
+                <VitaminsBook selectedDataTab={selectedDataPage} bookData={bookData} closeBookModal={() => setShowBookModal(false)}/>
+            }
             <div className={"d-flex flex-nowrap"}>
                 <div className="col-2">
                     <div className={"card"}>
                         <div className="card-body" style={{paddingRight: "16px"}}>
-                            <ChartMenuPanel verticalArrangement={true} setDataPage={props.setDataPage} dataPage={selectedDataPage}/>
+                            <ChartMenuPanel verticalArrangement={true} setDataPage={props.setDataPage}
+                                            dataPage={selectedDataPage}/>
                             <div className={"d-flex card"} style={{marginTop: "24px", backgroundColor: "#eeeeee"}}>
                                 <div className={"text-center"} style={{fontSize: "0.8em"}} data-tip={sourceToolTip}>
                                     {sourceString}
@@ -166,6 +196,16 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                         </div>
                         <div style={{paddingRight: "24px"}}>
                             <div style={{padding: "0px !important", margin: "0px !important"}}>
+                                {shouldShowBookIcon &&
+                                <span style={{marginRight: "20px"}}>
+                                    <Button
+                                        onClick={() => openVitaminMineralBook()}
+                                        data-tip={bookToolTip}>
+                                                        <ReactTooltip/>
+                                                        <FaBookOpen/>
+                                    </Button>
+                                </span>
+                                }
                                 <div className="btn-group" role="group">
                                     <Button className={chartButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
@@ -181,7 +221,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                         <FaThList/>
                                     </Button>
                                 </div>
-                                <div className="btn-group" role="group" style={{paddingLeft: "24px"}}>
+                                <div className="btn-group" role="group" style={{paddingLeft: "20px"}}>
                                     <Button className={"btn-primary button-foodPanelHead"}
                                             onClick={help}
                                             active={displayMode === DISPLAYMODE_CHART}>

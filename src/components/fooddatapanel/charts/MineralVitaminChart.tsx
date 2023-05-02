@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
-import {CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
+import {CHART_MINERALS, CHART_VITAMINS, GRAM, TAB_MINERAL_DATA, TAB_VITAMIN_DATA} from "../../../config/Constants";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartConfigurationService"

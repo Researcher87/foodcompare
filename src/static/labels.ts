@@ -1,4 +1,36 @@
 export const applicationStrings = {
+    book_heading_deficiencies: {
+        "de": "Mangelerscheinungen",
+        "en": "Deficiencies"
+    },
+    book_heading_dependencies: {
+        "de": "Abhängigkeiten",
+        "en": "Dependencies"
+    },
+    book_heading_functionality: {
+        "de": "Funktionen",
+        "en": "Meaning"
+    },
+    book_heading_overdose: {
+        "de": "Probleme bei Überdosis",
+        "en": "Issues of overdose"
+    },
+    book_heading_requirements: {
+        "de": "Tagedbedarf",
+        "en": "Daily requirement"
+    },
+    book_minerals: {
+        "de": "Buch der Mineralstoffe",
+        "en": "Book of Minerals"
+    },
+    book_proteins: {
+        "de": "Buch der Aminosäuren",
+        "en": "Book of Amino Acids"
+    },
+    book_vitamins: {
+        "de": "Buch der Vitamine",
+        "en": "Book of Vitamins"
+    },
     button_add: {
         de: 'Hinzufügen',
         en: 'Add'
@@ -1079,6 +1111,10 @@ export const applicationStrings = {
         de: 'Tab schließen',
         en: 'Close tab'
     },
+    tooltip_icon_minerals: {
+        de: 'Buch der Mineralstoffe öffnen',
+        en: 'Open minerals book'
+    },
     tooltip_icon_newFoodItem: {
         de: 'Lebensmittel hinzufügen',
         en: 'Add food item'
@@ -1086,6 +1122,10 @@ export const applicationStrings = {
     tooltip_icon_newFoodItemStack: {
         de: 'Kombinierte Liste an Lebensmitteln hinzufügen (aggregierte Daten)',
         en: 'Add composite list of food items (aggregated data)'
+    },
+    tooltip_icon_proteins: {
+        de: 'Buch der essenziellen Aminosäuren öffnen',
+        en: 'Open book of essential amino acids'
     },
     tooltip_icon_removeAll: {
         de: 'Alle Tabs schließen',
@@ -1095,8 +1135,12 @@ export const applicationStrings = {
         de: 'Tabellen-Modus',
         en: 'Table mode'
     },
+    tooltip_icon_vitamins: {
+        de: 'Vitaminbuch öffnen',
+        en: 'Open vitamins book'
+    },
     tooltip_source: {
         de: 'Verwendete Quelle: ',
         en: 'Used source: '
-    }
+    },
 }
