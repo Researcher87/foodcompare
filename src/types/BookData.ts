@@ -5,12 +5,13 @@ export interface NamePair {
 
 export interface BookDataEntry {
     name: NamePair,
-    scientificName?: NamePair | undefined,
+    scientificName?: NamePair,
     description: NamePair,
     functionality: NamePair[],
     deficiencies: NamePair[],
     overdose: NamePair,
     dependencies: NamePair,
+    storage: NamePair,
     sources: NamePair
     requirements: NamePair
 }

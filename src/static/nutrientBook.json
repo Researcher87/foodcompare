@@ -10,7 +10,7 @@
         "en": "Thiamine"
       },
       "description": {
-        "de": "Thiamin ist ein wasserlösliches Vitamin und ist u.a. am Stoffwechsel beteiligt. Es liegt v.a. in Getreide, Reis und Hülsenfrüchten vor, wobei bei der Getreideverarbeitung zu Wei0mehlprodukten oder beim Schälen von Reis ein Großteil des Vitamins verloren geht. In manchen Ländern wird diesen Produkten daher künstlich Vitamin B1 zugeführt. Vitamin B1 ist hitzeempfindlich und wird beim Kochen zerstört. Mangelerscheinungen sind in Industriestaaten eher selten, treten in ärmeren Ländern jedoch häufiger auf. Sie führen dazu, dass Kohlenhydrate nicht mehr aus der Nahrung aufgenommen werden können, was dann über ein anderes, weniger effizientes Enzym geschieht.",
+        "de": "Thiamin ist ein wasserlösliches Vitamin und ist u.a. am Stoffwechsel beteiligt. Es liegt v.a. in Getreide, Reis und Hülsenfrüchten vor, wobei bei der Getreideverarbeitung zu Weißmehlprodukten oder beim Schälen von Reis ein Großteil des Vitamins verloren geht. In manchen Ländern wird diesen Produkten daher künstlich Vitamin B1 zugeführt. Vitamin B1 ist hitzeempfindlich und wird beim Kochen zerstört. Mangelerscheinungen sind in Industriestaaten eher selten, treten in ärmeren Ländern jedoch häufiger auf. Sie führen dazu, dass Kohlenhydrate nicht mehr aus der Nahrung aufgenommen werden können, was dann über ein anderes, weniger effizientes Enzym geschieht.",
         "en": "Thiamine is a water-soluble vitamin that is, among others, involved in metabolism. It is mainly contained by grains, rice and legumes, though grain processing (white flour products) or rice polishing can considerably lower the vitamin content. For this reason, vitamin B1 is added to those products in some countries. Vitamin B1 is vulnerable against heat and gets destroyed in the process of boiling. Deficiencies are rather rare in developed countries, yet occur more often in poorer countries. Thiamine deficiency results in carbohydrates not being efficiently absorbed in the digestive system, which will then be treated by other enzymes in a less efficient way."
       },
       "functionality": [
@@ -43,19 +43,23 @@
       ],
       "overdose": {
         "de": "Nicht bekannt.",
-        "en": "Unknwon."
+        "en": "Unknown."
       },
       "dependencies": {
         "de": "Da B1 an der Kohlenhydrat-Verstoffwechslung beteiligt ist, erhöht sich der Bedarf bei kohlenhydratlastiger Ernährung entsprechend. Der Verzehr von verarbeiteten Lebensmitteln wie geschältem Reis oder Weißmehlprodukten wirkt sich hier negativ aus, da diese Lebensmittel zwar selbst viele Kohlenhydrate, jedoch kaum mehr Vitamin B1 enthalten.",
         "en": "Since B1 participates in the carbohydrate metabolism, carbohydrate-centric diets increase the B1 requirement accordingly. Consumption of processed food such as white wheat products or polished rice exacerbate vitamin B1 supply, as those products scarcely contain any remaining vitamin B1, yet contain a high amount of carbohydrates themselves."
+      },
+      "storage": {
+        "de": "Der Körper kann etwa 25 bis 30 mg Vitamin B1 speichern.",
+        "en": "The human body can store about 25 .. 30 mg of vitamin B1."
       },
       "sources": {
         "de": "Vollkornprodukte, Hülsenfrüchte (z.B. Weiße Bohnen, Erbsen), Kartoffeln, Zucchini, Milch, Schweinefleisch, Nüsse, best. Fischarten (z.B. Thunfisch)",
         "en": "Whole-grain products, legumes (such as white beans, peas), potatoes, zucchini, milk, pork, nuts, some types of fish (e.g. tuna fish)"
       },
       "requirements": {
-        "de": "male: 1.0 .. 1.3 mg | female: 1.0 mg",
-        "en": "male: 1.0 .. 1.3 mg | female: 1.0 mg"
+        "de": "Mann: 1,0 .. 1,3 mg | Frau: 1,0 mg (schwanger: 1,3 mg)",
+        "en": "male: 1.0 .. 1.3 mg | female: 1.0 mg (pregnant: 1.3 mg)"
       }
     },
     {
@@ -64,44 +68,526 @@
         "en": "Vitamin B2"
       },
       "scientificName": {
-        "de": "Ribovlamin",
-        "en": "Ribovlamine"
+        "de": "Riboflavin",
+        "en": "Riboflavin"
       },
       "description": {
-        "de": "Thiamin ist ein wasserlösliches Vitamin und ist u.a. am Stoffwechsel beteiligt. Es liegt v.a. in Getreide, Reis und Hülsenfrüchten vor, wobei bei der Getreideverarbeitung zu Weißmehlprodukten oder beim Schälen von Reis ein Großteil des Vitamins verloren geht. In manchen Ländern wird diesen Produkten daher künstlich Vitamin B1 zugeführt. Vitamin B1 ist hitzeempfindlich und wird beim Kochen zerstört. Mangelerscheinungen sind in Industriestaaten eher selten, treten in ärmeren Ländern jedoch häufiger auf.",
-        "en": "Thiamine is a water-soluble vitamin that is, among others, involved in metabolism. It is mainly contained by grains, rice and legumes, though grain processing (while flour products) or rice polishing can considerably lower the vitamin content. For this reason, vitamin B1 is added to those products in some countries. Vitamin B1 is vulnerable against heat and gets destroyed in the process of boiling. Deficiencies are rather rare in developed countries, yet occur more often in poorer countries."
+        "de": "Riboflavin ist primär am Stoffwechsel beteiligt und ermöglicht den Abbau von Kohlenhydraten, Fetten und Eiweiß. Ein Mangel ist sehr selten, da das Vitamin in vielen Lebensmitteln in reichlicher Menge vorhanden ist. Die Aufnahme aus tierischen Quellen erfolgt besser als aus pflanzlichen Quellen. Vitamin B2 ist lichtempfindlich und sollte daher dunkel gelagert werden.",
+        "en": "Riboflavin is primarly involved in metabolism and allows carbohydrate, fatty acid and protein absorbation. Decifiencies are rare, since vitamin B2 is abundantly contained in many foods. Vitamin B2 is better absorbed from animal food compare to plant-based food. The vitamin is vulnerable to light and should be stored dark."
       },
       "functionality": [
         {
-          "de": "aaa",
-          "en": "aaa"
+          "de": "Beteiligt am Stoffwechsel (Kohlenhydrate, Fette, Eiweiße)",
+          "en": "Involved in metabolism (carbohydrates, fatty acids, proteins)"
         },
         {
-          "de": "bbb",
-          "en": "bbb"
+          "de": "Wichtig für verschiedene Zellfunktionen",
+          "en": "Needed for several cellular functions"
+        },
+        {
+          "de": "Beteiligt am Wachstum",
+          "en": "Involed in the process of growth"
+        },
+        {
+          "de": "Unterstützt die Wirkung von Vitamin B3 und B6",
+          "en": "Supports the usage of vitamin B3 and B6"
         }
       ],
       "deficiencies": [
         {
-          "de": "",
-          "en": ""
+          "de": "Entzündliche Haut",
+          "en": "Inflammatory skin"
+        },
+        {
+        "de": "Entzündung der Mundschleimhäute",
+        "en": "Stomatitis (inflammation of mouth and lips)"
         }
       ],
       "overdose": {
-        "de": "qqq",
-        "en": "qqq"
+        "de": "Nicht bekannt.",
+        "en": "Unknown."
+      },
+      "dependencies": {
+        "de": "Riboflavin wird benötigt, damit die Vitamine B3 und B6 effizient verwendet werden können. Ein B2-Mangel kann daher auch indirekt ein Defizit an Vitamin B3 und B6 im Körper bedeuten. Die Aufnahme von Vitamin B2 funktioniert nur mit Proteinen, so dass ein Proteinmangel automatisch zu einem Vitamin-B2-Mangel führt.",
+        "en": "Riboflavin is needed to efficiently make use of vitamin B3 and B6 within the human body. A lack of vitamin B2 may thus indirectly lead to a vitamin B3 and B6 shortage. In order to absorb vitamin B2, proteins are needed. A protein deficiency leads inevitably to a vitamin B2 shortage. "
+      },
+      "sources": {
+        "de": "Brokkoli, Spinat, Milchprodukte, Eier, Sojabohnen, Leber, Fleisch",
+        "en": "Broccoli, spinach, dairy products, eggs, soya beans, liver, meat"
+      },
+      "storage": {
+        "de": "",
+        "en": ""
+      },
+      "requirements": {
+        "de": "Mann: 1,3 .. 1,4 mg | Frau: 1,0 .. 1,1 mg (schwanger: 1,4 mg)",
+        "en": "male: 1.3 .. 1.4 mg | female: 1.0 .. 1.1 mg (pregnant: 1.4 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin B3",
+        "en": "Vitamin B3"
+      },
+      "scientificName": {
+        "de": "Niacin",
+        "en": "Niacin"
+      },
+      "description": {
+        "de": "Ähnlich wie Vitamin B2 ist Niacin am Stoffwechsel beteiligt und in der Nahrung in reichlicher Menge vorhanden, so dass ein Mangel sehr selten ist. Es kommt vor allem in tierischen Produkten vor, in geringerem Maß aber auch in pflanzlicher Nahrung. Die Aufnahme aus tierischen Quellen funktioniert besser als aus pflanzlichen Quellen. Der Mensch kann mit dem Protein Tryptophan und dem Vitamin B6 das Vitamin B3 auch selbst herstellen, jedoch nicht in ausreichender Menge.",
+        "en": "Similar to vitamin B2, Niacin is involved in metabolism and is abundantly contained in everyday food. Deficiencies are very rare. The vitamin is primarily contained in animal food, yet to a less degree in plant-based food as well. Absorbtion from animal food is more effective than from plant-based food. The human body can also produce Niacin on its own, using the protein Tryptophan and vitamin B3. This way of production is not sufficent for the total requirement, though."
+      },
+      "functionality": [
+        {
+          "de": "Ist am Stoffwechsel beteiligt",
+          "en": "Takes part in metabolism"
+        },
+        {
+          "de": "Wird insbesondere an Orten mit hohem Energiebedarf benötigt (z.B. Muskeln, Herz)",
+          "en": "Especially needed in energy-consuming parts of the body (such as muscles, heart)"
+        },
+        {
+          "de": "Unterstützt die Regeneration von Haut, Muskeln, Nerven und DNA",
+          "en": "Promotes the regeneration of skin, muscles, nerves and DNA"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Konzentrationsschwäche, Nervosität, Reizbarkeit",
+          "en": "Lack of concentration, nervousness, irritability"
+        },
+        {
+          "de": "Hautveränderungen (Dermatitis)",
+          "en": "Inflammation of the skin (dermatitis)"
+        },
+        {
+          "de": "Durchfall und Verdauungsstörungen",
+          "en": "Diarrhea and indigestion"
+        }
+      ],
+      "overdose": {
+        "de": "Nicht bekannt.",
+        "en": "Unknown."
+      },
+      "dependencies": {
+        "de": "Damit der Körper das Vitamin auch selbst herstellen kann, werden Vitamin B6 und Proteins (Tryptophan) benötigt. Ein Mangel daran kann u.U. auch zu einem Mangel an Vitamin B3 führen.",
+        "en": "In order to produce the vitamin on its own, vitamin B6 and proteins (Tryptophan) are needed. A shortage of those two components might lead to a shortage of vitamin B3 as well. "
+      },
+      "sources": {
+        "de": "Fleisch, Fisch, Vollkornprodukte, Kartoffeln, Erbsen, Kaffee, Erdnüsse, Reis",
+        "en": "Meat, fish, whole-grain products, potatoes, peas, coffee, peanuts, rice"
+      },
+      "storage": {
+        "de": "",
+        "en": ""
+      },
+      "requirements": {
+        "de": "Mann: 14 .. 15 mg | Frau: 11 .. 12 mg  (schwanger: 16 mg)",
+        "en": "male: 14 .. 15 mg | female: 11 .. 12 mg  (pregnant: 16 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin B5",
+        "en": "Vitamin B5"
+      },
+      "scientificName": {
+        "de": "Pantothensäure",
+        "en": "Pantothenic acid"
+      },
+      "description": {
+        "de": "Pantothensäure ist ein wasserlösliches Vitamin, das in fast allen Lebensmitteln auftritt, so dass Mangelerscheinungen extrem selten sind. Das Vitamin ist an der Energiegewinnung in den Zellen beteiligt. Es ist sehr empfindlich gegenüber Hitze und geht auch bei der Verarbeitung und Lagerung von Lebensmitteln zum Teil verloren.",
+        "en": "Pantothenic acid is a water-soluble vitamin that appears in almost all kinds of food, making deficiencies extremely rare. It takes part in the energy production of the cells and in metabolism in general. Vitamin B5 is vulnerable against light and may partly vanish when food is processed or stored."
+      },
+      "functionality": [
+        {
+          "de": "Ist am Stoffwechsel beteiligt",
+          "en": "Takes part in metabolism"
+        },
+        {
+          "de": "Beteiligt an der Herstellung von Cholesterin und Provitamin D.",
+          "en": "Supports the production of cholesterol and provitamin D"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Müdigkeit, Schlaflosigkeit, Depressionen",
+          "en": "Fatigue, sleeplessness, depressions"
+        },
+        {
+          "de": "Muskelkrämpfe",
+          "en": "Muscle cramps"
+        },
+        {
+          "de": "Übelkeit",
+          "en": "Nausea"
+        }
+      ],
+      "overdose": {
+        "de": "Ab einer täglichen Menge von mehr als 10 mg können leichte Darmstörungen auftreten.",
+        "en": "Slight irritations of the bowel may occur when more than 10 mg of Vitamin B5 are consumed per day."
       },
       "dependencies": {
         "de": "",
         "en": ""
       },
       "sources": {
+        "de": "Fleisch, Fisch, Getreide, Eier, Kartoffeln",
+        "en": "Meat, fish, grain, eggs, potatoes"
+      },
+      "storage": {
         "de": "",
         "en": ""
       },
       "requirements": {
+        "de": "ca. 6 mg (der genaue Bedarf ist noch nicht abschließend geklärt)",
+        "en": "about 6 mg (the exact amount has not been identified yet)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin B6",
+        "en": "Vitamin B6"
+      },
+      "scientificName": {
+        "de": "Pyridoxin, Pyridoxal, Pyridoxamin",
+        "en": "Pyridoxine, pyridoxal, pyridoxamine"
+      },
+      "description": {
+        "de": "Vitamin B6 bezeichnet eine Gruppe chemischer Verbindungen und spielt eine große Rolle bei der Verstoffwechslung von Eiweißen. Das Vitamin kommt in vielen tierischen und pflanzlichen Lebensmitteln vor, wobei es aus tierischen Quellen besser aufgenommen wird. In einigen Produkten (z.B. Säfte, Milchprodukte, Süßwaren) wird Vitamin B6 heute auch künstlich hinzugefügt. Ein Mangel an Vitamin B6 ist daher eher selten.",
+        "en": "Vitamin B6 is a group of chemical substances that play an important part in protein metabolism. It is contained in many animal and plant-based foods, though the absorption from animal food is more effective. In food industry, the vitamin is sometimes added to products such as juices, dairy and confectionery, making deficiencies rather rare."
+      },
+      "functionality": [
+        {
+          "de": "Für den Eiweißsstoffwechsel benötigt",
+          "en": "Needed for protein metabolism"
+        },
+        {
+          "de": "Auch am Stoffwechsel von Stärke und Fettsäuren beteiligt",
+          "en": "Takes also part in starch metabolism and lipids metabolism"
+        },
+        {
+          "de": "An der Produktion vieler Botenstoffe beteiligt, z.B. Dopamin, Serotonin, Histamin",
+          "en": "Takes part in the production of some messengers, such as Dopamine, Serotonin and Histamine"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Wachstumsstörung durch verminderte Produktion von Aminosäuren im Körper",
+          "en": "Growth disturbance because of reduced production of amino acids in the body"
+        },
+        {
+          "de": "Übelkeit, Appetitlosigkeit",
+          "en": "Nausea, anorexia"
+        },
+        {
+          "de": "Blutarmut",
+          "en": "Anemia"
+        },
+        {
+          "de": "Hautveränderungen",
+          "en": "Skin irritations"
+        },
+        {
+          "de": "Geschwächtes Immunsystem",
+          "en": "Weakened immune system"
+        }
+      ],
+      "overdose": {
+        "de": "Eine Überdosis kann allgemein zu Schmerzen und Taubheitsgefühlen in den Extremitäten führen, bei starker Überdosis können auch Nervenschädigungen auftreten. Die Grenzwerte für eine Überdosis schwanken zwischen 25 und 100 mg pro Tag.",
+        "en": "An overdose can lead to general pain and numb extremities, an extreme overdose can also lead to neuropathy (damage of the nerves). There is different data related to the overdose threshold, reaching from 25 to 100 mg per day."
+      },
+      "dependencies": {
+        "de": "Da Vitamin B6 für den Eiweißstoffwechsel verwendet wird, führt eine eiweißreiche Ernährung auch zu einem etwas höheren Vitamin-B6-Bedarf.",
+        "en": "Since vitamin B6 is needed for protein absorption and processing, protein-intensive diets may require a higher consumption of vitamin B6."
+      },
+      "sources": {
+        "de": "Fisch, Leber, Avocado, Kartoffeln, Nüsse, Weizen",
+        "en": "Fish, liver, avocado, potatoes, nuts, wheat"
+      },
+      "storage": {
         "de": "",
         "en": ""
+      },
+      "requirements": {
+        "de": "Mann: 1,4 .. 1,5 mg | Frau: 1,1 .. 1,2 mg  (schwanger: 1,9 mg)",
+        "en": "male: 1.4 .. 1.5 mg | female: 1.1 .. 1.2 mg  (pregnant: 1.9 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin B7",
+        "en": "Vitamin B7"
+      },
+      "scientificName": {
+        "de": "Biotin",
+        "en": "Biotin"
+      },
+      "description": {
+        "de": "Biotin ist ebenfalls am Stoffwechsel beteiligt und sorgt für die Eiweißbildung im Körper und das Zellwachstum. Ein Mangel ist selten, da das Vitamin in sehr vielen Lebensmitteln vorkommt. Allerdings verursacht der Verzehr roher Eier, dass Biotin an das darin enthaltene Avidin gebunden wird und vom Darm nicht aufgenommen werden kann. Der Verzehr roher Eier kann daher zu einem erheblichen Vitamin-B7-Mangel führen.",
+        "en": "Biotin takes part in metabolism and is responsible for protein production and cell growth. Deficiencies are rare, since Vitamin B7 is part of many foods. However, consumption of raw eggs can lead to a considerable shortage of the vitamin, since unheated egg white contains the protein avidin, which binds strongly to Biotin, making it impossible for the bowel to absorb."
+      },
+      "functionality": [
+        {
+          "de": "Beteiligt am Stoffwechsel von Kohlenhydraten, Fetten, Eiweißen",
+          "en": "Participates in carbohydrate, lipid and protein metabolism"
+        },
+        {
+          "de": "Beteiligt an der Neubildung von Eiweißen im Körper",
+          "en": "Takes part in the production of proteins within the human body"
+        },
+        {
+          "de": "Für gesunde Haut, Haare und Nägel benötigt",
+          "en": "Needed for healthy skin, hair and nails"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Muskelschwäche, Muskelschmerzen",
+          "en": "Muscle aches, muscle weakness"
+        },
+        {
+          "de": "Haarausfall, brüchige Nägel, Hautausschlag",
+          "en": "Hair loss, brittle nails, skin irritations"
+        },
+        {
+          "de": "Appetitlosigkeit, Nervosität, Müdigkeit, Depressionen",
+          "en": "Anorexia, nervousness, fatigue, depressions"
+        }
+      ],
+      "overdose": {
+        "de": "Nicht bekannt.",
+        "en": "Unknown."
+      },
+      "dependencies": {
+        "de": "",
+        "en": ""
+      },
+      "sources": {
+        "de": "Pilze, Leber, Eier, Nüsse, Soja, Fisch",
+        "en": "Mushrooms, liver, eggs, nuts, soy, fish"
+      },
+      "storage": {
+        "de": "",
+        "en": ""
+      },
+      "requirements": {
+        "de": "45 mg",
+        "en": "45 mg"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin B9",
+        "en": "Vitamin B9"
+      },
+      "scientificName": {
+        "de": "Folat, Folsäure",
+        "en": "Folate"
+      },
+      "description": {
+        "de": "Folat ist ein wasserlösliches, hitze- und lichtempfindliches Vitamin, das v.a. in pflanzlicher Nahrung vorkommt. Sein Name leitet sich von lateinisch 'folium' (Blatt) ab, da das Vitamin insbesondere in grünem Gemüse vorkommt. Wird das Vitamin synthetisch hergestellt, so spricht man von Folsäure. Folat wir v.a. für die Zellteilung und das Zellwachstum benötigt. In Phasen verstärkter Zellteilung (z.B. Kindheit und Schwangerschaft) ist der Bedarf entsprechend erhöht. Ein leichter Mangel kommt in der Gesellschaft relativ häufig vor, insbesondere bei einseitiger Ernährung.",
+        "en": "Folate is a water-soluble vitamin that is vulnerable against heat and light. It occurs in many plant-based foods, especially in leafy greens (the name folate originates from Latin 'folium', meaning 'leaf').  It plays an important part in the process of cell division and cell growth. In periods of increased cell division (such as childhood and pregnancy) the requirement increases. Light deficiencies are rather frequent, especially in case of an unbalanced diet."
+      },
+      "functionality": [
+        {
+          "de": "Beteiligt an der Herstellung der Erbsubstanz",
+          "en": "Involved in the production of the genetic substance"
+        },
+        {
+          "de": "Beteiligt an der Zellteilung und dem Zellwachstum",
+          "en": "Needed for cell division and cell growth"
+        },
+        {
+          "de": "Beteiligt an der Bildung der roten und weißen Blutkörperchen",
+          "en": "Participates in the production of white and red blood cells"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Blutarmut",
+          "en": "Anemia"
+        },
+        {
+          "de": "Schleimhautentzündungen",
+          "en": "Mucositis (inflammation of the mucous membranes in the digestive tract)"
+        },
+        {
+          "de": "Schwangerschaftskomplikationen, Entwicklungsstörungen beim Säugling",
+          "en": "Pregnancy complications, development complications of newborns"
+        }
+      ],
+      "overdose": {
+        "de": "Negative Folgen sind nicht bekannt. Ein überhoher Vitamin-B9-Gehalt im Körper kann jedoch einen Vitamin-B12-Mangel verdecken, der wiederum zu schweren Komplikationen führen kann.",
+        "en": "No negative consequences are known. However, an excessive vitamin B9 consumption may hide a shortage of vitamin B12, that in turn may lead to serious health issues."
+      },
+      "dependencies": {
+        "de": "Ein Mangel an Vitamin C, B12 oder Eisen kann die Aufnahme von Folat im Körper vermindern.",
+        "en": "A shortage of vitamin C, B12 or iron can reduce the absorption of folate in the digestive system."
+      },
+      "storage": {
+        "de": "Im Körper können etwa 12 bis 15 mg Vitamin B9 gespeichert werden. Je nach individuellem Verbrauch (im Mittel ca. 0,2 mg pro Tag) halten die Vitamin-B9-Speicher damit rund 2-4 Monate. Auf die Haut treffende intensive Sonnenstrahlung kann das Vitamin im Körper reduzieren.",
+        "en": "The body can store up to 12 .. 15 mg of vitamin B9. Depending on the individual usage (about 0.2 mg per day) the storage can hold between 2 and 4 months. If the skin is exposed to intensive sun light, the amount of Vitamin B9 in the body gets reduced."
+      },
+      "sources": {
+        "de": "Spinat, Broccoli, Grünkohl, Getreide, Leber, Eier, Sojabohnen",
+        "en": "Spinach, Broccoli, Green cabbage, grains, liver, eggs, soy beans"
+      },
+      "requirements": {
+        "de": "Mann: 0,3 mg | Frau: 0,3 mg  (schwanger: 0,45 mg, stillend: 0,55 mg)",
+        "en": "male: 0.3 mg | female: 0.3 mg  (pregnant: 0.45 mg, breastfeeding: 0.55 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin B12",
+        "en": "Vitamin B12"
+      },
+      "scientificName": {
+        "de": "Cobalamin",
+        "en": "Cobalamin"
+      },
+      "description": {
+        "de": "Cobalamin nimmt eine Sonderstellung unter den B-Vitaminen ein. Es ist zwar ebenfalls wasserlöslich, bei gut gefüllten Speichern kann es jedoch über viele Jahre ausreichen. Das Vitamin wird von Mikroorganismen und Bakterien gebildet und kommt in allen Lebewesen vor. Es wird mit Hilfe eines Proteins aufgenommen, das im Magen gebildet wird. Der Abschnitt im Dünndarm, der das Vitamin aufnimmt, ist nur sehr kurz. Bei entsprechenden Magen- oder Darmerkrankungen kann es daher leicht zu einem Mangel kommen, der im Extremfall schwerwiegende, irreversible Nervenschädigungen zur Folge hat. Menschen, die sich rein pflanzlich ernähren, müssen entsprechend Vitamin-B12-Präparate nehmen, um einen Mangel an Vitamin B12 zu vermeiden. Zwar kommt das Vitamin auch ganz vereinzelt in Pflanzen vor (z.B. manche Algenarten) und wird tw. auch Säften oder Sojamilch künstlich hinzugefügt, für die Abdeckung des Tagesbedarfs reicht es jedoch nicht aus.",
+        "en": "Cobalamin takes a special position within the vitamin-B-complex. Just like the other vitamins in that group it is water-soluble, yet the vitamin can be stored for several years. Vitamin B12 is solely produced by microorganisms and bacteria and appears in all living creatures. It can only be absorbed within a short part of the bowel, in combination with a special protein produced in the stomach. Deficiencies thus easily occur in case of stomach or bowel disorders that prevent the absorption of the vitamin. They can lead to serious and irreversible damage of the nervous system. People exclusively consuming plant-based food need to consume vitamin B12 supplements in order to avoid deficiencies. Though the vitamin does occur in a very few plants (such as some algae) and is sometimes artificially added to juices or soy milk, the amount does not suffice to cover the daily requirements."
+      },
+      "functionality": [
+        {
+          "de": "An der Blutbildung beteiligt (rote Blutkörperchen)",
+          "en": "Participates in the production of blood cells (red cells)"
+        },
+        {
+          "de": "Unterstützung und Erhalt des Nervensystems",
+          "en": "Supports and maintains the nervous system"
+        },
+        {
+          "de": "Ebenso an der Bildung der DNA beteiligt",
+          "en": "Takes part in the production of DNA"
+        },
+        {
+          "de": "Wichtig für Zellteilung und Zellwachstum",
+          "en": "Important for cell division and cell growth"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Erschöpfung, Schwäche, Konzentrationsstörungen",
+          "en": "Fatigue, Weakness, loss of concentration"
+        },
+        {
+          "de": "Blutarmt",
+          "en": "Anemia"
+        },
+        {
+          "de": "Nervenschädigungen",
+          "en": "Damage to the nervous system"
+        }
+      ],
+      "overdose": {
+        "de": "Nicht bekannt.",
+        "en": "Unknown."
+      },
+      "dependencies": {
+        "de": "Vitamin B12 wird für die effektive Verwendung von Vitamin B9 benötigt. Umgekehrt kann jedoch einer hoher Vitamin-B9-Gehalt im Körper (z.B. durch hohen Konsum an pflanzlicher Nahrung) einen vorhandenen Vitamin-B12-Mangel verdecken.",
+        "en": "Vitamin B12 is needed for the effective usage of vitamin B9. By contrast, a high amount of vitamin B9 in the body (e.g. caused by plant-based nutrition) may hide a vitamin B12 deficiency."
+      },
+      "sources": {
+        "de": "Leber, Fisch, Fleisch, Eier, Milchprodukte",
+        "en": "Liver, Fish, meat, eggs, dairy"
+      },
+      "storage": {
+        "de": "Im Körper können maximal 2 bis 5 mg Vitamin B12 gespeichert werden, die Hälfte davon in der Leber. Da der Tagesbedarf von Vitamin B12 sehr gering ist, halten gut gefüllte Speicher somit über mehrere Jahre. Angaben schwanken zw. 3 und 10 Jahren.",
+        "en": "The human body can store up to 2 .. 5 mg of vitamin B12, half of it within the liver. Since the daily requirement is very low, a filled up storage of vitamin B12 can hold for several years. Data varies between 3 and 10 years."
+      },
+      "requirements": {
+        "de": "Mann: 0,003 mg | Frau: 0,003 mg  (schwanger: 0,0035 mg)",
+        "en": "male: 0.003 mg | female: 0.003 mg  (pregnant: 0.0035 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin C",
+        "en": "Vitamin C"
+      },
+      "scientificName": {
+        "de": "Ascorbinsäure",
+        "en": "Ascorbic acid"
+      },
+      "description": {
+        "de": "Vitamin C ist das einzige wasserlösliche Vitamin neben den B-Vitaminen. Es wird von den meisten Säugetieren selbst hergestellt, und konnte auch vom Menschen einst selbst hergestellt werden. Heute muss es jedoch über die Nahrung in ausreichender Menge zugeführt werden. Vitamin C enthält eine ganze Reihe wichtiger Aufgaben, darunter auch die Stärkung des Immunsystems. Ob Vitamin C tatsächlich auch Krankheiten wie Erkältungen vorbeugt, konnte wissenschaftlich jedoch bislang nicht nachgewiesen werden. Von wenigen Ausnahmen abgesehen kommt Vitamin C ausschließlich in pflanzlicher Nahrung vor, so dass bei einer pflanzenarmen Ernährung schnell ein Vitamin-C-Mangel auftreten kann. Aktuell beträgt der Referenzwert rund 100 mg pro Tag, wobei der Wert noch nicht abschließend wissenschaftlich geklärt ist und sowohl deutlich höher als auch niedriger sein könnte. Bekannt ist jedoch, dass bei Tabak- und Alkoholkonsum und Stress ein deutlich höherer Bedarf an Vitamin C besteht. Starker Vitamin-C-Mangel ist dafür bekannt, dass es zur sog. Seefahrer-Krankheit Skorbut führt.",
+        "en": "Vitamin C is the only water-soluble vitamin next to the vitamin-B-complex. Most mammals produce it on their own (including the prehistoric human), yet modern humans need to ingest it with food to cover their demand. Vitamin C has multiple functions and effects in the body, including the strengthening of the immune system. However, so far there is no scientific evidence whether it can actually lower the risk of some diseases such as the common cold. With the exception of a few animal foods, Vitamin C solely occurs in plant-based food. Diets focusing on animal food can easily lead to vitamin C shortage. The current dietary requirement value is about 100 mg per day, though the value is still heavily debated among scientists and could be considerably higher or lower. It is certain, however, that some people have a higher demand for Vitamin C, including smokers, pregnant women, people consuming alcohol and people under stress. Extreme vitamin C deficiency is infamous for causing scurvy."
+      },
+      "functionality": [
+        {
+          "de": "Wirkt als Antioxidant gegen freie Radikale",
+          "en": "Serves as an antioxidant against free radicals"
+        },
+        {
+          "de": "Stärkt das Immunsystem",
+          "en": "Strengthens the immune system"
+        },
+        {
+          "de": "Beteiligt an der Wirkung von Hormonen",
+          "en": "Supports the impact of some hormones"
+        },
+        {
+          "de": "Fördert die Eisenaufnahme im Körper",
+          "en": "Promotes the absorption of iron"
+        },
+        {
+          "de": "Wiederherstellung von Blutgefäßen, Zellen, Zahnfleisch und Knochen",
+          "en": "Recovery of blood vessels, cells, gums and bones"
+        },
+        {
+          "de": "Stärkt das Bindegewebe",
+          "en": "Strengthens the conjunctive tissue"
+        },
+        {
+          "de": "Unterstützt die Wundheilung",
+          "en": "Supports wound healing"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Müdigkeit, Schwäche, Depressionen",
+          "en": "Fatigue, weakness, depressions"
+        },
+        {
+          "de": "Muskelschmerzen, Gelenkschmerzen",
+          "en": "Muscle aches, joint pain"
+        },
+        {
+          "de": "Schwaches Immunsystem",
+          "en": "Weak immune system"
+        },
+        {
+          "de": "Zahnfleischbluten",
+          "en": "Gum bleeding"
+        },
+        {
+          "de": "Schlechte Wundheilung",
+          "en": "Impaired wound healing"
+        }
+      ],
+      "overdose": {
+        "de": "Nicht bekannt.",
+        "en": "Unknown."
+      },
+      "dependencies": {
+        "de": "Vitamin C unterstützt die Eisenaufnahme, ein Mangel kann daher indirekt auch zu einem Eisenmangel führen.",
+        "en": "Vitamin C supports the absorption of iron. A shortage may indirectly lead to iron deficiency."
+      },
+      "storage": {
+        "de": "",
+        "en": ""
+      },
+      "sources": {
+        "de": "Hagebutte, Petersilie, Brokkoli, Paprika, Zitrone, Orange, Erdbeere, Kohl, Tomate, Sauerkraut, Kartoffel, Leber",
+        "en": "Rosehip, parsley, broccoli, bell pepper, lime, orange, strawberry, cabbage, tomato, sauerkraut, potato, liver"
+      },
+      "requirements": {
+        "de": "Mann: 110 mg | Frau: 95 mg (schwanger: 105 mg, stillend: 125 mg)",
+        "en": "male: 110 mg | female: 95 mg (pregnant: 105 mg, breastfeeding: 125 mg)"
       }
     }
   ]

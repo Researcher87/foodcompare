@@ -12,13 +12,18 @@ import {Modal} from "react-bootstrap";
 interface VitaminBookModalProps {
     selectedDataTab: string
     bookData: BookDataEntry[]
-    closeBookModal: () => void
+    closeBookModal: () => void,
+    initiallySelectedItem?: string
 }
 
 export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
     const languageContext = useContext(LanguageContext)
 
-    const [selectedEntry, setSelectedEntry] = useState<BookDataEntry>(props.bookData[0])
+    const initialIndex = props.initiallySelectedItem === undefined
+        ? 0
+        : props.bookData.findIndex(entry => entry.name[languageContext.language].endsWith(props.initiallySelectedItem)) ?? 0
+
+    const [selectedEntry, setSelectedEntry] = useState<BookDataEntry>(props.bookData[initialIndex])
 
     const handleEntryChange = (entry: ReactSelectOption) => {
         const selection = props.bookData[entry.value]
@@ -44,7 +49,7 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
             <div className={"form-section"}>
                 <Select className={selectClass}
                         options={selectList}
-                        defaultValue={selectList[0]}
+                        defaultValue={selectList[initialIndex]}
                         onChange={handleEntryChange}
                         styles={customSelectStyles}
                 />
@@ -70,6 +75,7 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
         const hasDeficiencies = selectedEntry.deficiencies?.length > 0
         const hasOverdose = selectedEntry.overdose !== undefined && selectedEntry.overdose !== null
         const hasDependencies = selectedEntry.overdose !== undefined && selectedEntry.overdose !== null
+        const hasStorage = selectedEntry.storage !== undefined && selectedEntry.storage !== null
         const hasDailyRequirements = selectedEntry.requirements !== undefined && selectedEntry.requirements !== null
 
         return (
@@ -86,11 +92,9 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
                 {hasFunctionality &&
                 <div>
                     <h5>{applicationStrings.book_heading_functionality[lang]}</h5>
-                    <p>
-                        <ul>
-                            {renderItemList(selectedEntry.functionality)}
-                        </ul>
-                    </p>
+                    <ul>
+                        {renderItemList(selectedEntry.functionality)}
+                    </ul>
                 </div>
                 }
                 {hasDeficiencies &&
@@ -111,6 +115,12 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
                 <div>
                     <h5>{applicationStrings.book_heading_dependencies[lang]}</h5>
                     <p>{selectedEntry.dependencies[lang]}</p>
+                </div>
+                }
+                {hasStorage &&
+                <div>
+                    <h5>{applicationStrings.book_heading_storage[lang]}</h5>
+                    <p>{selectedEntry.storage[lang]}</p>
                 </div>
                 }
                 {hasDailyRequirements &&

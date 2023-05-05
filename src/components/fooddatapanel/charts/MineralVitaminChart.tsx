@@ -13,6 +13,10 @@ import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
+import {VitaminsBook} from "../VitaminBook";
+import {BookDataEntry} from "../../../types/BookData";
+import nutrientBook from "../../../static/nutrientBook.json";
+
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -37,6 +41,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const [portionType_minerals, setPortionType_minerals] = useState<string>(chartConfigMinerals.portionType)
     const [expand100_minerals, setExpand100_minerals] = useState<boolean>(chartConfigMinerals.expand100)
     const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
+    const [showBookModal, setShowBookModal] = useState<boolean>(false)
+    const [selectedColumnLabel, setSelectedColumnLabel] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -161,7 +167,12 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         }
     }
 
-    const getOptions = (title, maxValue) => {
+    const openVitaminMineralBook = (selectedColumn: string) => {
+        setSelectedColumnLabel(selectedColumn)
+        setShowBookModal(true)
+    }
+
+    const getOptions = (title, maxValue, data) => {
         const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals;
         const overallMaxValue = props.directCompareConfig && props.directCompareConfig.maxValue
             ? props.directCompareConfig.maxValue
@@ -198,6 +209,14 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
         let barChartOptions = getBarChartOptions(title, "%", maxYValue);
 
+        const handleChartClick = (c, i) => {
+            if(i && i[0]) {
+                const clickedColumnIndex = i[0].index;
+                const columnLabel = data.labels[clickedColumnIndex]
+                openVitaminMineralBook(columnLabel)
+            }
+        }
+
         if (props.selectedSubChart === CHART_VITAMINS) {
             barChartOptions = {
                 ...barChartOptions, plugins: {
@@ -216,7 +235,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
                             }
                         }
                     }
-                }
+                },
+                onClick: handleChartClick
             }
         }
 
@@ -250,11 +270,17 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const title = props.selectedSubChart === CHART_VITAMINS ? applicationStrings.label_charttype_vitamins[lang] :
         applicationStrings.label_charttype_minerals[lang];
 
-    const options = getOptions(title, maxValue);
+    const options = getOptions(title, maxValue, data);
     const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
+
+    let bookToolTip = null
+    const bookData = props.selectedSubChart === TAB_VITAMIN_DATA ? nutrientBook.vitamins : nutrientBook.vitamins
 
     return (
         <div className="container-fluid">
+            {showBookModal &&
+                <VitaminsBook selectedDataTab={props.selectedSubChart} bookData={bookData} initiallySelectedItem={selectedColumnLabel} closeBookModal={() => setShowBookModal(false)}/>
+            }
             <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                 <div className={"col-12"}>
                     <Bar
