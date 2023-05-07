@@ -13,9 +13,13 @@ import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
-import {VitaminsBook} from "../VitaminBook";
-import {BookDataEntry} from "../../../types/BookData";
 import nutrientBook from "../../../static/nutrientBook.json";
+import {callEvent} from "../../../service/GA_EventService";
+import {
+    GA_ACTION_DATAPANEL_MINERALS_CONFIG,
+    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
+    GA_CATEGORY_DATAPANEL
+} from "../../../config/GA_Events";
 
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
@@ -152,17 +156,25 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     }
 
     const handleRadioButtonClick = (event: any): void => {
+        const value=event.target.value
         if (props.selectedSubChart === CHART_VITAMINS) {
-            setPortionType_vitamins(event.target.value)
+            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_VITAMINS_CONFIG, GA_CATEGORY_DATAPANEL, value, 1)
+            setPortionType_vitamins(value)
         } else if (props.selectedSubChart === CHART_MINERALS) {
-            setPortionType_minerals(event.target.value)
+            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_MINERALS_CONFIG, GA_CATEGORY_DATAPANEL, value, 1)
+            setPortionType_minerals(value)
         }
     }
 
     const handleExpandCheckbox = () => {
+        const label = props.selectedSubChart === CHART_VITAMINS
+            ? "expand100: " + !expand100_vitamins
+            : "expand100: " + !expand100_minerals
         if (props.selectedSubChart === CHART_VITAMINS) {
+            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_VITAMINS_CONFIG, GA_CATEGORY_DATAPANEL, label, 1)
             setExpand100_vitamins(!expand100_vitamins)
         } else if (props.selectedSubChart === CHART_MINERALS) {
+            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_MINERALS_CONFIG, GA_CATEGORY_DATAPANEL, label, 1)
             setExpand100_minerals(!expand100_minerals)
         }
     }
@@ -278,9 +290,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     return (
         <div className="container-fluid">
-            {showBookModal &&
-                <VitaminsBook selectedDataTab={props.selectedSubChart} bookData={bookData} initiallySelectedItem={selectedColumnLabel} closeBookModal={() => setShowBookModal(false)}/>
-            }
             <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                 <div className={"col-12"}>
                     <Bar
