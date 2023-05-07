@@ -13,6 +13,7 @@ import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
+import {VitaminsBook} from "../VitaminBook";
 import nutrientBook from "../../../static/nutrientBook.json";
 import {callEvent} from "../../../service/GA_EventService";
 import {
@@ -290,6 +291,9 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     return (
         <div className="container-fluid">
+            {showBookModal &&
+                <VitaminsBook selectedDataTab={props.selectedSubChart} bookData={bookData} initiallySelectedItem={selectedColumnLabel} closeBookModal={() => setShowBookModal(false)}/>
+            }
             <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                 <div className={"col-12"}>
                     <Bar
