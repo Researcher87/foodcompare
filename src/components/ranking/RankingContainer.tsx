@@ -35,7 +35,6 @@ export function RankingContainer() {
         }
 
         setSelectedValue(selectedValue)
-
         const {foodItems, foodClasses, dietaryRequirements} = applicationContext.foodDataCorpus
         const userData = applicationContext.userData
 

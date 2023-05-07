@@ -23,6 +23,13 @@ import {
     getOmegaChartData,
     getTotalLipidsChartData
 } from "../../../service/chartdata/LipidsChartDataService";
+import {callEvent} from "../../../service/GA_EventService";
+import {
+    GA_ACTION_DATAPANEL_BASEDATA_CONFIG,
+    GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_ACTION_DATAPANEL_PROTEINS_CONFIG,
+    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
+    GA_CATEGORY_DATAPANEL
+} from "../../../config/GA_Events";
 
 export default function LipidsDataChart(props: LipidsDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -95,18 +102,27 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
     const totalLipidsAmount = getNutrientData(props.selectedFoodItem).baseData.lipids;
 
     const handleChartSelectionChange = (event: any) => {
+        const value = event.target.value
+        const eventLabel = props.directCompareUse ? 2 : 1
         if (props.directCompareConfig && props.directCompareConfig.handleSubchartChange) {
             props.directCompareConfig.handleSubchartChange(event)
         } else {
-            setSubChart(event.target.value)
+            setSubChart(value)
         }
+        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_CATEGORY_DATAPANEL, value, eventLabel)
     }
 
     const handleExpand100Change = () => {
+        const label = "expand100: " + !expand100
+        const eventValue = props.directCompareUse ? 2 : 1
+        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         setExpand100(!expand100)
     }
 
     const handleHideRemaindersCheckbox = () => {
+        const label = "hideRemainders: " + !hideRemainders
+        const eventValue = props.directCompareUse ? 2 : 1
+        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         setShowHideRemainders(!hideRemainders)
     }
 
@@ -144,10 +160,17 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
     }
 
     const handleRadioButtonClick = (event: any) => {
+        const value = event.target.value
+        const eventValue = props.directCompareUse ? 2 : 1
+        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_CATEGORY_DATAPANEL, value, eventValue)
         setChartType(event.target.value)
     }
 
     const handleLegendCheckbox = () => {
+        setShowLegend(!showLegend)
+        const eventValue = props.directCompareUse ? 2 : 1
+        const label = "legend: " + !showLegend
+        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         setShowLegend(!showLegend)
     }
 

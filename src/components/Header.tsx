@@ -21,6 +21,13 @@ import {LanguageContext} from "../contexts/LangContext";
 import {Link} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 import {isMobileDevice} from "../service/WindowDimension";
+import {callEvent} from "../service/GA_EventService";
+import {
+    GA_ACTION_HEADER_CONFIG_DATASOURCE,
+    GA_ACTION_HEADER_CONFIG_LANGUAGE,
+    GA_ACTION_HOME_ACCESS_MENU,
+    GA_CATEGORY_HEADER
+} from "../config/GA_Events";
 
 
 export default function Header() {
@@ -33,12 +40,17 @@ export default function Header() {
     }
 
     const handleLanguageButtonClick = (event: any): void => {
-        userLanguageChange(event.target.value)
+        const language = event.target.value
+        callEvent(applicationContext.debug, GA_ACTION_HEADER_CONFIG_LANGUAGE, GA_CATEGORY_HEADER, language)
+
+        userLanguageChange(language)
         applicationContext.setFoodDataPanelData.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
     }
 
     const handleSourceButtonClick = (event: any): void => {
-        applicationContext.setPreferredSource(event.target.value)
+        const source = event.target.value
+        callEvent(applicationContext.debug, GA_ACTION_HEADER_CONFIG_DATASOURCE, GA_CATEGORY_HEADER, source)
+        applicationContext.setPreferredSource(source)
     }
 
     let activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
@@ -48,6 +60,10 @@ export default function Header() {
 
     if (applicationContext.debug) {
         console.log('Path:', activePath)
+    }
+
+    const onMenuButtonClick = (path: string) => {
+        callEvent(applicationContext?.debug, GA_ACTION_HOME_ACCESS_MENU, GA_CATEGORY_HEADER, path)
     }
 
     const renderMenus = () => {
@@ -61,7 +77,7 @@ export default function Header() {
         return (
             <div className="btn-group flex flex-wrap" role="group">
                 <div className="header-menu">
-                    <Link to={PATH_HOME}>
+                    <Link to={PATH_HOME} onClick={() => onMenuButtonClick(PATH_HOME)}>
                         <Button className={buttonContainerClass}
                                 value={PATH_HOME}
                                 variant={'link'}
@@ -71,7 +87,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <div>
-                    <Link to={PATH_FOODDATA_PANEL}>
+                    <Link to={PATH_FOODDATA_PANEL} onClick={() => onMenuButtonClick(PATH_FOODDATA_PANEL)}>
                         <Button className={buttonContainerClass}
                                 value={PATH_FOODDATA_PANEL}
                                 variant={'link'}
@@ -81,7 +97,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <div>
-                    <Link to={PATH_DIRECT_COMPARE}>
+                    <Link to={PATH_DIRECT_COMPARE} onClick={() => onMenuButtonClick(PATH_DIRECT_COMPARE)}>
                         <Button className={buttonContainerClass}
                                 value={PATH_DIRECT_COMPARE}
                                 variant={'link'}
@@ -91,7 +107,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <div>
-                    <Link to={PATH_RANKING}>
+                    <Link to={PATH_RANKING} onClick={() => onMenuButtonClick(PATH_RANKING)}>
                         <Button className={buttonContainerClass}
                                 value={PATH_RANKING}
                                 variant={'link'}
@@ -101,7 +117,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <div>
-                    <Link to={PATH_USERSETTINGS}>
+                    <Link to={PATH_USERSETTINGS} onClick={() => onMenuButtonClick(PATH_USERSETTINGS)}>
                         <Button className={buttonContainerClass}
                                 value={PATH_USERSETTINGS}
                                 variant={'link'}
@@ -111,7 +127,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <div>
-                    <Link to={PATH_CONTACT}>
+                    <Link to={PATH_CONTACT} onClick={() => onMenuButtonClick(PATH_CONTACT)}>
                         <Button className={buttonContainerClass}
                                 variant={'link'}
                                 value={PATH_CONTACT}

@@ -11,6 +11,12 @@ import {PATH_RANKING, QUERYKEY_DATAPANEL_RANKING} from "../../config/Constants";
 import {makeRankingPanelDataUri, parseRankingPanelDataUri} from "../../service/uri/RankingPanelUriService";
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
 import {customSelectStyles} from "../../config/UI_Config";
+import {callEvent} from "../../service/GA_EventService";
+import {
+    GA_ACTION_RANKING_CONFIG,
+    GA_ACTION_SELECTION_RANKING_CAT, GA_ACTION_SELECTION_RANKING_ELEMENT,
+    GA_CATEGORY_RANKING
+} from "../../config/GA_Events";
 
 interface RankingSelectorProps {
     openChart: (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => void,
@@ -108,6 +114,7 @@ export function RankingSelector(props: RankingSelectorProps) {
             selectedFoodCategory: selectedOption
         }
 
+        callEvent(applicationContext.debug, GA_ACTION_SELECTION_RANKING_CAT, GA_CATEGORY_RANKING, selectedOption.value)
         applicationContext.setRankingPanelData(newRankingData)
     }
 
@@ -127,10 +134,14 @@ export function RankingSelector(props: RankingSelectorProps) {
             ...applicationContext.applicationData.rankingPanelData,
             selectedElement: selectedOption
         }
+
+        callEvent(applicationContext.debug, GA_ACTION_SELECTION_RANKING_ELEMENT, GA_CATEGORY_RANKING, selectedOption.value)
         applicationContext.setRankingPanelData(newRankingData)
     }
 
     const handlePortionAmountChange = () => {
+        const label = "100 gram portion: " + !use100gram
+        callEvent(applicationContext.debug, GA_ACTION_RANKING_CONFIG, GA_CATEGORY_RANKING, label)
         const newRankingData = {
             ...applicationContext.applicationData.rankingPanelData,
             use100gram: !use100gram
@@ -139,6 +150,8 @@ export function RankingSelector(props: RankingSelectorProps) {
     }
 
     const handleDietaryRequirementsCheckbox = () => {
+        const label = "use dietary req.: " + !showDietaryRequirements
+        callEvent(applicationContext.debug, GA_ACTION_RANKING_CONFIG, GA_CATEGORY_RANKING, label)
         const newRankingData = {
             ...applicationContext.applicationData.rankingPanelData,
             showDietaryRequirements: !showDietaryRequirements

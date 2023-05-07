@@ -12,6 +12,9 @@ import {Link} from 'react-router-dom';
 import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
 import {isMobileDevice} from "../service/WindowDimension";
+import {callEvent} from "../service/GA_EventService";
+import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
+import {GA_ACTION_HOME_CLICK_START_BUTTON, GA_CATEGORY_HOME} from "../config/GA_Events";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -24,6 +27,7 @@ interface HomeTextElement {
 export function Home() {
     const {language} = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
+    const applicationContext = useContext(ApplicationDataContextStore)
 
     const imageChanged = (image) => {
         setDisplayedImage(image)
@@ -37,8 +41,6 @@ export function Home() {
         const pic5 = images(`./Img-${language}-5.png`).default;
         const pic6 = images(`./Img-${language}-6.png`).default;
         const pic7 = images(`./Img-${language}-7.png`).default;
-
-        console.log('PIC', images(`./Img-${language}-1.png`))
 
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][language];
@@ -86,13 +88,33 @@ export function Home() {
     const buttonBgColor = "#2952a3"
     const buttonTextColor = "#FFFFFF"
 
+    const onStartButtonClick = (id: number) => {
+        let label = "";
+        switch(id) {
+            case 1:
+                label = "Food Analyzer (Default Mode)"
+                break;
+            case 2:
+                label = "Food Analyzer (Aggregated)"
+                break;
+            case 3:
+                label = "Direct Compare"
+                break;
+            case 4:
+                label = "Ranking"
+                break;
+        }
+
+        callEvent(applicationContext?.debug, GA_ACTION_HOME_CLICK_START_BUTTON, GA_CATEGORY_HOME, label)
+    }
+
     const renderStartButtons = () => {
         return (
             <div style={{paddingTop: "16px"}}>
                 <b>{applicationStrings.label_getStarted[language]}</b>
                 <div className={"text-center"}>
                     <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
+                        <Link to={PATH_FOODDATA_PANEL + "?add=1"} onClick={() => onStartButtonClick(1)}>
                             <button type="button"
                                     className="btn btn-small"
                                     style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
@@ -102,7 +124,7 @@ export function Home() {
                     </div>
                     {!isMobileDevice() &&
                         <div style={{paddingTop: "20px"}}>
-                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
+                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
                                 <button type="button"
                                         className="btn btn-small"
                                         style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
@@ -112,7 +134,7 @@ export function Home() {
                         </div>
                     }
                     <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_DIRECT_COMPARE}>
+                        <Link to={PATH_DIRECT_COMPARE} onClick={() => onStartButtonClick(3)}>
                             <button type="button"
                                     className="btn btn-small"
                                     style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
@@ -121,7 +143,7 @@ export function Home() {
                         </Link>
                     </div>
                     <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_RANKING}>
+                        <Link to={PATH_RANKING} onClick={() => onStartButtonClick(4)}>
                             <button type="button"
                                     className="btn btn-small"
                                     style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
