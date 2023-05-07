@@ -16,8 +16,12 @@ export const applicationStrings = {
         "en": "Issues of overdose"
     },
     book_heading_requirements: {
-        "de": "Tagedbedarf",
+        "de": "Tagesbedarf",
         "en": "Daily requirement"
+    },
+    book_heading_storage: {
+        "de": "Speicherung",
+        "en": "Storage"
     },
     book_minerals: {
         "de": "Buch der Mineralstoffe",
@@ -1060,7 +1064,7 @@ export const applicationStrings = {
         en: 'For the computation of daily dietary requirements, data from the German Nutrition Society (DGE) is used.'
     },
     text_contact_form: {
-        de: 'Bitte benutzen Sie das Kontaktformular, wenn Sie Frage oder Feedback zu Food Compare haben.',
+        de: 'Bitte benutzen Sie das Kontaktformular, wenn Sie Fragen oder Feedback zu Food Compare haben.',
         en: 'Please use the contact form below if you have questions of feedback about Food Compare.'
     },
     text_contact_source1: {
