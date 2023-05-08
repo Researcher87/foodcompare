@@ -16,8 +16,6 @@ import {DC_MineralVitaminChartProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
-import getName from "../../service/LanguageService";
-import {LanguageContext} from "../../contexts/LangContext";
 import {VerticalLabel} from "./VerticalLabel";
 import {callEvent} from "../../service/GA_EventService";
 import {
@@ -57,7 +55,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
         expand100_vitamins,
         expand100_minerals,
         containerHeight,
-        windowSize.height]
+        windowSize]
     )
 
     if (!applicationContext) {
@@ -93,7 +91,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
     const handleRadioButtonClick = (event: any): void => {
         const value = event.target.value
-        const action = props.selectedSubChart == CHART_VITAMINS
+        const action = props.selectedSubChart === CHART_VITAMINS
             ? GA_ACTION_DATAPANEL_VITAMINS_CONFIG
             : GA_ACTION_DATAPANEL_MINERALS_CONFIG
         callEvent(applicationContext?.debug, action, GA_CATEGORY_DATAPANEL, value, 2)
@@ -101,7 +99,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     }
 
     const handleExpandCheckbox = () => {
-        const action = props.selectedSubChart == CHART_VITAMINS
+        const action = props.selectedSubChart === CHART_VITAMINS
             ? GA_ACTION_DATAPANEL_VITAMINS_CONFIG
             : GA_ACTION_DATAPANEL_MINERALS_CONFIG
         const label = props.selectedSubChart === CHART_VITAMINS
@@ -112,7 +110,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     }
 
     const handleSynchronize = () => {
-        const action = props.selectedSubChart == CHART_VITAMINS
+        const action = props.selectedSubChart === CHART_VITAMINS
             ? GA_ACTION_DATAPANEL_VITAMINS_CONFIG
             : GA_ACTION_DATAPANEL_MINERALS_CONFIG
         const label = props.selectedSubChart === CHART_VITAMINS

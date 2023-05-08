@@ -9,9 +9,7 @@ import {Impressum} from "./Impressum";
 import {callEvent} from "../../service/GA_EventService";
 import {
     GA_ACTION_CONTACT_SUBMENU,
-    GA_ACTION_USER_SETTINGS,
-    GA_CATEGORY_CONTACT,
-    GA_CATEGORY_USER_SETTINGS
+    GA_CATEGORY_CONTACT
 } from "../../config/GA_Events";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 

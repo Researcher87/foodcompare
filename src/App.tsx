@@ -3,16 +3,17 @@ import './App.scss';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import {NotificationContainer} from 'react-notifications'
-import ApplicationDataContextProvider, {ApplicationDataContextStore} from "./contexts/ApplicationDataContext";
-import React, {useContext, useEffect} from "react";
+import ApplicationDataContextProvider from "./contexts/ApplicationDataContext";
+import React, {useEffect} from "react";
 
-import {LanguageContext, LanguageProvider} from "./contexts/LangContext";
+import {LanguageProvider} from "./contexts/LangContext";
 import ReactTooltip from "react-tooltip";
 import ReactGA from "react-ga4"
 import {ANALYTICS_MESS_ID} from "./config/ApplicationKeys";
 
 import {WebPageContainer} from "./components/WebPageContainer";
 import {parseFoodCompareUri} from "./service/uri/BaseUriService";
+import MobileDeviceCheck from "./components/MobileDeviceCheck";
 
 
 function initializeReactGA() {
@@ -35,13 +36,13 @@ function App(): JSX.Element {
         initializeReactGA()  // Initialize Google Analytics Tool if the app is not run in test/debug mode
     }
 
-
     return (
         <div className="App">
             <NotificationContainer/>
             <ReactTooltip/>
             <LanguageProvider>
                 <ApplicationDataContextProvider>
+                    <MobileDeviceCheck/>
                     <WebPageContainer/>
                 </ApplicationDataContextProvider>
             </LanguageProvider>

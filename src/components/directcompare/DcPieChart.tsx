@@ -9,7 +9,7 @@ import {
     LIPIDS_DATA_BASE,
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
-    TAB_LIPIDS_DATA, TAB_MINERAL_DATA, TAB_VITAMIN_DATA
+    TAB_LIPIDS_DATA
 } from "../../config/Constants";
 import LipidsDataChart from "../fooddatapanel/charts/LipidsDataChart";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
@@ -31,11 +31,8 @@ import {
     GA_ACTION_DATAPANEL_BASEDATA_CONFIG,
     GA_ACTION_DATAPANEL_CARBS_CONFIG,
     GA_ACTION_DATAPANEL_LIPIDS_CONFIG,
-    GA_ACTION_DATAPANEL_MINERALS_CONFIG,
-    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
     GA_CATEGORY_DATAPANEL
 } from "../../config/GA_Events";
-import {act} from "react-dom/test-utils";
 
 /**
  * Re-usable direct compare chart component for pie-chart data pages (Lipids, Carbs, Base Data)

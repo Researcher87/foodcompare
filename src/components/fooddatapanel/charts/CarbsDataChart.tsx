@@ -5,7 +5,6 @@ import {CARBS_DATA_BASE, CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/C
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartConfigurationService";
 import {LanguageContext} from "../../../contexts/LangContext";
-import {autoRound} from "../../../service/calculation/MathService";
 import {applicationStrings} from "../../../static/labels";
 import {Form} from "react-bootstrap";
 import {CustomLegend} from "../../charthelper/CustomLegend";

@@ -16,10 +16,8 @@ import {
     nullifyNonOverlappingValues
 } from "../../service/calculation/NutrientCalculationService";
 import {VerticalLabel} from "./VerticalLabel";
-import {CHART_VITAMINS} from "../../config/Constants";
 import {
-    GA_ACTION_DATAPANEL_MINERALS_CONFIG, GA_ACTION_DATAPANEL_PROTEINS_CONFIG,
-    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
+    GA_ACTION_DATAPANEL_PROTEINS_CONFIG,
     GA_CATEGORY_DATAPANEL
 } from "../../config/GA_Events";
 import {callEvent} from "../../service/GA_EventService";

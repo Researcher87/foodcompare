@@ -58,7 +58,7 @@ export function UserSettings() {
             setBreastFeeding(applicationContext.userData.breastFeeding)
             setLeisureSport(applicationContext.userData.leisureSports)
         }
-    }, [])
+    }, [applicationContext])
 
     const changeAge = (event: any) => {
         setAge(event.target.value)

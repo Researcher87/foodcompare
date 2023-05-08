@@ -29,11 +29,13 @@ export interface ApplicationDataContext {
     userData: UserData
     debug: boolean
     ready: boolean
+    useAsMobile: Boolean | null
 }
 
 export interface ApplicationContext extends ApplicationDataContext {
     setUserData: (userData: UserData) => void
     setPreferredSource: (string) => void
+    setMobileUsage: (boolean) => void
     setFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => void
     setDirectCompareFoodSelector1: (sourceSupplement: boolean, sourceCombine: boolean) => void
     setDirectCompareFoodSelector2: (sourceSupplement: boolean, sourceCombine: boolean) => void
@@ -353,7 +355,8 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             initialValues: true
         },
         debug: this.isDebugMode(),
-        ready: false
+        ready: false,
+        useAsMobile: null
     }
 
     UNSAFE_componentWillMount() {
@@ -371,8 +374,12 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             userData: this.state.userData,
             debug: this.state.debug,
             ready: this.state.ready,
+            useAsMobile: this.state.useAsMobile,
             setUserData: this.setUserData,
             setPreferredSource: this.setPreferredSource,
+            setMobileUsage: (usage: boolean) => {
+                this.setState({...this.state, useAsMobile: usage})
+            },
             setFoodDataPanelData: {
                 setSelectedFoodTab: this.setSelectedFoodDataPanelTab,
                 setSelectedDataPage: this.setSelectedFoodDataPanelPage,

@@ -11,7 +11,7 @@ $usersettings-palwidth: 60ch;
 /*** 2. Mobile Device Main Settings ***/
 
 // Force Rotation to Landscape mode on mobile devices
-@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+/* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
     html {
         transform: rotate(-90deg);
         transform-origin: left top;
@@ -22,7 +22,7 @@ $usersettings-palwidth: 60ch;
         top: 100%;
         left: 0;
     }
-}
+} */
 
 
 /*** 3. Bootstrap Overwrites ***/
