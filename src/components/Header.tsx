@@ -195,7 +195,7 @@ export default function Header() {
                         </div>
                         <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
                             {renderLanguageButtons()}
-                            {renderSourceButtons()}
+                            {!isMobileDevice() && renderSourceButtons()}
                         </div>
                     </div>
                     <div className="d-flex flex-row" style={{marginTop: "3px"}}>
