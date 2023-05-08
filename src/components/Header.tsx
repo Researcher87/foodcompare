@@ -120,7 +120,7 @@ export default function Header() {
     const renderLanguageButtons = () => {
         return (
             <div className="form-small text-right">
-                <form className="form-group">
+                <form>
                     <label className="form-elements">
                         <b>{applicationStrings.label_language[language]}</b>
                     </label>
@@ -229,7 +229,7 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-                <div className="d-flex flex-row" style={{marginTop: "3px"}}>
+                <div style={{marginTop: "3px"}}>
                     {renderMenus()}
                 </div>
             </div>
