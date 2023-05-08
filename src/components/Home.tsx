@@ -109,10 +109,12 @@ export function Home() {
     }
 
     const renderStartButtons = () => {
+        const buttonClass = isMobileDevice() ? "text-center d-flex flex-row" : "text-center"
+
         return (
             <div style={{paddingTop: "16px"}}>
                 <b>{applicationStrings.label_getStarted[language]}</b>
-                <div className={"text-center"}>
+                <div className={buttonClass}>
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_FOODDATA_PANEL + "?add=1"} onClick={() => onStartButtonClick(1)}>
                             <button type="button"
@@ -182,9 +184,14 @@ export function Home() {
             case "fancy-item":
                 return (
                     <div key={`homeitem ${index}`}>
-                        <span style={{paddingLeft: "10px", paddingRight: "10px"}}>
-                            <FaAngleDoubleRight/>
-                        </span>
+                        {!isMobileDevice()
+                            ? <span style={{paddingLeft: "10px", paddingRight: "10px"}}>
+                                    <FaAngleDoubleRight/>
+                                </span>
+                            : <span>
+                                    <FaAngleDoubleRight/>
+                            </span>
+                        }
                         {text}
                     </div>
                 )
@@ -196,23 +203,21 @@ export function Home() {
 
     const renderMobile = () => {
         return (
-            <div>
-                <div className="media home app" style={{margin: "0 auto"}}>
+            <div className="media home app" style={{margin: "0 auto"}}>
+                <div>
                     <div>
-                        <div>
-                            {renderHomeText(homeText1)}
-                            <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
-                                {renderStartButtons()}
-                            </div>
-                            {renderHomeText(homeText2)}
+                        {renderHomeText(homeText1)}
+                        <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
+                            {renderStartButtons()}
                         </div>
-                        <hr/>
-                        <div style={{paddingTop: "30px"}}>
-                            <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
-                            <div className="card-header"
-                                 style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
-                                {renderHomeText(homeText3)}
-                            </div>
+                        {renderHomeText(homeText2)}
+                    </div>
+                    <hr/>
+                    <div style={{paddingTop: "30px"}}>
+                        <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
+                        <div className="card-header"
+                             style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                            {renderHomeText(homeText3)}
                         </div>
                     </div>
                 </div>

@@ -21,13 +21,6 @@ import {LanguageContext} from "../contexts/LangContext";
 import {Link} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 import {isMobileDevice} from "../service/WindowDimension";
-import {callEvent} from "../service/GA_EventService";
-import {
-    GA_ACTION_HEADER_CONFIG_DATASOURCE,
-    GA_ACTION_HEADER_CONFIG_LANGUAGE,
-    GA_ACTION_HOME_ACCESS_MENU,
-    GA_CATEGORY_HEADER
-} from "../config/GA_Events";
 
 
 export default function Header() {
@@ -40,17 +33,12 @@ export default function Header() {
     }
 
     const handleLanguageButtonClick = (event: any): void => {
-        const language = event.target.value
-        callEvent(applicationContext.debug, GA_ACTION_HEADER_CONFIG_LANGUAGE, GA_CATEGORY_HEADER, language)
-
-        userLanguageChange(language)
+        userLanguageChange(event.target.value)
         applicationContext.setFoodDataPanelData.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
     }
 
     const handleSourceButtonClick = (event: any): void => {
-        const source = event.target.value
-        callEvent(applicationContext.debug, GA_ACTION_HEADER_CONFIG_DATASOURCE, GA_CATEGORY_HEADER, source)
-        applicationContext.setPreferredSource(source)
+        applicationContext.setPreferredSource(event.target.value)
     }
 
     let activePath = location.pathname && location.pathname !== "/" ? location.pathname : PATH_HOME
@@ -62,10 +50,6 @@ export default function Header() {
         console.log('Path:', activePath)
     }
 
-    const onMenuButtonClick = (path: string) => {
-        callEvent(applicationContext?.debug, GA_ACTION_HOME_ACCESS_MENU, GA_CATEGORY_HEADER, path)
-    }
-
     const renderMenus = () => {
         const menuNameAnalyze = isMobileDevice() ? applicationStrings.menu_food_data_panel_m[language] : applicationStrings.menu_food_data_panel[language]
         const menuNameDirectCompare = isMobileDevice() ? applicationStrings.menu_direct_compare_m[language] : applicationStrings.menu_direct_compare[language]
@@ -74,68 +58,58 @@ export default function Header() {
 
         const buttonContainerClass = isMobileDevice() ? "link header-link-mobile" : "link header-link"
 
+        const menuClass = isMobileDevice() ? "btn-group" : "btn-group flex flex-wrap"
+
         return (
-            <div className="btn-group flex flex-wrap" role="group">
-                <div className="header-menu">
-                    <Link to={PATH_HOME} onClick={() => onMenuButtonClick(PATH_HOME)}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_HOME}
-                                variant={'link'}
-                                active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
-                            {applicationStrings.menu_home[language]}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_FOODDATA_PANEL} onClick={() => onMenuButtonClick(PATH_FOODDATA_PANEL)}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_FOODDATA_PANEL}
-                                variant={'link'}
-                                active={activePath === PATH_FOODDATA_PANEL}>
-                            {menuNameAnalyze}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_DIRECT_COMPARE} onClick={() => onMenuButtonClick(PATH_DIRECT_COMPARE)}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_DIRECT_COMPARE}
-                                variant={'link'}
-                                active={activePath === PATH_DIRECT_COMPARE}>
-                            {menuNameDirectCompare}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_RANKING} onClick={() => onMenuButtonClick(PATH_RANKING)}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_RANKING}
-                                variant={'link'}
-                                active={activePath === PATH_RANKING}>
-                            {menuNameRanking}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_USERSETTINGS} onClick={() => onMenuButtonClick(PATH_USERSETTINGS)}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_USERSETTINGS}
-                                variant={'link'}
-                                active={activePath === PATH_USERSETTINGS}>
-                            {menuNameSettings}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_CONTACT} onClick={() => onMenuButtonClick(PATH_CONTACT)}>
-                        <Button className={buttonContainerClass}
-                                variant={'link'}
-                                value={PATH_CONTACT}
-                                active={activePath === PATH_CONTACT}>
-                            {applicationStrings.menu_contact[language]}
-                        </Button>
-                    </Link>
-                </div>
+            <div className={menuClass}>
+                <Link to={PATH_HOME}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_HOME}
+                            variant={'link'}
+                            active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
+                        {applicationStrings.menu_home[language]}
+                    </Button>
+                </Link>
+                <Link to={PATH_FOODDATA_PANEL}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_FOODDATA_PANEL}
+                            variant={'link'}
+                            active={activePath === PATH_FOODDATA_PANEL}>
+                        {menuNameAnalyze}
+                    </Button>
+                </Link>
+                <Link to={PATH_DIRECT_COMPARE}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_DIRECT_COMPARE}
+                            variant={'link'}
+                            active={activePath === PATH_DIRECT_COMPARE}>
+                        {menuNameDirectCompare}
+                    </Button>
+                </Link>
+                <Link to={PATH_RANKING}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_RANKING}
+                            variant={'link'}
+                            active={activePath === PATH_RANKING}>
+                        {menuNameRanking}
+                    </Button>
+                </Link>
+                <Link to={PATH_USERSETTINGS}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_USERSETTINGS}
+                            variant={'link'}
+                            active={activePath === PATH_USERSETTINGS}>
+                        {menuNameSettings}
+                    </Button>
+                </Link>
+                <Link to={PATH_CONTACT}>
+                    <Button className={buttonContainerClass}
+                            variant={'link'}
+                            value={PATH_CONTACT}
+                            active={activePath === PATH_CONTACT}>
+                        {applicationStrings.menu_contact[language]}
+                    </Button>
+                </Link>
             </div>
         )
     }
@@ -255,7 +229,7 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-                <div className="flex row" style={{marginTop: "3px"}}>
+                <div className="d-flex flex-row" style={{marginTop: "3px"}}>
                     {renderMenus()}
                 </div>
             </div>
