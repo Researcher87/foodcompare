@@ -90,7 +90,7 @@ export function Home() {
 
     const onStartButtonClick = (id: number) => {
         let label = "";
-        switch(id) {
+        switch (id) {
             case 1:
                 label = "Food Analyzer (Default Mode)"
                 break;
@@ -123,15 +123,15 @@ export function Home() {
                         </Link>
                     </div>
                     {!isMobileDevice() &&
-                        <div style={{paddingTop: "20px"}}>
-                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
-                                <button type="button"
-                                        className="btn btn-small"
-                                        style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                    {applicationStrings.button_getstarted_2[language]}
-                                </button>
-                            </Link>
-                        </div>
+                    <div style={{paddingTop: "20px"}}>
+                        <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
+                            <button type="button"
+                                    className="btn btn-small"
+                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                {applicationStrings.button_getstarted_2[language]}
+                            </button>
+                        </Link>
+                    </div>
                     }
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_DIRECT_COMPARE} onClick={() => onStartButtonClick(3)}>
@@ -193,37 +193,71 @@ export function Home() {
         }
     }
 
-    const colSizeLeft = isMobileDevice() ? "col-12" : "col-5"
 
-    return (
-        <div>
-            <div className="media home app" style={{margin: "0 auto"}}>
-                <div className={"container-fluid"}>
-                    <div className="row">
-                        <div className={colSizeLeft}>
+    const renderMobile = () => {
+        return (
+            <div>
+                <div className="media home app" style={{margin: "0 auto"}}>
+                    <div>
+                        <div>
                             {renderHomeText(homeText1)}
                             <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
                                 {renderStartButtons()}
                             </div>
                             {renderHomeText(homeText2)}
                         </div>
-                        {!isMobileDevice() &&
-                        <div className={"col-7"} style={{paddingLeft: "45px"}}>
-                            {renderCarousel()}
-                        </div>
-                        }
-                    </div>
-                    <hr/>
-                    <div style={{paddingTop: "30px"}}>
-                        <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
-                        <div className="card-header"
-                             style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
-                            {renderHomeText(homeText3)}
+                        <hr/>
+                        <div style={{paddingTop: "30px"}}>
+                            <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
+                            <div className="card-header"
+                                 style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                                {renderHomeText(homeText3)}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        )
+    }
+
+    const renderDesktop = () => {
+        return (
+            <div>
+                <div className="media home app" style={{margin: "0 auto"}}>
+                    <div className={"container-fluid"}>
+                        <div className="row">
+                            <div className={"col-5"}>
+                                {renderHomeText(homeText1)}
+                                <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
+                                    {renderStartButtons()}
+                                </div>
+                                {renderHomeText(homeText2)}
+                            </div>
+                            <div className={"col-7"} style={{paddingLeft: "45px"}}>
+                                {renderCarousel()}
+                            </div>
+                        </div>
+                        <hr/>
+                        <div style={{paddingTop: "30px"}}>
+                            <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
+                            <div className="card-header"
+                                 style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                                {renderHomeText(homeText3)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+
+    return <div>
+        {isMobileDevice()
+            ? <div>{renderMobile()}</div>
+            : <div>{renderDesktop()}</div>
+        }
+    </div>
+
 
 }
