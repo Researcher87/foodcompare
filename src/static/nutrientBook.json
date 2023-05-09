@@ -2,6 +2,96 @@
   "vitamins": [
     {
       "name": {
+        "de": "Vitamin A",
+        "en": "Vitamin A"
+      },
+      "scientificName": {
+        "de": "Retinol, Retinal, Retinsäure",
+        "en": "Retinol, Retinal, Retinoic acid"
+      },
+      "description": {
+        "de": "Vitamin A bezeichnet eine Reihe chemischer Verbindungen und gehört zu den fettlöslichen Vitaminen, die somit längerfristig im Körper gespeichert werden können. Es existiert in vielen tierischen Produkten bereits in einer für den Menschen verwertbaren Form. In pflanzlichen Produkten liegt es in einer Vorstufe vor, aus der der Mensch Vitamin A selbst herstellen kann. Diese Vorstufen werden als Carotinoide bezeichnet, wobei das Beta-Carotinoid die größte Rolle spielt. Es ist in pflanzlichen Produkten an seiner intensiven Farbgebung zu erkennen (z.B. in der Karotte oder im Brokkoli). Vitamin A aus tierischen Quellen wird im Körper jedoch besser aufgenommen als beim Umwandlungsprozess aus Carotinoiden. Es hat eine große Bedeutung für die Zellen, Haut und Schleimhäute, das Sehvermögen und das Immunsystem. Das Vitamin ist empfindlich gegenüber Licht, Hitze und Sauerstoff. So gehen beim Kochen von Lebensmitteln bspw. zwischen 10 und 30 % des Vitamins verloren. Vitamin-A-Mangel ist der weltweit häufigste Vitaminmangel. In der westlichen Welt kommt ein starker Mangel nur selten vor. In Entwicklungsländern stellt Vitamin-A-Mangel hingegen oft ein schweres Problem dar, an dem geschätzt 250 Mio. Vorschulkinder leiden und rund eine Mio. Kinder jährlich versterben.",
+        "en": "Vitamin A comprises several chemical compounds and belongs to the fat-soluble vitamins that can be stored for a long time in the human body. In anmial products it already exists in a human-exploitable form, whereas it exists as a provitamin (precursor) in many plant-based products. Those provitamins are called carotenoids, with beta-carotenoid playing the most important part. Beta-carotenoid is often identifyable by its intensive color in plant-based food, such as carrots, broccoli or green cabbage. Just as other carotenoids, the human body can transform it to vitamin A on its own, though the usage from animal-based food is more effective than by means of this transformation process. Vitamin A plays a significant role for cells, skin and mucous membranes, as well as for vision and the immune system. It is vulnerable against light, oxygen and heat; for instance, the loss of vitamin A in the process of cooking is between 10 and 30 percent. Vitamin A has the highest defiency rate among all vitamins in the world. While high defiencies are rare in western countries, it is a serious issue in many developing countries, resulting in about 250 million prescool children suffering from vitamin A shortage, with about one million of them dying from it every year."
+      },
+      "functionality": [
+        {
+          "de": "Aufbau der Haut und Schleimhäute",
+          "en": "Development of the skin and mucous membranes"
+        },
+        {
+          "de": "Beteiligt am Sehvorgang",
+          "en": "Involved in vision"
+        },
+        {
+          "de": "Beteiligt an der Zellentwicklung",
+          "en": "Involved in the proper development of cells"
+        },
+        {
+          "de": "(Knochen-) Wachstum",
+          "en": "(Bone) growth"
+        },
+        {
+          "de": "Immunsystem",
+          "en": "Immune system"
+        },
+        {
+          "de": "Fortpflanzung (Bildung von Hormonen, Embryonalentwicklung)",
+          "en": "Reproduction (production of hormones, embroynal develeopt)"
+        },
+        {
+          "de": "Fördert die Bildung roter Blutkörperchen",
+          "en": "Promotes the production of red blood cells"
+        },
+        {
+          "de": "Beta-Carotin: Freies Radikal",
+          "en": "Beta-carotenoid: Free radical"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Trockene und spröde Haut",
+          "en": "Dry and brittle skin"
+        },
+        {
+          "de": "Geschwächtes Immunsystem, Infektanfälligkeit",
+          "en": "Weakened immune system, vulnerability to infection"
+        },
+        {
+          "de": "Lichtempfindlichkeit",
+          "en": "Sensitivity to the light"
+        },
+        {
+          "de": "Verminderte Sehfähigkeit in der Dämmerung (Nachtblindheit)",
+          "en": "Impaired vision in dusk or dark (night blindness)"
+        },
+        {
+          "de": "Störung des Knochwachstums bei Kindern",
+          "en": "Impaired bone growth of children"
+        }
+      ],
+      "overdose": {
+        "de": "Beim Erwachsenen gelten bis zu 3 mg Vitamin A pro Tag als tolerabel. Bei einer deutlich höheren Zufuhr kann es zu einer Vergiftung mit Vitamin A kommen, da die Leber die Mengen nicht mehr speichern kann. Anzeichen sind dann bspw. Übelkeit, Erbrechen, starke Kopfschmerzen oder Benommenheit. Eine solche Überdosis kann nur durch Nahrungsergänzungsmittel oder dem Verzehr bestimmter Leberarten geschehen (Beispiele sind Eisbär- oder Robbenleber, in denen sehr viel Vitamin A angesammelt ist).",
+        "en": "For adults, up to 3 mg of vitamin A per day are considered tolerable. Considerably higher doses may lead to a poisoning, since the liver may not be able to store the vitamin anymore. Such a poisoning can cause nausea, vomiting, strong headaches or dizziness. It can only be causes by nutrient supplement or consumption of certain animal livers. Examples include the liver of polar bears and robs, where much vitamin A is accumulated."
+      },
+      "dependencies": {
+        "de": "",
+        "en": ""
+      },
+      "storage": {
+        "de": "Vitamin A wird, wie die meisten fettlöslichen Vitamine, in der Leber gespeichert. Volle Speicher reichen theoretisch 1 bis 2 Jahre aus, ehe Mangelerscheinungen sichtbar werden. Die Halbwertszeit beträgt 50 bis 100 Tage.",
+        "en": "Just like other fat-soluble vitamins, vitamin A is primarily stored in the liver. Humans fully supplied with it may live without further vitamin A consumption for about 1 to 2 years not showing any deficiency symptoms. The half-life of the vitamin is 50 through 100 days."
+      },
+      "sources": {
+        "de": "Fisch, Milchprodukte, Eier, Rindfleisch, Leber; Beta-Carotin: Karotten, Grünkohl, Broccoli, Spinat",
+        "en": "Fish, dairy, eggs, beef, liver; Beta-carotenoid: Carrots, green cabbage, broccoli, spinach"
+      },
+      "requirements": {
+        "de": "Mann: 1 mg | Frau: 0,8 mg (schwanger: 1,1 mg, stillend: 1,5 mg)",
+        "en": "male: 1 mg | female: 0.8 mg (pregnant: 1.1 mg, breastfeeding: 1.5 mg)"
+      }
+    },
+    {
+      "name": {
         "de": "Vitamin B1",
         "en": "Vitamin B1"
       },
@@ -588,6 +678,84 @@
       "requirements": {
         "de": "Mann: 110 mg | Frau: 95 mg (schwanger: 105 mg, stillend: 125 mg)",
         "en": "male: 110 mg | female: 95 mg (pregnant: 105 mg, breastfeeding: 125 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin D",
+        "en": "Vitamin D"
+      },
+      "scientificName": {
+        "de": "Calciferol",
+        "en": "Calciferol"
+      },
+      "description": {
+        "de": "Vitamin D ist eines der wenigen Vitamine, die der Mensch selbst herstellen kann. Dies geschieht in der Haut in Zusammenhang mit der UV-B-Strahlung der Sonne. Der Herstellungsprozess ist jedoch sehr komplex. So beginnt die Vitamin-D-Herstellung erst ab einem Sonnenstand von etwa 25 Grad, so dass Menschen in den Mittelbreiten im Winter kein Vitamin D produzieren können. Menschen mit heller Haut produzieren das Vitamin schneller, neigen jedoch auch schneller zum Sonnenbrand. Ältere Menschen produzieren Vitamin D schlechter und sind daher stärker von einem Mangel betroffen. Da Vitamin D auch in der Nahrung nur vergleichsweise selten vorkommt (10 bis 20 % des Bedarfs bei einer typischen Ernährung), tritt v.a. in den Wintermonaten bei vielen Menschen der mittleren und nördlichen Breiten ein Vitamin-D-Mangel auf, weshalb Vitamin-D-Präparate inzwischen weit verbreitet sind. Vitamin D selbst spielt eine zentrale Rolle für den Aufbau und Erhalt der Knochen und hat darüber hinaus eine Reihe weiterer wichtiger Eigenschaften, von denen noch nicht alle wissenschaftlich abschließend geklärt sind.",
+        "en": "Vitamin D is one of the few vitamins that humans can produce on their own. The production of vitamin D is rather complex and is carried out in the skin together with the UV-B radition of the sun. It gets only triggered when the sun reached a certain angle (about 25 degree), so that people living in the mid-latitutudes and further north cannot produce vitamin D during the winter months. People with light skin produce vitamin D faster, yet are also more susceptible for sun burns. Elder people generally produce less vitamin D and rely especially on supplements to avoid any shortage. Since vitamin D occurs only scarcely in nutrition (in an everyday nutrition it makes up 10 .. 20 % of the expected requirement), many people have a sligth through medium lack of vitamin D during the winter, especially in regions further up north. Vitamin D supplements are therefore widely used now. The vitamin as such plays an important part in the production and maintenance of bones. Additionally, it is involved in many other processes, of which not all have been scientifically identified or confirmed yet."
+      },
+      "functionality": [
+        {
+          "de": "Spielt eine große Rolle für den Knochenbau",
+          "en": "Plays a big part for bone development"
+        },
+        {
+          "de": "Unterstützt die Arbeit der Muskeln",
+          "en": "Supports muscle processes"
+        },
+        {
+          "de": "Stärkt das Immunsystem",
+          "en": "Strengthens the immune system"
+        },
+        {
+          "de": "Fördert das Zellwachstum der Hautzellen",
+          "en": "Promotes cell growth in the skin"
+        },
+        {
+          "de": "Schützt das Nervensystem und Herz-Kreislauf-System",
+          "en": "Protects the nervous system and cardiovascular system"
+        },
+        {
+          "de": "Reguliert den Calciumhaushalt",
+          "en": "Controls the calcium level"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Muskelschwäche, Muskelkrämpfe",
+          "en": "Muscle weakness, cramps"
+        },
+        {
+          "de": "Geschwächtes Immunsystem",
+          "en": "Weakened immune system"
+        },
+        {
+          "de": "Führt zu Knochenkrankheiten (z.B. Osteoporose)",
+          "en": "Causes bone diseases (such as Osteoporosis)"
+        },
+        {
+          "de": "Kann bei Kindern zu Rachitis führen",
+          "en": "May cause rachitis in children"
+        }
+      ],
+      "overdose": {
+        "de": "Eine Überdosis ist nur durch Einnahme von Zusatzstoffen möglich, da die Haut die Vitamin-D-Produktion bei Bedarf selbst einstellt (der Maximalwert pro Tag liegt bei 250 bis 500 µg). Zu viel Vitamin D kann zu Kalziumablagerungen in den Knochen führen. Tägliche Zuführung von bis zu 100 µg gelten bei Erwachsenen auch über einen langen Zeitraum als sicher.",
+        "en": "An overdose can only occur due to nutrient supplements, since the skin will automatically stop the vitamin D production if necessary (the maximum daily productivity is 250 .. 500 µg). Overdoses may lead to calcium deposits in the bones. For adults, a daily long-term consumption up to 100 µg is considered safe."
+      },
+      "dependencies": {
+        "de": "",
+        "en": ""
+      },
+      "storage": {
+        "de": "Vitamin D ist in den Muskeln und im Fettgewebe gespeichert. Gut gefüllte Speicher halten für etwa 2 bis 4 Monate.",
+        "en": "Vitamin D is stored in the muscles and fat tissue. When fully supplied with Vitamin D, the amout holds for about 2 through 4 months."
+      },
+      "sources": {
+        "de": "Lebertran, Fisch, Pilze, Eier",
+        "en": "Codliver oil, fish, mushrooms, eggs"
+      },
+      "requirements": {
+        "de": "ca. 20 µg (der genaue Bedarf ist noch nicht abschließend geklärt)",
+        "en": "about 20 µg (the exact amount has not been identified yet)"
       }
     }
   ]

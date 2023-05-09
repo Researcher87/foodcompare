@@ -32,7 +32,6 @@ import {isMobileDevice} from "../../service/WindowDimension";
 import {VitaminsBook} from "./VitaminBook";
 import nutrientBook from "../../static/nutrientBook.json";
 import {BookDataEntry} from "../../types/BookData";
-import {GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL} from "../../config/GA_Events";
 
 
 interface FoodDataPageHeaderProps {
