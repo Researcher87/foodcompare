@@ -58,10 +58,8 @@ export default function Header() {
 
         const buttonContainerClass = isMobileDevice() ? "link header-link-mobile" : "link header-link"
 
-        const menuClass = isMobileDevice() ? "btn-group" : "btn-group flex flex-wrap"
-
         return (
-            <div className={menuClass}>
+            <div className={"btn-group flex flex-wrap" }>
                 <Link to={PATH_HOME}>
                     <Button className={buttonContainerClass}
                             value={PATH_HOME}
@@ -117,14 +115,16 @@ export default function Header() {
     const language_en = isMobileDevice() ? applicationStrings.checkbox_english_m[language] : applicationStrings.checkbox_english[language]
     const language_de = isMobileDevice() ? applicationStrings.checkbox_german_m[language] : applicationStrings.checkbox_german[language]
 
+    const formElementsClass = isMobileDevice() ? "form-elements-m" : "form-elements"
+
     const renderLanguageButtons = () => {
         return (
             <div className="form-small text-right">
                 <form>
-                    <label className="form-elements">
+                    <label className={formElementsClass}>
                         <b>{applicationStrings.label_language[language]}</b>
                     </label>
-                    <label className="form-elements">
+                    <label className={formElementsClass}>
                         <input className="form-radiobutton"
                                name={"user language"}
                                type="radio"
@@ -134,7 +134,7 @@ export default function Header() {
                         />
                         {language_en}
                     </label>
-                    <label className="form-elements-largespace">
+                    <label style={{marginRight: "25px"}}>
                         <input className="form-radiobutton"
                                name={"user language"}
                                type="radio"
@@ -195,7 +195,6 @@ export default function Header() {
                         </div>
                         <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
                             {renderLanguageButtons()}
-                            {!isMobileDevice() && renderSourceButtons()}
                         </div>
                     </div>
                     <div className="d-flex flex-row" style={{marginTop: "3px"}}>
@@ -211,26 +210,24 @@ export default function Header() {
 
     const makeHeaderMobile = () => {
         return (
-            <div className="d-flex flex-column header" style={{overflowX: "hidden"}}>
-                <div className={"d-flex flex-row justify-content-between"}>
-                    <div className={"d-flex flex-row"}>
-                        <div style={{paddingTop: "4px", paddingLeft: "4px", minWidth: "40px", maxWidth: "40px"}}>
-                            <img src={logo} width={"32px"} alt={"Food Compare Logo (mobile)"}/>
-                        </div>
-                        <div style={{paddingTop: "8px"}}>
-                            <img src={text} width={"67px"} alt={"Food Compare Logo text (mobile)"}/>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="d-flex flex-row align-items-center justify-content-between">
-                            <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
-                                {renderLanguageButtons()}
-                            </div>
-                        </div>
-                    </div>
+            <div className="d-flex flex-row header">
+                <div style={{paddingTop: "4px", paddingLeft: "4px", minWidth: "75px", maxWidth: "75px"}}>
+                    <img src={logo} alt={"Food Compare Logo"}/>
                 </div>
-                <div style={{marginTop: "3px"}}>
-                    {renderMenus()}
+                <div className={"d-flex flex-column w-100"}>
+                    <div className="d-flex flex-row align-items-center justify-content-between">
+                        <div style={{paddingTop: "5px"}}>
+                            <img src={text} style={{width: "22vw"}} alt={"Food Compare Logo Text"}/>
+                        </div>
+                        <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
+                            {renderLanguageButtons()}
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row" style={{marginTop: "3px"}}>
+                        <div className="col-md-12 text-start">
+                            {renderMenus()}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

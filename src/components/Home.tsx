@@ -207,16 +207,16 @@ export function Home() {
                 <div>
                     <div>
                         {renderHomeText(homeText1)}
-                        <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
+                        <div style={{paddingTop: "20px", paddingBottom: "30px"}}>
                             {renderStartButtons()}
                         </div>
                         {renderHomeText(homeText2)}
                     </div>
                     <hr/>
-                    <div style={{paddingTop: "30px"}}>
+                    <div style={{paddingTop: "20px"}}>
                         <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
                         <div className="card-header"
-                             style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                             style={{paddingBottom: "20px", marginBottom: "30px"}}>
                             {renderHomeText(homeText3)}
                         </div>
                     </div>
