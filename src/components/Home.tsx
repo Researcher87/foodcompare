@@ -125,25 +125,27 @@ export function Home() {
                         </Link>
                     </div>
                     {!isMobileDevice() &&
-                    <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
-                            <button type="button"
-                                    className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                {applicationStrings.button_getstarted_2[language]}
-                            </button>
-                        </Link>
+                    <div>
+                        <div style={{paddingTop: "20px"}}>
+                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
+                                <button type="button"
+                                        className="btn btn-small"
+                                        style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                    {applicationStrings.button_getstarted_2[language]}
+                                </button>
+                            </Link>
+                        </div>
+                        <div style={{paddingTop: "20px"}}>
+                            <Link to={PATH_DIRECT_COMPARE} onClick={() => onStartButtonClick(3)}>
+                                <button type="button"
+                                        className="btn btn-small"
+                                        style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                    {applicationStrings.button_getstarted_3[language]}
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                     }
-                    <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_DIRECT_COMPARE} onClick={() => onStartButtonClick(3)}>
-                            <button type="button"
-                                    className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                {applicationStrings.button_getstarted_3[language]}
-                            </button>
-                        </Link>
-                    </div>
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_RANKING} onClick={() => onStartButtonClick(4)}>
                             <button type="button"
@@ -203,7 +205,7 @@ export function Home() {
 
     const renderMobile = () => {
         return (
-            <div className="media home app" style={{margin: "0 auto"}}>
+            <div className="media home app" style={{margin: "12px"}}>
                 <div>
                     <div>
                         {renderHomeText(homeText1)}

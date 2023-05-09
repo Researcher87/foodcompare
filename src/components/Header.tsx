@@ -68,14 +68,16 @@ export default function Header() {
                         {applicationStrings.menu_home[language]}
                     </Button>
                 </Link>
-                <Link to={PATH_FOODDATA_PANEL}>
-                    <Button className={buttonContainerClass}
-                            value={PATH_FOODDATA_PANEL}
-                            variant={'link'}
-                            active={activePath === PATH_FOODDATA_PANEL}>
-                        {menuNameAnalyze}
-                    </Button>
-                </Link>
+                {!isMobileDevice() &&
+                    <Link to={PATH_FOODDATA_PANEL}>
+                        <Button className={buttonContainerClass}
+                                value={PATH_FOODDATA_PANEL}
+                                variant={'link'}
+                                active={activePath === PATH_FOODDATA_PANEL}>
+                            {menuNameAnalyze}
+                        </Button>
+                    </Link>
+                }
                 <Link to={PATH_DIRECT_COMPARE}>
                     <Button className={buttonContainerClass}
                             value={PATH_DIRECT_COMPARE}
