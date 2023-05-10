@@ -41,13 +41,13 @@
 			"de": {
 				"title": "Vitamine",
 				"content": [
-					"Das Diagramm zeigt die enthaltenen Vitamine im Vergleich zum Tagesbedarf eines Erwachsenen an (der Tagesbedarf wird aus den eingestellten User-Daten berechnet). Im Tabellenmodus werden hingegen die absoluten Werte in mg angezeigt." 
+					"Das Diagramm zeigt die enthaltenen Vitamine im Vergleich zum Tagesbedarf eines Erwachsenen an (der Tagesbedarf wird aus den eingestellten User-Daten berechnet). Dabei werden auch Provitamine (z.B. Carotin) in Lebensmitteln mit berücksichtigt und in ihrer entsprechenden Äquivalenz zu dem Vitamin mit eingerechnet. Im Tabellenmodus werden hingegen die absoluten Werte in mg angezeigt."
 				]
 			},
 			"en": {
 				"title": "Vitamins",
 				"content": [
-					"Displays the vitamins contained by the food or food combination. The values relate to the daily dietary requirements of an adult (that is, of the body data set in the settings menu). By contrast, the table mode displays the absolute amounts of vitamins in mg."
+					"Displays the vitamins contained by the food or food combination. The values relate to the daily dietary requirements of an adult (that is, of the body data set in the settings menu). Provitamins in food (e.g. Carotene) are also regarded and are included with their vitamin equivalence value. By contrast, the table mode displays the absolute amounts of vitamins in mg."
 				]
 			}
 		}, 

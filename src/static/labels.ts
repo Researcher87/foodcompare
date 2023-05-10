@@ -660,8 +660,36 @@ export const applicationStrings = {
         en: 'Vitamin D'
     },
     label_nutrient_vit_e: {
-        de: 'Vitamin E',
-        en: 'Vitamin E'
+        de: 'Vitamin E (α-Tocopherol)',
+        en: 'Vitamin E (α-Tocopherol)'
+    },
+    label_nutrient_vit_e_ext: {
+        de: 'Weitere Vitamin-E-Formen',
+        en: 'Further forms of Vitamin E'
+    },
+    label_nutrient_vit_e_ext_tocopherolBeta: {
+        de: 'Beta-Tocopherol',
+        en: 'Beta-Tocopherol'
+    },
+    label_nutrient_vit_e_ext_tocopherolGamma: {
+        de: 'Gamma-Tocopherol',
+        en: 'Gamma-Tocopherol'
+    },
+    label_nutrient_vit_e_ext_tocopherolDelta: {
+        de: 'Delta-Tocopherol',
+        en: 'Delta-Tocopherol'
+    },
+    label_nutrient_vit_e_ext_tocotrienolAlpha: {
+        de: 'Alpha-Tocotrienol',
+        en: 'Alpha-Tocotrienol'
+    },
+    label_nutrient_vit_e_ext_tocotrienolBeta: {
+        de: 'Beta-Tocotrienol',
+        en: 'Beta-Tocotrienol'
+    },
+    label_nutrient_vit_e_ext_tocotrienolGamma: {
+        de: 'Gamma-Tocotrienol',
+        en: 'Gamma-Tocotrienol'
     },
     label_nutrient_vit_k: {
         de: 'Vitamin K',
@@ -678,6 +706,10 @@ export const applicationStrings = {
     label_nutrient_vit_carotenoid_beta: {
         de: 'Beta-Carotin',
         en: 'Beta-Carotene'
+    },
+    label_nutrient_vit_cryptoxanthin: {
+        de: 'Beta-Cryptoxanthin',
+        en: 'Beta-Cryptoxanthin'
     },
     label_nutrient_vit_scientific_a: {
         de: 'inkl. Provitamin A / Carotine',

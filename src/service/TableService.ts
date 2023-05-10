@@ -5,6 +5,7 @@ import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {getTotalAmountOfCarotenoids} from "./calculation/CarotenoidCalculationService";
 import {CATEGORY_BEVERAGE} from "../config/Constants";
+import {getTotalAmountOfExtendedVitaminE} from "./calculation/ExtendedVitaminECalculationService";
 
 export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
@@ -91,16 +92,22 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
             let carotenoidTableObject = createTableObject(
                 applicationStrings.label_nutrient_vit_carotenoid[language],
                 totalCarotenoid,
-                portion, "mg")
+                portion, "mg"
+            )
 
             if (carotenoidData.caroteneAlpha !== null) {
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_carotenoid_alpha[language]}`
-                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneAlpha, portion, "g")
+                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneAlpha, portion, "mg")
             }
 
             if (carotenoidData.caroteneBeta !== null) {
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_carotenoid_beta[language]}`
-                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneBeta, portion, "g")
+                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneBeta, portion, "mg")
+            }
+
+            if (carotenoidData.cryptoxanthin !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_cryptoxanthin[language]}`
+                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.cryptoxanthin, portion, "mg")
             }
 
             tableData.push(carotenoidTableObject)
@@ -185,6 +192,52 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
             nutrientData.vitaminData.e,
             portion, "mg")
         );
+    }
+
+    const {extendedVitaminE} = nutrientData.vitaminData
+
+    if(extendedVitaminE != null) {
+        const totalExtensions = getTotalAmountOfExtendedVitaminE(extendedVitaminE)
+
+        if(totalExtensions !== null) {
+            let extendedVitaminETable = createTableObject(
+                applicationStrings.label_nutrient_vit_e_ext[language],
+                totalExtensions,
+                portion, "mg"
+            )
+
+            if (extendedVitaminE.tocopherolBeta !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocopherolBeta[language]}`
+                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocopherolBeta, portion, "mg")
+            }
+
+            if (extendedVitaminE.tocopherolGamma !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocopherolGamma[language]}`
+                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocopherolGamma, portion, "mg")
+            }
+
+            if (extendedVitaminE.tocopherolDelta !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocopherolDelta[language]}`
+                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocopherolDelta, portion, "mg")
+            }
+
+            if (extendedVitaminE.tocotrienolAlpha !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocotrienolAlpha[language]}`
+                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocotrienolAlpha, portion, "mg")
+            }
+
+            if (extendedVitaminE.tocotrienolBeta !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocotrienolBeta[language]}`
+                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocotrienolBeta, portion, "mg")
+            }
+
+            if (extendedVitaminE.tocotrienolGamma !== null) {
+                const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocotrienolGamma[language]}`
+                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocotrienolGamma, portion, "mg")
+            }
+
+            tableData.push(extendedVitaminETable)
+        }
     }
 
     if (nutrientData.vitaminData.k != null) {
@@ -665,9 +718,9 @@ function makeCarbsTableObject(carbohydrates: number, sugar: number | null, dieta
 }
 
 
-function appendTableDataObject(object: FoodTableDataObject, language: string, label: string, value: number, portion: number, unit: string): FoodTableDataObject {
+function appendTableDataObject(object: FoodTableDataObject, language: string, label: string, value: number,
+                               portion: number, unit: string): FoodTableDataObject {
     const appendedObject = {...object}
-
     const extension = createTableObject(label, value, portion, unit)
 
     appendedObject.label = appendedObject.label + '&&' + extension.label
