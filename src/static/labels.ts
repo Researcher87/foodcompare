@@ -144,12 +144,8 @@ export const applicationStrings = {
         en: 'Really close all food tabs?'
     },
     device_detection_hint: {
-        de: 'Die Website Food Compare ist nicht für Mobilgeräte und sehr kleine Bildschirmgrößen geeignet. Stattdessen bieten wir eine App für Android-Geräte, welche einen Großteil der Funktionalität von Food Compare umfasst.',
-        en: 'This website is not designed for mobile devices and very small screen sizes. Instead, we provide an app for Android devices that comprises most of the functionality provided by the website.',
-    },
-    device_detection_question: {
-        de: 'Möchten Sie die Android App verwenden?',
-        en: 'Do you want to use the Android App?',
+        de: 'Auf Mobilgeräten und sehr kleinen Geräten stehen einige Funktionen von Food Compare aktuell nur eingeschränkt zur Verfügung. Wir bitten um Verständnis.',
+        en: 'Please understand that on mobile devices and very small screens some functionality of Food Compare is currently limited or unavailable.',
     },
     direct_compare_text: {
         de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, die miteinander verglichen werden sollen, und klicken Sie dann den Anzeigen-Button.',
@@ -700,8 +696,36 @@ export const applicationStrings = {
         en: 'Vitamin D'
     },
     label_nutrient_vit_e: {
-        de: 'Vitamin E',
-        en: 'Vitamin E'
+        de: 'Vitamin E (α-Tocopherol)',
+        en: 'Vitamin E (α-Tocopherol)'
+    },
+    label_nutrient_vit_e_ext: {
+        de: 'Weitere Vitamin-E-Formen',
+        en: 'Further forms of Vitamin E'
+    },
+    label_nutrient_vit_e_ext_tocopherolBeta: {
+        de: 'Beta-Tocopherol',
+        en: 'Beta-Tocopherol'
+    },
+    label_nutrient_vit_e_ext_tocopherolGamma: {
+        de: 'Gamma-Tocopherol',
+        en: 'Gamma-Tocopherol'
+    },
+    label_nutrient_vit_e_ext_tocopherolDelta: {
+        de: 'Delta-Tocopherol',
+        en: 'Delta-Tocopherol'
+    },
+    label_nutrient_vit_e_ext_tocotrienolAlpha: {
+        de: 'Alpha-Tocotrienol',
+        en: 'Alpha-Tocotrienol'
+    },
+    label_nutrient_vit_e_ext_tocotrienolBeta: {
+        de: 'Beta-Tocotrienol',
+        en: 'Beta-Tocotrienol'
+    },
+    label_nutrient_vit_e_ext_tocotrienolGamma: {
+        de: 'Gamma-Tocotrienol',
+        en: 'Gamma-Tocotrienol'
     },
     label_nutrient_vit_k: {
         de: 'Vitamin K',
@@ -718,6 +742,10 @@ export const applicationStrings = {
     label_nutrient_vit_carotenoid_beta: {
         de: 'Beta-Carotin',
         en: 'Beta-Carotene'
+    },
+    label_nutrient_vit_cryptoxanthin: {
+        de: 'Beta-Cryptoxanthin',
+        en: 'Beta-Cryptoxanthin'
     },
     label_nutrient_vit_scientific_a: {
         de: 'inkl. Provitamin A / Carotine',
@@ -962,10 +990,6 @@ export const applicationStrings = {
     message_error_invalid_portion: {
         de: 'Geben Sie bitte eine Portion zwischen 1 und 5000 Gramm an.',
         en: 'Please specify a portion amount between 1 and 5000 gram.'
-    },
-    message_mobile_app: {
-        de: 'Einige Funktionen von Food Compare stehen auf Mobilgeräten nur eingeschränkt zur Verfügung.',
-        en: 'Some functionality of Food Compare are limited on mobile devices.'
     },
     message_userdata_success: {
         de: 'Änderungen wurden gespeichert.',

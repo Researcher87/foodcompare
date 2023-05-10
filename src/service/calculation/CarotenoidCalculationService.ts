@@ -16,12 +16,6 @@ export function getTotalAmountOfCarotenoids(carotenoidData: CarotenoidData): num
     if(carotenoidData.cryptoxanthin) {
         amount += carotenoidData.cryptoxanthin
     }
-    if(carotenoidData.lutein) {
-        amount += carotenoidData.lutein
-    }
-    if(carotenoidData.lycopene) {
-        amount += carotenoidData.lycopene
-    }
 
     return amount
 }
@@ -37,8 +31,8 @@ export function calculateVitaminAEquivalent(carotenoidData: CarotenoidData | nul
 
     let amount = 0;
 
-    const factorBetaCarotene = 0.1667
-    const factorOtherCarotenoids = 0.0833
+    const factorBetaCarotene = 0.08333
+    const factorOtherCarotenoids = 0.04166
 
     if(carotenoidData.caroteneAlpha) {
         amount += (carotenoidData.caroteneAlpha * factorOtherCarotenoids)
@@ -48,12 +42,6 @@ export function calculateVitaminAEquivalent(carotenoidData: CarotenoidData | nul
     }
     if(carotenoidData.cryptoxanthin) {
         amount += (carotenoidData.cryptoxanthin * factorOtherCarotenoids)
-    }
-    if(carotenoidData.lutein) {
-        amount += (carotenoidData.lutein * factorOtherCarotenoids)
-    }
-    if(carotenoidData.lycopene) {
-        amount += (carotenoidData.lycopene * factorOtherCarotenoids)
     }
 
     return amount

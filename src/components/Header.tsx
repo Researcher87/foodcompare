@@ -59,18 +59,16 @@ export default function Header() {
         const buttonContainerClass = isMobileDevice() ? "link header-link-mobile" : "link header-link"
 
         return (
-            <div className="btn-group flex flex-wrap" role="group">
-                <div className="header-menu">
-                    <Link to={PATH_HOME}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_HOME}
-                                variant={'link'}
-                                active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
-                            {applicationStrings.menu_home[language]}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
+            <div className={"btn-group flex flex-wrap" }>
+                <Link to={PATH_HOME}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_HOME}
+                            variant={'link'}
+                            active={activePath === PATH_HOME || activePath === PATH_FOODCOMPARE}>
+                        {applicationStrings.menu_home[language]}
+                    </Button>
+                </Link>
+                {!isMobileDevice() &&
                     <Link to={PATH_FOODDATA_PANEL}>
                         <Button className={buttonContainerClass}
                                 value={PATH_FOODDATA_PANEL}
@@ -79,47 +77,39 @@ export default function Header() {
                             {menuNameAnalyze}
                         </Button>
                     </Link>
-                </div>
-                <div>
-                    <Link to={PATH_DIRECT_COMPARE}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_DIRECT_COMPARE}
-                                variant={'link'}
-                                active={activePath === PATH_DIRECT_COMPARE}>
-                            {menuNameDirectCompare}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_RANKING}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_RANKING}
-                                variant={'link'}
-                                active={activePath === PATH_RANKING}>
-                            {menuNameRanking}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_USERSETTINGS}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_USERSETTINGS}
-                                variant={'link'}
-                                active={activePath === PATH_USERSETTINGS}>
-                            {menuNameSettings}
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to={PATH_CONTACT}>
-                        <Button className={buttonContainerClass}
-                                variant={'link'}
-                                value={PATH_CONTACT}
-                                active={activePath === PATH_CONTACT}>
-                            {applicationStrings.menu_contact[language]}
-                        </Button>
-                    </Link>
-                </div>
+                }
+                <Link to={PATH_DIRECT_COMPARE}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_DIRECT_COMPARE}
+                            variant={'link'}
+                            active={activePath === PATH_DIRECT_COMPARE}>
+                        {menuNameDirectCompare}
+                    </Button>
+                </Link>
+                <Link to={PATH_RANKING}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_RANKING}
+                            variant={'link'}
+                            active={activePath === PATH_RANKING}>
+                        {menuNameRanking}
+                    </Button>
+                </Link>
+                <Link to={PATH_USERSETTINGS}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_USERSETTINGS}
+                            variant={'link'}
+                            active={activePath === PATH_USERSETTINGS}>
+                        {menuNameSettings}
+                    </Button>
+                </Link>
+                <Link to={PATH_CONTACT}>
+                    <Button className={buttonContainerClass}
+                            variant={'link'}
+                            value={PATH_CONTACT}
+                            active={activePath === PATH_CONTACT}>
+                        {applicationStrings.menu_contact[language]}
+                    </Button>
+                </Link>
             </div>
         )
     }
@@ -127,14 +117,16 @@ export default function Header() {
     const language_en = isMobileDevice() ? applicationStrings.checkbox_english_m[language] : applicationStrings.checkbox_english[language]
     const language_de = isMobileDevice() ? applicationStrings.checkbox_german_m[language] : applicationStrings.checkbox_german[language]
 
+    const formElementsClass = isMobileDevice() ? "form-elements-m" : "form-elements"
+
     const renderLanguageButtons = () => {
         return (
             <div className="form-small text-right">
-                <form className="form-group">
-                    <label className="form-elements">
+                <form>
+                    <label className={formElementsClass}>
                         <b>{applicationStrings.label_language[language]}</b>
                     </label>
-                    <label className="form-elements">
+                    <label className={formElementsClass}>
                         <input className="form-radiobutton"
                                name={"user language"}
                                type="radio"
@@ -144,7 +136,7 @@ export default function Header() {
                         />
                         {language_en}
                     </label>
-                    <label className="form-elements-largespace">
+                    <label style={{marginRight: "25px"}}>
                         <input className="form-radiobutton"
                                name={"user language"}
                                type="radio"
@@ -205,7 +197,6 @@ export default function Header() {
                         </div>
                         <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
                             {renderLanguageButtons()}
-                            {renderSourceButtons()}
                         </div>
                     </div>
                     <div className="d-flex flex-row" style={{marginTop: "3px"}}>
@@ -221,26 +212,24 @@ export default function Header() {
 
     const makeHeaderMobile = () => {
         return (
-            <div className="d-flex flex-column header" style={{overflowX: "hidden"}}>
-                <div className={"d-flex flex-row justify-content-between"}>
-                    <div className={"d-flex flex-row"}>
-                        <div style={{paddingTop: "4px", paddingLeft: "4px", minWidth: "40px", maxWidth: "40px"}}>
-                            <img src={logo} width={"32px"} alt={"Food Compare Logo (mobile)"}/>
-                        </div>
-                        <div style={{paddingTop: "8px"}}>
-                            <img src={text} width={"67px"} alt={"Food Compare Logo text (mobile)"}/>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="d-flex flex-row align-items-center justify-content-between">
-                            <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
-                                {renderLanguageButtons()}
-                            </div>
-                        </div>
-                    </div>
+            <div className="d-flex flex-row header">
+                <div style={{paddingTop: "4px", paddingLeft: "4px", minWidth: "75px", maxWidth: "75px"}}>
+                    <img src={logo} alt={"Food Compare Logo"}/>
                 </div>
-                <div className="flex row" style={{marginTop: "3px"}}>
-                    {renderMenus()}
+                <div className={"d-flex flex-column w-100"}>
+                    <div className="d-flex flex-row align-items-center justify-content-between">
+                        <div style={{paddingTop: "5px"}}>
+                            <img src={text} style={{width: "22vw"}} alt={"Food Compare Logo Text"}/>
+                        </div>
+                        <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
+                            {renderLanguageButtons()}
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row" style={{marginTop: "3px"}}>
+                        <div className="col-md-12 text-start">
+                            {renderMenus()}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

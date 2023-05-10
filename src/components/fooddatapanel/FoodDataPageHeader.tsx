@@ -29,10 +29,13 @@ import {ChartMenuPanel} from "./ChartMenuPanel";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import {useHistory} from 'react-router-dom';
 import {isMobileDevice} from "../../service/WindowDimension";
+
 import {VitaminsBook} from "./VitaminBook";
 import nutrientBook from "../../static/nutrientBook.json";
 import {BookDataEntry} from "../../types/BookData";
 
+import {callEvent} from "../../service/GA_EventService";
+import {GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL} from "../../config/GA_Events";
 
 interface FoodDataPageHeaderProps {
     setDisplayMode: (id: string) => void
@@ -58,12 +61,16 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const handleRadioButtonClick = (value: string) => {
         const displaymode = value === DISPLAYMODE_TABLE ? "table" : "chart"
+
+        const label = `Switch display mode to ${displaymode}`
+        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, label)
         props.setDisplayMode(value)
     }
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
         const remainingItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
+        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, "Close food item tab")
 
         applicationContext.setFoodDataPanelData.removeItemFromFoodDataPanel(id)
 
@@ -73,6 +80,8 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     }
 
     const help = () => {
+        const label = `Open help page: ${dataPage}`
+        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, label)
         switch (dataPage) {
             case TAB_BASE_DATA:
                 setHelpModalId(1)
@@ -144,7 +153,6 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const sourceString = getSourceName(props.selectedFoodItem.selectedSource)
     const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
     const sourceToolTip = `${applicationStrings.tooltip_source[languageContext.language]} ${sourceString}`
-
     const headerLabel = isMobileDevice() ? "header-label-m" : "header-label";
 
     let bookToolTip = null

@@ -1,7 +1,7 @@
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodItem, {
     BaseData,
-    CarbohydrateData, CarotenoidData,
+    CarbohydrateData, CarotenoidData, ExtendedVitaminE,
     LipidData,
     MineralData,
     NutrientData,
@@ -159,175 +159,175 @@ function removeNutrientObjectsWithNullValues(nutrientObject: NutrientData, compo
         }
 
 
-		// Vitamins:
-		if(nutrientData.vitaminData.a === null) {
-			nutrientObject.vitaminData.a = null
-		}
-		
-		if(nutrientData.vitaminData.b1 === null) {
-			nutrientObject.vitaminData.b1 = null
-		}
-		
-		if(nutrientData.vitaminData.b2 === null) {
-			nutrientObject.vitaminData.b2 = null
-		}
-		
-		if(nutrientData.vitaminData.b3 === null) {
-			nutrientObject.vitaminData.b3 = null
-		}
-		
-		if(nutrientData.vitaminData.b5 === null) {
-			nutrientObject.vitaminData.b5 = null
-		}
-		
-		if(nutrientData.vitaminData.b6 === null) {
-			nutrientObject.vitaminData.b6 = null
-		}
-		
-		if(nutrientData.vitaminData.b7 === null) {
-			nutrientObject.vitaminData.b7 = null
-		}
-		
-		if(nutrientData.vitaminData.b9 === null) {
-			nutrientObject.vitaminData.b9 = null
-		}
-		
-		if(nutrientData.vitaminData.b12 === null) {
-			nutrientObject.vitaminData.b12 = null
-		}
-		
-		if(nutrientData.vitaminData.c === null) {
-			nutrientObject.vitaminData.c = null
-		}
-		
-		if(nutrientData.vitaminData.d === null) {
-			nutrientObject.vitaminData.d = null
-		}
-		
-		if(nutrientData.vitaminData.e === null) {
-			nutrientObject.vitaminData.e = null
-		}
-		
-		if(nutrientData.vitaminData.k === null) {
-			nutrientObject.vitaminData.k = null
-		}
-		
-		
-		// Minerals:
-		if(nutrientData.mineralData.calcium === null) {
-			nutrientObject.mineralData.calcium = null
-		}
-		
-		if(nutrientData.mineralData.copper === null) {
-			nutrientObject.mineralData.copper = null
-		}
-		
-		if(nutrientData.mineralData.iron === null) {
-			nutrientObject.mineralData.iron = null
-		}
-		
-		if(nutrientData.mineralData.magnesium === null) {
-			nutrientObject.mineralData.magnesium = null
-		}
-		
-		if(nutrientData.mineralData.manganese === null) {
-			nutrientObject.mineralData.manganese = null
-		}
-		
-		if(nutrientData.mineralData.phosphorus === null) {
-			nutrientObject.mineralData.phosphorus = null
-		}
-		
-		if(nutrientData.mineralData.potassium === null) {
-			nutrientObject.mineralData.potassium = null
-		}
-		
-		if(nutrientData.mineralData.selenium === null) {
-			nutrientObject.mineralData.selenium = null
-		}
+        // Vitamins:
+        if (nutrientData.vitaminData.a === null) {
+            nutrientObject.vitaminData.a = null
+        }
 
-		if(nutrientData.mineralData.sodium === null) {
-			nutrientObject.mineralData.sodium = null
-		}
-		
-		if(nutrientData.mineralData.zinc === null) {
-			nutrientObject.mineralData.zinc = null
-		}
-		
-		
-		// Proteins:
-		
-		if(nutrientData.proteinData.alanine === null) {
-			nutrientObject.proteinData.alanine = null
-		}
-		
-		if(nutrientData.proteinData.arginine === null) {
-			nutrientObject.proteinData.arginine = null
-		}
-		
-		if(nutrientData.proteinData.asparticAcid === null) {
-			nutrientObject.proteinData.asparticAcid = null
-		}
-		
-		if(nutrientData.proteinData.cystine === null) {
-			nutrientObject.proteinData.cystine = null
-		}
-		
-		if(nutrientData.proteinData.glutamicAcid === null) {
-			nutrientObject.proteinData.glutamicAcid = null
-		}
-		
-		if(nutrientData.proteinData.glycine === null) {
-			nutrientObject.proteinData.glycine = null
-		}
-		
-		if(nutrientData.proteinData.histidine === null) {
-			nutrientObject.proteinData.histidine = null
-		}
-		
-		if(nutrientData.proteinData.isoleucine === null) {
-			nutrientObject.proteinData.isoleucine = null
-		}
-		
-		if(nutrientData.proteinData.leucine === null) {
-			nutrientObject.proteinData.leucine = null
-		}
-		
-		if(nutrientData.proteinData.lysine === null) {
-			nutrientObject.proteinData.lysine = null
-		}
-		
-		if(nutrientData.proteinData.methionine === null) {
-			nutrientObject.proteinData.methionine = null
-		}
-		
-		if(nutrientData.proteinData.phenylalanine === null) {
-			nutrientObject.proteinData.phenylalanine = null
-		}
-		
-		if(nutrientData.proteinData.proline === null) {
-			nutrientObject.proteinData.proline = null
-		}
-		
-		if(nutrientData.proteinData.serine === null) {
-			nutrientObject.proteinData.serine = null
-		}
-		
-		if(nutrientData.proteinData.threonine === null) {
-			nutrientObject.proteinData.threonine = null
-		}
-		
-		if(nutrientData.proteinData.tryptophan === null) {
-			nutrientObject.proteinData.tryptophan = null
-		}
-		
-		if(nutrientData.proteinData.tyrosine === null) {
-			nutrientObject.proteinData.tyrosine = null
-		}
-		
-		if(nutrientData.proteinData.valine === null) {
-			nutrientObject.proteinData.valine = null
-		}
+        if (nutrientData.vitaminData.b1 === null) {
+            nutrientObject.vitaminData.b1 = null
+        }
+
+        if (nutrientData.vitaminData.b2 === null) {
+            nutrientObject.vitaminData.b2 = null
+        }
+
+        if (nutrientData.vitaminData.b3 === null) {
+            nutrientObject.vitaminData.b3 = null
+        }
+
+        if (nutrientData.vitaminData.b5 === null) {
+            nutrientObject.vitaminData.b5 = null
+        }
+
+        if (nutrientData.vitaminData.b6 === null) {
+            nutrientObject.vitaminData.b6 = null
+        }
+
+        if (nutrientData.vitaminData.b7 === null) {
+            nutrientObject.vitaminData.b7 = null
+        }
+
+        if (nutrientData.vitaminData.b9 === null) {
+            nutrientObject.vitaminData.b9 = null
+        }
+
+        if (nutrientData.vitaminData.b12 === null) {
+            nutrientObject.vitaminData.b12 = null
+        }
+
+        if (nutrientData.vitaminData.c === null) {
+            nutrientObject.vitaminData.c = null
+        }
+
+        if (nutrientData.vitaminData.d === null) {
+            nutrientObject.vitaminData.d = null
+        }
+
+        if (nutrientData.vitaminData.e === null) {
+            nutrientObject.vitaminData.e = null
+        }
+
+        if (nutrientData.vitaminData.k === null) {
+            nutrientObject.vitaminData.k = null
+        }
+
+
+        // Minerals:
+        if (nutrientData.mineralData.calcium === null) {
+            nutrientObject.mineralData.calcium = null
+        }
+
+        if (nutrientData.mineralData.copper === null) {
+            nutrientObject.mineralData.copper = null
+        }
+
+        if (nutrientData.mineralData.iron === null) {
+            nutrientObject.mineralData.iron = null
+        }
+
+        if (nutrientData.mineralData.magnesium === null) {
+            nutrientObject.mineralData.magnesium = null
+        }
+
+        if (nutrientData.mineralData.manganese === null) {
+            nutrientObject.mineralData.manganese = null
+        }
+
+        if (nutrientData.mineralData.phosphorus === null) {
+            nutrientObject.mineralData.phosphorus = null
+        }
+
+        if (nutrientData.mineralData.potassium === null) {
+            nutrientObject.mineralData.potassium = null
+        }
+
+        if (nutrientData.mineralData.selenium === null) {
+            nutrientObject.mineralData.selenium = null
+        }
+
+        if (nutrientData.mineralData.sodium === null) {
+            nutrientObject.mineralData.sodium = null
+        }
+
+        if (nutrientData.mineralData.zinc === null) {
+            nutrientObject.mineralData.zinc = null
+        }
+
+
+        // Proteins:
+
+        if (nutrientData.proteinData.alanine === null) {
+            nutrientObject.proteinData.alanine = null
+        }
+
+        if (nutrientData.proteinData.arginine === null) {
+            nutrientObject.proteinData.arginine = null
+        }
+
+        if (nutrientData.proteinData.asparticAcid === null) {
+            nutrientObject.proteinData.asparticAcid = null
+        }
+
+        if (nutrientData.proteinData.cystine === null) {
+            nutrientObject.proteinData.cystine = null
+        }
+
+        if (nutrientData.proteinData.glutamicAcid === null) {
+            nutrientObject.proteinData.glutamicAcid = null
+        }
+
+        if (nutrientData.proteinData.glycine === null) {
+            nutrientObject.proteinData.glycine = null
+        }
+
+        if (nutrientData.proteinData.histidine === null) {
+            nutrientObject.proteinData.histidine = null
+        }
+
+        if (nutrientData.proteinData.isoleucine === null) {
+            nutrientObject.proteinData.isoleucine = null
+        }
+
+        if (nutrientData.proteinData.leucine === null) {
+            nutrientObject.proteinData.leucine = null
+        }
+
+        if (nutrientData.proteinData.lysine === null) {
+            nutrientObject.proteinData.lysine = null
+        }
+
+        if (nutrientData.proteinData.methionine === null) {
+            nutrientObject.proteinData.methionine = null
+        }
+
+        if (nutrientData.proteinData.phenylalanine === null) {
+            nutrientObject.proteinData.phenylalanine = null
+        }
+
+        if (nutrientData.proteinData.proline === null) {
+            nutrientObject.proteinData.proline = null
+        }
+
+        if (nutrientData.proteinData.serine === null) {
+            nutrientObject.proteinData.serine = null
+        }
+
+        if (nutrientData.proteinData.threonine === null) {
+            nutrientObject.proteinData.threonine = null
+        }
+
+        if (nutrientData.proteinData.tryptophan === null) {
+            nutrientObject.proteinData.tryptophan = null
+        }
+
+        if (nutrientData.proteinData.tyrosine === null) {
+            nutrientObject.proteinData.tyrosine = null
+        }
+
+        if (nutrientData.proteinData.valine === null) {
+            nutrientObject.proteinData.valine = null
+        }
 
     }
 
@@ -423,7 +423,8 @@ function buildVitaminDataObject(compositeList: Array<SelectedFoodItem>, portionS
         d: createFinalValue(d, portionSize),
         e: createFinalValue(e, portionSize),
         k: createFinalValue(k, portionSize),
-        carotenoidData: buildCarotenoidDataObject(compositeList, portionSize, preferredSource)
+        carotenoidData: buildCarotenoidDataObject(compositeList, portionSize, preferredSource),
+        extendedVitaminE: buildExtendedVitaminEObject(compositeList, portionSize, preferredSource)
     }
 }
 
@@ -440,7 +441,7 @@ function buildCarotenoidDataObject(compositeList: Array<SelectedFoodItem>, porti
         const userSetPortion = selectedFoodItem.portion.amount
         const portionFactor = userSetPortion / 100
 
-        if(carotenoidData !== null) {
+        if (carotenoidData !== null) {
             alpha += (carotenoidData.caroteneAlpha ? carotenoidData.caroteneAlpha : 0) * portionFactor
             beta += (carotenoidData.caroteneBeta ? carotenoidData.caroteneBeta : 0) * portionFactor
             cryptoxanthin += (carotenoidData.cryptoxanthin ? carotenoidData.cryptoxanthin : 0) * portionFactor
@@ -455,6 +456,39 @@ function buildCarotenoidDataObject(compositeList: Array<SelectedFoodItem>, porti
         cryptoxanthin: createFinalValue(cryptoxanthin, portionSize),
         lycopene: createFinalValue(lycopene, portionSize),
         lutein: createFinalValue(lutein, portionSize)
+    }
+}
+
+function buildExtendedVitaminEObject(compositeList: Array<SelectedFoodItem>, portionSize: number, preferredSource: string): ExtendedVitaminE {
+    let tocopherolBeta = 0
+    let tocopherolGamma = 0
+    let tocopherolDelta = 0
+    let tocotrienolAlpha = 0
+    let tocotrienolBeta = 0
+    let tocotrienolGamma = 0
+
+    compositeList.forEach(selectedFoodItem => {
+        const extendedVitaminEData = getNutrientData(selectedFoodItem).vitaminData.extendedVitaminE
+        const userSetPortion = selectedFoodItem.portion.amount
+        const portionFactor = userSetPortion / 100
+
+        if (extendedVitaminEData !== null) {
+            tocopherolBeta += (extendedVitaminEData.tocopherolBeta ? extendedVitaminEData.tocopherolBeta : 0) * portionFactor
+            tocopherolGamma += (extendedVitaminEData.tocopherolGamma ? extendedVitaminEData.tocopherolGamma : 0) * portionFactor
+            tocopherolDelta += (extendedVitaminEData.tocopherolDelta ? extendedVitaminEData.tocopherolDelta : 0) * portionFactor
+            tocotrienolAlpha += (extendedVitaminEData.tocotrienolAlpha ? extendedVitaminEData.tocotrienolAlpha : 0) * portionFactor
+            tocotrienolBeta += (extendedVitaminEData.tocotrienolBeta ? extendedVitaminEData.tocotrienolBeta : 0) * portionFactor
+            tocotrienolGamma += (extendedVitaminEData.tocotrienolGamma ? extendedVitaminEData.tocotrienolGamma : 0) * portionFactor
+        }
+    })
+
+    return {
+        tocopherolBeta: createFinalValue(tocopherolBeta, portionSize),
+        tocopherolGamma: createFinalValue(tocopherolGamma, portionSize),
+        tocopherolDelta: createFinalValue(tocopherolDelta, portionSize),
+        tocotrienolAlpha: createFinalValue(tocotrienolAlpha, portionSize),
+        tocotrienolBeta: createFinalValue(tocotrienolBeta, portionSize),
+        tocotrienolGamma: createFinalValue(tocotrienolGamma, portionSize)
     }
 }
 

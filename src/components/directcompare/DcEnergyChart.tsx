@@ -12,7 +12,7 @@ export function DcEnergyChart(props: DirectCompareDataPanelProps) {
 
     useEffect(() => {
         setContainerHeight(calculateChartContainerHeight(windowSize, true))
-    }, [containerHeight, windowSize.height])
+    }, [containerHeight, windowSize])
 
     return <div className={"direct-compare-panel"}>
         <Card>

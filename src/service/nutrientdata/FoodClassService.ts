@@ -7,7 +7,8 @@ import FoodDataCorpus from "../../types/nutrientdata/FoodDataCorpus";
 
 export const foodClassLabelSeparator = "||"
 
-export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category: number, foodNames: Array<NameType>, language: string): ReactSelectFoodClassOption[] {
+export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category: number,
+                                       foodNames: Array<NameType>, language: string): ReactSelectFoodClassOption[] {
     const {foodClasses, foodItems} = foodDataCorpus
     const filteredFoodClasses = getFoodClassesOfCategory(foodClasses, category)
 

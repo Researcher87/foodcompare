@@ -13,8 +13,15 @@ import {useWindowDimension} from "../../../service/WindowDimension";
 import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
+
 import {VitaminsBook} from "../VitaminBook";
 import nutrientBook from "../../../static/nutrientBook.json";
+import {callEvent} from "../../../service/GA_EventService";
+import {
+    GA_ACTION_DATAPANEL_MINERALS_CONFIG,
+    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
+    GA_CATEGORY_DATAPANEL
+} from "../../../config/GA_Events";
 
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {

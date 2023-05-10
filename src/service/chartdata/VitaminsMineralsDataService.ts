@@ -5,6 +5,7 @@ import {UserData} from "../../types/livedata/UserData";
 import {ChartDisplayData} from "../../types/livedata/ChartDisplayData";
 import {applicationStrings} from "../../static/labels";
 import {calculateVitaminAEquivalent} from "../calculation/CarotenoidCalculationService";
+import {calculateVitaminEEquivalent} from "../calculation/ExtendedVitaminECalculationService";
 
 export function getVitaminChartData(vitaminData: VitaminData, requirementData: VitaminRequirementData, userData: UserData,
                                     portionAmount: number): ChartDisplayData {
@@ -63,8 +64,9 @@ export function getVitaminChartData(vitaminData: VitaminData, requirementData: V
     }
 
     if (vitaminData.e !== null) {
+        const amountE = vitaminData.e + calculateVitaminEEquivalent(vitaminData.extendedVitaminE)
         labels.push("E");
-        values.push(determineFoodRequirementRatio(requirementData.e, vitaminData.e, portionAmount, userData));
+        values.push(determineFoodRequirementRatio(requirementData.e, amountE, portionAmount, userData));
     }
 
     if (vitaminData.k !== null) {

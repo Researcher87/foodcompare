@@ -58,6 +58,14 @@ export function makeDefaultVitaminData(): VitaminData {
             cryptoxanthin: 10,
             lycopene: 0,
             lutein: null
+        },
+        extendedVitaminE: {
+            tocopherolBeta: 3,
+            tocopherolGamma: 10,
+            tocopherolDelta: 20,
+            tocotrienolAlpha: 50,
+            tocotrienolBeta: 7,
+            tocotrienolGamma: 11
         }
     }
 

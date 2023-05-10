@@ -12,6 +12,9 @@ import {Link} from 'react-router-dom';
 import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
 import {isMobileDevice} from "../service/WindowDimension";
+import {callEvent} from "../service/GA_EventService";
+import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
+import {GA_ACTION_HOME_CLICK_START_BUTTON, GA_CATEGORY_HOME} from "../config/GA_Events";
 
 const images = require.context('../static/image/carousel', true);
 
@@ -24,6 +27,7 @@ interface HomeTextElement {
 export function Home() {
     const {language} = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
+    const applicationContext = useContext(ApplicationDataContextStore)
 
     const imageChanged = (image) => {
         setDisplayedImage(image)
@@ -37,8 +41,6 @@ export function Home() {
         const pic5 = images(`./Img-${language}-5.png`).default;
         const pic6 = images(`./Img-${language}-6.png`).default;
         const pic7 = images(`./Img-${language}-7.png`).default;
-
-        console.log('PIC', images(`./Img-${language}-1.png`))
 
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][language];
@@ -54,25 +56,25 @@ export function Home() {
                           showStatus={false}
                           onChange={imageChanged}>
                     <div>
-                        <img src={pic1} alt={"Caroussel image 1"}/>
+                        <img src={pic1} alt={"Carousel 1"}/>
                     </div>
                     <div>
-                        <img src={pic2} alt={"Caroussel image 2"}/>
+                        <img src={pic2} alt={"Carousel 2"}/>
                     </div>
                     <div>
-                        <img src={pic3} alt={"Caroussel image 3"}/>
+                        <img src={pic3} alt={"Carousel 3"}/>
                     </div>
                     <div>
-                        <img src={pic4} alt={"Caroussel image 4"}/>
+                        <img src={pic4} alt={"Carousel 4"}/>
                     </div>
                     <div>
-                        <img src={pic5} alt={"Caroussel image 5"}/>
+                        <img src={pic5} alt={"Carousel 5"}/>
                     </div>
                     <div>
-                        <img src={pic6} alt={"Caroussel image 6"}/>
+                        <img src={pic6} alt={"Carousel 6"}/>
                     </div>
                     <div>
-                        <img src={pic7} alt={"Caroussel image 7"}/>
+                        <img src={pic7} alt={"Carousel 7"}/>
                     </div>
                 </Carousel>
                 <div style={{textAlign: "center", fontStyle: "oblique"}}>
@@ -86,13 +88,35 @@ export function Home() {
     const buttonBgColor = "#2952a3"
     const buttonTextColor = "#FFFFFF"
 
+    const onStartButtonClick = (id: number) => {
+        let label = "";
+        switch (id) {
+            case 1:
+                label = "Food Analyzer (Default Mode)"
+                break;
+            case 2:
+                label = "Food Analyzer (Aggregated)"
+                break;
+            case 3:
+                label = "Direct Compare"
+                break;
+            case 4:
+                label = "Ranking"
+                break;
+        }
+
+        callEvent(applicationContext?.debug, GA_ACTION_HOME_CLICK_START_BUTTON, GA_CATEGORY_HOME, label)
+    }
+
     const renderStartButtons = () => {
+        const buttonClass = isMobileDevice() ? "text-center d-flex flex-row" : "text-center"
+
         return (
             <div style={{paddingTop: "16px"}}>
                 <b>{applicationStrings.label_getStarted[language]}</b>
-                <div className={"text-center"}>
+                <div className={buttonClass}>
                     <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
+                        <Link to={PATH_FOODDATA_PANEL + "?add=1"} onClick={() => onStartButtonClick(1)}>
                             <button type="button"
                                     className="btn btn-small"
                                     style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
@@ -101,8 +125,9 @@ export function Home() {
                         </Link>
                     </div>
                     {!isMobileDevice() &&
+                    <div>
                         <div style={{paddingTop: "20px"}}>
-                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
+                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
                                 <button type="button"
                                         className="btn btn-small"
                                         style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
@@ -110,18 +135,19 @@ export function Home() {
                                 </button>
                             </Link>
                         </div>
+                        <div style={{paddingTop: "20px"}}>
+                            <Link to={PATH_DIRECT_COMPARE} onClick={() => onStartButtonClick(3)}>
+                                <button type="button"
+                                        className="btn btn-small"
+                                        style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
+                                    {applicationStrings.button_getstarted_3[language]}
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
                     }
                     <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_DIRECT_COMPARE}>
-                            <button type="button"
-                                    className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                {applicationStrings.button_getstarted_3[language]}
-                            </button>
-                        </Link>
-                    </div>
-                    <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_RANKING}>
+                        <Link to={PATH_RANKING} onClick={() => onStartButtonClick(4)}>
                             <button type="button"
                                     className="btn btn-small"
                                     style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
@@ -160,9 +186,14 @@ export function Home() {
             case "fancy-item":
                 return (
                     <div key={`homeitem ${index}`}>
-                        <span style={{paddingLeft: "10px", paddingRight: "10px"}}>
-                            <FaAngleDoubleRight/>
-                        </span>
+                        {!isMobileDevice()
+                            ? <span style={{paddingLeft: "10px", paddingRight: "10px"}}>
+                                    <FaAngleDoubleRight/>
+                                </span>
+                            : <span>
+                                    <FaAngleDoubleRight/>
+                            </span>
+                        }
                         {text}
                     </div>
                 )
@@ -171,37 +202,69 @@ export function Home() {
         }
     }
 
-    const colSizeLeft = isMobileDevice() ? "col-12" : "col-5"
 
-    return (
-        <div>
-            <div className="media home app" style={{margin: "0 auto"}}>
-                <div className={"container-fluid"}>
-                    <div className="row">
-                        <div className={colSizeLeft}>
-                            {renderHomeText(homeText1)}
-                            <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
-                                {renderStartButtons()}
-                            </div>
-                            {renderHomeText(homeText2)}
+    const renderMobile = () => {
+        return (
+            <div className="media home app" style={{margin: "12px"}}>
+                <div>
+                    <div>
+                        {renderHomeText(homeText1)}
+                        <div style={{paddingTop: "20px", paddingBottom: "30px"}}>
+                            {renderStartButtons()}
                         </div>
-                        {!isMobileDevice() &&
-                        <div className={"col-7"} style={{paddingLeft: "45px"}}>
-                            {renderCarousel()}
-                        </div>
-                        }
+                        {renderHomeText(homeText2)}
                     </div>
                     <hr/>
-                    <div style={{paddingTop: "30px"}}>
+                    <div style={{paddingTop: "20px"}}>
                         <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
                         <div className="card-header"
-                             style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                             style={{paddingBottom: "20px", marginBottom: "30px"}}>
                             {renderHomeText(homeText3)}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        )
+    }
+
+    const renderDesktop = () => {
+        return (
+            <div>
+                <div className="media home app" style={{margin: "0 auto"}}>
+                    <div className={"container-fluid"}>
+                        <div className="row">
+                            <div className={"col-5"}>
+                                {renderHomeText(homeText1)}
+                                <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
+                                    {renderStartButtons()}
+                                </div>
+                                {renderHomeText(homeText2)}
+                            </div>
+                            <div className={"col-7"} style={{paddingLeft: "45px"}}>
+                                {renderCarousel()}
+                            </div>
+                        </div>
+                        <hr/>
+                        <div style={{paddingTop: "30px"}}>
+                            <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
+                            <div className="card-header"
+                                 style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
+                                {renderHomeText(homeText3)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+
+    return <div>
+        {isMobileDevice()
+            ? <div>{renderMobile()}</div>
+            : <div>{renderDesktop()}</div>
+        }
+    </div>
+
 
 }
