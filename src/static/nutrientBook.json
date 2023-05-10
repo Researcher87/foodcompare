@@ -757,6 +757,138 @@
         "de": "ca. 20 µg (der genaue Bedarf ist noch nicht abschließend geklärt)",
         "en": "about 20 µg (the exact amount has not been identified yet)"
       }
+    },
+    {
+      "name": {
+        "de": "Vitamin E",
+        "en": "Vitamin E"
+      },
+      "scientificName": {
+        "de": "Tocopherol",
+        "en": "Tocopherol"
+      },
+      "description": {
+        "de": "Vitamin E umfasst verschiedene chemische Verbindungen, zu denen bspw. die Tocopherole und Tocotrienole gehören. Es ist ein Antioxidans und schützt die mehrfach ungesättigten Fettsäuren, die den freien Radikalen besonders stark ausgesetzt sind. Das Vitamin ist empfindlich gegenüber Hitze und Licht. Es kommt größtenteils in pflanzlichen Lebensmitteln vor, insbesondere in Pflanzenölen, Getreide und Nüssen. Ein Mangel ist in der westlichen Welt äußerst selten, da das Vitamin vom Körper auch sehr gut gespeichert wird.",
+        "en": "Vitamin E comprises several chemical compounds, such as Tocopherols and Tocotrienols. As an antioxidant, it protects the polyunsaturated fatty acids against free radicals, that attack those cells and may destroy them. The vitamin is vulnerable against heat and light and mostly appears in plant-based food, especially in plant-based oils, grains and nuts. Vitamin E deficiencies are very rare in western countries, since the vitamin can be effectively stored in the human body."
+      },
+      "functionality": [
+        {
+          "de": "Antioxidans, das die Körperzellen schützt",
+          "en": "Antioxidant protecting the somatic cells"
+        },
+        {
+          "de": "Schützt die Haut, verbessert die Wundheilung",
+          "en": "Protects the skin, promotes wound healing"
+        },
+        {
+          "de": "Schützt das Immunsystem, wirkt entzündungshemmend",
+          "en": "Protects the immune system, reduces inflammations"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Durchblutungsstörungen",
+          "en": "Circulatory disorders"
+        },
+        {
+          "de": "Zittern, beeinträchtigte Reflexe, Konzentrationsschwäche",
+          "en": "Tremor, impaired reflexes, loss of concentration"
+        },
+        {
+          "de": "Muskelschwäche",
+          "en": "Muscle weakness"
+        },
+        {
+          "de": "Immunsystemschwäche",
+          "en": "Weakened immune system"
+        }
+      ],
+      "overdose": {
+        "de": "Eine Überdosis kann zu Blutungen, Übelkeit und weiteren gesundheitlichen Schäden führen. Als maximaler täglicher Höchstwert wird 2 mg je kg Körpergewicht angegeben. Andere Quellen empfehlen, nicht mehr als 30 mg pro Tag an Ergänzungsmitteln zu nehmen.",
+        "en": "An overdose may lead to bleeding, nausea and further health issues. The maximal daily amount for an adult is about 2 mg per kg body mass. Other sources state that 30 mg of vitamin E as supplement should not be exceeded per day."
+      },
+      "dependencies": {
+        "de": "Bei einem erhöhten Konsum von ungesättigten Fettsäuren erhöht sich der Bedarf von Vitamin E entsprechend.",
+        "en": "An increased consumption of polyunsaturated fatty acids increases the demand for vitamin E accordingly."
+      },
+      "storage": {
+        "de": "",
+        "en": ""
+      },
+      "sources": {
+        "de": "Pflanzenöle, Getreide, Nüsse, Fisch, Gemüse",
+        "en": "Plant-based oils, grains, nuts, fish, vegetables"
+      },
+      "requirements": {
+        "de": "Mann: 14 mg | Frau: 12 mg (schwanger: 13 mg, stillend: 17 mg)",
+        "en": "male: 14 mg | female: 12 mg (pregnant: 13 mg, breastfeeding: 17 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Vitamin K",
+        "en": "Vitamin K"
+      },
+      "scientificName": {
+        "de": "Phyllochinon, Menachinon",
+        "en": "Phylloquinone, Menaquinone"
+      },
+      "description": {
+        "de": "Die K-Vitamine sind eine Gruppe von Vitaminen, die vor allem bei der Blutgerinnung eine wichtige Rolle spielen. Für den Menschen bedeutsam sind dabei die Vitamine K1 (Phyllochinon), das in pflanzlicher Nahrung vorkommt, und K2 (Menachinon), das durch Darmbakterien im Darmtrakt hergestellt wird und daher in tierischen Produkten enthalten ist. Da die K-Vitamine in der Nahrung ausreichend vorhanden sind, ist ein Mangel äußerst selten. Besonders gute Quellen sind grünes Gemüse, in den oft sehr viel Vitamin K enthalten ist.",
+        "en": "K-Vitamins (K1, K2) are a group of vitamins that play an important part in blood coagulation. Vitamin K1 (Phylloquinone) appears in plant-based food, whereas vitamin K2 (Menaquinone) is produced by bacteria in the digestive tract and thus appear in animal food. Since K-vitamins sufficiently occur in foods, deficiencies are very rare. Good sources of vitamin K are leafy greens, which often contain large amounts of the vitamin."
+      },
+      "functionality": [
+        {
+          "de": "Blutgerinnung",
+          "en": "Blood coagulation"
+        },
+        {
+          "de": "Knochenstoffwechsel und Knochenwachstum",
+          "en": "Bone metabolism and bone production"
+        },
+        {
+          "de": "Hilft bei Zellprozessen wie dem Zellwachstum",
+          "en": "Supports cell processes such as cell growth"
+        },
+        {
+          "de": "K2: Verhindert Kalkablagerungen",
+          "en": "K2: Prevents calcifications"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Störungen bei der Blutgerinnung",
+          "en": "Blood coagulation disorders"
+        },
+        {
+          "de": "Gefäßverkalkung (Arteriosklerose)",
+          "en": "Atherosclerosis"
+        },
+        {
+          "de": "Osteoporose",
+          "en": "Osteoporosis"
+        }
+      ],
+      "overdose": {
+        "de": "Nicht bekannt.",
+        "en": "Unknown."
+      },
+      "dependencies": {
+        "de": "",
+        "en": ""
+      },
+      "storage": {
+        "de": "",
+        "en": ""
+      },
+      "sources": {
+        "de": "K1: Grünes Gemüse, plant-based oils; K2: Eier, Fleisch, Milchprodukte",
+        "en": "K1: Leafy greens, pflanzliche Öle; K2: Eggs, meat, dairy"
+      },
+      "requirements": {
+        "de": "Mann: 70 µg | Frau: 60 µg",
+        "en": "male: 70 µg | female: 60 µg"
+      }
     }
   ]
 }
