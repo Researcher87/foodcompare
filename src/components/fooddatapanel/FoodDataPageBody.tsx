@@ -10,7 +10,8 @@ import {calculateMinimalDataPanelWidth} from "../../service/nutrientdata/ChartSi
 
 interface FoodDataPageBodyProps {
     tableData: Array<FoodTableDataObject>
-    selectedFoodItem: SelectedFoodItem
+    selectedFoodItem: SelectedFoodItem,
+    dataPage: string
 }
 
 export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
@@ -27,7 +28,10 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
             <div>
                 {displayMode === DISPLAYMODE_TABLE &&
                 <div className="col">
-                    <FoodDataTable tableData={props.tableData} portionSize={props.selectedFoodItem.portion.amount}/>
+                    <FoodDataTable tableData={props.tableData}
+                                   portionSize={props.selectedFoodItem.portion.amount}
+                                   dataPage={props.dataPage}
+                    />
                 </div>
                 }
                 {displayMode === DISPLAYMODE_CHART &&

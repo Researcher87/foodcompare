@@ -783,21 +783,25 @@ export const applicationStrings = {
         de: 'Typische Portion',
         en: 'Typical portion'
     },
-    label_prefix_hereof: {
-        de: 'davon',
-        en: 'hereof'
-    },
-    label_reference: {
-        de: 'Bezug',
-        en: 'Reference'
-    },
     label_preferred_source: {
         de: 'Bevorzugte Datenquelle',
         en: 'Preferred data source'
     },
+    label_prefix_hereof: {
+        de: 'davon',
+        en: 'hereof'
+    },
     label_ranking_dietaryRequirements: {
         de: 'Zeige Tagesbedarf',
         en: 'Show dietary requirements'
+    },
+    label_requirement: {
+        de: 'Tagesbedarf',
+        en: 'Daily requirements'
+    },
+    label_reference: {
+        de: 'Bezug',
+        en: 'Reference'
     },
     label_source: {
         de: 'Datenquelle',

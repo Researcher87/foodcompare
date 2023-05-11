@@ -3,12 +3,34 @@ import {applicationStrings} from "../static/labels";
 import {FoodTableDataObject} from "../types/livedata/SelectedFoodItemData";
 import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
-import {getTotalAmountOfCarotenoids} from "./calculation/CarotenoidCalculationService";
+import {getTotalAmountOfCarotenoids} from "./calculation/provitaminCalculation/CarotenoidCalculationService";
 import {CATEGORY_BEVERAGE} from "../config/Constants";
-import {getTotalAmountOfExtendedVitaminE} from "./calculation/ExtendedVitaminECalculationService";
+import {getTotalAmountOfExtendedVitaminE} from "./calculation/provitaminCalculation/ExtendedVitaminECalculationService";
+import DietaryRequirement, {
+    MineralRequirementData, ProteinRequirementData, RequirementData,
+    VitaminRequirementData
+} from "../types/nutrientdata/DietaryRequirement";
+import {determineDailyRequirement} from "./calculation/DietaryRequirementService";
+import {UserData} from "../types/livedata/UserData";
+import {
+    EC_FACTOR_TOCOTRIENOL_ALPHA, EC_FACTOR_TOCOTRIENOL_BETA, EC_FACTOR_TOCOTRIENOL_GAMMA,
+    EQ_FACTOR_BETA_CAROTENE,
+    EQ_FACTOR_OTHER_CAROTENE, EQ_FACTOR_TOCOPHEROL_BETA, EQ_FACTOR_TOCOPHEROL_DELTA, EQ_FACTOR_TOCOPHEROL_GAMMA
+} from "./calculation/provitaminCalculation/ProvitaminEquivalentFactors";
+import {autoRound} from "./calculation/MathService";
 
-export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export interface TableCalculationParams {
+    selectedFoodItem: SelectedFoodItem
+    portion: number
+    language: string
+    preferredSource: string
+    dietaryRequirement?: DietaryRequirement
+    userData?: UserData
+}
+
+export function createBaseDataTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
+    const {selectedFoodItem, portion, language} = params
 
     const {
         water,
@@ -29,7 +51,7 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
         );
     }
 
-    if (carbohydrates  !== null) {
+    if (carbohydrates !== null) {
         const carbObject = makeCarbsTableObject(carbohydrates, sugar, dietaryFibers, portion, language)
         tableData.push(carbObject)
     }
@@ -71,15 +93,23 @@ export function createBaseDataTable(selectedFoodItem: SelectedFoodItem, portion:
 }
 
 
-export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createVitaminTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
-    const nutrientData = getNutrientData(foodItem)
+    const {selectedFoodItem, portion, language, dietaryRequirement, userData} = params
+    const vitRequirementData = dietaryRequirement?.vitaminRequirementData ?? null
+
+    const nutrientData = getNutrientData(selectedFoodItem)
 
     if (nutrientData.vitaminData.a != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_a[language],
-            nutrientData.vitaminData.a,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.a, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_a[language],
+                nutrientData.vitaminData.a,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
@@ -89,25 +119,76 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
         const totalCarotenoid = getTotalAmountOfCarotenoids(carotenoidData)
 
         if (totalCarotenoid !== null) {
+            let reqString = ""
+            if (vitRequirementData && userData) {
+                const requirementVitaminA = determineDailyRequirement(vitRequirementData.a, userData)
+                reqString = `${requirementVitaminA} mg Vit. A ≙`
+            }
+
             let carotenoidTableObject = createTableObject(
                 applicationStrings.label_nutrient_vit_carotenoid[language],
                 totalCarotenoid,
-                portion, "mg"
+                portion, "mg", reqString
             )
 
             if (carotenoidData.caroteneAlpha !== null) {
+                let reqString = ""
+                if (vitRequirementData && userData) {
+                    const requirementVitaminA = determineDailyRequirement(vitRequirementData.a, userData)
+                    const equivalentVitA = autoRound(requirementVitaminA / EQ_FACTOR_OTHER_CAROTENE)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitA} mg`
+                }
+
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_carotenoid_alpha[language]}`
-                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneAlpha, portion, "mg")
+
+                carotenoidTableObject = appendTableDataObject(
+                    carotenoidTableObject,
+                    language,
+                    label,
+                    carotenoidData.caroteneAlpha,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             if (carotenoidData.caroteneBeta !== null) {
+                let reqString = ""
+                if (vitRequirementData && userData) {
+                    const requirementVitaminA = determineDailyRequirement(vitRequirementData.a, userData)
+                    const equivalentVitA = autoRound(requirementVitaminA / EQ_FACTOR_BETA_CAROTENE)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitA} mg`
+                }
+
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_carotenoid_beta[language]}`
-                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.caroteneBeta, portion, "mg")
+                carotenoidTableObject = appendTableDataObject(
+                    carotenoidTableObject,
+                    language,
+                    label,
+                    carotenoidData.caroteneBeta,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             if (carotenoidData.cryptoxanthin !== null) {
+                let reqString = ""
+                if (vitRequirementData && userData) {
+                    const requirementVitaminA = determineDailyRequirement(vitRequirementData.a, userData)
+                    const equivalentVitA = autoRound(requirementVitaminA / EQ_FACTOR_OTHER_CAROTENE)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitA} mg`
+                }
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_cryptoxanthin[language]}`
-                carotenoidTableObject = appendTableDataObject(carotenoidTableObject, language, label, carotenoidData.cryptoxanthin, portion, "mg")
+                carotenoidTableObject = appendTableDataObject(
+                    carotenoidTableObject,
+                    language,
+                    label,
+                    carotenoidData.cryptoxanthin,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             tableData.push(carotenoidTableObject)
@@ -115,125 +196,266 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
     }
 
     if (nutrientData.vitaminData.b1 != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_b1[language],
-            nutrientData.vitaminData.b1,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.b1, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_b1[language],
+                nutrientData.vitaminData.b1,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.b2 != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_b2[language],
-            nutrientData.vitaminData.b2,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.b2, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_b2[language],
+                nutrientData.vitaminData.b2,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.b3 != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_b3[language],
-            nutrientData.vitaminData.b3,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.b3, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_b3[language],
+                nutrientData.vitaminData.b3,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.b5 != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_b5[language],
-            nutrientData.vitaminData.b5,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.b5, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_b5[language],
+                nutrientData.vitaminData.b5,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.b6 != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_b6[language],
-            nutrientData.vitaminData.b6,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.b6, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_b6[language],
+                nutrientData.vitaminData.b6,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.b9 != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_b9[language],
-            nutrientData.vitaminData.b9,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.b9, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_b9[language],
+                nutrientData.vitaminData.b9,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.b12 != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_b12[language],
-            nutrientData.vitaminData.b12,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.b12, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_b12[language],
+                nutrientData.vitaminData.b12,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.c != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_c[language],
-            nutrientData.vitaminData.c,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.c, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_c[language],
+                nutrientData.vitaminData.c,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.d != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_d[language],
-            nutrientData.vitaminData.d,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.d, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_d[language],
+                nutrientData.vitaminData.d,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (nutrientData.vitaminData.e != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_e[language],
-            nutrientData.vitaminData.e,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.e, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_e[language],
+                nutrientData.vitaminData.e,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     const {extendedVitaminE} = nutrientData.vitaminData
 
-    if(extendedVitaminE != null) {
+    if (extendedVitaminE != null) {
         const totalExtensions = getTotalAmountOfExtendedVitaminE(extendedVitaminE)
 
-        if(totalExtensions !== null) {
+        if (totalExtensions !== null) {
+            let reqString = ""
+            if (vitRequirementData && userData) {
+                const requirementVitaminA = determineDailyRequirement(vitRequirementData.e, userData)
+                reqString = `${requirementVitaminA} mg Vit. E ≙`
+            }
+
             let extendedVitaminETable = createTableObject(
                 applicationStrings.label_nutrient_vit_e_ext[language],
                 totalExtensions,
-                portion, "mg"
+                portion,
+                "mg",
+                reqString
             )
 
             if (extendedVitaminE.tocopherolBeta !== null) {
+                let reqString = ""
+                if (vitRequirementData?.e && userData) {
+                    const requirementVitaminE = determineDailyRequirement(vitRequirementData.e, userData)
+                    const equivalentVitE = autoRound(requirementVitaminE / EQ_FACTOR_TOCOPHEROL_BETA)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitE} mg`
+                }
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocopherolBeta[language]}`
-                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocopherolBeta, portion, "mg")
+                extendedVitaminETable = appendTableDataObject(
+                    extendedVitaminETable,
+                    language,
+                    label,
+                    extendedVitaminE.tocopherolBeta,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             if (extendedVitaminE.tocopherolGamma !== null) {
+                let reqString = ""
+                if (vitRequirementData?.e && userData) {
+                    const requirementVitaminE = determineDailyRequirement(vitRequirementData.e, userData)
+                    const equivalentVitE = autoRound(requirementVitaminE / EQ_FACTOR_TOCOPHEROL_GAMMA)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitE} mg`
+                }
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocopherolGamma[language]}`
-                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocopherolGamma, portion, "mg")
+                extendedVitaminETable = appendTableDataObject(
+                    extendedVitaminETable,
+                    language,
+                    label,
+                    extendedVitaminE.tocopherolGamma,
+                    portion,
+                    "mg",
+                    reqString)
             }
 
             if (extendedVitaminE.tocopherolDelta !== null) {
+                let reqString = ""
+                if (vitRequirementData?.e && userData) {
+                    const requirementVitaminE = determineDailyRequirement(vitRequirementData.e, userData)
+                    const equivalentVitE = autoRound(requirementVitaminE / EQ_FACTOR_TOCOPHEROL_DELTA)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitE} mg`
+                }
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocopherolDelta[language]}`
-                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocopherolDelta, portion, "mg")
+                extendedVitaminETable = appendTableDataObject(
+                    extendedVitaminETable,
+                    language,
+                    label,
+                    extendedVitaminE.tocopherolDelta,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             if (extendedVitaminE.tocotrienolAlpha !== null) {
+                let reqString = ""
+                if (vitRequirementData?.e && userData) {
+                    const requirementVitaminE = determineDailyRequirement(vitRequirementData.e, userData)
+                    const equivalentVitE = autoRound(requirementVitaminE / EC_FACTOR_TOCOTRIENOL_ALPHA)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitE} mg`
+                }
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocotrienolAlpha[language]}`
-                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocotrienolAlpha, portion, "mg")
+                extendedVitaminETable = appendTableDataObject(
+                    extendedVitaminETable,
+                    language,
+                    label,
+                    extendedVitaminE.tocotrienolAlpha,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             if (extendedVitaminE.tocotrienolBeta !== null) {
+                let reqString = ""
+                if (vitRequirementData?.e && userData) {
+                    const requirementVitaminE = determineDailyRequirement(vitRequirementData.e, userData)
+                    const equivalentVitE = autoRound(requirementVitaminE / EC_FACTOR_TOCOTRIENOL_BETA)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitE} mg`
+                }
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocotrienolBeta[language]}`
-                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocotrienolBeta, portion, "mg")
+                extendedVitaminETable = appendTableDataObject(
+                    extendedVitaminETable,
+                    language,
+                    label,
+                    extendedVitaminE.tocotrienolBeta,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             if (extendedVitaminE.tocotrienolGamma !== null) {
+                let reqString = ""
+                if (vitRequirementData?.e && userData) {
+                    const requirementVitaminE = determineDailyRequirement(vitRequirementData.e, userData)
+                    const equivalentVitE = autoRound(requirementVitaminE / EC_FACTOR_TOCOTRIENOL_GAMMA)
+                    reqString = `... ${applicationStrings.label_prefix_hereof[language]} ${equivalentVitE} mg`
+                }
                 const label = ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_vit_e_ext_tocotrienolGamma[language]}`
-                extendedVitaminETable = appendTableDataObject(extendedVitaminETable, language, label, extendedVitaminE.tocotrienolGamma, portion, "mg")
+                extendedVitaminETable = appendTableDataObject(
+                    extendedVitaminETable,
+                    language,
+                    label,
+                    extendedVitaminE.tocotrienolGamma,
+                    portion,
+                    "mg",
+                    reqString
+                )
             }
 
             tableData.push(extendedVitaminETable)
@@ -241,10 +463,15 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
     }
 
     if (nutrientData.vitaminData.k != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_vit_k[language],
-            nutrientData.vitaminData.k,
-            portion, "mg")
+        const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.k, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_vit_k[language],
+                nutrientData.vitaminData.k,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
@@ -252,88 +479,139 @@ export function createVitaminTable(foodItem: SelectedFoodItem, portion: number, 
 }
 
 
-export function createMineralTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createMineralTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
+    const {selectedFoodItem, portion, language, dietaryRequirement, userData} = params
+    const minRequirementData = dietaryRequirement?.mineralRequirementData ?? null
 
-    const firstNutrientData = getNutrientData(foodItem);
+    const firstNutrientData = getNutrientData(selectedFoodItem);
 
     if (firstNutrientData.mineralData.calcium != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_calcium[language],
-            firstNutrientData.mineralData.calcium,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.calcium, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_calcium[language],
+                firstNutrientData.mineralData.calcium,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.iron != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_iron[language],
-            firstNutrientData.mineralData.iron,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.iron, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_iron[language],
+                firstNutrientData.mineralData.iron,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.magnesium != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_magnesium[language],
-            firstNutrientData.mineralData.magnesium,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.magnesium, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_magnesium[language],
+                firstNutrientData.mineralData.magnesium,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.phosphorus != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_phosphorus[language],
-            firstNutrientData.mineralData.phosphorus,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.phosphorus, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_phosphorus[language],
+                firstNutrientData.mineralData.phosphorus,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.potassium != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_potassimum[language],
-            firstNutrientData.mineralData.potassium,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.potassium, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_potassimum[language],
+                firstNutrientData.mineralData.potassium,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.sodium != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_sodium[language],
-            firstNutrientData.mineralData.sodium,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.sodium, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_sodium[language],
+                firstNutrientData.mineralData.sodium,
+                portion, "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.zinc != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_zinc[language],
-            firstNutrientData.mineralData.zinc,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.zinc, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_zinc[language],
+                firstNutrientData.mineralData.zinc,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.copper != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_copper[language],
-            firstNutrientData.mineralData.copper,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.copper, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_copper[language],
+                firstNutrientData.mineralData.copper,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.manganese != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_manganese[language],
-            firstNutrientData.mineralData.manganese,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.manganese, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_manganese[language],
+                firstNutrientData.mineralData.manganese,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
     if (firstNutrientData.mineralData.selenium != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_min_selenium[language],
-            firstNutrientData.mineralData.selenium,
-            portion, "mg")
+        const requirement = minRequirementData && userData ? makeDietaryRequirementString(minRequirementData.selenium, userData) : ""
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_min_selenium[language],
+                firstNutrientData.mineralData.selenium,
+                portion,
+                "mg",
+                requirement
+            )
         );
     }
 
@@ -341,9 +619,10 @@ export function createMineralTable(foodItem: SelectedFoodItem, portion: number, 
 }
 
 
-export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createLipidsTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
-    const firstNutrientData = getNutrientData(foodItem);
+    const {selectedFoodItem, portion, language} = params
+    const firstNutrientData = getNutrientData(selectedFoodItem);
 
     if (firstNutrientData.lipidData.saturated != null) {
         tableData.push(createTableObject(
@@ -407,10 +686,11 @@ export function createLipidsTable(foodItem: SelectedFoodItem, portion: number, l
 }
 
 
-export function createEnergyTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createEnergyTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
+    const {selectedFoodItem, portion, language} = params
 
-    const nutrientData = getNutrientData(foodItem)
+    const nutrientData = getNutrientData(selectedFoodItem)
     const energy = nutrientData.baseData.energy !== null ? nutrientData.baseData.energy : 0;
 
     tableData.push(createTableObject(
@@ -429,10 +709,11 @@ export function createEnergyTable(foodItem: SelectedFoodItem, portion: number, l
 }
 
 
-export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createCarbsTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
+    const {selectedFoodItem, portion, language} = params
 
-    const firstNutrientData = getNutrientData(foodItem);
+    const firstNutrientData = getNutrientData(selectedFoodItem);
     const {carbohydrates, dietaryFibers} = firstNutrientData.baseData
     const {sugar} = firstNutrientData.carbohydrateData
 
@@ -501,155 +782,225 @@ export function createCarbsTable(foodItem: SelectedFoodItem, portion: number, la
 }
 
 
-export function createProteinTable(foodItem: SelectedFoodItem, portion: number, language: string, preferredSource: string): Array<FoodTableDataObject> {
+export function createProteinTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
+    const {selectedFoodItem, portion, language, dietaryRequirement, userData} = params
+    const protRequirementData = dietaryRequirement?.proteinRequirementData ?? null
 
-    const proteinData = getNutrientData(foodItem).proteinData;
+    const proteinData = getNutrientData(selectedFoodItem).proteinData;
     if (!proteinData) {
         return tableData;
     }
 
     if (proteinData.tryptophan != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_tryptophan[language],
-            proteinData.tryptophan,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_tryptophan[language],
+                proteinData.tryptophan,
+                portion,
+                "g",
+                protRequirementData ? `${protRequirementData.tryptophan} mg` : ""
+            )
         );
     }
 
     if (proteinData.threonine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_threonine[language],
-            proteinData.threonine,
-            portion, "g")
+        tableData.push(
+                createTableObject(
+                applicationStrings.label_nutrient_proteins_threonine[language],
+                proteinData.threonine,
+                portion,
+                    "g",
+                    protRequirementData ? `${protRequirementData.threonine} mg` : ""
+            )
         );
     }
 
     if (proteinData.isoleucine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_isoleucine[language],
-            proteinData.isoleucine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_isoleucine[language],
+                proteinData.isoleucine,
+                portion, "g",
+                protRequirementData ? `${protRequirementData.isoleucine} mg` : ""
+            )
         );
     }
 
     if (proteinData.leucine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_leucine[language],
-            proteinData.leucine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_leucine[language],
+                proteinData.leucine,
+                portion, "g",
+                protRequirementData ? `${protRequirementData.leucine} mg` : ""
+            )
         );
     }
 
     if (proteinData.lysine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_lysine[language],
-            proteinData.lysine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_lysine[language],
+                proteinData.lysine,
+                portion, "g",
+                protRequirementData ? `${protRequirementData.lysine} mg` : ""
+            )
         );
     }
 
     if (proteinData.methionine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_methionine[language],
-            proteinData.methionine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_methionine[language],
+                proteinData.methionine,
+                portion,
+                "g",
+                protRequirementData ? `${protRequirementData.methionine} mg` : ""
+            )
         );
     }
 
     if (proteinData.cystine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_cystine[language],
-            proteinData.cystine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_cystine[language],
+                proteinData.cystine,
+                portion,
+                "g",
+                protRequirementData ? `${protRequirementData.cystine} mg` : ""
+            )
         );
     }
 
     if (proteinData.phenylalanine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_phenylalanine[language],
-            proteinData.phenylalanine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_phenylalanine[language],
+                proteinData.phenylalanine,
+                portion,
+                "g",
+                protRequirementData ? `${protRequirementData.phenylalanine} mg` : ""
+            )
         );
     }
 
     if (proteinData.tyrosine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_tyrosine[language],
-            proteinData.tyrosine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_tyrosine[language],
+                proteinData.tyrosine,
+                portion,
+                "g",
+                ""
+            )
         );
     }
 
     if (proteinData.valine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_valine[language],
-            proteinData.valine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_valine[language],
+                proteinData.valine,
+                portion,
+                "g",
+                protRequirementData ? `${protRequirementData.valine} mg` : ""
+            )
         );
     }
 
     if (proteinData.arginine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_arginine[language],
-            proteinData.arginine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_arginine[language],
+                proteinData.arginine,
+                portion,
+                "g",
+                ""
+            )
         );
     }
 
     if (proteinData.histidine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_histidine[language],
-            proteinData.histidine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_histidine[language],
+                proteinData.histidine,
+                portion,
+                "g",
+                protRequirementData ? `${protRequirementData.histidine} mg` : ""
+            )
         );
     }
 
     if (proteinData.alanine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_alanine[language],
-            proteinData.alanine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_alanine[language],
+                proteinData.alanine,
+                portion, "g",
+                ""
+            )
         );
     }
 
     if (proteinData.asparticAcid != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_asparticAcid[language],
-            proteinData.asparticAcid,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_asparticAcid[language],
+                proteinData.asparticAcid,
+                portion,
+                "g",
+                ""
+            )
         );
     }
 
     if (proteinData.glutamicAcid != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_glutamicAcid[language],
-            proteinData.glutamicAcid,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_glutamicAcid[language],
+                proteinData.glutamicAcid,
+                portion,
+                "g",
+                ""
+            )
         );
     }
 
     if (proteinData.glycine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_glysine[language],
-            proteinData.glycine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_glysine[language],
+                proteinData.glycine,
+                portion,
+                "g",
+                ""
+            )
         );
     }
 
     if (proteinData.proline != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_proline[language],
-            proteinData.proline,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_proline[language],
+                proteinData.proline,
+                portion,
+                "g",
+                ""
+            )
         );
     }
 
     if (proteinData.serine != null) {
-        tableData.push(createTableObject(
-            applicationStrings.label_nutrient_proteins_serine[language],
-            proteinData.serine,
-            portion, "g")
+        tableData.push(
+            createTableObject(
+                applicationStrings.label_nutrient_proteins_serine[language],
+                proteinData.serine,
+                portion,
+                "g",
+                ""
+            )
         );
     }
 
@@ -657,12 +1008,13 @@ export function createProteinTable(foodItem: SelectedFoodItem, portion: number, 
 }
 
 
-function createTableObject(label: string, value_100g: number, portion: number, unit: String): FoodTableDataObject {
+function createTableObject(label: string, value_100g: number, portion: number, unit: String, requirement?: string): FoodTableDataObject {
     const valuePortion = calculatePortionData(value_100g, portion);
     return {
         label: label,
         value_100g: `${MathService.autoRound(value_100g)} ${unit}`,
-        value_portion: `${MathService.autoRound(valuePortion)} ${unit}`
+        value_portion: `${MathService.autoRound(valuePortion)} ${unit}`,
+        dailyRequirement: requirement ?? ""
     }
 }
 
@@ -719,13 +1071,22 @@ function makeCarbsTableObject(carbohydrates: number, sugar: number | null, dieta
 
 
 function appendTableDataObject(object: FoodTableDataObject, language: string, label: string, value: number,
-                               portion: number, unit: string): FoodTableDataObject {
+                               portion: number, unit: string, reqString?: string): FoodTableDataObject {
     const appendedObject = {...object}
-    const extension = createTableObject(label, value, portion, unit)
+    const extension = createTableObject(label, value, portion, unit, reqString)
 
     appendedObject.label = appendedObject.label + '&&' + extension.label
     appendedObject.value_100g = appendedObject.value_100g + '&&' + extension.value_100g
     appendedObject.value_portion = appendedObject.value_portion + '&&' + extension.value_portion
 
+    if (reqString) {
+        appendedObject.dailyRequirement = appendedObject.dailyRequirement + '&&' + extension.dailyRequirement
+    }
+
     return appendedObject
+}
+
+function makeDietaryRequirementString(requirementData: RequirementData, userData: UserData): string {
+    const requirement = determineDailyRequirement(requirementData, userData)
+    return `${requirement} mg`
 }

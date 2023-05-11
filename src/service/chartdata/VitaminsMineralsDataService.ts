@@ -4,8 +4,8 @@ import {MineralRequirementData, VitaminRequirementData} from "../../types/nutrie
 import {UserData} from "../../types/livedata/UserData";
 import {ChartDisplayData} from "../../types/livedata/ChartDisplayData";
 import {applicationStrings} from "../../static/labels";
-import {calculateVitaminAEquivalent} from "../calculation/CarotenoidCalculationService";
-import {calculateVitaminEEquivalent} from "../calculation/ExtendedVitaminECalculationService";
+import {calculateVitaminAEquivalent} from "../calculation/provitaminCalculation/CarotenoidCalculationService";
+import {calculateVitaminEEquivalent} from "../calculation/provitaminCalculation/ExtendedVitaminECalculationService";
 
 export function getVitaminChartData(vitaminData: VitaminData, requirementData: VitaminRequirementData, userData: UserData,
                                     portionAmount: number): ChartDisplayData {

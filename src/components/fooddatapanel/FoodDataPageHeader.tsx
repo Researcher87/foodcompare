@@ -213,6 +213,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                     </div>
                     <FoodDataPageBody selectedFoodItem={props.selectedFoodItem}
                                       tableData={props.tableData}
+                                      dataPage={dataPage}
                     />
                 </div>
             </div>
