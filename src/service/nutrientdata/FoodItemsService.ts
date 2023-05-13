@@ -37,7 +37,7 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
             const condition = conditions.find(condition => condition.id === foodItem.conditionId)
             const conditionName = condition ? getName(condition, language) : null
 
-            if(conditionName) {
+            if(conditionName && foodItem.conditionId !== 100) {   // Exclude the "general" condition
                 foodName = `${foodName} (${conditionName})`
             }
 

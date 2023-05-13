@@ -124,8 +124,12 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     setSelectedFoodClass(foodClass)
 
                     if (foodDataCorpus.foodItems && foodClasses) {
-                        const foodItemsOfFoodClass = getFoodItemsSelectList(foodDataCorpus.foodItems, foodClasses[initialFoodClass].value.id, foodDataCorpus.foodNames,
-                            foodDataCorpus.conditions, language)
+                        const foodItemsOfFoodClass = getFoodItemsSelectList(
+                            foodDataCorpus.foodItems,
+                            foodClasses[initialFoodClass].value.id,
+                            foodDataCorpus.foodNames,
+                            foodDataCorpus.conditions, language
+                        )
 
                         setFoodItemsList(foodItemsOfFoodClass)
                         setSelectedFoodItem(foodItemsOfFoodClass[0])
@@ -185,6 +189,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const handleFoodClassChange = (foodClass: ReactSelectFoodClassOption) => {
         setSelectedFoodClass(foodClass)
         updateFoodItem(foodClass)
+        resetTypeaheadFilter()
+    }
+
+    const resetTypeaheadFilter = () => {
+        setFoodClassesTypeaheadList(foodClassesList)
     }
 
     const handleFoodItemChange = (foodItem: ReactSelectFoodItemOption) => {
@@ -293,7 +302,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
 
-    const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined, portion: PortionData | undefined): SelectedFoodItem | null => {
+    const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined,
+            portion: PortionData | undefined): SelectedFoodItem | null => {
         if (!foodItem || !foodClass || !portion) {
             return null
         }
@@ -555,6 +565,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         formatOptionLabel={foodclassFormatter}
                         value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
+                        onMenuClose ={() => resetTypeaheadFilter()}
                         styles={stylesFoodClass}
                 />
             </div>

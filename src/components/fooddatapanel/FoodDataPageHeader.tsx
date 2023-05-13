@@ -138,7 +138,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         if (isMobileDevice()) {
             foodName = shortenName(foodName, 16)
         }
-        fullName = `${foodName} (${conditionName}, ${portionSize} g)`
+        fullName = condition?.id !== 100
+            ? `${foodName} (${conditionName}, ${portionSize} g)`
+            : `${foodName} (${portionSize} g)`
     } else {
         fullName = `${foodName} (${portionSize} g)`
     }
