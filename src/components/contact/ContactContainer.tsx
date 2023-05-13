@@ -59,8 +59,7 @@ export function ContactContainer() {
         }
 
         callEvent(applicationContext?.debug, GA_ACTION_CONTACT_SUBMENU, GA_CATEGORY_CONTACT, label)
-
-        setSelectedMenu(menu_contact)
+        setSelectedMenu(selectedMenu)
     }
 
     return (
