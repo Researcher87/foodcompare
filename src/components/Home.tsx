@@ -16,7 +16,8 @@ import {callEvent} from "../service/GA_EventService";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {GA_ACTION_HOME_CLICK_START_BUTTON, GA_CATEGORY_HOME} from "../config/GA_Events";
 
-const images = require.context('../static/image/carousel', true);
+const carouselImages = require.context('../static/image/carousel', true);
+const startImages = require.context('../static/image/startImages', true);
 
 interface HomeTextElement {
     type: string
@@ -34,13 +35,13 @@ export function Home() {
     }
 
     const renderCarousel = () => {
-        const pic1 = images(`./Img-${language}-1.png`).default;
-        const pic2 = images(`./Img-${language}-2.png`).default;
-        const pic3 = images(`./Img-${language}-3.png`).default;
-        const pic4 = images(`./Img-${language}-4.png`).default;
-        const pic5 = images(`./Img-${language}-5.png`).default;
-        const pic6 = images(`./Img-${language}-6.png`).default;
-        const pic7 = images(`./Img-${language}-7.png`).default;
+        const pic1 = carouselImages(`./Img-${language}-1.png`).default;
+        const pic2 = carouselImages(`./Img-${language}-2.png`).default;
+        const pic3 = carouselImages(`./Img-${language}-3.png`).default;
+        const pic4 = carouselImages(`./Img-${language}-4.png`).default;
+        const pic5 = carouselImages(`./Img-${language}-5.png`).default;
+        const pic6 = carouselImages(`./Img-${language}-6.png`).default;
+        const pic7 = carouselImages(`./Img-${language}-7.png`).default;
 
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][language];
@@ -111,53 +112,57 @@ export function Home() {
     const renderStartButtons = () => {
         const buttonClass = isMobileDevice() ? "text-center d-flex flex-row" : "text-center"
 
+        const startImg1 = startImages(`./StartImg1.jpg`).default
+        const startImg2 = startImages(`./StartImg2.jpg`).default
+        const startImg3 = startImages(`./StartImg3.jpg`).default
+        const startImg4 = startImages(`./StartImg4.jpg`).default
+
         return (
             <div style={{paddingTop: "16px"}}>
                 <b>{applicationStrings.label_getStarted[language]}</b>
                 <div className={buttonClass}>
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_FOODDATA_PANEL + "?add=1"} onClick={() => onStartButtonClick(1)}>
-                            <button type="button"
-                                    className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                {applicationStrings.button_getstarted_1[language]}
-                            </button>
+                            {renderStartButton(applicationStrings.button_getstarted_1[language], startImg1)}
                         </Link>
                     </div>
                     {!isMobileDevice() &&
                     <div>
                         <div style={{paddingTop: "20px"}}>
                             <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
-                                <button type="button"
-                                        className="btn btn-small"
-                                        style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                    {applicationStrings.button_getstarted_2[language]}
-                                </button>
+                                {renderStartButton(applicationStrings.button_getstarted_2[language], startImg2)}
                             </Link>
                         </div>
                         <div style={{paddingTop: "20px"}}>
                             <Link to={PATH_DIRECT_COMPARE} onClick={() => onStartButtonClick(3)}>
-                                <button type="button"
-                                        className="btn btn-small"
-                                        style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                    {applicationStrings.button_getstarted_3[language]}
-                                </button>
+                                {renderStartButton(applicationStrings.button_getstarted_3[language], startImg3)}
                             </Link>
                         </div>
                     </div>
                     }
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_RANKING} onClick={() => onStartButtonClick(4)}>
-                            <button type="button"
-                                    className="btn btn-small"
-                                    style={{width: "75%", backgroundColor: buttonBgColor, color: buttonTextColor}}>
-                                {applicationStrings.button_getstarted_4[language]}
-                            </button>
+                            {renderStartButton(applicationStrings.button_getstarted_4[language], startImg4)}
                         </Link>
                     </div>
                 </div>
             </div>
         )
+    }
+
+    const renderStartButton = (label: string, srcImage: string): any => {
+        return <button type="button"
+                       className="btn btn-small btn-outline-dark"
+                       style={{width: "90%"}}>
+            <div className={"d-flex flex-row"} style={{maxHeight: "100px"}}>
+                <div className={"d-flex flex-column"} style={{width: "40%", maxHeight: "96px", marginRight: "12px"}}>
+                    <img src={srcImage} style={{maxHeight: "90px", maxWidth: "169px"}} alt={"Start btn img"}></img>
+                </div>
+                <div className={"d-flex flex-column justify-content-center"}  style={{width: "60%"}}>
+                    <div className={"align-items-center"}>{label}</div>
+                </div>
+            </div>
+        </button>
     }
 
 

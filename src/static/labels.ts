@@ -16,12 +16,12 @@ export const applicationStrings = {
         en: 'Close'
     },
     button_getstarted_1: {
-        de: 'Verschiedene Lebensmittel analysieren',
-        en: 'Analyze different food items'
+        de: 'Einzelne Lebensmittel analysieren',
+        en: 'Analyze separate food items'
     },
     button_getstarted_2: {
-        de: 'Komplexe Lebensmittel zusammenstellen',
-        en: 'Create a composite food list'
+        de: 'Komplexe Lebensmittel zusammenstellen und analysieren',
+        en: 'Create and analyze a composite food list'
     },
     button_getstarted_3: {
         de: 'Zwei Lebensmittel gegenüberstellen',
