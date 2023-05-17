@@ -5,7 +5,10 @@ import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {getTotalAmountOfCarotenoids} from "./calculation/provitaminCalculation/CarotenoidCalculationService";
 import {CATEGORY_BEVERAGE} from "../config/Constants";
-import {getTotalAmountOfExtendedVitaminE} from "./calculation/provitaminCalculation/ExtendedVitaminECalculationService";
+import {
+    getTotalAmountOfExtendedVitaminE,
+    hasExtendedData
+} from "./calculation/provitaminCalculation/ExtendedVitaminECalculationService";
 import DietaryRequirement, {
     MineralRequirementData, ProteinRequirementData, RequirementData,
     VitaminRequirementData
@@ -327,7 +330,7 @@ export function createVitaminTable(params: TableCalculationParams): Array<FoodTa
 
     const {extendedVitaminE} = nutrientData.vitaminData
 
-    if (extendedVitaminE != null) {
+    if (nutrientData.vitaminData.e !== null && extendedVitaminE !== null && hasExtendedData(extendedVitaminE)) {
         const totalExtensions = getTotalAmountOfExtendedVitaminE(extendedVitaminE)
 
         if (totalExtensions !== null) {

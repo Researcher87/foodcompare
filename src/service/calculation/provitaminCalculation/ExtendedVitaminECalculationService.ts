@@ -72,3 +72,13 @@ export function calculateVitaminEEquivalent(extendedVitaminE: ExtendedVitaminE |
 
     return amount
 }
+
+
+export function hasExtendedData(extendedVitaminE: ExtendedVitaminE): boolean {
+    return extendedVitaminE.tocopherolBeta !== null
+        || extendedVitaminE.tocopherolGamma !== null
+        || extendedVitaminE.tocopherolDelta !== null
+        || extendedVitaminE.tocotrienolAlpha !== null
+        || extendedVitaminE.tocotrienolBeta !== null
+        || extendedVitaminE.tocotrienolGamma !== null
+}

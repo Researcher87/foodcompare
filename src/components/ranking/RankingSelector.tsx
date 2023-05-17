@@ -194,7 +194,7 @@ export function RankingSelector(props: RankingSelectorProps) {
             <div className="column select-menu" style={{paddingLeft: "20px", paddingTop: "10px"}}>
                 <form className="form-inline form-group">
                     <label className="form-elements form-label">
-                        <input className="form-radiobutton"
+                        <input className={"form-input"}
                                type="radio"
                                checked={(use100gram)}
                                onChange={handlePortionAmountChange}
@@ -202,7 +202,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                         100 g
                     </label>
                     <label className="form-elements-largespace form-label">
-                        <input className="form-radiobutton"
+                        <input className={"form-input"}
                                type="radio"
                                checked={!use100gram}
                                onChange={handlePortionAmountChange}

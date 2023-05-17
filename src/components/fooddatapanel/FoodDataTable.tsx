@@ -52,7 +52,7 @@ export function FoodDataTable(props: FoodDataTableProps) {
         || props.dataPage === TAB_PROTEINS_DATA
 
     return (
-        <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
+        <div style={{height: "428px", margin: "25px", overflowY: "auto"}}>
             <div>
                 {dataExists &&
                 <BootstrapTable trClassName={tableClass} data={props.tableData} striped hover>

@@ -254,8 +254,9 @@ export function UserSettings() {
         return (
             <div className="form-row-indent" style={{marginTop: "-15px"}}>
                 <label className="form-elements"
+                       data-for={"us-leisure"}
                        data-tip={applicationStrings.label_userSettings_leisureSports_tooltip[lang]}>
-                    <ReactTooltip/>
+                    <ReactTooltip id={"us-leisure"}/>
                     <Form.Check inline className="form-radiobutton"
                                 label={applicationStrings.label_userSettings_leisureSports[lang]}
                                 checked={leisureSport}

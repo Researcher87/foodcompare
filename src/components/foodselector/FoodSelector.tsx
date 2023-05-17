@@ -460,6 +460,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         const checkboxes = (
             <div>
                 <label className="form-elements"
+                       data-for={"selector-supplement"}
                        data-tip={applicationStrings.label_source_supplement_tooltip[language]}>
                     <ReactTooltip/>
                     <Form.Check inline className="form-radiobutton"
@@ -468,10 +469,12 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                                 disabled={sourcesList.length <= 1}
                                 onClick={onCheckSupplementCheckbox}>
                     </Form.Check>
+                    <ReactTooltip id={"selector-supplement"}/>
                 </label>
                 <label className="form-elements"
+                       data-for={"selector-combine"}
                        data-tip={applicationStrings.label_source_combine_tooltip[language]}>
-                    <ReactTooltip/>
+                    <ReactTooltip id={"selector-combine"}/>
                     <Form.Check className="form-radiobutton"
                                 style={{minHeight: "1rem"}}
                                 label={applicationStrings.label_source_combine[language]}

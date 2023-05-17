@@ -34,14 +34,16 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
 
-    useEffect(() => {
-        ReactTooltip.rebuild()
-    })
-
-    ReactTooltip.rebuild()
-
     if (!applicationContext) {
         return <div/>
+    }
+
+    const onOpenSelector = (aggregateSelector: boolean) => {
+        if(aggregateSelector) {
+            setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)
+        } else {
+            setShowFoodSelector(!showFoodSelector)
+        }
     }
 
     const onHide = (): void => {
@@ -109,8 +111,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const selectedFoodItems = applicationContext?.applicationData.foodDataPanel.selectedFoodItems
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
-    ReactTooltip.rebuild()
-
     const buttonClass = isMobileDevice() ? "btn mb-4" : "btn mb-4 foodanalyzer-button"
 
     return (
@@ -125,25 +125,30 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                                    compositeSelector={true}/>
                 }
                 <div className={"d-flex flex-column align-items-center"}>
-                    <Button onClick={() => setShowFoodSelector(!showFoodSelector)}
+                    <Button onClick={() => onOpenSelector(false)}
                             className={buttonClass}
+                            data-for={"fa-btn-add"}
                             data-tip={applicationStrings.tooltip_icon_newFoodItem[languageContext.language]}>
                         <FaPlusSquare/>
+                        <ReactTooltip id={"fa-btn-add"} globalEventOff="click"/>
                     </Button>
-                    <Button onClick={() => setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)}
+                    <Button onClick={() => onOpenSelector(true)}
                             className={buttonClass}
                             disabled={isMobileDevice()}
+                            data-for={"fa-btn-aggregate"}
                             data-tip={applicationStrings.tooltip_icon_newFoodItemStack[languageContext.language]}>
                         <FaLayerGroup/>
+                        <ReactTooltip id={"fa-btn-aggregate"} globalEventOff="click"/>
                     </Button>
                     <Button onClick={() => onCloseAllTabs()}
                             disabled={deleteIconEnabled === false}
                             className={buttonClass}
+                            data-for={"fa-btn-close"}
                             data-tip={applicationStrings.tooltip_icon_removeAll[languageContext.language]}>
                         <FaTrash/>
+                        <ReactTooltip id={"fa-btn-close"}/>
                     </Button>
                 </div>
-                <ReactTooltip/>
             </div>
         </div>
     )

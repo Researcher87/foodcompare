@@ -184,16 +184,19 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                     <Button className={chartButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
                                             active={displayMode === DISPLAYMODE_CHART}
+                                            data-for={"datapanel-chart"}
                                             data-tip={applicationStrings.tooltip_icon_charts[languageContext.language]}>
-                                        <ReactTooltip/>
+                                        <ReactTooltip id={"datapanel-chart"}/>
                                         <FaChartBar/>
                                     </Button>
                                     <Button className={tablesButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_TABLE)}
                                             active={displayMode === DISPLAYMODE_TABLE}
+                                            data-for={"datapanel-table"}
                                             data-tip={applicationStrings.tooltip_icon_table[languageContext.language]}>
                                         <FaThList/>
                                     </Button>
+                                    <ReactTooltip id="datapanel-table"/>
                                 </div>
                                 <div className="btn-group" role="group" style={{paddingLeft: "20px"}}>
                                     <Button className={"btn-primary button-foodPanelHead"}
@@ -204,9 +207,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                     </Button>
                                     <Button className={"button-closeTab"}
                                             onClick={closeTab}
-                                            data-for="closeButtonTooltip"
+                                            data-for={"datapanel-close"}
                                             data-tip={applicationStrings.tooltip_icon_close[languageContext.language]}>
-                                        <ReactTooltip id="closeButtonTooltip"/>
+                                        <ReactTooltip id="datapanel-close"/>
                                         <FaTimes/>
                                     </Button>
                                 </div>
