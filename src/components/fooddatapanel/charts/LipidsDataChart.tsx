@@ -14,7 +14,7 @@ import {PieChartConfigurationForm} from "../../charthelper/PieChartConfiguration
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LipidsDataChartProps} from "../../../types/livedata/ChartPropsData";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {

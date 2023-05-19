@@ -14,7 +14,7 @@ import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {Card} from "react-bootstrap";
 import {DC_MineralVitaminChartProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
-import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 import {VerticalLabel} from "./VerticalLabel";
 import {callEvent} from "../../service/GA_EventService";

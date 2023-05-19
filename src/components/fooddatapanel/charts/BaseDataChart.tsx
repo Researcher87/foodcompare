@@ -11,7 +11,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {ChartDisplayData} from "../../../types/livedata/ChartDisplayData";
 import {getBaseChartLegendData, getNutrientChartData, getTotalChartData} from "../../../service/chartdata/BaseChartDataService";

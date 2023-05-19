@@ -10,7 +10,7 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {MineralVitaminChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
 import {callEvent} from "../../../service/GA_EventService";

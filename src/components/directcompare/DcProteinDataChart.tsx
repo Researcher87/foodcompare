@@ -8,7 +8,7 @@ import {Card} from "react-bootstrap";
 import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
 import {BarChartDirectCompareConfig, DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
-import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 import {
     getMaximumValue,

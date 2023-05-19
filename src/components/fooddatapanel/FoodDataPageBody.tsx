@@ -6,7 +6,7 @@ import {FoodDataTable} from "./FoodDataTable";
 import {InfoData} from "./charts/InfoData";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {calculateMinimalDataPanelWidth} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateMinimalDataPanelWidth} from "../../service/ChartSizeCalculation";
 
 interface FoodDataPageBodyProps {
     tableData: Array<FoodTableDataObject>

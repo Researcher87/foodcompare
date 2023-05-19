@@ -23,7 +23,7 @@ import {
     GeneralChartConfigDirectCompareWithSubCharts,
     GeneralChartConfigWithDetails
 } from "../../types/livedata/ChartConfigData";
-import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {VerticalLabel} from "./VerticalLabel";
 import {callEvent} from "../../service/GA_EventService";

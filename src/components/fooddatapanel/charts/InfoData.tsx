@@ -6,7 +6,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeService";
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
-import {calculateChartContainerHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../../service/ChartSizeCalculation";
 import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";

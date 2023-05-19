@@ -220,8 +220,8 @@ export const applicationStrings = {
         en: 'Minerals (related to daily requirements)'
     },
     label_charttype_proteins: {
-        de: 'Proteine (im Vgl. zum Tagesbedarf)',
-        en: 'Proteins  (related to daily requirements)'
+        de: 'Aminosäuren (im Vgl. zum Tagesbedarf)',
+        en: 'Amino acids  (related to daily requirements)'
     },
     label_charttype_vitamins: {
         de: 'Vitamine (im Vgl. zum Tagesbedarf)',

@@ -14,7 +14,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {
     getCarbBaseChartData,

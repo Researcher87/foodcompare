@@ -799,10 +799,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_tryptophan[language],
-                proteinData.tryptophan,
+                convertToMg(proteinData.tryptophan),
                 portion,
-                "g",
-                protRequirementData ? `${protRequirementData.tryptophan} mg` : ""
+                "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.tryptophan, userData)} mg` : ""
             )
         );
     }
@@ -811,10 +811,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
                 createTableObject(
                 applicationStrings.label_nutrient_proteins_threonine[language],
-                proteinData.threonine,
+                convertToMg(proteinData.threonine),
                 portion,
-                    "g",
-                    protRequirementData ? `${protRequirementData.threonine} mg` : ""
+                    "mg",
+                    protRequirementData ? `${calculateProteinRequirement(protRequirementData.threonine, userData)} mg` : ""
             )
         );
     }
@@ -823,9 +823,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_isoleucine[language],
-                proteinData.isoleucine,
-                portion, "g",
-                protRequirementData ? `${protRequirementData.isoleucine} mg` : ""
+                convertToMg(proteinData.isoleucine),
+                portion, "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.isoleucine, userData)} mg` : ""
             )
         );
     }
@@ -834,9 +834,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_leucine[language],
-                proteinData.leucine,
-                portion, "g",
-                protRequirementData ? `${protRequirementData.leucine} mg` : ""
+                convertToMg(proteinData.leucine),
+                portion, "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.leucine, userData)} mg` : ""
             )
         );
     }
@@ -845,9 +845,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_lysine[language],
-                proteinData.lysine,
-                portion, "g",
-                protRequirementData ? `${protRequirementData.lysine} mg` : ""
+                convertToMg(proteinData.lysine),
+                portion, "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.lysine, userData)} mg` : ""
             )
         );
     }
@@ -856,10 +856,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_methionine[language],
-                proteinData.methionine,
+                convertToMg(proteinData.methionine),
                 portion,
-                "g",
-                protRequirementData ? `${protRequirementData.methionine} mg` : ""
+                "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.methionine, userData)} mg` : ""
             )
         );
     }
@@ -868,10 +868,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_cystine[language],
-                proteinData.cystine,
+                convertToMg(proteinData.cystine),
                 portion,
-                "g",
-                protRequirementData ? `${protRequirementData.cystine} mg` : ""
+                "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.cystine, userData)} mg` : ""
             )
         );
     }
@@ -880,10 +880,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_phenylalanine[language],
-                proteinData.phenylalanine,
+                convertToMg(proteinData.phenylalanine),
                 portion,
-                "g",
-                protRequirementData ? `${protRequirementData.phenylalanine} mg` : ""
+                "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.phenylalanine, userData)} mg` : ""
             )
         );
     }
@@ -892,9 +892,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_tyrosine[language],
-                proteinData.tyrosine,
+                convertToMg(proteinData.tyrosine),
                 portion,
-                "g",
+                "mg",
                 ""
             )
         );
@@ -904,10 +904,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_valine[language],
-                proteinData.valine,
+                convertToMg(proteinData.valine),
                 portion,
-                "g",
-                protRequirementData ? `${protRequirementData.valine} mg` : ""
+                "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.valine, userData)} mg` : ""
             )
         );
     }
@@ -916,9 +916,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_arginine[language],
-                proteinData.arginine,
+                convertToMg(proteinData.arginine),
                 portion,
-                "g",
+                "mg",
                 ""
             )
         );
@@ -928,10 +928,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_histidine[language],
-                proteinData.histidine,
+                convertToMg(proteinData.histidine),
                 portion,
-                "g",
-                protRequirementData ? `${protRequirementData.histidine} mg` : ""
+                "mg",
+                protRequirementData ? `${calculateProteinRequirement(protRequirementData.histidine, userData)} mg` : ""
             )
         );
     }
@@ -940,8 +940,8 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_alanine[language],
-                proteinData.alanine,
-                portion, "g",
+                convertToMg(proteinData.alanine),
+                portion, "mg",
                 ""
             )
         );
@@ -951,9 +951,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_asparticAcid[language],
-                proteinData.asparticAcid,
+                convertToMg(proteinData.asparticAcid),
                 portion,
-                "g",
+                "mg",
                 ""
             )
         );
@@ -963,9 +963,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_glutamicAcid[language],
-                proteinData.glutamicAcid,
+                convertToMg(proteinData.glutamicAcid),
                 portion,
-                "g",
+                "mg",
                 ""
             )
         );
@@ -975,9 +975,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_glysine[language],
-                proteinData.glycine,
+                convertToMg(proteinData.glycine),
                 portion,
-                "g",
+                "mg",
                 ""
             )
         );
@@ -987,9 +987,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_proline[language],
-                proteinData.proline,
+                convertToMg(proteinData.proline),
                 portion,
-                "g",
+                "mg",
                 ""
             )
         );
@@ -999,9 +999,9 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_proteins_serine[language],
-                proteinData.serine,
+                convertToMg(proteinData.serine),
                 portion,
-                "g",
+                "mg",
                 ""
             )
         );
@@ -1092,4 +1092,12 @@ function appendTableDataObject(object: FoodTableDataObject, language: string, la
 function makeDietaryRequirementString(requirementData: RequirementData, userData: UserData): string {
     const requirement = determineDailyRequirement(requirementData, userData)
     return `${requirement} mg`
+}
+
+function convertToMg(amountInGram: number) {
+    return amountInGram * 1000;
+}
+
+function calculateProteinRequirement(requirementMg: number, userData: UserData) {
+    return (requirementMg * userData.weight)
 }
