@@ -1089,7 +1089,10 @@ function appendTableDataObject(object: FoodTableDataObject, language: string, la
     return appendedObject
 }
 
-function makeDietaryRequirementString(requirementData: RequirementData, userData: UserData): string {
+function makeDietaryRequirementString(requirementData: RequirementData, userData: UserData | undefined): string {
+    if(userData === undefined) {
+        return ""
+    }
     const requirement = determineDailyRequirement(requirementData, userData)
     return `${requirement} mg`
 }
@@ -1098,6 +1101,9 @@ function convertToMg(amountInGram: number) {
     return amountInGram * 1000;
 }
 
-function calculateProteinRequirement(requirementMg: number, userData: UserData) {
+function calculateProteinRequirement(requirementMg: number, userData: UserData | undefined) {
+    if(userData === undefined) {
+        return 0
+    }
     return (requirementMg * userData.weight)
 }
