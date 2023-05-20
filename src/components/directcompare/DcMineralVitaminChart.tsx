@@ -84,7 +84,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     }
 
     const handleRadioButtonClick = (event: any): void => {
-        props.selectedSubChart === CHART_VITAMINS ? setPortionType_vitamins(event.target.value) : setPortionType_minerals(value)
+        props.selectedSubChart === CHART_VITAMINS ? setPortionType_vitamins(event.target.value) : setPortionType_minerals(event.target.value)
     }
 
     const handleExpandCheckbox = () => {

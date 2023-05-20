@@ -29,7 +29,6 @@ import {ChartMenuPanel} from "./ChartMenuPanel";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import {useHistory} from 'react-router-dom';
 import {isMobileDevice} from "../../service/WindowDimension";
-import SettingsModal from "./SettingsModal";
 
 interface FoodDataPageHeaderProps {
     setDisplayMode: (id: string) => void
