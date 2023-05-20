@@ -17,12 +17,6 @@ import {useWindowDimension} from "../../service/WindowDimension";
 import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 import {VerticalLabel} from "./VerticalLabel";
-import {callEvent} from "../../service/GA_EventService";
-import {
-    GA_ACTION_DATAPANEL_MINERALS_CONFIG,
-    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
-    GA_CATEGORY_DATAPANEL
-} from "../../config/GA_Events";
 
 export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -90,33 +84,14 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     }
 
     const handleRadioButtonClick = (event: any): void => {
-        const value = event.target.value
-        const action = props.selectedSubChart === CHART_VITAMINS
-            ? GA_ACTION_DATAPANEL_VITAMINS_CONFIG
-            : GA_ACTION_DATAPANEL_MINERALS_CONFIG
-        callEvent(applicationContext?.debug, action, GA_CATEGORY_DATAPANEL, value, 2)
         props.selectedSubChart === CHART_VITAMINS ? setPortionType_vitamins(event.target.value) : setPortionType_minerals(value)
     }
 
     const handleExpandCheckbox = () => {
-        const action = props.selectedSubChart === CHART_VITAMINS
-            ? GA_ACTION_DATAPANEL_VITAMINS_CONFIG
-            : GA_ACTION_DATAPANEL_MINERALS_CONFIG
-        const label = props.selectedSubChart === CHART_VITAMINS
-            ? "expand100: " + !expand100_vitamins
-            : "expand100: " + !expand100_minerals
-        callEvent(applicationContext?.debug, action, GA_CATEGORY_DATAPANEL, label, 2)
         props.selectedSubChart === CHART_VITAMINS ? setExpand100_vitamins(!expand100_vitamins) : setExpand100_minerals(!expand100_minerals)
     }
 
     const handleSynchronize = () => {
-        const action = props.selectedSubChart === CHART_VITAMINS
-            ? GA_ACTION_DATAPANEL_VITAMINS_CONFIG
-            : GA_ACTION_DATAPANEL_MINERALS_CONFIG
-        const label = props.selectedSubChart === CHART_VITAMINS
-            ? "synchronize: " + !synchronizeVitamins
-            : "synchronize: " + !synchronizeMinerals
-        callEvent(applicationContext?.debug, action, GA_CATEGORY_DATAPANEL, label, 2)
         props.selectedSubChart === CHART_VITAMINS ? setSynchronizeVitamins(!synchronizeVitamins) : setSynchronizeMinerals(!synchronizeMinerals)
     }
 

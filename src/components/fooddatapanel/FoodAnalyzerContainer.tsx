@@ -13,9 +13,6 @@ import {useHistory} from 'react-router-dom';
 import {PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import {isMobileDevice} from "../../service/WindowDimension";
-import ReactGA from "react-ga4";
-import {GA_ACTION_SELECT_FOOD_ITEM, GA_CATEGORY_FOOD_ANALYZER} from "../../config/GA_Events";
-import {callEvent} from "../../service/GA_EventService";
 
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
@@ -65,29 +62,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
         if (applicationContext?.debug) {
             console.log('FoodAnalyzerContainer: Set new selected item and execute callback. Selected item = ', selectedFoodItemWithComponent)
-        }
-
-        const foodClassNameKey = selectedFoodItem.foodClass?.nameKey
-        const nameEntity = applicationContext.foodDataCorpus.foodNames.find(entry => entry.id === foodClassNameKey)
-        const foodClassName = nameEntity ? nameEntity.englishName : ''
-        const debugMode = applicationContext.debug
-
-        if (selectedFoodItem.foodItem.aggregated) {
-            callEvent(
-                debugMode,
-                GA_ACTION_SELECT_FOOD_ITEM,
-                GA_CATEGORY_FOOD_ANALYZER,
-                "Aggregated Data",
-                selectedFoodItem.compositeSubElements?.length ?? 0
-            )
-        } else {
-            callEvent(
-                debugMode,
-                GA_ACTION_SELECT_FOOD_ITEM,
-                GA_CATEGORY_FOOD_ANALYZER,
-                foodClassName,
-                selectedFoodItem.foodItem.id
-            )
         }
 
         props.onNewFoodItemSelected()

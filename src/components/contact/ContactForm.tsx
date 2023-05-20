@@ -5,7 +5,6 @@ import {maxMessageCharacters} from "../../config/ApplicationSetting";
 import {MailData} from "../../types/livedata/MailData";
 import {checkMailValidity} from "../../service/MailService";
 import {NotificationManager} from 'react-notifications'
-import Recaptcha from 'react-recaptcha'
 
 import {
     MAIL_CONTENT_TO_LONG,
@@ -25,8 +24,6 @@ export function ContactForm() {
     const [mailAddress, setMailAdress] = useState("")
     const [message, setMessage] = useState("")
     const [characters, setCharacters] = useState(0)
-
-    const [userVerified, setUserVerified] = useState(false)
 
     const updateName = (event) => {
         setName(event.target.value)
@@ -49,11 +46,6 @@ export function ContactForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
-        if(!userVerified) {
-            NotificationManager.error(applicationStrings.label_mail_error_verification[language])
-            return
-        }
 
         const mailData: MailData = {
             name: name.trim(),
@@ -141,15 +133,6 @@ export function ContactForm() {
                     />
                 </div>
                 <div><p style={{fontSize: "0.8em"}}>{charactersMessage}</p></div>
-
-                <div style={{paddingTop: "12px", paddingBottom: "36px"}}>
-                    <Recaptcha
-                        sitekey={RECAPTCHA_KEY}
-                        render="explicit"
-                        verifyCallback={verifyCallBack}
-                    />
-                </div>
-
                 <button className={"btn btn-primary"} type="submit">{applicationStrings.button_send[language]}</button>
             </div>
         </form>
