@@ -1,4 +1,24 @@
 export const applicationStrings = {
+    _gram: {
+        de: 'Gramm',
+        en: 'Gram'
+    },
+    _milligram: {
+        de: 'Milligramm (mg)',
+        en: 'Milligram (mg)'
+    },
+    _microgram: {
+        de: 'Mikrogramm (µg)',
+        en: 'Microgram (µg)'
+    },
+    _option_no: {
+        de: 'Nein',
+        en: 'No'
+    },
+    _option_yes: {
+        de: 'Ja',
+        en: 'Yes'
+    },
     button_add: {
         de: 'Hinzufügen',
         en: 'Add'
@@ -979,6 +999,34 @@ export const applicationStrings = {
         de: 'Geben Sie bitte ein Gewicht zwischen 30 und 250 kg ein.',
         en: 'Please enter a body weight between 30 and 250 kg.'
     },
+    modal_settings_title: {
+        de: "Einstellungen",
+        en: "Settings"
+    },
+    modal_settings_label_unit_vitamins: {
+        de: "Einheit für Vitamine/Mineralstoffe",
+        en: "Unit of vitamins/minerals"
+    },
+    modal_settings_label_unit_proteins: {
+        de: "Einheit für Aminosäuren",
+        en: "Unit of amino acids:"
+    },
+    modal_settings_label_provitamins: {
+        de: "Provitamine in Berechnung berücksichtigen",
+        en: "Include provitamins in calculation:"
+    },
+    modal_settings_label_dietaryRequirments: {
+        de: "Anzeige des Tagesbedarfs",
+        en: "Display of daily requirement"
+    },
+    modal_settings_option_dailyrequirements_absolute: {
+        de: "Absolute Menge (Tageswert)",
+        en: "Absolute amount (Daily value)"
+    },
+    modal_settings_option_dailyrequirements_relative: {
+        de: "Relativ zum ausgewählten Lebensmittel",
+        en: "Relative to selected food item"
+    },
     palcat_name_1: {
         de: 'Extrem niedrige Aktivität',
         en: 'Extremely light activity.'
@@ -1118,6 +1166,10 @@ export const applicationStrings = {
     tooltip_icon_removeAll: {
         de: 'Alle Tabs schließen',
         en: 'Close all data tabs'
+    },
+    tooltip_icon_settings: {
+        de: 'Einstellungen zu Diagrammen/Tabellendaten öffnen',
+        en: 'Open settings menu für chart and table data'
     },
     tooltip_icon_table: {
         de: 'Tabellen-Modus',

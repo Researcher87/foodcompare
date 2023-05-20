@@ -3,7 +3,14 @@ import * as NutrientDataImportService from "../service/NutrientDataImportService
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {ApplicationData, RankingPanelData} from "../types/livedata/ApplicationData";
-import {DISPLAYMODE_CHART, PATH_FOODDATA_PANEL, SOURCE_SRLEGACY, TAB_BASE_DATA} from "../config/Constants";
+import {
+    DISPLAY_REQ_ABSOLUTE,
+    DISPLAYMODE_CHART, OPTION_YES,
+    PATH_FOODDATA_PANEL,
+    SOURCE_SRLEGACY,
+    TAB_BASE_DATA, UNIT_GRAM,
+    UNIT_MILLIGRAM
+} from "../config/Constants";
 import {UserData} from "../types/livedata/UserData";
 import {
     initialChartConfigData,
@@ -22,11 +29,13 @@ import NameType from "../types/nutrientdata/NameType";
 import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
 import ReactSelectOption from "../types/ReactSelectOption";
 import {parseFoodCompareUri} from "../service/uri/BaseUriService";
+import {DataSettings} from "../types/livedata/DataSettings";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
     applicationData: ApplicationData
     userData: UserData
+    dataSettings: DataSettings,
     debug: boolean
     ready: boolean
     useAsMobile: Boolean | null
@@ -34,6 +43,7 @@ export interface ApplicationDataContext {
 
 export interface ApplicationContext extends ApplicationDataContext {
     setUserData: (userData: UserData) => void
+    setDataSettings: (dataSettings: DataSettings) => void
     setPreferredSource: (string) => void
     setMobileUsage: (boolean) => void
     setFoodSelectorConfig: (selectedCategory: ReactSelectOption | null, sourceSupplement: boolean, sourceCombine: boolean) => void
@@ -55,7 +65,6 @@ export interface ApplicationContext extends ApplicationDataContext {
         setSelectedDirectCompareDataPage: (selectedPage: string) => void
     }
     setRankingPanelData: (RankingPanelData) => void
-
 }
 
 export const ApplicationDataContextStore = createContext<ApplicationContext | null>(null)
@@ -230,6 +239,14 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         }))
     }
 
+    setDataSettings = (dataSettings: DataSettings) => {
+        this.setState(() => ({
+            dataSettings: {
+                ...dataSettings
+            }
+        }))
+    }
+
     setPreferredSource = (source: string) => {
         this.setState(prevState => ({
             applicationData: {
@@ -354,6 +371,12 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             leisureSports: initialUserDataLeisureSports,
             initialValues: true
         },
+        dataSettings: {
+          unitVitamins: UNIT_MILLIGRAM,
+          unitProteins: UNIT_GRAM,
+          includeProvitamins: OPTION_YES,
+          dietaryRequirementsDisplay: DISPLAY_REQ_ABSOLUTE
+        },
         debug: this.isDebugMode(),
         ready: false,
         useAsMobile: null
@@ -372,10 +395,12 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             applicationData: this.state.applicationData,
             foodDataCorpus: this.state.foodDataCorpus,
             userData: this.state.userData,
+            dataSettings: this.state.dataSettings,
             debug: this.state.debug,
             ready: this.state.ready,
             useAsMobile: this.state.useAsMobile,
             setUserData: this.setUserData,
+            setDataSettings: this.setDataSettings,
             setPreferredSource: this.setPreferredSource,
             setMobileUsage: (usage: boolean) => {
                 this.setState({...this.state, useAsMobile: usage})

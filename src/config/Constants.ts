@@ -1,5 +1,5 @@
 export const AMOUNT_PORTION = "amount portion"
-export const GRAM = "100 gram"
+export const AMOUNT_100_GRAM = "100 gram"
 
 export const CHART_TYPE_PIE = "pie chart"
 export const CHART_TYPE_BAR = "bar chart"
@@ -77,11 +77,17 @@ export const DATA_PROTEIN_SERINE = "serine";
 export const DISPLAYMODE_TABLE = "dtb"
 export const DISPLAYMODE_CHART = "dct"
 
+export const DISPLAY_REQ_ABSOLUTE = 0
+export const DISPLAY_REQ_RELATIVE = 1
+
 export const CARBS_DATA_BASE = "carbs data base chart";
 export const CARBS_DATA_DETAIL = "carbs data detail chart"
 
 export const LIPIDS_DATA_BASE = "lipids data base chart";
 export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
+
+export const OPTION_YES = 0
+export const OPTION_NO = 1
 
 export const PATH_DIRECT_COMPARE = "/directcompare";
 export const PATH_FOODCOMPARE = "/foodcompare"
@@ -120,3 +126,7 @@ export const QUERYKEY_DATAPANEL_RANKING = "ranking"
 export const QUERYKEY_DATAPANEL_AGGREGATED = "aggregated"
 
 export const TAB_LIST = [TAB_BASE_DATA, TAB_ENERGY_DATA, TAB_VITAMIN_DATA, TAB_MINERAL_DATA, TAB_LIPIDS_DATA, TAB_CARBS_DATA, TAB_PROTEINS_DATA, TAB_INFO]
+
+export const UNIT_GRAM = 0
+export const UNIT_MILLIGRAM = 1
+export const UNIT_MICROGRAM = 2

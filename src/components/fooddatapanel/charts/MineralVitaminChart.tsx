@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
-import {CHART_MINERALS, CHART_VITAMINS, GRAM} from "../../../config/Constants";
+import {CHART_MINERALS, CHART_VITAMINS, AMOUNT_100_GRAM} from "../../../config/Constants";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartConfigurationService"
@@ -102,7 +102,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.vitaminRequirementData;
         const userData = applicationContext.userData
-        const portionAmount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
+        const portionAmount = portionType_vitamins === AMOUNT_100_GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         if (!vitaminData || !requirementData) {
             return null
@@ -130,7 +130,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         const mineralData = props.precalculatedData !== undefined ? props.precalculatedData : getNutrientData(props.selectedFoodItem).mineralData;
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.mineralRequirementData;
         const userData = applicationContext.userData
-        const portionAmount = portionType_minerals === GRAM ? 100 : props.selectedFoodItem.portion.amount
+        const portionAmount = portionType_minerals === AMOUNT_100_GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         if (!mineralData || !requirementData) {
             return null
