@@ -931,6 +931,10 @@ export const applicationStrings = {
         de: 'Quellen',
         en: 'Sources'
     },
+    menu_contact_dataprivacy: {
+        de: 'Datenschutz',
+        en: 'Data privacy'
+    },
     menu_contact_versions: {
         de: 'Versionen',
         en: 'Versions'
