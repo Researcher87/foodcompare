@@ -12,9 +12,7 @@ import {
 import {applicationStrings} from "../../static/labels";
 import {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
-import {callEvent} from "../../service/GA_EventService";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {GA_ACTION_DATAPANEL_SWITCH_PAGE, GA_CATEGORY_DATAPANEL} from "../../config/GA_Events";
 
 interface ChartMenuPanelProps {
     dataPage: string
@@ -27,8 +25,6 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
 
     const handlePageButtonClick = (value: string) => {
-        const eventValue = props.verticalArrangement ? 1 : 2
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_SWITCH_PAGE, GA_CATEGORY_DATAPANEL, value, eventValue)
         props.setDataPage(value)
     }
 

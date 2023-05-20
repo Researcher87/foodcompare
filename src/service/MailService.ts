@@ -33,11 +33,11 @@ export function checkMailValidity(mail: MailData): string[] {
 }
 
 function checkName(name: string): boolean {
-    return name.length >= 2 && name.length <= 50
+    return name.length >= 3 && name.length <= 50
 }
 
 function checkContent(content: string): boolean {
-    return content.length >= 20
+    return content.length >= 30
 }
 
 function checkLength(content: string): boolean {

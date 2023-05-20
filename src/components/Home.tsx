@@ -12,9 +12,7 @@ import {Link} from 'react-router-dom';
 import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
 import {isMobileDevice} from "../service/WindowDimension";
-import {callEvent} from "../service/GA_EventService";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
-import {GA_ACTION_HOME_CLICK_START_BUTTON, GA_CATEGORY_HOME} from "../config/GA_Events";
 
 const carouselImages = require.context('../static/image/carousel', true);
 const startImages = require.context('../static/image/startImages', true);
@@ -105,8 +103,6 @@ export function Home() {
                 label = "Ranking"
                 break;
         }
-
-        callEvent(applicationContext?.debug, GA_ACTION_HOME_CLICK_START_BUTTON, GA_CATEGORY_HOME, label)
     }
 
     const renderStartButtons = () => {

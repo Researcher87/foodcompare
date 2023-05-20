@@ -9,10 +9,6 @@ import {PATH_DIRECT_COMPARE, QUERYKEY_DATAPANEL_ITEM} from "../../config/Constan
 import {useHistory} from 'react-router-dom';
 import {makeDirectCompareDataUri, parseDirectComparetUri} from "../../service/uri/DirectCompareUriService";
 import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
-import {callEvent} from "../../service/GA_EventService";
-import {
-	GA_ACTION_SELECTION_DIRECT_COMPARE, GA_CATEGORY_DIRECT_COMPARE,
-} from "../../config/GA_Events";
 
 export default function DirectCompareContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -141,7 +137,6 @@ export default function DirectCompareContainer() {
 		const foodClassName2 = nameEntity2 ? nameEntity2.englishName : ''
 		const label = `${foodClassName1}; ${foodClassName2}`
 		const debugMode = applicationContext.debug
-		callEvent(debugMode, GA_ACTION_SELECTION_DIRECT_COMPARE, GA_CATEGORY_DIRECT_COMPARE, label, selectedFoodItem1.foodItem.id)
 
 		setSelectedFoodItem1(selectedFoodItem1)
         setSelectedFoodItem2(selectedFoodItem2)

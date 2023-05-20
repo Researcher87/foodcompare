@@ -29,8 +29,7 @@ import {ChartMenuPanel} from "./ChartMenuPanel";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import {useHistory} from 'react-router-dom';
 import {isMobileDevice} from "../../service/WindowDimension";
-import {callEvent} from "../../service/GA_EventService";
-import {GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL} from "../../config/GA_Events";
+import SettingsModal from "./SettingsModal";
 
 interface FoodDataPageHeaderProps {
     setDisplayMode: (id: string) => void
@@ -55,17 +54,12 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const dataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
 
     const handleRadioButtonClick = (value: string) => {
-        const displaymode = value === DISPLAYMODE_TABLE ? "table" : "chart"
-        const label = `Switch display mode to ${displaymode}`
-        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, label)
         props.setDisplayMode(value)
     }
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
         const remainingItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
-        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, "Close food item tab")
-
         applicationContext.setFoodDataPanelData.removeItemFromFoodDataPanel(id)
 
         if (remainingItems === 0) {
@@ -73,9 +67,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         }
     }
 
-    const help = () => {
-        const label = `Open help page: ${dataPage}`
-        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, label)
+    const openHelpMenu = () => {
         switch (dataPage) {
             case TAB_BASE_DATA:
                 setHelpModalId(1)
@@ -200,7 +192,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                 </div>
                                 <div className="btn-group" role="group" style={{paddingLeft: "20px"}}>
                                     <Button className={"btn-primary button-foodPanelHead"}
-                                            onClick={help}
+                                            onClick={openHelpMenu}
                                             active={displayMode === DISPLAYMODE_CHART}>
                                         <ReactTooltip/>
                                         <FaQuestionCircle/>

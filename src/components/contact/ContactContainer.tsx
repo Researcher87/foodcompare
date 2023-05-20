@@ -6,11 +6,6 @@ import {ContactForm} from "./ContactForm";
 import {Sources} from "./Sources";
 import {Versions} from "./Versions";
 import {Impressum} from "./Impressum";
-import {callEvent} from "../../service/GA_EventService";
-import {
-    GA_ACTION_CONTACT_SUBMENU,
-    GA_CATEGORY_CONTACT
-} from "../../config/GA_Events";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 
 export function ContactContainer() {
@@ -42,23 +37,6 @@ export function ContactContainer() {
     }
 
     const onChangeSubmenu = (selectedMenu) => {
-        let label = ""
-        switch(selectedMenu) {
-            case menu_contact:
-                label = "Contact"
-                break
-            case menu_sources:
-                label = "Sources"
-                break
-            case menu_versions:
-                label = "Versions"
-                break
-            case menu_impressum:
-                label = "Impressum"
-                break
-        }
-
-        callEvent(applicationContext?.debug, GA_ACTION_CONTACT_SUBMENU, GA_CATEGORY_CONTACT, label)
         setSelectedMenu(selectedMenu)
     }
 

@@ -10,9 +10,7 @@ import {calculateChartContainerHeight} from "../../../service/ChartSizeCalculati
 import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";
-import {getFoodItem, getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
-import {callEvent} from "../../../service/GA_EventService";
-import {GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL} from "../../../config/GA_Events";
+import {getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
 
 interface InfoDataProps {
     selectedFoodItem: SelectedFoodItem,
@@ -165,12 +163,6 @@ export function InfoData(props: InfoDataProps) {
     const onLinkClick = () => {
         const sourceItemId = getNutrientData(props.selectedFoodItem).sourceItemId
         const usdaLink = `https://fdc.nal.usda.gov/fdc-app.html#/food-details/${sourceItemId}/nutrients`
-
-        console.log('SEL', props.selectedFoodItem)
-
-        const label = "Open ext. FoodDataCentral Link"
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, label, props.selectedFoodItem.foodItem.id)
-
         const link = window.open(usdaLink, '_blank')
         if (link) {
             link.focus()
