@@ -40,16 +40,16 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, true))
 
     useEffect(() => {
-        updateChartConfig()
-        setContainerHeight(calculateChartContainerHeight(windowSize, true))
-    }, [portionType_minerals,
-        portionType_vitamins,
-        synchronizeVitamins,
-        synchronizeMinerals,
-        expand100_vitamins,
-        expand100_minerals,
-        containerHeight,
-        windowSize]
+            updateChartConfig()
+            setContainerHeight(calculateChartContainerHeight(windowSize, true))
+        }, [portionType_minerals,
+            portionType_vitamins,
+            synchronizeVitamins,
+            synchronizeMinerals,
+            expand100_vitamins,
+            expand100_minerals,
+            containerHeight,
+            windowSize]
     )
 
     if (!applicationContext) {
@@ -84,22 +84,35 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     }
 
     const handleRadioButtonClick = (event: any): void => {
-        props.selectedSubChart === CHART_VITAMINS ? setPortionType_vitamins(event.target.value) : setPortionType_minerals(value)
+        const value = event.target.value
+        props.selectedSubChart === CHART_VITAMINS
+            ? setPortionType_vitamins(value)
+            : setPortionType_minerals(value)
     }
 
     const handleExpandCheckbox = () => {
-        props.selectedSubChart === CHART_VITAMINS ? setExpand100_vitamins(!expand100_vitamins) : setExpand100_minerals(!expand100_minerals)
+        props.selectedSubChart === CHART_VITAMINS
+            ? setExpand100_vitamins(!expand100_vitamins)
+            : setExpand100_minerals(!expand100_minerals)
     }
 
     const handleSynchronize = () => {
-        props.selectedSubChart === CHART_VITAMINS ? setSynchronizeVitamins(!synchronizeVitamins) : setSynchronizeMinerals(!synchronizeMinerals)
+        props.selectedSubChart === CHART_VITAMINS
+            ? setSynchronizeVitamins(!synchronizeVitamins)
+            : setSynchronizeMinerals(!synchronizeMinerals)
     }
 
-    const portionType = props.selectedSubChart === CHART_VITAMINS ? portionType_vitamins : portionType_minerals
+    const portionType = props.selectedSubChart === CHART_VITAMINS
+        ? portionType_vitamins
+        : portionType_minerals
 
     const renderChartConfigurationForm = () => {
-        const expand100 = props.selectedSubChart === CHART_VITAMINS ? expand100_vitamins : expand100_minerals
-        const synchronize = props.selectedSubChart === CHART_VITAMINS ? synchronizeVitamins : synchronizeMinerals
+        const expand100 = props.selectedSubChart === CHART_VITAMINS
+            ? expand100_vitamins
+            : expand100_minerals
+        const synchronize = props.selectedSubChart === CHART_VITAMINS
+            ? synchronizeVitamins
+            : synchronizeMinerals
 
         const barChartProps = {
             portionType: portionType,

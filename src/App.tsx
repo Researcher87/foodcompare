@@ -19,7 +19,7 @@ function App(): JSX.Element {
     })
 
     return (
-        <div className="App">
+        <div id="root" className="App">
             <NotificationContainer/>
             <LanguageProvider>
                 <ApplicationDataContextProvider>

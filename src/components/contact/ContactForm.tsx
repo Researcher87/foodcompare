@@ -38,12 +38,6 @@ export function ContactForm() {
         setCharacters(event.target.value.length)
     }
 
-    const verifyCallBack = (response) => {
-        if(response) {
-            setUserVerified(true)
-        }
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault()
 
