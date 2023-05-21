@@ -77,9 +77,6 @@ export const DATA_PROTEIN_SERINE = "serine";
 export const DISPLAYMODE_TABLE = "dtb"
 export const DISPLAYMODE_CHART = "dct"
 
-export const DISPLAY_REQ_ABSOLUTE = 0
-export const DISPLAY_REQ_RELATIVE = 1
-
 export const CARBS_DATA_BASE = "carbs data base chart";
 export const CARBS_DATA_DETAIL = "carbs data detail chart"
 

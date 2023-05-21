@@ -4,9 +4,7 @@ import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {ApplicationData, RankingPanelData} from "../types/livedata/ApplicationData";
 import {
-    DISPLAY_REQ_ABSOLUTE,
     DISPLAYMODE_CHART, OPTION_YES,
-    PATH_FOODDATA_PANEL,
     SOURCE_SRLEGACY,
     TAB_BASE_DATA, UNIT_GRAM,
     UNIT_MILLIGRAM
@@ -374,8 +372,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         dataSettings: {
           unitVitamins: UNIT_MILLIGRAM,
           unitProteins: UNIT_GRAM,
-          includeProvitamins: OPTION_YES,
-          dietaryRequirementsDisplay: DISPLAY_REQ_ABSOLUTE
+          includeProvitamins: OPTION_YES
         },
         debug: this.isDebugMode(),
         ready: false,

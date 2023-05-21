@@ -5,7 +5,6 @@ import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {isMobileDevice} from "../../service/WindowDimension";
 import {
-    DISPLAY_REQ_ABSOLUTE, DISPLAY_REQ_RELATIVE,
     OPTION_NO,
     OPTION_YES,
     UNIT_GRAM,
@@ -44,13 +43,6 @@ export default function SettingsModal(props: SettingsProps) {
         }
     }
 
-    const handleDisplayRequirementsChange = (selectionOption: ReactSelectOption) => {
-        if (applicationContext) {
-            let dataSettings = {...applicationContext.dataSettings, dietaryRequirementsDisplay: selectionOption.value}
-            applicationContext.setDataSettings(dataSettings)
-        }
-    }
-
     const renderMenu = () => {
         const optionsVitamins: Array<ReactSelectOption> = [
             {label: applicationStrings._milligram[language], value: UNIT_MILLIGRAM},
@@ -61,7 +53,7 @@ export default function SettingsModal(props: SettingsProps) {
 
         const optionsProteins: Array<ReactSelectOption> = [
             {label: applicationStrings._gram[language], value: UNIT_GRAM},
-            {label: applicationStrings._microgram[language], value: UNIT_MILLIGRAM},
+            {label: applicationStrings._milligram[language], value: UNIT_MILLIGRAM},
         ]
         const selectedUnitProteins = applicationContext?.dataSettings.unitProteins
         const selectedOptionProteins = optionsProteins.find(option => option.value === selectedUnitProteins)
@@ -72,13 +64,6 @@ export default function SettingsModal(props: SettingsProps) {
         ]
         const includeProvitamins = applicationContext?.dataSettings.includeProvitamins
         const selectedOptionProvitamins = optionsProvitamins.find(option => option.value === includeProvitamins)
-
-        const optionsDisplayRequirements: Array<ReactSelectOption> = [
-            {label: applicationStrings.modal_settings_option_dailyrequirements_absolute[language], value: DISPLAY_REQ_ABSOLUTE},
-            {label: applicationStrings.modal_settings_option_dailyrequirements_relative[language], value: DISPLAY_REQ_RELATIVE},
-        ]
-        const selectedDisplayRequirement = applicationContext?.dataSettings.dietaryRequirementsDisplay
-        const selectedDisplayRequirementsOption = optionsDisplayRequirements.find(option => option.value === selectedDisplayRequirement)
 
         const classRow = isMobileDevice() ? "form-row-m" : "form-row"
 
@@ -104,16 +89,6 @@ export default function SettingsModal(props: SettingsProps) {
                                     value={selectedOptionProteins}
                                     isSearchable={false}
                                     onChange={(value) => handleUnitProteinsChange(value)}
-                            />
-                        </div>
-                        <div className={classRow}>
-                            <Form.Label className="form-label">
-                                {applicationStrings.modal_settings_label_dietaryRequirments[language]}:
-                            </Form.Label>
-                            <Select options={optionsDisplayRequirements}
-                                    value={selectedDisplayRequirementsOption}
-                                    isSearchable={false}
-                                    onChange={(value) => handleDisplayRequirementsChange(value)}
                             />
                         </div>
                         <div className={classRow}>

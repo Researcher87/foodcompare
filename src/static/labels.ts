@@ -733,7 +733,7 @@ export const applicationStrings = {
     },
     label_nutrient_vit_scientific_a: {
         de: 'inkl. Provitamin A / Carotine',
-        en: 'incl. caraotene'
+        en: 'including Provitamin A / carotene'
     },
     label_nutrient_vit_scientific_b1: {
         de: 'Thiamine',
@@ -768,8 +768,8 @@ export const applicationStrings = {
         en: 'Vitamin D'
     },
     label_nutrient_vit_scientific_e: {
-        de: 'Tocopherol',
-        en: 'Tocopherol'
+        de: 'inkl. Provitamin E / Tocopherol',
+        en: 'including provitamin E / Tocopherol'
     },
     label_nutrient_vit_scientific_k: {
         de: 'Vitamin K',
@@ -1022,14 +1022,6 @@ export const applicationStrings = {
     modal_settings_label_dietaryRequirments: {
         de: "Anzeige des Tagesbedarfs",
         en: "Display of daily requirement"
-    },
-    modal_settings_option_dailyrequirements_absolute: {
-        de: "Absolute Menge (Tageswert)",
-        en: "Absolute amount (Daily value)"
-    },
-    modal_settings_option_dailyrequirements_relative: {
-        de: "Relativ zum ausgewählten Lebensmittel",
-        en: "Relative to selected food item"
     },
     palcat_name_1: {
         de: 'Extrem niedrige Aktivität',
