@@ -7,8 +7,20 @@ import {ChartDisplayData, LegendData} from "../../types/livedata/ChartDisplayDat
 export function getCarbBaseChartData(nutrientData: NutrientData, hideRemainders: boolean, totalAmount: number,
                                      language: string): ChartDisplayData | null {
     let totalCarbsAmount = nutrientData.baseData.carbohydrates;
-    const dietaryFibers = nutrientData.baseData.dietaryFibers;
-    const sugar = nutrientData.carbohydrateData.sugar
+    let dietaryFibers = nutrientData.baseData.dietaryFibers;
+    let sugar = nutrientData.carbohydrateData.sugar
+
+    // NOTE: Sometimes the sugar or dietary fibers value is above the carbs value, which is impossible (> 100 %)
+    if(sugar && (sugar > totalCarbsAmount)) {
+        sugar = totalCarbsAmount
+    }
+    if(dietaryFibers && (dietaryFibers > totalCarbsAmount)) {
+        dietaryFibers = totalCarbsAmount
+    }
+    if(sugar && dietaryFibers && (sugar + dietaryFibers > totalCarbsAmount)) {  // Special case, where sug + fibers are above the 100 %
+        sugar = (sugar / (sugar+dietaryFibers)) * totalCarbsAmount
+        dietaryFibers = (dietaryFibers / (sugar+dietaryFibers)) * totalCarbsAmount
+    }
 
     if (!sugar || !dietaryFibers) {
         return null
