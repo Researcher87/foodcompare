@@ -107,7 +107,7 @@ export function getMineralsChartData(mineralData: MineralData, requirementData: 
     }
 
     if (mineralData.potassium !== null) {
-        labels.push(applicationStrings.label_nutrient_min_potassimum[language]);
+        labels.push(applicationStrings.label_nutrient_min_potassium[language]);
         values.push(determineFoodRequirementRatio(requirementData.potassium, mineralData.potassium, portionAmount, userData));
     }
 

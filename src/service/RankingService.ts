@@ -82,7 +82,7 @@ export function getMineralCategoryValues(language: string) {
         {value: Constants.DATA_MINERAL_IRON, label: applicationStrings.label_nutrient_min_iron[language]},
         {value: Constants.DATA_MINERAL_MAGNESIUM, label: applicationStrings.label_nutrient_min_magnesium[language]},
         {value: Constants.DATA_MINERAL_PHOSPHORUS, label: applicationStrings.label_nutrient_min_phosphorus[language]},
-        {value: Constants.DATA_MINERAL_POTASSIUM, label: applicationStrings.label_nutrient_min_potassimum[language]},
+        {value: Constants.DATA_MINERAL_POTASSIUM, label: applicationStrings.label_nutrient_min_potassium[language]},
         {value: Constants.DATA_MINERAL_SODIUM, label: applicationStrings.label_nutrient_min_sodium[language]},
         {value: Constants.DATA_MINERAL_ZINC, label: applicationStrings.label_nutrient_min_zinc[language]},
         {value: Constants.DATA_MINERAL_SELENIUM, label: applicationStrings.label_nutrient_min_selenium[language]},

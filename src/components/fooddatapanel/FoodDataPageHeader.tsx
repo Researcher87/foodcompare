@@ -156,6 +156,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             break;
         case TAB_MINERAL_DATA:
             bookToolTip = applicationStrings.tooltip_icon_minerals[languageContext.language]
+            bookData = nutrientBook.minerals
             break;
         case TAB_PROTEINS_DATA:
             bookToolTip = applicationStrings.tooltip_icon_proteins[languageContext.language]

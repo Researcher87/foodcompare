@@ -9,9 +9,9 @@ export interface BookDataEntry {
     description: NamePair,
     functionality: NamePair[],
     deficiencies: NamePair[],
-    overdose: NamePair,
-    dependencies: NamePair,
-    storage: NamePair,
-    sources: NamePair
+    overdose?: NamePair,
+    dependencies?: NamePair,
+    storage?: NamePair,
+    sources?: NamePair
     requirements: NamePair
 }

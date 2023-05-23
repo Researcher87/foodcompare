@@ -890,5 +890,363 @@
         "en": "male: 70 µg | female: 60 µg"
       }
     }
-  ]
+  ],
+  "minerals": [
+    {
+      "name": {
+        "de": "Natrium",
+        "en": "Sodium"
+      },
+      "description": {
+        "de": "Der Menschh enthält etwa 100 Gramm Natrium in seinem Körper, von dem der größte Teil im Blut enthalten ist. Natrium ist maßgeblich an der Regulierung des Wasserhaushalts beteiligt und ist ein lebenswichtiges Mengenelement, das immer im korrekten Verhältnis zum Wasserhaushalt vorliegen muss. Ein Mangel oder eine Überdosis kann so recht schnell einmal auftreten und führt zu Unwohlsein, oder, in schweren Fällen, zu ernsten gesundheitlichen Problemen. Das liegt auch daran, dass die Menge an Natrium im Körper oft starken Schwankungen ausgesetzt ist. Der Natriumspiegel sinkt tw. erheblich, wenn Natrium durch Schwitzen oder Erkrankungen (Durchfall, Erbrechen etc.) entsprechend ausgeschieden wird oder über den Tag zu wenig Wasser zugeführt wird. Natriumzufuhr durch salzhaltige Nahrung führt hingegen zu einem entsprechenden Anstieg. Die Nieren versuchen dabei, den Natriumspiegel auf dem richtigen Level zu halten, indem sie entweder Natrium über den Urin ausscheiden oder Wasser im Körper zurückhalten (weniger Urinproduktion), um das Verhältnis aus Wasser und Natrium zu erhöhen. Der Mensch nimmt Natrium zum allergrößten Teil aus Kochsalz (Natriumchlorid) in der Nahrung auf. Ein Gramm Kochsalz enthalten dabei etwa 0,4 g Natrium.",
+        "en": "The human body contains approximately 100 gram of sodium, with the largest part being contained by the blood. Sodium is a vital abundant element, necessary for the regulation of the water balance in the human body, that always needs to be in the right ratio to water. The amount of sodium is subject to constant fluctuations so that a shortage or an overdose may occasionally occur. It leads to discomfort and, if more severe, to serious health issues. A shortage usually emerges if too much sodium is washed out of the body, e.g., because of sweating or diseases (such as vomitting, diarrhea). An overdose may be caused by the consumption of large amounts of salty food. The kidneys try to keep the balance between water and sodium at a constant level, either by eliminating excess sodium through the urin or by keeping water back in the body in case of a shortage (reduced urin production). In nutrition, people consume the vast majority of sodium through common salt (sodium chloride), where 1 gram of salt contains about 0.4 gram of sodium."
+      },
+      "functionality": [
+        {
+          "de": "Lebensnotwendig zur Regulation des Wasserhaushalts",
+          "en": "Vital for the regulation of the water balance"
+        },
+        {
+          "de": "Beteiligt an der Regulation des Säure-Base-Haushalts im Körper",
+          "en": "Participates in the regulation of the acid-base-balance"
+        },
+        {
+          "de": "Wichtig für das Nervensystem",
+          "en": "Significant for the nervous system"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Niedriger Blutdruck",
+          "en": "Low blood pressure"
+        },
+        {
+          "de": "Schwindel, Kopfschmerzen",
+          "en": "Dizziness, headaches"
+        },
+        {
+          "de": "Übelkeit",
+          "en": "Nausea"
+        },
+        {
+          "de": "Krämpfe",
+          "en": "Cramps"
+        },
+        {
+          "de": "Schwächegefühl, Kreislaufversagen",
+          "en": "Weakness, circulatory failure"
+        }
+      ],
+      "overdose": {
+        "de": "Bei einer Überdosis nimmt der Blutdruck zu; Menschen mit Bluthochdruck wird daher eine natriumarme Ernährung empfohlen. Weitere Symptome sind Durstgefühl, Kopfschmerzen, Reizbarkeit. Eine Überdosis an Natrium kann lebensgefährlich sein, die hierfür ausreichende Menge beträgt nur etwa 0,5 bis 1 Gramm pro kg Körpergewicht (d.h. ca. 50 Gramm Natrium bzw. 125 Gramm Kochsalz beim durchschnittlichen Erwachsenen).",
+        "en": "In case of an overdose the blood pressure increases. For this reason, people with high blood pressure are often advised to consume sodium-low food. An overdose can be lethal. The deadly dose is only about 0.5 .. 1 gram per kg body weight, i.e., about 50 gram of sodium resp. 125 gram of common salt for an average adult."
+      },
+      "dependencies": {
+        "de": "Die Wasserregulation im Körper geschieht gemeinsam mit Kalium, so dass Natrium und Kalium im wechselseitigen Verhältnis wirken und im richtigen Verhältnis vorliegen sollten. Die Ausscheidung von Natrium geschieht in den Nieren unter Beteiligung von Calcium. Ein hoher Natriumkonsum führt damit zu einem höheren Calciumverbrauch (und damit höheren Calciumbedarf).",
+        "en": "The water regulation in the body is carried out together with potassium. Both elements interact and should be in the right proportion to each other. Calcium is used in the process of sodium excretion through the kidneys. An increased consumption of sodium thus increases calcium loss (and consequently increase the calcium demand)."
+      },
+      "sources": {
+        "de": "",
+        "en": ""
+      },
+      "requirements": {
+        "de": "1,5 mg",
+        "en": "1,5 mg"
+      }
+    },
+    {
+      "name": {
+        "de": "Kalium",
+        "en": "Potassium"
+      },
+      "description": {
+        "de": "Kalium hat, genau wie das Natrium, einen wichtigen Anteil an der Regulation des Wasserhaushalts. Während Natrium das Wasser im Blut behält und blutdrucksteigend wirkt, entzieht Kalium dem Blut Wasser, um es in die Zellen abzugeben. Es wirkt damit blutdrucksenkend. Aus diesem Grund ist ein gutes Gleichgewicht zwischen Kalium und Natrium wichtig. Unsere heutige Ernährung ist jedoch oft natriumreich und kaliumarm, was zu einem gestörten Wasserhaushalt führen kann. Kalium ist daneben auch noch an vielen Stoffwechsel- und Enzymvorgängen sowie an der Reizübertragung in den Nerven beteiligt. Wie beim Natrium kann es zu einem Mangel durch Schwitzen, Durchfall oder Erbrechen kommen. Im Gegensatz zum Natrium ist eine moderat hohe Zufuhr jedoch nicht schädlich und wirkt sich oft oft positiv auf das Allgemeinbefinden aus. Kalium ist in vielen Lebensmitteln enthalten, hat jedoch auch mit rund 4000 mg einen außergewöhnlich hohen Tagesbedarf. Ein Mangel ist dennoch relativ selten, allerdings ist der Bedarf bei manchen Menschen generell erhöht (z.B. Menschen mit Bluthochdruck oder Herzkrankheiten).",
+        "en": "Just like sodium, potassium plays an important part in the water regulation. While sodium keeps water in the blood and tends to increase the blood pressure, potassium conveys water into the cells and thus decreases the blood pressure. A balance between the amount of sodium and potassium is therefore highly important, yet modern nutrition often contains too much sodium and not enough potassium, which might lead to an unbalanced and unhealthy water balance. Additionally, potassium participates in many metabolism and enzyme activities and is needed for the transmission of impulses through the nerve cells. Similar to sodium, potassium can be washed out of the body through sweating, diarrhea or vomiting, though unlike sodium a moderate overdose has generally no negative effect for the body (but may even increase overall health). It is contained by many foods, but has an exceptionally high daily requirement of about 4000 mg. Still, serious deficiencies are rather rare. Some people have an even higher need for potassium, though, such as people having hypertension or heart diseases."
+      },
+      "functionality": [
+        {
+          "de": "An der Wasserregulation beteiligt",
+          "en": "Participates in the water regulation"
+        },
+        {
+          "de": "Beteiligt an der Regulation des Säure-Base-Haushalts im Körper",
+          "en": "Participates in the regulation of the acid-base-balance"
+        },
+        {
+          "de": "Beteiligt an der Energieproduktion",
+          "en": "Takes part in energy production"
+        },
+        {
+          "de": "Wichtig für die Nerven, Muskelarbeit, Herzfunktion und Regulation des Blutdrucks",
+          "en": "Important for the nervous system, muscle work, cardiac function and regulation of the blood pressure"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Unwohlsein, Leistungsschwäche",
+          "en": "Discomfort, weakness"
+        },
+        {
+          "de": "Eingeschränkte Muskelfunktionen, Lähmung",
+          "en": "Impaired muscle work, paralysis"
+        },
+        {
+          "de": "Herzrhythmusstörungen",
+          "en": "Cardiac arrhythmia"
+        },
+        {
+          "de": "Verstopfung",
+          "en": "Congestion"
+        }
+      ],
+      "overdose": {
+        "de": "Überschüssiges Kalium wird durch die Nieren ausgesondert, so dass bei intakter Nierenfunktion eine Überdosis i.A. keine Auswirkungen hat.",
+        "en": "Excess potassium will be eliminated by the kidneys. In case of healthy kidneys, a overdose has genereally no negative effect."
+      },
+      "dependencies": {
+        "de": "Bei erhöhtem Konsum von Natrium erhöht sich auch der Bedarf an Kalium. Eine Mangelversorgung mit Magnesium vermindert die Aufnahme von Kalium im Darm.",
+        "en": "An increased consumption of sodium also increases the need for potassium. Magnesium deficiencies reduce the resorption of potassium in the bowel."
+      },
+      "sources": {
+        "de": "Nüsse, Bananen, grünes Gemüse, Kartoffeln, Avocado, Sojabohnen",
+        "en": "Nuts, bananas, leafy greens, potatoes, avocado, soy beans"
+      },
+      "requirements": {
+        "de": "4 mg (Schwangere: 4,4 mg)",
+        "en": "4 mg (pregnant: 4.4 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Magnesium",
+        "en": "Magnesium"
+      },
+      "description": {
+        "de": "Magnesium spielt eine große Rolle für das Muskelsystem und ist vor allem an der Reizübertragung von Muskeln und Nerven beteiligt. Der menschliche Körper enthält rund 20 bis 30 mg Magnesium, das sich zu rund 60 % in unseren Knochen, knapp 40 % in den Muskeln und Organen und nur zu rund 1 % im Blut befindet. Wie andere Mineralstoffe kann es beim Schwitzen aus dem Körper ausgewaschen werden und damit verlorengehen. Ein leichter Magnesiummangel tritt in der Bevölkerung recht häufig auf, wobei die Bestimmung des Magnesiumswerts sehr schwierig ist (eine Blutanalyse gibt nur wenig Aufschluss). Magnesium wird daher häufig als Ergänzungsmittel verwendet. Ein schwerer Mangel tritt jedoch meist nur in Zusammenhang mit verschiedenen Erkrankungen auf (z.B. Nierenerkrankung, Verdauungsprobleme, starker Durchfall). Magnesium findet sich v.a. in Getreideprodukten, Nüssen, Gemüse, Schokolade und Mineralwasser und Leitungswasser (bei ausreichender Wasserhärte).",
+        "en": "Magnesium is especially needed for the muscle system and the transmission of impulses through the muscles and nerve cells. The human body contains about 20 .. 30 mg of magnesium, of which about 60 % are stored in the bones, about 40 % in the muscles and organs and only 1 % in the blood. Just like other minerals, magnesium will be washed out when sweating and thus drops away. It is supposed that a light shortage of magnesium occurs frequently in society, though it is generally difficult to determine the magnesium amount in the body (a blood analysis does not suffice to determine the exact amount). However, serious deficiencies usually only occur in case of diseases (such as kidney diseases, digestive disorders, heavy diarrhea). Magnesium is mostly contained in plant-based food, especially in grain products, nuts, vegetables, soda and tap water (of sufficient water hardness)."
+      },
+      "functionality": [
+        {
+          "de": "Wichtig für das Muskelsystem, sorgt für die Entspannung der Muskeln",
+          "en": "Import for the muscle system, eases muscle tension"
+        },
+        {
+          "de": "Aktiviert rund 300 Enzyme beim Stoffwechsel",
+          "en": "Activates about 300 encymes needed for metabolism"
+        },
+        {
+          "de": "An der Energieproduktion beteiligt, erhöht die Leistungsfähigkeit",
+          "en": "Takes part in energy production, enhances the performance"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Muskelschwäche, Muskelkrämpe (z.B. Wadenkrämpfe)",
+          "en": "Muscle weakness, muscle cramps (e.g. leg cramps)"
+        },
+        {
+          "de": "Reizbarkeit",
+          "en": "Irritability"
+        },
+        {
+          "de": "Unruhe, Müdigkeit",
+          "en": "Restlessness, sleepiness"
+        },
+        {
+          "de": "Herzrhythmusstörungen",
+          "en": "cardiac arrhythmias"
+        }
+      ],
+      "overdose": {
+        "de": "Eine Überdosis kann zu Verdauungsproblemen und Durchfall führen, bei stärkerer Überdosis (ab 2500 mg pro Tag) auch zu ernsten Erkrankungen wie Muskelschwäche oder Blutdruckabfall. Eine solche Überdosis ist über die Ernährung jedoch nicht möglich, sondern nur durch die Einnahme von Präparaten.",
+        "en": "An overdose can lead to digestion problems and diarrhea. A more severe overdosis (above 2500 mg per day) can also lead to serious health issues such as muscle weakness and low blood pressure. Such an overdose cannot occur through nutrition, though, but only by means of supplements."
+      },
+      "dependencies": {
+        "de": "Magnesiummangel führt zu einer schlechteren Aufnahme von Kalium im Darm und kann indirekt zu einem Kaliummangel führen. Zudem aktiviert Magnesium die Produktion von Vitamin D im Körper. Ein Mangel kann somit wiederum indirekt zu einem Vitamin-D-Mangel führen.",
+        "en": "Magnesium deficiency reduces potassium resorbtion in the bowel and may indirectly lead to a potassium deficiency. Magnesium is also needed to activate the vitamin D production in the body; again, a deficiency may indirectly lead to a vitamin D deficiency."
+      },
+      "sources": {
+        "de": "Hülsenfrüche, Nüsse, Getreideprodukte, Käse, Kakao, Schokolade",
+        "en": "Legumes, nuts, grain products, cheese, cocoa, chocolate"
+      },
+      "requirements": {
+        "de": "Mann: 350 mg | Frau: 300 mg  (schwanger: 310 mg, stillend: 390 mg)",
+        "en": "male: 350 mg | female: 300 mg  (pregnant: 310 mg, breastfeeding: 390 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Kalzium",
+        "en": "Calcium"
+      },
+      "description": {
+        "de": "Kalzium spielt eine wichtige Rolle für den Knochenbau und die Zähne. Im menschlichen Körper hat es einen Anteil von etwa 1 bis 1,5 Kilogramm, womit es den größten Anteil aller Mineralstoffe ausmacht. Etwa 99 Prozent davon lagern in den Knochen und Zähnen, wo es für deren Aufbau dient. Gleichzeitig dienen die Knochen auch als Speicher für Kalzium und können es bei Mangel freigeben, was dann jedoch zum Knochenschwund führt. Da ab dem 30. Lebensjahr in den Knochen kaum noch Kalzium eingelagert wird, ist dieser Prozess tw. irreversibel. Kalzium ist außerdem das Gegenstück zum Magnesium, da es für eine Anspannung der Muskeln sorgt. Das Verhältnis Kalzium zu Magnesium sollte im Körper etwa 2:1 betragen. Kalziummangel kann durch einseitige Ernährung auftreten, v.a. bei Verzicht auf Milchprodukte. Zudem haben Kinder, Schwangere und ältere Menschen ein erhöhtes Risiko, einen Kalziummangel zu erleiden. Kalzium ist v.a. in Milchprodukten enthalten sowie in Mineralwasser und Leitungswasser mit entsprechender Wasserhärte.",
+        "en": "Calcium plays an important part for bone production and teeth. The human body contains about 1 .. 1.5 kilogram of calcium, making it by far the largest part of the minerals, with about 99 % of it being stored in the bones and teeth. Calcium is needed to maintain and strengthen bones and teeth. In case of a deficiency, the bones can release calcium, concequently leading to bone loss, though. Since the human body scarcely stores up calcium in the bones after the age of 30, this process is partly irreversible. Calcium is also the counterpart to magnesium, since it promotes muscle contraction. The ratio between calcium and magnesium in the body should be about 2:1. Calcium deficiency may occur in case of an unbalanced diet, especially if dairy products are avoided. In addition, children, pregnant women and elderly people have a generally higher risk to suffer from calcium deficiency. Calcium is found in dairy products and soda, as well as tap water (of sufficient water hardness)."
+      },
+      "functionality": [
+        {
+          "de": "Sorgt für Stabilität und Festigkeit der Knochen",
+          "en": "Promotes the stability and strength of bones"
+        },
+        {
+          "de": "Erregung der Muskeln und Nerven",
+          "en": "Stimulates muscles and nerves"
+        },
+        {
+          "de": "Beteiligt am Stoffwechsel und der Zellteilung",
+          "en": "Participates in metabolism and cell division"
+        },
+        {
+          "de": "Beteiligt an der Bildung einiger Enzyme und Hormome",
+          "en": "Participates in the production of some enzymes and hormones"
+        },
+        {
+          "de": "Wird für die Blutgerinnung benötigt",
+          "en": "Needed for blood coagulation"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Poröse und brüchige Knochen, Knochenschwund (Osteoporose)",
+          "en": "Porous and brittle bones, bone loss (osteoporosis)"
+        },
+        {
+          "de": "Muskelkrämpfe, Kribbeln",
+          "en": "Muscle cramps, tingling"
+        }
+      ],
+      "overdose": {
+        "de": "Eine Überdosis kann kurzfristig zu Übelkeit, Verdauungsstörungen, Muskelkrämpfen und Müdigkeit führen, langfristig auch zu Nierensteinen und im schlimmsten Fall zu Nierenversage. Allein über die Ernährung ist eine Überdosis beim gesunden Menschen jedoch praktisch nicht möglich.",
+        "en": "An overdose may cause nausea, digestion disorders, cramps and tiredness. Over a long time, it can also cause kidney stones or, in the worst case, kidney failure. However, with a normal diet an overdose is practically impossible for a healthy person."
+      },
+      "dependencies": {
+        "de": "Für die Aufnahme von Calcium im Darm wird Vitamin D benötigt. Ein Vitamin-D-Mangel kann damit indirekt zu einem Calciummangel führen.",
+        "en": "The resorption of calcium in the bowel requires vitamin D. A vitamin D shortage may thus indirectly lead to a calcium deficiency."
+      },
+      "sources": {
+        "de": "Milchprodukte, Hülsenfrüchte, Mineralwasser",
+        "en": "Dairy products, legumes, soda"
+      },
+      "requirements": {
+        "de": "1000 mg",
+        "en": "1000 mg"
+      }
+    },
+    {
+      "name": {
+        "de": "Magnesium",
+        "en": "Magnesium"
+      },
+      "description": {
+        "de": "Magnesium spielt eine große Rolle für das Muskelsystem und ist vor allem an der Reizübertragung von Muskeln und Nerven beteiligt. Der menschliche Körper enthält rund 20 bis 30 mg Magnesium, das sich zu rund 60 % in unseren Knochen, knapp 40 % in den Muskeln und Organen und nur zu rund 1 % im Blut befindet. Wie andere Mineralstoffe kann es beim Schwitzen aus dem Körper ausgewaschen werden und damit verlorengehen. Ein leichter Magnesiummangel tritt in der Bevölkerung recht häufig auf, wobei die Bestimmung des Magnesiumswerts sehr schwierig ist (eine Blutanalyse gibt nur wenig Aufschluss). Magnesium wird daher häufig als Ergänzungsmittel verwendet. Ein schwerer Mangel tritt jedoch meist nur in Zusammenhang mit verschiedenen Erkrankungen auf (z.B. Nierenerkrankung, Verdauungsprobleme, starker Durchfall). Magnesium findet sich v.a. in Getreideprodukten, Nüssen, Gemüse, Schokolade und Mineralwasser und Leitungswasser (bei ausreichender Wasserhärte).",
+        "en": "Magnesium is especially needed for the muscle system and the transmission of impulses through the muscles and nerve cells. The human body contains about 20 .. 30 mg of magnesium, of which about 60 % are stored in the bones, about 40 % in the muscles and organs and only 1 % in the blood. Just like other minerals, magnesium will be washed out when sweating and thus drops away. It is supposed that a light shortage of magnesium occurs frequently in society, though it is generally difficult to determine the magnesium amount in the body (a blood analysis does not suffice to determine the exact amount). However, serious deficiencies usually only occur in case of diseases (such as kidney diseases, digestive disorders, heavy diarrhea). Magnesium is mostly contained in plant-based food, especially in grain products, nuts, vegetables, soda and tap water (of sufficient water hardness)."
+      },
+      "functionality": [
+        {
+          "de": "Wichtig für das Muskelsystem, sorgt für die Entspannung der Muskeln",
+          "en": "Import for the muscle system, eases muscle tension"
+        },
+        {
+          "de": "Aktiviert rund 300 Enzyme beim Stoffwechsel",
+          "en": "Activates about 300 encymes needed for metabolism"
+        },
+        {
+          "de": "An der Energieproduktion beteiligt, erhöht die Leistungsfähigkeit",
+          "en": "Takes part in energy production, enhances the performance"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Muskelschwäche, Muskelkrämpe (z.B. Wadenkrämpfe)",
+          "en": "Muscle weakness, muscle cramps (e.g. leg cramps)"
+        },
+        {
+          "de": "Reizbarkeit",
+          "en": "Irritability"
+        },
+        {
+          "de": "Unruhe, Müdigkeit",
+          "en": "Restlessness, sleepiness"
+        },
+        {
+          "de": "Herzrhythmusstörungen",
+          "en": "cardiac arrhythmias"
+        }
+      ],
+      "overdose": {
+        "de": "Eine Überdosis kann zu Verdauungsproblemen und Durchfall führen, bei stärkerer Überdosis (ab 2500 mg pro Tag) auch zu ernsten Erkrankungen wie Muskelschwäche oder Blutdruckabfall. Eine solche Überdosis ist über die Ernährung jedoch nicht möglich, sondern nur durch die Einnahme von Präparaten.",
+        "en": "An overdose can lead to digestion problems and diarrhea. A more severe overdosis (above 2500 mg per day) can also lead to serious health issues such as muscle weakness and low blood pressure. Such an overdose cannot occur through nutrition, though, but only by means of supplements."
+      },
+      "dependencies": {
+        "de": "Magnesiummangel führt zu einer schlechteren Aufnahme von Kalium im Darm und kann indirekt zu einem Kaliummangel führen. Zudem aktiviert Magnesium die Produktion von Vitamin D im Körper. Ein Mangel kann somit wiederum indirekt zu einem Vitamin-D-Mangel führen.",
+        "en": "Magnesium deficiency reduces potassium resorbtion in the bowel and may indirectly lead to a potassium deficiency. Magnesium is also needed to activate the vitamin D production in the body; again, a deficiency may indirectly lead to a vitamin D deficiency."
+      },
+      "sources": {
+        "de": "Hülsenfrüche, Nüsse, Getreideprodukte, Käse, Kakao, Schokolade",
+        "en": "Legumes, nuts, grain products, cheese, cocoa, chocolate"
+      },
+      "requirements": {
+        "de": "Mann: 350 mg | Frau: 300 mg  (schwanger: 310 mg, stillend: 390 mg)",
+        "en": "male: 350 mg | female: 300 mg  (pregnant: 310 mg, breastfeeding: 390 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Phosphor",
+        "en": "Phosphorus"
+      },
+      "description": {
+        "de": "Ähnlich wie Kalzium ist Phosphor am Knochenbau beteiligt und hat mit 600 bis 700 Gramm im menschlichen Körper einen ebenfalls hohen Anteil. Davon sind 90 % in den Knochen gebunden. Phosphor ist in nahezu allen Lebensmitteln enthalten, insbesondere in proteinreichen Lebensmittel wie Milchprodukten, Eiern, Fleisch und Fisch, so dass bei gesunden Menschen ein Mangel faktisch nicht möglich ist.",
+        "en": "Similar to calcium, phosphorous is needed for bone production and has a high share in the human body (600 .. 700 gram, of which 90 % are bound to the bones). It is contained by almost every food, especially in those that are rich in proteins, such as dairy products, eggs, meat and fish. For healthy persons, it is practically impossible to suffer phosphorous deficiency."
+      },
+      "functionality": [
+        {
+          "de": "Am Knochenbau beteiligt, insbesondere an der Mineralisierung von Knochen und Zähnen",
+          "en": "Participates in the bone production, especially in bone and tooth mineralization"
+        },
+        {
+          "de": "Für den Energiestoffwechsel benötigt",
+          "en": "Needed for energy metabolism"
+        },
+        {
+          "de": "Stabilisiert den pH-Wert im Blut",
+          "en": "Stabilizes the pH-value in the blood"
+        },
+        {
+          "de": "Beteiligt am Aufbau der Zellmembran",
+          "en": "Promotes cell membrane production"
+        },
+        {
+          "de": "Bestandteil der DNA",
+          "en": "Part of the DNA"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Knochenerweichung (Osteomalazie)",
+          "en": "Osteomalacia (bone softening)"
+        },
+        {
+          "de": "Verzögertes Wachstum bei Kindern",
+          "en": "Impaired growth in children"
+        },
+        {
+          "de": "Müdigkeit, Schwäche, Übelkeit",
+          "en": "Sleepiness, weakness, nausea"
+        }
+      ],
+      "overdose": {
+        "de": "Eine kritische Überdosis kann durch die normale Ernährung im Grunde nicht erfolgen. Nur bei anderen Erkrankungen kann eine zu hohe Phosphoransammlung mit verschiedenen gesundheitlichen Problemen eintreten.",
+        "en": "A critical overdose cannot occur in a regular diet. Only in case of different diseases, critical amounts of phosphorous may be accumulated in the body, that may lead to versatile health issues."
+      },
+      "dependencies": {
+        "de": "Phosphor hemmt die Verwertung von Calcium im Körper, so dass ein hoher Phosphorkonsum einen höheren Bedarf an Calcium zur Folge hat.",
+        "en": "Phosphorous impairs the use of calcium within the human body. A high intake of phosphorous thus increases the demand for calcium."
+      },
+      "requirements": {
+        "de": "Mann: 700 mg | Frau: 700 mg  (schwanger: 800 mg, stillend: 900 mg)",
+        "en": "male: 700 mg | female: 700 mg  (pregnant: 800 mg, breastfeeding: 900 mg)"
+      }
+    }
+    ]
 }

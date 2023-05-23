@@ -19,6 +19,10 @@ export const applicationStrings = {
         "de": "Tagesbedarf",
         "en": "Daily requirement"
     },
+    book_heading_sources: {
+        "de": "Quellen",
+        "en": "Sources"
+    },
     book_heading_storage: {
         "de": "Speicherung",
         "en": "Storage"
@@ -543,9 +547,9 @@ export const applicationStrings = {
         de: 'Phosphor',
         en: 'Phosphorus'
     },
-    label_nutrient_min_potassimum: {
+    label_nutrient_min_potassium: {
         de: 'Kalium',
-        en: 'Potassimum'
+        en: 'Potassium'
     },
     label_nutrient_min_selenium: {
         de: 'Selen',

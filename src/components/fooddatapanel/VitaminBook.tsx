@@ -74,8 +74,10 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
         const hasFunctionality = selectedEntry.functionality?.length > 0
         const hasDeficiencies = selectedEntry.deficiencies?.length > 0
         const hasOverdose = selectedEntry.overdose !== undefined && selectedEntry.overdose !== null
-        const hasDependencies = selectedEntry.overdose !== undefined && selectedEntry.overdose !== null
+        const hasDependencies = selectedEntry.dependencies !== undefined && selectedEntry.dependencies !== null
+        const hasSources = selectedEntry.sources !== undefined && selectedEntry.sources !== null
         const hasStorage = selectedEntry.storage !== undefined && selectedEntry.storage !== null
+
         const hasDailyRequirements = selectedEntry.requirements !== undefined && selectedEntry.requirements !== null
 
         return (
@@ -105,22 +107,28 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
                     </ul>
                 </div>
                 }
-                {hasOverdose &&
+                {hasOverdose && selectedEntry.overdose &&
                 <div>
                     <h5>{applicationStrings.book_heading_overdose[lang]}</h5>
                     <p>{selectedEntry.overdose[lang]}</p>
                 </div>
                 }
-                {hasDependencies &&
+                {hasDependencies && selectedEntry.dependencies &&
                 <div>
                     <h5>{applicationStrings.book_heading_dependencies[lang]}</h5>
                     <p>{selectedEntry.dependencies[lang]}</p>
                 </div>
                 }
-                {hasStorage &&
+                {hasStorage && selectedEntry.storage &&
                 <div>
                     <h5>{applicationStrings.book_heading_storage[lang]}</h5>
                     <p>{selectedEntry.storage[lang]}</p>
+                </div>
+                }
+                {hasSources && selectedEntry.sources &&
+                <div>
+                    <h5>{applicationStrings.book_heading_sources[lang]}</h5>
+                    <p>{selectedEntry.sources[lang]}</p>
                 </div>
                 }
                 {hasDailyRequirements &&
