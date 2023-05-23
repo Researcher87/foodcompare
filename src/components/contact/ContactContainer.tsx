@@ -6,12 +6,8 @@ import {ContactForm} from "./ContactForm";
 import {Sources} from "./Sources";
 import {Versions} from "./Versions";
 import {Impressum} from "./Impressum";
-import {callEvent} from "../../service/GA_EventService";
-import {
-    GA_ACTION_CONTACT_SUBMENU,
-    GA_CATEGORY_CONTACT
-} from "../../config/GA_Events";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
+import {DataPrivacy} from "./DataPrivacy";
 
 export function ContactContainer() {
     const languageContext = useContext(LanguageContext)
@@ -19,8 +15,9 @@ export function ContactContainer() {
 
     const menu_contact = 1
     const menu_sources = 2
-    const menu_versions = 3
-    const menu_impressum = 4
+    const menu_privacy = 3
+    const menu_versions = 4
+    const menu_impressum = 5
 
 
     const [selectedMenu, setSelectedMenu] = useState(menu_contact)
@@ -32,6 +29,8 @@ export function ContactContainer() {
                 return <ContactForm/>
             case menu_sources:
                 return <Sources/>
+            case menu_privacy:
+                return <DataPrivacy/>
             case menu_versions:
                 return <Versions/>
             case menu_impressum:
@@ -42,25 +41,7 @@ export function ContactContainer() {
     }
 
     const onChangeSubmenu = (selectedMenu) => {
-        let label = ""
-        switch(selectedMenu) {
-            case menu_contact:
-                label = "Contact"
-                break
-            case menu_sources:
-                label = "Sources"
-                break
-            case menu_versions:
-                label = "Versions"
-                break
-            case menu_impressum:
-                label = "Impressum"
-                break
-        }
-
-        callEvent(applicationContext?.debug, GA_ACTION_CONTACT_SUBMENU, GA_CATEGORY_CONTACT, label)
-
-        setSelectedMenu(menu_contact)
+        setSelectedMenu(selectedMenu)
     }
 
     return (
@@ -81,6 +62,12 @@ export function ContactContainer() {
                                   checked={selectedMenu === menu_sources}
                                   onChange={() => onChangeSubmenu(menu_sources)}>
                         {applicationStrings.menu_contact_sources[languageContext.language]}
+                    </ToggleButton>
+                    <ToggleButton style={buttonStyle}
+                                  value={menu_privacy}
+                                  checked={selectedMenu === menu_privacy}
+                                  onChange={() => onChangeSubmenu(menu_privacy)}>
+                        {applicationStrings.menu_contact_dataprivacy[languageContext.language]}
                     </ToggleButton>
                     <ToggleButton style={buttonStyle}
                                   value={menu_versions}

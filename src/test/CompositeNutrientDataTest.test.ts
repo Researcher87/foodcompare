@@ -131,6 +131,7 @@ describe('The composite nutrient data service should calculate the correct amoun
 			d: null,
 			e: 10,
 			k: null,
+			vitaminE: null,
 			carotenoidData: null
 		}
 		
@@ -148,6 +149,7 @@ describe('The composite nutrient data service should calculate the correct amoun
 			d: 10,
 			e: null,
 			k: null,
+			vitaminE: null,
 			carotenoidData: null
 		}
 	

@@ -1,11 +1,11 @@
-import {isMobileDevice, WindowDimension} from "../WindowDimension";
+import {isMobileDevice, WindowDimension} from "./WindowDimension";
 import {
     basedata_piechart_width,
     basedata_piechart_width_m, datapanel_container_min_width, datapanel_container_min_width_m,
     default_chart_height,
     default_chart_height_m
-} from "../../config/ChartConfig";
-import {TAB_BASE_DATA} from "../../config/Constants";
+} from "../config/ChartConfig";
+import {TAB_BASE_DATA} from "../config/Constants";
 
 export function calculateChartHeight(currentDimension: WindowDimension, directCompare?: boolean, dataPage?: string): number {
     const mobile = isMobileDevice()

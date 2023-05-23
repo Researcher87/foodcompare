@@ -5,12 +5,13 @@ import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {DISPLAYMODE_CHART} from "../../config/Constants";
+import {DISPLAYMODE_CHART, TAB_MINERAL_DATA, TAB_PROTEINS_DATA, TAB_VITAMIN_DATA} from "../../config/Constants";
 import {isMobileDevice} from "../../service/WindowDimension";
 
 interface FoodDataTableProps {
     tableData: Array<FoodTableDataObject>
     portionSize: number
+    dataPage: string
 }
 
 export function FoodDataTable(props: FoodDataTableProps) {
@@ -47,18 +48,29 @@ export function FoodDataTable(props: FoodDataTableProps) {
     const labelPortion = `${applicationStrings.label_per_portion[language.language]} (${props.portionSize} g)`
     const tableClass = isMobileDevice() ? "table-style-m" : "table-style"
 
+    const shouldShowDietaryRequirements = props.dataPage === TAB_VITAMIN_DATA || props.dataPage === TAB_MINERAL_DATA
+        || props.dataPage === TAB_PROTEINS_DATA
+
     return (
-        <div style={{height: "418px", margin: "25px", overflowY: "auto"}}>
+        <div style={{height: "428px", margin: "25px", overflowY: "auto"}}>
             <div>
                 {dataExists &&
                 <BootstrapTable trClassName={tableClass} data={props.tableData} striped hover>
                     <TableHeaderColumn isKey dataField='label' dataFormat={formatDataCell}>Element</TableHeaderColumn>
                     <TableHeaderColumn dataField='value_100g'
+                                       width={"170px"}
                                        dataFormat={formatDataCell}>{applicationStrings.label_per_100g[language.language]}
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField='value_portion'
+                                       width={"170px"}
                                        dataFormat={formatDataCell}>{labelPortion}
                     </TableHeaderColumn>
+                    {shouldShowDietaryRequirements &&
+                    <TableHeaderColumn dataField='dailyRequirement'
+                                       width={"190px"}
+                                       dataFormat={formatDataCell}>{applicationStrings.label_requirement[language.language]}
+                    </TableHeaderColumn>
+                    }
                 </BootstrapTable>
                 }
                 {!dataExists &&

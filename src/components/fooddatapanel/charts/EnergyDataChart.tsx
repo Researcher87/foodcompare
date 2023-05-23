@@ -10,7 +10,7 @@ import {default_chart_height} from "../../../config/ChartConfig";
 import annotationPlugin from 'chartjs-plugin-annotation'
 import {ChartProps} from "../../../types/livedata/ChartPropsData";
 import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 export default function EnergyDataChart(props: ChartProps) {

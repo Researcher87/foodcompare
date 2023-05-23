@@ -127,8 +127,8 @@ export default function Header() {
                         <b>{applicationStrings.label_language[language]}</b>
                     </label>
                     <label className={formElementsClass}>
-                        <input className="form-radiobutton"
-                               name={"user language"}
+                        <input name={"user language"}
+                               className={"form-input"}
                                type="radio"
                                value={LANGUAGE_EN}
                                defaultChecked={language === LANGUAGE_EN}
@@ -137,8 +137,8 @@ export default function Header() {
                         {language_en}
                     </label>
                     <label style={{marginRight: "25px"}}>
-                        <input className="form-radiobutton"
-                               name={"user language"}
+                        <input name={"user language"}
+                               className={"form-input"}
                                type="radio"
                                value={LANGUAGE_DE}
                                defaultChecked={language === LANGUAGE_DE}
@@ -156,13 +156,13 @@ export default function Header() {
         const preferredSource = applicationContext.applicationData.preferredSource
 
         return (
-            <div className="form-small text-right" style={{paddingLeft: "25px"}}>
+            <div className="form-small text-right" style={{paddingRight: "25px"}}>
                 <form className="form-group">
                     <label className="form-elements">
                         <b>{applicationStrings.label_preferred_source[language]}</b>
                     </label>
                     <label className="form-elements">
-                        <input className="form-radiobutton"
+                        <input className="form-input"
                                type="radio"
                                value={SOURCE_SRLEGACY}
                                checked={preferredSource === SOURCE_SRLEGACY}
@@ -171,7 +171,7 @@ export default function Header() {
                         SR Legacy
                     </label>
                     <label className="form-elements-largespace">
-                        <input className="form-radiobutton"
+                        <input className="form-input"
                                type="radio"
                                value={SOURCE_FNDDS}
                                checked={(preferredSource === SOURCE_FNDDS)}
@@ -196,6 +196,9 @@ export default function Header() {
                             <img src={text} alt={"Food Compare Logo Text"}/>
                         </div>
                         <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
+                            {!isMobileDevice() &&
+                                renderSourceButtons()
+                            }
                             {renderLanguageButtons()}
                         </div>
                     </div>

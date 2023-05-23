@@ -21,7 +21,7 @@ import {
     createLipidsTable,
     createMineralTable,
     createProteinTable,
-    createVitaminTable
+    createVitaminTable, TableCalculationParams
 } from "../../service/TableService";
 
 interface FoodDataPageProps {
@@ -44,21 +44,35 @@ export default function FoodDataPage(props: FoodDataPageProps) {
         const {portion} = props.selectedFoodItem
 
         const preferredSource = applicationContext ? applicationContext.applicationData.preferredSource : SOURCE_SRLEGACY
+        const dietaryRequirement = applicationContext?.foodDataCorpus.dietaryRequirements ?? undefined
+        const userData = applicationContext?.userData
+
+        const tableCalculationParams: TableCalculationParams = {
+            selectedFoodItem: props.selectedFoodItem,
+            portion: portion.amount,
+            language: language,
+            preferredSource: preferredSource
+        }
+
+        const extendedParams = {...tableCalculationParams,
+            dietaryRequirement: dietaryRequirement,
+            userData: userData
+        }
 
         if (selectedDataTab === TAB_BASE_DATA) {
-            tableDataList = createBaseDataTable(props.selectedFoodItem, portion.amount, language, preferredSource);
+            tableDataList = createBaseDataTable(tableCalculationParams);
         } else if (selectedDataTab === TAB_ENERGY_DATA) {
-            tableDataList = createEnergyTable(props.selectedFoodItem, portion.amount, language, preferredSource);
+            tableDataList = createEnergyTable(tableCalculationParams);
         } else if (selectedDataTab === TAB_VITAMIN_DATA) {
-            tableDataList = createVitaminTable(props.selectedFoodItem, portion.amount, language, preferredSource);
+            tableDataList = createVitaminTable(extendedParams);
         } else if (selectedDataTab === TAB_MINERAL_DATA) {
-            tableDataList = createMineralTable(props.selectedFoodItem, portion.amount, language, preferredSource);
+            tableDataList = createMineralTable(extendedParams);
         } else if (selectedDataTab === TAB_LIPIDS_DATA) {
-            tableDataList = createLipidsTable(props.selectedFoodItem, portion.amount, language, preferredSource);
+            tableDataList = createLipidsTable(tableCalculationParams);
         } else if (selectedDataTab === TAB_CARBS_DATA) {
-            tableDataList = createCarbsTable(props.selectedFoodItem, portion.amount, language, preferredSource);
+            tableDataList = createCarbsTable(tableCalculationParams);
         } else if (selectedDataTab === TAB_PROTEINS_DATA) {
-            tableDataList = createProteinTable(props.selectedFoodItem, portion.amount, language, preferredSource);
+            tableDataList = createProteinTable(extendedParams);
         }
 
         setTableData(tableDataList)

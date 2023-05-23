@@ -3,7 +3,7 @@ import EnergyDataChart from "../fooddatapanel/charts/EnergyDataChart";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {useEffect, useState} from "react";
-import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 import {VerticalLabel} from "./VerticalLabel";
 
 export function DcEnergyChart(props: DirectCompareDataPanelProps) {

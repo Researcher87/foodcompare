@@ -8,7 +8,7 @@ import {Card} from "react-bootstrap";
 import ProteinDataChart from "../fooddatapanel/charts/ProteinDataChart";
 import {BarChartDirectCompareConfig, DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
-import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../service/nutrientdata/NutrientDataRetriever";
 import {
     getMaximumValue,
@@ -16,11 +16,6 @@ import {
     nullifyNonOverlappingValues
 } from "../../service/calculation/NutrientCalculationService";
 import {VerticalLabel} from "./VerticalLabel";
-import {
-    GA_ACTION_DATAPANEL_PROTEINS_CONFIG,
-    GA_CATEGORY_DATAPANEL
-} from "../../config/GA_Events";
-import {callEvent} from "../../service/GA_EventService";
 
 export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -66,19 +61,14 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
 
     const handleRadioButtonClick = (event: any): void => {
         const value = event.target.value
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_PROTEINS_CONFIG, GA_CATEGORY_DATAPANEL, value, 2)
         setPortionType(value)
     }
 
     const handleExpandCheckbox = () => {
-        const label = "expand100: " + !expand100
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_PROTEINS_CONFIG, GA_CATEGORY_DATAPANEL, label, 2)
         setExpand100(!expand100)
     }
 
     const handleSynchronize = () => {
-        const label = "synchronize: " + !synchronize
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_PROTEINS_CONFIG, GA_CATEGORY_DATAPANEL, label, 2)
         setSynchronize(!synchronize)
     }
 

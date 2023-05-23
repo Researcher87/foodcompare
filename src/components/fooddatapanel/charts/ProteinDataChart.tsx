@@ -10,15 +10,9 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getProteinChartData} from "../../../service/chartdata/ProteinChartDataService";
-import {callEvent} from "../../../service/GA_EventService";
-import {
-    GA_ACTION_DATAPANEL_PROTEINS_CONFIG,
-    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
-    GA_CATEGORY_DATAPANEL
-} from "../../../config/GA_Events";
 
 export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -97,13 +91,10 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
 
     const handleRadioButtonClick = (event: any) => {
         const value=event.target.value
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_PROTEINS_CONFIG, GA_CATEGORY_DATAPANEL, value, 1)
         setPortionType(value)
     }
 
     const handleExpandCheckbox = () => {
-        const label = "expand100: " + !expand100
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_PROTEINS_CONFIG, GA_CATEGORY_DATAPANEL, label, 1)
         setExpand100(!expand100)
     }
 

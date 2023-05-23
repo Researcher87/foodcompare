@@ -3,7 +3,7 @@ import {InfoData} from "../fooddatapanel/charts/InfoData";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {useEffect, useState} from "react";
-import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 
 
 export function DcInfoDataChart(props: DirectCompareDataPanelProps) {

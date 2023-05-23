@@ -11,12 +11,10 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {ChartDisplayData} from "../../../types/livedata/ChartDisplayData";
 import {getBaseChartLegendData, getNutrientChartData, getTotalChartData} from "../../../service/chartdata/BaseChartDataService";
-import {callEvent} from "../../../service/GA_EventService";
-import {GA_ACTION_DATAPANEL_BASEDATA_CONFIG, GA_CATEGORY_DATAPANEL} from "../../../config/GA_Events";
 
 export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -107,25 +105,17 @@ export default function BaseDataChart(props: BaseDataChartProps) {
 
     const handleRadioButtonClick = (event: any) => {
         const value = event.target.value
-        const eventValue = props.directCompareUse ? 2 : 1
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_BASEDATA_CONFIG, GA_CATEGORY_DATAPANEL, value, eventValue)
         setChartType(value)
         updateChartConfig()
     }
 
     const handleLegendCheckboxClick = () => {
         setShowLegend(!showLegend)
-        const eventValue = props.directCompareUse ? 2 : 1
-        const label = "legend: " + !showLegend
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_BASEDATA_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         updateChartConfig()
     }
 
     const handleDetailsCheckboxClick = () => {
         setShowDetails(!showDetails)
-        const eventValue = props.directCompareUse ? 2 : 1
-        const label = "details: " + !showDetails
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_BASEDATA_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         updateChartConfig()
     }
 

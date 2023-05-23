@@ -11,6 +11,8 @@ import {SEX_MALE} from "../../config/Constants";
  *
  * dailyRequirementObject: A vitamin or mineral requirement object (e.g. for Vitamin C or Iron).
  * userData: The user data object containing the user data.
+ *
+ * @return: The daily requirement (mg)
  */
 export function determineDailyRequirement(dailyRequirementObject: RequirementData, userData: UserData): number {
     let ageGroupRequirements: RequirementAgeGroupData
@@ -55,7 +57,8 @@ export function determineDailyRequirement(dailyRequirementObject: RequirementDat
  * portionSize: The portion size in gram (100 = default value, i.e., 100 gram).
  * amountInFood: The amount of the vitamin or mineral in the food (which is always 100 gram).
  */
-export function determineFoodRequirementRatio(dailyRequirementObject: RequirementData, amountInFood: number, portionSize: number, userData: UserData): number {
+export function determineFoodRequirementRatio(dailyRequirementObject: RequirementData, amountInFood: number,
+                                              portionSize: number, userData: UserData): number {
     const dailyRequirement = determineDailyRequirement(dailyRequirementObject, userData);
     if (portionSize === 100) {
         return Math.round(amountInFood / dailyRequirement * 1000) / 10;

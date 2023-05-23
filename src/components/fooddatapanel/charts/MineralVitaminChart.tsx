@@ -10,18 +10,12 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {MineralVitaminChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
 
 import {VitaminsBook} from "../VitaminBook";
 import nutrientBook from "../../../static/nutrientBook.json";
-import {callEvent} from "../../../service/GA_EventService";
-import {
-    GA_ACTION_DATAPANEL_MINERALS_CONFIG,
-    GA_ACTION_DATAPANEL_VITAMINS_CONFIG,
-    GA_CATEGORY_DATAPANEL
-} from "../../../config/GA_Events";
 
 
 export default function MineralVitaminChart(props: MineralVitaminChartProps) {
@@ -160,23 +154,16 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const handleRadioButtonClick = (event: any): void => {
         const value=event.target.value
         if (props.selectedSubChart === CHART_VITAMINS) {
-            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_VITAMINS_CONFIG, GA_CATEGORY_DATAPANEL, value, 1)
             setPortionType_vitamins(value)
         } else if (props.selectedSubChart === CHART_MINERALS) {
-            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_MINERALS_CONFIG, GA_CATEGORY_DATAPANEL, value, 1)
             setPortionType_minerals(value)
         }
     }
 
     const handleExpandCheckbox = () => {
-        const label = props.selectedSubChart === CHART_VITAMINS
-            ? "expand100: " + !expand100_vitamins
-            : "expand100: " + !expand100_minerals
         if (props.selectedSubChart === CHART_VITAMINS) {
-            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_VITAMINS_CONFIG, GA_CATEGORY_DATAPANEL, label, 1)
             setExpand100_vitamins(!expand100_vitamins)
         } else if (props.selectedSubChart === CHART_MINERALS) {
-            callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_MINERALS_CONFIG, GA_CATEGORY_DATAPANEL, label, 1)
             setExpand100_minerals(!expand100_minerals)
         }
     }

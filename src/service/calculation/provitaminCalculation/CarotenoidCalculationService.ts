@@ -1,4 +1,5 @@
-import {CarotenoidData} from "../../types/nutrientdata/FoodItem";
+import {CarotenoidData} from "../../../types/nutrientdata/FoodItem";
+import {EQ_FACTOR_BETA_CAROTENE, EQ_FACTOR_OTHER_CAROTENE} from "./ProvitaminEquivalentFactors";
 
 export function getTotalAmountOfCarotenoids(carotenoidData: CarotenoidData): number | null {
     if(carotenoidData === null) {
@@ -31,17 +32,14 @@ export function calculateVitaminAEquivalent(carotenoidData: CarotenoidData | nul
 
     let amount = 0;
 
-    const factorBetaCarotene = 0.08333
-    const factorOtherCarotenoids = 0.04166
-
     if(carotenoidData.caroteneAlpha) {
-        amount += (carotenoidData.caroteneAlpha * factorOtherCarotenoids)
+        amount += (carotenoidData.caroteneAlpha * EQ_FACTOR_OTHER_CAROTENE)
     }
     if(carotenoidData.caroteneBeta) {
-        amount += (carotenoidData.caroteneBeta * factorBetaCarotene)
+        amount += (carotenoidData.caroteneBeta * EQ_FACTOR_BETA_CAROTENE)
     }
     if(carotenoidData.cryptoxanthin) {
-        amount += (carotenoidData.cryptoxanthin * factorOtherCarotenoids)
+        amount += (carotenoidData.cryptoxanthin * EQ_FACTOR_OTHER_CAROTENE)
     }
 
     return amount

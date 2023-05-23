@@ -23,16 +23,9 @@ import {
     GeneralChartConfigDirectCompareWithSubCharts,
     GeneralChartConfigWithDetails
 } from "../../types/livedata/ChartConfigData";
-import {calculateChartContainerHeight} from "../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight} from "../../service/ChartSizeCalculation";
 import {useWindowDimension} from "../../service/WindowDimension";
 import {VerticalLabel} from "./VerticalLabel";
-import {callEvent} from "../../service/GA_EventService";
-import {
-    GA_ACTION_DATAPANEL_BASEDATA_CONFIG,
-    GA_ACTION_DATAPANEL_CARBS_CONFIG,
-    GA_ACTION_DATAPANEL_LIPIDS_CONFIG,
-    GA_CATEGORY_DATAPANEL
-} from "../../config/GA_Events";
 
 /**
  * Re-usable direct compare chart component for pie-chart data pages (Lipids, Carbs, Base Data)
@@ -145,41 +138,16 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         }
     }
 
-    const getEventActionName = (): string | null => {
-        if(props.dataPage === TAB_BASE_DATA) {
-            return GA_ACTION_DATAPANEL_BASEDATA_CONFIG
-        } else if(props.dataPage === TAB_LIPIDS_DATA) {
-            return GA_ACTION_DATAPANEL_LIPIDS_CONFIG
-        } else if(props.dataPage === TAB_CARBS_DATA) {
-            return GA_ACTION_DATAPANEL_CARBS_CONFIG
-        }
-        return null
-    }
-
     const handleRadioButtonClick = (event: any): void => {
         const value = event.target.value
-        const action = getEventActionName()
-        if(action !== null) {
-            callEvent(applicationContext?.debug, action, GA_CATEGORY_DATAPANEL, value, 2)
-        }
         setChartType(value)
     }
 
     const handleShowLegendCheckbox = () => {
-        const label = "legend: " + !showLegend
-        const action = getEventActionName()
-        if(action !== null) {
-            callEvent(applicationContext?.debug, action, GA_CATEGORY_DATAPANEL, label, 2)
-        }
         setShowLegend(!showLegend)
     }
 
     const handleShowDetailsCheckbox = () => {
-        const label = "details: " + !showLegend
-        const action = getEventActionName()
-        if(action !== null) {
-            callEvent(applicationContext?.debug, action, GA_CATEGORY_DATAPANEL, label, 2)
-        }
         setShowDetails(!showDetails)
     }
 

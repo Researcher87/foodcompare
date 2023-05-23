@@ -34,8 +34,6 @@ import {VitaminsBook} from "./VitaminBook";
 import nutrientBook from "../../static/nutrientBook.json";
 import {BookDataEntry} from "../../types/BookData";
 
-import {callEvent} from "../../service/GA_EventService";
-import {GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL} from "../../config/GA_Events";
 
 interface FoodDataPageHeaderProps {
     setDisplayMode: (id: string) => void
@@ -60,18 +58,12 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const dataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
 
     const handleRadioButtonClick = (value: string) => {
-        const displaymode = value === DISPLAYMODE_TABLE ? "table" : "chart"
-
-        const label = `Switch display mode to ${displaymode}`
-        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, label)
         props.setDisplayMode(value)
     }
 
     const closeTab = () => {
         const id = (props.selectedFoodItem.foodItem.id)
         const remainingItems = applicationContext.applicationData.foodDataPanel.selectedFoodItems.length - 1
-        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, "Close food item tab")
-
         applicationContext.setFoodDataPanelData.removeItemFromFoodDataPanel(id)
 
         if (remainingItems === 0) {
@@ -79,9 +71,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         }
     }
 
-    const help = () => {
-        const label = `Open help page: ${dataPage}`
-        callEvent(applicationContext.debug, GA_ACTION_DATAPANEL_GENERAL_ACTION, GA_CATEGORY_DATAPANEL, label)
+    const openHelpMenu = () => {
         switch (dataPage) {
             case TAB_BASE_DATA:
                 setHelpModalId(1)
@@ -144,7 +134,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         if (isMobileDevice()) {
             foodName = shortenName(foodName, 16)
         }
-        fullName = `${foodName} (${conditionName}, ${portionSize} g)`
+        fullName = condition?.id !== 100
+            ? `${foodName} (${conditionName}, ${portionSize} g)`
+            : `${foodName} (${portionSize} g)`
     } else {
         fullName = `${foodName} (${portionSize} g)`
     }
@@ -219,29 +211,32 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                     <Button className={chartButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
                                             active={displayMode === DISPLAYMODE_CHART}
+                                            data-for={"datapanel-chart"}
                                             data-tip={applicationStrings.tooltip_icon_charts[languageContext.language]}>
-                                        <ReactTooltip/>
+                                        <ReactTooltip id={"datapanel-chart"}/>
                                         <FaChartBar/>
                                     </Button>
                                     <Button className={tablesButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_TABLE)}
                                             active={displayMode === DISPLAYMODE_TABLE}
+                                            data-for={"datapanel-table"}
                                             data-tip={applicationStrings.tooltip_icon_table[languageContext.language]}>
                                         <FaThList/>
                                     </Button>
+                                    <ReactTooltip id="datapanel-table"/>
                                 </div>
                                 <div className="btn-group" role="group" style={{paddingLeft: "20px"}}>
                                     <Button className={"btn-primary button-foodPanelHead"}
-                                            onClick={help}
+                                            onClick={openHelpMenu}
                                             active={displayMode === DISPLAYMODE_CHART}>
                                         <ReactTooltip/>
                                         <FaQuestionCircle/>
                                     </Button>
                                     <Button className={"button-closeTab"}
                                             onClick={closeTab}
-                                            data-for="closeButtonTooltip"
+                                            data-for={"datapanel-close"}
                                             data-tip={applicationStrings.tooltip_icon_close[languageContext.language]}>
-                                        <ReactTooltip id="closeButtonTooltip"/>
+                                        <ReactTooltip id="datapanel-close"/>
                                         <FaTimes/>
                                     </Button>
                                 </div>
@@ -250,6 +245,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                     </div>
                     <FoodDataPageBody selectedFoodItem={props.selectedFoodItem}
                                       tableData={props.tableData}
+                                      dataPage={dataPage}
                     />
                 </div>
             </div>

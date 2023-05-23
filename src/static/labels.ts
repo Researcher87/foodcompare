@@ -52,12 +52,12 @@ export const applicationStrings = {
         en: 'Close'
     },
     button_getstarted_1: {
-        de: 'Verschiedene Lebensmittel analysieren',
-        en: 'Analyze different food items'
+        de: 'Einzelne Lebensmittel analysieren',
+        en: 'Analyze separate food items'
     },
     button_getstarted_2: {
-        de: 'Komplexe Lebensmittel zusammenstellen',
-        en: 'Create a composite food list'
+        de: 'Komplexe Lebensmittel zusammenstellen und analysieren',
+        en: 'Create and analyze a composite food list'
     },
     button_getstarted_3: {
         de: 'Zwei Lebensmittel gegenüberstellen',
@@ -256,8 +256,8 @@ export const applicationStrings = {
         en: 'Minerals (related to daily requirements)'
     },
     label_charttype_proteins: {
-        de: 'Proteine (im Vgl. zum Tagesbedarf)',
-        en: 'Proteins  (related to daily requirements)'
+        de: 'Aminosäuren (im Vgl. zum Tagesbedarf)',
+        en: 'Amino acids  (related to daily requirements)'
     },
     label_charttype_vitamins: {
         de: 'Vitamine (im Vgl. zum Tagesbedarf)',
@@ -819,21 +819,25 @@ export const applicationStrings = {
         de: 'Typische Portion',
         en: 'Typical portion'
     },
-    label_prefix_hereof: {
-        de: 'davon',
-        en: 'hereof'
-    },
-    label_reference: {
-        de: 'Bezug',
-        en: 'Reference'
-    },
     label_preferred_source: {
         de: 'Bevorzugte Datenquelle',
         en: 'Preferred data source'
     },
+    label_prefix_hereof: {
+        de: 'davon',
+        en: 'hereof'
+    },
     label_ranking_dietaryRequirements: {
         de: 'Zeige Tagesbedarf',
         en: 'Show dietary requirements'
+    },
+    label_requirement: {
+        de: 'Tagesbedarf',
+        en: 'Daily requirements'
+    },
+    label_reference: {
+        de: 'Bezug',
+        en: 'Reference'
     },
     label_source: {
         de: 'Datenquelle',
@@ -962,6 +966,10 @@ export const applicationStrings = {
     menu_contact_sources: {
         de: 'Quellen',
         en: 'Sources'
+    },
+    menu_contact_dataprivacy: {
+        de: 'Datenschutz',
+        en: 'Data privacy'
     },
     menu_contact_versions: {
         de: 'Versionen',

@@ -6,4 +6,5 @@ export interface FoodTableDataObject {
     label: string
     value_100g: string
     value_portion: string
+    dailyRequirement?: string
 }

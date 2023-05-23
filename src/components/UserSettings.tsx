@@ -29,8 +29,6 @@ import {
 } from "../service/UserDataService";
 import {customSelectStyles} from "../config/UI_Config";
 import {FaLightbulb} from "react-icons/fa";
-import {callEvent} from "../service/GA_EventService";
-import {GA_ACTION_USER_SETTINGS, GA_CATEGORY_USER_SETTINGS} from "../config/GA_Events";
 
 export function UserSettings() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -118,7 +116,6 @@ export function UserSettings() {
         const inputOk = checkInputValidity(userData)
 
         if (inputOk) {
-            callEvent(applicationContext.debug, GA_ACTION_USER_SETTINGS, GA_CATEGORY_USER_SETTINGS)
             applicationContext.setUserData(userData)
             NotificationManager.success(applicationStrings.message_userdata_success[lang])
         }
@@ -254,8 +251,9 @@ export function UserSettings() {
         return (
             <div className="form-row-indent" style={{marginTop: "-15px"}}>
                 <label className="form-elements"
+                       data-for={"us-leisure"}
                        data-tip={applicationStrings.label_userSettings_leisureSports_tooltip[lang]}>
-                    <ReactTooltip/>
+                    <ReactTooltip id={"us-leisure"}/>
                     <Form.Check inline className="form-radiobutton"
                                 label={applicationStrings.label_userSettings_leisureSports[lang]}
                                 checked={leisureSport}

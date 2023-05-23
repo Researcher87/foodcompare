@@ -14,7 +14,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/nutrientdata/ChartSizeCalculation";
+import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {
     getCarbBaseChartData,
@@ -22,12 +22,6 @@ import {
     getCarbsBaseLegend,
     getCarbsDetailsLegend
 } from "../../../service/chartdata/CarbsChartDataService";
-import {callEvent} from "../../../service/GA_EventService";
-import {
-    GA_ACTION_DATAPANEL_CARBS_CONFIG,
-    GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_ACTION_DATAPANEL_PROTEINS_CONFIG,
-    GA_CATEGORY_DATAPANEL
-} from "../../../config/GA_Events";
 
 export default function CarbsDataChart(props: CarbDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -98,20 +92,12 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     }
 
     const handleExpand100Change = () => {
-        const label = "expand100: " + !expand100
-        const eventValue = props.directCompareUse ? 2 : 1
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_CARBS_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         setExpand100(!expand100)
     }
 
     const handleHideRemaindersCheckbox = () => {
-        const label = "hideRemainders: " + !hideRemainders
-        const eventValue = props.directCompareUse ? 2 : 1
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_CARBS_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         setShowHideRemainders(!hideRemainders)
     }
-
-    const carbohydrateData = getNutrientData(props.selectedFoodItem).carbohydrateData;
 
     const handleChartSelectionChange = (event: any) => {
         const value = event.target.value
@@ -145,9 +131,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         } else {
             setSubChart(value)
         }
-
-        const eventLabel = props.directCompareUse ? 2 : 1
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_LIPIDS_CONFIG, GA_CATEGORY_DATAPANEL, value, eventLabel)
     }
 
     const createBasicChartData = () => {
@@ -195,16 +178,11 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
     const handleRadioButtonClick = (event: any) => {
         const value = event.target.value
-        const eventValue = props.directCompareUse ? 2 : 1
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_CARBS_CONFIG, GA_CATEGORY_DATAPANEL, value, eventValue)
-        setChartType(event.target.value)
+        setChartType(value)
     }
 
     const handleLegendCheckbox = () => {
         setShowLegend(!showLegend)
-        const eventValue = props.directCompareUse ? 2 : 1
-        const label = "legend: " + !showLegend
-        callEvent(applicationContext?.debug, GA_ACTION_DATAPANEL_CARBS_CONFIG, GA_CATEGORY_DATAPANEL, label, eventValue)
         setShowLegend(!showLegend)
     }
 
