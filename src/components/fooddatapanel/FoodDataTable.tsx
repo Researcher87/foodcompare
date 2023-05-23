@@ -24,6 +24,10 @@ export function FoodDataTable(props: FoodDataTableProps) {
     }
 
     const formatDataCell = (cell, row) => {
+        if(!cell) {
+            return cell
+        }
+
         if (!cell.includes("&&")) {
             return cell
         }

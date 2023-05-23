@@ -54,6 +54,8 @@ export default function FoodDataPage(props: FoodDataPageProps) {
             preferredSource: preferredSource
         }
 
+        console.log('xxx', selectedDataTab)
+
         const extendedParams = {...tableCalculationParams,
             dietaryRequirement: dietaryRequirement,
             userData: userData

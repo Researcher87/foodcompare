@@ -102,7 +102,6 @@ export function createVitaminTable(params: TableCalculationParams): Array<FoodTa
     const vitRequirementData = dietaryRequirement?.vitaminRequirementData ?? null
 
     const nutrientData = getNutrientData(selectedFoodItem)
-
     if (nutrientData.vitaminData.a != null) {
         const requirement = vitRequirementData && userData ? makeDietaryRequirementString(vitRequirementData.a, userData) : ""
         tableData.push(
