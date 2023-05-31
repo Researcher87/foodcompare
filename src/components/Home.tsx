@@ -106,8 +106,6 @@ export function Home() {
     }
 
     const renderStartButtons = () => {
-        const buttonClass = isMobileDevice() ? "text-center d-flex flex-row" : "text-center"
-
         const startImg1 = startImages(`./StartImg1.jpg`).default
         const startImg2 = startImages(`./StartImg2.jpg`).default
         const startImg3 = startImages(`./StartImg3.jpg`).default
@@ -116,7 +114,7 @@ export function Home() {
         return (
             <div style={{paddingTop: "16px"}}>
                 <b>{applicationStrings.label_getStarted[language]}</b>
-                <div className={buttonClass}>
+                <div className={"text-center"}>
                     <div style={{paddingTop: "20px"}}>
                         <Link to={PATH_FOODDATA_PANEL + "?add=1"} onClick={() => onStartButtonClick(1)}>
                             {renderStartButton(applicationStrings.button_getstarted_1[language], startImg1)}
@@ -147,6 +145,8 @@ export function Home() {
     }
 
     const renderStartButton = (label: string, srcImage: string): any => {
+        const width = isMobileDevice() ? "90%" : "40%"
+
         return <button type="button"
                        className="btn btn-small btn-outline-dark"
                        style={{width: "90%"}}>

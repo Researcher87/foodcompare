@@ -653,7 +653,7 @@ export function createLipidsTable(params: TableCalculationParams): Array<FoodTab
     if (firstNutrientData.lipidData.omegaData) {
         if (firstNutrientData.lipidData.omegaData.omega3 != null) {
             tableData.push(createTableObject(
-                `${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega3[language]}`,
+                ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega3[language]}`,
                 firstNutrientData.lipidData.omegaData.omega3,
                 portion, "g")
             );
@@ -661,7 +661,7 @@ export function createLipidsTable(params: TableCalculationParams): Array<FoodTab
 
         if (firstNutrientData.lipidData.omegaData.omega6 != null) {
             tableData.push(createTableObject(
-                `${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega6[language]}`,
+                ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega6[language]}`,
                 firstNutrientData.lipidData.omegaData.omega6,
                 portion, "g")
             );
