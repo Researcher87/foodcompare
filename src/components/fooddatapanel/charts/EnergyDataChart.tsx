@@ -64,7 +64,7 @@ export default function EnergyDataChart(props: ChartProps) {
                 }
 
                 {showInfotext &&
-                <div style={{paddingTop: "30px"}}>
+                <div className="text-small" style={{paddingTop: "30px"}}>
                     {applicationContext.userData.initialValues ?
                         (<div>
                             <p>{applicationStrings.text_setUserdata_p1[lang]}</p>

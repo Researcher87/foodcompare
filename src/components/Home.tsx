@@ -111,8 +111,10 @@ export function Home() {
         const startImg3 = startImages(`./StartImg3.jpg`).default
         const startImg4 = startImages(`./StartImg4.jpg`).default
 
+        const paddingTop = isMobileDevice() ? "4px" : "16px";
+
         return (
-            <div style={{paddingTop: "16px"}}>
+            <div style={{paddingTop: paddingTop}}>
                 <b>{applicationStrings.label_getStarted[language]}</b>
                 <div className={"text-center"}>
                     <div style={{paddingTop: "20px"}}>
@@ -210,7 +212,7 @@ export function Home() {
                 <div>
                     <div>
                         {renderHomeText(homeText1)}
-                        <div style={{paddingTop: "20px", paddingBottom: "30px"}}>
+                        <div style={{paddingTop: "10px", paddingBottom: "40px"}}>
                             {renderStartButtons()}
                         </div>
                         {renderHomeText(homeText2)}

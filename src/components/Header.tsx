@@ -59,7 +59,7 @@ export default function Header() {
         const buttonContainerClass = isMobileDevice() ? "link header-link-mobile" : "link header-link"
 
         return (
-            <div className={"btn-group flex flex-wrap" }>
+            <div className={"btn-group flex flex-wrap"}>
                 <Link to={PATH_HOME}>
                     <Button className={buttonContainerClass}
                             value={PATH_HOME}
@@ -68,16 +68,15 @@ export default function Header() {
                         {applicationStrings.menu_home[language]}
                     </Button>
                 </Link>
+                <Link to={PATH_FOODDATA_PANEL}>
+                    <Button className={buttonContainerClass}
+                            value={PATH_FOODDATA_PANEL}
+                            variant={'link'}
+                            active={activePath === PATH_FOODDATA_PANEL}>
+                        {menuNameAnalyze}
+                    </Button>
+                </Link>
                 {!isMobileDevice() &&
-                    <Link to={PATH_FOODDATA_PANEL}>
-                        <Button className={buttonContainerClass}
-                                value={PATH_FOODDATA_PANEL}
-                                variant={'link'}
-                                active={activePath === PATH_FOODDATA_PANEL}>
-                            {menuNameAnalyze}
-                        </Button>
-                    </Link>
-                }
                 <Link to={PATH_DIRECT_COMPARE}>
                     <Button className={buttonContainerClass}
                             value={PATH_DIRECT_COMPARE}
@@ -86,6 +85,7 @@ export default function Header() {
                         {menuNameDirectCompare}
                     </Button>
                 </Link>
+                }
                 <Link to={PATH_RANKING}>
                     <Button className={buttonContainerClass}
                             value={PATH_RANKING}
@@ -197,7 +197,7 @@ export default function Header() {
                         </div>
                         <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
                             {!isMobileDevice() &&
-                                renderSourceButtons()
+                            renderSourceButtons()
                             }
                             {renderLanguageButtons()}
                         </div>
