@@ -85,7 +85,9 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const selectedFoodItems = applicationContext?.applicationData.foodDataPanel.selectedFoodItems
     const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
-    const buttonClass = isMobileDevice() ? "btn mb-4" : "btn mb-4 foodanalyzer-button"
+    const buttonClass = isMobileDevice() ? "btn m-2" : "btn mb-4 foodanalyzer-button"
+
+    const divButtonClass = isMobileDevice() ? "d-flex flex-row mb-4" : "d-flex flex-column align-items-center"
 
     return (
         <div className={"foodanalyzer-buttonbar"}>
@@ -98,7 +100,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                 <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit}
                                    compositeSelector={true}/>
                 }
-                <div className={"d-flex flex-column align-items-center"}>
+                <div className={divButtonClass}>
                     <Button onClick={() => onOpenSelector(false)}
                             className={buttonClass}
                             data-for={"fa-btn-add"}

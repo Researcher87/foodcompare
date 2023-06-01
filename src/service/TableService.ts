@@ -711,7 +711,7 @@ export function createLipidsTable(params: TableCalculationParams): Array<FoodTab
     if (firstNutrientData.lipidData.omegaData) {
         if (firstNutrientData.lipidData.omegaData.omega3 != null) {
             tableData.push(createTableObject(
-                `${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega3[language]}`,
+                ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega3[language]}`,
                 firstNutrientData.lipidData.omegaData.omega3,
                 portion, "g")
             );
@@ -719,7 +719,7 @@ export function createLipidsTable(params: TableCalculationParams): Array<FoodTab
 
         if (firstNutrientData.lipidData.omegaData.omega6 != null) {
             tableData.push(createTableObject(
-                `${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega6[language]}`,
+                ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega6[language]}`,
                 firstNutrientData.lipidData.omegaData.omega6,
                 portion, "g")
             );
@@ -852,6 +852,10 @@ export function createProteinTable(params: TableCalculationParams): Array<FoodTa
     const proteinData = getNutrientData(selectedFoodItem).proteinData;
     if (!proteinData) {
         return tableData;
+    }
+
+    if(!protRequirementData || !userData) {
+        throw new Error("Protein Requirement Data or User Data is not available")
     }
 
     if (proteinData.tryptophan != null) {
@@ -1123,6 +1127,19 @@ function calculatePortionData(value: number | null, portionSize: number): number
 
 function makeCarbsTableObject(carbohydrates: number, sugar: number | null, dietaryFibers: number | null,
                               portion: number, language: string): FoodTableDataObject {
+
+    // NOTE: Sometimes the sugar or dietary fibers value is above the carbs value, which is impossible (> 100 %)
+    if(sugar && (sugar > carbohydrates)) {
+        sugar = carbohydrates
+    }
+    if(dietaryFibers && (dietaryFibers > carbohydrates)) {
+        dietaryFibers = carbohydrates
+    }
+    if(sugar && dietaryFibers && (sugar + dietaryFibers > carbohydrates)) {  // Special case, where sug + fibers are above the 100 %
+        sugar = (sugar / (sugar+dietaryFibers)) * carbohydrates
+        dietaryFibers = (dietaryFibers / (sugar+dietaryFibers)) * carbohydrates
+    }
+
     let carbObject = createTableObject(
         applicationStrings.label_nutrient_carbohydrates[language],
         carbohydrates,

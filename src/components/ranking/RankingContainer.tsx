@@ -66,7 +66,7 @@ export function RankingContainer() {
 
     const getUnit = (selectedValue, transformToDietaryRequirements) => {
         if (selectedValue === Constants.DATA_ENERGY) {
-            return "kCal";
+            return "kcal";
         } else if (selectedValue === Constants.DATA_WATER
             || selectedValue === Constants.DATA_LIPIDS
             || selectedValue === Constants.DATA_CARBS
@@ -89,14 +89,23 @@ export function RankingContainer() {
         const helpText = applicationStrings.text_ranking[language];
 
         return (
-            <div className={"container"}>
-                <div className={"row"}>
-                    <div className="col-md-6 col-lg-5 infotextMenus" style={{padding: "24px"}}>
-                        <i>{helpText}</i>
-                    </div>
-                </div>
+            <div className="col-md-6 col-lg-5 infotextMenus" style={{padding: "24px"}}>
+                <i>{helpText}</i>
             </div>
         );
+    }
+
+    const renderInformationText = () => {
+        return (
+            <span>
+                {selectedValue === null &&
+                renderHelpText()
+                }
+                {selectedValue !== null && chartItems && chartItems.length === 0 &&
+                applicationStrings.label_noData[language]
+                }
+            </span>
+        )
     }
 
     const renderWebsite = () => {
@@ -113,11 +122,8 @@ export function RankingContainer() {
                                       selectedElement={selectedValue ? selectedValue.label : ""}/>
                     </div>
                     }
-                    {!chartItems &&
-                    renderHelpText()
-                    }
-                    {chartItems && chartItems.length === 0 &&
-                    applicationStrings.label_noData[language]
+                    {
+                        renderInformationText()
                     }
                 </div>
             </div>
@@ -138,15 +144,13 @@ export function RankingContainer() {
                                   selectedElement={selectedValue ? selectedValue.label : ""}/>
                 </div>
                 }
-                {!chartItems &&
-                renderHelpText()
-                }
-                {chartItems && chartItems.length === 0 &&
-                applicationStrings.label_noData[language]
+                {
+                    renderInformationText()
                 }
             </div>
         );
     }
+
 
     return isMobileDevice() ? renderMobile() : renderWebsite()
 

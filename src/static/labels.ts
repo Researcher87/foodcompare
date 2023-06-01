@@ -403,6 +403,10 @@ export const applicationStrings = {
         de: 'Kohlenhydrate',
         en: 'Carbohydrates'
     },
+    label_nutrient_carbohydrates_m: {
+        de: 'Kohlenhyd.',
+        en: 'Carbs'
+    },
     label_nutrient_carbohydrates_short: {
         de: 'Kohlenhyd.',
         en: 'Carbs'
@@ -501,6 +505,10 @@ export const applicationStrings = {
     },
     label_nutrient_min: {
         de: 'Mineralstoffe',
+        en: 'Minerals'
+    },
+    label_nutrient_min_m: {
+        de: 'Minerale',
         en: 'Minerals'
     },
     label_nutrient_min_calcium: {
@@ -1120,8 +1128,8 @@ export const applicationStrings = {
         en: 'Calculation of BMR and PAL:',
     },
     text_empty_fooddatapanel: {
-        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
-        en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
+        de: 'Klicken Sie links auf Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
+        en: 'Click the plus button to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
     text_empty_fooddatapanel_mobileInfo: {
         de: 'Das Erstellen komplexer Lebensmittel wird auf Mobilgeräten aktuell nicht unterstützt.',
