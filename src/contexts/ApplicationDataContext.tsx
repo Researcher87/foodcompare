@@ -12,7 +12,7 @@ import {
 import {UserData} from "../types/livedata/UserData";
 import {
     initialChartConfigData,
-    initialDirectCompareConfigData,
+    initialDirectCompareConfigData, initialJuxtapositionConfigData,
     initialUserDataAge,
     initialUserDataBreastfeeding,
     initialUserDataLeisureSports,
@@ -24,7 +24,7 @@ import {
 } from "../config/ApplicationSetting";
 import {getNameFromFoodNameList} from "../service/nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
-import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
+import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from "../types/livedata/ChartConfigData";
 import ReactSelectOption from "../types/ReactSelectOption";
 import {parseFoodCompareUri} from "../service/uri/BaseUriService";
 import {DataSettings} from "../types/livedata/DataSettings";
@@ -56,6 +56,7 @@ export interface ApplicationContext extends ApplicationDataContext {
         removeAllItemsFromFoodDataPanel: () => void
         updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void
         updateFoodDataPanelChartConfig: (chartConfig: ChartConfigData) => void
+        updateJuxtapositionConfig: (juxtapositionConfig: JuxtapositionConfig) => void
     }
     setDirectCompareData: {
         updateDirectCompareChartConfig: (chartConfig: DirectCompareChartConfigData) => void
@@ -186,6 +187,18 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 foodDataPanel: {
                     ...prevState.applicationData.foodDataPanel,
                     chartConfigData: chartConfig
+                }
+            }
+        }))
+    }
+
+    updateJuxtaPositionConfig = (juxtapositionConfigData: JuxtapositionConfig) => {
+        this.setState(prevState => ({
+            applicationData: {
+                ...prevState.applicationData,
+                foodDataPanel: {
+                    ...prevState.applicationData.foodDataPanel,
+                    juxtapositionConfigData: juxtapositionConfigData
                 }
             }
         }))
@@ -329,6 +342,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 displayMode: DISPLAYMODE_CHART,
                 selectedFoodItemIndex: 0,
                 chartConfigData: initialChartConfigData,
+                juxtapositionConfigData: initialJuxtapositionConfigData
             },
             directCompareDataPanel: {
                 selectedFoodItem1: null,
@@ -410,7 +424,8 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
                 removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
                 updateAllFoodItemNames: this.updateAllFoodItemNames,
-                updateFoodDataPanelChartConfig: this.updateFoodDataPanelChartConfig
+                updateFoodDataPanelChartConfig: this.updateFoodDataPanelChartConfig,
+                updateJuxtapositionConfig: this.updateJuxtaPositionConfig
             },
             setDirectCompareData: {
                 updateDirectCompareChartConfig: this.updateDirectCompareChartConfig,

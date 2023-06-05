@@ -10,7 +10,7 @@ import {
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
-    TAB_INFO,
+    TAB_INFO, TAB_JUXTAPOSITION,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
@@ -94,6 +94,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             case TAB_PROTEINS_DATA:
                 setHelpModalId(8)
                 return;
+            case TAB_JUXTAPOSITION:
+                setHelpModalId(11)
+                return;
             default:
                 return;
         }
@@ -147,6 +150,8 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
     const sourceToolTip = `${applicationStrings.tooltip_source[languageContext.language]} ${sourceString}`
     const headerLabel = isMobileDevice() ? "header-label-m" : "header-label";
+
+    const aggregatedFoodItem = props.selectedFoodItem?.aggregated === true
 
     return (
         <div style={{paddingBottom: "6px"}}>

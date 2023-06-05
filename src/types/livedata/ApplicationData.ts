@@ -1,5 +1,5 @@
 import SelectedFoodItem from "./SelectedFoodItem";
-import {ChartConfigData, DirectCompareChartConfigData} from "./ChartConfigData";
+import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from "./ChartConfigData";
 import ReactSelectOption from "../ReactSelectOption";
 
 export interface ApplicationData {
@@ -16,6 +16,7 @@ export interface FoodDataPanelData {
     selectedDataPage: string
     displayMode: string
     chartConfigData: ChartConfigData
+    juxtapositionConfigData: JuxtapositionConfig
 }
 
 export interface DirectCompareData {

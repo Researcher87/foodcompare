@@ -71,7 +71,7 @@ export function getVitaminChartData(vitaminData: VitaminData, requirementData: V
     if (vitaminData.e !== null) {
         let amountE = vitaminData.e
         if(dataSettings.includeProvitamins === OPTION_YES) {
-            amountE += calculateVitaminAEquivalent(vitaminData.extendedVitaminE)
+            amountE += calculateVitaminEEquivalent(vitaminData.extendedVitaminE)
         }
         labels.push("E");
         values.push(determineFoodRequirementRatio(requirementData.e, amountE, portionAmount, userData));

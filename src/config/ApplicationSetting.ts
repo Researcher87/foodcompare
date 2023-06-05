@@ -1,5 +1,12 @@
-import {AMOUNT_PORTION, CARBS_DATA_BASE, CHART_TYPE_PIE, LIPIDS_DATA_BASE, SEX_MALE} from "./Constants";
-import {ChartConfigData, DirectCompareChartConfigData} from "../types/livedata/ChartConfigData";
+import {
+    AMOUNT_PORTION,
+    CARBS_DATA_BASE,
+    CHART_TYPE_PIE, COMPARISON_REFERENCE_ALL,
+    LIPIDS_DATA_BASE,
+    RANKING_BASE_DATA_INDEX,
+    SEX_MALE
+} from "./Constants";
+import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from "../types/livedata/ChartConfigData";
 import {WindowDimension} from "../service/WindowDimension";
 
 export const release = "1.6.1"
@@ -64,6 +71,11 @@ export const initialChartConfigData: ChartConfigData = {
         portionType: AMOUNT_PORTION,
         expand100: false
     }
+}
+
+export const initialJuxtapositionConfigData: JuxtapositionConfig = {
+    selectedGroup: null,
+    selectedComparisonReference: null
 }
 
 export const initialDirectCompareConfigData: DirectCompareChartConfigData = {

@@ -5,7 +5,7 @@ import {
     CHART_VITAMINS,
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
-    TAB_ENERGY_DATA,
+    TAB_ENERGY_DATA, TAB_JUXTAPOSITION,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
@@ -18,6 +18,7 @@ import CarbsDataChart from "./charts/CarbsDataChart";
 import {ChartProps} from "../../types/livedata/ChartPropsData";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
+import JuxtapostionContainer from "./juxtaposition/JuxtapositionContainer";
 
 export function ChartPanel(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -42,6 +43,8 @@ export function ChartPanel(props: ChartProps) {
         chart = <CarbsDataChart selectedFoodItem={props.selectedFoodItem}/>
     } else if (selectedDataTab === TAB_PROTEINS_DATA) {
         chart = <ProteinDataChart selectedFoodItem={props.selectedFoodItem}/>
+    }  else if (selectedDataTab === TAB_JUXTAPOSITION) {
+        chart = <JuxtapostionContainer selectedFoodItem={props.selectedFoodItem} displayMode={props.displayMode}/>
     }
 
     return (

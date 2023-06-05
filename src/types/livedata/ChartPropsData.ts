@@ -6,7 +6,9 @@ import {MineralData, ProteinData, VitaminData} from "../nutrientdata/FoodItem";
 export interface ChartProps {
     selectedFoodItem: SelectedFoodItem
     directCompareUse?: boolean
+    displayMode?: string
 }
+
 export interface BaseDataChartProps extends ChartProps {
     directCompareConfig?: PieChartDirectCompareConfig
 }
@@ -32,6 +34,10 @@ export interface MineralVitaminChartProps extends ChartProps {
     precalculatedData?: any
 }
 
+export interface JuxtapositionChartProps extends ChartProps {
+    selectedGroup: number,
+    selectedReference: number
+}
 
 export interface BarChartDirectCompareConfig {
     maxValue?: number,

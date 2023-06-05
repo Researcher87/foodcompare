@@ -114,6 +114,7 @@ export const TAB_MINERAL_DATA = "mineraldata"
 export const TAB_LIPIDS_DATA = "lipidsdata"
 export const TAB_CARBS_DATA = "carbsdata"
 export const TAB_PROTEINS_DATA = "proteinsdata"
+export const TAB_JUXTAPOSITION = "juxtaposition"
 export const TAB_INFO = "infodata"
 
 export const QUERYKEY_DATAPANEL_ADD = "add"
@@ -127,3 +128,14 @@ export const TAB_LIST = [TAB_BASE_DATA, TAB_ENERGY_DATA, TAB_VITAMIN_DATA, TAB_M
 export const UNIT_GRAM = 0
 export const UNIT_MILLIGRAM = 1
 export const UNIT_MICROGRAM = 2
+
+export const RANKING_BASE_DATA_INDEX = 0
+export const RANKING_VITAMIN_INDEX = 1
+export const RANKING_MINERAL_INDEX = 2
+export const RANKING_LIPIDS_INDEX = 3
+export const RANKING_CARBS_INDEX = 4
+export const RANKING_PROTEIN_INDEX = 5
+
+export const COMPARISON_REFERENCE_ALL = 0
+export const COMPARISON_REFERENCE_ALL_IN_CATEGORY = 1
+export const COMPARISON_REFERENCE_SELECTED_TABS = 2

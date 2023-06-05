@@ -303,6 +303,38 @@ export const applicationStrings = {
         de: "Jetzt beginnen...",
         en: "Get started..."
     },
+    label_juxtaposition: {
+        de: 'Vergleich',
+        en: 'Juxtaposition'
+    },
+    label_juxtaposition_table_avg: {
+        de: 'Mittel',
+        en: 'Average'
+    },
+    label_juxtaposition_table_max: {
+        de: 'Max',
+        en: 'Max'
+    },
+    label_juxtaposition_table_median: {
+        de: 'Median',
+        en: 'Median'
+    },
+    label_juxtaposition_table_min: {
+        de: 'Min',
+        en: 'Min'
+    },
+    label_juxtaposition_table_rank: {
+        de: 'Rang',
+        en: 'Rank'
+    },
+    label_juxtaposition_table_value: {
+        de: 'Wert',
+        en: 'Value'
+    },
+    label_juxtaposition_unavailable: {
+        de: 'Keine Anzeige möglich.',
+        en: 'Data cannot be displayed.'
+    },
     label_info: {
         de: 'Info',
         en: 'Info'
@@ -823,13 +855,25 @@ export const applicationStrings = {
         de: 'Zeige Tagesbedarf',
         en: 'Show dietary requirements'
     },
-    label_requirement: {
-        de: 'Tagesbedarf',
-        en: 'Daily requirements'
-    },
     label_reference: {
         de: 'Bezug',
         en: 'Reference'
+    },
+    label_reference_all: {
+        de: 'Alle Lebensmittel in Food Compare',
+        en: 'All foods in Food Compare'
+    },
+    label_reference_category: {
+        de: 'Alle Lebensmittel dieser Kategorie',
+        en: 'All foods in this category'
+    },
+    label_reference_panel: {
+        de: 'Alle hinzugefügten Lebensmittel im Datenbereich',
+        en: 'All foods added in the data panel'
+    },
+    label_requirement: {
+        de: 'Tagesbedarf',
+        en: 'Daily requirements'
     },
     label_source: {
         de: 'Datenquelle',

@@ -226,8 +226,8 @@ export default function FoodDataPanelContainer() {
                                            openCompositeSelectorModal={openCompositeSelectorModal}
                     />
                 </div>
-                <div className={"d-flex flex-row"} style={{overflow: "auto"}}>
-                    <div className="col media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
+                <div className={"d-flex flex-row"}>
+                    <div className="col media app" style={{maxWidth: "1100px", minWidth: "1100px", marginTop: "-10px"}}>
                         {selectedFoodItems && selectedFoodItems.length > 0 ?
                             <div>
                                 <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>

@@ -10,7 +10,7 @@ import {applicationStrings} from "../../static/labels";
 import {confirmAction} from "../ConfirmationDialog";
 import ReactTooltip from "react-tooltip";
 import {useHistory} from 'react-router-dom';
-import {PATH_FOODDATA_PANEL} from '../../config/Constants';
+import {PATH_FOODDATA_PANEL, TAB_JUXTAPOSITION} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import {isMobileDevice} from "../../service/WindowDimension";
 

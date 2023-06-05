@@ -3,7 +3,7 @@ import {
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
-    TAB_INFO,
+    TAB_INFO, TAB_JUXTAPOSITION,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
@@ -91,6 +91,14 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
                         active={props.dataPage === TAB_PROTEINS_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_proteins[languageContext.language])}
                 </Button>
+                {props.verticalArrangement &&
+                    <Button className="btn sidebar-link"
+                            onClick={() => handlePageButtonClick(TAB_JUXTAPOSITION)}
+                            variant={variant}
+                            active={props.dataPage === TAB_JUXTAPOSITION}>
+                        {makeButtonLabel(applicationStrings.label_juxtaposition[languageContext.language])}
+                    </Button>
+                }
                 <Button className="btn sidebar-link"
                         onClick={() => handlePageButtonClick(TAB_INFO)}
                         variant={variant}

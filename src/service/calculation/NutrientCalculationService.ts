@@ -1,6 +1,7 @@
 import {determineFoodRequirementRatio, determineProteinRequirementRatio} from "./DietaryRequirementService";
 import {UserData} from "../../types/livedata/UserData";
 import {MineralData, VitaminData} from "../../types/nutrientdata/FoodItem";
+import * as Constants from "../../config/Constants";
 
 /**
  * Determines the maximum vitamin or mineral or protein value of a food item (referring to the daily dietary requirements).
@@ -52,4 +53,33 @@ export function nullifyNonOverlappingValues(dataSet: any, overlappingAttributes:
     }
 
     return newDataset
+}
+
+/**
+ * Returns the unit of a nutrient. This unit refers to the default unit of the Food Data Central data sheets (resp.
+ * the Food Compare Catalog)
+ * @param selectedValue The selected nutrient
+ * @param transformToDietaryRequirements Optionally, the specification that the daily requirements are used as unit
+ * @return The unit (g, mg or %).
+ */
+export const getUnit = (selectedValue: string, transformToDietaryRequirements?: boolean) => {
+    if (selectedValue === Constants.DATA_ENERGY) {
+        return "kcal";
+    } else if (selectedValue === Constants.DATA_WATER
+        || selectedValue === Constants.DATA_LIPIDS
+        || selectedValue === Constants.DATA_CARBS
+        || selectedValue === Constants.DATA_CARBS_SUGAR
+        || selectedValue === Constants.DATA_PROTEINS
+        || selectedValue === Constants.DATA_ASH
+        || selectedValue === Constants.DATA_CARBS_DIETARY_FIBERS
+        || selectedValue === Constants.DATA_LIPIDS_SATURATED
+        || selectedValue === Constants.DATA_LIPIDS_MONO_UNSATURATED
+        || selectedValue === Constants.DATA_LIPIDS_POLY_UNSATURATED
+        || selectedValue === Constants.DATA_LIPIDS_TRANSFATTY_ACIDS) {
+        return "g";
+    } else if (transformToDietaryRequirements) {
+        return "%";
+    } else {
+        return "mg";
+    }
 }

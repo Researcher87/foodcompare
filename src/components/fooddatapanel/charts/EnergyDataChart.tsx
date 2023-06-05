@@ -57,7 +57,7 @@ export default function EnergyDataChart(props: ChartProps) {
         const showInfotext = !(isMobileDevice() && props.directCompareUse)
 
         return (
-            <div style={{paddingLeft: "50px", paddingTop: "20px"}}>
+            <div style={{paddingLeft: "50px", paddingTop: "20px", maxWidth: "90%"}}>
                 {!isMobileDevice()
                     ? <h5><b>{`${energy100g}`} kcal / 100 g</b></h5>
                     : <h6><b>{`${energy100g}`} kcal / 100 g</b></h6>

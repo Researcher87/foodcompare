@@ -186,6 +186,22 @@
 					"<p><b>Data source:</b> For some foods more than one data source is provided. Food Compare uses data from SR Legacy by default, but for some foods also FNDDS is provided, which contains more up-to-date data (which is sometimes less comprehensive, though). In general, differences between the two data sources are low.<br/>In case that more than one data source is available, you can choose in the settings whether missing data values should be supplemented by the other data source, if it provides corresponding data (recommended). You can also let Food Compare calculate the average values of the two data sources (<i>combine data sources</i>).</p>"
 				]
 			}
+		},
+		{
+			"id": 11,
+			"remark": "Gegenüberstellung",
+			"de": {
+				"title": "Gegenüberstellung",
+				"content": [
+					"In dieser Ansicht werden die Nährstoffe das ausgewählte Lebensmittel im Vergleich zu anderen Lebensmitteln dargestellt. Dabei kann ausgewählt werden, ob es mit allen Lebensmitteln in Food Compare verglichen werden soll oder nur mit den Lebensmitteln aus derselben Kategorie. Wenn mindestens zwei Lebensmittel zum Datenbereich hinzugefügt wurden, dann kann außerdem ein Vergleich unter allen geöffneten Lebensmitteln (Tabs) durchgeführt werden. Im Diagrammmodus wird das Lebensmittel für jeden Nährstoff in einem eigenen Balkendiagramm einsortiert und hervorgehoben. Im Tabellenmodus können auch Informationen zu Durchschnitt, Median u.ä. abgerufen werden."
+				]
+			},
+			"en": {
+				"title": "Juxtaposition",
+				"content": [
+					"On this data page, the nutrient data of the selected food is compared with other foods. It is both possible to compare the selected food with all other food elements in Food Compare, or just with those food elements of the same category. If more than one food element has been added to the data panel, the selected food element can also be compared to the other food elements (tabs) of the data panel. In the chart mode, the nutrients of the selected food element will be classified in separate bar charts, with the respective food element being highlighted. In the table mode, additional information is provided, such as the average value, median and the like."
+				]
+			}
 		}
 	]
 }

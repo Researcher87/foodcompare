@@ -1198,7 +1198,7 @@ function calculateProteinRequirement(requirementMg: number, userData: UserData |
         return 0
     }
     const requirement = (requirementMg * userData.weight)
-    return dataSettings === UNIT_MILLIGRAM ? requirement : autoRound(requirement / 1000)
+    return dataSettings.unitProteins === UNIT_MILLIGRAM ? requirement : autoRound(requirement / 1000)
 }
 
 function calculateProvitaminEquivalent(referenceVitaminRequriemtnAmount: RequirementData, equivalenceFactor: number,

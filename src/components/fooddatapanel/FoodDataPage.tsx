@@ -63,8 +63,6 @@ export default function FoodDataPage(props: FoodDataPageProps) {
             dataSettings: applicationContext.dataSettings
         }
 
-        console.log('xxx', selectedDataTab)
-
         const extendedParams = {...tableCalculationParams,
             dietaryRequirement: dietaryRequirement,
             userData: userData

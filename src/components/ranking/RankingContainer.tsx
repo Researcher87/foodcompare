@@ -10,6 +10,7 @@ import {RankingChart} from "./RankingChart";
 import {maxElementsInRankingChart} from "../../config/ApplicationSetting";
 import ReactSelectOption from "../../types/ReactSelectOption";
 import {isMobileDevice} from "../../service/WindowDimension";
+import {getUnit} from "../../service/calculation/NutrientCalculationService";
 
 export function RankingContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -61,28 +62,6 @@ export function RankingContainer() {
 
         setChartItems(orderedChartItems)
         setUnit(unit)
-    }
-
-
-    const getUnit = (selectedValue, transformToDietaryRequirements) => {
-        if (selectedValue === Constants.DATA_ENERGY) {
-            return "kcal";
-        } else if (selectedValue === Constants.DATA_WATER
-            || selectedValue === Constants.DATA_LIPIDS
-            || selectedValue === Constants.DATA_CARBS
-            || selectedValue === Constants.DATA_CARBS_SUGAR
-            || selectedValue === Constants.DATA_PROTEINS
-            || selectedValue === Constants.DATA_CARBS_DIETARY_FIBERS
-            || selectedValue === Constants.DATA_LIPIDS_SATURATED
-            || selectedValue === Constants.DATA_LIPIDS_MONO_UNSATURATED
-            || selectedValue === Constants.DATA_LIPIDS_POLY_UNSATURATED
-            || selectedValue === Constants.DATA_LIPIDS_TRANSFATTY_ACIDS) {
-            return "g";
-        } else if (transformToDietaryRequirements) {
-            return "%";
-        } else {
-            return "mg";
-        }
     }
 
     const renderHelpText = () => {

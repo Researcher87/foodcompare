@@ -97,3 +97,5 @@ export function convertBooleanToDigit(value: boolean) {
 export function convertStringToBoolean(value: string) {
 	return value === "1" ? true : false
 }
+
+
