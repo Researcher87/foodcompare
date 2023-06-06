@@ -79,10 +79,7 @@ function getScalesForRankingChart() {
     const scales = {
         x: {
             ticks: {
-                autoSkip: false,
-                callback: function (value, index) {
-                    return shortenName(value, 20);
-                }
+                autoSkip: false
             },
         }
     };
