@@ -307,6 +307,30 @@ export const applicationStrings = {
         de: 'Vergleich',
         en: 'Juxtaposition'
     },
+    label_juxtaposition_settings_btn: {
+        de: 'Anzeigeoptionen',
+        en: 'Display settings'
+    },
+    label_juxtaposition_settings_chartsize: {
+        de: 'Diagrammgröße',
+        en: 'Chart size'
+    },
+    label_juxtaposition_settings_chartsize_s: {
+        de: 'Klein',
+        en: 'Small'
+    },
+    label_juxtaposition_settings_chartsize_m: {
+        de: 'Medium',
+        en: 'Medium'
+    },
+    label_juxtaposition_settings_chartsize_l: {
+        de: 'Groß',
+        en: 'Large'
+    },
+    label_juxtaposition_settings_showLabels: {
+        de: 'Labels anzeigen',
+        en: 'Show labels'
+    },
     label_juxtaposition_table_avg: {
         de: 'Mittel',
         en: 'Average'

@@ -12,7 +12,6 @@ import {
 import {isMobileDevice} from "../../../service/WindowDimension";
 import Select from 'react-select';
 import ReactSelectOption from "../../../types/ReactSelectOption";
-import SelectedFoodItem from "../../../types/livedata/SelectedFoodItem";
 
 export interface JuxtapositionSettingsProps {
     onHide: () => void,

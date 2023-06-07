@@ -7,6 +7,10 @@ export const CHART_TYPE_BAR = "bar chart"
 export const CHART_VITAMINS = "chart vitamins"
 export const CHART_MINERALS = "chart minerals"
 
+export const CHART_SIZE_LARGE = 1
+export const CHART_SIZE_MEDIUM = 2
+export const CHART_SIZE_SMALL = 3
+
 export const CATEGORY_BEVERAGE = 10
 
 export const DATA_ASH = "d_ash";
