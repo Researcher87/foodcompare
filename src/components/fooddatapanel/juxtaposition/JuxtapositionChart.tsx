@@ -11,6 +11,8 @@ import {Bar} from "react-chartjs-2";
 import {
     getBarChartOptionsForJuxtaposition
 } from "../../../service/ChartConfigurationService";
+import SelectedFoodItem from "../../../types/livedata/SelectedFoodItem";
+
 
 export function JuxtapositionChart(props: JuxtapositionChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

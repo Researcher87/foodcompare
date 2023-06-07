@@ -47,7 +47,8 @@ export function getTotalChartData(nutrientData: NutrientData, language: string, 
 
 export function getNutrientChartData(nutrientData: NutrientData, language: string, showDetails: boolean,
                                      category: number | undefined): ChartDisplayData {
-    const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids + nutrientData.baseData.proteins;
+    const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids
+        + nutrientData.baseData.proteins + (nutrientData.baseData.alcohol ?? 0)
 
     let sugar = nutrientData.carbohydrateData?.sugar ? nutrientData.carbohydrateData.sugar : 0
     let dietaryFibers = nutrientData.baseData.dietaryFibers ? nutrientData.baseData.dietaryFibers : 0

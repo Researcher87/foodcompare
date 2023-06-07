@@ -1104,13 +1104,12 @@ function createTableObjectAlcohol(label: string, value_100g: number, portion: nu
         }
     }
 
-    const valueVolumePortion = valuePortion * 1.267
     const valueVolume100gram = value_100g * 1.267
 
     return {
         label: label,
         value_100g: `${MathService.autoRound(value_100g)} ${unit}   ( = ${MathService.autoRound(valueVolume100gram)} Vol % )`,
-        value_portion: `${MathService.autoRound(valuePortion)} ${unit}   ( = ${MathService.autoRound(valueVolumePortion)} Vol % )`
+        value_portion: `${MathService.autoRound(valuePortion)} ${unit}   ( = ${MathService.autoRound(valueVolume100gram)} Vol % )`
     }
 }
 

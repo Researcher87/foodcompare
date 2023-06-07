@@ -1,5 +1,5 @@
 import {ChartProps} from "../../../types/livedata/ChartPropsData";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {getRankingGroups} from "../../../service/RankingService";
@@ -12,6 +12,7 @@ import {
 } from "../../../config/Constants";
 import {JuxtapositionChart} from "./JuxtapositionChart";
 import {JuxtapositionTable} from "./JuxtapositionTable";
+import {JustapositionSettings} from "./JustapositionSettings";
 
 export default function JuxtapostionContainer(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -20,6 +21,8 @@ export default function JuxtapostionContainer(props: ChartProps) {
     if (!applicationContext) {
         throw new Error("ApplicationContext unavailable.")
     }
+
+    const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false)
 
     const referenceList = [
         {value: COMPARISON_REFERENCE_ALL, label: applicationStrings.label_reference_all[language]},
@@ -60,7 +63,6 @@ export default function JuxtapostionContainer(props: ChartProps) {
         applicationContext.setFoodDataPanelData.updateJuxtapositionConfig(newJuxtapositionConfigData)
     }
 
-
     const getRankingGroupsList = () => {
         return getRankingGroups(language);
     }
@@ -83,6 +85,9 @@ export default function JuxtapostionContainer(props: ChartProps) {
 
     return (
         <div style={{maxHeight: "453px", minHeight: "453px", overflow: "auto"}}>
+            {showSettingsModal &&
+                <JustapositionSettings onHide={() => setShowSettingsModal(false)}></JustapositionSettings>
+            }
             <div className={"container row"}>
                 <div className={"col-4"}>
                     <span className={"form-label"}>{applicationStrings.label_reference[language]}:</span>
@@ -103,6 +108,11 @@ export default function JuxtapostionContainer(props: ChartProps) {
                             styles={customSelectStyles}
                             onChange={handleGroupChange}
                     />
+                </div>
+                <div>
+                    <button className={"btn btn-link"} onClick={() => setShowSettingsModal(true)}>
+                        Anzeige
+                    </button>
                 </div>
             </div>
             <hr/>
