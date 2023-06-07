@@ -1,9 +1,8 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {Form, FormGroup, Modal} from "react-bootstrap";
 import {applicationStrings} from "../../../static/labels";
-import ReactSelectOption from "../../../types/ReactSelectOption";
 import {
     CHART_SIZE_LARGE,
     CHART_SIZE_MEDIUM,
@@ -25,20 +24,19 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
         throw Error("Application context is unavailable.")
     }
 
-    const handleChartSizeChange = (selectionOption: ReactSelectOption) => {
-        const newJuxtapositionConfigData = {
-            ...applicationContext.applicationData.foodDataPanel.juxtapositionConfigData,
-            chartSize: selectedOption
-        }
-        applicationContext.setFoodDataPanelData.updateJuxtapositionConfig(newJuxtapositionConfigData)
-    }
+    const currentSettings = applicationContext.applicationData.foodDataPanel.juxtapositionConfigData
+    const [chartSize, setChartSize] = useState<number>(currentSettings.chartSize)
+    const [showLabels, setShowLabels] = useState<boolean>(currentSettings.showLabels)
 
-    const changeShowLabelState = (option: boolean) => {
+    const saveData = () => {
         const newJuxtapositionConfigData = {
             ...applicationContext.applicationData.foodDataPanel.juxtapositionConfigData,
-            showLabel: option
+            chartSize: chartSize,
+            showLabels: showLabels
         }
+        console.log('jux', newJuxtapositionConfigData)
         applicationContext.setFoodDataPanelData.updateJuxtapositionConfig(newJuxtapositionConfigData)
+        props.onHide()
     }
 
     const renderMenu = () => {
@@ -48,7 +46,8 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
             {label: applicationStrings.label_juxtaposition_settings_chartsize_l[language], value: CHART_SIZE_LARGE},
         ]
 
-        const {showLabels, chartSize} = applicationContext.applicationData.foodDataPanel.juxtapositionConfigData
+        const chartSizeOption = optionsChartSize[chartSize]
+
         const classRow = isMobileDevice() ? "form-row-m" : "form-row"
 
         return <div>
@@ -60,16 +59,16 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
                                 {applicationStrings.label_juxtaposition_settings_chartsize[language]}:
                             </Form.Label>
                             <Select options={optionsChartSize}
-                                    value={chartSize}
+                                    value={chartSizeOption}
                                     isSearchable={false}
-                                    onChange={(value) => handleChartSizeChange(value)}
+                                    onChange={(option) => setChartSize(option.value)}
                             />
                         </div>
                         <div className={classRow}>
                             <Form.Check inline className="form-radiobutton"
                                         checked={showLabels === true}
-                                        label={applicationStrings.label_juxtaposition_settings_showLabels[lang]}
-                                        onClick={changeShowLabelState}>
+                                        label={applicationStrings.label_juxtaposition_settings_showLabels[language]}
+                                        onChange={() => setShowLabels(!showLabels)}>
                             </Form.Check>
                         </div>
                     </div>
@@ -86,7 +85,7 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
                         className="btn-close"
                         data-dismiss="modal"
                         aria-label="Close"
-                        onClick={props.onHide}>
+                        onClick={() => saveData()}>
                 </button>
             </Modal.Header>
             <Modal.Body>
@@ -97,7 +96,7 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
             <Modal.Footer>
                 <button type="button"
                         className="btn btn-primary"
-                        onClick={props.onHide}>
+                        onClick={() => saveData()}>
                     {applicationStrings.button_close[language]}
                 </button>
             </Modal.Footer>

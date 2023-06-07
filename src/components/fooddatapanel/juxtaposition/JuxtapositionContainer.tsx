@@ -45,7 +45,8 @@ export default function JuxtapostionContainer(props: ChartProps) {
             }
             applicationContext.setFoodDataPanelData.updateJuxtapositionConfig(newJuxtapositionConfigData)
         }
-    }, [applicationContext.applicationData.foodDataPanel.selectedFoodItems.length, applicationContext.applicationData.foodDataPanel.juxtapositionConfigData])
+    }, [applicationContext.applicationData.foodDataPanel.selectedFoodItems.length,
+        applicationContext.applicationData.foodDataPanel.juxtapositionConfigData])
 
     const handleGroupChange = (selectedOption) => {
         const newJuxtapositionConfigData = {
@@ -75,7 +76,7 @@ export default function JuxtapostionContainer(props: ChartProps) {
     const rankingList = getRankingGroupsList()
 
     const group = selectedGroup ?? rankingList[0]
-    const reference = selectedComparisonReference ?? referenceList[0]
+    const reference = selectedComparisonReference ?? referenceList[1]
 
     if(props.selectedFoodItem.aggregated === true) {
         return <div>
@@ -88,7 +89,7 @@ export default function JuxtapostionContainer(props: ChartProps) {
             {showSettingsModal &&
                 <JustapositionSettings onHide={() => setShowSettingsModal(false)}></JustapositionSettings>
             }
-            <div className={"container row"}>
+            <div className={"container row align-items-end"}>
                 <div className={"col-4"}>
                     <span className={"form-label"}>{applicationStrings.label_reference[language]}:</span>
                     <Select className="form-control-sm"
@@ -109,9 +110,9 @@ export default function JuxtapostionContainer(props: ChartProps) {
                             onChange={handleGroupChange}
                     />
                 </div>
-                <div>
+                <div className={"col-2"}>
                     <button className={"btn btn-link"} onClick={() => setShowSettingsModal(true)}>
-                        Anzeige
+                        {applicationStrings.label_juxtaposition_settings_btn[language]}
                     </button>
                 </div>
             </div>
@@ -122,7 +123,6 @@ export default function JuxtapostionContainer(props: ChartProps) {
                     :
                     <JuxtapositionTable selectedGroup={group.value} selectedReference={reference.value} selectedFoodItem={props.selectedFoodItem}></JuxtapositionTable>
                 }
-
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import {
     AMOUNT_PORTION,
-    CARBS_DATA_BASE,
+    CARBS_DATA_BASE, CHART_SIZE_MEDIUM,
     CHART_TYPE_PIE, COMPARISON_REFERENCE_ALL,
     LIPIDS_DATA_BASE,
     RANKING_BASE_DATA_INDEX,
@@ -75,7 +75,9 @@ export const initialChartConfigData: ChartConfigData = {
 
 export const initialJuxtapositionConfigData: JuxtapositionConfig = {
     selectedGroup: null,
-    selectedComparisonReference: null
+    selectedComparisonReference: null,
+    chartSize: CHART_SIZE_MEDIUM,
+    showLabels: false
 }
 
 export const initialDirectCompareConfigData: DirectCompareChartConfigData = {

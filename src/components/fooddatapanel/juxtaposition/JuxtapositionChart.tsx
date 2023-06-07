@@ -1,5 +1,5 @@
 import {JuxtapositionChartProps} from "../../../types/livedata/ChartPropsData";
-import {color_line_blue, color_line_red} from "../../../config/ChartConfig";
+import {color_chart_black, color_gray, color_line_blue, color_line_red} from "../../../config/ChartConfig";
 import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {
@@ -12,6 +12,8 @@ import {
     getBarChartOptionsForJuxtaposition
 } from "../../../service/ChartConfigurationService";
 import SelectedFoodItem from "../../../types/livedata/SelectedFoodItem";
+import {CHART_SIZE_LARGE, CHART_SIZE_MEDIUM, CHART_SIZE_SMALL} from "../../../config/Constants";
+import {shortenName} from "../../../service/nutrientdata/NameTypeService";
 
 
 export function JuxtapositionChart(props: JuxtapositionChartProps) {
@@ -29,7 +31,8 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
         updateChart()
     }, [
         applicationContext.applicationData.foodDataPanel.juxtapositionConfigData,
-        applicationContext.applicationData.foodDataPanel.selectedFoodItems.length
+        applicationContext.applicationData.foodDataPanel.selectedFoodItems.length,
+        applicationContext.applicationData.foodDataPanel.selectedFoodItemIndex
     ])
 
     const updateChart = async () => {
@@ -43,6 +46,8 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
         setChartData(newChartData)
     }
 
+    const showLabels = applicationContext.applicationData.foodDataPanel.juxtapositionConfigData.showLabels
+
     const getOptions = (title: string, unit: string, nutrientIndex: number) => {
         let options = getBarChartOptionsForJuxtaposition(title, unit)
 
@@ -50,25 +55,65 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
             chartItem => chartItem.id === props.selectedFoodItem.id
         )
 
+        const color = showLabels ? color_chart_black : color_line_red
+        const maxRotation = showLabels ? 90 : 0
+        const minRotation = showLabels ? 90 : 0
+
+        const numberOfItemsInChart = chartData[nutrientIndex].chartItems.length
+        const maxNumberOfTicks = 60
+
         const ticks = {
             autoSkip: false,
-            maxRotation: 0,
-            minRotation: 0,
-            color: color_line_red,
+            color: color,
+            minRotation: minRotation,
+            maxRotation: maxRotation,
             callback: function (value, index) {
-                return index === barIndexOfSelectedFoodItem ? "▲" : ""
+                const label = showLabels ? chartData[nutrientIndex].chartItems[index].name : ""
+                const marker = showLabels ? "►" : "▲"
+
+                if(numberOfItemsInChart <= maxNumberOfTicks) {   // Not too many bars in chart => you can print any label then
+                    return index === barIndexOfSelectedFoodItem ? marker : shortenName(label, 18)
+                } else { // Too many bars in chart => print only every nth label
+                    const skip = Math.ceil(numberOfItemsInChart / maxNumberOfTicks)
+                    return (index % skip === 0 || index === barIndexOfSelectedFoodItem)
+                        ? index === barIndexOfSelectedFoodItem
+                            ? marker
+                            : shortenName(label, 18)
+                        : ""
+                }
             }
         }
 
         options = {
             ...options, scales: {
                 ...options.scales, x: {
-                    ...options.scales.x, ticks: ticks
+                    ...options.scales.x,
+                    ticks: ticks
                 }
             }
         }
 
         return options
+    }
+
+
+    const chartHeightCategory = applicationContext.applicationData.foodDataPanel.juxtapositionConfigData.chartSize
+    let height
+    switch (chartHeightCategory) {
+        case CHART_SIZE_SMALL:
+            height = 125
+            break
+        default:
+        case CHART_SIZE_MEDIUM:
+            height = 200
+            break
+        case CHART_SIZE_LARGE:
+            height = 300
+            break
+    }
+
+    if(showLabels) {
+        height += 115
     }
 
     const renderChartsOfGroup = () => {
@@ -95,23 +140,19 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
             }
 
             const options = getOptions(chartData.nutrientName, chartData.unit, nutrientIndex)
-            const dataAvailable = true   // Todo: calculate
 
             return (
                 <div key={`juxchartdiv-${chartData.nutrientName}`}>
                     <div className="smooth-scroll">
-                        {dataAvailable &&
-                            <div>
-                                <div>
-                                    <Bar key={`juxchart-${chartData.nutrientName}`}
-                                         data={chartDataObj}
-                                         height={200}
-                                         options={options}
-                                    />
-                                </div>
-                                <hr/>
+                        <div>
+                            <div style={{height: `${height}px`}}>
+                                <Bar key={`juxchart-${chartData.nutrientName}`}
+                                     data={chartDataObj}
+                                     options={options}
+                                />
                             </div>
-                        }
+                            <hr/>
+                        </div>
                     </div>
                 </div>
             )

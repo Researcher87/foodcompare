@@ -41,7 +41,6 @@ export function getNameFromFoodNameList(foodNameList: Array<NameType>, id: numbe
  * maxLength: The maximum length of the food name.
  */
 export function shortenName(name, maxLength) {
-    console.log('JUDE:', name)
     if(name.length <= maxLength) {
         return name;
     }

@@ -51,7 +51,9 @@ export interface DirectCompareBarChartConfig extends BarChartConfig {
 
 export interface JuxtapositionConfig {
     selectedGroup: ReactSelectOption | null,
-    selectedComparisonReference: ReactSelectOption | null
+    selectedComparisonReference: ReactSelectOption | null,
+    chartSize: number,
+    showLabels: boolean
 }
 
 // For URI String

@@ -28,6 +28,8 @@ export const color_chart_yellow_green_3 ="rgba(124, 179, 66)"
 export const color_chart_orange = "rgba(230, 126, 34)";
 export const color_x = "rgba(51, 204, 204)"
 
+export const color_chart_black = "rgba(0, 0, 0)";
+
 export const color_chart_misc = color_gray;
 
 // Chart sizes:

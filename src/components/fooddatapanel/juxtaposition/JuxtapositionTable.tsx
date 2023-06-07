@@ -23,7 +23,7 @@ export function JuxtapositionTable(props: JuxtapositionChartProps) {
 
     useEffect(() => {
         updateTable()
-    }, [applicationContext.applicationData.foodDataPanel.juxtapositionConfigData])
+    }, [applicationContext.applicationData.foodDataPanel.juxtapositionConfigData, props.selectedFoodItem])
 
     const updateTable = () => {
         const selectedFoodItemsInPanel = applicationContext.applicationData.foodDataPanel.selectedFoodItems
