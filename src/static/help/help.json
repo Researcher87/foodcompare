@@ -171,7 +171,7 @@
 			"de": {
 				"title": "Lebensmittelauswahl",
 				"content": [
-					"<p>Wählen Sie im linken Bereich ein Lebensmittel aus und klicken Sie <i>Hinzufügen</i>, um es ihrem Menü hinzuzfügen. Auf der rechten Seite sehen Sie Ihre Zusammenstellung. Wenn Ihre Zusammenstellung fertig ist, klicken Sie auf <i>Anzeigen</i>, um das Ergebnis in Food Compare darzustellen. Es erscheint als neuer Tab in Ihrem Analysebereich.</p>",
+					"<p>Wählen Sie im linken Bereich ein Lebensmittel aus und klicken Sie <i>Hinzufügen</i>, um es Ihrem Menü hinzuzfügen. Auf der rechten Seite sehen Sie Ihre Zusammenstellung. Wenn Ihre Zusammenstellung fertig ist, klicken Sie auf <i>Anzeigen</i>, um das Ergebnis in Food Compare darzustellen. Es erscheint als neuer Tab in Ihrem Analysebereich.</p>",
 					"<p><b>Food typ:</b> Zu vielen Lebensmitteln existieren Unterformen oder bestimmte Zubereitungsarten, die Sie hier auswählen können.</p>",
 					"<p><b>Portion:</b> Wählen Sie eine vordefinierte Portionsgröße oder geben Sie eine individuelle Portionsgröße ein.</p>",
 					"<p><b>Datenquelle:</b> Für manche Lebensmittel stehen mehrere Datenquellen zur Verfügung. Food Compare verwendet standardmäßig SR Legacy, manchmal steht auch die Datenquelle FNDDS zur Verfügung (mit neueren, z.T. jedoch nicht vollumfänglichen Daten). Meist sind die Unterschiede zwischen den Datenquellen nicht sehr groß.<br/>Falls mehrere Datenquellen zur Verfügung stehen, können Sie einstellen, ob fehlende Werte der von Ihnen ausgewählten Quelle bei Bedarf durch die Werte der anderen Quelle ergänzt werden sollen (empfohlen). Außerdem ist es auch möglich, den Mittelwert aus den Werten beider Quellen zu bilden (<i>Datenquellen kombinieren</i>).</p>"

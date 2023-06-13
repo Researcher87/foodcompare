@@ -6,6 +6,7 @@
  * minYValue: Optional, a pre-defined maxYValue for the Y axis (e.g. 100)
  */
 import {shortenName} from "./nutrientdata/NameTypeService";
+import {applicationStrings} from "../static/labels";
 
 export function getBarChartOptions(title: string, unit: string, maxYValue?: number | undefined) {
     let yAxis: any = {
@@ -25,14 +26,12 @@ export function getBarChartOptions(title: string, unit: string, maxYValue?: numb
 
 export function getBarChartOptionsForRanking(title: string, unit: string) {
     const scales = getScalesForRankingChart();
-    const fullTitle = `${title} (${unit})`
-    return getOptions(fullTitle, unit, scales);
+    return getOptions(title, unit, scales);
 }
 
 export function getBarChartOptionsForJuxtaposition(title: string, unit: string) {
     const scales = getScalesForRankingChart();
-    const titleWithUnit = `${title} (${unit})`
-    return getOptions(titleWithUnit, unit, scales);
+    return getOptions(title, unit, scales);
 }
 
 
