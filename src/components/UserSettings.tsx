@@ -235,6 +235,7 @@ export function UserSettings() {
                     <Select className="form-control-sm"
                             options={palCategories}
                             value={palValue}
+                            isSearchable={false}
                             styles={customSelectStyles}
                             onChange={(value) => changePalValue(value)}
                     />

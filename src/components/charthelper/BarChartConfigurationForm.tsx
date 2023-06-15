@@ -1,11 +1,9 @@
-import {useContext} from "react";
-import {LanguageContext} from "../../contexts/LangContext";
-import {Button, Form} from "react-bootstrap";
-import {applicationStrings} from "../../static/labels";
-import {AMOUNT_PORTION, DISPLAYMODE_CHART, GRAM} from "../../config/Constants";
-import {BarChartConfigurationProps} from "../../types/livedata/ChartPropsData";
-import ReactTooltip from "react-tooltip";
-import {FaBook, FaBookOpen, FaChartBar} from "react-icons/fa";
+import {useContext} from "react"
+import {LanguageContext} from "../../contexts/LangContext"
+import {Button, Form} from "react-bootstrap"
+import {applicationStrings} from "../../static/labels"
+import {AMOUNT_PORTION, GRAM} from "../../config/Constants"
+import {BarChartConfigurationProps} from "../../types/livedata/ChartPropsData"
 
 export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)

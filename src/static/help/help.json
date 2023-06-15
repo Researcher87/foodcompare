@@ -159,7 +159,7 @@
 				"title": "Food Selection",
 				"content": [
 					"<p>Please pick a food from the select list to add it to your food data panel. By default, all food items available in Food Compare are listed, but you can also select food items from a specific category.<br/>In case you are unable to find a desired food element, you may search for a more general term. Some foods are listed as a type (see below), such as different types of cheese or different mushroom species.</p>",
-					"<p><b>Type:</b> For many food items there exist specific forms or kinds of preprations that can be picked from the selector.</p>",
+					"<p><b>Type:</b> For many food items there exist specific forms or kinds of preparations that can be picked from the selector.</p>",
 					"<p><b>Portion:</b> Pick one of the pre-defined portion sizes or enter an individual portion size for the food.</p>",
 					"<p><b>Data source:</b> For some foods more than one data source is provided. Food Compare uses data from SR Legacy by default, but for some foods also FNDDS is provided, which contains more up-to-date data (which is sometimes less comprehensive, though). In general, differences between the two data sources are low.<br/>In case that more than one data source is available, you can choose in the settings whether missing data values should be supplemented by the other data source, if it provides corresponding data (recommended). You can also let Food Compare calculate the average values of the two data sources (<i>combine data sources</i>).</p>"
 				]
@@ -171,7 +171,7 @@
 			"de": {
 				"title": "Lebensmittelauswahl",
 				"content": [
-					"<p>Wählen Sie im linken Bereich ein Lebensmittel aus und klicken Sie <i>Hinzufügen</i>, um es ihrem Menü hinzuzfügen. Auf der rechten Seite sehen Sie Ihre Zusammenstellung. Wenn Ihre Zusammenstellung fertig ist, klicken Sie auf <i>Anzeigen</i>, um das Ergebnis in Food Compare darzustellen. Es erscheint als neuer Tab in Ihrem Analysebereich.</p>",
+					"<p>Wählen Sie im linken Bereich ein Lebensmittel aus und klicken Sie <i>Hinzufügen</i>, um es Ihrem Menü hinzuzfügen. Auf der rechten Seite sehen Sie Ihre Zusammenstellung. Wenn Ihre Zusammenstellung fertig ist, klicken Sie auf <i>Anzeigen</i>, um das Ergebnis in Food Compare darzustellen. Es erscheint als neuer Tab in Ihrem Analysebereich.</p>",
 					"<p><b>Food typ:</b> Zu vielen Lebensmitteln existieren Unterformen oder bestimmte Zubereitungsarten, die Sie hier auswählen können.</p>",
 					"<p><b>Portion:</b> Wählen Sie eine vordefinierte Portionsgröße oder geben Sie eine individuelle Portionsgröße ein.</p>",
 					"<p><b>Datenquelle:</b> Für manche Lebensmittel stehen mehrere Datenquellen zur Verfügung. Food Compare verwendet standardmäßig SR Legacy, manchmal steht auch die Datenquelle FNDDS zur Verfügung (mit neueren, z.T. jedoch nicht vollumfänglichen Daten). Meist sind die Unterschiede zwischen den Datenquellen nicht sehr groß.<br/>Falls mehrere Datenquellen zur Verfügung stehen, können Sie einstellen, ob fehlende Werte der von Ihnen ausgewählten Quelle bei Bedarf durch die Werte der anderen Quelle ergänzt werden sollen (empfohlen). Außerdem ist es auch möglich, den Mittelwert aus den Werten beider Quellen zu bilden (<i>Datenquellen kombinieren</i>).</p>"
@@ -181,9 +181,25 @@
 				"title": "Food Selection",
 				"content": [
 					"<p>Please pick a food from the selector on the left and click <i>Add</i> to add it to your composite food list displayed on the right. Once you completed your composition, click <i>Show</i> in order to show the result in Food Compare. It will appear as a new tab in the data panel.</p>",
-					"<p><b>Food type:</b> For many food items there exist specific forms or kinds of preprations that can be picked from the selector.</p>",
+					"<p><b>Food type:</b> For many food items there exist specific forms or kinds of preparations that can be picked from the selector.</p>",
 					"<p><b>Portion:</b> Pick one of the pre-defined portion sizes or enter an individual portion size for the food.</p>",
 					"<p><b>Data source:</b> For some foods more than one data source is provided. Food Compare uses data from SR Legacy by default, but for some foods also FNDDS is provided, which contains more up-to-date data (which is sometimes less comprehensive, though). In general, differences between the two data sources are low.<br/>In case that more than one data source is available, you can choose in the settings whether missing data values should be supplemented by the other data source, if it provides corresponding data (recommended). You can also let Food Compare calculate the average values of the two data sources (<i>combine data sources</i>).</p>"
+				]
+			}
+		},
+		{
+			"id": 11,
+			"remark": "Gegenüberstellung",
+			"de": {
+				"title": "Gegenüberstellung",
+				"content": [
+					"In dieser Ansicht werden die Nährstoffe des ausgewählten Lebensmittels im Vergleich zu anderen Lebensmitteln einsortiert und dargestellt. Dabei kann ausgewählt werden, ob es mit allen Lebensmitteln in Food Compare verglichen werden soll oder nur mit den Lebensmitteln aus derselben Kategorie (Obst, Gemüse, Fleisch etc.). Wenn mindestens zwei Lebensmittel zum Datenbereich hinzugefügt wurden, so kann außerdem ein Vergleich unter allen in der Ansicht geöffneten Lebensmitteln (Tabs) durchgeführt werden. Im Diagrammmodus wird das  Lebensmittel für jeden Nährstoff in einem separaten Balkendiagramm einsortiert und markiert. Im Tabellenmodus werden hingegen der Wert des entsprechenden Nährstoffs angezeigt, sein Rang im Vergleich zu den anderen Lebensmitteln sowie der Minimalwert, Maximalwert, Durchschnittswert und Median des Nährstoffs über alle Vergleichsobjekte. Der Rang bezeichnet dabei die Position des Lebensmittels in den absteigend nach Werten sortierten Vergleichsobjekte, wobei jedoch nur die Lebensmittel berücksichtigt werden, die eine Angabe zu dem Nährstoff besitzen."
+				]
+			},
+			"en": {
+				"title": "Juxtaposition",
+				"content": [
+					"On this data page, the nutrient data of the selected food is displayed in comparison to other foods. It is both possible to compare the selected food with all other food elements in Food Compare, or just with those food elements of the same category (such as fruit, vegetables, meat). If more than one food element has been added to the data panel, the selected food element can also be compared to the other food elements previously added to the data panel (tabs). In the chart mode, the nutrients of the selected food element will be sorted and classified in separate bar charts, with the selected food element being highlighted. In the table mode, the nutrient value is displayed, its rank compared to the other comparing food elements, as well as the minimum and maximum value, average and median. The rank refers to the position of the food element in the nutrient chart of decending order. Only those comparing food elements are regarded that actually have a data value for the corresponding nutrient."
 				]
 			}
 		}

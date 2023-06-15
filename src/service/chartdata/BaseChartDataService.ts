@@ -47,10 +47,23 @@ export function getTotalChartData(nutrientData: NutrientData, language: string, 
 
 export function getNutrientChartData(nutrientData: NutrientData, language: string, showDetails: boolean,
                                      category: number | undefined): ChartDisplayData {
-    const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids + nutrientData.baseData.proteins;
+    const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids
+        + nutrientData.baseData.proteins + (nutrientData.baseData.alcohol ?? 0)
 
-    const sugar = nutrientData.carbohydrateData?.sugar ? nutrientData.carbohydrateData.sugar : 0
-    const dietaryFibers = nutrientData.baseData.dietaryFibers ? nutrientData.baseData.dietaryFibers : 0
+    let sugar = nutrientData.carbohydrateData?.sugar ? nutrientData.carbohydrateData.sugar : 0
+    let dietaryFibers = nutrientData.baseData.dietaryFibers ? nutrientData.baseData.dietaryFibers : 0
+
+    // NOTE: Sometimes the sugar or dietary fibers value is above the carbs value, which is impossible (> 100 %)
+    if(sugar > totalValue) {
+        sugar = totalValue
+    }
+    if(dietaryFibers > totalValue) {
+        dietaryFibers = totalValue
+    }
+    if(sugar + dietaryFibers > totalValue) {  // Special case, where sug + fibers are above the 100 %
+        sugar = (sugar / (sugar+dietaryFibers)) * totalValue
+        dietaryFibers = (dietaryFibers / (sugar+dietaryFibers)) * totalValue
+    }
 
     let carbValue = showDetails ? (nutrientData.baseData.carbohydrates - sugar - dietaryFibers)
         : nutrientData.baseData.carbohydrates;

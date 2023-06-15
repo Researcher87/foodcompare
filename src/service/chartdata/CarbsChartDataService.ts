@@ -6,26 +6,39 @@ import {ChartDisplayData, LegendData} from "../../types/livedata/ChartDisplayDat
 
 export function getCarbBaseChartData(nutrientData: NutrientData, hideRemainders: boolean, totalAmount: number,
                                      language: string): ChartDisplayData | null {
-    const totalCarbsAmount = nutrientData.baseData.carbohydrates;
-    const dietaryFibers = nutrientData.baseData.dietaryFibers;
-    const sugar = nutrientData.carbohydrateData.sugar
+    let totalCarbsAmount = nutrientData.baseData.carbohydrates;
+    let dietaryFibers = nutrientData.baseData.dietaryFibers;
+    let sugar = nutrientData.carbohydrateData.sugar
+
+    // NOTE: Sometimes the sugar or dietary fibers value is above the carbs value, which is impossible (> 100 %)
+    if(sugar && (sugar > totalCarbsAmount)) {
+        sugar = totalCarbsAmount
+    }
+    if(dietaryFibers && (dietaryFibers > totalCarbsAmount)) {
+        dietaryFibers = totalCarbsAmount
+    }
+    if(sugar && dietaryFibers && (sugar + dietaryFibers > totalCarbsAmount)) {  // Special case, where sug + fibers are above the 100 %
+        sugar = (sugar / (sugar+dietaryFibers)) * totalCarbsAmount
+        dietaryFibers = (dietaryFibers / (sugar+dietaryFibers)) * totalCarbsAmount
+    }
 
     if (!sugar || !dietaryFibers) {
         return null
     }
+
+    let valueRemainder = totalCarbsAmount - (sugar + dietaryFibers);
+    if (valueRemainder < 0) {
+        valueRemainder = 0
+    }
+
+    totalCarbsAmount = hideRemainders ? totalCarbsAmount - valueRemainder : totalCarbsAmount
+    valueRemainder = autoRound(valueRemainder / totalCarbsAmount * 100);
 
     const valueSugar = autoRound(sugar / totalCarbsAmount * 100);
     const valueDietaryFibers = autoRound(dietaryFibers / totalCarbsAmount * 100);
 
     if (totalCarbsAmount === 0) {
         return null;
-    }
-
-    let valueMisc = totalCarbsAmount - (sugar + dietaryFibers);
-    valueMisc = autoRound(valueMisc / totalCarbsAmount * 100);
-
-    if (valueMisc < 0) {
-        valueMisc = 0;
     }
 
     const labels = [applicationStrings.label_nutrient_sugar[language],
@@ -43,7 +56,7 @@ export function getCarbBaseChartData(nutrientData: NutrientData, hideRemainders:
     if(!hideRemainders) {
         labels.push(applicationStrings.label_nutrient_remainder[language])
         colors.push(ChartConfig.color_chart_misc)
-        data.push(valueMisc)
+        data.push(valueRemainder)
     }
 
     return {
@@ -71,69 +84,70 @@ export function getCarbDetailsChartData(nutrientData: NutrientData, hideRemainde
         return null
     }
 
-    let valueMisc = 100
+    let valueRemainder = 100
+
     const labels: string[] = []
     const data: number[] = []
     const colors: string[] = []
 
     if (valueGlucose) {
-        valueMisc -= valueGlucose
+        valueRemainder -= valueGlucose
         labels.push(applicationStrings.label_nutrient_carbohydrates_glucose[language])
         data.push(valueGlucose)
         colors.push(ChartConfig.color_carbs_mono_glucose)
     }
     if (valueFructose) {
-        valueMisc -= valueFructose
+        valueRemainder -= valueFructose
         labels.push(applicationStrings.label_nutrient_carbohydrates_fructose[language])
         data.push(valueFructose)
         colors.push(ChartConfig.color_carbs_mono_fructose)
     }
     if (valueGalactose) {
-        valueMisc -= valueGalactose
+        valueRemainder -= valueGalactose
         labels.push(applicationStrings.label_nutrient_carbohydrates_galactose[language])
         data.push(valueGalactose)
         colors.push(ChartConfig.color_carbs_mono_galactose)
     }
     if (valueSucrose) {
-        valueMisc -= valueSucrose
+        valueRemainder -= valueSucrose
         labels.push(applicationStrings.label_nutrient_carbohydrates_sucrose[language])
         data.push(valueSucrose)
         colors.push(ChartConfig.color_carbs_di_sucrose)
     }
     if (valueLactose) {
-        valueMisc -= valueLactose
+        valueRemainder -= valueLactose
         labels.push(applicationStrings.label_nutrient_carbohydrates_lactose[language])
         data.push(valueLactose)
         colors.push(ChartConfig.color_carbs_di_lactose)
     }
     if (valueMaltose) {
-        valueMisc -= valueMaltose
+        valueRemainder -= valueMaltose
         labels.push(applicationStrings.label_nutrient_carbohydrates_maltose[language])
         data.push(valueMaltose)
         colors.push(ChartConfig.color_carbs_di_maltose)
     }
     if (valueStarch) {
-        valueMisc -= valueStarch
+        valueRemainder -= valueStarch
         labels.push(applicationStrings.label_nutrient_carbohydrates_starch[language])
         data.push(valueStarch)
         colors.push(ChartConfig.color_carbs_starch)
     }
 
     if (valueDietaryFibers) {
-        valueMisc -= valueDietaryFibers
+        valueRemainder -= valueDietaryFibers
         labels.push(applicationStrings.label_nutrient_dietaryFibers[language])
         data.push(valueDietaryFibers)
         colors.push(ChartConfig.color_carbs_dietaryFibers)
     }
 
-    valueMisc = autoRound(valueMisc);
-    if (valueMisc < 0) {
-        valueMisc = 0;
+    valueRemainder = autoRound(valueRemainder);
+    if (valueRemainder < 0) {
+        valueRemainder = 0;
     }
 
     if(!hideRemainders) {
         labels.push(applicationStrings.label_nutrient_remainder[language])
-        data.push(valueMisc)
+        data.push(valueRemainder)
         colors.push(ChartConfig.color_chart_misc)
     }
 

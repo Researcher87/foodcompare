@@ -10,6 +10,7 @@ import {RankingChart} from "./RankingChart";
 import {maxElementsInRankingChart} from "../../config/ApplicationSetting";
 import ReactSelectOption from "../../types/ReactSelectOption";
 import {isMobileDevice} from "../../service/WindowDimension";
+import {getUnit} from "../../service/calculation/NutrientCalculationService";
 
 export function RankingContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -63,40 +64,27 @@ export function RankingContainer() {
         setUnit(unit)
     }
 
-
-    const getUnit = (selectedValue, transformToDietaryRequirements) => {
-        if (selectedValue === Constants.DATA_ENERGY) {
-            return "kCal";
-        } else if (selectedValue === Constants.DATA_WATER
-            || selectedValue === Constants.DATA_LIPIDS
-            || selectedValue === Constants.DATA_CARBS
-            || selectedValue === Constants.DATA_CARBS_SUGAR
-            || selectedValue === Constants.DATA_PROTEINS
-            || selectedValue === Constants.DATA_CARBS_DIETARY_FIBERS
-            || selectedValue === Constants.DATA_LIPIDS_SATURATED
-            || selectedValue === Constants.DATA_LIPIDS_MONO_UNSATURATED
-            || selectedValue === Constants.DATA_LIPIDS_POLY_UNSATURATED
-            || selectedValue === Constants.DATA_LIPIDS_TRANSFATTY_ACIDS) {
-            return "g";
-        } else if (transformToDietaryRequirements) {
-            return "%";
-        } else {
-            return "mg";
-        }
-    }
-
     const renderHelpText = () => {
         const helpText = applicationStrings.text_ranking[language];
 
         return (
-            <div className={"container"}>
-                <div className={"row"}>
-                    <div className="col-md-6 col-lg-5 infotextMenus" style={{padding: "24px"}}>
-                        <i>{helpText}</i>
-                    </div>
-                </div>
+            <div className="col-md-6 col-lg-5 infotextMenus" style={{padding: "24px"}}>
+                <i>{helpText}</i>
             </div>
         );
+    }
+
+    const renderInformationText = () => {
+        return (
+            <span>
+                {selectedValue === null &&
+                renderHelpText()
+                }
+                {selectedValue !== null && chartItems && chartItems.length === 0 &&
+                applicationStrings.label_noData[language]
+                }
+            </span>
+        )
     }
 
     const renderWebsite = () => {
@@ -113,11 +101,8 @@ export function RankingContainer() {
                                       selectedElement={selectedValue ? selectedValue.label : ""}/>
                     </div>
                     }
-                    {!chartItems &&
-                    renderHelpText()
-                    }
-                    {chartItems && chartItems.length === 0 &&
-                    applicationStrings.label_noData[language]
+                    {
+                        renderInformationText()
                     }
                 </div>
             </div>
@@ -138,15 +123,13 @@ export function RankingContainer() {
                                   selectedElement={selectedValue ? selectedValue.label : ""}/>
                 </div>
                 }
-                {!chartItems &&
-                renderHelpText()
-                }
-                {chartItems && chartItems.length === 0 &&
-                applicationStrings.label_noData[language]
+                {
+                    renderInformationText()
                 }
             </div>
         );
     }
+
 
     return isMobileDevice() ? renderMobile() : renderWebsite()
 

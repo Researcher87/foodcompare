@@ -6,7 +6,7 @@ export const color_red = "rgba(255, 204, 204, 1.0)";   // Default for proteins
 export const color_blue = "rgba(133, 193, 233, 1.0)";   // Default for Water
 export const color_purple = "rgba(213, 205, 237, 1.0)"; // Default color for a blue line
 
-export const color_chart_brown = "rgba(188, 170, 164)";		// brown
+export const color_chart_fawn = "rgba(235, 232, 171, 1.0)";		// brown
 
 export const color_gray = "rgba(235, 235, 235, 1.0)"; // Default color for a blue line
 export const color_line_blue = "rgba(0, 107, 215, 1.0)"; // Default color for a blue line
@@ -14,7 +14,7 @@ export const color_line_red = "rgba(255, 102, 102, 1.0)"; // Default color for a
 
 export const color_chart_green_1 = "rgba(39, 177, 96)";		// Dark green
 export const color_chart_green_2 = "rgba(137, 238, 137)";	// Normal green
-export const color_chart_green_3 = "rgba(214, 245, 214)";		// Light green
+export const color_chart_green_3 = "rgba(222, 245, 222)";		// Light green
 
 export const color_chart_yellow_1 = "rgba(212, 172, 13)";		// Dark yellow
 export const color_chart_yellow_2 = "rgba(244, 208, 63)";	// Normal yellow
@@ -27,6 +27,8 @@ export const color_chart_yellow_green_3 ="rgba(124, 179, 66)"
 
 export const color_chart_orange = "rgba(230, 126, 34)";
 export const color_x = "rgba(51, 204, 204)"
+
+export const color_chart_black = "rgba(0, 0, 0)";
 
 export const color_chart_misc = color_gray;
 
@@ -52,7 +54,7 @@ export const color_water = color_blue;
 export const color_lipids = color_yellow;
 export const color_carbs = color_green;
 export const color_carbs_sugar = color_green_light;
-export const color_carbs_dietaryFibers = color_chart_brown;
+export const color_carbs_dietaryFibers = color_chart_fawn;
 
 export const color_carbs_mono_glucose = color_chart_yellow_green_1
 export const color_carbs_mono_fructose = color_chart_yellow_green_2

@@ -5,21 +5,23 @@ import FoodItem from "../types/nutrientdata/FoodItem";
 import FoodClass from "../types/nutrientdata/FoodClass";
 import {getNameFromFoodNameList} from "./nutrientdata/NameTypeService";
 import NameType from "../types/nutrientdata/NameType";
-import {
-    BASE_DATA_INDEX,
-    CARBS_INDEX,
-    LIPIDS_INDEX,
-    MINERAL_INDEX,
-    PROTEIN_INDEX,
-    VITAMIN_INDEX
-} from "../components/ranking/RankingSelector";
 import {getNutrientDataForFoodItem} from "./nutrientdata/NutrientDataRetriever";
 import getName from "./LanguageService";
+import {
+    RANKING_BASE_DATA_INDEX,
+    RANKING_CARBS_INDEX,
+    RANKING_LIPIDS_INDEX,
+    RANKING_MINERAL_INDEX,
+    RANKING_PROTEIN_INDEX,
+    RANKING_VITAMIN_INDEX
+} from "../config/Constants";
+import ReactSelectOption from "../types/ReactSelectOption";
 
 
 export interface ChartItem {
     name: string
     value: number
+    id?: number   // Possibly, the food item ID to which the bar refers to (juxtaposition chart)
 }
 
 /**
@@ -27,12 +29,12 @@ export interface ChartItem {
  */
 export function getRankingGroups(language: string) {
     return [
-        {value: BASE_DATA_INDEX, label: applicationStrings.label_chart_nutrientComposition[language]},
-        {value: VITAMIN_INDEX, label: applicationStrings.label_nutrient_vit[language]},
-        {value: MINERAL_INDEX, label: applicationStrings.label_nutrient_min[language]},
-        {value: LIPIDS_INDEX, label: applicationStrings.label_nutrient_lipids_long[language]},
-        {value: CARBS_INDEX, label: applicationStrings.label_nutrient_carbohydrates[language]},
-        {value: PROTEIN_INDEX, label: applicationStrings.label_chart_proteins[language]},
+        {value: RANKING_BASE_DATA_INDEX, label: applicationStrings.label_chart_nutrientComposition[language]},
+        {value: RANKING_VITAMIN_INDEX, label: applicationStrings.label_nutrient_vit[language]},
+        {value: RANKING_MINERAL_INDEX, label: applicationStrings.label_nutrient_min[language]},
+        {value: RANKING_LIPIDS_INDEX, label: applicationStrings.label_nutrient_lipids_long[language]},
+        {value: RANKING_CARBS_INDEX, label: applicationStrings.label_nutrient_carbohydrates[language]},
+        {value: RANKING_PROTEIN_INDEX, label: applicationStrings.label_chart_proteins[language]},
     ];
 }
 
@@ -191,17 +193,17 @@ export function getProteinCategoryValues(language: string) {
 
 export function getElementsOfRankingGroup(rankingGroup: number, language: string) {
     switch (rankingGroup) {
-        case BASE_DATA_INDEX:
+        case RANKING_BASE_DATA_INDEX:
             return getBaseCategoryValues(language)
-        case VITAMIN_INDEX:
+        case RANKING_VITAMIN_INDEX:
             return getVitaminCategoryValues(language)
-        case MINERAL_INDEX:
+        case RANKING_MINERAL_INDEX:
             return getMineralCategoryValues(language)
-        case LIPIDS_INDEX:
+        case RANKING_LIPIDS_INDEX:
             return getLipidCategoryValues(language)
-        case CARBS_INDEX:
+        case RANKING_CARBS_INDEX:
             return getCarbohydrateCategoryValues(language)
-        case PROTEIN_INDEX:
+        case RANKING_PROTEIN_INDEX:
             return getProteinCategoryValues(language)
     }
 }
@@ -259,8 +261,12 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
         chartItems.push(chartItem);
     }
 
+    return sortChartItems(chartItems);
+}
 
-    chartItems = chartItems.sort((obj1, obj2) => {
+
+export function sortChartItems(chartItems: Array<ChartItem>) {
+    return chartItems.sort((obj1, obj2) => {
         if (obj1.value > obj2.value) {
             return -1;
         } else if (obj1.value < obj2.value) {
@@ -269,12 +275,10 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
             return 0;
         }
     });
-
-    return chartItems;
 }
 
 
-function getValueOfFoodItem(foodItem, selectedValue) {
+export function getValueOfFoodItem(foodItem, selectedValue): number | null {
     let value
 
     const nutrientData = getNutrientDataForFoodItem(foodItem, 0, true)
@@ -293,7 +297,7 @@ function getValueOfFoodItem(foodItem, selectedValue) {
     // Base Data
 
     if (selectedValue === Constants.DATA_ENERGY) {
-        value = baseData.water;
+        value = baseData.energy;
     }
 
     if (selectedValue === Constants.DATA_WATER) {
@@ -310,6 +314,10 @@ function getValueOfFoodItem(foodItem, selectedValue) {
 
     if (selectedValue === Constants.DATA_PROTEINS) {
         value = baseData.proteins;
+    }
+
+    if (selectedValue === Constants.DATA_ASH) {
+        value = baseData.ash;
     }
 
 

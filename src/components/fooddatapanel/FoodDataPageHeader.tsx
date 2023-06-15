@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {Button} from "react-bootstrap";
 import {applicationStrings} from "../../static/labels";
-import {FaBookOpen, FaChartBar, FaQuestionCircle, FaThList, FaTimes} from "react-icons/fa";
+import {FaBookOpen, FaChartBar, FaQuestionCircle, FaThList, FaTimes, FaTools} from "react-icons/fa";
 import {
     DISPLAYMODE_CHART,
     DISPLAYMODE_TABLE,
@@ -10,7 +10,7 @@ import {
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
-    TAB_INFO,
+    TAB_INFO, TAB_JUXTAPOSITION,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
@@ -29,6 +29,7 @@ import {ChartMenuPanel} from "./ChartMenuPanel";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import {useHistory} from 'react-router-dom';
 import {isMobileDevice} from "../../service/WindowDimension";
+import SettingsModal from "./SettingsModal";
 
 import {VitaminsBook} from "./VitaminBook";
 import nutrientBook from "../../static/nutrientBook.json";
@@ -49,6 +50,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const [helpModalId, setHelpModalId] = useState<number>(0)
     const [showBookModal, setShowBookModal] = useState<boolean>(false)
+    const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false)
 
     if (applicationContext === null) {
         return <div/>
@@ -97,9 +99,16 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             case TAB_PROTEINS_DATA:
                 setHelpModalId(8)
                 return;
+            case TAB_JUXTAPOSITION:
+                setHelpModalId(11)
+                return;
             default:
                 return;
         }
+    }
+
+    const openSettingsMenu = () => {
+        setShowSettingsModal(true)
     }
 
     const openVitaminMineralBook = () => {
@@ -165,6 +174,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     const shouldShowBookIcon = selectedDataPage === TAB_VITAMIN_DATA || selectedDataPage == TAB_MINERAL_DATA
                                 || selectedDataPage == TAB_PROTEINS_DATA
+    const aggregatedFoodItem = props.selectedFoodItem?.aggregated === true
 
     return (
         <div style={{paddingBottom: "6px"}}>
@@ -172,7 +182,11 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}/>
             }
             {showBookModal &&
-                <VitaminsBook selectedDataTab={selectedDataPage} bookData={bookData} closeBookModal={() => setShowBookModal(false)}/>
+            <VitaminsBook selectedDataTab={selectedDataPage} bookData={bookData}
+                          closeBookModal={() => setShowBookModal(false)}/>
+            }
+            {showSettingsModal &&
+                <SettingsModal onHide={() => setShowSettingsModal(false)} />
             }
             <div className={"d-flex flex-nowrap"}>
                 <div className="col-2">
@@ -208,6 +222,8 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                     </Button>
                                 </span>
                                 }
+                                </div>
+                            <div className={"d-flex flex-row"} >
                                 <div className="btn-group" role="group">
                                     <Button className={chartButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
@@ -222,15 +238,20 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                             active={displayMode === DISPLAYMODE_TABLE}
                                             data-for={"datapanel-table"}
                                             data-tip={applicationStrings.tooltip_icon_table[languageContext.language]}>
+                                        <ReactTooltip id="datapanel-table"/>
                                         <FaThList/>
                                     </Button>
-                                    <ReactTooltip id="datapanel-table"/>
                                 </div>
-                                <div className="btn-group" role="group" style={{paddingLeft: "20px"}}>
+                                <div className={"d-flex flex-row"} style={{paddingLeft: "20px"}}>
                                     <Button className={"btn-primary button-foodPanelHead"}
-                                            onClick={openHelpMenu}
-                                            active={displayMode === DISPLAYMODE_CHART}>
-                                        <ReactTooltip/>
+                                            onClick={openSettingsMenu}
+                                            data-for={"datapanel-settings"}
+                                            data-tip={applicationStrings.tooltip_icon_settings[languageContext.language]}>
+                                        <ReactTooltip id="datapanel-settings" globalEventOff="click"/>
+                                        <FaTools/>
+                                    </Button>
+                                    <Button className={"btn-primary button-foodPanelHead"}
+                                            onClick={openHelpMenu}>
                                         <FaQuestionCircle/>
                                     </Button>
                                     <Button className={"button-closeTab"}

@@ -4,7 +4,7 @@ import {
 	CHART_TYPE_BAR,
 	CHART_TYPE_PIE,
 	DISPLAYMODE_CHART,
-	GRAM,
+	AMOUNT_100_GRAM,
 	LIPIDS_DATA_OMEGA,
 	TAB_BASE_DATA,
 	TAB_CARBS_DATA,
@@ -67,7 +67,7 @@ describe('Parsing of sub-elements in the URI', () => {
 		// Vitamin data test:
 		
 		const chartConfigDataVitamin: ChartConfigData = {...initialChartConfigData, vitaminChartConfig: {
-				portionType: GRAM,
+				portionType: AMOUNT_100_GRAM,
 				expand100: true
 			}
 		}

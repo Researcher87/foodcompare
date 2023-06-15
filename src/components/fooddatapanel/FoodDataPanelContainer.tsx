@@ -214,33 +214,37 @@ export default function FoodDataPanelContainer() {
         console.log('FoodDataPanelContainer: Render, selected food item = ', selectedFoodItem)
     }
 
+    const divClass = isMobileDevice() ? "" : "d-flex flex-row"
+
     return <div>
         {selectedFoodItem !== null &&
         <div className="container-fluid container-scroll" style={{paddingTop: "4vh"}}>
-            <div className="d-flex flex-row">
+            <div className={divClass}>
                 <div className={""}>
                     <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
                                            openSelectorModal={openSelectorModal}
                                            openCompositeSelectorModal={openCompositeSelectorModal}
                     />
                 </div>
-                <div className="col media app" style={{maxWidth: "1100px", marginTop: "-10px"}}>
-                    {selectedFoodItems && selectedFoodItems.length > 0 ?
-                        <div>
-                            <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
-                        </div>
-                        :
-                        <div className={"form-text"} style={{padding: "24px"}}>
-                            <p>
-                                <i>
-                                    {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
-                                </i>
-                            </p>
-                            {isMobileDevice() &&
-                             <p><FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}</p>
-                            }
-                        </div>
-                    }
+                <div className={"d-flex flex-row"}>
+                    <div className="col media app" style={{maxWidth: "1100px", minWidth: "1100px", marginTop: "-10px"}}>
+                        {selectedFoodItems && selectedFoodItems.length > 0 ?
+                            <div>
+                                <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
+                            </div>
+                            :
+                            <div className={"form-text"} style={{padding: "24px"}}>
+                                <p>
+                                    <i>
+                                        {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
+                                    </i>
+                                </p>
+                                {isMobileDevice() &&
+                                <p><FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}</p>
+                                }
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

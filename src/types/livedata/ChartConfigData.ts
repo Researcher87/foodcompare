@@ -1,3 +1,5 @@
+import ReactSelectOption from "../ReactSelectOption";
+
 export interface ChartConfigData {
     baseChartConfig: GeneralChartConfigWithDetails
     vitaminChartConfig: BarChartConfig
@@ -45,6 +47,13 @@ export interface BarChartConfig {
 
 export interface DirectCompareBarChartConfig extends BarChartConfig {
     synchronize: boolean
+}
+
+export interface JuxtapositionConfig {
+    selectedGroup: ReactSelectOption | null,
+    selectedComparisonReference: ReactSelectOption | null,
+    chartSize: number,
+    showLabels: boolean
 }
 
 // For URI String

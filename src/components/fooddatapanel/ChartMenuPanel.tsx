@@ -3,7 +3,7 @@ import {
     TAB_BASE_DATA,
     TAB_CARBS_DATA,
     TAB_ENERGY_DATA,
-    TAB_INFO,
+    TAB_INFO, TAB_JUXTAPOSITION,
     TAB_LIPIDS_DATA,
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
@@ -13,6 +13,7 @@ import {applicationStrings} from "../../static/labels";
 import {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
+import {isMobileDevice} from "../../service/WindowDimension";
 
 interface ChartMenuPanelProps {
     dataPage: string
@@ -36,6 +37,14 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
     }
 
     const rowClass = props.verticalArrangement ? "d-flex" : "d-flex flex-row flex-wrap"
+
+    const labelMinerals = isMobileDevice()
+        ? applicationStrings.label_nutrient_min_m[languageContext.language]
+        : applicationStrings.label_nutrient_min[languageContext.language]
+
+    const labelCarbs = isMobileDevice()
+        ? applicationStrings.label_nutrient_carbohydrates_m[languageContext.language]
+        : applicationStrings.label_nutrient_carbohydrates[languageContext.language]
 
     return (
         <div>
@@ -62,7 +71,7 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
                         onClick={() => handlePageButtonClick(TAB_MINERAL_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_MINERAL_DATA}>
-                    {makeButtonLabel(applicationStrings.label_nutrient_min[languageContext.language])}
+                    {makeButtonLabel(labelMinerals)}
                 </Button>
                 <Button className="btn sidebar-link"
                         onClick={() => handlePageButtonClick(TAB_LIPIDS_DATA)}
@@ -74,7 +83,7 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
                         onClick={() => handlePageButtonClick(TAB_CARBS_DATA)}
                         variant={variant}
                         active={props.dataPage === TAB_CARBS_DATA}>
-                    {makeButtonLabel(applicationStrings.label_nutrient_carbohydrates[languageContext.language])}
+                    {makeButtonLabel(labelCarbs)}
                 </Button>
                 <Button className="btn sidebar-link"
                         onClick={() => handlePageButtonClick(TAB_PROTEINS_DATA)}
@@ -82,6 +91,14 @@ export function ChartMenuPanel(props: ChartMenuPanelProps) {
                         active={props.dataPage === TAB_PROTEINS_DATA}>
                     {makeButtonLabel(applicationStrings.label_nutrient_proteins[languageContext.language])}
                 </Button>
+                {props.verticalArrangement &&
+                    <Button className="btn sidebar-link"
+                            onClick={() => handlePageButtonClick(TAB_JUXTAPOSITION)}
+                            variant={variant}
+                            active={props.dataPage === TAB_JUXTAPOSITION}>
+                        {makeButtonLabel(applicationStrings.label_juxtaposition[languageContext.language])}
+                    </Button>
+                }
                 <Button className="btn sidebar-link"
                         onClick={() => handlePageButtonClick(TAB_INFO)}
                         variant={variant}

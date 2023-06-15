@@ -6,16 +6,16 @@ import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById("root");
 
-if (rootElement && rootElement.hasChildNodes()) {
-    hydrate(<App />, rootElement);
+/* if (rootElement && rootElement.hasChildNodes()) {
+    hydrate(<div><App/></div>, rootElement);
 } else {
     render(
-        <App />, rootElement);
-}
+        <div><App/></div>, rootElement);
+} */
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+render(<div><App/></div>, rootElement);
+
+
+// reportWebVitals();
 
 

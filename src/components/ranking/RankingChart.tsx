@@ -89,7 +89,6 @@ export function RankingChart(props: RankingChartProps) {
                 }
             </div>
         </div>
-
     )
 
 }

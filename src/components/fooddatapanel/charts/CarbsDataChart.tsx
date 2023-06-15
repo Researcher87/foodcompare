@@ -35,11 +35,11 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             ? applicationContext.applicationData.foodDataPanel.chartConfigData.carbsChartConfig
             : initialChartConfigData.carbsChartConfig
 
-    const initialExpand100 =  props.directCompareConfig
+    const initialExpand100 = props.directCompareConfig
         ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.expand100
         : chartConfig.expand100
 
-    const initialHideRemainders =  props.directCompareConfig
+    const initialHideRemainders = props.directCompareConfig
         ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig.hideRemainders
         : chartConfig.hideRemainders
 
@@ -81,7 +81,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                 }
                 applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
             }
-        } else if(applicationContext) {
+        } else if (applicationContext) {
             const currentConfig = applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart.carbsChartConfig
             if (hideRemainders !== currentConfig.hideRemainders
                 || expand100 !== currentConfig.expand100) {
@@ -138,7 +138,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         const totalAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
         const chartDisplayData = getCarbBaseChartData(nutrientData, hideRemainders, totalAmount, lang)
 
-        if(!chartDisplayData) {
+        if (!chartDisplayData) {
             return
         }
 
@@ -160,7 +160,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
         const totalAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
         const chartDisplayData = getCarbDetailsChartData(nutrientData, hideRemainders, totalAmount, lang)
 
-        if(!chartDisplayData) {
+        if (!chartDisplayData) {
             return
         }
 
@@ -226,24 +226,22 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                             onChange={handleChartSelectionChange}>
                 </Form.Check>
                 <hr/>
-                <Form>
-                    <Form.Check inline={false}
-                                className="form-radiobutton"
-                                label={applicationStrings.checkbox_expand100g[lang]}
-                                type="checkbox"
-                                disabled={chartType === Constants.CHART_TYPE_PIE}
-                                checked={expand100}
-                                onChange={handleExpand100Change}>
-                    </Form.Check>
-                    <Form.Check inline={false}
-                                className="form-radiobutton"
-                                label={applicationStrings.checkbox_chartoption_hideRemainders[lang]}
-                                type="checkbox"
-                                disabled={subChart === Constants.CARBS_DATA_DETAIL}
-                                checked={hideRemainders}
-                                onChange={handleHideRemaindersCheckbox}>
-                    </Form.Check>
-                </Form>
+                <Form.Check inline={false}
+                            className="form-radiobutton"
+                            label={applicationStrings.checkbox_expand100g[lang]}
+                            type="checkbox"
+                            disabled={chartType === Constants.CHART_TYPE_PIE}
+                            checked={expand100}
+                            onChange={handleExpand100Change}>
+                </Form.Check>
+                <Form.Check inline={false}
+                            className="form-radiobutton"
+                            label={applicationStrings.checkbox_chartoption_hideRemainders[lang]}
+                            type="checkbox"
+                            disabled={subChart === Constants.CARBS_DATA_DETAIL}
+                            checked={hideRemainders}
+                            onChange={handleHideRemaindersCheckbox}>
+                </Form.Check>
             </Form>
         )
     }
@@ -283,7 +281,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const detailChartData = createDetailChartData()
     const basicChartData = createBasicChartData()
 
-    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
 
     return (
         <div className="container-fluid">

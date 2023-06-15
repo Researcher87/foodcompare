@@ -1,11 +1,17 @@
 export const AMOUNT_PORTION = "amount portion"
-export const GRAM = "100 gram"
+export const AMOUNT_100_GRAM = "100 gram"
+export const GRAM = "gram" +
+    ""
 
 export const CHART_TYPE_PIE = "pie chart"
 export const CHART_TYPE_BAR = "bar chart"
 
 export const CHART_VITAMINS = "chart vitamins"
 export const CHART_MINERALS = "chart minerals"
+
+export const CHART_SIZE_SMALL = 0
+export const CHART_SIZE_MEDIUM = 1
+export const CHART_SIZE_LARGE = 2
 
 export const CATEGORY_BEVERAGE = 10
 
@@ -83,6 +89,9 @@ export const CARBS_DATA_DETAIL = "carbs data detail chart"
 export const LIPIDS_DATA_BASE = "lipids data base chart";
 export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
 
+export const OPTION_YES = 0
+export const OPTION_NO = 1
+
 export const PATH_DIRECT_COMPARE = "/directcompare";
 export const PATH_FOODCOMPARE = "/foodcompare"
 export const PATH_FOODDATA_PANEL = "/datapanel";
@@ -111,6 +120,7 @@ export const TAB_MINERAL_DATA = "mineraldata"
 export const TAB_LIPIDS_DATA = "lipidsdata"
 export const TAB_CARBS_DATA = "carbsdata"
 export const TAB_PROTEINS_DATA = "proteinsdata"
+export const TAB_JUXTAPOSITION = "juxtaposition"
 export const TAB_INFO = "infodata"
 
 export const QUERYKEY_DATAPANEL_ADD = "add"
@@ -120,3 +130,18 @@ export const QUERYKEY_DATAPANEL_RANKING = "ranking"
 export const QUERYKEY_DATAPANEL_AGGREGATED = "aggregated"
 
 export const TAB_LIST = [TAB_BASE_DATA, TAB_ENERGY_DATA, TAB_VITAMIN_DATA, TAB_MINERAL_DATA, TAB_LIPIDS_DATA, TAB_CARBS_DATA, TAB_PROTEINS_DATA, TAB_INFO]
+
+export const UNIT_GRAM = 0
+export const UNIT_MILLIGRAM = 1
+export const UNIT_MICROGRAM = 2
+
+export const RANKING_BASE_DATA_INDEX = 0
+export const RANKING_VITAMIN_INDEX = 1
+export const RANKING_MINERAL_INDEX = 2
+export const RANKING_LIPIDS_INDEX = 3
+export const RANKING_CARBS_INDEX = 4
+export const RANKING_PROTEIN_INDEX = 5
+
+export const COMPARISON_REFERENCE_ALL = 0
+export const COMPARISON_REFERENCE_ALL_IN_CATEGORY = 1
+export const COMPARISON_REFERENCE_SELECTED_TABS = 2

@@ -7,7 +7,7 @@ import {getElementsOfRankingGroup, getRankingGroups} from "../../service/Ranking
 import {applicationStrings} from "../../static/labels";
 import {Form} from "react-bootstrap";
 import Select from 'react-select';
-import {PATH_RANKING, QUERYKEY_DATAPANEL_RANKING} from "../../config/Constants";
+import {RANKING_MINERAL_INDEX, PATH_RANKING, QUERYKEY_DATAPANEL_RANKING, RANKING_VITAMIN_INDEX} from "../../config/Constants";
 import {makeRankingPanelDataUri, parseRankingPanelDataUri} from "../../service/uri/RankingPanelUriService";
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
 import {customSelectStyles} from "../../config/UI_Config";
@@ -16,13 +16,6 @@ interface RankingSelectorProps {
     openChart: (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => void,
     useHorizontalLayout: boolean
 }
-
-export const BASE_DATA_INDEX = 0
-export const VITAMIN_INDEX = 1
-export const MINERAL_INDEX = 2
-export const LIPIDS_INDEX = 3
-export const CARBS_INDEX = 4
-export const PROTEIN_INDEX = 5
 
 export function RankingSelector(props: RankingSelectorProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -169,7 +162,7 @@ export function RankingSelector(props: RankingSelectorProps) {
         }
 
         const rankingCategory = selectedGroup ? selectedGroup.value : null
-        const mineralOrVitaminCategory = (rankingCategory === VITAMIN_INDEX) || (rankingCategory === MINERAL_INDEX);
+        const mineralOrVitaminCategory = (rankingCategory === RANKING_VITAMIN_INDEX) || (rankingCategory === RANKING_MINERAL_INDEX);
         const transformToDietaryRequirements = mineralOrVitaminCategory ? showDietaryRequirements : false;
 
         props.openChart(selectedFoodCategory, selectedElement, use100gram, transformToDietaryRequirements);
@@ -197,7 +190,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                         />
                         {applicationStrings.label_portion_common[language]}
                     </label>
-                    {(rankingCategory === VITAMIN_INDEX || rankingCategory === MINERAL_INDEX) &&
+                    {(rankingCategory === RANKING_VITAMIN_INDEX || rankingCategory === RANKING_MINERAL_INDEX) &&
                     <Form.Label className="form-elements">
                         <Form.Check className="form-radiobutton"
                                     inline={true}

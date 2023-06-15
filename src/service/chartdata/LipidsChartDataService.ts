@@ -8,16 +8,17 @@ export function getTotalLipidsChartData(lipidsData: LipidData, hideRemainders: b
                                            language: string): ChartDisplayData {
     const {saturated, unsaturatedMono, unsaturatedPoly} = lipidsData
 
-    const valueSaturated = autoRound(saturated!! / portionAmount * 100);
-    const valueUnsaturatedMono = autoRound(unsaturatedMono!! / portionAmount * 100);
-    const valueUnsaturatedPoly = autoRound(unsaturatedPoly!! / portionAmount * 100);
-
     let valueRemainder = portionAmount - (saturated!! + unsaturatedMono!! + unsaturatedPoly!!);
-    valueRemainder = autoRound(valueRemainder / portionAmount * 100);
-
     if (valueRemainder < 0) {
         valueRemainder = 0
     }
+
+    const portionAmountToUse = hideRemainders ? portionAmount - valueRemainder : portionAmount
+    valueRemainder = autoRound(valueRemainder / portionAmount * 100);
+
+    const valueSaturated = autoRound(saturated!! / portionAmountToUse * 100);
+    const valueUnsaturatedMono = autoRound(unsaturatedMono!! / portionAmountToUse * 100);
+    const valueUnsaturatedPoly = autoRound(unsaturatedPoly!! / portionAmountToUse * 100);
 
     const labels: string[] = [applicationStrings.label_nutrient_lipids_saturated_short[language],
         applicationStrings.label_nutrient_lipids_unsaturated_mono_short[language],

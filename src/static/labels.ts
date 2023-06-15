@@ -39,6 +39,26 @@ export const applicationStrings = {
         "de": "Buch der Vitamine",
         "en": "Book of Vitamins"
     },
+    _gram: {
+        de: 'Gramm',
+        en: 'Gram'
+    },
+    _milligram: {
+        de: 'Milligramm (mg)',
+        en: 'Milligram (mg)'
+    },
+    _microgram: {
+        de: 'Mikrogramm (µg)',
+        en: 'Microgram (µg)'
+    },
+    _option_no: {
+        de: 'Nein',
+        en: 'No'
+    },
+    _option_yes: {
+        de: 'Ja',
+        en: 'Yes'
+    },
     button_add: {
         de: 'Hinzufügen',
         en: 'Add'
@@ -323,6 +343,62 @@ export const applicationStrings = {
         de: "Jetzt beginnen...",
         en: "Get started..."
     },
+    label_juxtaposition: {
+        de: 'Vergleich',
+        en: 'Juxtaposition'
+    },
+    label_juxtaposition_settings_btn: {
+        de: 'Anzeigeoptionen',
+        en: 'Display settings'
+    },
+    label_juxtaposition_settings_chartsize: {
+        de: 'Diagrammgröße',
+        en: 'Chart size'
+    },
+    label_juxtaposition_settings_chartsize_s: {
+        de: 'Klein',
+        en: 'Small'
+    },
+    label_juxtaposition_settings_chartsize_m: {
+        de: 'Medium',
+        en: 'Medium'
+    },
+    label_juxtaposition_settings_chartsize_l: {
+        de: 'Groß',
+        en: 'Large'
+    },
+    label_juxtaposition_settings_showLabels: {
+        de: 'Labels anzeigen',
+        en: 'Show labels'
+    },
+    label_juxtaposition_table_avg: {
+        de: 'Mittel',
+        en: 'Average'
+    },
+    label_juxtaposition_table_max: {
+        de: 'Max',
+        en: 'Max'
+    },
+    label_juxtaposition_table_median: {
+        de: 'Median',
+        en: 'Median'
+    },
+    label_juxtaposition_table_min: {
+        de: 'Min',
+        en: 'Min'
+    },
+    label_juxtaposition_table_rank: {
+        de: 'Rang',
+        en: 'Rank'
+    },
+    label_juxtaposition_table_value: {
+        de: 'Wert',
+        en: 'Value'
+    },
+    label_juxtaposition_unavailable: {
+        de: 'Keine Anzeige möglich.',
+        en: 'Data cannot be displayed.'
+    },
     label_info: {
         de: 'Info',
         en: 'Info'
@@ -423,6 +499,10 @@ export const applicationStrings = {
         de: 'Kohlenhydrate',
         en: 'Carbohydrates'
     },
+    label_nutrient_carbohydrates_m: {
+        de: 'Kohlenhyd.',
+        en: 'Carbs'
+    },
     label_nutrient_carbohydrates_short: {
         de: 'Kohlenhyd.',
         en: 'Carbs'
@@ -521,6 +601,10 @@ export const applicationStrings = {
     },
     label_nutrient_min: {
         de: 'Mineralstoffe',
+        en: 'Minerals'
+    },
+    label_nutrient_min_m: {
+        de: 'Minerale',
         en: 'Minerals'
     },
     label_nutrient_min_calcium: {
@@ -753,7 +837,7 @@ export const applicationStrings = {
     },
     label_nutrient_vit_scientific_a: {
         de: 'inkl. Provitamin A / Carotine',
-        en: 'incl. caraotene'
+        en: 'including Provitamin A / carotene'
     },
     label_nutrient_vit_scientific_b1: {
         de: 'Thiamine',
@@ -788,8 +872,8 @@ export const applicationStrings = {
         en: 'Vitamin D'
     },
     label_nutrient_vit_scientific_e: {
-        de: 'Tocopherol',
-        en: 'Tocopherol'
+        de: 'inkl. Provitamin E / Tocopherol',
+        en: 'including provitamin E / Tocopherol'
     },
     label_nutrient_vit_scientific_k: {
         de: 'Vitamin K',
@@ -835,13 +919,25 @@ export const applicationStrings = {
         de: 'Zeige Tagesbedarf',
         en: 'Show dietary requirements'
     },
-    label_requirement: {
-        de: 'Tagesbedarf',
-        en: 'Daily requirements'
-    },
     label_reference: {
         de: 'Bezug',
         en: 'Reference'
+    },
+    label_reference_all: {
+        de: 'Alle Lebensmittel in Food Compare',
+        en: 'All foods in Food Compare'
+    },
+    label_reference_category: {
+        de: 'Alle Lebensmittel dieser Kategorie',
+        en: 'All foods in this category'
+    },
+    label_reference_panel: {
+        de: 'Alle hinzugefügten Lebensmittel im Datenbereich',
+        en: 'All foods added in the data panel'
+    },
+    label_requirement: {
+        de: 'Tagesbedarf',
+        en: 'Daily requirements'
     },
     label_source: {
         de: 'Datenquelle',
@@ -1023,6 +1119,26 @@ export const applicationStrings = {
         de: 'Geben Sie bitte ein Gewicht zwischen 30 und 250 kg ein.',
         en: 'Please enter a body weight between 30 and 250 kg.'
     },
+    modal_settings_title: {
+        de: "Einstellungen",
+        en: "Settings"
+    },
+    modal_settings_label_unit_vitamins: {
+        de: "Einheit für Vitamine/Mineralstoffe",
+        en: "Unit of vitamins/minerals"
+    },
+    modal_settings_label_unit_proteins: {
+        de: "Einheit für Aminosäuren",
+        en: "Unit of amino acids:"
+    },
+    modal_settings_label_provitamins: {
+        de: "Provitamine in Berechnung berücksichtigen",
+        en: "Include provitamins in calculation:"
+    },
+    modal_settings_label_dietaryRequirments: {
+        de: "Anzeige des Tagesbedarfs",
+        en: "Display of daily requirement"
+    },
     palcat_name_1: {
         de: 'Extrem niedrige Aktivität',
         en: 'Extremely light activity.'
@@ -1120,8 +1236,8 @@ export const applicationStrings = {
         en: 'Calculation of BMR and PAL:',
     },
     text_empty_fooddatapanel: {
-        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
-        en: 'Click the plus button on the left to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
+        de: 'Klicken Sie links auf Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
+        en: 'Click the plus button to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
     text_empty_fooddatapanel_mobileInfo: {
         de: 'Das Erstellen komplexer Lebensmittel wird auf Mobilgeräten aktuell nicht unterstützt.',
@@ -1170,6 +1286,10 @@ export const applicationStrings = {
     tooltip_icon_removeAll: {
         de: 'Alle Tabs schließen',
         en: 'Close all data tabs'
+    },
+    tooltip_icon_settings: {
+        de: 'Einstellungen zu Diagrammen/Tabellendaten öffnen',
+        en: 'Open settings menu für chart and table data'
     },
     tooltip_icon_table: {
         de: 'Tabellen-Modus',

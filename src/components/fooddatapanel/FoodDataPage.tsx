@@ -33,6 +33,14 @@ export default function FoodDataPage(props: FoodDataPageProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
+    if(applicationContext === null) {
+        throw new Error("ApplicationContext is null")
+    }
+
+    useEffect(() => {
+        updatePage()
+    }, [applicationContext.dataSettings])
+
     const selectedDataTab = applicationContext
         ? applicationContext.applicationData.foodDataPanel.selectedDataPage
         : TAB_BASE_DATA
@@ -51,7 +59,8 @@ export default function FoodDataPage(props: FoodDataPageProps) {
             selectedFoodItem: props.selectedFoodItem,
             portion: portion.amount,
             language: language,
-            preferredSource: preferredSource
+            preferredSource: preferredSource,
+            dataSettings: applicationContext.dataSettings
         }
 
         const extendedParams = {...tableCalculationParams,

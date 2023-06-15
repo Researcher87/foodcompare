@@ -134,6 +134,7 @@ $usersettings-palwidth: 60ch;
 .button-foodPanelHead, .button-closeTab {
     width: 40px;
     font-size: $fontsize-small;
+    margin-right: 10px;
 }
 
 .container-scroll {
@@ -148,6 +149,10 @@ $usersettings-palwidth: 60ch;
 
 .chart-control-button-bar {
     padding-top: 32px;
+}
+
+.text-small {
+    font-size: $fontsize-small;
 }
 
 

@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
-import {CHART_MINERALS, CHART_VITAMINS, GRAM, TAB_MINERAL_DATA, TAB_VITAMIN_DATA} from "../../../config/Constants";
+import {CHART_MINERALS, CHART_VITAMINS, AMOUNT_100_GRAM, OPTION_YES, TAB_VITAMIN_DATA} from "../../../config/Constants";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartConfigurationService"
@@ -95,17 +95,20 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const createVitaminChartData = () => {
-        const vitaminData = props.precalculatedData !== undefined ? props.precalculatedData : getNutrientData(props.selectedFoodItem).vitaminData;
+        const vitaminData = props.precalculatedData !== undefined
+            ? props.precalculatedData
+            : getNutrientData(props.selectedFoodItem).vitaminData;
 
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.vitaminRequirementData;
         const userData = applicationContext.userData
-        const portionAmount = portionType_vitamins === GRAM ? 100 : props.selectedFoodItem.portion.amount
+        const dataSettings = applicationContext.dataSettings
+        const portionAmount = portionType_vitamins === AMOUNT_100_GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         if (!vitaminData || !requirementData) {
             return null
         }
 
-        const chartDisplayData = getVitaminChartData(vitaminData, requirementData, userData, portionAmount)
+        const chartDisplayData = getVitaminChartData(vitaminData, requirementData, userData, dataSettings, portionAmount)
 
         const chartColor = props.directCompareConfig && props.directCompareConfig.barChartColor
             ? props.directCompareConfig.barChartColor
@@ -127,7 +130,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         const mineralData = props.precalculatedData !== undefined ? props.precalculatedData : getNutrientData(props.selectedFoodItem).mineralData;
         const requirementData = applicationContext.foodDataCorpus.dietaryRequirements?.mineralRequirementData;
         const userData = applicationContext.userData
-        const portionAmount = portionType_minerals === GRAM ? 100 : props.selectedFoodItem.portion.amount
+        const portionAmount = portionType_minerals === AMOUNT_100_GRAM ? 100 : props.selectedFoodItem.portion.amount
 
         if (!mineralData || !requirementData) {
             return null
@@ -200,6 +203,11 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         }
 
         const getScientificVitaminName = (vitamin: string): string | null => {
+            const includeProvitamins = applicationContext.dataSettings.includeProvitamins === OPTION_YES
+            if((vitamin.toLowerCase() === "a" || vitamin.toLowerCase() === "e") && !includeProvitamins) {
+                return null
+            }
+
             const labelName = "label_nutrient_vit_scientific_" + vitamin.toLowerCase()
             if(applicationStrings[labelName]) {
                 return applicationStrings[labelName][lang]

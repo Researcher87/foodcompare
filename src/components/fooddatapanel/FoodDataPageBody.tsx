@@ -1,5 +1,5 @@
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
-import {DISPLAYMODE_CHART, DISPLAYMODE_TABLE, TAB_INFO} from "../../config/Constants";
+import {DISPLAYMODE_CHART, DISPLAYMODE_TABLE, TAB_INFO, TAB_JUXTAPOSITION} from "../../config/Constants";
 import {ChartPanel} from "./ChartPanel";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {FoodDataTable} from "./FoodDataTable";
@@ -26,17 +26,16 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
     const renderDataPage = () => {
         return (
             <div>
-                {displayMode === DISPLAYMODE_TABLE &&
+                {(displayMode === DISPLAYMODE_TABLE && selectedDataPage !== TAB_JUXTAPOSITION) ?
                 <div className="col">
                     <FoodDataTable tableData={props.tableData}
                                    portionSize={props.selectedFoodItem.portion.amount}
                                    dataPage={props.dataPage}
                     />
                 </div>
-                }
-                {displayMode === DISPLAYMODE_CHART &&
+                :
                 <div className="col">
-                    <ChartPanel selectedFoodItem={props.selectedFoodItem} />
+                    <ChartPanel selectedFoodItem={props.selectedFoodItem} displayMode={displayMode} />
                 </div>
                 }
             </div>

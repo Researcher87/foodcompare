@@ -1,4 +1,4 @@
-import { AMOUNT_PORTION, CARBS_DATA_BASE, CARBS_DATA_DETAIL, CHART_TYPE_BAR, CHART_TYPE_PIE, GRAM, LIPIDS_DATA_BASE, LIPIDS_DATA_OMEGA, TAB_BASE_DATA, TAB_CARBS_DATA, TAB_LIPIDS_DATA, TAB_MINERAL_DATA, TAB_PROTEINS_DATA, TAB_VITAMIN_DATA } from "../../config/Constants"
+import { AMOUNT_PORTION, CARBS_DATA_BASE, CARBS_DATA_DETAIL, CHART_TYPE_BAR, CHART_TYPE_PIE, AMOUNT_100_GRAM, LIPIDS_DATA_BASE, LIPIDS_DATA_OMEGA, TAB_BASE_DATA, TAB_CARBS_DATA, TAB_LIPIDS_DATA, TAB_MINERAL_DATA, TAB_PROTEINS_DATA, TAB_VITAMIN_DATA } from "../../config/Constants"
 import { ChartConfigData, DirectCompareChartConfigData, GeneralizedChartConfig } from "../../types/livedata/ChartConfigData"
 import { convertBooleanToDigit, convertStringToBoolean } from "../calculation/MathService"
 
@@ -278,7 +278,7 @@ export function convertGeneralizedChartConfigStringToObject(uriString: string): 
 						
 	const portionType = portionTypeNumber === 0 || isNaN(portionTypeNumber) 
 						? undefined 
-						: portionTypeNumber === 1 ? AMOUNT_PORTION : GRAM
+						: portionTypeNumber === 1 ? AMOUNT_PORTION : AMOUNT_100_GRAM
 	
 	const subChart = subChartNumber === 0 || isNaN(subChartNumber) ? undefined : getSubChartFromKey(subChartNumber)
 	const subChart2 = subChartNumber2 === 0 || isNaN(subChartNumber2) ? undefined : getSubChartFromKey(subChartNumber2)

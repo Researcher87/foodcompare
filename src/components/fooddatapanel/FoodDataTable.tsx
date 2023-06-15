@@ -24,6 +24,10 @@ export function FoodDataTable(props: FoodDataTableProps) {
     }
 
     const formatDataCell = (cell, row) => {
+        if(!cell) {
+            return cell
+        }
+
         if (!cell.includes("&&")) {
             return cell
         }
@@ -31,13 +35,14 @@ export function FoodDataTable(props: FoodDataTableProps) {
         const firstLineStype = {paddingBottom: "6px", display: 'block'}
         const indentStyle = {paddingLeft: "8px"}
 
-        return <div>{cell.split("&&").map((element, index) => (<div>
+        return <div>{cell.split("&&").map((element, index) => (
+            <div key={`table-inner-cell-${row.label}-${index}`}>
                 {index > 0 ?
-                    <span key={`cellindex-${index}`} style={indentStyle}>
+                    <span style={indentStyle}>
                     {element}
-                </span>
+                    </span>
                     :
-                    <span key={`cellindex-${index}`} style={firstLineStype}>
+                    <span style={firstLineStype}>
                     {element}
                 </span>
                 }
