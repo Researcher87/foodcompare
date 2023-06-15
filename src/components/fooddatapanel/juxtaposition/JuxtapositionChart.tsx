@@ -24,27 +24,17 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
         throw new Error("Application context is unavailable.")
     }
 
-    const [chartData, setChartData] = useState<Array<JuxtapostionChartData>>([])
-
-
-    useEffect(() => {
-        updateChart()
-    }, [
-        applicationContext.applicationData.foodDataPanel.juxtapositionConfigData,
-        applicationContext.applicationData.foodDataPanel.selectedFoodItems.length,
-        applicationContext.applicationData.foodDataPanel.selectedFoodItemIndex
-    ])
-
-    const updateChart = async () => {
+    const calculateChartData = (): Array<JuxtapostionChartData> => {
         const selectedFoodItemsInPanel = applicationContext.applicationData.foodDataPanel.selectedFoodItems
         const foodDataCorpus = applicationContext.foodDataCorpus
         const {selectedReference, selectedFoodItem} = props
         const referenceData = getFoodItemsForComparison(selectedReference, foodDataCorpus, selectedFoodItem,
             selectedFoodItemsInPanel)
 
-        const newChartData = await createChartDataForJuxtapostionChart(props, foodDataCorpus, referenceData, language)
-        setChartData(newChartData)
+        return createChartDataForJuxtapostionChart(props, foodDataCorpus, referenceData, language)
     }
+
+    const chartData = calculateChartData()
 
     const showLabels = applicationContext.applicationData.foodDataPanel.juxtapositionConfigData.showLabels
 
@@ -135,7 +125,8 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
                     label: "",
                     data: data,
                     backgroundColor: colors,
-                    borderWidth: 2
+                    borderWidth: 2,
+                    maxBarThickness: 50
                 }]
             }
 

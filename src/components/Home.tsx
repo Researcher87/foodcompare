@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import {LanguageContext} from "../contexts/LangContext";
 import {Carousel} from 'react-responsive-carousel';
 import {applicationStrings} from "../static/labels";
@@ -12,7 +12,6 @@ import {Link} from 'react-router-dom';
 import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
 import {FaAngleDoubleRight} from "react-icons/fa";
 import {isMobileDevice} from "../service/WindowDimension";
-import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 
 const carouselImages = require.context('../static/image/carousel', true);
 const startImages = require.context('../static/image/startImages', true);
@@ -26,7 +25,6 @@ interface HomeTextElement {
 export function Home() {
     const {language} = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
-    const applicationContext = useContext(ApplicationDataContextStore)
 
     const imageChanged = (image) => {
         setDisplayedImage(image)
@@ -83,27 +81,6 @@ export function Home() {
         );
     }
 
-    // const buttonColors = ["#f9e79f", "#d5f5e3", "#fadbd8", "#aed6f1"];
-    const buttonBgColor = "#2952a3"
-    const buttonTextColor = "#FFFFFF"
-
-    const onStartButtonClick = (id: number) => {
-        let label = "";
-        switch (id) {
-            case 1:
-                label = "Food Analyzer (Default Mode)"
-                break;
-            case 2:
-                label = "Food Analyzer (Aggregated)"
-                break;
-            case 3:
-                label = "Direct Compare"
-                break;
-            case 4:
-                label = "Ranking"
-                break;
-        }
-    }
 
     const renderStartButtons = () => {
         const startImg1 = startImages(`./StartImg1.jpg`).default
@@ -118,26 +95,26 @@ export function Home() {
                 <b>{applicationStrings.label_getStarted[language]}</b>
                 <div className={"text-center"}>
                     <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_FOODDATA_PANEL + "?add=1"} onClick={() => onStartButtonClick(1)}>
+                        <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
                             {renderStartButton(applicationStrings.button_getstarted_1[language], startImg1)}
                         </Link>
                     </div>
                     {!isMobileDevice() &&
                     <div>
                         <div style={{paddingTop: "20px"}}>
-                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"} onClick={() => onStartButtonClick(2)}>
+                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
                                 {renderStartButton(applicationStrings.button_getstarted_2[language], startImg2)}
                             </Link>
                         </div>
                         <div style={{paddingTop: "20px"}}>
-                            <Link to={PATH_DIRECT_COMPARE} onClick={() => onStartButtonClick(3)}>
+                            <Link to={PATH_DIRECT_COMPARE}>
                                 {renderStartButton(applicationStrings.button_getstarted_3[language], startImg3)}
                             </Link>
                         </div>
                     </div>
                     }
                     <div style={{paddingTop: "20px"}}>
-                        <Link to={PATH_RANKING} onClick={() => onStartButtonClick(4)}>
+                        <Link to={PATH_RANKING}>
                             {renderStartButton(applicationStrings.button_getstarted_4[language], startImg4)}
                         </Link>
                     </div>
@@ -147,14 +124,12 @@ export function Home() {
     }
 
     const renderStartButton = (label: string, srcImage: string): any => {
-        const width = isMobileDevice() ? "90%" : "40%"
-
         return <button type="button"
                        className="btn btn-small btn-outline-dark"
                        style={{width: "90%"}}>
             <div className={"d-flex flex-row"} style={{maxHeight: "100px"}}>
                 <div className={"d-flex flex-column"} style={{width: "40%", maxHeight: "96px", marginRight: "12px"}}>
-                    <img src={srcImage} style={{maxHeight: "90px", maxWidth: "169px"}} alt={"Start btn img"}></img>
+                    <img src={srcImage} style={{maxHeight: "90px", maxWidth: "169px"}} alt={"Start btn img"}/>
                 </div>
                 <div className={"d-flex flex-column justify-content-center"}  style={{width: "60%"}}>
                     <div className={"align-items-center"}>{label}</div>
@@ -268,6 +243,5 @@ export function Home() {
             : <div>{renderDesktop()}</div>
         }
     </div>
-
 
 }

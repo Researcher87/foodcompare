@@ -30,14 +30,12 @@ export interface JuxtapostionChartData {
  * for each nutrient in the selected group.
  */
 export function createChartDataForJuxtapostionChart(props: JuxtapositionChartProps, foodDataCorpus: FoodDataCorpus,
-                                                    referenceData: Array<FoodItem>, language: string): Promise<Array<JuxtapostionChartData>> {
-    return new Promise((resolve, reject) => {
+                                                    referenceData: Array<FoodItem>, language: string): Array<JuxtapostionChartData> {
         const chartData: Array<JuxtapostionChartData> = []
         const valuesInGroup = getElementsOfRankingGroup(props.selectedGroup, language)
 
         if (!valuesInGroup) {
-            reject(new Error("No group values available"))
-            return
+            throw new Error("No group values available")
         }
 
         valuesInGroup.forEach(valueInGroup => {
@@ -77,8 +75,7 @@ export function createChartDataForJuxtapostionChart(props: JuxtapositionChartPro
             }
         })
 
-        resolve(chartData);
-    })
+    return chartData
 }
 
 /**
