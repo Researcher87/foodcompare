@@ -1247,6 +1247,308 @@
         "de": "Mann: 700 mg | Frau: 700 mg  (schwanger: 800 mg, stillend: 900 mg)",
         "en": "male: 700 mg | female: 700 mg  (pregnant: 800 mg, breastfeeding: 900 mg)"
       }
+    },
+    {
+      "name": {
+        "de": "Eisen",
+        "en": "Iron"
+      },
+      "description": {
+        "de": "Eisen ist ein wichtiges Spurenelement, das etwa 60 mg in unserem Körper ausmacht und v.a. für die Blutbildung und den Sauerstofftransport im Blut benötigt wird. Eisen steckt v.a. in Fleisch und Tierprodukten, sowie in Vollkornprodukten, Hülsenfrüchten, Spinat und Kräutern, der Darm kann jedoch nur einen Bruchteil des enthaltenen Eisens aus der Nahrung aufnehmen, wobei Eisen aus tierischen Quellen vom Körper besser aufgenommen wird als aus pflanzlichen Quellen. Einige Lebensmitteln enthalten Stoffe, die Eisen binden und somit die Eisenaufnahme im Darm hemmen. Dazu zählen bspw. Soja- und Milchprodukte, Kaffee, Tee und Rotwein. Ein leichter Mangel tritt in der Bevölkerung recht häufig auf, besonders betroffen sind Frauen (insbesondere während der Schwangerschaft), Kinder sowie Leistungssportler. ",
+        "en": "Iron is a significant trace element that makes up 60 mg in our body. It is especially needed for blood production and the transportation of oxygen in the blood. Iron occurs frequently in meat and animal products in general, but also in grain products, legumes, spinach and herbs. However, only a very small amount of the iron in food can be reabsorbed by the bowel, where iron from animal products is generally better resorbed than from plant-based products. Some foods contain compounds that bind iron so that the iron resorption in the bowel is impaired. Those include soy and dairy products, coffee, tea and red wine. A slight shortage occurs frequently in society, where women (especially during pregnancy), children and athletes are particularly affected."
+      },
+      "functionality": [
+        {
+          "de": "Für die Bildung von Hämoglobin benötigt (Sauerstofftransport im Blut)",
+          "en": "Needed for the production of haemoglobin (oxygen transportation in the blood)"
+        },
+        {
+          "de": "Ebenso an der Bildung von Myoglobin beteiligt (Sauerstoffversorgung der Muskeln)",
+          "en": "Also needed for the production of myoglobin (supply of oxygen to the muscles)"
+        },
+        {
+          "de": "Beteiligt an der Bildung vieler Enzyme und am Stoffwechsel",
+          "en": "Needed for the production of different enzymes as well as for metabolism"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Anämie (Blutarmut)",
+          "en": "Anemia"
+        },
+        {
+          "de": "Müdigkeit und Konzentrationsschwäche",
+          "en": "Sleepiness, loss of concentration"
+        },
+        {
+          "de": "Appetitlosigkeit",
+          "en": "Appetite loss"
+        },
+        {
+          "de": "Schwindel",
+          "en": "Dizziness"
+        },
+        {
+          "de": "Haarausfall, brüchige Nägel, trockene Haus",
+          "en": "Hair loss, brittle nails, dry skin"
+        }
+      ],
+      "overdose": {
+        "de": "Eine Überdosis von Eisen kann zu schweren gesundheitlichen Problemen führen. Über die normale Ernährung ist ein Eisenmangel zwar allein sehr unwahrscheinlich, jedoch können gesundheitliche Probleme zu einer Ansammlung von Eisen in der Leber und anderen Organen führen, was zu entsprechenden Organschäden führen kann.",
+        "en": "An overdose may lead to serious health issues. Though an overdose solely caused by normal diets is very likely, some diseases may lead to an accumulation of iron in the liver and other organs, which may damage those organs accordingly."
+      },
+      "dependencies": {
+        "de": "Vitamin C fördert die Aufnahme von Eisen im Darm. Ein Vitamin-C-Mangel kann damit indirekt zu einem Eisenmangel führen. Bei vegetarischer Ernährung kann ein hoher Vitamin-C-Konsum über Obst und Gemüse somit einen Eisenmangel vorbeugen.",
+        "en": "Vitamin C supports the resorption of iron in the bowel. A vitamin C shortage thus can indirectly lead to an iron shortage. In case of a vegetarian diet, an increased consumption of fruit or vegetables containing vitamin C may prevent an iron deficiency."
+      },
+      "requirements": {
+        "de": "Mann: 10 mg | Frau: 15 mg  (schwanger: 30 mg, stillend: 20 mg)",
+        "en": "male: 10 mg | female: 15 mg  (pregnant: 30 mg, breastfeeding: 20 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Zink",
+        "en": "zinc"
+      },
+      "description": {
+        "de": "Zink ist ein Spurenelement, das eine Vielzahl unterschiedlicher Aufgaben im Körper wahrnimmt. Es kommt v.a. in tierischen Lebensmitteln vor, z.B. Schweinefleisch, Fisch, Eiern und Milchprodukten. In geringerer Menge tritt es auch in Getreideprodukten, Nüssen und Hülsenfrüchten auf, wobei die Aufnahme aus tierischen Quellen im Darm jedoch besser funktioniert. Zinkmangel tritt in der Gesellschaft recht häufig auf, da auch bei einigen Menschen erblich oder gesundheitlich bedingt die Zinkaufnahme im Darm nur unzureichend geschieht. Besonders schlimm ist die Situation in Entwicklungsländern. Man schätzt, dass weltweit zwei Milliarden Menschen an einem Zinkmangel leiden, mit mehr als einer Millionen Todesopfern pro Jahr.",
+        "en": "Zinc is a trace element that has different functions within the human body. It occurs espeically in animal food, e.g., pork meat, fish, eggs and dairy products, and to a less degree in grain products, nuts and legumes. The resorption from animal-based food works better than from plant-based food. Zinc defiencies occur frequently, also because some people have a hereditarily or physically impaired zinc resorption. Zinc deficiencies are especially serious in developing country; it is assumed that about two billion people in the world suffer from a shortage, with more than one million people dying from it every year."
+      },
+      "functionality": [
+        {
+          "de": "Beteiligt am Stoffwechsel",
+          "en": "Takes part in metabolism"
+        },
+        {
+          "de": "Benötigt für Wachstum und Zellentwicklung",
+          "en": "Needed for growth an cell development"
+        },
+        {
+          "de": "Bildung von Eiweiß",
+          "en": "Production of proteins"
+        },
+        {
+          "de": "Sorgt für die Wirkung verschiedener Hormone (z.B. Wachstumshormone, Insulin)",
+          "en": "Participates in the effective use of different hormones"
+        },
+        {
+          "de": "Bedeutung für das Immunsystem",
+          "en": "Significant for the immune system"
+        },
+        {
+          "de": "Wirkt als Antioxidans gegen freie Radikale",
+          "en": "As an antioxidant acts against free radicals"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Helle Flecken auf den Fingernägeln",
+          "en": "Light spots on the finger nails"
+        },
+        {
+          "de": "Wachstumsstörung",
+          "en": "Impaired growth"
+        },
+        {
+          "de": "Anämie (Blutarmut)",
+          "en": "Anaemia"
+        },
+        {
+          "de": "Brüchige Nägel, Haarausfall, trockene Haut",
+          "en": "Britte nails, hair loss, dry skin"
+        },
+        {
+          "de": "Geschwächtes Immunsystem",
+          "en": "Weakened immune system"
+        }
+      ],
+      "overdose": {
+        "de": "Die tägliche Maximaldosis wird mit 40 mg angegeben. Eine Überdosis kann Übelkeit, Erbrechen und Durchfall auslösen sowie das Immunsystem schwächen.",
+        "en": "The maximum dose is estimated 40 mg per day. An overdose can cause nausea, vomiting and diarhrrea, and may weaken the immune system."
+      },
+      "dependencies": {
+        "de": "Kupfer und Eisen binden Zink im Körper. Ein hoher Kupferspiegel oder ein hoher Eisenspiegel verschlechtern damit die Aufnahme von Zink und können zu einem Zinkmangel beitragen. Die in vielen Pflanzen enthaltene Phytate (z.B. Getreideprodukte, Nüsse, Hülsenfrüchte, Gemüse) hemmt ebenfalls die Zinkaufnahme. Beim Konsum dieser Lebensmittel erhöht sich somit auch der Tagesbedarf an Zink.",
+        "en": "Copper and iron bind to zinc so that a high copper or iron level impair the resorption of zinc in the digestive tract, potentially causing a zinc deficiency. Phytates, which occur in many plant-based foods (such as grain products, nuts, legumes and vegetables) impair the zinc resorption as well. Consuming those foods increases the daily requirement for zinc."
+      },
+      "requirements": {
+        "de": "Mann: 10 mg | Frau: 7 mg  (schwanger: 10 mg, stillend: 11 mg)",
+        "en": "male: 10 mg | female: 7 mg  (pregnant: 10 mg, breastfeeding: 11 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Kupfer",
+        "en": "Copper"
+      },
+      "description": {
+        "de": "Kupfer ist ein Spurenelement, das für viele Enzyme benötigt wird und am Stoffwechsel mit beteiligt ist. Der menschliche Körper enthält etwa 100 mg Kupfer, das u.a. im Skelett, in den Muskeln und der Leber gespeichert ist. Ein Mangel ist sehr selten, da Kupfer in vielen Lebensmitteln auftritt. Er tritt am ehesten durch Krankheiten oder eine zu hohe Zinkzufuhr über längere Zeit auf. ",
+        "en": "Copper is a trace element needed for many enzymes as well as for metabolism. The human body contains about 100 mg of copper, which is mostly stored in the bones, muscles and liver. Copper defieciencies are very rare, since copper is part of many foods. It may occur in case of several diseases or a constantly high zinc intake, though."
+      },
+      "functionality": [
+        {
+          "de": "Bestandteil vieler Enzyme",
+          "en": "Part of many enzymes"
+        },
+        {
+          "de": "Am Stoffwechsel beteiligt",
+          "en": "Takes part in metabolism"
+        },
+        {
+          "de": "An vielen biologischen Prozessen beteiligt (z.B. Wachstum, Entwicklung der Blutzellen)",
+          "en": "Participates in many biological processes (such as growth, developtment of the blood cells)"
+        },
+        {
+          "de": "Beteiligt an der Pigmentierung von Augen, Haaren und Haut",
+          "en": "Needed for the pigmentation of eyes, hair and skin"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Müdigkeit",
+          "en": "Sleepiness"
+        },
+        {
+          "de": "Konzentrationsstörungen",
+          "en": "Loss of concentration"
+        },
+        {
+          "de": "Magenschmerzen, Durchfall",
+          "en": "Stomachaches, diarhrrea"
+        },
+        {
+          "de": "Depressionen",
+          "en": "depressions"
+        }
+      ],
+      "overdose": {
+        "de": "Eine tägliche Dosis bis 5 mg gilt als unbedenklich. Bei einer Überdosis kann es zu Vergiftungserscheinungen gekommen, z.B. in Form von starker Übelkeit und Durchfall oder Kopfschmerzen und Schwindel. Sie tritt i.d.R. nicht durch die Ernährung auf, sondern meist durch Erkrankungen oder die Einnahme von Medikamenten, die zu einem höheren Kupferspiegel im Körper führen. Der Konsum von säurehaltigen Lebensmitteln aus Kupfergefäßen (oder Wasser aus Kupferleitungen) kann ebenfalls zu einer Überdosierung führen, da es das Kupfer aus dem Behälter lösen kann.",
+        "en": "An intake of up to 5 mg per day is considered innocuous. An overdose can trigger symptoms of poisoning, such as severe nausea and diarrhea or headaches and dizziness. An overdose is usually not caused by normal nutrition, yet may be caused by diseases or the intake of some medication, that can lead to an increased copper level in the body. The consumption of acidic foods from copper vessels (or tap water from copper pipes) may also lead to an overdose, as those foods may wash out the copper from the container."
+      },
+      "dependencies": {
+        "de": "Eine erhöhte Zinkzufuhr über längeren Zeitraum kann die Kupferaufnahme hemmen und damit indirekt zu einem Mangel führen. Kupfer ist an der Aufnahme von Eisen im Darm beteiligt. Ein Kupfermangel vermindert damit die Eisenaufnahme und kann indirekt zu einem Eisenmangel führen (der zu Blutarmut führen kann).",
+        "en": "A constantly increased intake of zinc can reduce the resorption of copper and thus indirectly lead to a copper shortage. Copper participates in the resorption of iron in the digestive system; a copper shortage may thus indirectly lead to an iron shortage (which may lead to anemia)."
+      },
+      "requirements": {
+        "de": "ca. 1,25 mg (der genaue Bedarf ist noch nicht abschließend geklärt)",
+        "en": "about 1.25 mg (the exact amount has not been identified yet)"
+      }
+    },
+    {
+      "name": {
+        "de": "Selen",
+        "en": "Selenium"
+      },
+      "description": {
+        "de": "Selen ist ein Spurenelement, das ähnlich wie Kupfer Bestandteil vieler Enzyme ist. Es kommt sowohl in pflanzlicher als auch tierischer Nahrung vor, allerdings ist es in pflanzlicher Nahrung starken Schwankungen ausgesetzt. Der Anteil von Selen ist abhängig vom Selengehalt im Boden. In Europa sind die Böden eher selenarm, so dass die Selenversorgung hier primär über tierische Produkte wie Fleisch, Fisch und Eier geschieht. In den USA enthalten die Böden mehr Selenium, in Teilen Afrikas und Chinas ist die Konzentration noch deutlicher geringer. In der westlichen Welt ist ein Selenmangel bei ausgewogener Ernährung sehr selten, in Ländern mit selenarmen Böden und primär pflanzlicher Ernährung in der Bevölkerung stellt es jedoch ein großes Problem dar.",
+        "en": "Similar to copper, selenium is a trace element that is part of many enzymes. It is contained both by plant-based food an animal food, yet in plants the amount is subject to strong fluctuations. The amount of selenium in plants depends on the amount of selenium in soil. Europe's soils contain only low amounts of selenium so that the supply of the population is primarily achieved through animal-based food such as meat, fish and eggs. Soils in the United States generally contain more selenium, yet parts in Africa and China even less. In western countries, selenium deficiencies are very rare in case of a balanced diet. However, in countries of low-selenium soils and primarily plant-based nutrition among the population it may pose a severe risk."
+      },
+      "functionality": [
+        {
+          "de": "Bestandteil von Enzymen und Hormonen",
+          "en": "Part of enzymes and hormones"
+        },
+        {
+          "de": "Beteiligt an der Regulation des Schilddrüsenhormons",
+          "en": "Participates in the regulation of the thyroid hormone"
+        },
+        {
+          "de": "Baustein für Spermien, fördert die Fruchtbarkeit beim Mann",
+          "en": "Part of spermia, promotes the fertility of men"
+        },
+        {
+          "de": "Baustein für Spermien, fördert die Fruchtbarkeit beim Mann",
+          "en": "Part of spermia, promotes the fertility of men"
+        },
+        {
+          "de": "Unterstützt die Neutralisierung freier Radikale",
+          "en": "Participates in the neutralization of free radicals"
+        },
+        {
+          "de": "Wichtig fürs Immunsystem ",
+          "en": "Important for the immune system"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Geschwächtes Immunsystem",
+          "en": "Weaked immune system"
+        },
+        {
+          "de": "Muskelschwäche",
+          "en": "Muscle weakness"
+        },
+        {
+          "de": "Störung der Spermienproduktion",
+          "en": "Impairs sperm production"
+        },
+        {
+          "de": "Wachstumsverzögerung",
+          "en": "Impairment of growth"
+        }
+      ],
+      "overdose": {
+        "de": "Eine chronische Überdosis kann zu Haarausfall, Übelkeit und zur Störung des Nervensystems führen. Als maximal zulässiger täglicher Referenzwert wird oft 250 bis 400 µg angegeben.",
+        "en": "A chronic overdose may cause hair loss, nausea and impairment of the nervous system. The maximal tolerable daily dose is, according to different sources, between 250 and 400 µg. "
+      },
+      "requirements": {
+        "de": "Mann: 0,7 mg | Frau: 0,6 mg  (schwanger: 0,6 mg, stillend: 0,75 mg)",
+        "en": "male: 0.7 mg | female: 0.6 mg  (pregnant: 0.6 mg, breastfeeding: 0.75 mg)"
+      }
+    },
+    {
+      "name": {
+        "de": "Mangan",
+        "en": "Manganese"
+      },
+      "description": {
+        "de": "Mangan ist ein Spurenelement, das Bestandteil von Enzymen sowie am Aufbau von Knochen und Bindegewerbe beteiligt ist. Es macht nur rund 10 bis 40 mg in unserem Körper aus und kommt in der Ernährung reichlich vor, insbesondere in Getreide, Nüssen und anderen pflanzlichen Lebensmitteln. Ein Mangel ist daher sehr selten.",
+        "en": "Manganese is a trace element that is part of enzymes and needed for bone and tissue growth. It makes up 10 .. 40 mg within the human body and is suffiently contained in foods, in particular in grain products, nuts and other plant-based food. A manganese defficiency is thus very rare."
+      },
+      "functionality": [
+        {
+          "de": "Aufbau von Knochen, Knorpel und Bindegewebe",
+          "en": "Production of bones, cartilage and conjunctive tissue"
+        },
+        {
+          "de": "Bildung verschiedener Enzyme (z.B.Enzyme zur Blutgerinnung)",
+          "en": "Production of different enzymes (e.g. enzymes for blood coagulation)"
+        },
+        {
+          "de": "Beteiligt am Insulin- und Fettstoffwechsel",
+          "en": "Participates in the insuline and lipid metabolism"
+        },
+        {
+          "de": "Wichtig fürs Nervensystem",
+          "en": "Needed for the nervous system"
+        }
+      ],
+      "deficiencies": [
+        {
+          "de": "Hemmung des Knochenwachstums ",
+          "en": "Impairment of bone growth"
+        },
+        {
+          "de": "Immunschwäche",
+          "en": "Weakened immune system"
+        },
+        {
+          "de": "Blutgerinnungsstörung",
+          "en": "Impairment of blood coagulation"
+        },
+        {
+          "de": "Störung von Stoffwechselprozessen",
+          "en": "Impairment of metabolic processes"
+        }
+      ],
+      "overdose": {
+        "de": "Ein genauer Referenzwert für eine Überdosis existiert nicht, jedoch gilt eine tägliche Aufnahme zwischen 2 und 5 mg als unbedenklich. Es gibt keinen belegbaren Vorteil einer höheren Manganzufuhr. Bei einer deutlichen Überdosierung können verschiedene Vergiftungserscheinungen eintretren, z.B. Herz-Kreislauf-Beschwerden und Leberversagen.",
+        "en": "So far, no specific maximal acceptable daily amount has been identified, an intake amount between 2 and 5 mg is considered safe, though. There are no proven facts for any benefits resulting of a higher intake. A serious overdose may lead to different symptoms of poisoning, e.g. cardiovascular complains and liver failure."
+      },
+      "requirements": {
+        "de": "Mann: 3,5 mg | Frau: 3,5 mg",
+        "en": "male: 3.5 mg | female: 3.5 mg"
+      }
     }
     ]
 }

@@ -158,7 +158,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
 
     let bookToolTip = null
     let bookData: BookDataEntry[] = []
-    switch(selectedDataPage) {
+    switch (selectedDataPage) {
         case TAB_VITAMIN_DATA:
             bookToolTip = applicationStrings.tooltip_icon_vitamins[languageContext.language]
             bookData = nutrientBook.vitamins
@@ -173,7 +173,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     }
 
     const shouldShowBookIcon = selectedDataPage === TAB_VITAMIN_DATA || selectedDataPage == TAB_MINERAL_DATA
-                                || selectedDataPage == TAB_PROTEINS_DATA
+        || selectedDataPage == TAB_PROTEINS_DATA
     const aggregatedFoodItem = props.selectedFoodItem?.aggregated === true
 
     return (
@@ -186,7 +186,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                           closeBookModal={() => setShowBookModal(false)}/>
             }
             {showSettingsModal &&
-                <SettingsModal onHide={() => setShowSettingsModal(false)} />
+            <SettingsModal onHide={() => setShowSettingsModal(false)}/>
             }
             <div className={"d-flex flex-nowrap"}>
                 <div className="col-2">
@@ -210,7 +210,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                 <b>{fullName}</b>
                             </div>
                         </div>
-                        <div style={{paddingRight: "24px"}}>
+                        <div className={"d-flex flex-row"} style={{paddingRight: "24px"}}>
                             <div style={{padding: "0px !important", margin: "0px !important"}}>
                                 {shouldShowBookIcon &&
                                 <span style={{marginRight: "20px"}}>
@@ -222,8 +222,8 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                                     </Button>
                                 </span>
                                 }
-                                </div>
-                            <div className={"d-flex flex-row"} >
+                            </div>
+                            <div className={"d-flex flex-row"}>
                                 <div className="btn-group" role="group">
                                     <Button className={chartButtonClasses}
                                             onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}

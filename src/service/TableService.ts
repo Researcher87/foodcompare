@@ -602,7 +602,7 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         const requirement = makeDietaryRequirementString(minRequirementData.potassium, userData, dataSettings)
         tableData.push(
             createTableObject(
-                applicationStrings.label_nutrient_min_potassimum[language],
+                applicationStrings.label_nutrient_min_potassium[language],
                 getVitaminOrMineralAmount(firstNutrientData.mineralData.potassium, dataSettings),
                 portion,
                 unit,
