@@ -2,7 +2,7 @@ import {Component, createContext, ReactElement} from "react";
 import * as NutrientDataImportService from "../service/NutrientDataImportService";
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
-import {ApplicationData, RankingPanelData} from "../types/livedata/ApplicationData";
+import {ApplicationData, FoodDataPanelData, RankingPanelData} from "../types/livedata/ApplicationData";
 import {
     DISPLAYMODE_CHART, OPTION_YES,
     SOURCE_SRLEGACY,
@@ -48,6 +48,7 @@ export interface ApplicationContext extends ApplicationDataContext {
     setDirectCompareFoodSelector1: (sourceSupplement: boolean, sourceCombine: boolean) => void
     setDirectCompareFoodSelector2: (sourceSupplement: boolean, sourceCombine: boolean) => void
     setFoodDataPanelData: {
+        setCompleteData: (FoodDataPanelData) => void
         setSelectedFoodTab: (number) => void
         setSelectedDataPage: (string) => void
         setSelectedDisplayMode: (string) => void
@@ -112,6 +113,15 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             applicationData: {
                 ...prevState.applicationData,
                 foodDataPanel: {...prevState.applicationData.foodDataPanel, selectedFoodItems: newItems}
+            }
+        }))
+    }
+
+    setCompleteFoodDataPanel = (foodDataPanelData: FoodDataPanelData) => {
+        this.setState(prevState => ({
+            applicationData: {
+                ...prevState.applicationData,
+                foodDataPanel: foodDataPanelData
             }
         }))
     }
@@ -247,6 +257,12 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             userData: {
                 ...userData
             }
+        }))
+    }
+
+    setFoodDataPanelData = (foodDataPanelData: FoodDataPanelData) => {
+        this.setState( ()=> ({
+            applicationData: {...this.state.applicationData, foodDataPanel: foodDataPanelData}
         }))
     }
 
@@ -417,6 +433,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 this.setState({...this.state, useAsMobile: usage})
             },
             setFoodDataPanelData: {
+                setCompleteData: this.setCompleteFoodDataPanel,
                 setSelectedFoodTab: this.setSelectedFoodDataPanelTab,
                 setSelectedDataPage: this.setSelectedFoodDataPanelPage,
                 setSelectedDisplayMode: this.setSelectedDisplayMode,

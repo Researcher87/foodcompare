@@ -1059,6 +1059,22 @@ export const applicationStrings = {
         de: 'Geben Sie bitte eine Portion zwischen 1 und 5000 Gramm an.',
         en: 'Please specify a portion amount between 1 and 5000 gram.'
     },
+    message_export_error: {
+        de: 'Export fehlgeschlagen: Fehler beim Serialisieren der Food Compare Daten.',
+        en: 'Export failed: Error while trying to serialize Food Compare data.'
+    },
+    message_import_error_invalidfile: {
+        de: 'Datei konnte nicht verarbeitet werden. Möglicherweise ist dies keine Food Compare Datei.',
+        en: 'Could not parse data file. Possibly this is not a Food Compare data file.'
+    },
+    message_import_error_parse: {
+        de: 'Fehler beim Deserialisieren der Food Compare Datei.',
+        en: 'Error while trying to deserialize Food Compare data file.'
+    },
+    message_import_question: {
+        de: 'Im Datenbereich befinden sich noch Datenobjekte, die mit den zu importierenden Daten überschrieben werden. Möchten Sie trotzdem fortfahren?',
+        en: 'The data panel still contains food data objects which will be overwritten by the imported data. Do you still want to proceed?'
+    },
     message_userdata_success: {
         de: 'Änderungen wurden gespeichert.',
         en: 'Saved changes.'
@@ -1226,6 +1242,14 @@ export const applicationStrings = {
     tooltip_icon_close: {
         de: 'Tab schließen',
         en: 'Close tab'
+    },
+    tooltip_icon_export: {
+        de: 'Aktuelle Datenansicht speichern (Export)',
+        en: 'Save current data view to file (export)'
+    },
+    tooltip_icon_import: {
+        de: 'Food Compare Daten von Datei importieren',
+        en: 'Import Food Compare data from file'
     },
     tooltip_icon_newFoodItem: {
         de: 'Lebensmittel hinzufügen',
