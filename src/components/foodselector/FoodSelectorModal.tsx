@@ -17,11 +17,14 @@ import {FaQuestionCircle} from "react-icons/fa";
 import {HelpModal} from "../HelpModal";
 import {getHelpText} from "../../service/HelpService";
 import ReactSelectOption from "../../types/ReactSelectOption";
+import {MODE_EDIT} from "../../config/Constants";
 
 export interface FoodSelectorModalProps {
     onHide: () => void,
     selectedFoodItemCallback: (selectedFoodItem: SelectedFoodItem) => void
     compositeSelector: boolean
+    selectedFoodItem?: SelectedFoodItem,
+    mode?: string
 }
 
 
@@ -29,9 +32,16 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     const applicationContext = useContext(ApplicationDataContextStore)
     const {language} = useContext(LanguageContext)
 
-    const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(null)
+    const initialFoodItem = props.selectedFoodItem ? props.selectedFoodItem : null
+    const initialCompositeList = props.selectedFoodItem && props.selectedFoodItem.compositeSubElements
+        ? props.selectedFoodItem.compositeSubElements
+        : []
+
+    console.log('Scheißjude', initialCompositeList)
+
+    const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(initialFoodItem)
     const [compositeTitle, setCompositeTitle] = useState<string | null>(null)
-    const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>([])
+    const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>( initialCompositeList ?? [])
     const [showHelpModal, setShowHelpModal] = useState<boolean>(false)
 
     if (!applicationContext) {
@@ -74,6 +84,14 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const onSubmitSingleItem = () => {
+        if(props.mode === MODE_EDIT) {
+            if(selectedFoodItem) {
+                props.selectedFoodItemCallback(selectedFoodItem)
+                props.onHide()
+            }
+            return;
+        }
+
         const foodItemId = selectedFoodItem ? selectedFoodItem.foodItem.id : null
         if (foodItemId) {
             const existingItemInList = applicationContext?.applicationData.foodDataPanel.selectedFoodItems.find(foodItem => foodItem.id === foodItemId)
@@ -110,6 +128,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         }
 
         aggregatedSelectedFoodItem = {...aggregatedSelectedFoodItem, aggregated: true}
+
+        console.log("Aggregated:", aggregatedSelectedFoodItem)
+
         props.selectedFoodItemCallback(aggregatedSelectedFoodItem)
         props.onHide()
     }
@@ -149,7 +170,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                         <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
                                       defaultFoodClass={initialFoodClassId}
                                       compositeSelector={false}
+                                      selectedFoodItem={selectedFoodItem}
                                       updateFoodSelectorConfig={updateFoodSelectorConfig}
+                                      mode={props.mode}
                         />
                         :
                         <div className={"container"}>

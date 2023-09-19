@@ -16,7 +16,7 @@ import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodClass from "../../types/nutrientdata/FoodClass";
 import {LanguageContext} from "../../contexts/LangContext";
 import {isMobileDevice, isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
-import {SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
+import {MODE_EDIT, SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
 import {Form} from "react-bootstrap";
@@ -38,6 +38,7 @@ export interface FoodSelectorProps {
     selectedFoodItem?: SelectedFoodItem | null
     defaultFoodClass?: number
     directCompareSelectorNumber?: number
+    mode?: string
 }
 
 /**
@@ -537,6 +538,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const stylesFoodClass = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODCLASS) : customSelectStyles
     const stylesFoodItem = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODITEM) : customSelectStyles
 
+    console.log('ABC', props.mode)
+
     return <div>
         <div className="container">
             {props.compositeSelector === true &&
@@ -554,6 +557,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
                 <Select className={selectClass}
                         options={categoriesList}
+                        isDisabled={props.mode === MODE_EDIT}
                         value={selectedCategory ? selectedCategory : categoriesList[0]}
                         onChange={(value) => handleCategoryChange(value)}
                         styles={stylesCategory}
@@ -564,6 +568,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select className={selectClass}
                         options={foodClassesTypeaheadList}
+                        isDisabled={props.mode === MODE_EDIT}
                         onInputChange={handleFoodClassInputChange}
                         formatOptionLabel={foodclassFormatter}
                         value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
@@ -575,6 +580,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
                 <Select className={selectClass}
+                        isDisabled={props.mode === MODE_EDIT}
                         options={foodItemsList}
                         value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
                         onChange={handleFoodItemChange}

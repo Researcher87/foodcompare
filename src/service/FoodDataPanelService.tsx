@@ -29,3 +29,12 @@ export function makeFoodDataPanelComponent(selectedFoodItem: SelectedFoodItem, f
 
     return selectedFoodItem
 }
+
+/**
+ * Sets the food data page component on a given food item and returns a new copy of it.
+ * @param foodItem A copy of a selected food item, containing the JSX Food Data Page component.
+ */
+export function setFoodDataPageComponent(foodItem: SelectedFoodItem): SelectedFoodItem {
+    const component = <FoodDataPage key={`page component ${foodItem.id}`} selectedFoodItem={foodItem}/>
+    return {...foodItem, component: component}
+}

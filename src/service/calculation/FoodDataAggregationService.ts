@@ -26,6 +26,8 @@ export default function combineFoodItems(compositeList: Array<SelectedFoodItem>,
         aggregated: true
     }
 
+    console.log('JUDE', compositeList)
+
     let combinedFoodItem: SelectedFoodItem = {
         id: id,
         foodItem: aggreatedFoodItem,

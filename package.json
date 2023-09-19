@@ -35,6 +35,7 @@
     "react-snap": "^1.23.0",
     "react-tooltip": "^4.2.21",
     "sass": "^1.48.0",
+    "shrink-string": "^3.1.7",
     "typescript": "^4.4.2",
     "web-vitals": "^1.1.2"
   },

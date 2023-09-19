@@ -1251,6 +1251,10 @@ export const applicationStrings = {
         de: 'Food Compare Daten von Datei importieren',
         en: 'Import Food Compare data from file'
     },
+    tooltip_icon_editFoodItem: {
+        de: 'Ausgewähltes Lebensmittel bearbeiten',
+        en: 'Edit selected food item'
+    },
     tooltip_icon_newFoodItem: {
         de: 'Lebensmittel hinzufügen',
         en: 'Add food item'

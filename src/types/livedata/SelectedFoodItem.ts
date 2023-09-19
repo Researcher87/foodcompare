@@ -8,16 +8,11 @@ export default interface SelectedFoodItem {
     tab?: string
     component?: JSX.Element
     id?: number
-    compositeSubElements?: Array<CompositeFoodElement>
+    compositeSubElements?: Array<SelectedFoodItem>
     resolvedName?: string | null
     selectedSource: number
     supplementData: boolean
     combineData: boolean
 	aggregated?: boolean
     title?: string
-}
-
-export interface CompositeFoodElement {
-    foodItem: FoodItem
-    portion: PortionData
 }

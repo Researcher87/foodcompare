@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap'
 import {NotificationManager} from 'react-notifications'
 
 import FoodSelectorModal from '../foodselector/FoodSelectorModal'
-import {FaDownload, FaLayerGroup, FaPlusSquare, FaTrash, FaUpload} from "react-icons/fa";
+import {FaDownload, FaEdit, FaLayerGroup, FaPlusSquare, FaTrash, FaUpload} from "react-icons/fa";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";
@@ -11,10 +11,12 @@ import {applicationStrings} from "../../static/labels";
 import {confirmAction} from "../ConfirmationDialog";
 import ReactTooltip from "react-tooltip";
 import {useHistory} from 'react-router-dom';
-import {PATH_FOODDATA_PANEL} from '../../config/Constants';
+import {MODE_EDIT, MODE_NEW, PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import {isMobileDevice} from "../../service/WindowDimension";
 import FoodDataPage from "./FoodDataPage";
+
+const {compress, decompress} = require('shrink-string')
 
 
 interface FoodAnalyzerContainerProps {
@@ -25,7 +27,7 @@ interface FoodAnalyzerContainerProps {
 
 export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
-    const { language } = useContext(LanguageContext)
+    const {language} = useContext(LanguageContext)
     const history = useHistory()
 
     const showFoodSelectorInitialState = props.openSelectorModal === true
@@ -33,13 +35,27 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
+    const [foodSelectorEditMode, setFoodSelectorEditMode] = useState<Boolean>(false)
 
     if (!applicationContext) {
         return <div/>
     }
 
-    const onOpenSelector = (aggregateSelector: boolean) => {
+    const onAddNewFoodItem = (aggregateSelector: boolean) => {
+        setFoodSelectorEditMode(false)
         if (aggregateSelector) {
+            setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)
+        } else {
+            setShowFoodSelector(!showFoodSelector)
+        }
+    }
+
+    const onEditSelectedFoodItem = () => {
+        const {selectedFoodItems, selectedFoodItemIndex} = applicationContext.applicationData.foodDataPanel;
+        const selectedFoodItem = selectedFoodItems[selectedFoodItemIndex];
+
+        setFoodSelectorEditMode(true)
+        if (selectedFoodItem.aggregated) {
             setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)
         } else {
             setShowFoodSelector(!showFoodSelector)
@@ -54,7 +70,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             }
         }
 
-        if(applicationContext.applicationData.foodDataPanel?.selectedFoodItems?.length > 0) {
+        if (applicationContext.applicationData.foodDataPanel?.selectedFoodItems?.length > 0) {
             if (await confirmAction(
                 applicationStrings.message_import_question[language],
                 applicationStrings.button_yes[language],
@@ -78,12 +94,16 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
         const file = files[0];
         const fileReader = new FileReader();
         fileReader.readAsText(file);
-        fileReader.onloadend = () => {
+        fileReader.onloadend = async () => {
             const content = fileReader.result as string;
+            if (!content) {
+                return;
+            }
+            const decompressedContent = await decompress(content)
             const expectedStartOfContent = "{\"selectedFoodItems\":[";
-            if (content && content.startsWith(expectedStartOfContent)) {
+            if (decompressedContent.startsWith(expectedStartOfContent)) {
                 try {
-                    let foodDataPanelData = JSON.parse(content);
+                    let foodDataPanelData = JSON.parse(decompressedContent);
                     foodDataPanelData = {
                         ...foodDataPanelData, selectedFoodItems: foodDataPanelData.selectedFoodItems.map(item => {
                             return {
@@ -93,7 +113,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                         })
                     }
                     applicationContext.setFoodDataPanelData.setCompleteData(foodDataPanelData);
-                } catch(e) {
+                } catch (e) {
                     NotificationManager.error(applicationStrings.message_import_error_invalidfile[language])
                 }
             } else {
@@ -103,7 +123,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     }
 
 
-    const onExport = () => {
+    const onExport = async () => {
         let dataObj = applicationContext.applicationData.foodDataPanel;
 
         /*
@@ -119,16 +139,17 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
         try {
             const fileContent = JSON.stringify(dataObj);
+            const compressedContent = await compress(fileContent)
 
             // Create pseudo-element representing a download element
             var element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContent));
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(compressedContent));
             element.setAttribute('download', "food-compare_dataexport.json");
             element.style.display = 'none';
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
-        } catch(e) {
+        } catch (e) {
             NotificationManager.error(applicationStrings.message_export_error[language])
         }
 
@@ -144,18 +165,26 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             return
         }
 
-        const selectedFoodItemWithComponent = makeFoodDataPanelComponent(
-            selectedFoodItem, applicationContext.foodDataCorpus.foodNames, language)
+        const selectedIndex = applicationContext.applicationData.foodDataPanel.selectedFoodItemIndex
 
-        if (selectedFoodItemWithComponent !== null) {
-            applicationContext.setFoodDataPanelData.addItemToFoodDataPanel(selectedFoodItemWithComponent)
+        if (foodSelectorEditMode) {
+            // ToDo: Anpassen bei aggregated -> composite list clonen
+            applicationContext.setFoodDataPanelData.setItemOfFoodDataPanel(selectedFoodItem, selectedIndex)
+        } else {
+            const selectedFoodItemWithComponent = makeFoodDataPanelComponent(
+                selectedFoodItem, applicationContext.foodDataCorpus.foodNames, language)
+
+            if (selectedFoodItemWithComponent !== null) {
+                applicationContext.setFoodDataPanelData.addItemToFoodDataPanel(selectedFoodItemWithComponent)
+            }
+
+            if (applicationContext?.debug) {
+                console.log('FoodAnalyzerContainer: Set new selected item and execute callback. Selected item = ', selectedFoodItemWithComponent)
+            }
+
+            props.onNewFoodItemSelected()
         }
 
-        if (applicationContext?.debug) {
-            console.log('FoodAnalyzerContainer: Set new selected item and execute callback. Selected item = ', selectedFoodItemWithComponent)
-        }
-
-        props.onNewFoodItemSelected()
     }
 
     const onCloseAllTabs = async () => {
@@ -174,66 +203,88 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
         console.log('FoodAnalyzerContainer: Render')
     }
 
-    const selectedFoodItems = applicationContext?.applicationData.foodDataPanel.selectedFoodItems
-    const deleteIconEnabled = selectedFoodItems && selectedFoodItems.length > 0
+    const {selectedFoodItems, selectedFoodItemIndex} = applicationContext.applicationData.foodDataPanel
+    const isFoodItemSelected = selectedFoodItems && selectedFoodItems.length > 0
     const buttonClass = isMobileDevice() ? "btn m-2" : "btn mb-4 foodanalyzer-button"
+    const buttonClassWithExtraSpace = isMobileDevice() ? "btn m-2" : "btn mb-5 foodanalyzer-button"
 
-    const divButtonClass = isMobileDevice() ? "d-flex flex-row mb-4" : "d-flex flex-column align-items-center"
+    const divButtonClass = isMobileDevice() ? "d-flex flex-row mb-4" : "d-flex flex-column align-items-left"
+
+    const selectedFoodItem = isFoodItemSelected ? selectedFoodItems[selectedFoodItemIndex] : undefined
+    const existingFoodItem = foodSelectorEditMode ? selectedFoodItem : undefined
+    const mode = foodSelectorEditMode ? MODE_EDIT : MODE_NEW
 
     return (
         <div className={"foodanalyzer-buttonbar"}>
-            <div>
-                {showFoodSelector &&
-                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit}
-                                   compositeSelector={false}/>
-                }
-                {showFoodAggregatedFoodSelector &&
-                <FoodSelectorModal onHide={onHide} selectedFoodItemCallback={onSelectFoodItemSubmit}
-                                   compositeSelector={true}/>
-                }
-                <div className={divButtonClass}>
-                    <Button onClick={() => onOpenSelector(false)}
-                            className={buttonClass}
-                            data-for={"fa-btn-add"}
-                            data-tip={applicationStrings.tooltip_icon_newFoodItem[language]}>
-                        <FaPlusSquare/>
-                        <ReactTooltip id={"fa-btn-add"} globalEventOff="click"/>
-                    </Button>
-                    <Button onClick={() => onOpenSelector(true)}
-                            className={buttonClass}
-                            disabled={isMobileDevice()}
-                            data-for={"fa-btn-aggregate"}
-                            data-tip={applicationStrings.tooltip_icon_newFoodItemStack[language]}>
-                        <FaLayerGroup/>
-                        <ReactTooltip id={"fa-btn-aggregate"} globalEventOff="click"/>
-                    </Button>
-                    <Button onClick={() => onExport()}
-                            className={buttonClass}
-                            disabled={isMobileDevice()}
-                            data-for={"fa-btn-export"}
-                            data-tip={applicationStrings.tooltip_icon_export[language]}>
-                        <FaDownload/>
-                        <ReactTooltip id={"fa-btn-export"} globalEventOff="click"/>
-                    </Button>
-                    <input type="file" id="importFileInput" style={{visibility: "hidden"}} accept={".json"}
-                           onChange={onImport}/>
-                    <Button onClick={() => onOpenFileUpload()}
-                            className={buttonClass}
-                            disabled={isMobileDevice()}
-                            data-for={"fa-btn-import"}
-                            data-tip={applicationStrings.tooltip_icon_import[language]}>
-                        <FaUpload/>
-                        <ReactTooltip id={"fa-btn-import"} globalEventOff="click"/>
-                    </Button>
-                    <Button onClick={() => onCloseAllTabs()}
-                            disabled={deleteIconEnabled === false}
-                            className={buttonClass}
-                            data-for={"fa-btn-close"}
-                            data-tip={applicationStrings.tooltip_icon_removeAll[language]}>
-                        <FaTrash/>
-                        <ReactTooltip id={"fa-btn-close"}/>
-                    </Button>
-                </div>
+            {showFoodSelector &&
+            <FoodSelectorModal onHide={onHide}
+                               selectedFoodItemCallback={onSelectFoodItemSubmit}
+                               compositeSelector={false}
+                               selectedFoodItem={existingFoodItem}
+                               mode={mode}
+            />
+            }
+            {showFoodAggregatedFoodSelector &&
+            <FoodSelectorModal onHide={onHide}
+                               selectedFoodItemCallback={onSelectFoodItemSubmit}
+                               compositeSelector={true}
+                               selectedFoodItem={existingFoodItem}
+                               mode={mode}
+            />
+            }
+            <div className={divButtonClass}>
+                <Button onClick={() => onAddNewFoodItem(false)}
+                        className={buttonClass}
+                        data-for={"fa-btn-add"}
+                        data-tip={applicationStrings.tooltip_icon_newFoodItem[language]}>
+                    <FaPlusSquare/>
+                    <ReactTooltip id={"fa-btn-add"} globalEventOff="click"/>
+                </Button>
+                <Button onClick={() => onEditSelectedFoodItem()}
+                        className={buttonClassWithExtraSpace}
+                        disabled={!isFoodItemSelected}
+                        data-for={"fa-btn-edit"}
+                        data-tip={applicationStrings.tooltip_icon_editFoodItem[language]}>
+                    <FaEdit/>
+                    <ReactTooltip id={"fa-btn-edit"} globalEventOff="click"/>
+                </Button>
+                <Button onClick={() => onAddNewFoodItem(true)}
+                        className={buttonClass}
+                        disabled={isMobileDevice()}
+                        data-for={"fa-btn-aggregate"}
+                        data-tip={applicationStrings.tooltip_icon_newFoodItemStack[language]}>
+                    <FaLayerGroup/>
+                    <ReactTooltip id={"fa-btn-aggregate"} globalEventOff="click"/>
+                </Button>
+                <Button onClick={() => onExport()}
+                        className={buttonClass}
+                        disabled={!isFoodItemSelected || isMobileDevice()}
+                        data-for={"fa-btn-export"}
+                        data-tip={applicationStrings.tooltip_icon_export[language]}>
+                    <FaDownload/>
+                    <ReactTooltip id={"fa-btn-export"} globalEventOff="click"/>
+                </Button>
+                <input type="file"
+                       id="importFileInput"
+                       style={{visibility: "hidden", maxWidth: "1px", maxHeight: "1px"}}
+                       accept={".json"}
+                       onChange={onImport}/>
+                <Button onClick={() => onOpenFileUpload()}
+                        className={buttonClassWithExtraSpace}
+                        disabled={isMobileDevice()}
+                        data-for={"fa-btn-import"}
+                        data-tip={applicationStrings.tooltip_icon_import[language]}>
+                    <FaUpload/>
+                    <ReactTooltip id={"fa-btn-import"} globalEventOff="click"/>
+                </Button>
+                <Button onClick={() => onCloseAllTabs()}
+                        disabled={!isFoodItemSelected}
+                        className={buttonClass + " btn-secondary"}
+                        data-for={"fa-btn-close"}
+                        data-tip={applicationStrings.tooltip_icon_removeAll[language]}>
+                    <FaTrash/>
+                    <ReactTooltip id={"fa-btn-close"}/>
+                </Button>
             </div>
         </div>
     )

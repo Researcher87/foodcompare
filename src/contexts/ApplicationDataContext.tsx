@@ -28,6 +28,7 @@ import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from
 import ReactSelectOption from "../types/ReactSelectOption";
 import {parseFoodCompareUri} from "../service/uri/BaseUriService";
 import {DataSettings} from "../types/livedata/DataSettings";
+import {setFoodDataPageComponent, makeFoodDataPanelComponent} from "../service/FoodDataPanelService";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
@@ -53,6 +54,7 @@ export interface ApplicationContext extends ApplicationDataContext {
         setSelectedDataPage: (string) => void
         setSelectedDisplayMode: (string) => void
         addItemToFoodDataPanel: (selectedFoodItem: SelectedFoodItem) => void
+        setItemOfFoodDataPanel: (selectedFoodItem: SelectedFoodItem, index: number) => void
         removeItemFromFoodDataPanel: (number) => void
         removeAllItemsFromFoodDataPanel: () => void
         updateAllFoodItemNames: (foodNames: Array<NameType>, newLanguage: string) => void
@@ -113,6 +115,36 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             applicationData: {
                 ...prevState.applicationData,
                 foodDataPanel: {...prevState.applicationData.foodDataPanel, selectedFoodItems: newItems}
+            }
+        }))
+    }
+
+    setItemOfFoodDataPanel = (updatedSelectedFoodItem: SelectedFoodItem, selectedIndex: number) => {
+        console.log('SCHWEIN', updatedSelectedFoodItem)
+
+        const updatedItems =this.state.applicationData.foodDataPanel.selectedFoodItems.map((item, index) => {
+                if(selectedIndex === index) {
+                    const updatedElement = {...item,
+                        portion: updatedSelectedFoodItem.portion,
+                        selectedSource: updatedSelectedFoodItem.selectedSource,
+                        supplementData: updatedSelectedFoodItem.supplementData,
+                        compositeSubElements: updatedSelectedFoodItem.compositeSubElements
+                    }
+
+                    // Need to make a new instance of the component on the food item, as it also contains an instance of selected food item
+                    return setFoodDataPageComponent(updatedElement)
+                } else {
+                    return item
+                }
+            }
+        )
+
+        console.log('Updated items:', updatedItems)
+
+        this.setState(prevState => ({
+            applicationData: {
+                ...prevState.applicationData,
+                foodDataPanel: {...prevState.applicationData.foodDataPanel, selectedFoodItems: updatedItems}
             }
         }))
     }
@@ -438,6 +470,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 setSelectedDataPage: this.setSelectedFoodDataPanelPage,
                 setSelectedDisplayMode: this.setSelectedDisplayMode,
                 addItemToFoodDataPanel: this.addItemToFoodDataPanel,
+                setItemOfFoodDataPanel: this.setItemOfFoodDataPanel,
                 removeItemFromFoodDataPanel: this.removeItemFromFoodDataPanel,
                 removeAllItemsFromFoodDataPanel: this.removeAllItemsFromFoodDataPanel,
                 updateAllFoodItemNames: this.updateAllFoodItemNames,
