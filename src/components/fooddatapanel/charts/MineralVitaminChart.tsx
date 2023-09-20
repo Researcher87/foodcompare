@@ -221,7 +221,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         const handleChartClick = (c, i) => {
             if(i && i[0]) {
                 const clickedColumnIndex = i[0].index;
-                console.log("COL", c, i, i[0])
                 const columnLabel = data.labels[clickedColumnIndex]
                 openVitaminMineralBook(columnLabel)
             }
@@ -286,12 +285,15 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
     const options = getOptions(title, maxValue, data);
     const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
-    const bookData = props.selectedSubChart === TAB_VITAMIN_DATA ? nutrientBook.vitamins : nutrientBook.minerals
+    const bookData = props.selectedSubChart === CHART_VITAMINS ? nutrientBook.vitamins : nutrientBook.minerals
 
     return (
         <div className="container-fluid">
             {showBookModal &&
-                <VitaminsBook selectedDataTab={props.selectedSubChart} bookData={bookData} initiallySelectedItem={selectedColumnLabel} closeBookModal={() => setShowBookModal(false)}/>
+                <VitaminsBook selectedDataTab={props.selectedSubChart}
+                              bookData={bookData}
+                              initiallySelectedItem={selectedColumnLabel}
+                              closeBookModal={() => setShowBookModal(false)}/>
             }
             <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
                 <div className={"col-12"}>

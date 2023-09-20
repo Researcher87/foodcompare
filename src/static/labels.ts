@@ -1303,4 +1303,8 @@ export const applicationStrings = {
         de: 'Verwendete Quelle: ',
         en: 'Used source: '
     },
+    vitamin_book_disclaimer: {
+        de: 'Die hier präsentierten Informationen wurden aus freien Quellen wie Wikipedia oder Websites zu Gesundheit und Ernährung zusammengetragen. Es besteht kein Anspruch auf Vollständigkeit oder Korrektheit.',
+        en: 'The informationed shown in this booklet originate from free sources such as Wikipedia or health- or nutrition-related websites. There is no claim to completeness or correctness: '
+    },
 }

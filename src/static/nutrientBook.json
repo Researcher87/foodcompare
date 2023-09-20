@@ -11,7 +11,7 @@
       },
       "description": {
         "de": "Vitamin A bezeichnet eine Reihe chemischer Verbindungen und gehört zu den fettlöslichen Vitaminen, die somit längerfristig im Körper gespeichert werden können. Es existiert in vielen tierischen Produkten bereits in einer für den Menschen verwertbaren Form. In pflanzlichen Produkten liegt es in einer Vorstufe vor, aus der der Mensch Vitamin A selbst herstellen kann. Diese Vorstufen werden als Carotinoide bezeichnet, wobei das Beta-Carotinoid die größte Rolle spielt. Es ist in pflanzlichen Produkten an seiner intensiven Farbgebung zu erkennen (z.B. in der Karotte oder im Brokkoli). Vitamin A aus tierischen Quellen wird im Körper jedoch besser aufgenommen als beim Umwandlungsprozess aus Carotinoiden. Es hat eine große Bedeutung für die Zellen, Haut und Schleimhäute, das Sehvermögen und das Immunsystem. Das Vitamin ist empfindlich gegenüber Licht, Hitze und Sauerstoff. So gehen beim Kochen von Lebensmitteln bspw. zwischen 10 und 30 % des Vitamins verloren. Vitamin-A-Mangel ist der weltweit häufigste Vitaminmangel. In der westlichen Welt kommt ein starker Mangel nur selten vor. In Entwicklungsländern stellt Vitamin-A-Mangel hingegen oft ein schweres Problem dar, an dem geschätzt 250 Mio. Vorschulkinder leiden und rund eine Mio. Kinder jährlich versterben.",
-        "en": "Vitamin A comprises several chemical compounds and belongs to the fat-soluble vitamins that can be stored for a long time in the human body. In anmial products it already exists in a human-exploitable form, whereas it exists as a provitamin (precursor) in many plant-based products. Those provitamins are called carotenoids, with beta-carotenoid playing the most important part. Beta-carotenoid is often identifyable by its intensive color in plant-based food, such as carrots, broccoli or green cabbage. Just as other carotenoids, the human body can transform it to vitamin A on its own, though the usage from animal-based food is more effective than by means of this transformation process. Vitamin A plays a significant role for cells, skin and mucous membranes, as well as for vision and the immune system. It is vulnerable against light, oxygen and heat; for instance, the loss of vitamin A in the process of cooking is between 10 and 30 percent. Vitamin A has the highest defiency rate among all vitamins in the world. While high defiencies are rare in western countries, it is a serious issue in many developing countries, resulting in about 250 million prescool children suffering from vitamin A shortage, with about one million of them dying from it every year."
+        "en": "Vitamin A comprises several chemical compounds and belongs to the fat-soluble vitamins that can be stored for a long time in the human body. In anmial products it already exists in a human-exploitable form, whereas it exists as a provitamin (precursor) in many plant-based products. Those provitamins are called carotenoids, with beta-carotenoid playing the most important part. Beta-carotenoid is often identifiable by its intensive color in plant-based food, such as carrots, broccoli or green cabbage. Just as other carotenoids, the human body can transform it to vitamin A on its own, though the usage from animal-based food is more effective than by means of this transformation process. Vitamin A plays a significant role for cells, skin and mucous membranes, as well as for vision and the immune system. It is vulnerable against light, oxygen and heat; for instance, the loss of vitamin A in the process of cooking is between 10 and 30 percent. Vitamin A has the highest deficiency rate among all vitamins in the world. While high deficiencies are rare in western countries, it is a serious issue in many developing countries, resulting in about 250 million pre-school children suffering from vitamin A deficiency, with about one million of them dying from it every year."
       },
       "functionality": [
         {
@@ -71,22 +71,18 @@
       ],
       "overdose": {
         "de": "Beim Erwachsenen gelten bis zu 3 mg Vitamin A pro Tag als tolerabel. Bei einer deutlich höheren Zufuhr kann es zu einer Vergiftung mit Vitamin A kommen, da die Leber die Mengen nicht mehr speichern kann. Anzeichen sind dann bspw. Übelkeit, Erbrechen, starke Kopfschmerzen oder Benommenheit. Eine solche Überdosis kann nur durch Nahrungsergänzungsmittel oder dem Verzehr bestimmter Leberarten geschehen (Beispiele sind Eisbär- oder Robbenleber, in denen sehr viel Vitamin A angesammelt ist).",
-        "en": "For adults, up to 3 mg of vitamin A per day are considered tolerable. Considerably higher doses may lead to a poisoning, since the liver may not be able to store the vitamin anymore. Such a poisoning can cause nausea, vomiting, strong headaches or dizziness. It can only be causes by nutrient supplement or consumption of certain animal livers. Examples include the liver of polar bears and robs, where much vitamin A is accumulated."
-      },
-      "dependencies": {
-        "de": "",
-        "en": ""
+        "en": "For adults, up to 3 mg of vitamin A per day are considered tolerable. Considerably higher doses may lead to a poisoning, since the liver may not be able to store the vitamin anymore. Such a poisoning can cause nausea, vomiting, strong headaches or dizziness. It can only be caused by nutrient supplements or consumption of certain animal livers. Examples include the liver of polar bears and robs, where much vitamin A is accumulated."
       },
       "storage": {
         "de": "Vitamin A wird, wie die meisten fettlöslichen Vitamine, in der Leber gespeichert. Volle Speicher reichen theoretisch 1 bis 2 Jahre aus, ehe Mangelerscheinungen sichtbar werden. Die Halbwertszeit beträgt 50 bis 100 Tage.",
-        "en": "Just like other fat-soluble vitamins, vitamin A is primarily stored in the liver. Humans fully supplied with it may live without further vitamin A consumption for about 1 to 2 years not showing any deficiency symptoms. The half-life of the vitamin is 50 through 100 days."
+        "en": "Just like other fat-soluble vitamins, vitamin A is primarily stored in the liver. Humans being fully supplied with it may live without further vitamin A consumption for about 1 to 2 years not showing any deficiency symptoms. The half-life of the vitamin is 50 through 100 days."
       },
       "sources": {
         "de": "Fisch, Milchprodukte, Eier, Rindfleisch, Leber; Beta-Carotin: Karotten, Grünkohl, Broccoli, Spinat",
         "en": "Fish, dairy, eggs, beef, liver; Beta-carotenoid: Carrots, green cabbage, broccoli, spinach"
       },
       "requirements": {
-        "de": "Mann: 1 mg | Frau: 0,8 mg (schwanger: 1,1 mg, stillend: 1,5 mg)",
+        "de": "Mann: 1 mg | Frau: 0,8 mg (schwanger: 1,1 mg, in der Stillzeit: 1,5 mg)",
         "en": "male: 1 mg | female: 0.8 mg (pregnant: 1.1 mg, breastfeeding: 1.5 mg)"
       }
     },
@@ -189,8 +185,8 @@
           "en": "Inflammatory skin"
         },
         {
-        "de": "Entzündung der Mundschleimhäute",
-        "en": "Stomatitis (inflammation of mouth and lips)"
+          "de": "Entzündung der Mundschleimhäute",
+          "en": "Stomatitis (inflammation of mouth and lips)"
         }
       ],
       "overdose": {
@@ -204,10 +200,6 @@
       "sources": {
         "de": "Brokkoli, Spinat, Milchprodukte, Eier, Sojabohnen, Leber, Fleisch",
         "en": "Broccoli, spinach, dairy products, eggs, soya beans, liver, meat"
-      },
-      "storage": {
-        "de": "",
-        "en": ""
       },
       "requirements": {
         "de": "Mann: 1,3 .. 1,4 mg | Frau: 1,0 .. 1,1 mg (schwanger: 1,4 mg)",
@@ -267,10 +259,6 @@
         "de": "Fleisch, Fisch, Vollkornprodukte, Kartoffeln, Erbsen, Kaffee, Erdnüsse, Reis",
         "en": "Meat, fish, whole-grain products, potatoes, peas, coffee, peanuts, rice"
       },
-      "storage": {
-        "de": "",
-        "en": ""
-      },
       "requirements": {
         "de": "Mann: 14 .. 15 mg | Frau: 11 .. 12 mg  (schwanger: 16 mg)",
         "en": "male: 14 .. 15 mg | female: 11 .. 12 mg  (pregnant: 16 mg)"
@@ -317,17 +305,9 @@
         "de": "Ab einer täglichen Menge von mehr als 10 mg können leichte Darmstörungen auftreten.",
         "en": "Slight irritations of the bowel may occur when more than 10 mg of Vitamin B5 are consumed per day."
       },
-      "dependencies": {
-        "de": "",
-        "en": ""
-      },
       "sources": {
         "de": "Fleisch, Fisch, Getreide, Eier, Kartoffeln",
         "en": "Meat, fish, grain, eggs, potatoes"
-      },
-      "storage": {
-        "de": "",
-        "en": ""
       },
       "requirements": {
         "de": "ca. 6 mg (der genaue Bedarf ist noch nicht abschließend geklärt)",
@@ -395,10 +375,6 @@
         "de": "Fisch, Leber, Avocado, Kartoffeln, Nüsse, Weizen",
         "en": "Fish, liver, avocado, potatoes, nuts, wheat"
       },
-      "storage": {
-        "de": "",
-        "en": ""
-      },
       "requirements": {
         "de": "Mann: 1,4 .. 1,5 mg | Frau: 1,1 .. 1,2 mg  (schwanger: 1,9 mg)",
         "en": "male: 1.4 .. 1.5 mg | female: 1.1 .. 1.2 mg  (pregnant: 1.9 mg)"
@@ -449,17 +425,9 @@
         "de": "Nicht bekannt.",
         "en": "Unknown."
       },
-      "dependencies": {
-        "de": "",
-        "en": ""
-      },
       "sources": {
         "de": "Pilze, Leber, Eier, Nüsse, Soja, Fisch",
         "en": "Mushrooms, liver, eggs, nuts, soy, fish"
-      },
-      "storage": {
-        "de": "",
-        "en": ""
       },
       "requirements": {
         "de": "45 mg",
@@ -524,7 +492,7 @@
         "en": "Spinach, Broccoli, Green cabbage, grains, liver, eggs, soy beans"
       },
       "requirements": {
-        "de": "Mann: 0,3 mg | Frau: 0,3 mg  (schwanger: 0,45 mg, stillend: 0,55 mg)",
+        "de": "Mann: 0,3 mg | Frau: 0,3 mg  (schwanger: 0,45 mg, in der Stillzeit: 0,55 mg)",
         "en": "male: 0.3 mg | female: 0.3 mg  (pregnant: 0.45 mg, breastfeeding: 0.55 mg)"
       }
     },
@@ -667,16 +635,12 @@
         "de": "Vitamin C unterstützt die Eisenaufnahme, ein Mangel kann daher indirekt auch zu einem Eisenmangel führen.",
         "en": "Vitamin C supports the absorption of iron. A shortage may indirectly lead to iron deficiency."
       },
-      "storage": {
-        "de": "",
-        "en": ""
-      },
       "sources": {
         "de": "Hagebutte, Petersilie, Brokkoli, Paprika, Zitrone, Orange, Erdbeere, Kohl, Tomate, Sauerkraut, Kartoffel, Leber",
         "en": "Rosehip, parsley, broccoli, bell pepper, lime, orange, strawberry, cabbage, tomato, sauerkraut, potato, liver"
       },
       "requirements": {
-        "de": "Mann: 110 mg | Frau: 95 mg (schwanger: 105 mg, stillend: 125 mg)",
+        "de": "Mann: 110 mg | Frau: 95 mg (schwanger: 105 mg, in der Stillzeit: 125 mg)",
         "en": "male: 110 mg | female: 95 mg (pregnant: 105 mg, breastfeeding: 125 mg)"
       }
     },
@@ -740,10 +704,6 @@
       "overdose": {
         "de": "Eine Überdosis ist nur durch Einnahme von Zusatzstoffen möglich, da die Haut die Vitamin-D-Produktion bei Bedarf selbst einstellt (der Maximalwert pro Tag liegt bei 250 bis 500 µg). Zu viel Vitamin D kann zu Kalziumablagerungen in den Knochen führen. Tägliche Zuführung von bis zu 100 µg gelten bei Erwachsenen auch über einen langen Zeitraum als sicher.",
         "en": "An overdose can only occur due to nutrient supplements, since the skin will automatically stop the vitamin D production if necessary (the maximum daily productivity is 250 .. 500 µg). Overdoses may lead to calcium deposits in the bones. For adults, a daily long-term consumption up to 100 µg is considered safe."
-      },
-      "dependencies": {
-        "de": "",
-        "en": ""
       },
       "storage": {
         "de": "Vitamin D ist in den Muskeln und im Fettgewebe gespeichert. Gut gefüllte Speicher halten für etwa 2 bis 4 Monate.",
@@ -811,16 +771,12 @@
         "de": "Bei einem erhöhten Konsum von ungesättigten Fettsäuren erhöht sich der Bedarf von Vitamin E entsprechend.",
         "en": "An increased consumption of polyunsaturated fatty acids increases the demand for vitamin E accordingly."
       },
-      "storage": {
-        "de": "",
-        "en": ""
-      },
       "sources": {
         "de": "Pflanzenöle, Getreide, Nüsse, Fisch, Gemüse",
         "en": "Plant-based oils, grains, nuts, fish, vegetables"
       },
       "requirements": {
-        "de": "Mann: 14 mg | Frau: 12 mg (schwanger: 13 mg, stillend: 17 mg)",
+        "de": "Mann: 14 mg | Frau: 12 mg (schwanger: 13 mg, in der Stillzeit: 17 mg)",
         "en": "male: 14 mg | female: 12 mg (pregnant: 13 mg, breastfeeding: 17 mg)"
       }
     },
@@ -872,14 +828,6 @@
       "overdose": {
         "de": "Nicht bekannt.",
         "en": "Unknown."
-      },
-      "dependencies": {
-        "de": "",
-        "en": ""
-      },
-      "storage": {
-        "de": "",
-        "en": ""
       },
       "sources": {
         "de": "K1: Grünes Gemüse, plant-based oils; K2: Eier, Fleisch, Milchprodukte",
@@ -944,10 +892,6 @@
       "dependencies": {
         "de": "Die Wasserregulation im Körper geschieht gemeinsam mit Kalium, so dass Natrium und Kalium im wechselseitigen Verhältnis wirken und im richtigen Verhältnis vorliegen sollten. Die Ausscheidung von Natrium geschieht in den Nieren unter Beteiligung von Calcium. Ein hoher Natriumkonsum führt damit zu einem höheren Calciumverbrauch (und damit höheren Calciumbedarf).",
         "en": "The water regulation in the body is carried out together with potassium. Both elements interact and should be in the right proportion to each other. Calcium is used in the process of sodium excretion through the kidneys. An increased consumption of sodium thus increases calcium loss (and consequently increase the calcium demand)."
-      },
-      "sources": {
-        "de": "",
-        "en": ""
       },
       "requirements": {
         "de": "1,5 mg",
@@ -1070,7 +1014,7 @@
         "en": "Legumes, nuts, grain products, cheese, cocoa, chocolate"
       },
       "requirements": {
-        "de": "Mann: 350 mg | Frau: 300 mg  (schwanger: 310 mg, stillend: 390 mg)",
+        "de": "Mann: 350 mg | Frau: 300 mg  (schwanger: 310 mg, in der Stillzeit: 390 mg)",
         "en": "male: 350 mg | female: 300 mg  (pregnant: 310 mg, breastfeeding: 390 mg)"
       }
     },
@@ -1134,64 +1078,6 @@
     },
     {
       "name": {
-        "de": "Magnesium",
-        "en": "Magnesium"
-      },
-      "description": {
-        "de": "Magnesium spielt eine große Rolle für das Muskelsystem und ist vor allem an der Reizübertragung von Muskeln und Nerven beteiligt. Der menschliche Körper enthält rund 20 bis 30 mg Magnesium, das sich zu rund 60 % in unseren Knochen, knapp 40 % in den Muskeln und Organen und nur zu rund 1 % im Blut befindet. Wie andere Mineralstoffe kann es beim Schwitzen aus dem Körper ausgewaschen werden und damit verlorengehen. Ein leichter Magnesiummangel tritt in der Bevölkerung recht häufig auf, wobei die Bestimmung des Magnesiumswerts sehr schwierig ist (eine Blutanalyse gibt nur wenig Aufschluss). Magnesium wird daher häufig als Ergänzungsmittel verwendet. Ein schwerer Mangel tritt jedoch meist nur in Zusammenhang mit verschiedenen Erkrankungen auf (z.B. Nierenerkrankung, Verdauungsprobleme, starker Durchfall). Magnesium findet sich v.a. in Getreideprodukten, Nüssen, Gemüse, Schokolade und Mineralwasser und Leitungswasser (bei ausreichender Wasserhärte).",
-        "en": "Magnesium is especially needed for the muscle system and the transmission of impulses through the muscles and nerve cells. The human body contains about 20 .. 30 mg of magnesium, of which about 60 % are stored in the bones, about 40 % in the muscles and organs and only 1 % in the blood. Just like other minerals, magnesium will be washed out when sweating and thus drops away. It is supposed that a light shortage of magnesium occurs frequently in society, though it is generally difficult to determine the magnesium amount in the body (a blood analysis does not suffice to determine the exact amount). However, serious deficiencies usually only occur in case of diseases (such as kidney diseases, digestive disorders, heavy diarrhea). Magnesium is mostly contained in plant-based food, especially in grain products, nuts, vegetables, soda and tap water (of sufficient water hardness)."
-      },
-      "functionality": [
-        {
-          "de": "Wichtig für das Muskelsystem, sorgt für die Entspannung der Muskeln",
-          "en": "Import for the muscle system, eases muscle tension"
-        },
-        {
-          "de": "Aktiviert rund 300 Enzyme beim Stoffwechsel",
-          "en": "Activates about 300 encymes needed for metabolism"
-        },
-        {
-          "de": "An der Energieproduktion beteiligt, erhöht die Leistungsfähigkeit",
-          "en": "Takes part in energy production, enhances the performance"
-        }
-      ],
-      "deficiencies": [
-        {
-          "de": "Muskelschwäche, Muskelkrämpe (z.B. Wadenkrämpfe)",
-          "en": "Muscle weakness, muscle cramps (e.g. leg cramps)"
-        },
-        {
-          "de": "Reizbarkeit",
-          "en": "Irritability"
-        },
-        {
-          "de": "Unruhe, Müdigkeit",
-          "en": "Restlessness, sleepiness"
-        },
-        {
-          "de": "Herzrhythmusstörungen",
-          "en": "cardiac arrhythmias"
-        }
-      ],
-      "overdose": {
-        "de": "Eine Überdosis kann zu Verdauungsproblemen und Durchfall führen, bei stärkerer Überdosis (ab 2500 mg pro Tag) auch zu ernsten Erkrankungen wie Muskelschwäche oder Blutdruckabfall. Eine solche Überdosis ist über die Ernährung jedoch nicht möglich, sondern nur durch die Einnahme von Präparaten.",
-        "en": "An overdose can lead to digestion problems and diarrhea. A more severe overdosis (above 2500 mg per day) can also lead to serious health issues such as muscle weakness and low blood pressure. Such an overdose cannot occur through nutrition, though, but only by means of supplements."
-      },
-      "dependencies": {
-        "de": "Magnesiummangel führt zu einer schlechteren Aufnahme von Kalium im Darm und kann indirekt zu einem Kaliummangel führen. Zudem aktiviert Magnesium die Produktion von Vitamin D im Körper. Ein Mangel kann somit wiederum indirekt zu einem Vitamin-D-Mangel führen.",
-        "en": "Magnesium deficiency reduces potassium resorbtion in the bowel and may indirectly lead to a potassium deficiency. Magnesium is also needed to activate the vitamin D production in the body; again, a deficiency may indirectly lead to a vitamin D deficiency."
-      },
-      "sources": {
-        "de": "Hülsenfrüche, Nüsse, Getreideprodukte, Käse, Kakao, Schokolade",
-        "en": "Legumes, nuts, grain products, cheese, cocoa, chocolate"
-      },
-      "requirements": {
-        "de": "Mann: 350 mg | Frau: 300 mg  (schwanger: 310 mg, stillend: 390 mg)",
-        "en": "male: 350 mg | female: 300 mg  (pregnant: 310 mg, breastfeeding: 390 mg)"
-      }
-    },
-    {
-      "name": {
         "de": "Phosphor",
         "en": "Phosphorus"
       },
@@ -1244,7 +1130,7 @@
         "en": "Phosphorous impairs the use of calcium within the human body. A high intake of phosphorous thus increases the demand for calcium."
       },
       "requirements": {
-        "de": "Mann: 700 mg | Frau: 700 mg  (schwanger: 800 mg, stillend: 900 mg)",
+        "de": "Mann: 700 mg | Frau: 700 mg  (schwanger: 800 mg, in der Stillzeit: 900 mg)",
         "en": "male: 700 mg | female: 700 mg  (pregnant: 800 mg, breastfeeding: 900 mg)"
       }
     },
@@ -1302,7 +1188,7 @@
         "en": "Vitamin C supports the resorption of iron in the bowel. A vitamin C shortage thus can indirectly lead to an iron shortage. In case of a vegetarian diet, an increased consumption of fruit or vegetables containing vitamin C may prevent an iron deficiency."
       },
       "requirements": {
-        "de": "Mann: 10 mg | Frau: 15 mg  (schwanger: 30 mg, stillend: 20 mg)",
+        "de": "Mann: 10 mg | Frau: 15 mg  (schwanger: 30 mg, in der Stillzeit: 20 mg)",
         "en": "male: 10 mg | female: 15 mg  (pregnant: 30 mg, breastfeeding: 20 mg)"
       }
     },
@@ -1372,7 +1258,7 @@
         "en": "Copper and iron bind to zinc so that a high copper or iron level impair the resorption of zinc in the digestive tract, potentially causing a zinc deficiency. Phytates, which occur in many plant-based foods (such as grain products, nuts, legumes and vegetables) impair the zinc resorption as well. Consuming those foods increases the daily requirement for zinc."
       },
       "requirements": {
-        "de": "Mann: 10 mg | Frau: 7 mg  (schwanger: 10 mg, stillend: 11 mg)",
+        "de": "Mann: 10 mg | Frau: 7 mg  (schwanger: 10 mg, in der Stillzeit: 11 mg)",
         "en": "male: 10 mg | female: 7 mg  (pregnant: 10 mg, breastfeeding: 11 mg)"
       }
     },
@@ -1492,7 +1378,7 @@
         "en": "A chronic overdose may cause hair loss, nausea and impairment of the nervous system. The maximal tolerable daily dose is, according to different sources, between 250 and 400 µg. "
       },
       "requirements": {
-        "de": "Mann: 0,7 mg | Frau: 0,6 mg  (schwanger: 0,6 mg, stillend: 0,75 mg)",
+        "de": "Mann: 0,7 mg | Frau: 0,6 mg  (schwanger: 0,6 mg, in der Stillzeit: 0,75 mg)",
         "en": "male: 0.7 mg | female: 0.6 mg  (pregnant: 0.6 mg, breastfeeding: 0.75 mg)"
       }
     },
@@ -1550,5 +1436,5 @@
         "en": "male: 3.5 mg | female: 3.5 mg"
       }
     }
-    ]
+  ]
 }

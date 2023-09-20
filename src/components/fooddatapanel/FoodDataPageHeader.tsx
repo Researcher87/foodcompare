@@ -167,13 +167,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             bookToolTip = applicationStrings.tooltip_icon_minerals[languageContext.language]
             bookData = nutrientBook.minerals
             break;
-        case TAB_PROTEINS_DATA:
-            bookToolTip = applicationStrings.tooltip_icon_proteins[languageContext.language]
-            break;
     }
 
     const shouldShowBookIcon = selectedDataPage === TAB_VITAMIN_DATA || selectedDataPage == TAB_MINERAL_DATA
-        || selectedDataPage == TAB_PROTEINS_DATA
     const aggregatedFoodItem = props.selectedFoodItem?.aggregated === true
 
     return (

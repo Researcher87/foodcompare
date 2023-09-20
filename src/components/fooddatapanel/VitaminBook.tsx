@@ -46,7 +46,7 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
 
     const renderSelectList = () => {
         return (
-            <div className={"form-section"}>
+            <div className={"form-section"} style={{width: "90%"}}>
                 <Select className={selectClass}
                         options={selectList}
                         defaultValue={selectList[initialIndex]}
@@ -60,6 +60,31 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
 
     const renderItemList = (items: NamePair[]) => {
         return items.map(item => <li key={item[languageContext.language]}>{item[languageContext.language]}</li>)
+    }
+
+    const renderDailyRequirements = (dailyRequirementsText: string) => {
+        if(!dailyRequirementsText.includes("|")) {
+            return <p>{dailyRequirementsText}</p>
+        } else {
+            const parts = dailyRequirementsText.split("|");
+            if(parts[0].includes(":") && parts[1].includes(":")) {
+                const malePartsPrefix = parts[0].substring(0, parts[0].indexOf(":")).trim()
+                const malePartsData = parts[0].substring(parts[0].indexOf(":")+1).trim()
+                const femalePartsPrefix = parts[1].substring(0, parts[1].indexOf(":")).trim()
+                const femalePartsData = parts[1].substring(parts[1].indexOf(":")+1).trim()
+                return <span>
+                    <p>
+                        <span style={{display: "inline-block", minWidth: "8ch"}}><b>{malePartsPrefix}:</b></span>
+                        {malePartsData}
+                        <br/>
+                        <span style={{display: "inline-block", minWidth: "8ch"}}><b>{femalePartsPrefix}:</b></span>
+                        {femalePartsData}
+                    </p>
+                </span>
+            } else {
+                return <p>{dailyRequirementsText}</p>
+            }
+        }
     }
 
     const renderDataContent = () => {
@@ -134,9 +159,14 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
                 {hasDailyRequirements &&
                 <div>
                     <h5>{applicationStrings.book_heading_requirements[lang]}</h5>
-                    <p>{selectedEntry.requirements[lang]}</p>
+                    {renderDailyRequirements(selectedEntry.requirements[lang])}
                 </div>
                 }
+                <div className={"pb-5"}/>
+                <hr/>
+                <div>
+                    <p style={{fontWeight: 100, fontSize: "0.9rem", textAlign: "center"}}>{applicationStrings.vitamin_book_disclaimer[lang]}</p>
+                </div>
             </div>
         )
     }
