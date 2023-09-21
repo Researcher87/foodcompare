@@ -1212,7 +1212,7 @@ export const applicationStrings = {
         en: 'Calculation of BMR and PAL:',
     },
     text_empty_fooddatapanel: {
-        de: 'Klicken Sie links auf Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
+        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
         en: 'Click the plus button to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
     text_empty_fooddatapanel_mobileInfo: {
