@@ -1,8 +1,8 @@
 import {useContext} from "react"
 import {LanguageContext} from "../../contexts/LangContext"
-import {Button, Form} from "react-bootstrap"
+import {Form} from "react-bootstrap"
 import {applicationStrings} from "../../static/labels"
-import {AMOUNT_PORTION, GRAM} from "../../config/Constants"
+import {AMOUNT_100_GRAM, AMOUNT_PORTION} from "../../config/Constants"
 import {BarChartConfigurationProps} from "../../types/livedata/ChartPropsData"
 
 export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
@@ -23,8 +23,8 @@ export function BarChartConfigurationForm(props: BarChartConfigurationProps) {
                             type="radio"
                             inline={true}
                             label={"100g"}
-                            value={GRAM}
-                            checked={(props.portionType === GRAM)}
+                            value={AMOUNT_100_GRAM}
+                            checked={(props.portionType === AMOUNT_100_GRAM)}
                             onChange={props.handleRadioButtonClick}
                 />
                 <Form.Check className="form-radiobutton form-horizontal-separation"

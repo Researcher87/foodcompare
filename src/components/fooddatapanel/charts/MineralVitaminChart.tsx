@@ -1,7 +1,12 @@
 import {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
-import {CHART_MINERALS, CHART_VITAMINS, AMOUNT_100_GRAM, OPTION_YES, TAB_VITAMIN_DATA} from "../../../config/Constants";
+import {
+    CHART_MINERALS,
+    CHART_VITAMINS,
+    OPTION_YES,
+    AMOUNT_PORTION, AMOUNT_100_GRAM
+} from "../../../config/Constants";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
 import {getBarChartOptions} from "../../../service/ChartConfigurationService"
@@ -103,6 +108,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         const userData = applicationContext.userData
         const dataSettings = applicationContext.dataSettings
         const portionAmount = portionType_vitamins === AMOUNT_100_GRAM ? 100 : props.selectedFoodItem.portion.amount
+
+        console.log('Port am', portionAmount)
 
         if (!vitaminData || !requirementData) {
             return null
@@ -274,6 +281,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const data = props.selectedSubChart === CHART_VITAMINS ? createVitaminChartData() : createMineralChartData();
+    console.log('DATA', data)
+
     if (!data) {
         return <div/>
     }

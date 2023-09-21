@@ -86,8 +86,14 @@ export const DISPLAYMODE_CHART = "dct"
 export const CARBS_DATA_BASE = "carbs data base chart";
 export const CARBS_DATA_DETAIL = "carbs data detail chart"
 
+export const LANGUAGE_DE = "de";
+export const LANGUAGE_EN = "en";
+
 export const LIPIDS_DATA_BASE = "lipids data base chart";
 export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
+
+export const MODE_NEW = "new";
+export const MODE_EDIT = "edit";
 
 export const OPTION_YES = 0
 export const OPTION_NO = 1
@@ -104,8 +110,11 @@ export const PATH_RANKING = "/ranking";
 export const PORTION_KEY_INDIVIDUAL = 0
 export const PORTION_KEY_100 = 1
 
-export const LANGUAGE_DE = "de";
-export const LANGUAGE_EN = "en";
+export const QUERYKEY_DATAPANEL_ADD = "add"
+export const QUERYKEY_DATAPANEL_ADD_COMPOSITE = "composite"
+export const QUERYKEY_DATAPANEL_ITEM = "item"
+export const QUERYKEY_DATAPANEL_RANKING = "ranking"
+export const QUERYKEY_DATAPANEL_AGGREGATED = "aggregated"
 
 export const SEX_MALE = "sex male"
 export const SEX_FEMALE = "sex female"
@@ -122,12 +131,6 @@ export const TAB_CARBS_DATA = "carbsdata"
 export const TAB_PROTEINS_DATA = "proteinsdata"
 export const TAB_JUXTAPOSITION = "juxtaposition"
 export const TAB_INFO = "infodata"
-
-export const QUERYKEY_DATAPANEL_ADD = "add"
-export const QUERYKEY_DATAPANEL_ADD_COMPOSITE = "composite"
-export const QUERYKEY_DATAPANEL_ITEM = "item"
-export const QUERYKEY_DATAPANEL_RANKING = "ranking"
-export const QUERYKEY_DATAPANEL_AGGREGATED = "aggregated"
 
 export const TAB_LIST = [TAB_BASE_DATA, TAB_ENERGY_DATA, TAB_VITAMIN_DATA, TAB_MINERAL_DATA, TAB_LIPIDS_DATA, TAB_CARBS_DATA, TAB_PROTEINS_DATA, TAB_INFO]
 
