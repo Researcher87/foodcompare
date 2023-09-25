@@ -102,6 +102,7 @@ export const PATH_FOODDATA_PANEL = "/datapanel";
 export const PATH_HOME = "/home";
 export const PATH_CONTACT = "/contact";
 export const PATH_USERSETTINGS = "/usersettings";
+export const PATH_INFO = "/info";
 
 export const PATH_RANKING = "/ranking";
 

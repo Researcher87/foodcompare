@@ -8,7 +8,7 @@ import {
     PATH_FOODDATA_PANEL,
     QUERYKEY_DATAPANEL_ADD, QUERYKEY_DATAPANEL_ADD_COMPOSITE,
     QUERYKEY_DATAPANEL_AGGREGATED,
-    QUERYKEY_DATAPANEL_ITEM
+    QUERYKEY_DATAPANEL_ITEM, TAB_JUXTAPOSITION
 } from "../../config/Constants";
 import {useHistory} from 'react-router-dom';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
@@ -68,7 +68,12 @@ export default function FoodDataPanelContainer() {
     const updateUriQuery = (selectedFoodItemIndex: number) => {
         const selectedFoodItem = selectedFoodItems[selectedFoodItemIndex]
         const userData = applicationContext.userData
-        const {selectedDataPage, displayMode, chartConfigData} = applicationContext.applicationData.foodDataPanel
+        const {
+            selectedDataPage,
+            displayMode,
+            chartConfigData,
+            juxtapositionConfigData
+        } = applicationContext.applicationData.foodDataPanel
 
         // New query for aggregated food item
         if (selectedFoodItem.aggregated) {
@@ -94,7 +99,14 @@ export default function FoodDataPanelContainer() {
                 supplementData: supplementData,
                 combineData: combineData
             }
-            const query = makeFoodDataPanelDefaultUri(foodItemData, userData, selectedDataPage, displayMode, chartConfigData)
+            let query = makeFoodDataPanelDefaultUri(foodItemData, userData, selectedDataPage, displayMode,
+                chartConfigData)
+
+            const currentQuery = window.location.search
+            if(currentQuery.includes("&group=")) {
+                const groupFragment = currentQuery.substring(currentQuery.indexOf("&group="));
+                query += groupFragment;
+            }
 
             history.push({
                 pathName: PATH_FOODDATA_PANEL,
@@ -134,7 +146,7 @@ export default function FoodDataPanelContainer() {
                     addItemToFoodDataPanel(selectedFoodItemWithComponent)
                 }
             } catch (e) {
-                if(applicationContext.debug) {
+                if (applicationContext.debug) {
                     console.log(e)
                 }
             }
@@ -157,7 +169,9 @@ export default function FoodDataPanelContainer() {
                 }
 
                 applicationContext.setUserData(uriDataObject.userData)
-                const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
+                const foodClass = applicationContext.foodDataCorpus.foodClasses.find(
+                    foodClass => foodClass.id === foodItem.foodClass
+                )
 
                 const selectedFoodItem: SelectedFoodItem = {
                     id: 1,
@@ -240,7 +254,9 @@ export default function FoodDataPanelContainer() {
                                     </i>
                                 </p>
                                 {isMobileDevice() &&
-                                <p><FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}</p>
+                                <p>
+                                    <FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}
+                                </p>
                                 }
                             </div>
                         }

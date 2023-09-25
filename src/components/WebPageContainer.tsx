@@ -5,7 +5,7 @@ import {
     PATH_DIRECT_COMPARE,
     PATH_FOODCOMPARE,
     PATH_FOODDATA_PANEL,
-    PATH_HOME,
+    PATH_HOME, PATH_INFO,
     PATH_RANKING,
     PATH_USERSETTINGS
 } from "../config/Constants";
@@ -20,6 +20,7 @@ import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {RankingContainer} from "./ranking/RankingContainer";
 import {Chart, ArcElement} from 'chart.js'
 import annotationPlugin from "chartjs-plugin-annotation";
+import {InfoContainer} from "./InfoSiteContainer";
 
 export function WebPageContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -45,6 +46,7 @@ export function WebPageContainer() {
                         <Route path={PATH_RANKING} component={RankingContainer}/>
                         <Route path={PATH_USERSETTINGS} component={UserSettings}/>
                         <Route path={PATH_CONTACT} component={ContactContainer}/>
+                        <Route path={PATH_INFO} component={InfoContainer}/>
                         <Route exact path={"/"} component={Home}/>
                     </Switch>
                 </Router>

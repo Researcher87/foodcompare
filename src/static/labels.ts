@@ -135,33 +135,33 @@ export const applicationStrings = {
         de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, die miteinander verglichen werden sollen, und klicken Sie dann den Anzeigen-Button.',
         en: 'Pick two food elements from the two selectors that should be compared with each other. Then click the Show button.'
     },
+    home_button_info: {
+        de: 'Mehr zu den Features von Food Compare erfahren...',
+        en: 'Learn more about the features of Food Compare...'
+    },
     home_carousel_0: {
-        de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
-        en: 'Vitamins in food compared to daily requirements'
+        de: 'Vitamingehalt von Äpfeln zum Tagesbedarf anzeigen',
+        en: 'Show vitamin content of apples compared to daily requirement'
     },
     home_carousel_1: {
-        de: 'Mineralstoffe in Lebensmitteln im Vergleich zum Tagesbedarf',
-        en: 'Minerals in food compared to daily requirements'
+        de: 'Unterschied zwischen Zubereitungsart mit/ohne Schale anzeigen',
+        en: 'Show difference between potatoes cooked with or without skin'
     },
     home_carousel_2: {
-        de: 'Nährstoffzusammensetzung in einem Lebensmittel',
-        en: 'Food composition of nutrients'
+        de: 'Lebensmittel anzeigen, die viel Magnesium enthalten',
+        en: 'Show food that contains a lot of magnesium'
     },
     home_carousel_3: {
-        de: 'Verteilung der Fettsäuren (gesättigt / ungesättigt)',
-        en: 'Distribution of fatty acids (saturated / unsaturated)'
+        de: 'Mineralstoffgehalt von Spinat mit anderem Gemüse vergleichen',
+        en: 'Compare the amount of minerals in spinach with other vegetables'
     },
     home_carousel_4: {
-        de: 'In Nahrungsmitteln enthaltene Aminosäuren',
-        en: 'Amino acids conainted in foods'
+        de: 'Liste an Lebensmitteln zusammenstellen und Gesamtgehalt an Vitaminen anzeigen',
+        en: 'Create a list of foods and show the total amount of contained vitamins'
     },
     home_carousel_5: {
-        de: 'Gegenüberstellung zweier Lebensmittel',
-        en: 'Comparing two food items'
-    },
-    home_carousel_6: {
-        de: 'Nach Nährstoffwert sortierte Lebensmittel',
-        en: 'Food items ranked by a specific nutrient value'
+        de: 'Verteilung von Fettsäuren zwischen zwei Lebensmitteln vergleichen',
+        en: 'Compare the distribution of fatty acids between two foods'
     },
     home_text_1: {
         de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
@@ -178,6 +178,10 @@ export const applicationStrings = {
     home_foodcompare_overview: {
         de: 'Food Compare im Überblick',
         en: 'Food Compare at a Glance'
+    },
+    info_button_back: {
+        de: 'Zurück zur Startseite',
+        en: 'Back to home page'
     },
     input_compositelist_title: {
         de: 'Individuelle Liste',
@@ -299,9 +303,9 @@ export const applicationStrings = {
         de: 'Gruppe',
         en: 'Group'
     },
-    label_getStarted: {
-        de: "Jetzt beginnen...",
-        en: "Get started..."
+    label_home_slogan: {
+        de: "Lebensmitteldaten grafisch darstellen",
+        en: "The Graphic Way of Displaying Food Data"
     },
     label_juxtaposition: {
         de: 'Vergleich',
