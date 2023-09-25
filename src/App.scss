@@ -246,6 +246,13 @@ $usersettings-palwidth: 60ch;
     color: $home-header-font-color;
 }
 
+.home-header-mobile {
+    background: linear-gradient(to right, $home-header-color-start, $home-header-color-end);
+    height: max(20vh, 10vw);
+    font-size: min( calc(0.4rem + 1.2vh), calc(0.4rem + 0.8vw));
+    color: $home-header-font-color;
+}
+
 .home-header-slogan {
     font-size: min( calc(0.7rem + 1.2vh), calc(0.7rem + 0.8vw));
     font-style: italic;
@@ -262,6 +269,19 @@ $usersettings-palwidth: 60ch;
     width: min(30vh, 18vw);
     margin: 3vw;
 }
+
+.home-startbutton-mobile {
+    height: min(35vh, 30vw);
+    width: min(35vh, 30vw);
+    margin: 3vw;
+}
+
+.home-startbutton-label {
+    height: 50%;
+    padding: 0.5vw;
+    font-size: min( calc(0.4rem + 1.2vh), calc(0.4rem + 0.8vw));
+}
+
 
 
 

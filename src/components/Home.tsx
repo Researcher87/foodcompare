@@ -18,11 +18,19 @@ import {isMobileDevice} from "../service/WindowDimension";
 const carouselImages = require.context('../static/image/carousel-samples', true);
 const startButtonImages = require.context('../static/image/start-buttons', true);
 
+const startImg1 = startButtonImages(`./StartImg1.jpg`).default
+const startImg2 = startButtonImages(`./StartImg2.jpg`).default
+const startImg3 = startButtonImages(`./StartImg3.jpg`).default
+const startImg4 = startButtonImages(`./StartImg4.jpg`).default
 
+
+/**
+ * Home component (not including Header or Info page).
+ * @constructor
+ */
 export function Home() {
     const {language} = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
-
     const history = useHistory()
 
     const imageChanged = (image) => {
@@ -117,7 +125,7 @@ export function Home() {
     }
 
 
-    const renderHomeHeader = () => {
+    const renderHomeHeaderDesktop = () => {
         return <div className={"d-flex flex-row home-header align-items-center"}>
             <div className={"d-flex flex-column w-50"}>
                 <div className={"home-header-slogan mb-2"}>{applicationStrings.label_home_slogan[language]}</div>
@@ -129,12 +137,16 @@ export function Home() {
         </div>
     }
 
-    const renderStartButtons = () => {
-        const startImg1 = startButtonImages(`./StartImg1.jpg`).default
-        const startImg2 = startButtonImages(`./StartImg2.jpg`).default
-        const startImg3 = startButtonImages(`./StartImg3.jpg`).default
-        const startImg4 = startButtonImages(`./StartImg4.jpg`).default
+    const renderHomeHeaderMobile = () => {
+        return <div className={" home-header-mobile align-items-center"}>
+            <div className={""}>
+                <div className={"home-header-slogan mb-2"}>{applicationStrings.label_home_slogan[language]}</div>
+                <div>{homeText1[language]}</div>
+            </div>
+        </div>
+    }
 
+    const renderStartButtonsDesktop = () => {
         return (
             <div>
                 <div className={"d-flex flex-row justify-content-center"}>
@@ -168,66 +180,42 @@ export function Home() {
     }
 
     const renderStartButton = (label: string, srcImage: string): any => {
-        return <button type="button" className="btn btn-small btn-outline-dark home-startbutton">
+        const buttonClass = !isMobileDevice() ? "home-startbutton" : "home-startbutton-mobile"
+        return <button type="button" className={`btn btn-small btn-outline-dark ${buttonClass}`}>
             <div className={"d-flex flex-column h-100"}>
                 <div className={"flex-row"}>
                     <img src={srcImage} style={{maxWidth: "95%"}} alt={"Start btn img"}/>
                 </div>
-                <div className="container d-flex flex-row align-items-center" style={{height: "50%", padding: "0.5vw"}}>
+                <div className="container d-flex flex-row align-items-center home-startbutton-label">
                     {label}
                 </div>
             </div>
         </button>
     }
 
-    const renderMobile = () => {
-        return (
-            <div className="media home" style={{margin: "12px"}}>
-                {/*<div>*/}
-                {/*    {renderHomeText(homeText1)}*/}
-                {/*    {renderStartButtons()}*/}
-                {/*    {renderHomeText(homeText2)}*/}
-                {/*</div>*/}
-                {/*<hr/>*/}
-                {/*<div style={{paddingTop: "20px"}}>*/}
-                {/*    <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>*/}
-                {/*    <div className="card-header"*/}
-                {/*         style={{paddingBottom: "20px", marginBottom: "30px"}}>*/}
-                {/*        {renderHomeText(homeText3)}*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-            </div>
-        )
-    }
-
     const gotoInfoPage = () => {
         history.push(PATH_INFO);
     }
 
-    const renderDesktop = () => {
-        return (
-            <div>
-                <div className="media">
-                    <div className={"container-fluid"}>
-                        <div className="row">
-                            {renderHomeHeader()}
-                        </div>
-                        {renderStartButtons()}
-                        <hr/>
-                        <div className={"d-flex justify-content-center"}>
-                            <button className={"btn btn-link"} onClick={() => {gotoInfoPage()}}>{applicationStrings.home_button_info[language]}</button>
-                        </div>
+    return (
+        <div>
+            <div className="media">
+                <div className={"container-fluid"}>
+                    <div className="row">
+                        {!isMobileDevice() ?
+                            renderHomeHeaderDesktop()
+                            :
+                            renderHomeHeaderMobile()
+                        }
+                    </div>
+                    {renderStartButtonsDesktop()}
+                    <hr/>
+                    <div className={"d-flex justify-content-center"}>
+                        <button className={"btn btn-link"} onClick={() => {gotoInfoPage()}}>{applicationStrings.home_button_info[language]}</button>
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    return <div>
-        {isMobileDevice()
-            ? <div>{renderMobile()}</div>
-            : <div>{renderDesktop()}</div>
-        }
-    </div>
+        </div>
+    );
 
 }

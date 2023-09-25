@@ -70,14 +70,26 @@ export function InfoContainer() {
         const renderImage = (index) => {
             const imageSrc = introImages(`./img-${index + 1}-${language}.png`).default;
             return <div className={"d-flex justify-content-center"}>
-
                 <img src={imageSrc} style={{width: "90%", margin: "auto", maxHeight: "100%"}}
                      alt={`Intro Image ${index}`}/>
             </div>
         }
 
         return textElements.map((textParagraph, index) => {
-            return <div className={"d-flex flex-row"} style={{paddingBottom: "15vh"}} key={`home-text-${textParagraph.id}`}>
+            if (isMobileDevice()) {
+                if (index === 1 || index === 3) {   // Do not show information about features not provided on mobile devices
+                    return <></>
+                }
+
+                return <div style={{paddingBottom: "5vh"}}
+                            key={`home-text-${textParagraph.id}`}>
+                    <div>{textParagraph.text.map((text, index) => renderTextElement(text, index))}</div>
+                    <div className={"d-flex align-items-center justify-content-center"}>{renderImage(index)}</div>
+                </div>
+            }
+
+            return <div className={"d-flex flex-row"} style={{paddingBottom: "15vh"}}
+                        key={`home-text-${textParagraph.id}`}>
                 <div className={"w-50 pr-3"}>
                     {index % 2 === 0 ?
                         <div className={"d-flex align-items-center justify-content-center"}
@@ -107,13 +119,15 @@ export function InfoContainer() {
             <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
         </div>
         <div className="container-fluid" style={{maxWidth: "1600px"}}>
-            <div  style={{paddingBottom: "20px", marginBottom: "50px", marginTop: "5vh"}}>
+            <div style={{paddingBottom: "20px", marginBottom: "50px", marginTop: "5vh"}}>
                 {renderHomeText(homeText3)}
             </div>
         </div>
         <hr/>
         <div className={"d-flex justify-content-center"}>
-            <button className={"btn btn-link"} onClick={() => {gotoHomePage()}}>{applicationStrings.info_button_back[language]}</button>
+            <button className={"btn btn-link"} onClick={() => {
+                gotoHomePage()
+            }}>{applicationStrings.info_button_back[language]}</button>
         </div>
     </div>
 }
