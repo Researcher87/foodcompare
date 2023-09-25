@@ -294,20 +294,24 @@ $usersettings-palwidth: 60ch;
     text-decoration: underline;
 }
 
-.legendItem {
-    width: 1vw;
-    height: 1vw;
-    min-width: 1vw;
-    margin-top: 0.1vw;
-    margin-right: 5px;
+.legend-container {
+    min-width: 18ch;
+    margin-left: 1ch;
+}
+
+.legend-item {
+    width: min(1.0vw, 1.5vh);
+    height: min(1.0vw, 1.5vh);
+    margin-top: 1.2vh;
+    margin-right: 1ch;
     border: 1px solid black;
 }
 
-.legendItemLabel {
-    font-size:0.8vw;
+.legend-item-label {
+    font-size: 1.8vh;
 }
 
-.legendItemLabel-mobile {
+.legend-item-label-mobile {
     font-size: max(1.2vw, 1.2vh);
 }
 

@@ -177,7 +177,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                     </div>
                 </div>
                 {legendAllowed &&
-                <div className="d-inline-block float-right">
+                <div className="d-inline-block float-right legend-container">
                     <CustomLegend legendData={getBaseChartLegendData(lang, showDetails, props.selectedFoodItem.foodClass?.category)}/>
                 </div>
                 }
