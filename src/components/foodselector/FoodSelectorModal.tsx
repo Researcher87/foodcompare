@@ -157,7 +157,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     const helpText = props.compositeSelector ? getHelpText(10, language) : getHelpText(9, language)
 
     return (
-        <Modal size={'lg'} show={true} onHide={props.onHide}>
+        <Modal size={'lg'} show={true} onHide={props.onHide} backdrop="static">
             <Modal.Header>
                 <b>{title}</b>
             </Modal.Header>
