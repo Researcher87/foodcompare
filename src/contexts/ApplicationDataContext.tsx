@@ -28,7 +28,7 @@ import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from
 import ReactSelectOption from "../types/ReactSelectOption";
 import {parseFoodCompareUri} from "../service/uri/BaseUriService";
 import {DataSettings} from "../types/livedata/DataSettings";
-import {setFoodDataPageComponent, makeFoodDataPanelComponent} from "../service/FoodDataPanelService";
+import {setFoodDataPageComponent} from "../service/FoodDataPanelService";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus

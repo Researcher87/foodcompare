@@ -111,10 +111,12 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
         const selectedFoodItem = foodSelectorNumber === 1 ? selectedFoodItem1 : selectedFoodItem2
         const updateFoodSelectorConfig = foodSelectorNumber === 1 ? updateFoodSelectorConfig1 : updateFoodSelectorConfig2
 
-        return <div style={{paddingTop: "32px"}}>
-            <Card style={styleClass}>
+        return <div style={{paddingTop: "3.5vh"}}>
+            <Card style={styleClass} >
                 <Card.Header>
-                    {applicationStrings.label_food[language]} {foodSelectorNumber}
+                    <div className={"form-label-dc-selector"}>
+                        {applicationStrings.label_food[language]} {foodSelectorNumber}
+                    </div>
                 </Card.Header>
                 <CardDeck>
                     <FoodSelector updateSelectedFoodItem={updateSelectedFoodItem}
@@ -135,7 +137,7 @@ export function DirectCompareSelector(props: DirectCompareSelectorProps) {
     return <div>
         {renderFoodSelectorCard(1)}
         {renderFoodSelectorCard(2)}
-        <div style={{paddingTop: "20px", paddingBottom: "64px"}}>
+        <div style={{paddingTop: "2vh"}}>
             <Button className={"form-button float-end"}
                     disabled={displayStatus === STATUS_NOT_UPDATED}
                     onClick={onSubmit}>

@@ -491,7 +491,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             return <div>
                 <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
                 <div className={"d-flex row"}>
-                    <div className="col-4 column select-menu form-section">
+                    <div className="col-4 column select-menu form-section-small">
                         {sourceSelectBox}
                     </div>
                     <div className={"col-8"}>
@@ -521,7 +521,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const selectClass = isSmallScreen(windowSize) ? "form-control-sm" : ""
     const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm" : "form-control"
 
-    const formClass = props.compositeSelector ? "form-section-small" : "form-section"
+    const formClass = props.directCompareSelector ? "form-section-small" : "form-section"
 
     // Remove hidden food class information in the label, which is only used to facilitate user search (e.g. find 'Cheese' for term 'Gouda')
     const foodclassFormatter = (option) => {
@@ -599,8 +599,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                                 onChange={(value) => handlePortionChange(value)}/>
                     </div>
                     <div className={"col-4"}>
-                        <span
-                            className={'form-label'}>{amount_label}</span>
+                        <span className={'form-label'}>{amount_label}</span>
                         <input className={inputClass}
                                disabled={selectedPortion?.value.portionType !== 0}
                                value={portionAmount}

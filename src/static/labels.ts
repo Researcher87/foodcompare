@@ -404,8 +404,8 @@ export const applicationStrings = {
         en: 'Source'
     },
     label_language: {
-        de: 'Sprache:',
-        en: 'Language:'
+        de: 'Sprache',
+        en: 'Language'
     },
     label_mail_name: {
         de: "Name",
@@ -1078,6 +1078,10 @@ export const applicationStrings = {
     message_import_question: {
         de: 'Im Datenbereich befinden sich noch Datenobjekte, die mit den zu importierenden Daten überschrieben werden. Möchten Sie trotzdem fortfahren?',
         en: 'The data panel still contains food data objects which will be overwritten by the imported data. Do you still want to proceed?'
+    },
+    menu_info: {
+        de: 'Info',
+        en: 'Info'
     },
     message_userdata_success: {
         de: 'Änderungen wurden gespeichert.',

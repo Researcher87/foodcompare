@@ -77,11 +77,6 @@ export function Home() {
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][language];
 
-        // history.push({
-        //     pathName: PATH_FOODDATA_PANEL,
-        //     search: `${QUERYKEY_DATAPANEL_RANKING}=`
-        // })
-
         return (
             <div style={{height: "60%"}}>
                 <Carousel className={"home-header-carousel"}
@@ -128,8 +123,10 @@ export function Home() {
     const renderHomeHeaderDesktop = () => {
         return <div className={"d-flex flex-row home-header align-items-center"}>
             <div className={"d-flex flex-column w-50"}>
-                <div className={"home-header-slogan mb-2"}>{applicationStrings.label_home_slogan[language]}</div>
-                <div>{homeText1[language]}</div>
+                <div style={{paddingLeft: "1vw"}}>
+                    <div className={"home-header-slogan mb-2"}>{applicationStrings.label_home_slogan[language]}</div>
+                    <div>{homeText1[language]}</div>
+                </div>
             </div>
             <div className={"d-flex flex-column w-50"}>
                 {renderCarousel()}

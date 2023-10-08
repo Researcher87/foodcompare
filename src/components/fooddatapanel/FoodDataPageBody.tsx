@@ -43,7 +43,7 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
     }
 
     return (
-        <div style={{maxWidth: "1200px", minWidth: calculateMinimalDataPanelWidth()}}>
+        <div style={{minWidth: calculateMinimalDataPanelWidth()}}>
             {selectedDataPage === TAB_INFO &&
                  <InfoData selectedFoodItem={props.selectedFoodItem}/>
             }

@@ -10,8 +10,8 @@
       },
       {
         "type": "paragraph",
-        "de": "Food Compare umfasst mehr als 200 Lebensmittel, die händisch ausgewählt und zusammengestellt wurden. Die Daten entstammen der USDA, welche die weltweit größte Datenbank für detaillierte Lebensmitteldaten bereitstellt.",
-        "en": "Food Compare contains more than 200 food items that have been manually selected and added to the web project. The USDA has served as our primary resource, which provides the world-largest nutrient database."
+        "de": "Food Compare umfasst mehr als 300 Lebensmittel, die händisch ausgewählt und zusammengestellt wurden. Die Daten entstammen der USDA, welche die weltweit größte Datenbank für detaillierte Lebensmitteldaten bereitstellt.",
+        "en": "Food Compare contains more than 300 food items that have been manually selected and added to the web project. The USDA has served as our primary resource, which provides the world-largest nutrient database."
       },
       {
         "type": "paragraph",
@@ -20,13 +20,13 @@
       },
       {
         "type": "paragraph",
-        "de": "Die Lebensmittel werden in separaten Tabs des Datenbereichs angezeigt. Der Datenbereich enthält verschiedene Rubriken, die einzelne Informationen zu dem Lebensmittel umfassen, z.B. die Gesamtzusammensetzung, Energiegehalt, Vitamine, Mineralstoffe, Fettsäuren etc.",
-        "en": "Food items will be displayed in separate data tabs. The data panel comprises several sections that contain separate pieces of informationen, such as the total nutrient composition, energy amount, vitamins, minerals, fatty acids and the like."
+        "de": "Die Lebensmittel werden in separaten Tabs des Datenbereichs angezeigt. Der Datenbereich enthält verschiedene Rubriken, die einzelne Informationen zu dem Lebensmittel umfassen, z.B. die Gesamtzusammensetzung, Energiegehalt, Vitamine, Mineralstoffe, Fettsäuren etc. Die Angaben zu Vitaminen, Mineralstoffen und Proteinen werden zur besseren Veranschaulichung in Bezug zum Tagesbedarf dargestellt (z.B. enthält ein durchschnittlicher Apfel etwa 7 % des Tagesbedarfs an Vitamin C).",
+        "en": "Food items will be displayed in separate data tabs. The data panel comprises several sections that contain separate pieces of informationen, such as the total nutrient composition, energy amount, vitamins, minerals, fatty acids and the like. For a better understanding, data about vitamins, minerals and proteins is displayed in relation to the daily requirements. For instance, an average apple covers about 7 % of the daily requirement of Vitamin C."
       },
       {
         "type": "paragraph",
         "de": "Obwohl Food Compare speziell zur grafischen Veranschaulichung von Inhaltsstoffen entwickelt wurde, besteht auch die Möglichkeit, im Analysebereich auf die Tabellenansicht zu wechseln. Dort werden die Inhaltsstoffe in klassischer Form angezeigt, ggf. auch zusammen mit dem empfohlenen Tagesbedarf.",
-        "en": "Although Food Compare has been developed with focus on graphic illustration, the analysis panel also allows to switch to the table mode in which food data is traditionally displayed. If available, the amounts of daily requirements will also be displayed in this mode."
+        "en": "Although Food Compare has been developed with focus on graphical illustration, the analysis panel also allows to switch to the table mode in which food data is traditionally displayed. If available, the amounts of daily requirements will also be displayed in this mode."
       }
     ]
   },
@@ -41,13 +41,13 @@
       },
       {
         "type": "paragraph",
-        "de": "Die Anwendung erlaubt es auch, komplexe Lebensmittel oder Mahlzeiten zusammenzustellen und die Gesamtzahl an Inhaltsstoffen dafür anzuzeigen. Diese Funktion ist nützlich, wenn der Nährstoffgehalt von Menüs berechnet werden soll, die aus verschiedenen Lebensmitteln bestehen, oder wenn ermitteln werden soll, wie viele Nährstoffe man in einem bestimmten Zeitraum, z.B. einem Tag, zu sich genommen hat.",
+        "de": "Die Anwendung erlaubt es auch, komplexe Lebensmittel oder Mahlzeiten zusammenzustellen und die Gesamtzahl an Inhaltsstoffen dafür anzuzeigen. Diese Funktion ist nützlich, wenn der Nährstoffgehalt von Menüs berechnet werden soll, die aus verschiedenen Lebensmitteln bestehen, oder wenn ermittelt werden soll, wie viele Nährstoffe man in einem bestimmten Zeitraum, z.B. einem Tag, zu sich genommen hat.",
         "en": "Additionally, Food Compare allows to combine different food items to composite food elements. This feature seems useful for people who are interested in the composition of menus consisting of different foods, or who want to determine the total amount of nutrients they consumed within a specific time, like a day."
       },
       {
         "type": "paragraph",
-        "de": "Um eine solche Kombination an Lebensmitteln vorzunehmen, klickt man im Analyse-Bereich auf das Stapel-Icon und kann dann verschiedene Lebensmittel in frei definierbaren Portionsgrößen zusammenstellen. Klickt man auf Anzeigen, so öffnet sich im Datenbereich ein neues Tab mit dem zusammengestellten Menü.",
-        "en": "In order to create a composite food, click the stack button on the food analyze page and add food items to your composite list. Individual portion sizes can be set. Once you have clicked the show button, the composite food will be added to the food data panel as a new tab."
+        "de": "Um eine solche Kombination an Lebensmitteln vorzunehmen, klickt man im Analyse-Bereich auf das Stapel-Icon und kann dann verschiedene Lebensmittel in frei definierbaren Portionsgrößen zusammenstellen. Klickt man auf Anzeigen, so öffnet sich im Datenbereich ein neues Tab mit dem zusammengestellten Menü. Die angezeigten Daten stellen dann die Gesamtmenge an Nährstoffen, Vitaminen und Mineralstoffen in dem Menü dar. Für ein korrektes Ergebnis werden dabei Nährstoffwerte ausgeblendet, die nicht in allen Lebensmitteln der Auswahl zur Verfügung stehen.",
+        "en": "In order to create a composite food, click the stack button on the food analyze page and add food items to your composite list. Individual portion sizes can be set. Once you have clicked the show button, the composite food will be added to the food data panel as a new tab. The data you will see is total amount of nutrients, vitamins and minerals in your menu. For correctness, nutrient data that is not provided by each of the selected foods will not be displayed."
       }
     ]
   },
@@ -63,7 +63,7 @@
       {
         "type": "paragraph",
         "de": "Um die Inhaltsstoffe zweier Lebensmittel gegenüberzustellen, kann man im Menü Direktvergleich zwei beliebige Lebensmittel auswählen und die Nährstoffdaten entsprechend miteinander vergleichen. So lassen sich bspw. die Zusammensetzung oder die Vitamindaten zweier Lebensmittel auf einen Blick erfassen. Bei manchen Diagrammen steht auch die Funktion „synchronisieren“ bereit, so dass die Skalierung der Diagramme bei beiden Lebensmitteln identisch ist – dies erleichtert den schnellen Vergleich.",
-        "en": "For the juxtaposition of food data between two food items, the direct comparison page allows to pick two foods and compare the data with each other. This enables you to see and compare the nutrient composition or vitamins of two foods on one glance. Some data pages also allow to synchronize the charts, which means that they are scaled the same way; this may additionally help to quickly compare food data."
+        "en": "For the juxtaposition of food data between two food items, the direct comparison page allows to pick two foods and compare the data with each other. This enables you to see and compare the nutrient composition or vitamins of two foods on one glance. Some data pages also allow to synchronize the charts, which means that they are scaled the same way. Synchronizing charts helps to easily compare food data between two foods."
       },
       {
         "type": "paragraph-before-itemization",
@@ -84,6 +84,11 @@
         "type": "fancy-item",
         "de": "Zwei Zubereitungsarten eines Lebensmittels, z.B. gekochter oder roher Blumenkohl",
         "en": "Two preparation types of a food, such as cooked cauliflower and raw cauliflower"
+      },
+      {
+        "type": "fancy-item",
+        "de": "Zwei Portionsgrößen, z.B. ein kleiner und ein großer Apfel",
+        "en": "Two portion sizes, such as a small and a large apple"
       }
     ]
   },
@@ -99,7 +104,12 @@
       {
         "type": "paragraph",
         "de": "Food Compare ermöglicht es ebenfalls, Lebensmittel nach einem bestimmten Wert, z.B. einem bestimmten Vitamin oder Nährstoff, zu sortieren. Die Anwendung zeigt dabei absteigend sortiert die Lebensmittel der Food Compare Datenbank an, welche die höchsten Vorkommen besitzen. Es können dabei alle Lebensmittel berücksichtigt werden oder die einer bestimmten Lebensmittelkategorie. Zudem kann zwischen einheitlichen 100-Gramm-Portionen und der in Food Compare verwendeten Standardportion unterschieden werden.",
-        "en": "Food Compare also allows to rank foods by a certain value, such as a specific vitamin or nutrient. The resulting chart will show those food items of the Food Compare database containing the largest amount of that value in a descending order. Either all food items of the application can be taken into account or just those of a specific category. Additionally, users can distinguish between the standardized 100 gram portion sizes or the default portion sizes used in the application."
+        "en": "Food Compare also allows to rank foods by a certain value, such as a specific vitamin or nutrient. The resulting chart will show those food items of the Food Compare database containing the largest amount of that value in descending order. Either all food items of the application can be taken into account or just those of a specific category. Additionally, users can distinguish between the standardized 100 gram portion sizes or the default portion sizes used in the application."
+      },
+      {
+        "type": "paragraph",
+        "de": "Das Ranking-Menü bietet sich vor allem an, wenn man nach Lebensmitteln sucht, die einen recht hohen Anteil eines bestimmten Nährstoffs, Vitamins oder Minerals haben. Das betrifft bspw. Personen, die eine bestimmte Diät verfolgen.",
+        "en": "The ranking menu is especially useful for people that are looking for foods covering a particularly high amount of a specific nutrient, vitamin or mineral. Those may, for instance, people being on a certain diet."
       }
     ]
   },
@@ -114,7 +124,7 @@
       },
       {
         "type": "paragraph",
-        "de": "Im Analysebereich wird ebenfalls angezeigt, wie sich ein Lebensmittel bezüglich eines Werts zu anderen Lebensmitteln verhält, z.B. ob es eine außergewöhnlich hohe oder geringe Menge des Inhaltsstoffes aufweist. Dabei kann das Lebensmittel in Relation zu allen anderen Lebensmitteln derselben Kategorie einsortiert werden oder auch in Relation zu allen anderen Lebensmitteln der gesamten Food-Compare-Datenbank. Falls mehrere Tabs im Analysebereich geöffnet sind, kann das ausgewählte Lebensmittel auch in Relation zu den anderen Lebensmitteln des Analysebereich einsortiert werden.\n\nIm Tabellenmodus der Vergleichsansicht werden hingegen die Maximal-, Minimal- und Durchschnittswerte des Inhaltsstoffes über alle Lebensmittel angezeigt.",
+        "de": "Im Analysebereich wird ebenfalls angezeigt, wie sich ein Lebensmittel bezüglich eines Werts zu anderen Lebensmitteln verhält, z.B. ob es eine außergewöhnlich hohe oder geringe Menge des Inhaltsstoffes aufweist. Dabei kann das Lebensmittel in Relation zu allen anderen Lebensmitteln derselben Kategorie einsortiert werden oder auch in Relation zu allen anderen Lebensmitteln der gesamten Food Compare Datenbank. Falls mehrere Tabs im Analysebereich geöffnet sind, kann das ausgewählte Lebensmittel auch in Relation zu den anderen Lebensmitteln des Analysebereich einsortiert werden.",
         "en": "The analysis panels contains a view to show how a value of a selected food correlates to other foods in Food Compare, for example, whether this food contains an unusual high or low amount of the specified ingredient. The selected food can be put in relation to all the other food elements of its food category, or to all the other food elements of the whole Food Compare database. In case that multiple food tabs have been opened, the selected food can also be compared to the other elements of the analysis panel."
       },
       {

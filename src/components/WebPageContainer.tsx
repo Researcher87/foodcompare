@@ -30,8 +30,18 @@ export function WebPageContainer() {
     }
 
     // Registering requires some time and should only be performed when the real site is loaded.
+    if(applicationContext.debug) {
+        console.log('Start annotation plugin registration...')
+    }
     Chart.register(annotationPlugin)
     Chart.register(ArcElement);
+    if(applicationContext.debug) {
+        console.log('...done.')
+    }
+
+    if(applicationContext.debug) {
+        require('./../App-debug.scss');
+    }
 
     return (
         <div>

@@ -35,5 +35,5 @@ export function isNarrowScreen(windowDimension: WindowDimension) {
 }
 
 export function isMobileDevice() {
-    return false
+    return isMobile
 }
