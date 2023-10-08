@@ -286,7 +286,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     return (
         <div className="container-fluid">
             <div className="row" style={{height: containerHeight}} key={"carbs container " + containerHeight}>
-                <div className="col-3" style={{display: "block"}}>
+                <div className="col-3 text-align-center">
                     {renderChartSelector()}
                 </div>
                 <div className={chartColType}>

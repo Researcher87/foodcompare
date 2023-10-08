@@ -28,6 +28,7 @@ $food-analyzer-panel-empty: $food-analyzer-panel-area;    // Background color of
 
 // 1.3 Misc:
 
+$food-analyzer-panel-width: calc(300px + 36vw);
 $usersettings-palwidth: 60ch;
 
 
@@ -359,6 +360,13 @@ $usersettings-palwidth: 60ch;
 .foodanalyzer-basepanel-empty {
     @include foodanalyzer-basepanel;
     background: $food-analyzer-panel-empty;
+}
+
+// MAIN CSS CLASS TO DEFINE THE WIDTH OF THE FOOD ANALYZER CONTAINER
+.foodanalyzer-inner-container {
+    max-width: $food-analyzer-panel-width;
+    min-width: $food-analyzer-panel-width;
+    margin-top: -10px;
 }
 
 .sidebar-link {

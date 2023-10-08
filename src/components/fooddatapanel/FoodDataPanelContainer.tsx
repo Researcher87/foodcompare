@@ -233,7 +233,7 @@ export default function FoodDataPanelContainer() {
         ? "d-flex flex-row foodanalyzer-basepanel"
         : "d-flex flex-row foodanalyzer-basepanel-empty";
 
-    return <div className={"container container-scroll container-fluid"}>
+    return <div className={"container-scroll container-fluid"}>
         {selectedFoodItem !== null &&
         <div style={{paddingTop: "4vh"}}>
             <div className={containerDivClass} >
@@ -245,7 +245,7 @@ export default function FoodDataPanelContainer() {
                         />
                     </div>
                     <div className={"d-flex flex-row"}>
-                        <div>
+                        <div className="col foodanalyzer-inner-container">
                             {selectedFoodItems && selectedFoodItems.length > 0 ?
                                 <div>
                                     <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
