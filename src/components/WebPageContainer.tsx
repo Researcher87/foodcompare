@@ -40,7 +40,7 @@ export function WebPageContainer() {
     }
 
     if(applicationContext.debug) {
-        require('./../App-debug.scss');
+        //require('./../App-debug.scss');
     }
 
     return (
