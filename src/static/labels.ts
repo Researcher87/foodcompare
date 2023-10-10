@@ -84,20 +84,12 @@ export const applicationStrings = {
         en: 'Hide remainders'
     },
     checkbox_chartoption_showLegend: {
-        de: 'Legende anzeigen',
-        en: 'Show legend'
-    },
-    checkbox_chartoption_showLegend_m: {
         de: 'Legende',
         en: 'Legend'
     },
     checkbox_chartoption_showDetails: {
-        de: 'Details anzeigen',
-        en: 'Show details'
-    },
-    checkbox_chartoption_showDetails_m: {
         de: 'Details',
-        en: 'Show'
+        en: 'Details'
     },
     checkbox_english: {
         de: 'Englisch',
@@ -200,8 +192,8 @@ export const applicationStrings = {
         en: 'Category'
     },
     label_charttype: {
-        de: 'Diagrammart',
-        en: 'Chart type'
+        de: 'Anzeige',
+        en: 'Display'
     },
     label_charttype_pie: {
         de: 'Tortendiagramm',
@@ -1052,7 +1044,7 @@ export const applicationStrings = {
         en: 'Error while trying to send message.'
     },
     message_error_existing_element: {
-        de: 'Das ausgewählte Element befindet sich bereits im Datenbereich. Ein Lebensmittel darf nur einmal hinzugefügt werden.',
+        de: 'Das ausgewählte Element befindet sich bereits im Datenbereich. Ein Lebensmittel kann nur einmal hinzugefügt werden.',
         en: 'The selected food item already exists in your list. A food item can be added only once.'
     },
     message_error_incomplete_form: {
@@ -1152,7 +1144,7 @@ export const applicationStrings = {
         en: 'Mediocre Activity'
     },
     palcat_desc_4: {
-        de: 'Überwiegende Stehende Tätigkeit (z.B. Handwerker, Verkäufer, Kellner, Krankenschwester).',
+        de: 'Überwiegende stehende Tätigkeit (z.B. Handwerker, Verkäufer, Kellner, Krankenschwester).',
         en: 'Mostly standing activity (e.g. shop assistants, waiters, craftsmen, nurses).'
     },
     palcat_name_5: {

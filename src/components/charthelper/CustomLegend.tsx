@@ -16,7 +16,7 @@ export function CustomLegend(props: CustomLegendProps) {
             const indent = element.indent > 0 ? "2ch" : "0ch";
             const id = `legendrow ${i}`;
 
-            const legendItemLabelClass = mobile ? "legendItemLabel-mobile" : "legendItemLabel"
+            const legendItemLabelClass = mobile ? "legend-item-label" : "legend-item-label"
             const legendClassName = isMobileDevice() ? "align-items-baseline" : "align-items-middle"
 
             legend.push(
@@ -34,8 +34,8 @@ export function CustomLegend(props: CustomLegendProps) {
 
 
     return (
-        <div style={{borderLeft: "1px solid #aaaaaa", paddingLeft: "5px"}}>
-            <div style={{paddingTop: "4px"}}>
+        <div style={{borderLeft: "1px solid #aaaaaa"}}>
+            <div>
                 {renderLegend()}
             </div>
         </div>

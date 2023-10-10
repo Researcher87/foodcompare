@@ -12,8 +12,8 @@ $fontsize-header-links: min(1.6vh, 1.2vw);
 
 // 1.2 Colors:
 
-$header-link-color: #555;
-$header-link-color-selected: #22f;
+$header-link-color: #333;
+$header-link-color-selected: white;
 
 $home-header-color: #8db8e3;
 $home-header-color-start: #051d33;
@@ -26,10 +26,18 @@ $food-analyzer-panel-border: $food-analyzer-panel-area;   // Border color if at 
 $food-analyzer-panel-empty: $food-analyzer-panel-area;    // Background color of the data panel surrounding if no tab is open
 
 
-// 1.3 Misc:
+// 1.3 Food Panel sizes:
 
-$food-analyzer-panel-width: calc(300px + 36vw);
-$usersettings-palwidth: 60ch;
+// width of the whole panel area (basis for further calculations)
+$food-analyzer-panel-width: calc(300px + 40vw);
+
+$food-analyzer-panel-height: calc(#{$food-analyzer-panel-width} * 0.48);     // height of the whole panel area
+$food-analyzer-chart-height: calc(#{$food-analyzer-panel-width} * 0.38);    // height of the chart area within a tab (including a config line)
+
+// height of the chart/table area without a config line
+$food-analyzer-chart-height-without-configline: calc(#{$food-analyzer-panel-width} * 0.45);
+
+$food-analyzer-chart-height-dc: calc(35vh);                 // height of the chart area in the direct compare view
 
 
 /*** 2. Mobile Device Main Settings ***/
@@ -132,13 +140,13 @@ $usersettings-palwidth: 60ch;
 }
 
 .form-row-indent {
-    margin-left: 24px;
-    padding-bottom: 10px;
+    margin-left: 1.3vw;
+    padding-bottom: 1vh;
 }
 
 .form-row-indent-m {
-    margin-left: 16px;
-    padding-bottom: 6px;
+    margin-left: 0.8vw;
+    padding-bottom: 0.6vh;
 }
 
 .button-apply {
@@ -196,6 +204,11 @@ $usersettings-palwidth: 60ch;
     height: 9.5vh;
 }
 
+.header-m {
+    background: $home-header-color;
+    height: max(9.5vh, 9.5vw);
+}
+
 .header-form {
     font-size: $fontsize-small;
 }
@@ -212,17 +225,10 @@ $usersettings-palwidth: 60ch;
 }
 
 .header-label {
-    font-size: max(1.0vw, 1.8vh);
-    borderBottom: "1px solid #BBBBBB";
-    paddingLeft: "12px";
-    paddingRight: "12px"
-}
-
-.header-label-m {
-    font-size: max(1.2vw, 1.2vh);
-    borderBottom: "1px solid #BBBBBB";
-    paddingLeft: "6px";
-    paddingRight: "6px"
+    font-size: min(1.2vw, 2.0vh);
+    borderBottom: 1px solid #BBBBBB;
+    paddingLeft: 0.4vw;
+    paddingRight: 0.4vw;
 }
 
 .header-link {
@@ -287,8 +293,8 @@ $usersettings-palwidth: 60ch;
 
 .home-header-mobile {
     background: linear-gradient(to right, $home-header-color-start, $home-header-color-end);
-    height: max(20vh, 10vw);
-    font-size: min( calc(0.4rem + 1.2vh), calc(0.4rem + 0.8vw));
+    height: max(28vh, 18vw);
+    font-size: min( calc(0.6rem + 1.2vh), calc(0.6rem + 0.8vw));
     color: $home-header-font-color;
 }
 
@@ -334,6 +340,18 @@ $usersettings-palwidth: 60ch;
 
 /*** 8. Food Analyzer / Direct Compare Menu ***/
 
+.chart-area {
+    height: $food-analyzer-chart-height;
+}
+
+.chart-area-without-configline {
+    height: $food-analyzer-chart-height-without-configline;
+}
+
+.chart-area-dc {
+    height: $food-analyzer-chart-height-dc;
+}
+
 .foodanalyzer-button {
     width: 7vmin;
     height: 7vmin;
@@ -352,8 +370,8 @@ $usersettings-palwidth: 60ch;
 .foodanalyzer-basepanel {
     @include foodanalyzer-basepanel;
     background:  #fcfefe;
-    border-width: min(0.8vw, 0.4vh);
-    border-color: $food-analyzer-panel-border;
+    border-width: min(0.2vw, 0.1vh);
+    border-color: #aaa;
     border-style: solid;
 }
 
@@ -366,7 +384,16 @@ $usersettings-palwidth: 60ch;
 .foodanalyzer-inner-container {
     max-width: $food-analyzer-panel-width;
     min-width: $food-analyzer-panel-width;
-    margin-top: -10px;
+    margin-top: -1vh;
+}
+
+.food-analyzer-sourcebox {
+    font-size: $fontsize-label;
+}
+
+.food-analyzer-chartpanel {
+    max-height: $food-analyzer-panel-height;
+    min-height: $food-analyzer-panel-height;
 }
 
 .sidebar-link {
@@ -391,15 +418,17 @@ $usersettings-palwidth: 60ch;
 }
 
 .legend-item {
-    width: min(1.0vw, 1.5vh);
-    height: min(1.0vw, 1.5vh);
+    min-width: min(1.0vw, 1.5vh);
+    max-width: min(1.0vw, 1.5vh);
+    min-height: min(1.0vw, 1.5vh);
+    max-height: min(1.0vw, 1.5vh);
     margin-top: 1.2vh;
     margin-right: 1ch;
     border: 1px solid black;
 }
 
 .legend-item-label {
-    font-size: 1.8vh;
+    font-size: $fontsize-label;
 }
 
 .legend-item-label-mobile {
@@ -411,11 +440,25 @@ $usersettings-palwidth: 60ch;
 }
 
 .table-style {
-    font-size: 16px;
+    font-size: $fontsize-label;
 }
 
 .table-style-m {
-    font-size: 12px;
+    font-size: $fontsize-label;
+}
+
+.table-data {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height-without-configline;
+    overflow-y: auto;
+    margin: 2vh;
+}
+
+.juxtaposition-data {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height;
+    overflow-y: auto;
+    margin: 2vh;
 }
 
 .vertical-label {
@@ -475,17 +518,40 @@ $usersettings-palwidth: 60ch;
     display: none !important;
 }
 
+.tab-info {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height-without-configline;
+    overflow-y: auto;
+    padding: 1vh;
+}
+
+.tab-info-directcompare {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height-dc;
+    overflow-y: auto;
+    padding: 3vh;
+}
+
 
 
 /*** 9. User Settings ***/
 
+.usersettings-form {
+    max-width: 80ch;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3vh;
+}
+
 .usersettings-pal {
-    width: $usersettings-palwidth;
+    width: 100%;
     padding-top: 3vh;
 }
 
 .usersettings-pal-text {
-    width: $usersettings-palwidth;
+    width: 100%;
     font-size: $fontsize-label;
     padding-top: 0.75vh;
     color: grey;

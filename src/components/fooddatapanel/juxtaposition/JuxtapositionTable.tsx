@@ -41,34 +41,32 @@ export function JuxtapositionTable(props: JuxtapositionChartProps) {
 
     return (
         <div>
-            <div style={{height: "428px", margin: "12px"}}>
-                <div>
-                    {dataExists &&
-                    <BootstrapTable trClassName={tableClass} data={tableData} striped hover>
-                        <TableHeaderColumn isKey dataField='label' width={"220px"}>Element</TableHeaderColumn>
-                        <TableHeaderColumn dataField='value'>{applicationStrings.label_juxtaposition_table_value[language]}
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='rank'>
-                            {applicationStrings.label_juxtaposition_table_rank[language]}
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='min'>
-                            {applicationStrings.label_juxtaposition_table_min[language]}
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='max'>
-                            {applicationStrings.label_juxtaposition_table_max[language]}
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='average'>
-                            {applicationStrings.label_juxtaposition_table_avg[language]}
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='median'>
-                            {applicationStrings.label_juxtaposition_table_median[language]}
-                        </TableHeaderColumn>
-                    </BootstrapTable>
-                    }
-                    {!dataExists &&
-                    <div className="text-center">{applicationStrings.label_noData[language]}</div>
-                    }
-                </div>
+            <div>
+                {dataExists &&
+                <BootstrapTable trClassName={tableClass} data={tableData} striped hover>
+                    <TableHeaderColumn isKey dataField='label' width={"220px"}>Element</TableHeaderColumn>
+                    <TableHeaderColumn dataField='value'>{applicationStrings.label_juxtaposition_table_value[language]}
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='rank'>
+                        {applicationStrings.label_juxtaposition_table_rank[language]}
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='min'>
+                        {applicationStrings.label_juxtaposition_table_min[language]}
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='max'>
+                        {applicationStrings.label_juxtaposition_table_max[language]}
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='average'>
+                        {applicationStrings.label_juxtaposition_table_avg[language]}
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='median'>
+                        {applicationStrings.label_juxtaposition_table_median[language]}
+                    </TableHeaderColumn>
+                </BootstrapTable>
+                }
+                {!dataExists &&
+                <div className="text-center">{applicationStrings.label_noData[language]}</div>
+                }
             </div>
         </div>
     )

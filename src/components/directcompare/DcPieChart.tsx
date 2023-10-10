@@ -247,7 +247,7 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
 
     return <div className={"direct-compare-panel"}>
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}}
+            <div className={"d-flex"} style={{maxHeight: containerHeight, marginBottom: "2vh"}}
                  key={"directcompare container" + containerHeight}>
                 <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
                 {getChartComponent(props.selectedFoodItem1, 1)}
@@ -255,7 +255,7 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         </Card>
 
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}}
+            <div className={"d-flex"} style={{maxHeight: containerHeight, marginBottom: "2vh"}}
                  key={"directcompare container" + containerHeight}>
                 <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
                 {getChartComponent(props.selectedFoodItem2, 2)}

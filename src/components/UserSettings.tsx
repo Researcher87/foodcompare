@@ -146,10 +146,8 @@ export function UserSettings() {
     const inputClass = isSmallScreen(windowSize) ? "form-control form-control-sm input-sm" : "form-control input"
 
     const renderTextField = (label, value, callback) => {
-        const classRow = isMobileDevice() ? "form-row-m" : "form-row"
-
         return (
-            <div className={classRow}>
+            <Form className={"form-elements"}>
                 <Form.Label className="form-label">{label}:</Form.Label>
                 <FormControl
                     className={inputClass}
@@ -157,7 +155,7 @@ export function UserSettings() {
                     value={value}
                     onChange={callback}
                 />
-            </div>
+            </Form>
         );
     }
 
@@ -166,27 +164,29 @@ export function UserSettings() {
 
         return (
             <div className={classRow}>
-                    <Form.Check type="radio"
-                                inline={true}
-                                label={applicationStrings.label_userSettings_sex_male[lang]}
-                                value={SEX_MALE}
-                                checked={(sex === SEX_MALE)}
-                                onChange={handleRadioButtonClick}
-                    />
-                    <Form.Check type="radio"
-                                inline={true}
-                                label={applicationStrings.label_userSettings_sex_female[lang]}
-                                value={SEX_FEMALE}
-                                checked={(sex !== SEX_MALE)}
-                                onChange={handleRadioButtonClick}
-                    />
+                <Form.Check type="radio"
+                            className="form-label"
+                            inline={true}
+                            label={applicationStrings.label_userSettings_sex_male[lang]}
+                            value={SEX_MALE}
+                            checked={(sex === SEX_MALE)}
+                            onChange={handleRadioButtonClick}
+                />
+                <Form.Check type="radio"
+                            className="form-label"
+                            inline={true}
+                            label={applicationStrings.label_userSettings_sex_female[lang]}
+                            value={SEX_FEMALE}
+                            checked={(sex !== SEX_MALE)}
+                            onChange={handleRadioButtonClick}
+                />
             </div>
         )
     }
 
     const renderFemaleCheckboxes = () => {
         return (
-            <div className="form" style={{marginLeft: "100px"}}>
+            <div className="form">
                 <div>
                     <Form.Check inline className="form-radiobutton"
                                 checked={pregnant === true}
@@ -229,7 +229,7 @@ export function UserSettings() {
         const description = applicationStrings[descriptionCode][lang];
 
         return (
-            <div className="form-row">
+            <div>
                 <div className={"usersettings-pal"}>
                     <label className="form-label">{applicationStrings.label_userSettings_palValue[lang]}:</label>
                     <Select className="form-control-sm"
@@ -250,11 +250,11 @@ export function UserSettings() {
 
     const renderActivityCheckboxes = () => {
         return (
-            <div className="form-row-indent" style={{marginTop: "-15px"}}>
+            <div className="form-row-indent">
                 <label className="form-elements"
                        data-for={"us-leisure"}
                        data-tip={applicationStrings.label_userSettings_leisureSports_tooltip[lang]}>
-                    <ReactTooltip id={"us-leisure"}/>
+                    <ReactTooltip id={"us-leisure"} place={"right"}/>
                     <Form.Check inline className="form-radiobutton"
                                 label={applicationStrings.label_userSettings_leisureSports[lang]}
                                 checked={leisureSport}
@@ -267,10 +267,9 @@ export function UserSettings() {
 
     const renderSubmitButton = () => {
         return (
-            <div className="text-center">
+            <div className="text-center pt-4">
                 <button type="button"
                         className="btn btn-primary"
-                        style={{marginBottom: "5vh"}}
                         onClick={() => submitUserData()}>
                     {applicationStrings.button_submit[lang]}
                 </button>
@@ -287,37 +286,31 @@ export function UserSettings() {
     const value_weight = (weight != null) ? weight : initialUserDataWeight
 
     return (
-        <div>
-            <div className={"m-3"}>
-               <FaLightbulb/> {applicationStrings.label_userSettings_intro[lang]}
+        <div className={"usersettings-form flex-column"}>
+            <div>
+                <FaLightbulb/> <span className={"form-text"}>{applicationStrings.label_userSettings_intro[lang]}</span>
             </div>
-            <div className="container" style={{paddingTop: "24px"}}>
-                <div className="row userDataSettings">
-                    <div className="col-12">
-                        <form>
-                            <FormGroup controlId="formBasicText">
-                                <div className="row">
-                                    <div className="col-6">
-                                        {renderTextField(applicationStrings.label_userSettings_age[lang], value_age, changeAge)}
-                                        {renderTextField(applicationStrings.label_userSettings_size[lang], value_size, changeSize)}
-                                        {renderTextField(applicationStrings.label_userSettings_weight[lang], value_weight, changeWeight)}
-                                    </div>
-                                    <div className="col-6">
-                                        <Form.Label className="form-label" style={{paddingLeft: "20px"}}>
-                                            {applicationStrings.label_userSettings_sex[lang]}
-                                        </Form.Label>
-                                        {renderSexRadioButtons()}
-                                        {renderFemaleCheckboxes()}
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    {renderPalList(applicationContext.userData)}
-                                    {renderActivityCheckboxes()}
-                                </div>
-                            </FormGroup>
-                            {renderSubmitButton()}
-                        </form>
-                    </div>
+            <div style={{paddingTop: "4vh"}}>
+                <div>
+                    <FormGroup>
+                        <div className={"d-flex flex-row"} style={{paddingBottom: "3vh"}}>
+                            {renderTextField(applicationStrings.label_userSettings_age[lang], value_age, changeAge)}
+                            {renderTextField(applicationStrings.label_userSettings_size[lang], value_size, changeSize)}
+                            {renderTextField(applicationStrings.label_userSettings_weight[lang], value_weight, changeWeight)}
+                        </div>
+                        <div className={"d-flex flex-row align-items-baseline"}>
+                            <Form.Label className="form-label">
+                                {applicationStrings.label_userSettings_sex[lang]}
+                            </Form.Label>
+                            {renderSexRadioButtons()}
+                            {renderFemaleCheckboxes()}
+                        </div>
+                        <div>
+                            {renderPalList(applicationContext.userData)}
+                            {renderActivityCheckboxes()}
+                        </div>
+                    </FormGroup>
+                    {renderSubmitButton()}
                 </div>
             </div>
         </div>

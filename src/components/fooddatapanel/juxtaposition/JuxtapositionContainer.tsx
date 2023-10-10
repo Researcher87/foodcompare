@@ -116,7 +116,7 @@ export default function JuxtapostionContainer(props: ChartProps) {
     }
 
     return (
-        <div style={{maxHeight: "453px", minHeight: "453px", overflow: "auto"}}>
+        <div className={"juxtaposition-data"}>
             {showSettingsModal &&
                 <JustapositionSettings onHide={() => setShowSettingsModal(false)}></JustapositionSettings>
             }
@@ -148,7 +148,7 @@ export default function JuxtapostionContainer(props: ChartProps) {
                 </div>
             </div>
             <hr/>
-            <div style={{paddingTop: "10px", paddingBottom: "10px", paddingLeft: "20px", paddingRight: "15px"}}>
+            <div style={{paddingTop: "1vh", paddingBottom: "1vh", paddingLeft: "1vw", paddingRight: "0.75vw"}}>
                 {props.displayMode === DISPLAYMODE_CHART ?
                     <JuxtapositionChart selectedGroup={group.value} selectedReference={reference.value} selectedFoodItem={props.selectedFoodItem}/>
                     :

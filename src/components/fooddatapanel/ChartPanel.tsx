@@ -48,7 +48,7 @@ export function ChartPanel(props: ChartProps) {
     }
 
     return (
-        <div style={{paddingTop: "24px"}}>
+        <div style={{paddingTop: "2vh"}}>
             {chart}
         </div>
     )

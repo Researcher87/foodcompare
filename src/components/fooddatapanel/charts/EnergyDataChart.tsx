@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {Bar, Chart} from "react-chartjs-2";
@@ -6,11 +6,8 @@ import {getBarChartOptions} from "../../../service/ChartConfigurationService";
 import {applicationStrings} from "../../../static/labels";
 import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/calculation/EnergyService";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
-import {default_chart_height} from "../../../config/ChartConfig";
-import annotationPlugin from 'chartjs-plugin-annotation'
 import {ChartProps} from "../../../types/livedata/ChartPropsData";
 import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 
 export default function EnergyDataChart(props: ChartProps) {
@@ -21,11 +18,6 @@ export default function EnergyDataChart(props: ChartProps) {
 
     const nutrientData = getNutrientData(props.selectedFoodItem);
     const energy100g = nutrientData.baseData.energy;
-    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
-
-    useEffect(() => {
-        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
-    }, [chartHeight])
 
     if (!applicationContext || !energy100g) {
         return <div>No data.</div>
@@ -57,10 +49,10 @@ export default function EnergyDataChart(props: ChartProps) {
         const showInfotext = !(isMobileDevice() && props.directCompareUse)
 
         return (
-            <div style={{paddingLeft: "50px", paddingTop: "20px", maxWidth: "90%"}}>
+            <div style={{paddingLeft: "2vw", paddingTop: "2vh", maxWidth: "90%"}}>
                 {!isMobileDevice()
-                    ? <h5><b>{`${energy100g}`} kcal / 100 g</b></h5>
-                    : <h6><b>{`${energy100g}`} kcal / 100 g</b></h6>
+                    ? <div className={"header-label"}><b>{`${energy100g}`} kcal / 100 g</b></div>
+                    : <p><b>{`${energy100g}`} kcal / 100 g</b></p>
                 }
 
                 {showInfotext &&
@@ -140,29 +132,27 @@ export default function EnergyDataChart(props: ChartProps) {
 
     const data = createEnergyLevelChart();
     if (!data) {
-        return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+        return <div>{applicationStrings.label_noData[lang]}</div>
     }
 
-    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
+    const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
 
     return (
         <div className="container-fluid">
-            <div className="row " style={{height: containerHeight}} key={"energy container " + containerHeight}>
-                <div className="col-6">
-                    <div>
+            <div className="row " key={"energy container"}>
+                <div className="col-7">
+                    <div className={chartClass}>
                         <Bar
                             data={data}
-                            key={'chart ' + chartHeight}
-                            height={chartHeight}
+                            key={'chart energy'}
                             options={getOptions()}
                         />
                     </div>
                 </div>
-                <div className="col-6">
+                <div className="col-5">
                     {renderUserDataInfoPage()}
                 </div>
             </div>
-            <div style={{height: "64px"}}></div>
         </div>
     )
 

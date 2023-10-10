@@ -10,7 +10,6 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getProteinChartData} from "../../../service/chartdata/ProteinChartDataService";
 
@@ -28,7 +27,6 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
 
     const [portionType, setPortionType] = useState<string>(chartConfig.portionType)
     const [expand100, setExpand100] = useState<boolean>(chartConfig.expand100)
-    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -36,9 +34,8 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
             setPortionType(chartConfig.portionType)
         }
 
-        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [portionType, expand100, chartHeight, props])
+    }, [portionType, expand100, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
@@ -147,22 +144,21 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
     const options = getOptions(applicationStrings.label_charttype_proteins[lang], maxValue);
     const dataExists = data.datasets && data.datasets[0].data && data.datasets[0].data.length > 0
 
-    const containerHeight = calculateChartContainerHeight(windowSize,  props.directCompareUse)
+    const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
 
     return (
         <div className="container-fluid">
-            <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
-                <div className="col-12">
+            <div className="row" key={"base chart container proteins"}>
+                <div className={chartClass}>
                     {dataExists &&
                     <Bar
                         data={data}
-                        key={'chart ' + chartHeight}
-                        height={chartHeight}
+                        key={'chart proteins'}
                         options={options}
                     />
                     }
                     {!dataExists &&
-                    <p className="text-center" style={{height: ChartConfig.default_chart_height}}>
+                    <p className="text-center">
                         {applicationStrings.label_noData[lang]}
                     </p>
                     }

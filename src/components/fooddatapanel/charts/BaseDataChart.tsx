@@ -11,7 +11,6 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BaseDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {ChartDisplayData} from "../../../types/livedata/ChartDisplayData";
 import {getBaseChartLegendData, getNutrientChartData, getTotalChartData} from "../../../service/chartdata/BaseChartDataService";
@@ -37,7 +36,6 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
     const [showDetails, setShowDetails] = useState<boolean>(showDetailsProp)
-    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse, TAB_BASE_DATA))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -46,9 +44,8 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             setShowDetails(showDetailsProp)
         }
 
-        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse, TAB_BASE_DATA))
         updateChartConfig()
-    }, [chartType, showDetails, showLegend, chartHeight, props])
+    }, [chartType, showDetails, showLegend, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
@@ -131,21 +128,21 @@ export default function BaseDataChart(props: BaseDataChartProps) {
             return <div/>
         }
 
+        const chartClass = props.directCompareUse ? "chart-area-dc" : "chart-area"
+
         return (
-            <div>
+            <div className={chartClass}>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie
                     data={chartData}
-                    key={'chart ' + chartHeight}
-                    height={chartHeight}
+                    key={'chart base ' + title}
                     width={ChartConfig.basedata_piechart_width}
                     options={getOptions(title)}/>
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar
                     data={chartData}
-                    key={'chart ' + chartHeight}
-                    height={chartHeight}
+                    key={'chart base ' + title}
                     width={ChartConfig.basedata_barchart_width}
                     options={getOptions(title)}/>
                 }
@@ -159,19 +156,18 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const totalChartDataTitle = applicationStrings.label_chart_totalComposition[lang]
     const nutrientChartDataTitle = applicationStrings.label_chart_nutrientComposition[lang]
 
-    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
     const justifyContent = props.directCompareUse ? "center" : "left"
 
     return (
         <div className="container-fluid">
             <div className="d-flex text-align-center" style={{justifyContent: justifyContent}}>
-                <div className="d-inline-block">
-                    <div className="row" style={{height: containerHeight}}
-                         key={"base chart container " + containerHeight}>
+                <div style={{width: "100%"}}>
+                    <div className="row"
+                         key={"base chart container"}>
                         <div className="col-6">
                             <div>{renderSubChart(totalChartDataTitle, totalChartData)}</div>
                         </div>
-                        <div className="col-6">
+                        <div className="col-6" >
                             <div>{renderSubChart(nutrientChartDataTitle, nutrientChartData)}</div>
                         </div>
                     </div>

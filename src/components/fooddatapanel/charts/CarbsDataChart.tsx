@@ -14,7 +14,6 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {
     getCarbBaseChartData,
@@ -27,7 +26,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
-    const windowSize = useWindowDimension()
 
     let chartConfig = props.directCompareConfig
         ? props.directCompareConfig
@@ -48,7 +46,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const [hideRemainders, setShowHideRemainders] = useState<boolean>(initialHideRemainders ? initialHideRemainders : false)
     const [expand100, setExpand100] = useState<boolean>(initialExpand100 ? initialExpand100 : false)
     const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
-    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -57,9 +54,8 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
             setSubChart(chartConfig.subChart ? chartConfig.subChart : CARBS_DATA_BASE)
         }
 
-        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, hideRemainders, expand100, subChart, chartHeight, props])
+    }, [chartType, showLegend, hideRemainders, expand100, subChart, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
@@ -250,25 +246,25 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const renderChart = (data: any) => {
         if (!data) {
             return (
-                <div style={{height: ChartConfig.default_chart_height}}>
+                <div>
                     {applicationStrings.label_noData[lang]}
                 </div>
             )
         }
 
+        const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
+
         return (
-            <div>
+            <div className={chartClass}>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie data={data}
-                     key={'chart ' + chartHeight}
-                     height={chartHeight}
+                     key={'chart carbs'}
                      options={getOptions()}
                 />
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar data={data}
-                     key={'chart ' + chartHeight}
-                     height={chartHeight}
+                     key={'chart carbs'}
                      options={getOptions()}
                 />
                 }
@@ -281,11 +277,9 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
     const detailChartData = createDetailChartData()
     const basicChartData = createBasicChartData()
 
-    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
-
     return (
         <div className="container-fluid">
-            <div className="row" style={{height: containerHeight}} key={"carbs container " + containerHeight}>
+            <div className="row" key={"carbs container"}>
                 <div className="col-3 text-align-center">
                     {renderChartSelector()}
                 </div>
@@ -297,7 +291,7 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                     renderChart(detailChartData)
                     }
                     {!detailChartData && subChart === Constants.CARBS_DATA_DETAIL &&
-                    <div style={{height: ChartConfig.default_chart_height}}>
+                    <div>
                         {applicationStrings.label_noData[lang]}
                     </div>
                     }

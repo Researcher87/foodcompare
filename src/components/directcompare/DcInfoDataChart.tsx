@@ -15,14 +15,14 @@ export function DcInfoDataChart(props: DirectCompareDataPanelProps) {
     }, [containerHeight])
 
 
-    return <div>
+    return <div className={"direct-compare-panel"}>
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+            <div className={"d-flex"}>
                 <InfoData selectedFoodItem={props.selectedFoodItem1} directCompare={true}/>
             </div>
         </Card>
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+            <div className={"d-flex"}>
                 <InfoData selectedFoodItem={props.selectedFoodItem2} directCompare={true}/>
             </div>
         </Card>

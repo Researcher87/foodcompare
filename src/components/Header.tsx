@@ -130,9 +130,9 @@ export default function Header() {
     const renderLanguageButtons = () => {
         return (
             <div className="header-form" style={{paddingRight: "1vw"}}>
-                <Form.Label className={labelClass}>
+                <span className={labelClass}>
                     {applicationStrings.label_language[language]}:
-                </Form.Label>
+                </span>
                 <Form.Check inline={true}
                             className="form-radiobutton"
                             label={language_en}
@@ -159,9 +159,9 @@ export default function Header() {
 
         return (
             <div className="header-form text-right" style={{paddingRight: "1vw"}}>
-                <Form.Label className="header-form-label">
+                <span className="header-form-label">
                     {applicationStrings.label_preferred_source[language]}:
-                </Form.Label>
+                </span>
                 <Form.Check inline={true}
                             className="form-radiobutton"
                             label={"SR Legacy"}
@@ -182,8 +182,10 @@ export default function Header() {
         )
     }
 
+    const headerClass = isMobileDevice() ? "header-m" : "header"
+
     return (
-        <div className="d-flex flex-row header">
+        <div className={`d-flex flex-row ${headerClass}`}>
             <img src={logo} className="header-logo" alt={"Food Compare Logo"}/>
             <div className={"d-flex flex-column w-100"} style={{paddingTop: "0.8vh", paddingLeft: "0.2vw"}}>
                 <div className="d-flex flex-row align-items-center justify-content-between">

@@ -77,7 +77,7 @@ export function InfoContainer() {
 
         return textElements.map((textParagraph, index) => {
             if (isMobileDevice()) {
-                if (index === 1 || index === 3) {   // Do not show information about features not provided on mobile devices
+                if (index === 1) {   // Do not show information about features not provided on mobile devices
                     return <></>
                 }
 
