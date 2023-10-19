@@ -120,7 +120,7 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
             }
         }
 
-        return getBarChartOptions(title, "%", maxYValue);
+        return getBarChartOptions(title, applicationStrings.label_requirement_chart[lang], maxYValue);
     }
 
     const renderChartConfigurationForm = () => {

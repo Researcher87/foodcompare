@@ -209,7 +209,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             }
         }
 
-        let barChartOptions = getBarChartOptions(title, "%", maxYValue);
+        let barChartOptions = getBarChartOptions(title, applicationStrings.label_requirement_chart[lang], maxYValue);
 
         const handleChartClick = (c, i) => {
             if(i && i[0]) {

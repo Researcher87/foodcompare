@@ -895,6 +895,10 @@ export const applicationStrings = {
         de: 'Tagesbedarf',
         en: 'Daily requirements'
     },
+    label_requirement_chart: {
+        de: '% vom Tagesbedarf',
+        en: '% of daily requirement'
+    },
     label_source: {
         de: 'Datenquelle',
         en: 'Data source'

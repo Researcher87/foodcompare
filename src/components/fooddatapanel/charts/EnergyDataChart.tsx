@@ -119,7 +119,7 @@ export default function EnergyDataChart(props: ChartProps) {
             }
         }
 
-        let options: any = getBarChartOptions(applicationStrings.label_charttype_energy[languageContext.language], "kCal");
+        let options: any = getBarChartOptions(applicationStrings.label_charttype_energy[languageContext.language], "kcal");
         options = {
             ...options, plugins: {
                 ...options.plugins,
