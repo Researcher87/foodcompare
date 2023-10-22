@@ -6,7 +6,6 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeService";
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
-import {calculateChartContainerHeight} from "../../../service/ChartSizeCalculation";
 import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";
@@ -28,11 +27,6 @@ export function InfoData(props: InfoDataProps) {
     const lang = languageContext.language
 
     const windowSize = useWindowDimension()
-    const [containerHeight, setContainerHeight] = useState<number>(calculateChartContainerHeight(windowSize, props.directCompare))
-
-    useEffect(() => {
-        setContainerHeight(calculateChartContainerHeight(windowSize, props.directCompare))
-    }, [containerHeight])
 
     const createRow = (key: string, value: any): RowElement => {
         return {
@@ -153,7 +147,7 @@ export function InfoData(props: InfoDataProps) {
         return (
             <div>
                 <BootstrapTable trClassName={tableClass} bordered={false} data={data}>
-                    <TableHeaderColumn className="table-header-no-top-border" dataField='key' isKey width="200px"/>
+                    <TableHeaderColumn className="table-header-no-top-border" dataField='key' isKey width="20vw"/>
                     <TableHeaderColumn className="table-header-no-top-border" dataField='value'/>
                 </BootstrapTable>
             </div>
@@ -171,29 +165,24 @@ export function InfoData(props: InfoDataProps) {
         }
     }
 
-
-    let height = containerHeight
-    if (!props.directCompare) {
-        height += 86
-    }
-
     const isCompositeFoodElement = props.selectedFoodItem.aggregated === true
+    const containerClass = props.directCompare ? "tab-info-directcompare" : "tab-info"
 
     return (
-        <div>
-            <div style={{height: height, maxHeight: height, overflowY: "auto", padding: "15px"}}>
+        <div className={containerClass}>
+            <div>
                 {!isCompositeFoodElement &&
                 <div>
                     <div>
                         <div>
                             {renderSubTable(getGeneralTableData())}
                         </div>
-                        <div style={{paddingTop: "30px"}}>
+                        <div style={{paddingTop: "3vh"}}>
                             <h5>{applicationStrings.label_info_portion[lang]}</h5>
                             {renderSubTable(getTableDataPortion())}
                         </div>
                     </div>
-                    <div style={{paddingTop: "20px", paddingBottom: "12px"}}>
+                    <div style={{paddingTop: "2vh", paddingBottom: "1.2vh"}}>
                         <Button variant={'link'} active={true} onClick={onLinkClick}>
                             {applicationStrings.label_usda_reference[lang]}
                         </Button>

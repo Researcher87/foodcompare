@@ -1,7 +1,5 @@
-[
-  {
-    "type": "paragraph",
-    "de": "Food Compare ist ein Webprojekt zur grafischen Darstellung der Inhaltsstoffe und Zusammensetzung von Lebensmitteln. Während Lebensmittelinformationen meist nur in tabellarischer Form angeben werden, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) verständlicher und übersichtlich darzustellen. Nutzer der Website sollen damit möglichst einfach und schnell Informationen zu alltäglichen Lebensmitteln erhalten und diese auf unkomplizierte Weise miteinander vergleichen können.",
-    "en": "Food Compare is a web project to visually display nutrient data and food composition. While conventional websites commonly present nutrient data in tables, Food Compare provides charts and graphs allowing a better understanding of the containing nutrients (carbohydrates, lipids, proteins) as well as vitamins and minerals. Thus, Food Compare enables users to quickly obtain comprehensible information about everyday food and to easily compare different foods with each other."
-  }
-]
+{
+  "type": "paragraph",
+  "de": "Food Compare stellt Nährstoffdaten zu alltäglichen Lebensmitteln in grafischer Form dar. Anstelle von klassischen Nährstofftabellen werden Lebensmitteldaten in unserer Anwendung durch Grafiken und Diagramme veranschaulicht, z.B. in Ansichten zu Kohlenhydraten, Fettsäuren, Proteinen, Vitaminen und Mineralstoffen. Darüber hinaus stellt Food Compare eine Reihe von Möglichkeiten zum Vergleichen verschiedener Lebensmittel zur Verfügung.",
+  "en": "Food Compare visually displays nutrient data of common foods and dishes by means of graphs and charts.  While conventional sources commonly present food data in tables, our application provides food charts for common nutrients in groceries and beverages, such as carbohydrates, fatty acids, proteins, vitamins and minerals. Additionally, Food Compare provides different ways to compare food elements with each other."
+}

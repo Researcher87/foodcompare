@@ -91,19 +91,19 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
     let height
     switch (chartHeightCategory) {
         case CHART_SIZE_SMALL:
-            height = 125
+            height = 11
             break
         default:
         case CHART_SIZE_MEDIUM:
-            height = 200
+            height = 19
             break
         case CHART_SIZE_LARGE:
-            height = 300
+            height = 27
             break
     }
 
     if(showLabels) {
-        height += 115
+        height += 11
     }
 
     const renderChartsOfGroup = () => {
@@ -136,7 +136,7 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
                 <div key={`juxchartdiv-${chartData.nutrientName}`}>
                     <div className="smooth-scroll">
                         <div>
-                            <div style={{height: `${height}px`}}>
+                            <div style={{height: `${height}vh`}}>
                                 <Bar key={`juxchart-${chartData.nutrientName}`}
                                      data={chartDataObj}
                                      options={options}

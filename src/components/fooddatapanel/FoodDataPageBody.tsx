@@ -1,12 +1,11 @@
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
-import {DISPLAYMODE_CHART, DISPLAYMODE_TABLE, TAB_INFO, TAB_JUXTAPOSITION} from "../../config/Constants";
+import {DISPLAYMODE_TABLE, TAB_INFO, TAB_JUXTAPOSITION} from "../../config/Constants";
 import {ChartPanel} from "./ChartPanel";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {FoodDataTable} from "./FoodDataTable";
 import {InfoData} from "./charts/InfoData";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {calculateMinimalDataPanelWidth} from "../../service/ChartSizeCalculation";
 
 interface FoodDataPageBodyProps {
     tableData: Array<FoodTableDataObject>
@@ -25,16 +24,16 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
 
     const renderDataPage = () => {
         return (
-            <div>
+            <div className="d-flex flex-column">
                 {(displayMode === DISPLAYMODE_TABLE && selectedDataPage !== TAB_JUXTAPOSITION) ?
-                <div className="col">
+                <div >
                     <FoodDataTable tableData={props.tableData}
                                    portionSize={props.selectedFoodItem.portion.amount}
                                    dataPage={props.dataPage}
                     />
                 </div>
                 :
-                <div className="col">
+                <div>
                     <ChartPanel selectedFoodItem={props.selectedFoodItem} displayMode={displayMode} />
                 </div>
                 }
@@ -43,7 +42,7 @@ export default function FoodDataPageBody(props: FoodDataPageBodyProps) {
     }
 
     return (
-        <div style={{maxWidth: "1200px", minWidth: calculateMinimalDataPanelWidth()}}>
+        <div className={"food-analyzer-chartpanel"}>
             {selectedDataPage === TAB_INFO &&
                  <InfoData selectedFoodItem={props.selectedFoodItem}/>
             }

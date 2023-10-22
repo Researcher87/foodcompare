@@ -4,57 +4,94 @@ import {Carousel} from 'react-responsive-carousel';
 import {applicationStrings} from "../static/labels";
 
 import homeText1 from "../static/hometext1.json";
-import homeText2 from "../static/hometext2.json";
-import homeText3 from "../static/hometext3.json";
+import {FaExternalLinkAlt} from "react-icons/fa";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Link} from 'react-router-dom';
-import {LANGUAGE_DE, PATH_DIRECT_COMPARE, PATH_FOODDATA_PANEL, PATH_RANKING} from "../config/Constants";
-import {FaAngleDoubleRight} from "react-icons/fa";
+import {Link, useHistory} from 'react-router-dom';
+import {
+    PATH_DIRECT_COMPARE,
+    PATH_FOODDATA_PANEL, PATH_INFO,
+    PATH_RANKING
+} from "../config/Constants";
 import {isMobileDevice} from "../service/WindowDimension";
 
-const carouselImages = require.context('../static/image/carousel', true);
-const startImages = require.context('../static/image/startImages', true);
+const carouselImages = require.context('../static/image/carousel-samples', true);
+const startButtonImages = require.context('../static/image/start-buttons', true);
 
-interface HomeTextElement {
-    type: string
-    de: string
-    en: string
-}
+const startImg1 = startButtonImages(`./StartImg1.jpg`).default
+const startImg2 = startButtonImages(`./StartImg2.jpg`).default
+const startImg3 = startButtonImages(`./StartImg3.jpg`).default
+const startImg4 = startButtonImages(`./StartImg4.jpg`).default
 
+
+/**
+ * Home component (not including Header or Info page).
+ * @constructor
+ */
 export function Home() {
     const {language} = useContext(LanguageContext)
     const [displayedImage, setDisplayedImage] = useState<number>(0)
+    const history = useHistory()
 
     const imageChanged = (image) => {
         setDisplayedImage(image)
     }
 
+    const onClickCarouselImage = (index: number) => {
+        let route: string | null = null;
+
+        switch (index) {
+            case 0:
+                route = "datapanel?item=1;0;102_169;10;vitamindata;dct;075035175031000;01000000";
+                break;
+            case 1:
+                route = "directcompare?item=124;0;200_136;10;123;0;202_167;10;vitamindata;075035175031000;02000001"
+                break;
+            case 2:
+                route = "ranking?ranking=0;2;d_magnesium;11"
+                break;
+            case 3:
+                route = "datapanel?item=63;0;300_180;10;juxtaposition;dct;075035175031000;00000000&group=2"
+                break;
+            case 4:
+                route = `${PATH_FOODDATA_PANEL}?composite=1`
+                break;
+            case 5:
+                route = "directcompare?item=159;0;999_100;10;194;0;999_150;10;lipidsdata;075035175031000;10000030"
+                break;
+        }
+
+        if (route) {
+            history.push(route);
+        }
+    }
+
     const renderCarousel = () => {
-        const pic1 = carouselImages(`./Img-${language}-1.png`).default;
-        const pic2 = carouselImages(`./Img-${language}-2.png`).default;
-        const pic3 = carouselImages(`./Img-${language}-3.png`).default;
-        const pic4 = carouselImages(`./Img-${language}-4.png`).default;
-        const pic5 = carouselImages(`./Img-${language}-5.png`).default;
-        const pic6 = carouselImages(`./Img-${language}-6.png`).default;
-        const pic7 = carouselImages(`./Img-${language}-7.png`).default;
+        const pic1 = carouselImages(`./img-1-${language}.png`).default;
+        const pic2 = carouselImages(`./img-2-${language}.png`).default;
+        const pic3 = carouselImages(`./img-3-${language}.png`).default;
+        const pic4 = carouselImages(`./img-4-${language}.png`).default;
+        const pic5 = carouselImages(`./img-5-${language}.png`).default;
+        const pic6 = carouselImages(`./img-6-${language}.png`).default;
 
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][language];
 
         return (
-            <div style={{paddingBottom: "40px"}}>
-                <Carousel showArrows={true}
-                          infiniteLoop={true} autoPlay={true}
-                          interval={6000}
-                          transitionTime={800}
+            <div style={{height: "60%"}}>
+                <Carousel className={"home-header-carousel"}
+                          showArrows={false}
+                          infiniteLoop={true}
+                          autoPlay={true}
+                          interval={8000}
+                          transitionTime={1000}
                           selectedItem={displayedImage}
                           showThumbs={false}
                           showStatus={false}
+                          showIndicators={false}
+                          onClickItem={onClickCarouselImage}
                           onChange={imageChanged}>
-                    <div>
-                        <img src={pic1} alt={"Carousel 1"}/>
-                    </div>
+                    <img src={pic1} alt={"Carousel 1"}/>
                     <div>
                         <img src={pic2} alt={"Carousel 2"}/>
                     </div>
@@ -70,50 +107,66 @@ export function Home() {
                     <div>
                         <img src={pic6} alt={"Carousel 6"}/>
                     </div>
-                    <div>
-                        <img src={pic7} alt={"Carousel 7"}/>
-                    </div>
                 </Carousel>
-                <div style={{textAlign: "center", fontStyle: "oblique"}}>
-                    {imageCaption}
+                <div style={{textAlign: "center", fontStyle: "oblique"}}
+                     onClick={() => onClickCarouselImage(displayedImage)}>
+                    <span style={{paddingRight: "1ch"}}>{imageCaption}</span>
+                    <span>
+                        <FaExternalLinkAlt/>
+                    </span>
                 </div>
             </div>
         );
     }
 
 
-    const renderStartButtons = () => {
-        const startImg1 = startImages(`./StartImg1.jpg`).default
-        const startImg2 = startImages(`./StartImg2.jpg`).default
-        const startImg3 = startImages(`./StartImg3.jpg`).default
-        const startImg4 = startImages(`./StartImg4.jpg`).default
+    const renderHomeHeaderDesktop = () => {
+        return <div className={"d-flex flex-row home-header align-items-center"}>
+            <div className={"d-flex flex-column w-50"}>
+                <div style={{paddingLeft: "1vw"}}>
+                    <div className={"home-header-slogan mb-2"}>{applicationStrings.label_home_slogan[language]}</div>
+                    <div>{homeText1[language]}</div>
+                </div>
+            </div>
+            <div className={"d-flex flex-column w-50"}>
+                {renderCarousel()}
+            </div>
+        </div>
+    }
 
-        const paddingTop = isMobileDevice() ? "4px" : "16px";
+    const renderHomeHeaderMobile = () => {
+        return <div className={" home-header-mobile align-items-center"}>
+            <div className={""}>
+                <div className={"home-header-slogan mb-2"}>{applicationStrings.label_home_slogan[language]}</div>
+                <div>{homeText1[language]}</div>
+            </div>
+        </div>
+    }
 
+    const renderStartButtonsDesktop = () => {
         return (
-            <div style={{paddingTop: paddingTop}}>
-                <b>{applicationStrings.label_getStarted[language]}</b>
-                <div className={"text-center"}>
-                    <div style={{paddingTop: "20px"}}>
+            <div>
+                <div className={"d-flex flex-row justify-content-center"}>
+                    <div className={"mr-5"}>
                         <Link to={PATH_FOODDATA_PANEL + "?add=1"}>
                             {renderStartButton(applicationStrings.button_getstarted_1[language], startImg1)}
                         </Link>
                     </div>
                     {!isMobileDevice() &&
                     <div>
-                        <div style={{paddingTop: "20px"}}>
-                            <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
-                                {renderStartButton(applicationStrings.button_getstarted_2[language], startImg2)}
-                            </Link>
-                        </div>
-                        <div style={{paddingTop: "20px"}}>
-                            <Link to={PATH_DIRECT_COMPARE}>
-                                {renderStartButton(applicationStrings.button_getstarted_3[language], startImg3)}
-                            </Link>
-                        </div>
+                        <Link to={PATH_FOODDATA_PANEL + "?composite=1"}>
+                            {renderStartButton(applicationStrings.button_getstarted_2[language], startImg2)}
+                        </Link>
                     </div>
                     }
-                    <div style={{paddingTop: "20px"}}>
+                    {!isMobileDevice() &&
+                    <div>
+                        <Link to={PATH_DIRECT_COMPARE}>
+                            {renderStartButton(applicationStrings.button_getstarted_3[language], startImg3)}
+                        </Link>
+                    </div>
+                    }
+                    <div>
                         <Link to={PATH_RANKING}>
                             {renderStartButton(applicationStrings.button_getstarted_4[language], startImg4)}
                         </Link>
@@ -124,124 +177,42 @@ export function Home() {
     }
 
     const renderStartButton = (label: string, srcImage: string): any => {
-        return <button type="button"
-                       className="btn btn-small btn-outline-dark"
-                       style={{width: "90%"}}>
-            <div className={"d-flex flex-row"} style={{maxHeight: "100px"}}>
-                <div className={"d-flex flex-column"} style={{width: "40%", maxHeight: "96px", marginRight: "12px"}}>
-                    <img src={srcImage} style={{maxHeight: "90px", maxWidth: "169px"}} alt={"Start btn img"}/>
+        const buttonClass = !isMobileDevice() ? "home-startbutton" : "home-startbutton-mobile"
+        return <button type="button" className={`btn btn-small btn-outline-dark ${buttonClass}`}>
+            <div className={"d-flex flex-column h-100"}>
+                <div className={"flex-row"}>
+                    <img src={srcImage} style={{maxWidth: "95%"}} alt={"Start btn img"}/>
                 </div>
-                <div className={"d-flex flex-column justify-content-center"}  style={{width: "60%"}}>
-                    <div className={"align-items-center"}>{label}</div>
+                <div className="container d-flex flex-row align-items-center home-startbutton-label">
+                    {label}
                 </div>
             </div>
         </button>
     }
 
-
-    const renderHomeText = (textElements: HomeTextElement[]): any => {
-        return textElements.map((textElement, index) => renderTextElement(textElement, index))
+    const gotoInfoPage = () => {
+        history.push(PATH_INFO);
     }
 
-    const renderTextElement = (textElement: HomeTextElement, index: number): JSX.Element => {
-        const text = language === LANGUAGE_DE ? textElement.de : textElement.en
-
-        switch (textElement.type) {
-            case "paragraph":
-                return <p key={`homeitem ${index}`}>{text}</p>
-            case "subheading":
-                return (
-                    <div key={`homeitem ${index}`}>
-                        <br/>
-                        <h4>
-                            {text}
-                        </h4>
-                        <hr/>
-                    </div>
-                )
-            case "paragraph-before-itemization":
-                return <p key={`homeitem ${index}`}><b>{text}</b></p>
-            case "fancy-item":
-                return (
-                    <div key={`homeitem ${index}`}>
-                        {!isMobileDevice()
-                            ? <span style={{paddingLeft: "10px", paddingRight: "10px"}}>
-                                    <FaAngleDoubleRight/>
-                                </span>
-                            : <span>
-                                    <FaAngleDoubleRight/>
-                            </span>
+    return (
+        <div>
+            <div className="media">
+                <div className={"container-fluid"}>
+                    <div className="row">
+                        {!isMobileDevice() ?
+                            renderHomeHeaderDesktop()
+                            :
+                            renderHomeHeaderMobile()
                         }
-                        {text}
                     </div>
-                )
-            default:
-                return <p>{text}</p>
-        }
-    }
-
-
-    const renderMobile = () => {
-        return (
-            <div className="media home app" style={{margin: "12px"}}>
-                <div>
-                    <div>
-                        {renderHomeText(homeText1)}
-                        <div style={{paddingTop: "10px", paddingBottom: "40px"}}>
-                            {renderStartButtons()}
-                        </div>
-                        {renderHomeText(homeText2)}
-                    </div>
+                    {renderStartButtonsDesktop()}
                     <hr/>
-                    <div style={{paddingTop: "20px"}}>
-                        <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
-                        <div className="card-header"
-                             style={{paddingBottom: "20px", marginBottom: "30px"}}>
-                            {renderHomeText(homeText3)}
-                        </div>
+                    <div className={"d-flex justify-content-center"}>
+                        <button className={"btn btn-link"} onClick={() => {gotoInfoPage()}}>{applicationStrings.home_button_info[language]}</button>
                     </div>
                 </div>
             </div>
-        )
-    }
-
-    const renderDesktop = () => {
-        return (
-            <div>
-                <div className="media home app" style={{margin: "0 auto"}}>
-                    <div className={"container-fluid"}>
-                        <div className="row">
-                            <div className={"col-5"}>
-                                {renderHomeText(homeText1)}
-                                <div style={{paddingTop: "20px", paddingBottom: "60px"}}>
-                                    {renderStartButtons()}
-                                </div>
-                                {renderHomeText(homeText2)}
-                            </div>
-                            <div className={"col-7"} style={{paddingLeft: "45px"}}>
-                                {renderCarousel()}
-                            </div>
-                        </div>
-                        <hr/>
-                        <div style={{paddingTop: "30px"}}>
-                            <h3>{applicationStrings.home_foodcompare_overview[language]}</h3>
-                            <div className="card-header"
-                                 style={{maxWidth: "1000px", paddingBottom: "20px", marginBottom: "50px"}}>
-                                {renderHomeText(homeText3)}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-
-    return <div>
-        {isMobileDevice()
-            ? <div>{renderMobile()}</div>
-            : <div>{renderDesktop()}</div>
-        }
-    </div>
+        </div>
+    );
 
 }

@@ -1,11 +1,43 @@
 /*** 1. Variables ***/
 
-$fontsize-text: calc(0.8rem + 0.3vw);   // Font size for texts, such as on the home screen
-$fontsize-forms: calc(0.6rem + 0.3vw);                // Default font unsed in forms
-$fontsize-label: calc(0.6rem + 0.3vw);                // Font size of form labels
-$fontsize-small: calc(0.5rem + 0.3vw);                 // Font size for small components
+// 1.1 Font sizes:
 
-$usersettings-palwidth: 60ch;
+$fontsize-text: calc(0.8rem + min(0.6vh, 0.3vw));       // General font size for texts, such as on the home screen
+$fontsize-forms: calc(0.6rem + min(0.55vh, 0.3vw));      // Default font unsed in forms
+$fontsize-label: calc(0.6rem + min(0.4vh, 0.25vw));      // Font size of form labels
+$fontsize-small: calc(0.5rem + min(0.5vh, 0.3vw));      // Font size for small components
+
+$fontsize-header-links: min(1.6vh, 1.2vw);
+
+
+// 1.2 Colors:
+
+$header-link-color: #333;
+$header-link-color-selected: white;
+
+$home-header-color: #8db8e3;
+$home-header-color-start: #051d33;
+$home-header-color-end: #4fb9c9;
+$home-header-font-color: white;
+
+$food-analyzer-panel-header: #b6c9f1;   // Background color of the tab bar of the food analyzer data panel
+$food-analyzer-panel-area: #f2f5fd;     // Background color of the food analyzer data panel
+$food-analyzer-panel-border: $food-analyzer-panel-area;   // Border color if at least one tab is open
+$food-analyzer-panel-empty: $food-analyzer-panel-area;    // Background color of the data panel surrounding if no tab is open
+
+
+// 1.3 Food Panel sizes:
+
+// width of the whole panel area (basis for further calculations)
+$food-analyzer-panel-width: calc(300px + 40vw);
+
+$food-analyzer-panel-height: calc(#{$food-analyzer-panel-width} * 0.48);     // height of the whole panel area
+$food-analyzer-chart-height: calc(#{$food-analyzer-panel-width} * 0.38);    // height of the chart area within a tab (including a config line)
+
+// height of the chart/table area without a config line
+$food-analyzer-chart-height-without-configline: calc(#{$food-analyzer-panel-width} * 0.45);
+
+$food-analyzer-chart-height-dc: calc(35vh);                 // height of the chart area in the direct compare view
 
 
 /*** 2. Mobile Device Main Settings ***/
@@ -51,9 +83,16 @@ $usersettings-palwidth: 60ch;
     font-size: $fontsize-label !important;
 }
 
+.form-label-dc-selector {
+    color: #666666;
+    font-weight: bold;
+    font-size: $fontsize-label !important;
+    text-align: center;
+}
+
 .form-radiobutton {
     font-size: $fontsize-forms !important;
-    margin-right: 25px;
+    margin-right: 1.2vw;
 }
 
 
@@ -68,7 +107,7 @@ $usersettings-palwidth: 60ch;
 }
 
 .form-section-small {
-    padding-bottom: 0.5vh;
+    padding-bottom: 0.2vh !important;
 }
 
 .form-button {
@@ -77,11 +116,11 @@ $usersettings-palwidth: 60ch;
 }
 
 .form-elements {
-    margin-right: 20px;
+    margin-right: 0.75vw;
 }
 
 .form-elements-m {
-    margin-right: 12px;
+    margin-right: 0.5vw;
 }
 
 .form-elements-largespace {
@@ -90,10 +129,6 @@ $usersettings-palwidth: 60ch;
 
 .form-input {
     margin-right: 5px;
-}
-
-.form-small {
-    font-size: $fontsize-small;
 }
 
 .form-row {
@@ -105,13 +140,13 @@ $usersettings-palwidth: 60ch;
 }
 
 .form-row-indent {
-    margin-left: 24px;
-    padding-bottom: 10px;
+    margin-left: 1.3vw;
+    padding-bottom: 1vh;
 }
 
 .form-row-indent-m {
-    margin-left: 16px;
-    padding-bottom: 6px;
+    margin-left: 0.8vw;
+    padding-bottom: 0.6vh;
 }
 
 .button-apply {
@@ -138,13 +173,10 @@ $usersettings-palwidth: 60ch;
 }
 
 .container-scroll {
+    width: 100%;
     overflow-x: auto;
-}
-
-@media (min-width: 1220px) {
-    .container-scroll {
-        overflow-x: hidden;
-    }
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .chart-control-button-bar {
@@ -168,49 +200,78 @@ $usersettings-palwidth: 60ch;
 /*** 6. Header ***/
 
 .header {
-    background: #d5ce9c;
+    background: $home-header-color;
+    height: 9.5vh;
+}
+
+.header-m {
+    background: $home-header-color;
+    height: max(9.5vh, 9.5vw);
+}
+
+.header-form {
+    font-size: $fontsize-small;
+}
+
+.header-form-label {
+    margin-right: 0.8vw;
+    color: black;
+    font-weight: bold;
+}
+
+.header-form-label-m {
+    margin-right: 1.5vw;
+    color: black;
 }
 
 .header-label {
-    font-size: max(1.0vw, 1.8vh);
-    borderBottom: "1px solid #BBBBBB";
-    paddingLeft: "12px";
-    paddingRight: "12px"
-}
-
-.header-label-m {
-    font-size: max(1.2vw, 1.2vh);
-    borderBottom: "1px solid #BBBBBB";
-    paddingLeft: "6px";
-    paddingRight: "6px"
+    font-size: min(1.2vw, 2.0vh);
+    borderBottom: 1px solid #BBBBBB;
+    paddingLeft: 0.4vw;
+    paddingRight: 0.4vw;
 }
 
 .header-link {
-    margin-top: 0.3vh;
     padding-right: 1.2vw !important;
-    font-size: $fontsize-forms;
-    color: #969696 !important;
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+    font-size: $fontsize-header-links !important;
+    color: $header-link-color !important;
 }
 
 .header-link-mobile {
     font-size: $fontsize-forms;
     padding-right: 0.5vw !important;
-    color: #969696 !important;
+    color:$header-link-color !important;
 }
 
 // Remove the annoying border/shadow when the header link has the focus:
 .header-link.focus, .header-link:focus, .header-link.active, .header-link:active, .header-link:active:focus, .header-link.active:focus, .header-link.active.focus {
     outline: none !important;
     box-shadow: none !important;
-    color: #0064ff !important;
+    color: $header-link-color-selected !important;
     text-decoration: underline;
 }
 
 .header-link-mobile .focus, .header-link-mobile:focus, .header-link-mobile.active, .header-link-mobile:active, .header-link-mobile:active:focus, .header-link-mobile.active:focus, .header-link-mobile.active.focus {
     outline: none !important;
     box-shadow: none !important;
-    color: #0064ff !important;
+    color: $header-link-color-selected !important;
     text-decoration: underline;
+}
+
+.header-logo {
+    object-fit: contain;
+    height: 100%;
+}
+
+.header-logo-m {
+    height: 8vh;
+    width: 8vh;
+}
+
+.header-logo-text {
+    height: 4vh;
 }
 
 
@@ -223,9 +284,73 @@ $usersettings-palwidth: 60ch;
     font-size: $fontsize-text;
 }
 
+.home-header {
+    background: linear-gradient(to right, $home-header-color-start, $home-header-color-end);
+    height: max(32vh, 13vw);
+    font-size: min( calc(0.4rem + 1.2vh), calc(0.4rem + 0.6vw));
+    color: $home-header-font-color;
+}
+
+.home-header-mobile {
+    background: linear-gradient(to right, $home-header-color-start, $home-header-color-end);
+    height: max(28vh, 18vw);
+    font-size: min( calc(0.6rem + 1.2vh), calc(0.6rem + 0.8vw));
+    color: $home-header-font-color;
+}
+
+.home-header-slogan {
+    font-size: min( calc(0.7rem + 1.2vh), calc(0.7rem + 0.8vw));
+    font-style: italic;
+    color: #ffca2c;
+}
+
+.home-header-carousel .slide img {
+    height: max(26vh, 11.5vw) !important;
+    object-fit: contain;
+}
+
+.home-startbutton {
+    height: min(30vh, 18vw);
+    width: min(30vh, 18vw);
+    margin: 3vw;
+}
+
+.home-startbutton-mobile {
+    height: min(35vh, 30vw);
+    width: min(35vh, 30vw);
+    margin: 3vw;
+}
+
+.home-startbutton-label {
+    height: 50%;
+    padding: 0.5vw;
+    font-size: min( calc(0.4rem + 1.2vh), calc(0.4rem + 0.8vw));
+}
+
+.mobile-device-message {
+    position: absolute;
+    padding: 20px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 100;
+}
 
 
 /*** 8. Food Analyzer / Direct Compare Menu ***/
+
+.chart-area {
+    height: $food-analyzer-chart-height;
+}
+
+.chart-area-without-configline {
+    height: $food-analyzer-chart-height-without-configline;
+}
+
+.chart-area-dc {
+    height: $food-analyzer-chart-height-dc;
+}
 
 .foodanalyzer-button {
     width: 7vmin;
@@ -233,9 +358,42 @@ $usersettings-palwidth: 60ch;
 }
 
 .foodanalyzer-buttonbar {
-    padding-top: 1.6vw;
     padding-left: 0.8vw;
     padding-right: 5vw;
+}
+
+@mixin foodanalyzer-basepanel {
+    padding: min(3vh, 6vw);
+    border-radius: min(0.75vh, 1.5vw);
+}
+
+.foodanalyzer-basepanel {
+    @include foodanalyzer-basepanel;
+    background:  #fcfefe;
+    border-width: min(0.2vw, 0.1vh);
+    border-color: #aaa;
+    border-style: solid;
+}
+
+.foodanalyzer-basepanel-empty {
+    @include foodanalyzer-basepanel;
+    background: $food-analyzer-panel-empty;
+}
+
+// MAIN CSS CLASS TO DEFINE THE WIDTH OF THE FOOD ANALYZER CONTAINER
+.foodanalyzer-inner-container {
+    max-width: $food-analyzer-panel-width;
+    min-width: $food-analyzer-panel-width;
+    margin-top: -1vh;
+}
+
+.food-analyzer-sourcebox {
+    font-size: $fontsize-label;
+}
+
+.food-analyzer-chartpanel {
+    max-height: $food-analyzer-panel-height;
+    min-height: $food-analyzer-panel-height;
 }
 
 .sidebar-link {
@@ -254,20 +412,26 @@ $usersettings-palwidth: 60ch;
     text-decoration: underline;
 }
 
-.legendItem {
-    width: 1vw;
-    height: 1vw;
-    min-width: 1vw;
-    margin-top: 0.1vw;
-    margin-right: 5px;
+.legend-container {
+    min-width: 18ch;
+    margin-left: 1ch;
+}
+
+.legend-item {
+    min-width: min(1.0vw, 1.5vh);
+    max-width: min(1.0vw, 1.5vh);
+    min-height: min(1.0vw, 1.5vh);
+    max-height: min(1.0vw, 1.5vh);
+    margin-top: 1.2vh;
+    margin-right: 1ch;
     border: 1px solid black;
 }
 
-.legendItemLabel {
-    font-size:0.8vw;
+.legend-item-label {
+    font-size: $fontsize-label;
 }
 
-.legendItemLabel-mobile {
+.legend-item-label-mobile {
     font-size: max(1.2vw, 1.2vh);
 }
 
@@ -276,11 +440,25 @@ $usersettings-palwidth: 60ch;
 }
 
 .table-style {
-    font-size: 16px;
+    font-size: $fontsize-label;
 }
 
 .table-style-m {
-    font-size: 12px;
+    font-size: $fontsize-label;
+}
+
+.table-data {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height-without-configline;
+    overflow-y: auto;
+    margin: 2vh;
+}
+
+.juxtaposition-data {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height;
+    overflow-y: auto;
+    margin: 2vh;
 }
 
 .vertical-label {
@@ -306,7 +484,7 @@ $usersettings-palwidth: 60ch;
 }
 
 .mainPanel {
-    background: #f2f5fd;
+    background: $food-analyzer-panel-area;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     padding-top: 4px;
@@ -314,20 +492,16 @@ $usersettings-palwidth: 60ch;
 
 .tab-panel {
     padding: 5px 24px !important;
-    background: #b6c9f1 !important;
+    background: $food-analyzer-panel-header !important;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     border-bottom: 1px solid black !important;
 }
 
-.tab-sidebar {
-    background: rgba(182, 201, 241, 0.68) !important;
-}
-
 .tab-panel button.tab {
     border: 1px solid black !important;
     font-weight: normal;
-    background: #d5e0f7 !important;
+    background: #333 !important;
 }
 
 .tab-panel button.tab.active {
@@ -344,35 +518,40 @@ $usersettings-palwidth: 60ch;
     display: none !important;
 }
 
-
-/*** 9. App Menu ***/
-
-.mobile-app-img {
-    max-height: 75vh;
-    max-width: 50vw;
+.tab-info {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height-without-configline;
+    overflow-y: auto;
+    padding: 1vh;
 }
 
-.mobile-device-message {
-    position: absolute;
-    padding: 20px;
-    margin: 0px;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    z-index: 100;
+.tab-info-directcompare {
+    font-size: $fontsize-label;
+    height: $food-analyzer-chart-height-dc;
+    overflow-y: auto;
+    padding: 3vh;
 }
 
 
 
-/*** 10. User Settings ***/
+/*** 9. User Settings ***/
+
+.usersettings-form {
+    max-width: 80ch;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3vh;
+}
 
 .usersettings-pal {
-    width: $usersettings-palwidth;
+    width: 100%;
     padding-top: 3vh;
 }
 
 .usersettings-pal-text {
-    width: $usersettings-palwidth;
+    width: 100%;
     font-size: $fontsize-label;
     padding-top: 0.75vh;
     color: grey;

@@ -9,14 +9,6 @@ import {isMobileDevice} from "../../service/WindowDimension";
 export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)
 
-    const legendLabel = isMobileDevice()
-        ? applicationStrings.checkbox_chartoption_showLegend_m[languageContext.language]
-        : applicationStrings.checkbox_chartoption_showLegend[languageContext.language]
-
-    const detailsLabel = isMobileDevice()
-        ? applicationStrings.checkbox_chartoption_showDetails_m[languageContext.language]
-        : applicationStrings.checkbox_chartoption_showDetails[languageContext.language]
-
     return (
         <div className="container">
             <div className="row">
@@ -42,7 +34,7 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
                     </Form.Check>
                     <Form.Check inline={true}
                                 className="form-radiobutton"
-                                label={legendLabel}
+                                label={applicationStrings.checkbox_chartoption_showLegend[languageContext.language]}
                                 defaultChecked={props.showLegend}
                                 disabled={props.chartType === CHART_TYPE_BAR}
                                 onClick={props.handleLegendCheckboxClick}>
@@ -50,7 +42,7 @@ export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
                     {props.detailsCheckboxAvailable &&
                     <Form.Check inline={true}
                                 className="form-radiobutton"
-                                label={detailsLabel}
+                                label={applicationStrings.checkbox_chartoption_showDetails[languageContext.language]}
                                 defaultChecked={props.showDetails}
                                 onClick={props.handleDetailsCheckboxClick}>
                     </Form.Check>

@@ -154,7 +154,6 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     const sourceString = getSourceName(props.selectedFoodItem.selectedSource)
     const selectedDataPage = applicationContext.applicationData.foodDataPanel.selectedDataPage
     const sourceToolTip = `${applicationStrings.tooltip_source[languageContext.language]} ${sourceString}`
-    const headerLabel = isMobileDevice() ? "header-label-m" : "header-label";
 
     let bookToolTip = null
     let bookData: BookDataEntry[] = []
@@ -187,11 +186,11 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             <div className={"d-flex flex-nowrap"}>
                 <div className="col-2">
                     <div className={"card"}>
-                        <div className="card-body" style={{paddingRight: "16px"}}>
+                        <div className="card-body" style={{paddingLeft: "0.65vw"}}>
                             <ChartMenuPanel verticalArrangement={true} setDataPage={props.setDataPage}
                                             dataPage={selectedDataPage}/>
-                            <div className={"d-flex card"} style={{marginTop: "24px", backgroundColor: "#eeeeee"}}>
-                                <div className={"text-center"} style={{fontSize: "0.8em"}} data-tip={sourceToolTip}>
+                            <div className={"d-flex card"} style={{marginTop: "2vh", backgroundColor: "#eeeeee"}}>
+                                <div className={"text-center food-analyzer-sourcebox"} data-tip={sourceToolTip}>
                                     {sourceString}
                                     <ReactTooltip/>
                                 </div>
@@ -200,9 +199,9 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                     </div>
                 </div>
                 <div className={"col-10"}>
-                    <div className="d-flex flex-row justify-content-between" style={{marginTop: "10px"}}>
-                        <div style={{paddingTop: "6px", paddingLeft: "32px"}}>
-                            <div className={headerLabel}>
+                    <div className="d-flex flex-row justify-content-between" style={{marginTop: "1vh"}}>
+                        <div style={{paddingTop: "0.75vh", paddingLeft: "1.5vw"}}>
+                            <div className={"header-label"}>
                                 <b>{fullName}</b>
                             </div>
                         </div>

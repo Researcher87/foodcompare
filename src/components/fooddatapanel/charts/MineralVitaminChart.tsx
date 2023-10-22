@@ -15,7 +15,6 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../../charthelper/BarChartConfigurationForm";
 import {MineralVitaminChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getMineralsChartData, getVitaminChartData} from "../../../service/chartdata/VitaminsMineralsDataService";
 
@@ -45,7 +44,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const [expand100_vitamins, setExpand100_vitamins] = useState<boolean>(chartConfigVitamins.expand100)
     const [portionType_minerals, setPortionType_minerals] = useState<string>(chartConfigMinerals.portionType)
     const [expand100_minerals, setExpand100_minerals] = useState<boolean>(chartConfigMinerals.expand100)
-    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
     const [showBookModal, setShowBookModal] = useState<boolean>(false)
     const [selectedColumnLabel, setSelectedColumnLabel] = useState<string | undefined>(undefined)
 
@@ -57,9 +55,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             setExpand100_minerals(chartConfigMinerals.expand100)
         }
 
-        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [portionType_vitamins, portionType_minerals, expand100_vitamins, expand100_minerals, chartHeight, props])
+    }, [portionType_vitamins, portionType_minerals, expand100_vitamins, expand100_minerals, props])
 
 
     if (!applicationContext || applicationContext.foodDataCorpus.dietaryRequirements === null) {
@@ -223,7 +220,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
             }
         }
 
-        let barChartOptions = getBarChartOptions(title, "%", maxYValue);
+        let barChartOptions = getBarChartOptions(title, applicationStrings.label_requirement_chart[lang], maxYValue);
 
         const handleChartClick = (c, i) => {
             if(i && i[0]) {
@@ -293,7 +290,8 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         applicationStrings.label_charttype_minerals[lang];
 
     const options = getOptions(title, maxValue, data);
-    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
+
+    const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
     const bookData = props.selectedSubChart === CHART_VITAMINS ? nutrientBook.vitamins : nutrientBook.minerals
 
     return (
@@ -304,12 +302,11 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
                               initiallySelectedItem={selectedColumnLabel}
                               closeBookModal={() => setShowBookModal(false)}/>
             }
-            <div className="row" style={{height: containerHeight}} key={"base chart container " + containerHeight}>
-                <div className={"col-12"}>
+            <div className="row" key={"base chart container vit-min"}>
+                <div className={chartClass}>
                     <Bar
                         data={data}
-                        key={'chart ' + chartHeight}
-                        height={chartHeight}
+                        key={'chart min-vit'}
                         options={options}
                     />
                 </div>

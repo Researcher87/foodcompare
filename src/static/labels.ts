@@ -124,20 +124,12 @@ export const applicationStrings = {
         en: 'Hide remainders'
     },
     checkbox_chartoption_showLegend: {
-        de: 'Legende anzeigen',
-        en: 'Show legend'
-    },
-    checkbox_chartoption_showLegend_m: {
         de: 'Legende',
         en: 'Legend'
     },
     checkbox_chartoption_showDetails: {
-        de: 'Details anzeigen',
-        en: 'Show details'
-    },
-    checkbox_chartoption_showDetails_m: {
         de: 'Details',
-        en: 'Show'
+        en: 'Details'
     },
     checkbox_english: {
         de: 'Englisch',
@@ -175,33 +167,33 @@ export const applicationStrings = {
         de: 'Wählen Sie zwei Lebensmittel aus den beiden Auswahlboxen, die miteinander verglichen werden sollen, und klicken Sie dann den Anzeigen-Button.',
         en: 'Pick two food elements from the two selectors that should be compared with each other. Then click the Show button.'
     },
+    home_button_info: {
+        de: 'Mehr zu den Features von Food Compare erfahren...',
+        en: 'Learn more about the features of Food Compare...'
+    },
     home_carousel_0: {
-        de: 'Vitamine in Lebensmitteln im Vergleich zum Tagesbedarf',
-        en: 'Vitamins in food compared to daily requirements'
+        de: 'Vitamingehalt von Äpfeln zum Tagesbedarf anzeigen',
+        en: 'Show vitamin content of apples compared to daily requirement'
     },
     home_carousel_1: {
-        de: 'Mineralstoffe in Lebensmitteln im Vergleich zum Tagesbedarf',
-        en: 'Minerals in food compared to daily requirements'
+        de: 'Unterschied zwischen Zubereitungsart mit/ohne Schale anzeigen',
+        en: 'Show difference between potatoes cooked with or without skin'
     },
     home_carousel_2: {
-        de: 'Nährstoffzusammensetzung in einem Lebensmittel',
-        en: 'Food composition of nutrients'
+        de: 'Lebensmittel anzeigen, die viel Magnesium enthalten',
+        en: 'Show food that contains a lot of magnesium'
     },
     home_carousel_3: {
-        de: 'Verteilung der Fettsäuren (gesättigt / ungesättigt)',
-        en: 'Distribution of fatty acids (saturated / unsaturated)'
+        de: 'Mineralstoffgehalt von Spinat mit anderem Gemüse vergleichen',
+        en: 'Compare the amount of minerals in spinach with other vegetables'
     },
     home_carousel_4: {
-        de: 'In Nahrungsmitteln enthaltene Aminosäuren',
-        en: 'Amino acids conainted in foods'
+        de: 'Liste an Lebensmitteln zusammenstellen und Gesamtgehalt an Vitaminen anzeigen',
+        en: 'Create a list of foods and show the total amount of contained vitamins'
     },
     home_carousel_5: {
-        de: 'Gegenüberstellung zweier Lebensmittel',
-        en: 'Comparing two food items'
-    },
-    home_carousel_6: {
-        de: 'Nach Nährstoffwert sortierte Lebensmittel',
-        en: 'Food items ranked by a specific nutrient value'
+        de: 'Verteilung von Fettsäuren zwischen zwei Lebensmitteln vergleichen',
+        en: 'Compare the distribution of fatty acids between two foods'
     },
     home_text_1: {
         de: 'Food Compare ist ein Webprojekt zur grafischen Darstellung der Zusammensetzung von Lebensmitteln. Während klassische Quellen die enthaltenen Inhaltsstoffe meist nur in tabellarischer Form angeben, verwendet Food Compare Grafiken und Diagramme, um den Gehalt an Vitaminen und Mineralstoffen, Kohlenhydraten, Fettsäuren und Eiweißen (Proteinen) leichter und übersichtlich darzustellen.',
@@ -218,6 +210,10 @@ export const applicationStrings = {
     home_foodcompare_overview: {
         de: 'Food Compare im Überblick',
         en: 'Food Compare at a Glance'
+    },
+    info_button_back: {
+        de: 'Zurück zur Startseite',
+        en: 'Back to home page'
     },
     input_compositelist_title: {
         de: 'Individuelle Liste',
@@ -236,8 +232,8 @@ export const applicationStrings = {
         en: 'Category'
     },
     label_charttype: {
-        de: 'Diagrammart',
-        en: 'Chart type'
+        de: 'Anzeige',
+        en: 'Display'
     },
     label_charttype_pie: {
         de: 'Tortendiagramm',
@@ -339,9 +335,9 @@ export const applicationStrings = {
         de: 'Gruppe',
         en: 'Group'
     },
-    label_getStarted: {
-        de: "Jetzt beginnen...",
-        en: "Get started..."
+    label_home_slogan: {
+        de: "Lebensmitteldaten grafisch darstellen",
+        en: "The Graphic Way of Displaying Food Data"
     },
     label_juxtaposition: {
         de: 'Vergleich',
@@ -440,8 +436,8 @@ export const applicationStrings = {
         en: 'Source'
     },
     label_language: {
-        de: 'Sprache:',
-        en: 'Language:'
+        de: 'Sprache',
+        en: 'Language'
     },
     label_mail_name: {
         de: "Name",
@@ -939,6 +935,10 @@ export const applicationStrings = {
         de: 'Tagesbedarf',
         en: 'Daily requirements'
     },
+    label_requirement_chart: {
+        de: '% vom Tagesbedarf',
+        en: '% of daily requirement'
+    },
     label_source: {
         de: 'Datenquelle',
         en: 'Data source'
@@ -1088,7 +1088,7 @@ export const applicationStrings = {
         en: 'Error while trying to send message.'
     },
     message_error_existing_element: {
-        de: 'Das ausgewählte Element befindet sich bereits im Datenbereich. Ein Lebensmittel darf nur einmal hinzugefügt werden.',
+        de: 'Das ausgewählte Element befindet sich bereits im Datenbereich. Ein Lebensmittel kann nur einmal hinzugefügt werden.',
         en: 'The selected food item already exists in your list. A food item can be added only once.'
     },
     message_error_incomplete_form: {
@@ -1114,6 +1114,10 @@ export const applicationStrings = {
     message_import_question: {
         de: 'Im Datenbereich befinden sich noch Datenobjekte, die mit den zu importierenden Daten überschrieben werden. Möchten Sie trotzdem fortfahren?',
         en: 'The data panel still contains food data objects which will be overwritten by the imported data. Do you still want to proceed?'
+    },
+    menu_info: {
+        de: 'Info',
+        en: 'Info'
     },
     message_userdata_success: {
         de: 'Änderungen wurden gespeichert.',
@@ -1184,7 +1188,7 @@ export const applicationStrings = {
         en: 'Mediocre Activity'
     },
     palcat_desc_4: {
-        de: 'Überwiegende Stehende Tätigkeit (z.B. Handwerker, Verkäufer, Kellner, Krankenschwester).',
+        de: 'Überwiegende stehende Tätigkeit (z.B. Handwerker, Verkäufer, Kellner, Krankenschwester).',
         en: 'Mostly standing activity (e.g. shop assistants, waiters, craftsmen, nurses).'
     },
     palcat_name_5: {
@@ -1252,7 +1256,7 @@ export const applicationStrings = {
         en: 'Calculation of BMR and PAL:',
     },
     text_empty_fooddatapanel: {
-        de: 'Klicken Sie links auf Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
+        de: 'Klicken Sie links auf den Plus-Button, um Lebensmittel zum Analysebereich hinzufügen. Es können beliebig viele Lebensmittel hinzugefügt werden. Klicken Sie den Stapel-Button, um ein komplexes Lebensmittel bzw. ein Menü zusammenzustellen, dessen Gesamtwerte dann angezeigt werden.',
         en: 'Click the plus button to add food elements to the analysis panel. You can add as many food elements as you like. Click the stack button if you want to create complex meals to show their total nutrient data.'
     },
     text_empty_fooddatapanel_mobileInfo: {
@@ -1333,6 +1337,6 @@ export const applicationStrings = {
     },
     vitamin_book_disclaimer: {
         de: 'Die hier präsentierten Informationen wurden aus freien Quellen wie Wikipedia oder Websites zu Gesundheit und Ernährung zusammengetragen. Es besteht kein Anspruch auf Vollständigkeit oder Korrektheit.',
-        en: 'The informationed shown in this booklet originate from free sources such as Wikipedia or health- or nutrition-related websites. There is no claim to completeness or correctness: '
+        en: 'The informationed shown in this booklet originate from free sources such as Wikipedia or health- or nutrition-related websites. There is no claim to completeness or correctness.'
     },
 }

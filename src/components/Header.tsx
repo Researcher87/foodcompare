@@ -1,6 +1,6 @@
 import logo from '../static/image/logo.png'
 import text from '../static/image/text.png'
-import {Button} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {
     LANGUAGE_DE,
     LANGUAGE_EN,
@@ -12,7 +12,7 @@ import {
     PATH_FOODCOMPARE,
     SOURCE_SRLEGACY,
     PATH_RANKING,
-    SOURCE_FNDDS
+    SOURCE_FNDDS, PATH_INFO, CHART_TYPE_PIE
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
@@ -102,6 +102,14 @@ export default function Header() {
                         {menuNameSettings}
                     </Button>
                 </Link>
+                <Link to={PATH_INFO}>
+                    <Button className={buttonContainerClass}
+                            variant={'link'}
+                            value={PATH_INFO}
+                            active={activePath === PATH_INFO}>
+                        {applicationStrings.menu_info[language]}
+                    </Button>
+                </Link>
                 <Link to={PATH_CONTACT}>
                     <Button className={buttonContainerClass}
                             variant={'link'}
@@ -117,36 +125,30 @@ export default function Header() {
     const language_en = isMobileDevice() ? applicationStrings.checkbox_english_m[language] : applicationStrings.checkbox_english[language]
     const language_de = isMobileDevice() ? applicationStrings.checkbox_german_m[language] : applicationStrings.checkbox_german[language]
 
-    const formElementsClass = isMobileDevice() ? "form-elements-m" : "form-elements"
+    const labelClass = isMobileDevice() ? "header-form-label-m" : "header-form-label"
 
     const renderLanguageButtons = () => {
         return (
-            <div className="form-small text-right">
-                <form>
-                    <label className={formElementsClass}>
-                        <b>{applicationStrings.label_language[language]}</b>
-                    </label>
-                    <label className={formElementsClass}>
-                        <input name={"user language"}
-                               className={"form-input"}
-                               type="radio"
-                               value={LANGUAGE_EN}
-                               defaultChecked={language === LANGUAGE_EN}
-                               onClick={handleLanguageButtonClick}
-                        />
-                        {language_en}
-                    </label>
-                    <label style={{marginRight: "25px"}}>
-                        <input name={"user language"}
-                               className={"form-input"}
-                               type="radio"
-                               value={LANGUAGE_DE}
-                               defaultChecked={language === LANGUAGE_DE}
-                               onClick={handleLanguageButtonClick}
-                        />
-                        {language_de}
-                    </label>
-                </form>
+            <div className="header-form" style={{paddingRight: "1vw"}}>
+                <span className={labelClass}>
+                    {applicationStrings.label_language[language]}:
+                </span>
+                <Form.Check inline={true}
+                            className="form-radiobutton"
+                            label={language_en}
+                            type="radio"
+                            value={LANGUAGE_EN}
+                            checked={language === LANGUAGE_EN}
+                            onClick={handleLanguageButtonClick}>
+                </Form.Check>
+                <Form.Check inline={true}
+                            className="form-radiobutton"
+                            label={language_de}
+                            type="radio"
+                            value={LANGUAGE_DE}
+                            checked={language === LANGUAGE_DE}
+                            onClick={handleLanguageButtonClick}>
+                </Form.Check>
             </div>
         )
     }
@@ -156,87 +158,55 @@ export default function Header() {
         const preferredSource = applicationContext.applicationData.preferredSource
 
         return (
-            <div className="form-small text-right" style={{paddingRight: "25px"}}>
-                <form className="form-group">
-                    <label className="form-elements">
-                        <b>{applicationStrings.label_preferred_source[language]}</b>
-                    </label>
-                    <label className="form-elements">
-                        <input className="form-input"
-                               type="radio"
-                               value={SOURCE_SRLEGACY}
-                               checked={preferredSource === SOURCE_SRLEGACY}
-                               onChange={handleSourceButtonClick}
-                        />
-                        SR Legacy
-                    </label>
-                    <label className="form-elements-largespace">
-                        <input className="form-input"
-                               type="radio"
-                               value={SOURCE_FNDDS}
-                               checked={(preferredSource === SOURCE_FNDDS)}
-                               onChange={handleSourceButtonClick}
-                        />
-                        FNDDS (Survey)
-                    </label>
-                </form>
+            <div className="header-form text-right" style={{paddingRight: "1vw"}}>
+                <span className="header-form-label">
+                    {applicationStrings.label_preferred_source[language]}:
+                </span>
+                <Form.Check inline={true}
+                            className="form-radiobutton"
+                            label={"SR Legacy"}
+                            type="radio"
+                            value={SOURCE_SRLEGACY}
+                            checked={preferredSource === SOURCE_SRLEGACY}
+                            onClick={handleSourceButtonClick}>
+                </Form.Check>
+                <Form.Check inline={true}
+                            className="form-radiobutton"
+                            label={"FNDDS (Survey)"}
+                            type="radio"
+                            value={SOURCE_FNDDS}
+                            checked={preferredSource === SOURCE_FNDDS}
+                            onClick={handleSourceButtonClick}>
+                </Form.Check>
             </div>
         )
     }
 
-    const makeHeaderDesktop = () => {
-        return (
-            <div className="d-flex flex-row header">
-                <div style={{paddingTop: "8px", paddingLeft: "8px", minWidth: "90px", maxWidth: "90px"}}>
-                    <img src={logo} alt={"Food Compare Logo"}/>
-                </div>
-                <div className={"d-flex flex-column w-100"}>
-                    <div className="d-flex flex-row align-items-center justify-content-between">
-                        <div style={{paddingTop: "5px"}}>
-                            <img src={text} alt={"Food Compare Logo Text"}/>
-                        </div>
-                        <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
-                            {!isMobileDevice() &&
-                            renderSourceButtons()
-                            }
-                            {renderLanguageButtons()}
-                        </div>
+    const headerClass = isMobileDevice() ? "header-m" : "header"
+
+    return (
+        <div className={`d-flex flex-row ${headerClass}`}>
+            <img src={logo} className="header-logo" alt={"Food Compare Logo"}/>
+            <div className={"d-flex flex-column w-100"} style={{paddingTop: "0.8vh", paddingLeft: "0.2vw"}}>
+                <div className="d-flex flex-row align-items-center justify-content-between">
+                    <div>
+                        <img src={text} className="header-logo-text" alt={"Food Compare Logo Text"}/>
                     </div>
-                    <div className="d-flex flex-row" style={{marginTop: "3px"}}>
-                        <div className="col-md-12 text-start">
-                            {renderMenus()}
-                        </div>
+                    <div className="d-flex flex-row justify-content-end">
+                        {!isMobileDevice() &&
+                        renderSourceButtons()
+                        }
+                        {renderLanguageButtons()}
+                    </div>
+                </div>
+                <div className="d-flex flex-row align-items-end" style={{height: "100%"}}>
+                    <div className="flex-column text-start">
+                        {renderMenus()}
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 
 
-    const makeHeaderMobile = () => {
-        return (
-            <div className="d-flex flex-row header">
-                <div style={{paddingTop: "4px", paddingLeft: "4px", minWidth: "75px", maxWidth: "75px"}}>
-                    <img src={logo} alt={"Food Compare Logo"}/>
-                </div>
-                <div className={"d-flex flex-column w-100"}>
-                    <div className="d-flex flex-row align-items-center justify-content-between">
-                        <div style={{paddingTop: "5px"}}>
-                            <img src={text} style={{width: "22vw"}} alt={"Food Compare Logo Text"}/>
-                        </div>
-                        <div className="d-flex flex-row justify-content-end" style={{paddingTop: "6px"}}>
-                            {renderLanguageButtons()}
-                        </div>
-                    </div>
-                    <div className="d-flex flex-row" style={{marginTop: "3px"}}>
-                        <div className="col-md-12 text-start">
-                            {renderMenus()}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    return isMobileDevice() ? makeHeaderMobile() : makeHeaderDesktop()
 }

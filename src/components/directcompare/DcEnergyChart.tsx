@@ -16,14 +16,14 @@ export function DcEnergyChart(props: DirectCompareDataPanelProps) {
 
     return <div className={"direct-compare-panel"}>
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+            <div className={"d-flex"} style={{maxHeight: containerHeight, marginBottom: "2vh"}}>
                 <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
                 <EnergyDataChart selectedFoodItem={props.selectedFoodItem1} directCompareUse={true}/>
             </div>
         </Card>
 
         <Card>
-            <div className={"d-flex"} style={{maxHeight: containerHeight}}>
+            <div className={"d-flex"} style={{maxHeight: containerHeight, marginBottom: "2vh"}}>
                 <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
                 <EnergyDataChart selectedFoodItem={props.selectedFoodItem2} directCompareUse={true}/>
             </div>

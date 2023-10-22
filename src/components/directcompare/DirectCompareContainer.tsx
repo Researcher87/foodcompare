@@ -146,10 +146,10 @@ export default function DirectCompareContainer() {
     return (
         <div className={"container-fluid"}>
             <div className={"row"}>
-                <div className={"col-4"}>
+                <div className={"col-4"} style={{paddingBottom: "2vh"}}>
                     <DirectCompareSelector updateSelectedFoodItems={updateSelectedFoodItems}/>
                 </div>
-                <div className={"col-8"} style={{padding: "32px"}}>
+                <div className={"col-8"} style={{paddingTop: "1vh", paddingLeft: "3vw", paddingRight: "3vw"}}>
                     {selectedFoodItem1 !== null && selectedFoodItem2 !== null ?
                     <DirectCompareDataPanel selectedFoodItem1={selectedFoodItem1}
                                             selectedFoodItem2={selectedFoodItem2}/>

@@ -23,9 +23,11 @@ export function Versions() {
         <p style={{paddingTop: "24px"}}>
             <b>New features in Version {release}</b>
             <ul>
-                <li>The layout of several menus has been revised</li>
-                <li>Food Compare fits better on mobile devices now, though some functionality remains limited</li>
-                <li>New food items have been added</li>
+                <li>Layout has been entirely revised.</li>
+                <li>Several display bugs have been fixed.</li>
+                <li>Import/Export of data tabs is now available.</li>
+                <li>Selected food items in the food data panel can be edit now (including composite food items).</li>
+                <li>New food items have been added to the database.</li>
             </ul>
         </p>
 

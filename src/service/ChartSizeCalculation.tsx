@@ -1,7 +1,7 @@
 import {isMobileDevice, WindowDimension} from "./WindowDimension";
 import {
     basedata_piechart_width,
-    basedata_piechart_width_m, datapanel_container_min_width, datapanel_container_min_width_m,
+    basedata_piechart_width_m,
     default_chart_height,
     default_chart_height_m
 } from "../config/ChartConfig";
@@ -28,8 +28,4 @@ export function calculateChartContainerHeight(currentDimension: WindowDimension,
     return directCompare === true
         ? calculateChartHeight(currentDimension, directCompare) + 24
         : calculateChartHeight(currentDimension, directCompare) + 10
-}
-
-export function calculateMinimalDataPanelWidth() {
-    return isMobileDevice() ? datapanel_container_min_width_m : datapanel_container_min_width
 }

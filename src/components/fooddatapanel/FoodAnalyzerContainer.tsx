@@ -208,7 +208,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     const buttonClass = isMobileDevice() ? "btn m-2" : "btn mb-4 foodanalyzer-button"
     const buttonClassWithExtraSpace = isMobileDevice() ? "btn m-2" : "btn mb-5 foodanalyzer-button"
 
-    const divButtonClass = isMobileDevice() ? "d-flex flex-row mb-4" : "d-flex flex-column align-items-left"
+    const divButtonClass = "d-flex flex-column align-items-left"
 
     const selectedFoodItem = isFoodItemSelected ? selectedFoodItems[selectedFoodItemIndex] : undefined
     const existingFoodItem = foodSelectorEditMode ? selectedFoodItem : undefined

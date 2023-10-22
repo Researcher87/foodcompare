@@ -43,11 +43,6 @@ export const basedata_piechart_width_m = 200;
 export const basedata_barchart_width = 380;
 export const basedata_barchart_width_m = 253;
 
-// Food data panel container size:
-
-export const datapanel_container_min_width = 850
-export const datapanel_container_min_width_m = 500
-
 export const max_portion = 5000;
 
 export const color_water = color_blue;

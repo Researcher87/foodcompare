@@ -11,7 +11,7 @@
       },
       "description": {
         "de": "Vitamin A bezeichnet eine Reihe chemischer Verbindungen und gehört zu den fettlöslichen Vitaminen, die somit längerfristig im Körper gespeichert werden können. Es existiert in vielen tierischen Produkten bereits in einer für den Menschen verwertbaren Form. In pflanzlichen Produkten liegt es in einer Vorstufe vor, aus der der Mensch Vitamin A selbst herstellen kann. Diese Vorstufen werden als Carotinoide bezeichnet, wobei das Beta-Carotinoid die größte Rolle spielt. Es ist in pflanzlichen Produkten an seiner intensiven Farbgebung zu erkennen (z.B. in der Karotte oder im Brokkoli). Vitamin A aus tierischen Quellen wird im Körper jedoch besser aufgenommen als beim Umwandlungsprozess aus Carotinoiden. Es hat eine große Bedeutung für die Zellen, Haut und Schleimhäute, das Sehvermögen und das Immunsystem. Das Vitamin ist empfindlich gegenüber Licht, Hitze und Sauerstoff. So gehen beim Kochen von Lebensmitteln bspw. zwischen 10 und 30 % des Vitamins verloren. Vitamin-A-Mangel ist der weltweit häufigste Vitaminmangel. In der westlichen Welt kommt ein starker Mangel nur selten vor. In Entwicklungsländern stellt Vitamin-A-Mangel hingegen oft ein schweres Problem dar, an dem geschätzt 250 Mio. Vorschulkinder leiden und rund eine Mio. Kinder jährlich versterben.",
-        "en": "Vitamin A comprises several chemical compounds and belongs to the fat-soluble vitamins that can be stored for a long time in the human body. In anmial products it already exists in a human-exploitable form, whereas it exists as a provitamin (precursor) in many plant-based products. Those provitamins are called carotenoids, with beta-carotenoid playing the most important part. Beta-carotenoid is often identifiable by its intensive color in plant-based food, such as carrots, broccoli or green cabbage. Just as other carotenoids, the human body can transform it to vitamin A on its own, though the usage from animal-based food is more effective than by means of this transformation process. Vitamin A plays a significant role for cells, skin and mucous membranes, as well as for vision and the immune system. It is vulnerable against light, oxygen and heat; for instance, the loss of vitamin A in the process of cooking is between 10 and 30 percent. Vitamin A has the highest deficiency rate among all vitamins in the world. While high deficiencies are rare in western countries, it is a serious issue in many developing countries, resulting in about 250 million pre-school children suffering from vitamin A deficiency, with about one million of them dying from it every year."
+        "en": "Vitamin A comprises several chemical compounds and belongs to the fat-soluble vitamins that can be stored for a long time in the human body. In animal products it already exists in a human-exploitable form, whereas it exists as a provitamin (precursor) in many plant-based products. Those provitamins are called carotenoids, with beta-carotenoid playing the most important part. Beta-carotenoid is often identifiable by its intensive color in plant-based food, such as carrots, broccoli or green cabbage. Just as other carotenoids, the human body can transform it to vitamin A on its own, though the usage from animal-based food is more effective than by means of this transformation process. Vitamin A plays a significant role for cells, skin and mucous membranes, as well as for vision and the immune system. It is vulnerable against light, oxygen and heat; for instance, the loss of vitamin A in the process of cooking is between 10 and 30 percent. Vitamin A has the highest deficiency rate among all vitamins in the world. While high deficiencies are rare in western countries, it is a serious issue in many developing countries, resulting in about 250 million pre-school children suffering from vitamin A deficiency, with about one million of them dying from it every year."
       },
       "functionality": [
         {
@@ -36,7 +36,7 @@
         },
         {
           "de": "Fortpflanzung (Bildung von Hormonen, Embryonalentwicklung)",
-          "en": "Reproduction (production of hormones, embroynal develeopt)"
+          "en": "Reproduction (production of hormones, embryonic development)"
         },
         {
           "de": "Fördert die Bildung roter Blutkörperchen",
@@ -71,11 +71,11 @@
       ],
       "overdose": {
         "de": "Beim Erwachsenen gelten bis zu 3 mg Vitamin A pro Tag als tolerabel. Bei einer deutlich höheren Zufuhr kann es zu einer Vergiftung mit Vitamin A kommen, da die Leber die Mengen nicht mehr speichern kann. Anzeichen sind dann bspw. Übelkeit, Erbrechen, starke Kopfschmerzen oder Benommenheit. Eine solche Überdosis kann nur durch Nahrungsergänzungsmittel oder dem Verzehr bestimmter Leberarten geschehen (Beispiele sind Eisbär- oder Robbenleber, in denen sehr viel Vitamin A angesammelt ist).",
-        "en": "For adults, up to 3 mg of vitamin A per day are considered tolerable. Considerably higher doses may lead to a poisoning, since the liver may not be able to store the vitamin anymore. Such a poisoning can cause nausea, vomiting, strong headaches or dizziness. It can only be caused by nutrient supplements or consumption of certain animal livers. Examples include the liver of polar bears and robs, where much vitamin A is accumulated."
+        "en": "For adults, up to 3 mg of vitamin A per day are considered tolerable. Much higher doses may lead to poisoning, since the liver may not be able to store the vitamin anymore. Such poisoning can cause nausea, vomiting, strong headaches or dizziness. It can only be caused by nutrient supplements or consumption of certain animal livers. Examples include the liver of polar bears and robs, where much vitamin A is accumulated."
       },
       "storage": {
-        "de": "Vitamin A wird, wie die meisten fettlöslichen Vitamine, in der Leber gespeichert. Volle Speicher reichen theoretisch 1 bis 2 Jahre aus, ehe Mangelerscheinungen sichtbar werden. Die Halbwertszeit beträgt 50 bis 100 Tage.",
-        "en": "Just like other fat-soluble vitamins, vitamin A is primarily stored in the liver. Humans being fully supplied with it may live without further vitamin A consumption for about 1 to 2 years not showing any deficiency symptoms. The half-life of the vitamin is 50 through 100 days."
+        "de": "Vitamin A wird, wie die meisten fettlöslichen Vitamine, in der Leber gespeichert. Volle Speicher reichen theoretisch 1 bis 2 Jahre aus, bevor Mangelerscheinungen sichtbar werden. Die Halbwertszeit beträgt 50 bis 100 Tage.",
+        "en": "Just like other fat-soluble vitamins, vitamin A is primarily stored in the liver. Humans with filled reserves may live without further vitamin A consumption for about 1 to 2 years not showing any deficiency symptoms. The half-life of the vitamin is 50 through 100 days."
       },
       "sources": {
         "de": "Fisch, Milchprodukte, Eier, Rindfleisch, Leber; Beta-Carotin: Karotten, Grünkohl, Broccoli, Spinat",
@@ -96,8 +96,8 @@
         "en": "Thiamine"
       },
       "description": {
-        "de": "Thiamin ist ein wasserlösliches Vitamin und ist u.a. am Stoffwechsel beteiligt. Es liegt v.a. in Getreide, Reis und Hülsenfrüchten vor, wobei bei der Getreideverarbeitung zu Weißmehlprodukten oder beim Schälen von Reis ein Großteil des Vitamins verloren geht. In manchen Ländern wird diesen Produkten daher künstlich Vitamin B1 zugeführt. Vitamin B1 ist hitzeempfindlich und wird beim Kochen zerstört. Mangelerscheinungen sind in Industriestaaten eher selten, treten in ärmeren Ländern jedoch häufiger auf. Sie führen dazu, dass Kohlenhydrate nicht mehr aus der Nahrung aufgenommen werden können, was dann über ein anderes, weniger effizientes Enzym geschieht.",
-        "en": "Thiamine is a water-soluble vitamin that is, among others, involved in metabolism. It is mainly contained by grains, rice and legumes, though grain processing (white flour products) or rice polishing can considerably lower the vitamin content. For this reason, vitamin B1 is added to those products in some countries. Vitamin B1 is vulnerable against heat and gets destroyed in the process of boiling. Deficiencies are rather rare in developed countries, yet occur more often in poorer countries. Thiamine deficiency results in carbohydrates not being efficiently absorbed in the digestive system, which will then be treated by other enzymes in a less efficient way."
+        "de": "Thiamin ist ein wasserlösliches Vitamin und ist u.a. am Stoffwechsel beteiligt. Es liegt v.a. in Getreide, Reis und Hülsenfrüchten vor, wobei bei der Getreideverarbeitung zu Weißmehlprodukten oder beim Schälen von Reis ein Großteil des Vitamins verloren geht. In manchen Ländern wird diesen Produkten daher künstlich Vitamin B1 zugeführt. Vitamin B1 ist hitzeempfindlich und wird beim Kochen zerstört. Mangelerscheinungen sind in Industriestaaten eher selten, treten in ärmeren Ländern jedoch häufiger auf. Sie führen dazu, dass Kohlenhydrate nicht mehr aus der Nahrung aufgenommen werden können, was dann im Körper über ein anderes, weniger effizientes Enzym geschieht.",
+        "en": "Thiamine is a water-soluble vitamin that is, among others, involved in metabolism. It is mainly contained by grains, rice and legumes, though grain processing (white flour products) or rice polishing can considerably lower the vitamin content. For this reason, vitamin B1 is artificially added to those products in some countries. The vitamin is vulnerable against heat and gets destroyed in the process of boiling. Deficiencies are rather rare in developed countries, yet occur more often in poorer countries. Thiamine deficiency results in carbohydrates not being efficiently absorbed in the digestive system anymore. The human body is then forced to absorb those carbs by other enzymes in a less efficient way."
       },
       "functionality": [
         {
@@ -132,8 +132,8 @@
         "en": "Unknown."
       },
       "dependencies": {
-        "de": "Da B1 an der Kohlenhydrat-Verstoffwechslung beteiligt ist, erhöht sich der Bedarf bei kohlenhydratlastiger Ernährung entsprechend. Der Verzehr von verarbeiteten Lebensmitteln wie geschältem Reis oder Weißmehlprodukten wirkt sich hier negativ aus, da diese Lebensmittel zwar selbst viele Kohlenhydrate, jedoch kaum mehr Vitamin B1 enthalten.",
-        "en": "Since B1 participates in the carbohydrate metabolism, carbohydrate-centric diets increase the B1 requirement accordingly. Consumption of processed food such as white wheat products or polished rice exacerbate vitamin B1 supply, as those products scarcely contain any remaining vitamin B1, yet contain a high amount of carbohydrates themselves."
+        "de": "Da Thiamin an der Kohlenhydrat-Verstoffwechslung beteiligt ist, erhöht sich der Bedarf bei kohlenhydratlastiger Ernährung entsprechend. Der Verzehr von verarbeiteten Lebensmitteln wie geschältem Reis oder Weißmehlprodukten wirkt sich hier negativ aus, da diese Lebensmittel zwar selbst viele Kohlenhydrate, jedoch kaum mehr Vitamin B1 enthalten.",
+        "en": "Since thiamine participates in the carbohydrate metabolism, carbohydrate-centric diets increase the B1 requirement accordingly. Consumption of processed food such as white wheat products or polished rice exacerbate vitamin B1 supply, as those products scarcely contain any remaining vitamin B1, yet contain a high amount of carbohydrates themselves."
       },
       "storage": {
         "de": "Der Körper kann etwa 25 bis 30 mg Vitamin B1 speichern.",
@@ -159,7 +159,7 @@
       },
       "description": {
         "de": "Riboflavin ist primär am Stoffwechsel beteiligt und ermöglicht den Abbau von Kohlenhydraten, Fetten und Eiweiß. Ein Mangel ist sehr selten, da das Vitamin in vielen Lebensmitteln in reichlicher Menge vorhanden ist. Die Aufnahme aus tierischen Quellen erfolgt besser als aus pflanzlichen Quellen. Vitamin B2 ist lichtempfindlich und sollte daher dunkel gelagert werden.",
-        "en": "Riboflavin is primarly involved in metabolism and allows carbohydrate, fatty acid and protein absorbation. Decifiencies are rare, since vitamin B2 is abundantly contained in many foods. Vitamin B2 is better absorbed from animal food compare to plant-based food. The vitamin is vulnerable to light and should be stored dark."
+        "en": "Riboflavin is primarily involved in metabolism and allows carbohydrate, fatty acid and protein absorption. Deficiencies are rare, since the vitamin is abundantly contained in many foods. Vitamin B2 is better absorbed from animal food compare to plant-based food. It is vulnerable to light and should be stored dark."
       },
       "functionality": [
         {
@@ -195,7 +195,7 @@
       },
       "dependencies": {
         "de": "Riboflavin wird benötigt, damit die Vitamine B3 und B6 effizient verwendet werden können. Ein B2-Mangel kann daher auch indirekt ein Defizit an Vitamin B3 und B6 im Körper bedeuten. Die Aufnahme von Vitamin B2 funktioniert nur mit Proteinen, so dass ein Proteinmangel automatisch zu einem Vitamin-B2-Mangel führt.",
-        "en": "Riboflavin is needed to efficiently make use of vitamin B3 and B6 within the human body. A lack of vitamin B2 may thus indirectly lead to a vitamin B3 and B6 shortage. In order to absorb vitamin B2, proteins are needed. A protein deficiency leads inevitably to a vitamin B2 shortage. "
+        "en": "Riboflavin is needed to efficiently make use of vitamin B3 and B6 within the human body. A lack of vitamin B2 may thus indirectly lead to a vitamin B3 and B6 deficiency. In order to absorb vitamin B2, proteins are needed. A protein deficiency leads inevitably to a vitamin B2 deficiency. "
       },
       "sources": {
         "de": "Brokkoli, Spinat, Milchprodukte, Eier, Sojabohnen, Leber, Fleisch",
@@ -217,7 +217,7 @@
       },
       "description": {
         "de": "Ähnlich wie Vitamin B2 ist Niacin am Stoffwechsel beteiligt und in der Nahrung in reichlicher Menge vorhanden, so dass ein Mangel sehr selten ist. Es kommt vor allem in tierischen Produkten vor, in geringerem Maß aber auch in pflanzlicher Nahrung. Die Aufnahme aus tierischen Quellen funktioniert besser als aus pflanzlichen Quellen. Der Mensch kann mit dem Protein Tryptophan und dem Vitamin B6 das Vitamin B3 auch selbst herstellen, jedoch nicht in ausreichender Menge.",
-        "en": "Similar to vitamin B2, Niacin is involved in metabolism and is abundantly contained in everyday food. Deficiencies are very rare. The vitamin is primarily contained in animal food, yet to a less degree in plant-based food as well. Absorbtion from animal food is more effective than from plant-based food. The human body can also produce Niacin on its own, using the protein Tryptophan and vitamin B3. This way of production is not sufficent for the total requirement, though."
+        "en": "Similar to vitamin B2, niacin is involved in metabolism and is abundantly contained in everyday food. Deficiencies are very rare. The vitamin is primarily contained in animal food, yet to a less degree in plant-based food as well. Absorption from animal food is more effective than from plant-based food. The human body can also produce niacin on its own, using the protein tryptophan and vitamin B3. This way of production is not sufficient for the total requirement, though."
       },
       "functionality": [
         {
@@ -252,8 +252,8 @@
         "en": "Unknown."
       },
       "dependencies": {
-        "de": "Damit der Körper das Vitamin auch selbst herstellen kann, werden Vitamin B6 und Proteins (Tryptophan) benötigt. Ein Mangel daran kann u.U. auch zu einem Mangel an Vitamin B3 führen.",
-        "en": "In order to produce the vitamin on its own, vitamin B6 and proteins (Tryptophan) are needed. A shortage of those two components might lead to a shortage of vitamin B3 as well. "
+        "de": "Damit der Körper das Vitamin auch selbst herstellen kann, werden Vitamin B6 und Proteine (Tryptophan) benötigt. Ein Mangel daran kann u.U. auch zu einem Mangel an Vitamin B3 führen.",
+        "en": "In order to produce the vitamin on its own, vitamin B6 and proteins (tryptophan) are needed. A deficiency of those two components might lead to a deficiency of vitamin B3 as well."
       },
       "sources": {
         "de": "Fleisch, Fisch, Vollkornprodukte, Kartoffeln, Erbsen, Kaffee, Erdnüsse, Reis",
@@ -310,8 +310,8 @@
         "en": "Meat, fish, grain, eggs, potatoes"
       },
       "requirements": {
-        "de": "ca. 6 mg (der genaue Bedarf ist noch nicht abschließend geklärt)",
-        "en": "about 6 mg (the exact amount has not been identified yet)"
+        "de": "Ca. 6 mg (der genaue Bedarf ist noch nicht abschließend geklärt).",
+        "en": "About 6 mg (the exact amount has not been identified yet)."
       }
     },
     {
@@ -338,7 +338,7 @@
         },
         {
           "de": "An der Produktion vieler Botenstoffe beteiligt, z.B. Dopamin, Serotonin, Histamin",
-          "en": "Takes part in the production of some messengers, such as Dopamine, Serotonin and Histamine"
+          "en": "Takes part in the production of some messengers, such as dopamine, serotonin and histamine"
         }
       ],
       "deficiencies": [
@@ -365,7 +365,7 @@
       ],
       "overdose": {
         "de": "Eine Überdosis kann allgemein zu Schmerzen und Taubheitsgefühlen in den Extremitäten führen, bei starker Überdosis können auch Nervenschädigungen auftreten. Die Grenzwerte für eine Überdosis schwanken zwischen 25 und 100 mg pro Tag.",
-        "en": "An overdose can lead to general pain and numb extremities, an extreme overdose can also lead to neuropathy (damage of the nerves). There is different data related to the overdose threshold, reaching from 25 to 100 mg per day."
+        "en": "An overdose can lead to general pain and numb extremities. An extreme overdose can also lead to neuropathy (damage of the nerves). There is different data related to the overdose threshold, reaching from 25 to 100 mg per day."
       },
       "dependencies": {
         "de": "Da Vitamin B6 für den Eiweißstoffwechsel verwendet wird, führt eine eiweißreiche Ernährung auch zu einem etwas höheren Vitamin-B6-Bedarf.",
@@ -391,7 +391,7 @@
       },
       "description": {
         "de": "Biotin ist ebenfalls am Stoffwechsel beteiligt und sorgt für die Eiweißbildung im Körper und das Zellwachstum. Ein Mangel ist selten, da das Vitamin in sehr vielen Lebensmitteln vorkommt. Allerdings verursacht der Verzehr roher Eier, dass Biotin an das darin enthaltene Avidin gebunden wird und vom Darm nicht aufgenommen werden kann. Der Verzehr roher Eier kann daher zu einem erheblichen Vitamin-B7-Mangel führen.",
-        "en": "Biotin takes part in metabolism and is responsible for protein production and cell growth. Deficiencies are rare, since Vitamin B7 is part of many foods. However, consumption of raw eggs can lead to a considerable shortage of the vitamin, since unheated egg white contains the protein avidin, which binds strongly to Biotin, making it impossible for the bowel to absorb."
+        "en": "Biotin takes part in metabolism and is responsible for protein production and cell growth. Deficiencies are rare, since Vitamin B7 is part of many foods. However, consumption of raw eggs can lead to a considerable deficiency of the vitamin, since unheated egg white contains the protein avidin, which binds strongly to Biotin, making it impossible for the bowel to absorb."
       },
       "functionality": [
         {
@@ -476,16 +476,16 @@
         }
       ],
       "overdose": {
-        "de": "Negative Folgen sind nicht bekannt. Ein überhoher Vitamin-B9-Gehalt im Körper kann jedoch einen Vitamin-B12-Mangel verdecken, der wiederum zu schweren Komplikationen führen kann.",
-        "en": "No negative consequences are known. However, an excessive vitamin B9 consumption may hide a shortage of vitamin B12, that in turn may lead to serious health issues."
+        "de": "Negative Folgen sind nicht bekannt. Ein stark erhöhter Vitamin-B9-Gehalt im Körper kann jedoch einen Vitamin-B12-Mangel verdecken, der wiederum zu schweren Komplikationen führen kann.",
+        "en": "No negative consequences are known. However, an excessive vitamin B9 concentration in the body may hide a deficiency of vitamin B12, that in turn may lead to serious health issues."
       },
       "dependencies": {
         "de": "Ein Mangel an Vitamin C, B12 oder Eisen kann die Aufnahme von Folat im Körper vermindern.",
-        "en": "A shortage of vitamin C, B12 or iron can reduce the absorption of folate in the digestive system."
+        "en": "A deficiency of vitamin C, B12 or iron can reduce the absorption of folate in the digestive system."
       },
       "storage": {
         "de": "Im Körper können etwa 12 bis 15 mg Vitamin B9 gespeichert werden. Je nach individuellem Verbrauch (im Mittel ca. 0,2 mg pro Tag) halten die Vitamin-B9-Speicher damit rund 2-4 Monate. Auf die Haut treffende intensive Sonnenstrahlung kann das Vitamin im Körper reduzieren.",
-        "en": "The body can store up to 12 .. 15 mg of vitamin B9. Depending on the individual usage (about 0.2 mg per day) the storage can hold between 2 and 4 months. If the skin is exposed to intensive sun light, the amount of Vitamin B9 in the body gets reduced."
+        "en": "The body can store up to 12 .. 15 mg of vitamin B9. Depending on the individual usage (about 0.2 mg per day) the reserves can hold between 2 and 4 months. If the skin is exposed to intensive sun light, the amount of Vitamin B9 in the body may get reduced."
       },
       "sources": {
         "de": "Spinat, Broccoli, Grünkohl, Getreide, Leber, Eier, Sojabohnen",
@@ -555,11 +555,11 @@
       },
       "storage": {
         "de": "Im Körper können maximal 2 bis 5 mg Vitamin B12 gespeichert werden, die Hälfte davon in der Leber. Da der Tagesbedarf von Vitamin B12 sehr gering ist, halten gut gefüllte Speicher somit über mehrere Jahre. Angaben schwanken zw. 3 und 10 Jahren.",
-        "en": "The human body can store up to 2 .. 5 mg of vitamin B12, half of it within the liver. Since the daily requirement is very low, a filled up storage of vitamin B12 can hold for several years. Data varies between 3 and 10 years."
+        "en": "The human body can store up to 2 .. 5 mg of vitamin B12, half of it within the liver. Since the daily requirement is very low, vitamin B12 can hold for several years in case of filled reserves. Data varies between 3 and 10 years."
       },
       "requirements": {
-        "de": "Mann: 0,003 mg | Frau: 0,003 mg  (schwanger: 0,0035 mg)",
-        "en": "male: 0.003 mg | female: 0.003 mg  (pregnant: 0.0035 mg)"
+        "de": "Mann: 3 µg | Frau: 3 µg  (schwanger: 3,5 µg)",
+        "en": "male: 3 µg | female: 3 µg  (pregnant: 3.5 µg)"
       }
     },
     {
@@ -573,7 +573,7 @@
       },
       "description": {
         "de": "Vitamin C ist das einzige wasserlösliche Vitamin neben den B-Vitaminen. Es wird von den meisten Säugetieren selbst hergestellt, und konnte auch vom Menschen einst selbst hergestellt werden. Heute muss es jedoch über die Nahrung in ausreichender Menge zugeführt werden. Vitamin C enthält eine ganze Reihe wichtiger Aufgaben, darunter auch die Stärkung des Immunsystems. Ob Vitamin C tatsächlich auch Krankheiten wie Erkältungen vorbeugt, konnte wissenschaftlich jedoch bislang nicht nachgewiesen werden. Von wenigen Ausnahmen abgesehen kommt Vitamin C ausschließlich in pflanzlicher Nahrung vor, so dass bei einer pflanzenarmen Ernährung schnell ein Vitamin-C-Mangel auftreten kann. Aktuell beträgt der Referenzwert rund 100 mg pro Tag, wobei der Wert noch nicht abschließend wissenschaftlich geklärt ist und sowohl deutlich höher als auch niedriger sein könnte. Bekannt ist jedoch, dass bei Tabak- und Alkoholkonsum und Stress ein deutlich höherer Bedarf an Vitamin C besteht. Starker Vitamin-C-Mangel ist dafür bekannt, dass es zur sog. Seefahrer-Krankheit Skorbut führt.",
-        "en": "Vitamin C is the only water-soluble vitamin next to the vitamin-B-complex. Most mammals produce it on their own (including the prehistoric human), yet modern humans need to ingest it with food to cover their demand. Vitamin C has multiple functions and effects in the body, including the strengthening of the immune system. However, so far there is no scientific evidence whether it can actually lower the risk of some diseases such as the common cold. With the exception of a few animal foods, Vitamin C solely occurs in plant-based food. Diets focusing on animal food can easily lead to vitamin C shortage. The current dietary requirement value is about 100 mg per day, though the value is still heavily debated among scientists and could be considerably higher or lower. It is certain, however, that some people have a higher demand for Vitamin C, including smokers, pregnant women, people consuming alcohol and people under stress. Extreme vitamin C deficiency is infamous for causing scurvy."
+        "en": "Vitamin C is the only water-soluble vitamin next to the vitamin-B-complex. Most mammals produce it on their own (including the prehistoric human), yet modern humans need to ingest it with food to cover their demand. Vitamin C has multiple functions and effects in the body, including the strengthening of the immune system. However, so far there is no scientific evidence whether it can actually lower the risk of some diseases such as the common cold. With the exception of a few animal foods, Vitamin C solely occurs in plant-based food. Diets focusing on animal food can easily lead to vitamin C deficiencies. The current dietary requirement value is about 100 mg per day, though the value is still heavily debated among scientists and could be considerably higher or lower. It is certain, however, that some people have a higher demand for Vitamin C, including smokers, pregnant women, people consuming alcohol and people under stress. Extreme vitamin C deficiency is infamous for causing scurvy."
       },
       "functionality": [
         {
@@ -633,7 +633,7 @@
       },
       "dependencies": {
         "de": "Vitamin C unterstützt die Eisenaufnahme, ein Mangel kann daher indirekt auch zu einem Eisenmangel führen.",
-        "en": "Vitamin C supports the absorption of iron. A shortage may indirectly lead to iron deficiency."
+        "en": "Vitamin C supports the absorption of iron. Deficiencies may indirectly lead to iron deficiency."
       },
       "sources": {
         "de": "Hagebutte, Petersilie, Brokkoli, Paprika, Zitrone, Orange, Erdbeere, Kohl, Tomate, Sauerkraut, Kartoffel, Leber",
@@ -655,7 +655,7 @@
       },
       "description": {
         "de": "Vitamin D ist eines der wenigen Vitamine, die der Mensch selbst herstellen kann. Dies geschieht in der Haut in Zusammenhang mit der UV-B-Strahlung der Sonne. Der Herstellungsprozess ist jedoch sehr komplex. So beginnt die Vitamin-D-Herstellung erst ab einem Sonnenstand von etwa 25 Grad, so dass Menschen in den Mittelbreiten im Winter kein Vitamin D produzieren können. Menschen mit heller Haut produzieren das Vitamin schneller, neigen jedoch auch schneller zum Sonnenbrand. Ältere Menschen produzieren Vitamin D schlechter und sind daher stärker von einem Mangel betroffen. Da Vitamin D auch in der Nahrung nur vergleichsweise selten vorkommt (10 bis 20 % des Bedarfs bei einer typischen Ernährung), tritt v.a. in den Wintermonaten bei vielen Menschen der mittleren und nördlichen Breiten ein Vitamin-D-Mangel auf, weshalb Vitamin-D-Präparate inzwischen weit verbreitet sind. Vitamin D selbst spielt eine zentrale Rolle für den Aufbau und Erhalt der Knochen und hat darüber hinaus eine Reihe weiterer wichtiger Eigenschaften, von denen noch nicht alle wissenschaftlich abschließend geklärt sind.",
-        "en": "Vitamin D is one of the few vitamins that humans can produce on their own. The production of vitamin D is rather complex and is carried out in the skin together with the UV-B radition of the sun. It gets only triggered when the sun reached a certain angle (about 25 degree), so that people living in the mid-latitutudes and further north cannot produce vitamin D during the winter months. People with light skin produce vitamin D faster, yet are also more susceptible for sun burns. Elder people generally produce less vitamin D and rely especially on supplements to avoid any shortage. Since vitamin D occurs only scarcely in nutrition (in an everyday nutrition it makes up 10 .. 20 % of the expected requirement), many people have a sligth through medium lack of vitamin D during the winter, especially in regions further up north. Vitamin D supplements are therefore widely used now. The vitamin as such plays an important part in the production and maintenance of bones. Additionally, it is involved in many other processes, of which not all have been scientifically identified or confirmed yet."
+        "en": "Vitamin D is one of the few vitamins that humans can produce on their own. The production of vitamin D is rather complex and is carried out in the skin together with the UV-B radiation of the sun. It gets only triggered when the sun reached a certain angle (about 25 degree), so that people living in the mid-latitudes and further north cannot produce vitamin D during the winter months. People with light skin produce vitamin D faster, yet are also more susceptible for sun burns. Elder people generally produce less vitamin D and rely especially on supplements to avoid deficiencies. Since vitamin D occurs only scarcely in nutrition (in an everyday nutrition it makes up 10 .. 20 % of the expected requirement), many people have a slight through medium lack of vitamin D during the winter, especially in regions further up north. Vitamin D supplements are therefore widely used now. The vitamin as such plays an important part in the production and maintenance of bones. Additionally, it is involved in many other processes, of which not all have been scientifically identified or confirmed yet."
       },
       "functionality": [
         {
@@ -707,15 +707,15 @@
       },
       "storage": {
         "de": "Vitamin D ist in den Muskeln und im Fettgewebe gespeichert. Gut gefüllte Speicher halten für etwa 2 bis 4 Monate.",
-        "en": "Vitamin D is stored in the muscles and fat tissue. When fully supplied with Vitamin D, the amout holds for about 2 through 4 months."
+        "en": "Vitamin D is stored in the muscles and fat tissue. Well-filled reserves can hold for about 2 through 4 months."
       },
       "sources": {
         "de": "Lebertran, Fisch, Pilze, Eier",
         "en": "Codliver oil, fish, mushrooms, eggs"
       },
       "requirements": {
-        "de": "ca. 20 µg (der genaue Bedarf ist noch nicht abschließend geklärt)",
-        "en": "about 20 µg (the exact amount has not been identified yet)"
+        "de": "Ca. 20 µg (der genaue Bedarf ist noch nicht abschließend geklärt).",
+        "en": "About 20 µg (the exact amount has not been identified yet)."
       }
     },
     {
@@ -808,7 +808,7 @@
         },
         {
           "de": "K2: Verhindert Kalkablagerungen",
-          "en": "K2: Prevents calcifications"
+          "en": "K2: Prevents calcification"
         }
       ],
       "deficiencies": [
@@ -830,8 +830,8 @@
         "en": "Unknown."
       },
       "sources": {
-        "de": "K1: Grünes Gemüse, plant-based oils; K2: Eier, Fleisch, Milchprodukte",
-        "en": "K1: Leafy greens, pflanzliche Öle; K2: Eggs, meat, dairy"
+        "de": "K1: Grünes Gemüse, pflanzliche Öle; K2: Eier, Fleisch, Milchprodukte",
+        "en": "K1: Leafy greens, plant-based oils; K2: Eggs, meat, dairy"
       },
       "requirements": {
         "de": "Mann: 70 µg | Frau: 60 µg",
@@ -847,7 +847,7 @@
       },
       "description": {
         "de": "Der Menschh enthält etwa 100 Gramm Natrium in seinem Körper, von dem der größte Teil im Blut enthalten ist. Natrium ist maßgeblich an der Regulierung des Wasserhaushalts beteiligt und ist ein lebenswichtiges Mengenelement, das immer im korrekten Verhältnis zum Wasserhaushalt vorliegen muss. Ein Mangel oder eine Überdosis kann so recht schnell einmal auftreten und führt zu Unwohlsein, oder, in schweren Fällen, zu ernsten gesundheitlichen Problemen. Das liegt auch daran, dass die Menge an Natrium im Körper oft starken Schwankungen ausgesetzt ist. Der Natriumspiegel sinkt tw. erheblich, wenn Natrium durch Schwitzen oder Erkrankungen (Durchfall, Erbrechen etc.) entsprechend ausgeschieden wird oder über den Tag zu wenig Wasser zugeführt wird. Natriumzufuhr durch salzhaltige Nahrung führt hingegen zu einem entsprechenden Anstieg. Die Nieren versuchen dabei, den Natriumspiegel auf dem richtigen Level zu halten, indem sie entweder Natrium über den Urin ausscheiden oder Wasser im Körper zurückhalten (weniger Urinproduktion), um das Verhältnis aus Wasser und Natrium zu erhöhen. Der Mensch nimmt Natrium zum allergrößten Teil aus Kochsalz (Natriumchlorid) in der Nahrung auf. Ein Gramm Kochsalz enthalten dabei etwa 0,4 g Natrium.",
-        "en": "The human body contains approximately 100 gram of sodium, with the largest part being contained by the blood. Sodium is a vital abundant element, necessary for the regulation of the water balance in the human body, that always needs to be in the right ratio to water. The amount of sodium is subject to constant fluctuations so that a shortage or an overdose may occasionally occur. It leads to discomfort and, if more severe, to serious health issues. A shortage usually emerges if too much sodium is washed out of the body, e.g., because of sweating or diseases (such as vomitting, diarrhea). An overdose may be caused by the consumption of large amounts of salty food. The kidneys try to keep the balance between water and sodium at a constant level, either by eliminating excess sodium through the urin or by keeping water back in the body in case of a shortage (reduced urin production). In nutrition, people consume the vast majority of sodium through common salt (sodium chloride), where 1 gram of salt contains about 0.4 gram of sodium."
+        "en": "The human body contains approximately 100 gram of sodium, with the largest part being contained by the blood. Sodium is a vital abundant element, necessary for the regulation of the water balance in the human body, that always needs to be in the right ratio to water. The amount of sodium is subject to constant fluctuations so that deficiencies or an overdose may occasionally occur. It leads to discomfort and, if more severe, to serious health issues. Deficiency usually emerges if too much sodium is washed out of the body, e.g., because of sweating or diseases (such as vomiting, diarrhea). An overdose may be caused by the consumption of large amounts of salty food. The kidneys try to keep the balance between water and sodium at a constant level, either by eliminating excess sodium through the urin or by keeping water back in the body in case of deficiency (reduced urine production). In nutrition, people consume the vast majority of sodium through common salt (sodium chloride), where 1 gram of salt contains about 0.4 gram of sodium."
       },
       "functionality": [
         {
@@ -891,7 +891,7 @@
       },
       "dependencies": {
         "de": "Die Wasserregulation im Körper geschieht gemeinsam mit Kalium, so dass Natrium und Kalium im wechselseitigen Verhältnis wirken und im richtigen Verhältnis vorliegen sollten. Die Ausscheidung von Natrium geschieht in den Nieren unter Beteiligung von Calcium. Ein hoher Natriumkonsum führt damit zu einem höheren Calciumverbrauch (und damit höheren Calciumbedarf).",
-        "en": "The water regulation in the body is carried out together with potassium. Both elements interact and should be in the right proportion to each other. Calcium is used in the process of sodium excretion through the kidneys. An increased consumption of sodium thus increases calcium loss (and consequently increase the calcium demand)."
+        "en": "The water regulation in the body is carried out together with potassium. Both elements interact and should be in the right proportion to each other. Calcium is used in the process of sodium excretion through the kidneys. An increased consumption of sodium thus increases calcium loss (and consequently increases the demand for calcium)."
       },
       "requirements": {
         "de": "1,5 mg",
@@ -945,19 +945,19 @@
       ],
       "overdose": {
         "de": "Überschüssiges Kalium wird durch die Nieren ausgesondert, so dass bei intakter Nierenfunktion eine Überdosis i.A. keine Auswirkungen hat.",
-        "en": "Excess potassium will be eliminated by the kidneys. In case of healthy kidneys, a overdose has genereally no negative effect."
+        "en": "Excess potassium will be eliminated by the kidneys. For people with healthy kidneys, an overdose has generally no negative effect."
       },
       "dependencies": {
         "de": "Bei erhöhtem Konsum von Natrium erhöht sich auch der Bedarf an Kalium. Eine Mangelversorgung mit Magnesium vermindert die Aufnahme von Kalium im Darm.",
-        "en": "An increased consumption of sodium also increases the need for potassium. Magnesium deficiencies reduce the resorption of potassium in the bowel."
+        "en": "An increased consumption of sodium also increases the need for potassium. Magnesium deficiencies reduce the absorption of potassium in the bowel."
       },
       "sources": {
         "de": "Nüsse, Bananen, grünes Gemüse, Kartoffeln, Avocado, Sojabohnen",
         "en": "Nuts, bananas, leafy greens, potatoes, avocado, soy beans"
       },
       "requirements": {
-        "de": "4 mg (Schwangere: 4,4 mg)",
-        "en": "4 mg (pregnant: 4.4 mg)"
+        "de": "4000 mg (Schwangere: 4400 mg)",
+        "en": "4000 mg (pregnant: 4400 mg)"
       }
     },
     {
@@ -967,7 +967,7 @@
       },
       "description": {
         "de": "Magnesium spielt eine große Rolle für das Muskelsystem und ist vor allem an der Reizübertragung von Muskeln und Nerven beteiligt. Der menschliche Körper enthält rund 20 bis 30 mg Magnesium, das sich zu rund 60 % in unseren Knochen, knapp 40 % in den Muskeln und Organen und nur zu rund 1 % im Blut befindet. Wie andere Mineralstoffe kann es beim Schwitzen aus dem Körper ausgewaschen werden und damit verlorengehen. Ein leichter Magnesiummangel tritt in der Bevölkerung recht häufig auf, wobei die Bestimmung des Magnesiumswerts sehr schwierig ist (eine Blutanalyse gibt nur wenig Aufschluss). Magnesium wird daher häufig als Ergänzungsmittel verwendet. Ein schwerer Mangel tritt jedoch meist nur in Zusammenhang mit verschiedenen Erkrankungen auf (z.B. Nierenerkrankung, Verdauungsprobleme, starker Durchfall). Magnesium findet sich v.a. in Getreideprodukten, Nüssen, Gemüse, Schokolade und Mineralwasser und Leitungswasser (bei ausreichender Wasserhärte).",
-        "en": "Magnesium is especially needed for the muscle system and the transmission of impulses through the muscles and nerve cells. The human body contains about 20 .. 30 mg of magnesium, of which about 60 % are stored in the bones, about 40 % in the muscles and organs and only 1 % in the blood. Just like other minerals, magnesium will be washed out when sweating and thus drops away. It is supposed that a light shortage of magnesium occurs frequently in society, though it is generally difficult to determine the magnesium amount in the body (a blood analysis does not suffice to determine the exact amount). However, serious deficiencies usually only occur in case of diseases (such as kidney diseases, digestive disorders, heavy diarrhea). Magnesium is mostly contained in plant-based food, especially in grain products, nuts, vegetables, soda and tap water (of sufficient water hardness)."
+        "en": "Magnesium is especially needed for the muscle system and the transmission of impulses through the muscles and nerve cells. The human body contains about 20 .. 30 mg of magnesium, of which about 60 % are stored in the bones, about 40 % in the muscles and organs and only 1 % in the blood. Just like other minerals, magnesium will be washed out when sweating and thus drops away. It is supposed that a light deficiency of magnesium occurs frequently in society, though it is generally difficult to determine the magnesium amount in the body (a blood analysis does not suffice to determine the exact amount). However, serious deficiencies usually only occur in case of diseases (such as kidney diseases, digestive disorders, heavy diarrhea). Magnesium is mostly contained in plant-based food, especially in grain products, nuts, vegetables, soda and tap water (of sufficient water hardness)."
       },
       "functionality": [
         {
@@ -1007,7 +1007,7 @@
       },
       "dependencies": {
         "de": "Magnesiummangel führt zu einer schlechteren Aufnahme von Kalium im Darm und kann indirekt zu einem Kaliummangel führen. Zudem aktiviert Magnesium die Produktion von Vitamin D im Körper. Ein Mangel kann somit wiederum indirekt zu einem Vitamin-D-Mangel führen.",
-        "en": "Magnesium deficiency reduces potassium resorbtion in the bowel and may indirectly lead to a potassium deficiency. Magnesium is also needed to activate the vitamin D production in the body; again, a deficiency may indirectly lead to a vitamin D deficiency."
+        "en": "Magnesium deficiency reduces potassium absorption in the bowel and may indirectly lead to a potassium deficiency. Magnesium is also needed to activate the vitamin D production in the body; again, a deficiency may indirectly lead to a vitamin D deficiency."
       },
       "sources": {
         "de": "Hülsenfrüche, Nüsse, Getreideprodukte, Käse, Kakao, Schokolade",
@@ -1024,8 +1024,8 @@
         "en": "Calcium"
       },
       "description": {
-        "de": "Kalzium spielt eine wichtige Rolle für den Knochenbau und die Zähne. Im menschlichen Körper hat es einen Anteil von etwa 1 bis 1,5 Kilogramm, womit es den größten Anteil aller Mineralstoffe ausmacht. Etwa 99 Prozent davon lagern in den Knochen und Zähnen, wo es für deren Aufbau dient. Gleichzeitig dienen die Knochen auch als Speicher für Kalzium und können es bei Mangel freigeben, was dann jedoch zum Knochenschwund führt. Da ab dem 30. Lebensjahr in den Knochen kaum noch Kalzium eingelagert wird, ist dieser Prozess tw. irreversibel. Kalzium ist außerdem das Gegenstück zum Magnesium, da es für eine Anspannung der Muskeln sorgt. Das Verhältnis Kalzium zu Magnesium sollte im Körper etwa 2:1 betragen. Kalziummangel kann durch einseitige Ernährung auftreten, v.a. bei Verzicht auf Milchprodukte. Zudem haben Kinder, Schwangere und ältere Menschen ein erhöhtes Risiko, einen Kalziummangel zu erleiden. Kalzium ist v.a. in Milchprodukten enthalten sowie in Mineralwasser und Leitungswasser mit entsprechender Wasserhärte.",
-        "en": "Calcium plays an important part for bone production and teeth. The human body contains about 1 .. 1.5 kilogram of calcium, making it by far the largest part of the minerals, with about 99 % of it being stored in the bones and teeth. Calcium is needed to maintain and strengthen bones and teeth. In case of a deficiency, the bones can release calcium, concequently leading to bone loss, though. Since the human body scarcely stores up calcium in the bones after the age of 30, this process is partly irreversible. Calcium is also the counterpart to magnesium, since it promotes muscle contraction. The ratio between calcium and magnesium in the body should be about 2:1. Calcium deficiency may occur in case of an unbalanced diet, especially if dairy products are avoided. In addition, children, pregnant women and elderly people have a generally higher risk to suffer from calcium deficiency. Calcium is found in dairy products and soda, as well as tap water (of sufficient water hardness)."
+        "de": "Kalzium spielt eine wichtige Rolle für den Knochenbau und die Zähne. Im menschlichen Körper hat es einen Anteil von etwa 1 bis 1,5 Kilogramm, womit es den weitaus größten Anteil aller Mineralstoffe ausmacht. Etwa 99 Prozent davon lagern in den Knochen und Zähnen, wo es für deren Aufbau dient. Gleichzeitig dienen die Knochen auch als Speicher für Kalzium und können es bei Mangel freigeben, was dann jedoch zum Knochenschwund führt. Da ab dem 30. Lebensjahr in den Knochen kaum noch Kalzium eingelagert wird, ist dieser Prozess tw. irreversibel. Kalzium ist außerdem das Gegenstück zum Magnesium, da es für eine Anspannung der Muskeln sorgt. Das Verhältnis Kalzium zu Magnesium sollte im Körper etwa 2:1 betragen. Kalziummangel kann durch einseitige Ernährung auftreten, v.a. bei Verzicht auf Milchprodukte. Zudem haben Kinder, Schwangere und ältere Menschen ein erhöhtes Risiko, einen Kalziummangel zu erleiden. Kalzium ist v.a. in Milchprodukten enthalten sowie in Mineralwasser und Leitungswasser mit entsprechender Wasserhärte.",
+        "en": "Calcium plays an important part for bone production and teeth. The human body contains about 1 .. 1.5 kilogram of calcium, so that it makes up the  largest part of the minerals, with about 99 % of it being stored in the bones and teeth. Calcium is needed to maintain and strengthen bones and teeth. In case of a deficiency, the bones can release calcium, consequently leading to bone loss, though. Since the human body scarcely stores up calcium in the bones after the age of 30, this process is partly irreversible. Calcium is also the counterpart to magnesium, since it promotes muscle contraction. The ratio between calcium and magnesium in the body should be about 2:1. Calcium deficiency may occur in case of an unbalanced diet, especially if dairy products are avoided. In addition, children, pregnant women and elderly people have a generally higher risk to suffer from calcium deficiency. Calcium is found in dairy products and soda, as well as tap water (of sufficient water hardness)."
       },
       "functionality": [
         {
@@ -1065,7 +1065,7 @@
       },
       "dependencies": {
         "de": "Für die Aufnahme von Calcium im Darm wird Vitamin D benötigt. Ein Vitamin-D-Mangel kann damit indirekt zu einem Calciummangel führen.",
-        "en": "The resorption of calcium in the bowel requires vitamin D. A vitamin D shortage may thus indirectly lead to a calcium deficiency."
+        "en": "The absorption of calcium in the bowel requires vitamin D. Vitamin D deficiency may thus indirectly lead to a calcium deficiency."
       },
       "sources": {
         "de": "Milchprodukte, Hülsenfrüchte, Mineralwasser",
@@ -1083,7 +1083,7 @@
       },
       "description": {
         "de": "Ähnlich wie Kalzium ist Phosphor am Knochenbau beteiligt und hat mit 600 bis 700 Gramm im menschlichen Körper einen ebenfalls hohen Anteil. Davon sind 90 % in den Knochen gebunden. Phosphor ist in nahezu allen Lebensmitteln enthalten, insbesondere in proteinreichen Lebensmittel wie Milchprodukten, Eiern, Fleisch und Fisch, so dass bei gesunden Menschen ein Mangel faktisch nicht möglich ist.",
-        "en": "Similar to calcium, phosphorous is needed for bone production and has a high share in the human body (600 .. 700 gram, of which 90 % are bound to the bones). It is contained by almost every food, especially in those that are rich in proteins, such as dairy products, eggs, meat and fish. For healthy persons, it is practically impossible to suffer phosphorous deficiency."
+        "en": "Similar to calcium, phosphorus is needed for bone production and has a high share in the human body (600 .. 700 gram, of which 90 % are bound to the bones). It is contained by almost every food, especially in those that are rich in proteins, such as dairy products, eggs, meat and fish. For healthy people, it is practically impossible to suffer from phosphorus deficiency."
       },
       "functionality": [
         {
@@ -1123,11 +1123,11 @@
       ],
       "overdose": {
         "de": "Eine kritische Überdosis kann durch die normale Ernährung im Grunde nicht erfolgen. Nur bei anderen Erkrankungen kann eine zu hohe Phosphoransammlung mit verschiedenen gesundheitlichen Problemen eintreten.",
-        "en": "A critical overdose cannot occur in a regular diet. Only in case of different diseases, critical amounts of phosphorous may be accumulated in the body, that may lead to versatile health issues."
+        "en": "A critical overdose cannot occur in a regular diet. Only in case of different diseases, critical amounts of phosphorus may be accumulated in the body, that may lead to versatile health issues."
       },
       "dependencies": {
         "de": "Phosphor hemmt die Verwertung von Calcium im Körper, so dass ein hoher Phosphorkonsum einen höheren Bedarf an Calcium zur Folge hat.",
-        "en": "Phosphorous impairs the use of calcium within the human body. A high intake of phosphorous thus increases the demand for calcium."
+        "en": "Phosphorus impairs the use of calcium within the human body. A high intake of phosphorus thus increases the demand for calcium."
       },
       "requirements": {
         "de": "Mann: 700 mg | Frau: 700 mg  (schwanger: 800 mg, in der Stillzeit: 900 mg)",
@@ -1141,7 +1141,7 @@
       },
       "description": {
         "de": "Eisen ist ein wichtiges Spurenelement, das etwa 60 mg in unserem Körper ausmacht und v.a. für die Blutbildung und den Sauerstofftransport im Blut benötigt wird. Eisen steckt v.a. in Fleisch und Tierprodukten, sowie in Vollkornprodukten, Hülsenfrüchten, Spinat und Kräutern, der Darm kann jedoch nur einen Bruchteil des enthaltenen Eisens aus der Nahrung aufnehmen, wobei Eisen aus tierischen Quellen vom Körper besser aufgenommen wird als aus pflanzlichen Quellen. Einige Lebensmitteln enthalten Stoffe, die Eisen binden und somit die Eisenaufnahme im Darm hemmen. Dazu zählen bspw. Soja- und Milchprodukte, Kaffee, Tee und Rotwein. Ein leichter Mangel tritt in der Bevölkerung recht häufig auf, besonders betroffen sind Frauen (insbesondere während der Schwangerschaft), Kinder sowie Leistungssportler. ",
-        "en": "Iron is a significant trace element that makes up 60 mg in our body. It is especially needed for blood production and the transportation of oxygen in the blood. Iron occurs frequently in meat and animal products in general, but also in grain products, legumes, spinach and herbs. However, only a very small amount of the iron in food can be reabsorbed by the bowel, where iron from animal products is generally better resorbed than from plant-based products. Some foods contain compounds that bind iron so that the iron resorption in the bowel is impaired. Those include soy and dairy products, coffee, tea and red wine. A slight shortage occurs frequently in society, where women (especially during pregnancy), children and athletes are particularly affected."
+        "en": "Iron is a significant trace element that makes up 60 mg in our body. It is especially needed for blood production and the transportation of oxygen in the blood. Iron occurs frequently in meat and animal products in general, but also in grain products, legumes, spinach and herbs. However, only a very small amount of the iron in food can be absorbed by the bowel, where iron from animal products is generally better absorbed than from plant-based products. Some foods contain compounds that bind iron so that the iron absorption in the bowel is impaired. Those include soy and dairy products, coffee, tea and red wine. A slight deficiency occurs frequently in society, where women (especially during pregnancy), children and athletes are particularly affected."
       },
       "functionality": [
         {
@@ -1180,12 +1180,12 @@
         }
       ],
       "overdose": {
-        "de": "Eine Überdosis von Eisen kann zu schweren gesundheitlichen Problemen führen. Über die normale Ernährung ist ein Eisenmangel zwar allein sehr unwahrscheinlich, jedoch können gesundheitliche Probleme zu einer Ansammlung von Eisen in der Leber und anderen Organen führen, was zu entsprechenden Organschäden führen kann.",
-        "en": "An overdose may lead to serious health issues. Though an overdose solely caused by normal diets is very likely, some diseases may lead to an accumulation of iron in the liver and other organs, which may damage those organs accordingly."
+        "de": "Eine Überdosis von Eisen kann zu schweren gesundheitlichen Problemen führen. Über die normale Ernährung ist eine Überdosis zwar allein sehr unwahrscheinlich, jedoch können gesundheitliche Probleme zu einer Ansammlung von Eisen in der Leber und anderen Organen führen, was zu entsprechenden Organschäden führen kann.",
+        "en": "An overdose may lead to serious health issues. Though an overdose solely caused by normal diets is very unlikely, some diseases may lead to an accumulation of iron in the liver and other organs, which may damage those organs accordingly."
       },
       "dependencies": {
         "de": "Vitamin C fördert die Aufnahme von Eisen im Darm. Ein Vitamin-C-Mangel kann damit indirekt zu einem Eisenmangel führen. Bei vegetarischer Ernährung kann ein hoher Vitamin-C-Konsum über Obst und Gemüse somit einen Eisenmangel vorbeugen.",
-        "en": "Vitamin C supports the resorption of iron in the bowel. A vitamin C shortage thus can indirectly lead to an iron shortage. In case of a vegetarian diet, an increased consumption of fruit or vegetables containing vitamin C may prevent an iron deficiency."
+        "en": "Vitamin C supports the absorption of iron in the bowel. Vitamin C deficiency thus can indirectly lead to an iron deficiency. In case of a vegetarian diet, an increased consumption of fruit or vegetables containing vitamin C may prevent an iron deficiency."
       },
       "requirements": {
         "de": "Mann: 10 mg | Frau: 15 mg  (schwanger: 30 mg, in der Stillzeit: 20 mg)",
@@ -1195,11 +1195,11 @@
     {
       "name": {
         "de": "Zink",
-        "en": "zinc"
+        "en": "Zinc"
       },
       "description": {
-        "de": "Zink ist ein Spurenelement, das eine Vielzahl unterschiedlicher Aufgaben im Körper wahrnimmt. Es kommt v.a. in tierischen Lebensmitteln vor, z.B. Schweinefleisch, Fisch, Eiern und Milchprodukten. In geringerer Menge tritt es auch in Getreideprodukten, Nüssen und Hülsenfrüchten auf, wobei die Aufnahme aus tierischen Quellen im Darm jedoch besser funktioniert. Zinkmangel tritt in der Gesellschaft recht häufig auf, da auch bei einigen Menschen erblich oder gesundheitlich bedingt die Zinkaufnahme im Darm nur unzureichend geschieht. Besonders schlimm ist die Situation in Entwicklungsländern. Man schätzt, dass weltweit zwei Milliarden Menschen an einem Zinkmangel leiden, mit mehr als einer Millionen Todesopfern pro Jahr.",
-        "en": "Zinc is a trace element that has different functions within the human body. It occurs espeically in animal food, e.g., pork meat, fish, eggs and dairy products, and to a less degree in grain products, nuts and legumes. The resorption from animal-based food works better than from plant-based food. Zinc defiencies occur frequently, also because some people have a hereditarily or physically impaired zinc resorption. Zinc deficiencies are especially serious in developing country; it is assumed that about two billion people in the world suffer from a shortage, with more than one million people dying from it every year."
+        "de": "Zink ist ein Spurenelement, das eine Vielzahl unterschiedlicher Aufgaben im Körper wahrnimmt. Es kommt v.a. in tierischen Lebensmitteln vor, z.B. Schweinefleisch, Fisch, Eiern und Milchprodukten. In geringerer Menge tritt es auch in Getreideprodukten, Nüssen und Hülsenfrüchten auf, wobei die Aufnahme aus tierischen Quellen im Darm besser funktioniert. Zinkmangel tritt in der Gesellschaft recht häufig auf, da auch bei einigen Menschen erblich oder gesundheitlich bedingt die Zinkaufnahme im Darm nur unzureichend geschieht. Besonders schlimm ist die Situation in Entwicklungsländern. Man schätzt, dass weltweit zwei Milliarden Menschen an einem Zinkmangel leiden, mit mehr als einer Millionen Todesopfern pro Jahr.",
+        "en": "Zinc is a trace element that has different functions within the human body. It occurs especially in animal food, e.g., pork meat, fish, eggs and dairy products, and to a less degree in grain products, nuts and legumes. The absorption from animal-based food works better than from plant-based food. Zinc deficiencies occur frequently, also because some people have a hereditary or physically impaired zinc absorption. Zinc deficiencies are especially serious in developing countries; it is assumed that about two billion people in the world suffer from a deficiency, with more than one million people dying from it every year."
       },
       "functionality": [
         {
@@ -1224,7 +1224,7 @@
         },
         {
           "de": "Wirkt als Antioxidans gegen freie Radikale",
-          "en": "As an antioxidant acts against free radicals"
+          "en": "As an antioxidant, it acts against free radicals"
         }
       ],
       "deficiencies": [
@@ -1254,8 +1254,8 @@
         "en": "The maximum dose is estimated 40 mg per day. An overdose can cause nausea, vomiting and diarhrrea, and may weaken the immune system."
       },
       "dependencies": {
-        "de": "Kupfer und Eisen binden Zink im Körper. Ein hoher Kupferspiegel oder ein hoher Eisenspiegel verschlechtern damit die Aufnahme von Zink und können zu einem Zinkmangel beitragen. Die in vielen Pflanzen enthaltene Phytate (z.B. Getreideprodukte, Nüsse, Hülsenfrüchte, Gemüse) hemmt ebenfalls die Zinkaufnahme. Beim Konsum dieser Lebensmittel erhöht sich somit auch der Tagesbedarf an Zink.",
-        "en": "Copper and iron bind to zinc so that a high copper or iron level impair the resorption of zinc in the digestive tract, potentially causing a zinc deficiency. Phytates, which occur in many plant-based foods (such as grain products, nuts, legumes and vegetables) impair the zinc resorption as well. Consuming those foods increases the daily requirement for zinc."
+        "de": "Kupfer und Eisen binden Zink im Körper. Ein hoher Kupferspiegel oder ein hoher Eisenspiegel verschlechtern damit die Aufnahme von Zink und können zu einem Zinkmangel beitragen. Die in vielen Pflanzen enthaltenen Phytate (z.B. Getreideprodukte, Nüsse, Hülsenfrüchte, Gemüse) hemmen ebenfalls die Zinkaufnahme. Beim Konsum dieser Lebensmittel erhöht sich somit auch der Tagesbedarf an Zink.",
+        "en": "Copper and iron bind to zinc so that a high copper or iron level impair the absorption of zinc in the digestive tract, potentially causing a zinc deficiency. Phytates, which occur in many plant-based foods (such as grain products, nuts, legumes and vegetables) impair the zinc absorption as well. Consuming those foods increases the daily requirement for zinc."
       },
       "requirements": {
         "de": "Mann: 10 mg | Frau: 7 mg  (schwanger: 10 mg, in der Stillzeit: 11 mg)",
@@ -1269,7 +1269,7 @@
       },
       "description": {
         "de": "Kupfer ist ein Spurenelement, das für viele Enzyme benötigt wird und am Stoffwechsel mit beteiligt ist. Der menschliche Körper enthält etwa 100 mg Kupfer, das u.a. im Skelett, in den Muskeln und der Leber gespeichert ist. Ein Mangel ist sehr selten, da Kupfer in vielen Lebensmitteln auftritt. Er tritt am ehesten durch Krankheiten oder eine zu hohe Zinkzufuhr über längere Zeit auf. ",
-        "en": "Copper is a trace element needed for many enzymes as well as for metabolism. The human body contains about 100 mg of copper, which is mostly stored in the bones, muscles and liver. Copper defieciencies are very rare, since copper is part of many foods. It may occur in case of several diseases or a constantly high zinc intake, though."
+        "en": "Copper is a trace element needed for many enzymes as well as for metabolism. The human body contains about 100 mg of copper, which is mostly stored in the bones, muscles and liver. Copper deficiencies are very rare, since copper is part of many foods. It may occur in case of several diseases or a constantly high zinc intake, though."
       },
       "functionality": [
         {
@@ -1308,16 +1308,16 @@
         }
       ],
       "overdose": {
-        "de": "Eine tägliche Dosis bis 5 mg gilt als unbedenklich. Bei einer Überdosis kann es zu Vergiftungserscheinungen gekommen, z.B. in Form von starker Übelkeit und Durchfall oder Kopfschmerzen und Schwindel. Sie tritt i.d.R. nicht durch die Ernährung auf, sondern meist durch Erkrankungen oder die Einnahme von Medikamenten, die zu einem höheren Kupferspiegel im Körper führen. Der Konsum von säurehaltigen Lebensmitteln aus Kupfergefäßen (oder Wasser aus Kupferleitungen) kann ebenfalls zu einer Überdosierung führen, da es das Kupfer aus dem Behälter lösen kann.",
+        "de": "Eine tägliche Dosis bis 5 mg gilt als unbedenklich. Bei einer Überdosis kann es zu Vergiftungserscheinungen kommen, z.B. in Form von starker Übelkeit und Durchfall oder Kopfschmerzen und Schwindel. Sie tritt i.d.R. nicht durch die Ernährung auf, sondern meist durch Erkrankungen oder die Einnahme von Medikamenten, die zu einem höheren Kupferspiegel im Körper führen. Der Konsum von säurehaltigen Lebensmitteln aus Kupfergefäßen (oder Wasser aus Kupferleitungen) kann ebenfalls zu einer Überdosierung führen, da es das Kupfer aus dem Behälter lösen kann.",
         "en": "An intake of up to 5 mg per day is considered innocuous. An overdose can trigger symptoms of poisoning, such as severe nausea and diarrhea or headaches and dizziness. An overdose is usually not caused by normal nutrition, yet may be caused by diseases or the intake of some medication, that can lead to an increased copper level in the body. The consumption of acidic foods from copper vessels (or tap water from copper pipes) may also lead to an overdose, as those foods may wash out the copper from the container."
       },
       "dependencies": {
         "de": "Eine erhöhte Zinkzufuhr über längeren Zeitraum kann die Kupferaufnahme hemmen und damit indirekt zu einem Mangel führen. Kupfer ist an der Aufnahme von Eisen im Darm beteiligt. Ein Kupfermangel vermindert damit die Eisenaufnahme und kann indirekt zu einem Eisenmangel führen (der zu Blutarmut führen kann).",
-        "en": "A constantly increased intake of zinc can reduce the resorption of copper and thus indirectly lead to a copper shortage. Copper participates in the resorption of iron in the digestive system; a copper shortage may thus indirectly lead to an iron shortage (which may lead to anemia)."
+        "en": "A constantly increased intake of zinc can reduce the absorption of copper and thus indirectly lead to copper deficiency. Copper participates in the absorption of iron in the digestive system; a copper deficiency may thus indirectly lead to an iron deficiency (which may lead to anemia)."
       },
       "requirements": {
-        "de": "ca. 1,25 mg (der genaue Bedarf ist noch nicht abschließend geklärt)",
-        "en": "about 1.25 mg (the exact amount has not been identified yet)"
+        "de": "Ca. 1,25 mg (der genaue Bedarf ist noch nicht abschließend geklärt).",
+        "en": "About 1.25 mg (the exact amount has not been identified yet)."
       }
     },
     {
@@ -1326,8 +1326,8 @@
         "en": "Selenium"
       },
       "description": {
-        "de": "Selen ist ein Spurenelement, das ähnlich wie Kupfer Bestandteil vieler Enzyme ist. Es kommt sowohl in pflanzlicher als auch tierischer Nahrung vor, allerdings ist es in pflanzlicher Nahrung starken Schwankungen ausgesetzt. Der Anteil von Selen ist abhängig vom Selengehalt im Boden. In Europa sind die Böden eher selenarm, so dass die Selenversorgung hier primär über tierische Produkte wie Fleisch, Fisch und Eier geschieht. In den USA enthalten die Böden mehr Selenium, in Teilen Afrikas und Chinas ist die Konzentration noch deutlicher geringer. In der westlichen Welt ist ein Selenmangel bei ausgewogener Ernährung sehr selten, in Ländern mit selenarmen Böden und primär pflanzlicher Ernährung in der Bevölkerung stellt es jedoch ein großes Problem dar.",
-        "en": "Similar to copper, selenium is a trace element that is part of many enzymes. It is contained both by plant-based food an animal food, yet in plants the amount is subject to strong fluctuations. The amount of selenium in plants depends on the amount of selenium in soil. Europe's soils contain only low amounts of selenium so that the supply of the population is primarily achieved through animal-based food such as meat, fish and eggs. Soils in the United States generally contain more selenium, yet parts in Africa and China even less. In western countries, selenium deficiencies are very rare in case of a balanced diet. However, in countries of low-selenium soils and primarily plant-based nutrition among the population it may pose a severe risk."
+        "de": "Selen ist ein Spurenelement, das ähnlich wie Kupfer Bestandteil vieler Enzyme ist. Es kommt sowohl in pflanzlicher als auch tierischer Nahrung vor, allerdings ist es in pflanzlicher Nahrung starken Schwankungen ausgesetzt. Der Anteil von Selen ist abhängig vom Selengehalt im Boden. In Europa sind die Böden eher selenarm, so dass die Selenversorgung hier primär über tierische Produkte wie Fleisch, Fisch und Eier geschieht. In den USA enthalten die Böden mehr Selenium, in Teilen Afrikas und Chinas ist die Konzentration hingegen nur sehr wenig. In der westlichen Welt ist ein Selenmangel bei ausgewogener Ernährung sehr selten, in Ländern mit selenarmen Böden und primär pflanzlicher Ernährung stellt es jedoch ein großes Problem dar.",
+        "en": "Similar to copper, selenium is a trace element that is part of many enzymes. It is contained both in plant-based food an animal food, yet in plants the amount depends highly on the amount of selenium in the soil. The soils in Europe contain only low amounts of selenium so that the supply for the population is primarily achieved through animal-based food like meat, fish and eggs. The soils in North America generally contain more selenium, while parts of Africa and China contain only low amounts. In western countries, selenium deficiencies are very rare for people with a balanced diet. However, in countries of low-selenium soils and primarily plant-based nutrition it may pose a severe risk."
       },
       "functionality": [
         {
@@ -1337,10 +1337,6 @@
         {
           "de": "Beteiligt an der Regulation des Schilddrüsenhormons",
           "en": "Participates in the regulation of the thyroid hormone"
-        },
-        {
-          "de": "Baustein für Spermien, fördert die Fruchtbarkeit beim Mann",
-          "en": "Part of spermia, promotes the fertility of men"
         },
         {
           "de": "Baustein für Spermien, fördert die Fruchtbarkeit beim Mann",
@@ -1366,7 +1362,7 @@
         },
         {
           "de": "Störung der Spermienproduktion",
-          "en": "Impairs sperm production"
+          "en": "Impairment of sperm production"
         },
         {
           "de": "Wachstumsverzögerung",
@@ -1375,11 +1371,11 @@
       ],
       "overdose": {
         "de": "Eine chronische Überdosis kann zu Haarausfall, Übelkeit und zur Störung des Nervensystems führen. Als maximal zulässiger täglicher Referenzwert wird oft 250 bis 400 µg angegeben.",
-        "en": "A chronic overdose may cause hair loss, nausea and impairment of the nervous system. The maximal tolerable daily dose is, according to different sources, between 250 and 400 µg. "
+        "en": "A chronic overdose may cause hair loss, nausea and impairment of the nervous system. The maximal tolerable daily dose is, according to different sources, between 250 and 400 µg."
       },
       "requirements": {
-        "de": "Mann: 0,7 mg | Frau: 0,6 mg  (schwanger: 0,6 mg, in der Stillzeit: 0,75 mg)",
-        "en": "male: 0.7 mg | female: 0.6 mg  (pregnant: 0.6 mg, breastfeeding: 0.75 mg)"
+        "de": "Mann: 70 µg | Frau: 60 µg  (schwanger: 60 µg, in der Stillzeit: 75 µg)",
+        "en": "male: 70 µg | female: 60 µg  (pregnant: 60 µg, breastfeeding: 75 µg)"
       }
     },
     {
@@ -1389,7 +1385,7 @@
       },
       "description": {
         "de": "Mangan ist ein Spurenelement, das Bestandteil von Enzymen sowie am Aufbau von Knochen und Bindegewerbe beteiligt ist. Es macht nur rund 10 bis 40 mg in unserem Körper aus und kommt in der Ernährung reichlich vor, insbesondere in Getreide, Nüssen und anderen pflanzlichen Lebensmitteln. Ein Mangel ist daher sehr selten.",
-        "en": "Manganese is a trace element that is part of enzymes and needed for bone and tissue growth. It makes up 10 .. 40 mg within the human body and is suffiently contained in foods, in particular in grain products, nuts and other plant-based food. A manganese defficiency is thus very rare."
+        "en": "Manganese is a trace element that is part of enzymes and needed for bone and tissue growth. It makes up 10 .. 40 mg within the human body and is sufficiently contained in foods, in particular in grain products, nuts and other plant-based food. A manganese deficiency is thus very rare."
       },
       "functionality": [
         {
@@ -1429,7 +1425,7 @@
       ],
       "overdose": {
         "de": "Ein genauer Referenzwert für eine Überdosis existiert nicht, jedoch gilt eine tägliche Aufnahme zwischen 2 und 5 mg als unbedenklich. Es gibt keinen belegbaren Vorteil einer höheren Manganzufuhr. Bei einer deutlichen Überdosierung können verschiedene Vergiftungserscheinungen eintretren, z.B. Herz-Kreislauf-Beschwerden und Leberversagen.",
-        "en": "So far, no specific maximal acceptable daily amount has been identified, an intake amount between 2 and 5 mg is considered safe, though. There are no proven facts for any benefits resulting of a higher intake. A serious overdose may lead to different symptoms of poisoning, e.g. cardiovascular complains and liver failure."
+        "en": "So far, no specific maximal acceptable daily amount has been identified, an intake between 2 and 5 mg is considered safe, though. There are no proven facts for any benefits resulting of a higher intake. A serious overdose may lead to different symptoms of poisoning, e.g. cardiovascular complains and liver failure."
       },
       "requirements": {
         "de": "Mann: 3,5 mg | Frau: 3,5 mg",

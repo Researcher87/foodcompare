@@ -140,13 +140,6 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean, categ
         }
     ];
 
-    if(category === CATEGORY_BEVERAGE || category === undefined) {
-        legendData.push({
-            item: applicationStrings.label_nutrient_alcohol[lang],
-            color: ChartConfig.color_alcohol,
-        })
-    }
-
     if (showDetails) {
         legendData.push(
             {
@@ -161,7 +154,13 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean, categ
                 separateNextElement: true
             }
         );
+    }
 
+    if(category === CATEGORY_BEVERAGE || category === undefined) {
+        legendData.push({
+            item: applicationStrings.label_nutrient_alcohol[lang],
+            color: ChartConfig.color_alcohol,
+        })
     }
 
     legendData.push({

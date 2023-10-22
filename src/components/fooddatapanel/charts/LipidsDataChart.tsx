@@ -1,6 +1,5 @@
 import {useContext, useEffect, useState} from "react";
 
-import {default_chart_height} from "../../../config/ChartConfig"
 import * as Constants from "../../../config/Constants"
 import {CHART_TYPE_BAR, CHART_TYPE_PIE, LIPIDS_DATA_BASE} from "../../../config/Constants"
 import {Bar, Pie} from "react-chartjs-2";
@@ -14,7 +13,6 @@ import {PieChartConfigurationForm} from "../../charthelper/PieChartConfiguration
 import {Form} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LipidsDataChartProps} from "../../../types/livedata/ChartPropsData";
-import {calculateChartContainerHeight, calculateChartHeight} from "../../../service/ChartSizeCalculation";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {
@@ -49,7 +47,6 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
     const [hideRemainders, setShowHideRemainders] = useState<boolean>(initialHideRemainders ? initialHideRemainders : false)
     const [expand100, setExpand100] = useState<boolean>(initialExpand100 ? initialExpand100 : false)
     const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
-    const [chartHeight, setChartHeight] = useState<number>(calculateChartHeight(windowSize, props.directCompareUse))
 
     useEffect(() => {
         if (props.directCompareConfig) {
@@ -58,9 +55,8 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
             setSubChart(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
         }
 
-        setChartHeight(calculateChartHeight(windowSize, props.directCompareUse))
         updateChartConfig()
-    }, [chartType, showLegend, hideRemainders, expand100, subChart, chartHeight, windowSize, props])
+    }, [chartType, showLegend, hideRemainders, expand100, subChart, windowSize, props])
 
     const updateChartConfig = () => {
         if (applicationContext && !props.directCompareConfig) {
@@ -230,7 +226,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         let data
         if (lipidsType === Constants.LIPIDS_DATA_BASE) {
             if (!saturated || !unsaturatedMono || !unsaturatedPoly) {
-                return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+                return <div>{applicationStrings.label_noData[lang]}</div>
             }
             data = createTotalChartData(totalLipidsAmount);
         } else if (lipidsType === Constants.LIPIDS_DATA_OMEGA) {
@@ -239,27 +235,27 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
             }
 
             if (!omegaData) {
-                return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+                return <div>{applicationStrings.label_noData[lang]}</div>
             }
         }
 
         if (!data) {
-            return <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+            return <div>{applicationStrings.label_noData[lang]}</div>
         }
 
+        const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
+
         return (
-            <div>
+            <div className={chartClass}>
                 {chartType === CHART_TYPE_PIE &&
                 <Pie data={data}
-                     key={'chart ' + chartHeight}
-                     height={chartHeight}
+                     key={'chart lipids'}
                      options={getOptions()}
                 />
                 }
                 {chartType === CHART_TYPE_BAR &&
                 <Bar data={data}
-                     key={'chart ' + chartHeight}
-                     height={chartHeight}
+                     key={'chart lipids'}
                      options={getOptions()}
                 />
                 }
@@ -268,12 +264,9 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
     }
 
 
-    //const height = props.directCompareUse === true ? direct_compare_chartheight : default_chart_height
-    const containerHeight = calculateChartContainerHeight(windowSize, props.directCompareUse)
-
     return (
         <div className="container-fluid">
-            <div className="row" style={{height: containerHeight}} key={"lipids container " + containerHeight}>
+            <div className="row" key={"lipids container "}>
                 <div className="col-3 text-align-center">
                     {renderChartSelector()}
                 </div>
@@ -285,7 +278,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                     renderChart(Constants.LIPIDS_DATA_OMEGA)
                     }
                     {!omegaDataAvailabe && subChart === Constants.LIPIDS_DATA_OMEGA &&
-                    <div style={{height: default_chart_height}}>{applicationStrings.label_noData[lang]}</div>
+                    <div>{applicationStrings.label_noData[lang]}</div>
                     }
                 </div>
 

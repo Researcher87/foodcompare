@@ -57,22 +57,22 @@ export function FoodDataTable(props: FoodDataTableProps) {
         || props.dataPage === TAB_PROTEINS_DATA
 
     return (
-        <div style={{height: "428px", margin: "25px", overflowY: "auto"}}>
+        <div className={"table-data"}>
             <div>
                 {dataExists &&
                 <BootstrapTable trClassName={tableClass} data={props.tableData} striped hover>
                     <TableHeaderColumn isKey dataField='label' dataFormat={formatDataCell}>Element</TableHeaderColumn>
                     <TableHeaderColumn dataField='value_100g'
-                                       width={"170px"}
+                                       width={"9vw"}
                                        dataFormat={formatDataCell}>{applicationStrings.label_per_100g[language.language]}
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField='value_portion'
-                                       width={"170px"}
+                                       width={"10vw"}
                                        dataFormat={formatDataCell}>{labelPortion}
                     </TableHeaderColumn>
                     {shouldShowDietaryRequirements &&
                     <TableHeaderColumn dataField='dailyRequirement'
-                                       width={"190px"}
+                                       width={"12vw"}
                                        dataFormat={formatDataCell}>{applicationStrings.label_requirement[language.language]}
                     </TableHeaderColumn>
                     }

@@ -13,18 +13,17 @@ export function CustomLegend(props: CustomLegendProps) {
 
         for (let i = 0; i < props.legendData.length; i++) {
             const element = props.legendData[i];
-            const indent = element.indent > 0 ? "25px" : "0px";
-            const verticalSpace = element.separateNextElement && !mobile ? "15px" : "0px";
+            const indent = element.indent > 0 ? "2ch" : "0ch";
             const id = `legendrow ${i}`;
 
-            const legendItemLabelClass = mobile ? "legendItemLabel-mobile" : "legendItemLabel"
+            const legendItemLabelClass = mobile ? "legend-item-label" : "legend-item-label"
             const legendClassName = isMobileDevice() ? "align-items-baseline" : "align-items-middle"
 
             legend.push(
-                <div key={id} className="row" style={{marginLeft: indent, marginBottom: verticalSpace}}>
-                    <div style={{display: "flex"}} className={legendClassName}>
-                        <div className="legendItem" style={{background: element.color}}></div>
-                        <p className={legendItemLabelClass}>{element.item}</p>
+                <div key={id} className="row" style={{marginLeft: indent}}>
+                    <div style={{display: "flex", alignItems: "baseline"}} className={legendClassName}>
+                        <div className="legend-item" style={{background: element.color}}></div>
+                        <span className={legendItemLabelClass}>{element.item}</span>
                     </div>
                 </div>
             );
@@ -35,8 +34,8 @@ export function CustomLegend(props: CustomLegendProps) {
 
 
     return (
-        <div style={{borderLeft: "1px solid #aaaaaa", paddingLeft: "5px"}}>
-            <div style={{paddingTop: "4px"}}>
+        <div style={{borderLeft: "1px solid #aaaaaa"}}>
+            <div>
                 {renderLegend()}
             </div>
         </div>

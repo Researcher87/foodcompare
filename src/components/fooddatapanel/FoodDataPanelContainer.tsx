@@ -8,7 +8,7 @@ import {
     PATH_FOODDATA_PANEL,
     QUERYKEY_DATAPANEL_ADD, QUERYKEY_DATAPANEL_ADD_COMPOSITE,
     QUERYKEY_DATAPANEL_AGGREGATED,
-    QUERYKEY_DATAPANEL_ITEM
+    QUERYKEY_DATAPANEL_ITEM, TAB_JUXTAPOSITION
 } from "../../config/Constants";
 import {useHistory} from 'react-router-dom';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
@@ -68,7 +68,12 @@ export default function FoodDataPanelContainer() {
     const updateUriQuery = (selectedFoodItemIndex: number) => {
         const selectedFoodItem = selectedFoodItems[selectedFoodItemIndex]
         const userData = applicationContext.userData
-        const {selectedDataPage, displayMode, chartConfigData} = applicationContext.applicationData.foodDataPanel
+        const {
+            selectedDataPage,
+            displayMode,
+            chartConfigData,
+            juxtapositionConfigData
+        } = applicationContext.applicationData.foodDataPanel
 
         // New query for aggregated food item
         if (selectedFoodItem.aggregated) {
@@ -94,7 +99,14 @@ export default function FoodDataPanelContainer() {
                 supplementData: supplementData,
                 combineData: combineData
             }
-            const query = makeFoodDataPanelDefaultUri(foodItemData, userData, selectedDataPage, displayMode, chartConfigData)
+            let query = makeFoodDataPanelDefaultUri(foodItemData, userData, selectedDataPage, displayMode,
+                chartConfigData)
+
+            const currentQuery = window.location.search
+            if (currentQuery.includes("&group=")) {
+                const groupFragment = currentQuery.substring(currentQuery.indexOf("&group="));
+                query += groupFragment;
+            }
 
             history.push({
                 pathName: PATH_FOODDATA_PANEL,
@@ -134,7 +146,7 @@ export default function FoodDataPanelContainer() {
                     addItemToFoodDataPanel(selectedFoodItemWithComponent)
                 }
             } catch (e) {
-                if(applicationContext.debug) {
+                if (applicationContext.debug) {
                     console.log(e)
                 }
             }
@@ -157,7 +169,9 @@ export default function FoodDataPanelContainer() {
                 }
 
                 applicationContext.setUserData(uriDataObject.userData)
-                const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
+                const foodClass = applicationContext.foodDataCorpus.foodClasses.find(
+                    foodClass => foodClass.id === foodItem.foodClass
+                )
 
                 const selectedFoodItem: SelectedFoodItem = {
                     id: 1,
@@ -214,36 +228,43 @@ export default function FoodDataPanelContainer() {
         console.log('FoodDataPanelContainer: Render, selected food item = ', selectedFoodItem)
     }
 
-    const divClass = isMobileDevice() ? "" : "d-flex flex-row"
+    const containerDivClass = isMobileDevice() ? "" : "d-flex flex-row justify-content-center"
+    const basepanelClass = selectedFoodItems && selectedFoodItems.length
+        ? "d-flex flex-row foodanalyzer-basepanel"
+        : "d-flex flex-row foodanalyzer-basepanel-empty";
 
-    return <div>
+    return <div className={"container-scroll container-fluid"}>
         {selectedFoodItem !== null &&
-        <div className="container-fluid container-scroll" style={{paddingTop: "4vh"}}>
-            <div className={divClass}>
-                <div className={""}>
-                    <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
-                                           openSelectorModal={openSelectorModal}
-                                           openCompositeSelectorModal={openCompositeSelectorModal}
-                    />
-                </div>
-                <div className={"d-flex flex-row"}>
-                    <div className="col media app" style={{maxWidth: "1100px", minWidth: "1100px", marginTop: "-10px"}}>
-                        {selectedFoodItems && selectedFoodItems.length > 0 ?
-                            <div>
-                                <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
-                            </div>
-                            :
-                            <div className={"form-text"} style={{padding: "24px"}}>
-                                <p>
-                                    <i>
-                                        {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
-                                    </i>
-                                </p>
-                                {isMobileDevice() &&
-                                <p><FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}</p>
-                                }
-                            </div>
-                        }
+        <div style={{paddingTop: "4vh"}}>
+            <div className={containerDivClass} >
+                <div className={basepanelClass}>
+                    <div>
+                        <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
+                                               openSelectorModal={openSelectorModal}
+                                               openCompositeSelectorModal={openCompositeSelectorModal}
+                        />
+                    </div>
+                    <div className={"d-flex flex-row"}>
+                        <div className="col foodanalyzer-inner-container">
+                            {selectedFoodItems && selectedFoodItems.length > 0 ?
+                                <div>
+                                    <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
+                                </div>
+                                :
+                                <div className={"form-text"} style={{margin: "1.2vw"}}>
+                                    <p>
+                                        <i>
+                                            {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
+                                        </i>
+                                    </p>
+                                    {isMobileDevice() &&
+                                    <p>
+                                        <FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}
+                                    </p>
+                                    }
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
