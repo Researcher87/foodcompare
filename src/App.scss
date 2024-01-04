@@ -422,7 +422,8 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
     max-width: min(1.0vw, 1.5vh);
     min-height: min(1.0vw, 1.5vh);
     max-height: min(1.0vw, 1.5vh);
-    margin-top: 1.2vh;
+    margin-top: 0.6vh;
+    margin-bottom: 0.6vh;
     margin-right: 1ch;
     border: 1px solid black;
 }

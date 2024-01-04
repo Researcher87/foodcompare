@@ -1,4 +1,4 @@
-import React, {ReactElement, useContext, useEffect, useState} from "react";
+import React, {ReactElement, useContext, useState} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {BookDataEntry, NamePair} from "../../types/BookData";
@@ -45,14 +45,21 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
     })
 
     const renderSelectList = () => {
+        const label = applicationStrings.vitamin_book_selection[languageContext.language]
+
         return (
-            <div className={"form-section"} style={{width: "90%"}}>
-                <Select className={selectClass}
-                        options={selectList}
-                        defaultValue={selectList[initialIndex]}
-                        onChange={handleEntryChange}
-                        styles={customSelectStyles}
-                />
+            <div className={"d-flex flex-row align-items-baseline"} style={{paddingBottom: "3vh"}}>
+                <span className={"form-text"} style={{paddingRight: "1ch"}}>
+                    {label}
+                </span>
+                <div className={"form-section"} style={{width: "70%"}}>
+                    <Select className={selectClass}
+                            options={selectList}
+                            defaultValue={selectList[initialIndex]}
+                            onChange={handleEntryChange}
+                            styles={customSelectStyles}
+                    />
+                </div>
             </div>
         )
     }
@@ -63,15 +70,15 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
     }
 
     const renderDailyRequirements = (dailyRequirementsText: string) => {
-        if(!dailyRequirementsText.includes("|")) {
+        if (!dailyRequirementsText.includes("|")) {
             return <p>{dailyRequirementsText}</p>
         } else {
             const parts = dailyRequirementsText.split("|");
-            if(parts[0].includes(":") && parts[1].includes(":")) {
+            if (parts[0].includes(":") && parts[1].includes(":")) {
                 const malePartsPrefix = parts[0].substring(0, parts[0].indexOf(":")).trim()
-                const malePartsData = parts[0].substring(parts[0].indexOf(":")+1).trim()
+                const malePartsData = parts[0].substring(parts[0].indexOf(":") + 1).trim()
                 const femalePartsPrefix = parts[1].substring(0, parts[1].indexOf(":")).trim()
-                const femalePartsData = parts[1].substring(parts[1].indexOf(":")+1).trim()
+                const femalePartsData = parts[1].substring(parts[1].indexOf(":") + 1).trim()
                 return <span>
                     <p>
                         <span style={{display: "inline-block", minWidth: "8ch"}}><b>{malePartsPrefix}:</b></span>
@@ -106,14 +113,14 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
         const hasDailyRequirements = selectedEntry.requirements !== undefined && selectedEntry.requirements !== null
 
         return (
-            <div style={{margin: "16px", height: "50vh"}}>
+            <div style={{margin: "0.8vw", height: "50vh"}} className={"form-text"}>
                 <h4>
                     {title}
                     {scientificTitle !== null &&
                     <i style={{marginLeft: "12px"}}>{`(${scientificTitle})`}</i>
                     }
                 </h4>
-                <p>
+                <p >
                     {selectedEntry.description[lang]}
                 </p>
                 {hasFunctionality &&
@@ -165,7 +172,11 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
                 <div className={"pb-5"}/>
                 <hr/>
                 <div>
-                    <p style={{fontWeight: 100, fontSize: "0.9rem", textAlign: "center"}}>{applicationStrings.vitamin_book_disclaimer[lang]}</p>
+                    <p style={{
+                        fontWeight: 100,
+                        fontSize: "0.9rem",
+                        textAlign: "center"
+                    }}>{applicationStrings.vitamin_book_disclaimer[lang]}</p>
                 </div>
             </div>
         )

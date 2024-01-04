@@ -244,15 +244,15 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
 
     const renderChart = (data: any) => {
+        const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
+
         if (!data) {
             return (
-                <div>
+                <div className={chartClass}>
                     {applicationStrings.label_noData[lang]}
                 </div>
             )
         }
-
-        const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
 
         return (
             <div className={chartClass}>
@@ -287,13 +287,8 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                     {subChart === Constants.CARBS_DATA_BASE &&
                     renderChart(basicChartData)
                     }
-                    {detailChartData && subChart === Constants.CARBS_DATA_DETAIL &&
+                    {subChart === Constants.CARBS_DATA_DETAIL &&
                     renderChart(detailChartData)
-                    }
-                    {!detailChartData && subChart === Constants.CARBS_DATA_DETAIL &&
-                    <div>
-                        {applicationStrings.label_noData[lang]}
-                    </div>
                     }
                 </div>
 

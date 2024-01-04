@@ -220,30 +220,28 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
         )
     }
 
-    const renderChart = (lipidsType) => {
+    const renderChart = (lipidsType, omegaDataAvailable?) => {
         const {saturated, unsaturatedMono, unsaturatedPoly, omegaData} = lipidData
+
+        const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
 
         let data
         if (lipidsType === Constants.LIPIDS_DATA_BASE) {
             if (!saturated || !unsaturatedMono || !unsaturatedPoly) {
-                return <div>{applicationStrings.label_noData[lang]}</div>
+                return <div className={chartClass}>{applicationStrings.label_noData[lang]}</div>
             }
             data = createTotalChartData(totalLipidsAmount);
         } else if (lipidsType === Constants.LIPIDS_DATA_OMEGA) {
-            if (omegaData) {
+            if (omegaData && omegaDataAvailable) {
                 data = createOmegaChartData(totalLipidsAmount, omegaData)
-            }
-
-            if (!omegaData) {
-                return <div>{applicationStrings.label_noData[lang]}</div>
+            } else {
+                return <div className={chartClass}>{applicationStrings.label_noData[lang]}</div>
             }
         }
 
         if (!data) {
-            return <div>{applicationStrings.label_noData[lang]}</div>
+            return <div className={chartClass}>{applicationStrings.label_noData[lang]}</div>
         }
-
-        const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
 
         return (
             <div className={chartClass}>
@@ -274,11 +272,8 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
                     {subChart === Constants.LIPIDS_DATA_BASE &&
                     renderChart(Constants.LIPIDS_DATA_BASE)
                     }
-                    {omegaDataAvailabe && subChart === Constants.LIPIDS_DATA_OMEGA &&
-                    renderChart(Constants.LIPIDS_DATA_OMEGA)
-                    }
-                    {!omegaDataAvailabe && subChart === Constants.LIPIDS_DATA_OMEGA &&
-                    <div>{applicationStrings.label_noData[lang]}</div>
+                    {subChart === Constants.LIPIDS_DATA_OMEGA &&
+                    renderChart(Constants.LIPIDS_DATA_OMEGA, omegaDataAvailabe)
                     }
                 </div>
 

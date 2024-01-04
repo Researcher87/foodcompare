@@ -15,13 +15,11 @@ export function CustomLegend(props: CustomLegendProps) {
             const element = props.legendData[i];
             const indent = element.indent > 0 ? "2ch" : "0ch";
             const id = `legendrow ${i}`;
-
             const legendItemLabelClass = mobile ? "legend-item-label" : "legend-item-label"
-            const legendClassName = isMobileDevice() ? "align-items-baseline" : "align-items-middle"
 
             legend.push(
                 <div key={id} className="row" style={{marginLeft: indent}}>
-                    <div style={{display: "flex", alignItems: "baseline"}} className={legendClassName}>
+                    <div className={"d-flex align-items-center"}>
                         <div className="legend-item" style={{background: element.color}}></div>
                         <span className={legendItemLabelClass}>{element.item}</span>
                     </div>
