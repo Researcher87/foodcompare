@@ -557,3 +557,22 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
     padding-top: 0.75vh;
     color: grey;
 }
+
+
+
+/*** 10. Ranking ***/
+
+.ranking-chart {
+    overflow-x: auto;
+    position: absolute;
+    max-width: 70vw;
+    background-color: $food-analyzer-panel-area;
+    padding: 1vw;
+}
+
+.ranking-chart-m {
+    overflow-x: auto;
+    position: absolute;
+    background-color: $food-analyzer-panel-area;
+    padding: 1vw;
+}

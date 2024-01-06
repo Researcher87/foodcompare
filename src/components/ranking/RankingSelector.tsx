@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import {getCategorySelectList} from "../../service/nutrientdata/CategoryService";
@@ -7,14 +7,21 @@ import {getElementsOfRankingGroup, getRankingGroups} from "../../service/Ranking
 import {applicationStrings} from "../../static/labels";
 import {Form} from "react-bootstrap";
 import Select from 'react-select';
-import {RANKING_MINERAL_INDEX, PATH_RANKING, QUERYKEY_DATAPANEL_RANKING, RANKING_VITAMIN_INDEX} from "../../config/Constants";
+import {
+    RANKING_MINERAL_INDEX,
+    PATH_RANKING,
+    QUERYKEY_DATAPANEL_RANKING,
+    RANKING_VITAMIN_INDEX
+} from "../../config/Constants";
 import {makeRankingPanelDataUri, parseRankingPanelDataUri} from "../../service/uri/RankingPanelUriService";
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
 import {customSelectStyles} from "../../config/UI_Config";
+import {FaLightbulb} from "react-icons/fa";
 
 interface RankingSelectorProps {
     openChart: (selectedCategory, selectedValue, use100gram, transformToDietaryRequirements) => void,
-    useHorizontalLayout: boolean
+    useHorizontalLayout: boolean,
+    numberOfChartItems: number
 }
 
 export function RankingSelector(props: RankingSelectorProps) {
@@ -25,7 +32,7 @@ export function RankingSelector(props: RankingSelectorProps) {
     const rankingPanelData = applicationContext?.applicationData.rankingPanelData
 
     const initializeState = rankingPanelData && rankingPanelData.selectedFoodCategory
-                                && rankingPanelData.selectedGroup && rankingPanelData.selectedElement ? true : false
+    && rankingPanelData.selectedGroup && rankingPanelData.selectedElement ? true : false
 
     const [elementsList, setElementsList] = useState<any>()
     const [initialized, setInitialized] = useState<boolean>(initializeState)
@@ -201,6 +208,11 @@ export function RankingSelector(props: RankingSelectorProps) {
                     </Form.Label>
                     }
                 </form>
+                {props.numberOfChartItems > 100 &&
+                <div style={{paddingTop: "20px"}}>
+                    <FaLightbulb/> <span className={"form-text"}>{applicationStrings.ranking_note[language]}</span>
+                </div>
+                }
             </div>
         );
 

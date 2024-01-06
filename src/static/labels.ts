@@ -1223,6 +1223,10 @@ export const applicationStrings = {
         de: 'Individuell',
         en: 'Individual'
     },
+    ranking_note: {
+        de: "Die angezeigten Ergebnisse sind auf die 100 Lebensmittel mit den höchsten Anteilen begrenzt.",
+        en: "The results being displayed are limited to the top 100 food items of the selected category."
+    },
     text_contact_disclaimer1: {
         de: 'Alle Rechte vorbehalten.',
         en: 'All rights reserved.'

@@ -3,7 +3,6 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import {LanguageContext} from "../../contexts/LangContext";
 import {ChartItem, getOrderedFoodList} from "../../service/RankingService";
 import {convertAbsoluteValueToDailyRequirement} from "../../service/calculation/DietaryRequirementService";
-import * as Constants from "./../../config/Constants";
 import {applicationStrings} from "../../static/labels";
 import {RankingSelector} from "./RankingSelector";
 import {RankingChart} from "./RankingChart";
@@ -80,40 +79,46 @@ export function RankingContainer() {
                 {selectedValue === null &&
                 renderHelpText()
                 }
-                {selectedValue !== null && chartItems && chartItems.length === 0 &&
-                applicationStrings.label_noData[language]
-                }
             </span>
         )
     }
 
-    const renderWebsite = () => {
-        return (
-            <div className="container-fluid" style={{paddingTop: "24px"}}>
-                <div className="row">
-                    <div className="col-3">
-                        <RankingSelector openChart={openChart} useHorizontalLayout={false}/>
-                    </div>
-                    {chartItems && chartItems.length > 0 &&
+    const numberOfChartItems = chartItems ? chartItems.length : 0;
+
+    const renderWebsite = () => (
+        <div className="container-fluid" style={{paddingTop: "24px"}}>
+            <div className="row">
+                <div className="col-3">
+                    <RankingSelector openChart={openChart}
+                                     useHorizontalLayout={false}
+                                     numberOfChartItems={numberOfChartItems}/>
+                </div>
+                {chartItems && chartItems.length > 0 ?
                     <div className="col-9">
                         <RankingChart chartItems={chartItems}
                                       unit={unit}
                                       selectedElement={selectedValue ? selectedValue.label : ""}/>
                     </div>
-                    }
-                    {
-                        renderInformationText()
-                    }
-                </div>
+                    :
+                    <div className="col-9">
+                        {applicationStrings.label_noData[language]}
+                    </div>
+                }
+                {
+                    renderInformationText()
+                }
             </div>
-        );
-    }
+        </div>
+    );
 
     const renderMobile = () => {
         return (
             <div className="container-fluid" style={{paddingTop: "24px"}}>
                 <div>
-                    <RankingSelector openChart={openChart} useHorizontalLayout={isMobileDevice()}/>
+                    <RankingSelector openChart={openChart}
+                                     useHorizontalLayout={isMobileDevice()}
+                                     numberOfChartItems={numberOfChartItems}
+                    />
                 </div>
                 <hr/>
                 {chartItems && chartItems.length > 0 &&
@@ -131,6 +136,7 @@ export function RankingContainer() {
     }
 
 
-    return isMobileDevice() ? renderMobile() : renderWebsite()
+    // return isMobileDevice() ? renderMobile() : renderWebsite()
+    return renderMobile()
 
 }

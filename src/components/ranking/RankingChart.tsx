@@ -39,13 +39,20 @@ export function RankingChart(props: RankingChartProps) {
         };
     }
 
+
     const getOptions = () => {
         let options = getBarChartOptionsForRanking(props.selectedElement, props.unit)
+        const unit = props.unit !== "%" ? props.unit : applicationStrings.label_requirement_chart[language]
         options = {
             ...options, plugins: {
                 ...options.plugins, title: {
                     ...options.plugins.title,
-                    position: "left"
+                    position: "left",
+                    align: "center",
+                    text: unit,
+                    padding: {
+                        bottom: "20"
+                    }
                 }
             }
         }
@@ -60,32 +67,33 @@ export function RankingChart(props: RankingChartProps) {
     const width = isMobileDevice()
         ? 40 * props.chartItems.length + 150
         : 50 * props.chartItems.length + 150
-    const height = isMobileDevice() ? 200 : 500;
-    const maxWidth = isMobileDevice() ? "90vw": 1000;
 
     let containerStyle: any = {
         position: "relative",
-        width: `${width}px`
+        width: `${width}px`,
+        height: "60vh"
     }
 
     if(isMobileDevice()) {
         containerStyle.height = `90vh`
     }
 
+    const chartClass = isMobileDevice() ? "ranking-chart-m" : "ranking-chart";
+
     return (
         <div>
-            <div className="smooth-scroll" style={{overflowX: "auto", position: "absolute", maxWidth: maxWidth}}>
+            <h5>{props.selectedElement}</h5>
+            <div className={`smooth-scroll ${chartClass}`}>
                 {dataAvailable &&
                     <div style={containerStyle}>
                         <Bar id="chart"
                              data={chartData}
-                             height={height}
                              options={options}
                         />
                     </div>
                 }
                 {!dataAvailable &&
-                  <span>{applicationStrings.label_noData[language]}</span>
+                    <div style={containerStyle}>{applicationStrings.label_noData[language]}</div>
                 }
             </div>
         </div>

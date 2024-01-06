@@ -13,7 +13,7 @@ export const release = "2.0.1"
 export const buildDate = "2023-10-10"
 
 export const maxMessageCharacters = 5000
-export const maxElementsInRankingChart = 50
+export const maxElementsInRankingChart = 100
 
 // The food class to be initially displayed in the food selector
 export const initialFoodClassId = 1
