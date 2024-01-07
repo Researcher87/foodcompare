@@ -16,6 +16,7 @@ export const color_chart_green_1 = "rgba(39, 177, 96)";		// Dark green
 export const color_chart_green_2 = "rgba(137, 238, 137)";	// Normal green
 export const color_chart_green_3 = "rgba(222, 245, 222)";		// Light green
 
+export const color_chart_yellow_0 = "rgba(190, 145, 0)";
 export const color_chart_yellow_1 = "rgba(212, 172, 13)";		// Dark yellow
 export const color_chart_yellow_2 = "rgba(244, 208, 63)";	// Normal yellow
 export const color_chart_yellow_3 = "rgba(249, 231, 159)";		// Light yellow
@@ -50,6 +51,8 @@ export const color_lipids = color_yellow;
 export const color_carbs = color_green;
 export const color_carbs_sugar = color_green_light;
 export const color_carbs_dietaryFibers = color_chart_fawn;
+export const color_ash = color_gray;
+export const color_caffeine = color_chart_yellow_0;
 
 export const color_carbs_mono_glucose = color_chart_yellow_green_1
 export const color_carbs_mono_fructose = color_chart_yellow_green_2
@@ -73,8 +76,6 @@ export const color_lipids_omega3 = color_chart_green_1;
 export const color_lipids_omega6 = color_chart_yellow_2;
 
 export const color_lipids_misc = color_gray;
-
-export const color_ash = color_gray;
 
 export const direct_compare_color1 = "#ffe085"
 export const direct_compare_color2 = "#d9ecff"

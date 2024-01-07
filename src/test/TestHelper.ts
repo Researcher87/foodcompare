@@ -30,6 +30,7 @@ export function makeDefaultBaseData(): BaseData {
         carbohydrates: 15,
         proteins: 15,
         ash: 10,
+        caffeine: 10,
         energy: 67.5,
         dietaryFibers: 16,
         alcohol: 0

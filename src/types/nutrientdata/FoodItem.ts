@@ -38,6 +38,7 @@ export interface BaseData {
 	dietaryFibers: number | null
 	ash: number | null
 	alcohol: number | null
+	caffeine: number | null
 }
 
 export interface VitaminData {

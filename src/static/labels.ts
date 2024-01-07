@@ -491,6 +491,14 @@ export const applicationStrings = {
         de: 'Reststoffe',
         en: 'Ash'
     },
+    label_nutrient_ash_short: {
+        de: 'Rest',
+        en: 'Ash'
+    },
+    label_nutrient_caffeine: {
+        de: 'Koffein',
+        en: 'Caffeine'
+    },
     label_nutrient_carbohydrates: {
         de: 'Kohlenhydrate',
         en: 'Carbohydrates'
@@ -500,7 +508,7 @@ export const applicationStrings = {
         en: 'Carbs'
     },
     label_nutrient_carbohydrates_short: {
-        de: 'Kohlenhyd.',
+        de: 'Kohlenhyd',
         en: 'Carbs'
     },
     label_nutrient_carbohydrates_fructose: {

@@ -49,6 +49,7 @@ export function getBaseCategoryValues(language: string) {
         {value: Constants.DATA_CARBS, label: applicationStrings.label_nutrient_carbohydrates[language]},
         {value: Constants.DATA_LIPIDS, label: applicationStrings.label_nutrient_lipids_long[language]},
         {value: Constants.DATA_PROTEINS, label: applicationStrings.label_nutrient_proteins[language]},
+        {value: Constants.DATA_CAFFEINE, label: applicationStrings.label_nutrient_caffeine[language]},
         {value: Constants.DATA_ASH, label: applicationStrings.label_nutrient_ash[language]},
     ];
 }
@@ -318,6 +319,10 @@ export function getValueOfFoodItem(foodItem, selectedValue): number | null {
 
     if (selectedValue === Constants.DATA_ASH) {
         value = baseData.ash;
+    }
+
+    if (selectedValue === Constants.DATA_CAFFEINE) {
+        value = baseData.caffeine;
     }
 
 

@@ -44,7 +44,8 @@ const baseDataReplacements: Array<Replacemet> = [
 	{key: "proteins", short: "_bE"},
 	{key: "dietaryFibers", short: "_bF"},
 	{key: "ash", short: "_bG"},
-	{key: "alcohol", short: "_bH"}
+	{key: "alcohol", short: "_bH"},
+	{key: "caffeine", short: "_bI"},
 ]
 
 const carbsDataReplacements: Array<Replacemet> = [

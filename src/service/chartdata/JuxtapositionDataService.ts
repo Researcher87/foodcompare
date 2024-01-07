@@ -120,7 +120,7 @@ export function createJuxtapositionTableData(props: JuxtapositionChartProps, foo
         const centerValue = sorted.length / 2
         const medianValue = allValues[Math.floor(centerValue)]
 
-        const rank = sorted.findIndex(num => num === value)
+        const rank = sorted.findIndex(num => num === value) + 1
 
         const label = valueInGroup.label
         const unit = getUnit(valueInGroup.value)

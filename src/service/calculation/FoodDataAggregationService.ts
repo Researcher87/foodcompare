@@ -346,6 +346,7 @@ function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize
     let dietaryFibers = 0;
     let alcohol = 0;
     let ash = 0;
+    let caffeine = 0;
 
     compositeList.forEach(selectedFoodItem => {
         const baseData = getNutrientData(selectedFoodItem).baseData;
@@ -360,6 +361,7 @@ function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize
         dietaryFibers += (baseData.dietaryFibers ? baseData.dietaryFibers : 0) * portionFactor;
         alcohol += (baseData.alcohol ? baseData.alcohol : 0) * portionFactor;
         ash += (baseData.ash ? baseData.ash : 0) * portionFactor;
+        caffeine += (baseData.caffeine ? baseData.caffeine : 0) * portionFactor;
     })
 
     return {
@@ -370,7 +372,8 @@ function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize
         water: createFinalValue(water, portionSize),
         dietaryFibers: createFinalValue(dietaryFibers, portionSize),
         alcohol: alcohol,
-        ash: ash
+        ash: ash,
+        caffeine: caffeine
     }
 
 }

@@ -16,6 +16,7 @@ export const CHART_SIZE_LARGE = 2
 export const CATEGORY_BEVERAGE = 10
 
 export const DATA_ASH = "d_ash";
+export const DATA_CAFFEINE = "d_caffeine";
 export const DATA_ENERGY = "d_energy";
 export const DATA_WATER = "d_water";
 export const DATA_CARBS = "d_carbs";

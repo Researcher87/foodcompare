@@ -41,7 +41,8 @@ export function createBaseDataTable(params: TableCalculationParams): Array<FoodT
         proteins,
         dietaryFibers,
         ash,
-        alcohol
+        alcohol,
+        caffeine
     } = getNutrientData(selectedFoodItem).baseData
     const {sugar} = getNutrientData(selectedFoodItem).carbohydrateData
 
@@ -79,6 +80,14 @@ export function createBaseDataTable(params: TableCalculationParams): Array<FoodT
         tableData.push(createTableObjectAlcohol(
             applicationStrings.label_nutrient_alcohol[language],
             alcohol,
+            portion, "g")
+        );
+    }
+
+    if (caffeine !== null) {
+        tableData.push(createTableObject(
+            applicationStrings.label_nutrient_caffeine[language],
+            caffeine / 1000,
             portion, "g")
         );
     }

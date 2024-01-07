@@ -86,6 +86,10 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     const onSubmitSingleItem = () => {
         if(props.mode === MODE_EDIT) {
             if(selectedFoodItem) {
+                if (selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
+                    NotificationManager.error(applicationStrings.message_error_invalid_portion[language])
+                    return
+                }
                 props.selectedFoodItemCallback(selectedFoodItem)
                 props.onHide()
             }
