@@ -74,7 +74,7 @@ export function RankingChart(props: RankingChartProps) {
         height: "60vh"
     }
 
-    if(isMobileDevice()) {
+    if (isMobileDevice()) {
         containerStyle.height = `90vh`
     }
 
@@ -82,18 +82,17 @@ export function RankingChart(props: RankingChartProps) {
 
     return (
         <div>
-            <h5>{props.selectedElement}</h5>
+            <p className={"form-text"} style={{fontWeight: "bold"}}>{props.selectedElement}</p>
             <div className={`smooth-scroll ${chartClass}`}>
-                {dataAvailable &&
+                {dataAvailable ?
                     <div style={containerStyle}>
                         <Bar id="chart"
                              data={chartData}
                              options={options}
                         />
                     </div>
-                }
-                {!dataAvailable &&
-                    <div style={containerStyle}>{applicationStrings.label_noData[language]}</div>
+                    :
+                    <div>{applicationStrings.label_noData[language]}</div>
                 }
             </div>
         </div>

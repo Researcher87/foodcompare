@@ -73,17 +73,21 @@ export function RankingContainer() {
         );
     }
 
-    const renderInformationText = () => {
+    const renderEmptyDatapage = () => {
         return (
             <span>
-                {selectedValue === null &&
-                renderHelpText()
+                {selectedValue === null ?
+                    <div>{renderHelpText()}</div>
+                    :
+                    <p>{applicationStrings.label_noData[language]}</p>
                 }
             </span>
         )
     }
 
     const numberOfChartItems = chartItems ? chartItems.length : 0;
+
+    // Note: The chart will only be displayed if at least 2 (!) items are in the result set.
 
     const renderWebsite = () => (
         <div className="container-fluid" style={{paddingTop: "24px"}}>
@@ -93,20 +97,15 @@ export function RankingContainer() {
                                      useHorizontalLayout={false}
                                      numberOfChartItems={numberOfChartItems}/>
                 </div>
-                {chartItems && chartItems.length > 0 ?
-                    <div className="col-9">
+                <div className="col-9">
+                    {chartItems && chartItems.length > 1 ?
                         <RankingChart chartItems={chartItems}
                                       unit={unit}
                                       selectedElement={selectedValue ? selectedValue.label : ""}/>
-                    </div>
-                    :
-                    <div className="col-9">
-                        {applicationStrings.label_noData[language]}
-                    </div>
-                }
-                {
-                    renderInformationText()
-                }
+                        :
+                        <div>{renderEmptyDatapage()}</div>
+                    }
+                </div>
             </div>
         </div>
     );
@@ -121,22 +120,16 @@ export function RankingContainer() {
                     />
                 </div>
                 <hr/>
-                {chartItems && chartItems.length > 0 &&
-                <div>
+                {chartItems && chartItems.length > 0 ?
                     <RankingChart chartItems={chartItems}
                                   unit={unit}
                                   selectedElement={selectedValue ? selectedValue.label : ""}/>
-                </div>
-                }
-                {
-                    renderInformationText()
+                    :
+                    <div>{renderEmptyDatapage()}</div>
                 }
             </div>
         );
     }
 
-
-    // return isMobileDevice() ? renderMobile() : renderWebsite()
-    return renderMobile()
-
+    return isMobileDevice() ? renderMobile() : renderWebsite()
 }
