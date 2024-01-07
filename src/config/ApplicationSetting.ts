@@ -9,8 +9,8 @@ import {
 import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from "../types/livedata/ChartConfigData";
 import {WindowDimension} from "../service/WindowDimension";
 
-export const release = "2.0.1"
-export const buildDate = "2023-10-10"
+export const release = "2.1"
+export const buildDate = "2024-01-07"
 
 export const maxMessageCharacters = 5000
 export const maxElementsInRankingChart = 100

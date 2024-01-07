@@ -260,7 +260,7 @@ export const versions = [
         date: "13-04-2023",
         subject: "Layout Revision / Mobile Device Support",
         features: [
-            "The Layout has been revised in several menus.",
+            "The layout has been revised in several menus.",
             "Food Compare is now also applicable on mobile devices, though some functionality is still limited.",
             "New food items have been added."
         ],
@@ -287,6 +287,42 @@ export const versions = [
         ],
         bugfixes: [
             "Some typos have been removes."
+        ]
+    },
+    {
+        id: "2.0",
+        date: "10-10-2023",
+        subject: "Improved and revised layout",
+        features: [
+            "The Layout has been entirely renewed in most menus.",
+            "New home screen and additional info page containing detailed information about Food Compare.",
+            "Better usability on mobile devices.",
+            "Settings menu in the food data panel was added.",
+            "Food elements in the data panel can be edit now",
+            "Import/Export function for food elements was added",
+            "Juxtaposition page was added to see values of a food in relation to other food elements in the database."
+        ],
+        bugfixes: [
+            "Some typos have been removed.",
+            "Incorrect alcohol value calculation has been fixed."
+        ]
+    },
+    {
+        id: "2.1",
+        date: "01-10-2024",
+        subject: "Vitamin and mineral book",
+        features: [
+            "The book of vitamins and minerals has been added to provide basic information about the meaning of the vitamins and minerals covered by Food Compare.",
+            "Caffeine values are now shown as part of the base data chart/table.",
+            "The layout of the ranking chart has been improved."
+        ],
+        updates: [
+            "Some older datasheets have been replaced by newer ones."
+        ],
+        bugfixes: [
+            "Fixed: It was possible to set a portion amount of 0 gram in the edit mode of the food data panel.",
+            "Fixed: Several display bugs.",
+            "Fixed: Sometimes, the alcohol value in the legend had the wrong color.",
         ]
     },
 ]
