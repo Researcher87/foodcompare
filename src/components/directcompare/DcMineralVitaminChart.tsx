@@ -150,7 +150,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     const maxY = synchronize
         ? roundToNextValue(maxValue) : undefined
 
-    const preconfigVitamins = {
+    const preConfigVitamins = {
         maxValue: maxY,
         portionType: portionType_vitamins,
         expand100: expand100_vitamins,
@@ -164,7 +164,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
         synchronize: synchronizeMinerals
     }
 
-    const preconfig = props.selectedSubChart === CHART_VITAMINS ? preconfigVitamins : preconfigMinerals
+    const preconfig = props.selectedSubChart === CHART_VITAMINS ? preConfigVitamins : preconfigMinerals
 
     const preconfigFoodItem1 = {...preconfig, barChartColor: direct_compare_color1}
     const preconfigFoodItem2 = {...preconfig, barChartColor: direct_compare_color2}

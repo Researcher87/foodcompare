@@ -37,8 +37,6 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         ? props.selectedFoodItem.compositeSubElements
         : []
 
-    console.log('Scheißjude', initialCompositeList)
-
     const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(initialFoodItem)
     const [compositeTitle, setCompositeTitle] = useState<string | null>(null)
     const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>( initialCompositeList ?? [])
@@ -121,7 +119,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         let aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
 
         if (compositeTitle !== null && compositeTitle.trim().length > 0) {
-            const titleToShow = compositeTitle.length < 24 ? compositeTitle.trim() : compositeTitle.substring(0, 21).trim() + "..."
+            const titleToShow = compositeTitle.length < 24
+                ? compositeTitle.trim()
+                : compositeTitle.substring(0, 21).trim() + "..."
             aggregatedSelectedFoodItem.title = titleToShow
         } else {
             aggregatedSelectedFoodItem.title = applicationStrings.input_compositelist_title[language]

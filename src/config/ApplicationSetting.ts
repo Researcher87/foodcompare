@@ -1,9 +1,8 @@
 import {
     AMOUNT_PORTION,
     CARBS_DATA_BASE, CHART_SIZE_MEDIUM,
-    CHART_TYPE_PIE, COMPARISON_REFERENCE_ALL,
+    CHART_TYPE_PIE,
     LIPIDS_DATA_BASE,
-    RANKING_BASE_DATA_INDEX,
     SEX_MALE
 } from "./Constants";
 import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from "../types/livedata/ChartConfigData";

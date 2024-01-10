@@ -80,15 +80,15 @@ export function UserSettings() {
         setSex(sex)
     }
 
-    const changePregnant = (event: any) => {
+    const changePregnant = () => {
         setPregnant(!pregnant)
     }
 
-    const changeBreastFeeding = (event: any) => {
+    const changeBreastFeeding = () => {
         setBreastFeeding(!breastFeeding)
     }
 
-    const changeAdditionalPalPorts = (event: any) => {
+    const changeAdditionalPalPorts = () => {
         setLeisureSport(!leisureSport)
     }
 
@@ -189,7 +189,7 @@ export function UserSettings() {
             <div className="form">
                 <div>
                     <Form.Check inline className="form-radiobutton"
-                                checked={pregnant === true}
+                                checked={pregnant}
                                 disabled={sex === SEX_MALE}
                                 label={applicationStrings.label_userSettings_pregnant[lang]}
                                 onClick={changePregnant}>

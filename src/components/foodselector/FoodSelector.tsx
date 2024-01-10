@@ -70,7 +70,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             : directCompareSelectorConfig2?.sourceCombine || false
 
     const [selectedCategory, setSelectedCategory] = useState<ReactSelectOption | null>(initialCategory)
-    const [selectdFoodClass, setSelectedFoodClass] = useState<ReactSelectFoodClassOption | null>(null)
+    const [selectedFoodClass, setSelectedFoodClass] = useState<ReactSelectFoodClassOption | null>(null)
     const [selectedFoodItem, setSelectedFoodItem] = useState<ReactSelectFoodItemOption | null>(null)
     const [selectedPortion, setSelectedPortion] = useState<ReactSelectPortionOption | null>(null)
     const [portionAmount, setPortionAmount] = useState<number>(0)
@@ -154,8 +154,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 }
             } else {
                 // Update data for outer component whenever render is triggered
-                if (selectedFoodItem && selectdFoodClass && selectedPortion) {
-                    const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectdFoodClass.value, selectedPortion.value)
+                if (selectedFoodItem && selectedFoodClass && selectedPortion) {
+                    const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectedFoodClass.value, selectedPortion.value)
                     if (newFoodItem) {
                         props.updateSelectedFoodItem(newFoodItem)
                         props.updateFoodSelectorConfig(selectedCategory, supplementData, combineData)
@@ -168,7 +168,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         }, [selectedFoodItem,
             selectedPortion,
-            selectdFoodClass,
+            selectedFoodClass,
             selectedCategory,
             selectedSource,
             portionAmount,
@@ -405,8 +405,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
             value = value.toLowerCase().trim()
 
-            // Find add all food class elements to the typeahead list that start with the search term
+            // Find all food class elements to the typeahead list that start with the search term
             foodClassesList.forEach(entry => {
+                if(entry.label.startsWith("Cou")) {
+                    console.log('XXX', entry)
+                }
                 let label = entry.label.toLowerCase()
                 if(label.includes(foodClassLabelSeparator)) {
                     label = label.substring(0, label.indexOf(foodClassLabelSeparator)).trim()
@@ -455,8 +458,6 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                     styles={customSelectStyles}
             />
         )
-
-        const x = props.directCompareSelector ? "a" : "b"
 
         const checkboxes = (
             <div>
@@ -538,11 +539,9 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const stylesFoodClass = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODCLASS) : customSelectStyles
     const stylesFoodItem = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODITEM) : customSelectStyles
 
-    console.log('ABC', props.mode)
-
     return <div>
         <div className="container">
-            {props.compositeSelector === true &&
+            {props.compositeSelector &&
             <div>
                 <span className={'form-label'}>{applicationStrings.label_title[language]}:</span>
                 <input className={inputClass}
@@ -571,7 +570,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         isDisabled={props.mode === MODE_EDIT}
                         onInputChange={handleFoodClassInputChange}
                         formatOptionLabel={foodclassFormatter}
-                        value={selectdFoodClass ? selectdFoodClass : foodClassesList[initialFoodClass]}
+                        value={selectedFoodClass ? selectedFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
                         onMenuClose ={() => resetTypeaheadFilter()}
                         styles={stylesFoodClass}

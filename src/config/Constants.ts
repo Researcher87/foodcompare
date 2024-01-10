@@ -49,7 +49,7 @@ export const DATA_VITAMINS_K = "d_k";
 
 export const DATA_LIPIDS_SATURATED = "d_saturated";
 export const DATA_LIPIDS_MONO_UNSATURATED = "d_mono_unsaturated";
-export const DATA_LIPIDS_POLY_UNSATURATED = "d_poly_unsaturate";
+export const DATA_LIPIDS_POLY_UNSATURATED = "d_poly_unsaturated";
 export const DATA_LIPIDS_TRANSFATTY_ACIDS = "d_transfatty_acids";
 
 export const DATA_CARBS_DIETARY_FIBERS = "d_dietary fibers";

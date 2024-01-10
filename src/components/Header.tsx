@@ -12,7 +12,7 @@ import {
     PATH_FOODCOMPARE,
     SOURCE_SRLEGACY,
     PATH_RANKING,
-    SOURCE_FNDDS, PATH_INFO, CHART_TYPE_PIE
+    SOURCE_FNDDS, PATH_INFO
 } from "../config/Constants";
 import {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";

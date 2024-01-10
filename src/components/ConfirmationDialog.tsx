@@ -9,7 +9,7 @@ interface ConfirmationDialogProps {
     title: string,
     confirmation: string,
     show: boolean,
-    proceed: (procedd: boolean) => void, // called when ok button is clicked.
+    proceed: (proceed: boolean) => void, // called when ok button is clicked.
     enableEscape: boolean,
     small?: boolean
 }
