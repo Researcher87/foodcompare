@@ -23,7 +23,7 @@ export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category:
             return
         }
         const nameType = foodNames[nameId - 1]
-        const foodName = getName(nameType, language)
+        const foodName = getName(nameType, language, true)
 
         /*
          * In order to find food items in the select menu, which do not match the food class name, the food class

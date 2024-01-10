@@ -27,6 +27,7 @@ import {
     customSelectStyles,
     getCustomSelectStyle
 } from "../../config/UI_Config";
+import getName from "../../service/LanguageService";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -407,9 +408,6 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
             // Find all food class elements to the typeahead list that start with the search term
             foodClassesList.forEach(entry => {
-                if(entry.label.startsWith("Cou")) {
-                    console.log('XXX', entry)
-                }
                 let label = entry.label.toLowerCase()
                 if(label.includes(foodClassLabelSeparator)) {
                     label = label.substring(0, label.indexOf(foodClassLabelSeparator)).trim()
@@ -526,12 +524,18 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     // Remove hidden food class information in the label, which is only used to facilitate user search (e.g. find 'Cheese' for term 'Gouda')
     const foodclassFormatter = (option) => {
-        const label = option.label
+        let label = option.label
 
-        if(label.includes("||")) {
-            const pos = label.indexOf("||")
-            return label.substring(0, pos)
+        if(label.includes(foodClassLabelSeparator)) {
+            const pos = label.indexOf(foodClassLabelSeparator)
+            label = label.substring(0, pos)
         }
+
+        if(label.includes("[")) {
+            const pos = label.indexOf("[")
+            label = label.substring(0, pos)
+        }
+
         return label
     }
 
