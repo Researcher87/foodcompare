@@ -120,8 +120,6 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     }
 
     setItemOfFoodDataPanel = (updatedSelectedFoodItem: SelectedFoodItem, selectedIndex: number) => {
-        console.log('SCHWEIN', updatedSelectedFoodItem)
-
         const updatedItems =this.state.applicationData.foodDataPanel.selectedFoodItems.map((item, index) => {
                 if(selectedIndex === index) {
                     const updatedElement = {...item,
@@ -138,8 +136,6 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 }
             }
         )
-
-        console.log('Updated items:', updatedItems)
 
         this.setState(prevState => ({
             applicationData: {

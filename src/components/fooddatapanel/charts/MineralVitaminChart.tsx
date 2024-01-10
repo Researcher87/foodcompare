@@ -106,8 +106,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
         const dataSettings = applicationContext.dataSettings
         const portionAmount = portionType_vitamins === AMOUNT_100_GRAM ? 100 : props.selectedFoodItem.portion.amount
 
-        console.log('Port am', portionAmount)
-
         if (!vitaminData || !requirementData) {
             return null
         }
@@ -278,7 +276,6 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
 
 
     const data = props.selectedSubChart === CHART_VITAMINS ? createVitaminChartData() : createMineralChartData();
-    console.log('DATA', data)
 
     if (!data) {
         return <div/>

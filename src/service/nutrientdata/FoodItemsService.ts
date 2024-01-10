@@ -1,7 +1,7 @@
 import FoodItem from "../../types/nutrientdata/FoodItem";
 import NameType from "../../types/nutrientdata/NameType";
 import {ReactSelectFoodItemOption} from "../../types/ReactSelectOption";
-import getName, {removeAuxiliaryInformationFromFoodName} from "../LanguageService";
+import getName, {} from "../LanguageService";
 
 
 /**
@@ -28,7 +28,7 @@ export function getFoodItem(foodItemId: number, foodItems: Array<FoodItem>): Foo
  */
 export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: number, foodNames: Array<NameType>,
                                        conditions: Array<NameType>, language: string): Array<ReactSelectFoodItemOption> {
-    const filteredFoodItems = getFoodItemsOfFoodclass(foodItems, foodClass)
+    const filteredFoodItems = getFoodItemsOfFoodClass(foodItems, foodClass)
     const reactSelectOptions: Array<ReactSelectFoodItemOption> = []
 
     if(filteredFoodItems && filteredFoodItems.length > 0) {
@@ -56,6 +56,7 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
  * @param foodItem The food item object.
  * @param foodNames The list of food items.
  * @param language The given language.
+ * @param verbose Specifies whether the verbose name should be returned or just the simple one.
  */
 export function getFoodItemName(foodItem: FoodItem, foodNames: Array<NameType>, language: string, verbose = false): string | null {
     const nameId = foodItem.nameId!!
@@ -72,7 +73,7 @@ export function getFoodItemName(foodItem: FoodItem, foodNames: Array<NameType>, 
  * @param foodItems The list of all food items.
  * @param foodClassId The ID of the selected food class.
  */
-export function getFoodItemsOfFoodclass(foodItems: Array<FoodItem>, foodClassId: number): Array<FoodItem> {
+export function getFoodItemsOfFoodClass(foodItems: Array<FoodItem>, foodClassId: number): Array<FoodItem> {
     return foodItems.filter(foodItem => {
         if(foodItem.foodClass === foodClassId) {
             return foodItem

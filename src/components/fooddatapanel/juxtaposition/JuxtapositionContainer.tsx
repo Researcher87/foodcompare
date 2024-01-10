@@ -105,8 +105,6 @@ export default function JuxtapostionContainer(props: ChartProps) {
     const rankingList = getRankingGroupsList()
     const group = selectedGroup ?? rankingList[0]
 
-    console.log("xxx", selectedGroup)
-
     const reference = selectedComparisonReference ?? referenceList[1]
 
     if(props.selectedFoodItem.aggregated === true) {

@@ -4,10 +4,9 @@ import {applicationStrings} from "../../static/labels";
 import * as ChartConfig from "../../config/ChartConfig";
 import {ChartDisplayData, LegendData} from "../../types/livedata/ChartDisplayData";
 import {CATEGORY_BEVERAGE} from "../../config/Constants";
-import {color_caffeine} from "../../config/ChartConfig";
 
 export function getTotalChartData(nutrientData: NutrientData, language: string, category: number | undefined): ChartDisplayData {
-    const alcoholValuePerc = nutrientData.baseData.alcohol !== null
+    const alcoholValuePercentage = nutrientData.baseData.alcohol !== null
         ? autoRound(nutrientData.baseData.alcohol)
         : null
 
@@ -33,8 +32,8 @@ export function getTotalChartData(nutrientData: NutrientData, language: string, 
         ChartConfig.color_proteins,
     ]
 
-    if (alcoholValuePerc !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
-        data.push(alcoholValuePerc)
+    if (alcoholValuePercentage !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
+        data.push(alcoholValuePercentage)
         labels.push(applicationStrings.label_nutrient_alcohol[language])
         colors.push(ChartConfig.color_alcohol)
     }
@@ -70,6 +69,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
     if (sugar > totalValue) {
         sugar = totalValue
     }
+
     if (dietaryFibers > totalValue) {
         dietaryFibers = totalValue
     }
