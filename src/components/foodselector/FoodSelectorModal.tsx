@@ -13,11 +13,12 @@ import {LanguageContext} from "../../contexts/LangContext";
 import {CompositeFoodList} from "./CompositeFoodList";
 import {initialFoodClassId, maximalPortionSize} from "../../config/ApplicationSetting";
 import combineFoodItems from "../../service/calculation/FoodDataAggregationService";
-import {FaQuestionCircle} from "react-icons/fa";
+import {FaQuestionCircle, FaList} from "react-icons/fa";
 import {HelpModal} from "../HelpModal";
 import {getHelpText} from "../../service/HelpService";
 import ReactSelectOption from "../../types/ReactSelectOption";
-import {MODE_EDIT} from "../../config/Constants";
+import {MODE_EDIT, SOURCE_FNDDS} from "../../config/Constants";
+import {CategoryTreeModal} from "./CategoryTreeModal";
 
 export interface FoodSelectorModalProps {
     onHide: () => void,
@@ -39,12 +40,15 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
     const [selectedFoodItem, setSelectedFoodItem] = useState<SelectedFoodItem | null>(initialFoodItem)
     const [compositeTitle, setCompositeTitle] = useState<string | null>(null)
-    const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>( initialCompositeList ?? [])
+    const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>(initialCompositeList ?? [])
     const [showHelpModal, setShowHelpModal] = useState<boolean>(false)
+    const [showCategoryTreeModal, setShowCategoryTreeModal] = useState<boolean>(false)
 
     if (!applicationContext) {
         return <div/>
     }
+
+    const {foodItems, foodClasses} = applicationContext.foodDataCorpus
 
     const updateSelectedFoodItem = (selectedFoodItem: SelectedFoodItem): void => {
         setSelectedFoodItem(selectedFoodItem)
@@ -82,8 +86,8 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const onSubmitSingleItem = () => {
-        if(props.mode === MODE_EDIT) {
-            if(selectedFoodItem) {
+        if (props.mode === MODE_EDIT) {
+            if (selectedFoodItem) {
                 if (selectedFoodItem.portion.amount < 1 || selectedFoodItem.portion.amount > maximalPortionSize) {
                     NotificationManager.error(applicationStrings.message_error_invalid_portion[language])
                     return
@@ -154,8 +158,41 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         setShowHelpModal(true)
     }
 
+    const onOpenCategoryTreeModal = () => {
+        setShowCategoryTreeModal(true)
+    }
+
     const title = props.compositeSelector ? applicationStrings.label_foodselector_composite[language] : applicationStrings.label_foodselector[language]
     const helpText = props.compositeSelector ? getHelpText(10, language) : getHelpText(9, language)
+
+    const selectFoodItemFromCategoryTree = (foodItemId) => {
+        const foodItemToSelect = foodItems.find(foodItem => foodItem.id === foodItemId)
+
+        if (foodItemToSelect && foodItemToSelect.portionData && foodItemToSelect.portionData.length > 0) {
+            let selectedSource = 0;  // SR Legacy = Default source
+            if(applicationContext.applicationData.preferredSource === SOURCE_FNDDS && foodItemToSelect.fnddsId) {
+                selectedSource = 1;
+            }
+
+            const foodClass = foodClasses.find(foodClass => foodClass.id === foodItemToSelect.foodClass)
+
+            const selectedObject: SelectedFoodItem = {
+                foodClass: foodClass,
+                foodItem: foodItemToSelect,
+                portion: foodItemToSelect.portionData[0],
+                selectedSource,
+                supplementData: applicationContext.applicationData.foodSelector.sourceSupplement,
+                combineData: applicationContext.applicationData.foodSelector.sourceCombine,
+            }
+
+            setSelectedFoodItem(selectedObject)
+        }
+    }
+
+    const category = applicationContext.applicationData.foodSelector.selectedCategory
+        ? applicationContext.applicationData.foodSelector.selectedCategory.value : 0
+
+    const canAccessCategoryTree = props.compositeSelector === false && props.mode !== MODE_EDIT
 
     return (
         <Modal size={'lg'} show={true} onHide={props.onHide} backdrop="static">
@@ -165,6 +202,12 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
             <Modal.Body>
                 {showHelpModal && helpText !== null &&
                 <HelpModal helpText={helpText} closeHelpModal={() => setShowHelpModal(false)}/>
+                }
+                {showCategoryTreeModal &&
+                <CategoryTreeModal selectedCategory={category}
+                                   closeModal={() => setShowCategoryTreeModal(false)}
+                                   selectFoodItemFromCategoryTree={selectFoodItemFromCategoryTree}
+                />
                 }
                 <div>
                     {!props.compositeSelector ?
@@ -197,9 +240,16 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
             </Modal.Body>
             <Modal.Footer className={"justify-content-between"}>
                 <div>
-                    <Button className={"btn btn-secondary"} onClick={onOpenHelpModal}>
-                        <FaQuestionCircle/>
-                    </Button>
+                    <span style={{paddingRight: "2ch"}}>
+                        <Button className={"btn btn-secondary"} onClick={onOpenHelpModal}>
+                            <FaQuestionCircle/>
+                        </Button>
+                    </span>
+                    {canAccessCategoryTree &&
+                        <Button className={"btn btn-secondary"} onClick={onOpenCategoryTreeModal}>
+                            <FaList/>
+                        </Button>
+                    }
                 </div>
                 <div className={"d-flex d-row justify-content-end"}>
                     <Button className={"btn-secondary form-button"} onClick={onCancel}>

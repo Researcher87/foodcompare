@@ -98,16 +98,18 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         ? autoRound((nutrientData.baseData.caffeine / 1000) / totalValue * 100)
         : null
 
-    const labels = [applicationStrings.label_nutrient_lipids[language],
-        applicationStrings.label_nutrient_proteins[language],
-        applicationStrings.label_nutrient_carbohydrates_short[language]]
+    const labels = [
+        applicationStrings.label_nutrient_carbohydrates_short[language],
+        applicationStrings.label_nutrient_lipids[language],
+        applicationStrings.label_nutrient_proteins[language]
+        ]
 
-    const values = [lipidValuePerc, proteinsValuePerc, carbValuePerc];
+    const values = [carbValuePerc, lipidValuePerc, proteinsValuePerc];
 
     const colors = [
+        ChartConfig.color_carbs,
         ChartConfig.color_lipids,
-        ChartConfig.color_proteins,
-        ChartConfig.color_carbs
+        ChartConfig.color_proteins
     ];
 
     if (alcoholValuePerc !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
@@ -158,7 +160,7 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean, categ
             color: ChartConfig.color_proteins
         },
         {
-            item: applicationStrings.label_nutrient_carbohydrates_short[lang],
+            item: applicationStrings.label_nutrient_carbohydrates[lang],
             color: ChartConfig.color_carbs,
         }
     ];

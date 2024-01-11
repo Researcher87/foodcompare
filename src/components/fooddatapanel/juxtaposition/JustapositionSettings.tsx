@@ -34,7 +34,7 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
             chartSize: chartSize,
             showLabels: showLabels
         }
-        console.log('jux', newJuxtapositionConfigData)
+
         applicationContext.setFoodDataPanelData.updateJuxtapositionConfig(newJuxtapositionConfigData)
         props.onHide()
     }

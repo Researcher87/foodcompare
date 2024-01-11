@@ -27,7 +27,7 @@ import {
     customSelectStyles,
     getCustomSelectStyle
 } from "../../config/UI_Config";
-import getName from "../../service/LanguageService";
+import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -38,6 +38,7 @@ export interface FoodSelectorProps {
     initialFoodClassToSet?: number
     selectedFoodItem?: SelectedFoodItem | null
     defaultFoodClass?: number
+    defaultFoodItem?: number
     directCompareSelectorNumber?: number
     mode?: string
 }
@@ -88,6 +89,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const [foodItemsList, setFoodItemsList] = useState<Array<ReactSelectFoodItemOption>>([])
     const [portionsList, setPortionsList] = useState<Array<ReactSelectPortionOption>>([])
     const [sourcesList, setSourcesList] = useState<Array<ReactSelectOption>>([])
+
+    // The food class search key entered by the user:
+    const [foodClassSearchTerm, setFoodClassSearchTerm] = useState<string>("")
+
+    // The selected food item object, from which the selector has once been created.
+    const initiallySetFoodItem = props.selectedFoodItem !== undefined ? props.selectedFoodItem : null
+    const [initiallySetSelectedFoodItem, setInitiallySetSelectedFoodItem] = useState<SelectedFoodItem | null>(initiallySetFoodItem)
 
     const windowSize = useWindowDimension()
 
@@ -249,14 +257,40 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         const {foodItems, foodNames, conditions} = applicationContext.foodDataCorpus
 
         if (foodItems) {
+            let selectedFoodItemIndex;
+
             const foodClassItems = getFoodItemsSelectList(foodItems, foodClass.value.id, foodNames, conditions, language)
             setFoodItemsList(foodClassItems)
-            setSelectedFoodItem(foodClassItems[0])
 
-            const foodItem = foodClassItems[0].value
-            if (foodItem) {
-                updatePortionsList(foodItem)
-                updateSourcesList(foodItem)
+            if(foodClassItems && foodClassItems.length > 0) {
+                const firstFoodClassItem = foodClassItems[0]
+                const nameId = firstFoodClassItem.value.nameId ?? -1
+                const firstFoodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
+
+                // The first food item in the list starts with the food class search string entered by the user
+                if(firstFoodItemName && firstFoodItemName.startsWith(foodClassSearchTerm)) {
+                    selectedFoodItemIndex = 0;
+                } else {   // Search for a food item in the list that starts with the food class search string
+                    const matchingIndex = foodClassItems.findIndex(item => {
+                        const nameId = item.value.nameId ?? -1
+                        const foodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
+                        return foodItemName && foodItemName.startsWith(foodClassSearchTerm)
+                    })
+                    if(matchingIndex >= 0) {  // Found one item in the list -> Select this item
+                        selectedFoodItemIndex = matchingIndex
+                    } else {   // Found no item in the list -> Just select the first food item
+                        selectedFoodItemIndex = 0
+                    }
+                }
+            }
+
+            const foodItemToSelect = foodClassItems[selectedFoodItemIndex]
+            setSelectedFoodItem(foodItemToSelect)
+
+            const foodItemValue = foodItemToSelect.value
+            if (foodItemValue) {
+                updatePortionsList(foodItemValue)
+                updateSourcesList(foodItemValue)
             }
         }
     }
@@ -396,6 +430,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
      */
     const handleFoodClassInputChange = (value, { action }) => {
         if (action === 'input-change') {
+            setFoodClassSearchTerm(value.trim())
+
             if(value.trim().length === 0) {
                 setFoodClassesTypeaheadList(foodClassesList)
                 return
@@ -442,8 +478,18 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         }
     }
 
-    if (props.selectedFoodItem && !initialized) {
-        setInitialFoodElement()
+    if (props.selectedFoodItem) {
+        if(!initialized) {
+            setInitialFoodElement()
+        } else {
+            if(initiallySetSelectedFoodItem === null && props.selectedFoodItem !== null
+                || (initiallySetSelectedFoodItem !== null
+                    && initiallySetSelectedFoodItem.foodItem.id !== props.selectedFoodItem.foodItem.id)
+            ) {  // Selecting an element from the category tree => reset category to "all" and load all food classes
+                setInitiallySetSelectedFoodItem(props.selectedFoodItem)
+                setInitialFoodElement()
+            }
+        }
     }
 
     const renderSourceLine = () => {

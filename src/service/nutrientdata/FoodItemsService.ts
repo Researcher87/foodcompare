@@ -48,6 +48,11 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
         })
     }
 
+    // If more than 5 items are in the list, we sort them lexicographically (otherwise by default).
+    if(reactSelectOptions.length > 5) {
+        reactSelectOptions.sort((obj1, obj2) => obj1.label.localeCompare(obj2.label))
+    }
+
     return reactSelectOptions
 }
 

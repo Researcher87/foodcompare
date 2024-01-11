@@ -231,6 +231,14 @@ export const applicationStrings = {
         de: 'Kategorie',
         en: 'Category'
     },
+    label_categoryTree_checkbox: {
+        de: 'Nach Kategorien unterteilen',
+        en: 'Separate by categories'
+    },
+    label_categoryTree_title: {
+        de: 'Food Compare Kategoriebaum',
+        en: 'Food Compare Category Tree'
+    },
     label_charttype: {
         de: 'Anzeige',
         en: 'Display'
@@ -508,7 +516,7 @@ export const applicationStrings = {
         en: 'Carbs'
     },
     label_nutrient_carbohydrates_short: {
-        de: 'Kohlenhyd',
+        de: 'Kohlenhyd.',
         en: 'Carbs'
     },
     label_nutrient_carbohydrates_fructose: {

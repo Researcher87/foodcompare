@@ -50,7 +50,7 @@ export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category:
 }
 
 
-function getFoodClassesOfCategory(foodClasses: Array<FoodClass>, category: number): Array<FoodClass> {
+export function getFoodClassesOfCategory(foodClasses: Array<FoodClass>, category: number): Array<FoodClass> {
     return foodClasses.filter(foodClass => {
         if (category === 0) {
             return foodClass
