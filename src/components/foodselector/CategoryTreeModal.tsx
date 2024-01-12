@@ -40,8 +40,11 @@ export function CategoryTreeModal(props: CategoryTreeModalProps): ReactElement {
         if(props.selectedCategory !== 0 || separateByCategory) {  // Separate by category
             return categories.map((category, index) => {
                 const name = getName(category, language)
+                const categoryHeading = props.selectedCategory === 0
+                    ? `${index+1}. ${name}`
+                    : name;
                 return <div style={{paddingBottom: "4ch"}} key={`tree-category-${index}`}>
-                    <h4>{`${index+1}. ${name}`}</h4>
+                    <h4>{categoryHeading}</h4>
                     {renderFoodClasses(category.id)}
                 </div>
             })
