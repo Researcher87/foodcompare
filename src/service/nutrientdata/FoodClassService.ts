@@ -45,7 +45,10 @@ export function getFoodClassSelectList(foodDataCorpus: FoodDataCorpus, category:
         })
     })
 
-    reactSelectOptions.sort((obj1, obj2) => obj1.label.localeCompare(obj2.label))
+    // Bugfix-187: Replace spaces in a word by a letter so that they WONT appear before the actual word (e.g. potato)
+    reactSelectOptions.sort((obj1, obj2) =>
+        (obj1.label).replace(" ", "x").localeCompare(obj2.label.replace(" ", "x"))
+    )
     return reactSelectOptions
 }
 
