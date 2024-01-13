@@ -14,7 +14,7 @@ import {
     PATH_RANKING,
     SOURCE_FNDDS, PATH_INFO
 } from "../config/Constants";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 import {applicationStrings} from "../static/labels";
 import {LanguageContext} from "../contexts/LangContext";
@@ -207,6 +207,5 @@ export default function Header() {
             </div>
         </div>
     );
-
 
 }
