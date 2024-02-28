@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import SelectedFoodItem from "../../../types/livedata/SelectedFoodItem";
@@ -6,7 +6,7 @@ import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataCont
 import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeService";
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
-import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
+import {isMobileDevice} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";
 import {getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
@@ -25,8 +25,6 @@ export function InfoData(props: InfoDataProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
-
-    const windowSize = useWindowDimension()
 
     const createRow = (key: string, value: any): RowElement => {
         return {

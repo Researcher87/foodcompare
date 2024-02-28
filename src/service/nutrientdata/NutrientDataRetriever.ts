@@ -72,18 +72,21 @@ function supplementCategory(nutrientCategory1: any, nutrientCategory2: any): any
         return nutrientCategory1
     }
 
+    // Clone to prevent overwriting the nutrient database elements!
+    const newDataObject = {...nutrientCategory1}
+
     const keysComplement = Object.keys(nutrientCategory2)
     keysComplement.forEach(key => {
-        if(nutrientCategory1[key] === null) {
+        if(newDataObject[key] === null) {
             const objectHasChildren = nutrientCategory2[key] && Object.keys(nutrientCategory2[key]).length > 0
             // Add value from source 2 to source 1 if it is not a sub-object (like Omega object on Lipids object):
             if(nutrientCategory2[key] !== null && !objectHasChildren) {
-                nutrientCategory1[key] = nutrientCategory2[key]
+                newDataObject[key] = nutrientCategory2[key]
             }
         }
     })
 
-    return nutrientCategory1
+    return newDataObject
 }
 
 
@@ -144,7 +147,7 @@ function combineCategory(nutrientCategory1: any, nutrientCategory2: any): any {
             finalValue = value2
         } else if(value1 === null && value2 === null) {
             finalValue = null
-        }else {
+        } else {
             finalValue = (value1 + value2) * 0.5
         }
 
