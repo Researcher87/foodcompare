@@ -358,8 +358,8 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
 }
 
 .foodanalyzer-buttonbar {
-    padding-left: 0.8vw;
-    padding-right: 5vw;
+    padding: 0.5vw;
+    margin-right: 2.4vw;
 }
 
 @mixin foodanalyzer-basepanel {
@@ -369,14 +369,14 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
 
 .foodanalyzer-basepanel {
     @include foodanalyzer-basepanel;
-    background:  #fcfefe;
-    border-width: min(0.2vw, 0.1vh);
-    border-color: #aaa;
-    border-style: solid;
+    background:  #fff;
 }
 
 .foodanalyzer-basepanel-empty {
     @include foodanalyzer-basepanel;
+    border-width: min(0.2vw, 0.1vh);
+    border-color: #aaa;
+    border-style: solid;
     background: $food-analyzer-panel-empty;
 }
 

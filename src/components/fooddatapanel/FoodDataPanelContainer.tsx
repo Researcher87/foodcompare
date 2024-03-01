@@ -235,40 +235,40 @@ export default function FoodDataPanelContainer() {
 
     return <div className={"container-scroll container-fluid"}>
         {selectedFoodItem !== null &&
-        <div style={{paddingTop: "4vh"}}>
-            <div className={containerDivClass} >
-                <div className={basepanelClass}>
-                    <div>
-                        <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
-                                               openSelectorModal={openSelectorModal}
-                                               openCompositeSelectorModal={openCompositeSelectorModal}
-                        />
-                    </div>
-                    <div className={"d-flex flex-row"}>
-                        <div className="col foodanalyzer-inner-container">
-                            {selectedFoodItems && selectedFoodItems.length > 0 ?
-                                <div>
-                                    <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
-                                </div>
-                                :
-                                <div className={"form-text"} style={{margin: "1.2vw"}}>
-                                    <p>
-                                        <i>
-                                            {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
-                                        </i>
-                                    </p>
-                                    {isMobileDevice() &&
-                                    <p>
-                                        <FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}
-                                    </p>
-                                    }
-                                </div>
-                            }
+            <div style={{paddingTop: "4vh"}}>
+                <div className={containerDivClass} >
+                    <div className={basepanelClass}>
+                        <div>
+                            <FoodAnalyzerContainer onNewFoodItemSelected={onNewFoodItemSelected}
+                                                   openSelectorModal={openSelectorModal}
+                                                   openCompositeSelectorModal={openCompositeSelectorModal}
+                            />
+                        </div>
+                        <div className={"d-flex flex-row"}>
+                            <div className="col foodanalyzer-inner-container">
+                                {selectedFoodItems && selectedFoodItems.length > 0 ?
+                                    <div>
+                                        <TabContainer indexToSet={selectedTabIndex} onTabChange={onTabChange}/>
+                                    </div>
+                                    :
+                                    <div className={"form-text"} style={{margin: "1.2vw"}}>
+                                        <p>
+                                            <i>
+                                                {applicationStrings.text_empty_fooddatapanel[languageContext.language]}
+                                            </i>
+                                        </p>
+                                        {isMobileDevice() &&
+                                        <p>
+                                            <FaExclamationTriangle/> {applicationStrings.text_empty_fooddatapanel_mobileInfo[languageContext.language]}
+                                        </p>
+                                        }
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         }
     </div>
 
