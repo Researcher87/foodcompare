@@ -2,7 +2,7 @@ import {ChartProps} from "../../../types/livedata/ChartPropsData";
 import {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../../contexts/LangContext";
-import {getRankingGroups} from "../../../service/RankingService";
+import {getNutrientGroups} from "../../../service/RankingService";
 import {applicationStrings} from "../../../static/labels";
 import {customSelectStyles} from "../../../config/UI_Config";
 import Select from 'react-select';
@@ -94,7 +94,7 @@ export default function JuxtapostionContainer(props: ChartProps) {
     }, [])
 
     const getRankingGroupsList = () => {
-        return getRankingGroups(language);
+        return getNutrientGroups(language);
     }
 
     const {

@@ -2,7 +2,7 @@ import {RankingPanelData} from "../../types/livedata/ApplicationData";
 import {prepareUriForParsing} from "./FoodDataPanelUriService";
 import {getCategorySelectList} from "../nutrientdata/CategoryService";
 import FoodDataCorpus from "../../types/nutrientdata/FoodDataCorpus";
-import {getElementsOfRankingGroup, getRankingGroups} from "../RankingService";
+import {getElementsOfRankingGroup, getNutrientGroups} from "../RankingService";
 
 export function makeRankingPanelDataUri(rankingPanelData: RankingPanelData) {
     const selectedCategory = rankingPanelData.selectedFoodCategory?.value
@@ -30,7 +30,7 @@ export function parseRankingPanelDataUri(uri: string, foodDataCorpus: FoodDataCo
     const selectedElement = fragments[2]
 
     const foodCategories = getCategorySelectList(foodDataCorpus.categories, language)
-    const groups = getRankingGroups(language)
+    const groups = getNutrientGroups(language)
     const elements = getElementsOfRankingGroup(selectedGroup, language)
 
     const selectedFoodCategoryOption = foodCategories.find(foodCategory => foodCategory.value === selectedCategory)

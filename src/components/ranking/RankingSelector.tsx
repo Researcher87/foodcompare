@@ -3,15 +3,15 @@ import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext
 import {LanguageContext} from "../../contexts/LangContext";
 import {getCategorySelectList} from "../../service/nutrientdata/CategoryService";
 import {useHistory} from 'react-router-dom';
-import {getElementsOfRankingGroup, getRankingGroups} from "../../service/RankingService";
+import {getElementsOfRankingGroup, getNutrientGroups} from "../../service/RankingService";
 import {applicationStrings} from "../../static/labels";
 import {Form} from "react-bootstrap";
 import Select from 'react-select';
 import {
-    RANKING_MINERAL_INDEX,
+    NUTRIENT_MINERAL_INDEX,
     PATH_RANKING,
     QUERYKEY_DATAPANEL_RANKING,
-    RANKING_VITAMIN_INDEX
+    NUTRIENT_VITAMIN_INDEX
 } from "../../config/Constants";
 import {makeRankingPanelDataUri, parseRankingPanelDataUri} from "../../service/uri/RankingPanelUriService";
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
@@ -77,7 +77,8 @@ export function RankingSelector(props: RankingSelectorProps) {
         const value = queryString.substring(equalOperator + 1)
 
         if (key === QUERYKEY_DATAPANEL_RANKING && value.length > 1) {
-            const uriData: RankingPanelData | null = parseRankingPanelDataUri(value, applicationContext.foodDataCorpus, language)
+            const uriData: RankingPanelData | null = parseRankingPanelDataUri(value, applicationContext.foodDataCorpus,
+                language)
             if (!uriData) {
                 return
             }
@@ -151,10 +152,6 @@ export function RankingSelector(props: RankingSelectorProps) {
         return getCategorySelectList(applicationContext.foodDataCorpus.categories, language)
     }
 
-    const getRankingGroupsList = () => {
-        return getRankingGroups(language);
-    }
-
     const buildElementsList = (selectedGroup) => {
         if (!selectedGroup) {
             return;
@@ -169,7 +166,8 @@ export function RankingSelector(props: RankingSelectorProps) {
         }
 
         const rankingCategory = selectedGroup ? selectedGroup.value : null
-        const mineralOrVitaminCategory = (rankingCategory === RANKING_VITAMIN_INDEX) || (rankingCategory === RANKING_MINERAL_INDEX);
+        const mineralOrVitaminCategory = (rankingCategory === NUTRIENT_VITAMIN_INDEX)
+            || (rankingCategory === NUTRIENT_MINERAL_INDEX);
         const transformToDietaryRequirements = mineralOrVitaminCategory ? showDietaryRequirements : false;
 
         props.openChart(selectedFoodCategory, selectedElement, use100gram, transformToDietaryRequirements);
@@ -197,7 +195,7 @@ export function RankingSelector(props: RankingSelectorProps) {
                         />
                         {applicationStrings.label_portion_common[language]}
                     </label>
-                    {(rankingCategory === RANKING_VITAMIN_INDEX || rankingCategory === RANKING_MINERAL_INDEX) &&
+                    {(rankingCategory === NUTRIENT_VITAMIN_INDEX || rankingCategory === NUTRIENT_MINERAL_INDEX) &&
                     <Form.Label className="form-elements">
                         <Form.Check className="form-radiobutton"
                                     inline={true}
@@ -218,10 +216,12 @@ export function RankingSelector(props: RankingSelectorProps) {
 
     }
 
-    const rankingList = getRankingGroupsList()
+    const nutrientGroups = getNutrientGroups(language);
 
     const containerClass = props.useHorizontalLayout ? "container row" : "container"
-    const selectorClass = props.useHorizontalLayout ? "col-4 select-menu form-section" : "column select-menu form-section"
+    const selectorClass = props.useHorizontalLayout
+        ? "col-4 select-menu form-section"
+        : "column select-menu form-section"
 
     return (
         <div className={containerClass}>
@@ -237,7 +237,7 @@ export function RankingSelector(props: RankingSelectorProps) {
             <div className={selectorClass}>
                 <span className={"form-label"}>{applicationStrings.label_group[language]}:</span>
                 <Select className="form-control-sm"
-                        options={rankingList}
+                        options={nutrientGroups}
                         value={selectedGroup}
                         styles={customSelectStyles}
                         onChange={handleGroupChange}
@@ -255,6 +255,5 @@ export function RankingSelector(props: RankingSelectorProps) {
             {renderPortionForm()}
         </div>
     )
-
 
 }

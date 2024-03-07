@@ -8,12 +8,12 @@ import NameType from "../types/nutrientdata/NameType";
 import {getNutrientDataForFoodItem} from "./nutrientdata/NutrientDataRetriever";
 import getName from "./LanguageService";
 import {
-    RANKING_BASE_DATA_INDEX,
-    RANKING_CARBS_INDEX,
-    RANKING_LIPIDS_INDEX,
-    RANKING_MINERAL_INDEX,
-    RANKING_PROTEIN_INDEX,
-    RANKING_VITAMIN_INDEX
+    NUTRIENT_BASE_DATA_INDEX,
+    NUTRIENT_CARBS_INDEX,
+    NUTRIENT_LIPIDS_INDEX,
+    NUTRIENT_MINERAL_INDEX,
+    NUTRIENT_PROTEIN_INDEX,
+    NUTRIENT_VITAMIN_INDEX
 } from "../config/Constants";
 import ReactSelectOption from "../types/ReactSelectOption";
 
@@ -27,14 +27,14 @@ export interface ChartItem {
 /**
  * Returns a list of all ranking categories.
  */
-export function getRankingGroups(language: string) {
+export function getNutrientGroups(language: string) {
     return [
-        {value: RANKING_BASE_DATA_INDEX, label: applicationStrings.label_chart_nutrientComposition[language]},
-        {value: RANKING_VITAMIN_INDEX, label: applicationStrings.label_nutrient_vit[language]},
-        {value: RANKING_MINERAL_INDEX, label: applicationStrings.label_nutrient_min[language]},
-        {value: RANKING_LIPIDS_INDEX, label: applicationStrings.label_nutrient_lipids_long[language]},
-        {value: RANKING_CARBS_INDEX, label: applicationStrings.label_nutrient_carbohydrates[language]},
-        {value: RANKING_PROTEIN_INDEX, label: applicationStrings.label_chart_proteins[language]},
+        {value: NUTRIENT_BASE_DATA_INDEX, label: applicationStrings.label_chart_nutrientComposition[language]},
+        {value: NUTRIENT_VITAMIN_INDEX, label: applicationStrings.label_nutrient_vit[language]},
+        {value: NUTRIENT_MINERAL_INDEX, label: applicationStrings.label_nutrient_min[language]},
+        {value: NUTRIENT_LIPIDS_INDEX, label: applicationStrings.label_nutrient_lipids_long[language]},
+        {value: NUTRIENT_CARBS_INDEX, label: applicationStrings.label_nutrient_carbohydrates[language]},
+        {value: NUTRIENT_PROTEIN_INDEX, label: applicationStrings.label_chart_proteins[language]},
     ];
 }
 
@@ -50,6 +50,7 @@ export function getBaseCategoryValues(language: string) {
         {value: Constants.DATA_LIPIDS, label: applicationStrings.label_nutrient_lipids_long[language]},
         {value: Constants.DATA_PROTEINS, label: applicationStrings.label_nutrient_proteins[language]},
         {value: Constants.DATA_CAFFEINE, label: applicationStrings.label_nutrient_caffeine[language]},
+        {value: Constants.DATA_ALCOHOL, label: applicationStrings.label_nutrient_alcohol[language]},
         {value: Constants.DATA_ASH, label: applicationStrings.label_nutrient_ash[language]},
     ];
 }
@@ -194,17 +195,17 @@ export function getProteinCategoryValues(language: string) {
 
 export function getElementsOfRankingGroup(rankingGroup: number, language: string) {
     switch (rankingGroup) {
-        case RANKING_BASE_DATA_INDEX:
+        case NUTRIENT_BASE_DATA_INDEX:
             return getBaseCategoryValues(language)
-        case RANKING_VITAMIN_INDEX:
+        case NUTRIENT_VITAMIN_INDEX:
             return getVitaminCategoryValues(language)
-        case RANKING_MINERAL_INDEX:
+        case NUTRIENT_MINERAL_INDEX:
             return getMineralCategoryValues(language)
-        case RANKING_LIPIDS_INDEX:
+        case NUTRIENT_LIPIDS_INDEX:
             return getLipidCategoryValues(language)
-        case RANKING_CARBS_INDEX:
+        case NUTRIENT_CARBS_INDEX:
             return getCarbohydrateCategoryValues(language)
-        case RANKING_PROTEIN_INDEX:
+        case NUTRIENT_PROTEIN_INDEX:
             return getProteinCategoryValues(language)
     }
 }
@@ -279,10 +280,10 @@ export function sortChartItems(chartItems: Array<ChartItem>) {
 }
 
 
-export function getValueOfFoodItem(foodItem, selectedValue): number | null {
+export function getValueOfFoodItem(foodItem, selectedValue, sourceToUse= 0, supplementData = true): number | null {
     let value
 
-    const nutrientData = getNutrientDataForFoodItem(foodItem, 0, true)
+    const nutrientData = getNutrientDataForFoodItem(foodItem, sourceToUse, supplementData)
 
     const baseData = nutrientData.baseData;
     const vitaminData = nutrientData.vitaminData;
@@ -323,6 +324,10 @@ export function getValueOfFoodItem(foodItem, selectedValue): number | null {
 
     if (selectedValue === Constants.DATA_CAFFEINE) {
         value = baseData.caffeine;
+    }
+
+    if (selectedValue === Constants.DATA_ALCOHOL) {
+        value = baseData.alcohol;
     }
 
 
@@ -434,7 +439,6 @@ export function getValueOfFoodItem(foodItem, selectedValue): number | null {
     if (selectedValue === Constants.DATA_LIPIDS_TRANSFATTY_ACIDS) {
         value = lipidData.transFattyAcids;
     }
-
 
     // Carbohydrates
 

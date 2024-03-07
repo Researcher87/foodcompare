@@ -3,7 +3,6 @@ import {autoRound} from "../calculation/MathService";
 import {applicationStrings} from "../../static/labels";
 import * as ChartConfig from "../../config/ChartConfig";
 import {ChartDisplayData, LegendData} from "../../types/livedata/ChartDisplayData";
-import {CATEGORY_BEVERAGE} from "../../config/Constants";
 
 export function getTotalChartData(nutrientData: NutrientData, language: string, category: number | undefined): ChartDisplayData {
     const alcoholValuePercentage = nutrientData.baseData.alcohol !== null
@@ -32,7 +31,7 @@ export function getTotalChartData(nutrientData: NutrientData, language: string, 
         ChartConfig.color_proteins,
     ]
 
-    if (alcoholValuePercentage !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
+    if (alcoholValuePercentage !== null) {
         data.push(alcoholValuePercentage)
         labels.push(applicationStrings.label_nutrient_alcohol[language])
         colors.push(ChartConfig.color_alcohol)
@@ -102,7 +101,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         applicationStrings.label_nutrient_carbohydrates_short[language],
         applicationStrings.label_nutrient_lipids[language],
         applicationStrings.label_nutrient_proteins[language]
-        ]
+    ]
 
     const values = [carbValuePerc, lipidValuePerc, proteinsValuePerc];
 
@@ -112,7 +111,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         ChartConfig.color_proteins
     ];
 
-    if (alcoholValuePerc !== null && (category === CATEGORY_BEVERAGE || category === undefined)) {
+    if (alcoholValuePerc !== null) {
         labels.push(applicationStrings.label_nutrient_alcohol[language])
         values.push(alcoholValuePerc)
         colors.push(ChartConfig.color_alcohol)
@@ -181,12 +180,10 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean, categ
         );
     }
 
-    if (category === CATEGORY_BEVERAGE || category === undefined) {
-        legendData.push({
-            item: applicationStrings.label_nutrient_alcohol[lang],
-            color: ChartConfig.color_alcohol,
-        })
-    }
+    legendData.push({
+        item: applicationStrings.label_nutrient_alcohol[lang],
+        color: ChartConfig.color_alcohol,
+    })
 
     legendData.push({
         item: applicationStrings.label_nutrient_caffeine[lang],

@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap'
 import {NotificationManager} from 'react-notifications'
 
 import FoodSelectorModal from '../foodselector/FoodSelectorModal'
-import {FaDownload, FaEdit, FaLayerGroup, FaPlusSquare, FaTrash, FaUpload} from "react-icons/fa";
+import {FaDownload, FaEdit, FaLayerGroup, FaPlusSquare, FaTable, FaTrash, FaUpload} from "react-icons/fa";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";
@@ -15,6 +15,7 @@ import {MODE_EDIT, MODE_NEW, PATH_FOODDATA_PANEL} from '../../config/Constants';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
 import {isMobileDevice} from "../../service/WindowDimension";
 import FoodDataPage from "./FoodDataPage";
+import {OverallView} from "./OverallView";
 
 const {compress, decompress} = require('shrink-string')
 
@@ -35,6 +36,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const [showFoodSelector, setShowFoodSelector] = useState<Boolean>(showFoodSelectorInitialState)
     const [showFoodAggregatedFoodSelector, setShowAggregatedFoodSelector] = useState<Boolean>(showCompositeFoodSelectorInitialState)
+    const [showOverallView, setShowOverallView] = useState<Boolean>(false)
     const [foodSelectorEditMode, setFoodSelectorEditMode] = useState<Boolean>(false)
 
     if (!applicationContext) {
@@ -84,6 +86,9 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
         }
     }
 
+    const onOpenOverallView = () => {
+        setShowOverallView(!showOverallView)
+    }
 
     const onImport = (event) => {
         const files = event.target.files;
@@ -155,9 +160,13 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     }
 
-    const onHide = (): void => {
+    const onHideSelector = (): void => {
         setShowFoodSelector(false)
         setShowAggregatedFoodSelector(false)
+    }
+
+    const onHideOverallView = (): void => {
+        setShowOverallView(false)
     }
 
     const onSelectFoodItemSubmit = (selectedFoodItem: SelectedFoodItem): void => {
@@ -205,8 +214,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const {selectedFoodItems, selectedFoodItemIndex} = applicationContext.applicationData.foodDataPanel
     const isFoodItemSelected = selectedFoodItems && selectedFoodItems.length > 0
-    const buttonClass = isMobileDevice() ? "btn m-2" : "btn mb-4 foodanalyzer-button"
-    const buttonClassWithExtraSpace = isMobileDevice() ? "btn m-2" : "btn mb-5 foodanalyzer-button"
+    const buttonClass = isMobileDevice() ? "btn m-2" : "btn mb-3 foodanalyzer-button"
+    const buttonClassWithExtraSpace = isMobileDevice() ? "btn m-2" : "btn mb-4 foodanalyzer-button"
 
     const divButtonClass = "d-flex flex-column align-items-left"
 
@@ -217,20 +226,23 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
     return (
         <div className={"foodanalyzer-buttonbar"}>
             {showFoodSelector &&
-            <FoodSelectorModal onHide={onHide}
-                               selectedFoodItemCallback={onSelectFoodItemSubmit}
-                               compositeSelector={false}
-                               selectedFoodItem={existingFoodItem}
-                               mode={mode}
-            />
+                <FoodSelectorModal onHide={onHideSelector}
+                                   selectedFoodItemCallback={onSelectFoodItemSubmit}
+                                   compositeSelector={false}
+                                   selectedFoodItem={existingFoodItem}
+                                   mode={mode}
+                />
             }
             {showFoodAggregatedFoodSelector &&
-            <FoodSelectorModal onHide={onHide}
-                               selectedFoodItemCallback={onSelectFoodItemSubmit}
-                               compositeSelector={true}
-                               selectedFoodItem={existingFoodItem}
-                               mode={mode}
-            />
+                <FoodSelectorModal onHide={onHideSelector}
+                                   selectedFoodItemCallback={onSelectFoodItemSubmit}
+                                   compositeSelector={true}
+                                   selectedFoodItem={existingFoodItem}
+                                   mode={mode}
+                />
+            }
+            {showOverallView &&
+                <OverallView onHide={onHideOverallView} />
             }
             <div className={divButtonClass}>
                 <Button onClick={() => onAddNewFoodItem(false)}
@@ -270,12 +282,20 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                        accept={".json"}
                        onChange={onImport}/>
                 <Button onClick={() => onOpenFileUpload()}
-                        className={buttonClassWithExtraSpace}
+                        className={buttonClass}
                         disabled={isMobileDevice()}
                         data-for={"fa-btn-import"}
                         data-tip={applicationStrings.tooltip_icon_import[language]}>
                     <FaUpload/>
                     <ReactTooltip id={"fa-btn-import"} globalEventOff="click"/>
+                </Button>
+                <Button onClick={() => onOpenOverallView()}
+                        className={buttonClassWithExtraSpace}
+                        disabled={isMobileDevice() || !isFoodItemSelected || selectedFoodItems.length <= 1}
+                        data-for={"fa-btn-overallview"}
+                        data-tip={applicationStrings.tooltip_icon_overallView[language]}>
+                    <FaTable/>
+                    <ReactTooltip id={"fa-btn-overallview"} globalEventOff="click"/>
                 </Button>
                 <Button onClick={() => onCloseAllTabs()}
                         disabled={!isFoodItemSelected}

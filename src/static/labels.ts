@@ -39,6 +39,10 @@ export const applicationStrings = {
         "de": "Buch der Vitamine",
         "en": "Book of Vitamins"
     },
+    _fl_ounces: {
+        de: 'Flüßigunzen',
+        en: 'Fl. ounces'
+    },
     _gram: {
         de: 'Gramm',
         en: 'Gram'
@@ -51,6 +55,10 @@ export const applicationStrings = {
         de: 'Mikrogramm (µg)',
         en: 'Microgram (µg)'
     },
+    _ounces: {
+        de: 'Unzen',
+        en: 'Ounces'
+    },
     _option_no: {
         de: 'Nein',
         en: 'No'
@@ -58,6 +66,10 @@ export const applicationStrings = {
     _option_yes: {
         de: 'Ja',
         en: 'Yes'
+    },
+    _pounds: {
+        de: 'Pfund',
+        en: 'Pounds'
     },
     button_add: {
         de: 'Hinzufügen',
@@ -319,6 +331,10 @@ export const applicationStrings = {
         de: 'Datentyp',
         en: 'Data type'
     },
+    label_error: {
+        de: 'Eingabefehler',
+        en: 'Input error'
+    },
     label_food: {
         de: "Lebensmittel",
         en: "Food"
@@ -342,6 +358,26 @@ export const applicationStrings = {
     label_group: {
         de: 'Gruppe',
         en: 'Group'
+    },
+    label_highlighting: {
+        de: 'Einfärben',
+        en: 'Highlighting'
+    },
+    label_highlighting_none: {
+        de: 'Nicht einfärben',
+        en: 'No highlighting'
+    },
+    label_highlighting_minmax: {
+        de: 'Minimum und Maximum',
+        en: 'Min and max'
+    },
+    label_highlighting_share_selection: {
+        de: 'Anteil im Lebensmittel im Bezug zur Auswahl',
+        en: 'Amount in food compared to the selection'
+    },
+    label_highlighting_share_database: {
+        de: 'Anteil im Lebensmittel im Bezug zur gesamten Datenbank',
+        en: 'Amount in food compared to the whole database'
     },
     label_home_slogan: {
         de: "Lebensmitteldaten grafisch darstellen",
@@ -486,6 +522,10 @@ export const applicationStrings = {
     label_mail_error_verification: {
         de: "Bitte verifizieren, dass Sie kein Roboter sind.",
         en: "Please verify that you are not a robot."
+    },
+    label_na: {
+        de: 'Keine Angabe',
+        en: 'Not available'
     },
     label_noData: {
         de: 'Keine Daten vorhanden',
@@ -899,6 +939,42 @@ export const applicationStrings = {
         de: 'Übersicht',
         en: 'Overview'
     },
+    label_overallview_avg: {
+        de: 'Mittelwert',
+        en: 'Average value'
+    },
+    label_overallview_avg_short: {
+        de: 'Mittel',
+        en: 'Mean'
+    },
+    label_overallview_compared: {
+        de: 'Vergleich zur Gesamtdatenbank:',
+        en: 'Compared to Food Compare database:'
+    },
+    label_overallview_max: {
+        de: 'Höchster Wert',
+        en: 'Highest value'
+    },
+    label_overallview_max_short: {
+        de: 'Max',
+        en: 'Max'
+    },
+    label_overallview_min: {
+        de: 'Niedrigster Wert',
+        en: 'Lowest value'
+    },
+    label_overallview_min_short: {
+        de: 'Min',
+        en: 'Min'
+    },
+    label_overallview_sum: {
+        de: 'Summe',
+        en: 'Sum'
+    },
+    label_overallview_title: {
+        de: 'Gesamtansicht der geladenen Daten',
+        en: 'Overall View of added food data'
+    },
     label_per_100g: {
         de: 'je 100 g',
         en: 'per 100 g'
@@ -978,6 +1054,18 @@ export const applicationStrings = {
     label_title: {
         de: 'Titel',
         en: 'Title'
+    },
+    label_tooltips: {
+        de: 'Tooltips anzeigen',
+        en: 'Show tool tips'
+    },
+    label_unit: {
+        de: 'Einheit',
+        en: 'Unit'
+    },
+    label_unit_conversion_title: {
+        de: 'Einheiten umwandeln',
+        en: 'Unit conversion'
     },
     label_unknown: {
         de: 'Unbekannt',
@@ -1110,6 +1198,10 @@ export const applicationStrings = {
     message_error_incomplete_form: {
         de: 'Das Formular ist unvollständig ausgefüllt.',
         en: 'The form is incomplete.'
+    },
+    message_error_input: {
+        de: 'Der Wert liegt außerhalb des zulässiges Bereichs.',
+        en: 'The value is outside the permissible range.'
     },
     message_error_invalid_portion: {
         de: 'Geben Sie bitte eine Portion zwischen 1 und 5000 Gramm an.',
@@ -1307,9 +1399,9 @@ export const applicationStrings = {
         de: 'Tab schließen',
         en: 'Close tab'
     },
-    tooltip_icon_minerals: {
-        de: 'Buch der Mineralstoffe öffnen',
-        en: 'Open minerals book'
+    tooltip_icon_editFoodItem: {
+        de: 'Ausgewähltes Lebensmittel bearbeiten',
+        en: 'Edit selected food item'
     },
     tooltip_icon_export: {
         de: 'Aktuelle Datenansicht speichern (Export)',
@@ -1319,9 +1411,9 @@ export const applicationStrings = {
         de: 'Food Compare Daten von Datei importieren',
         en: 'Import Food Compare data from file'
     },
-    tooltip_icon_editFoodItem: {
-        de: 'Ausgewähltes Lebensmittel bearbeiten',
-        en: 'Edit selected food item'
+    tooltip_icon_minerals: {
+        de: 'Buch der Mineralstoffe öffnen',
+        en: 'Open minerals book'
     },
     tooltip_icon_newFoodItem: {
         de: 'Lebensmittel hinzufügen',
@@ -1330,6 +1422,10 @@ export const applicationStrings = {
     tooltip_icon_newFoodItemStack: {
         de: 'Kombinierte Liste an Lebensmitteln hinzufügen (aggregierte Daten)',
         en: 'Add composite list of food items (aggregated data)'
+    },
+    tooltip_icon_overallView: {
+        de: 'Gesamtansicht aller Daten anzeigen',
+        en: 'Show overall data view'
     },
     tooltip_icon_proteins: {
         de: 'Buch der essenziellen Aminosäuren öffnen',

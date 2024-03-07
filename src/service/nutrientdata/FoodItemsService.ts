@@ -64,8 +64,8 @@ export function getFoodItemsSelectList(foodItems: Array<FoodItem>, foodClass: nu
  * @param verbose Specifies whether the verbose name should be returned or just the simple one.
  */
 export function getFoodItemName(foodItem: FoodItem, foodNames: Array<NameType>, language: string, verbose = false): string | null {
-    const nameId = foodItem.nameId!!
-    if(nameId > foodNames.length) {
+    const nameId = foodItem.nameId
+    if(!nameId || nameId > foodNames.length) {
         return null
     }
     const nameType = foodNames[nameId-1]

@@ -11,7 +11,7 @@ import FoodItem from "../../types/nutrientdata/FoodItem";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {getUnit} from "../calculation/NutrientCalculationService";
 import {JuxtapositionTableEntry} from "../../types/livedata/JuxtapositionTableEntry";
-import {autoRound} from "../calculation/MathService";
+import {autoRound, calculateMedian} from "../calculation/MathService";
 
 export interface JuxtapostionChartData {
     chartItems: Array<ChartItem>
@@ -118,7 +118,7 @@ export function createJuxtapositionTableData(props: JuxtapositionChartProps, foo
 
         const sorted = allValues.sort((a, b) => b-a)
         const centerValue = sorted.length / 2
-        const medianValue = allValues[Math.floor(centerValue)]
+        const medianValue = calculateMedian(allValues)
 
         const rank = sorted.findIndex(num => num === value) + 1
 

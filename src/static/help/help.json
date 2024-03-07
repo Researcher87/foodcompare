@@ -202,6 +202,34 @@
 					"On this data page, the nutrient data of the selected food is displayed in comparison to other foods. It is both possible to compare the selected food with all other food elements in Food Compare, or just with those food elements of the same category (such as fruit, vegetables, meat). If more than one food element has been added to the data panel, the selected food element can also be compared to the other food elements previously added to the data panel (tabs). In the chart mode, the nutrients of the selected food element will be sorted and classified in separate bar charts, with the selected food element being highlighted. In the table mode, the nutrient value is displayed, its rank compared to the other comparing food elements, as well as the minimum and maximum value, average and median. The rank refers to the position of the food element in the nutrient chart of decending order. Only those comparing food elements are regarded that actually have a data value for the corresponding nutrient."
 				]
 			}
+		},
+		{
+			"id": 12,
+			"remark": "Gesamtansicht aller Daten",
+			"de": {
+				"title": "Gesamtansicht aller Daten",
+				"content": [
+					"<p>Die Gesamttabelle zeigt die Nährstoffdaten aller im Analysebereich hinzugefügten Lebensmittel an. Die Nährstoffdaten sind nach Kategorie gruppiert, um die Tabelle übersichtlich zu halten. Auf der rechten Seite werden die aggregierten Werte angezeigt: Der höchste und niedrigste Wert für jeden Nährstoff sowie Durchschnitt und Summe über alle ausgewählten Lebensmittel. Wenn zu einem Lebensmittel kein Wert existiert, bleibt die Zelle frei.</p>",
+					"<p>Grundsätzlich lassen sich Nährstoffwerte auf zwei Weisen darstellen: In Bezug auf die eingestellte Portionsmenge und in Bezug zur 100-Gramm-Basis; letztere erleichtert meist das Vergleichen. Wenn die 100-Gramm-Basis eingestellt ist, ergeben sich ein paar weitere Anzeigeoptionen. In den Tooltips werden dann auch das das Minimum, Maximum und der Durchschnittswert aus allen Lebensmitteln der Food Compare Datenbank angezeigt. Ebenso kann ein weitere Option für das Einfärben der Tabelle ausgewählt werden (s.u.).</p>",
+					"<p>Die Tabellendaten können farblich hervorgehoben werden, um das Vergleich über mehrere Lebensmittel zu erleichtern. Folgende Optionen sind dabei möglich:</p>",
+					"<ol><li>Keine: Die Tabelle wird nicht eingefärbt.</li>",
+					"<li>Minimum und Maximum: Der höchste und niedrigste Wert jeder Zeile wird hervorgehoben.</li>",
+					"<li>Vergleich der ausgewählten Lebensmittel: Je dunkler die Zelle ist, desto höher ist der Anteil des Nährstoffs in diesem Lebensmittel im Vergleich zu den anderen Lebensmitteln in der Tabelle. Diese Option kann nur ausgewählt werden, wenn wenigstens drei Lebensmittel der Tabelle hinzugefügt wurden.</li>",
+					"<li>Vergleich zu allen Lebensmitteln in Food Compare: Je dunkler die Zelle ist, desto höher ist der Anteil des Nährstoffs in diesem Lebensmittel im Vergleich zu allen anderen Lebensmitteln in Food Compare. Diese Option kann nur ausgewählt werden, wenn wenigstens drei Lebensmittel der Tabelle hinzugefügt wurden un die Berechnung auf 100-Gramm-Basis eingestellt ist.</ol>"
+				]
+			},
+			"en": {
+				"title": "Overall view",
+				"content": [
+					"<p>The overall data view provides the nutrient data for all selected food items in the analysis panel. Nutrient values are grouped by nutrient categories to keep the overall table more compact. At the right end of the table, the aggregated values are displayed: The minimum and maximum value for each nutrient, the average value and sum across all selected foods. If there is no value for a nutrient of a food, the cell remains empty.</p>",
+					"<p>Generally, nutrient values can be displayed in two ways: Referring to the set portion amount and related to 100 gram basis (the latter makes it usually better comparable). If the 100 gram basis is set, some further features are provided. In the tooltips, the minimum, maximum and average amount of the nutrient compared to the whole Food Compare database will be shown. Additionally, a further color scheme is then provided (see below).</p>",
+					"<p>The table data is highlighted to alleviate the comparison across different foods. Up to four options can be set:</p>",
+					"<ol><li>None: The table remains white.</li>",
+					"<li>Minimum and maximum: Highlights the minimum and maximum value of each row.</li>",
+					"<li>Highlighting the amount compared to the selection: The darker the table cell is, the higher is the amount compared to the other foods in the table. This option can only be selected if at least 3 foods are displayed in the table.</li>",
+					"<li>Highlighting the amount compared to the whole database: The darker the table cell is, the higher is the amount compared to all other foods in the Food Compare database. This option can only be selected if at least 3 foods are displayed and the weight mode is set to  100 g.</li></ol>"
+				]
+			}
 		}
 	]
 }
