@@ -4,7 +4,7 @@ import {FoodTableDataObject} from "../types/livedata/SelectedFoodItemData";
 import {getNutrientData} from "./nutrientdata/NutrientDataRetriever";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import {getTotalAmountOfCarotenoids} from "./calculation/provitaminCalculation/CarotenoidCalculationService";
-import {CATEGORY_BEVERAGE, OPTION_YES, UNIT_GRAM, UNIT_MICROGRAM, UNIT_MILLIGRAM} from "../config/Constants";
+import {OPTION_YES, UNIT_GRAM, UNIT_MICROGRAM, UNIT_MILLIGRAM} from "../config/Constants";
 import {
     getTotalAmountOfExtendedVitaminE,
     hasExtendedData
@@ -75,8 +75,7 @@ export function createBaseDataTable(params: TableCalculationParams): Array<FoodT
         );
     }
 
-    // We display alcohol content only if the food class is beverage or unknown
-    if (alcohol !== null && (selectedFoodItem.foodClass?.category === CATEGORY_BEVERAGE || selectedFoodItem.foodClass === null)) {
+    if (alcohol !== null) {
         tableData.push(createTableObjectAlcohol(
             applicationStrings.label_nutrient_alcohol[language],
             alcohol,
@@ -1123,7 +1122,7 @@ function createTableObjectAlcohol(label: string, value_100g: number, portion: nu
 }
 
 
-function calculatePortionData(value: number | null, portionSize: number): number | null {
+export function calculatePortionData(value: number | null, portionSize: number): number | null {
     if (value === null || value === undefined) {
         return null;
     } else if (value === 0) {

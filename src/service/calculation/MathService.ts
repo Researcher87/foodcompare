@@ -98,4 +98,8 @@ export function convertStringToBoolean(value: string) {
 	return value === "1" ? true : false
 }
 
-
+export function calculateMedian(values: Array<number>) {
+    const sorted = values.sort((a, b) => b-a)
+    const centerValue = sorted.length / 2
+    return values[Math.floor(centerValue)]
+}

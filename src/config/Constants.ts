@@ -13,8 +13,7 @@ export const CHART_SIZE_SMALL = 0
 export const CHART_SIZE_MEDIUM = 1
 export const CHART_SIZE_LARGE = 2
 
-export const CATEGORY_BEVERAGE = 10
-
+export const DATA_ALCOHOL = "alcohol";
 export const DATA_ASH = "d_ash";
 export const DATA_CAFFEINE = "d_caffeine";
 export const DATA_ENERGY = "d_energy";
@@ -140,12 +139,17 @@ export const UNIT_GRAM = 0
 export const UNIT_MILLIGRAM = 1
 export const UNIT_MICROGRAM = 2
 
-export const RANKING_BASE_DATA_INDEX = 0
-export const RANKING_VITAMIN_INDEX = 1
-export const RANKING_MINERAL_INDEX = 2
-export const RANKING_LIPIDS_INDEX = 3
-export const RANKING_CARBS_INDEX = 4
-export const RANKING_PROTEIN_INDEX = 5
+export const NUTRIENT_BASE_DATA_INDEX = 0
+export const NUTRIENT_VITAMIN_INDEX = 1
+export const NUTRIENT_MINERAL_INDEX = 2
+export const NUTRIENT_LIPIDS_INDEX = 3
+export const NUTRIENT_CARBS_INDEX = 4
+export const NUTRIENT_PROTEIN_INDEX = 5
+
+export const HIGHLIGHTING_NONE = 0
+export const HIGHLIGHTING_MIN_MAX = 1
+export const HIGHLIGHTING_SHARE_SELECTION = 2
+export const HIGHLIGHTING_SHARE_ALL = 3
 
 export const COMPARISON_REFERENCE_ALL = 0
 export const COMPARISON_REFERENCE_ALL_IN_CATEGORY = 1

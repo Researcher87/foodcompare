@@ -22,10 +22,14 @@ export function getNutrientDataForFoodItem(foodItem: FoodItem, sourceToUse?: num
     if (sourceToUse === null || sourceToUse === undefined || foodItem.nutrientDataList.length === 1) {
         return foodItem.nutrientDataList[0]
     } else {
-        const nutrientData = foodItem.nutrientDataList.find(nutrientDataObject => nutrientDataObject.source.id === sourceToUse)
+        const nutrientData = foodItem.nutrientDataList.find(
+            nutrientDataObject => nutrientDataObject.source.id === sourceToUse
+        )
         if (nutrientData) {
             if(supplementData || combineData) {
-                const complement = foodItem.nutrientDataList.find(nutrientDataObject => nutrientDataObject.source.id !== sourceToUse)
+                const complement = foodItem.nutrientDataList.find(
+                    nutrientDataObject => nutrientDataObject.source.id !== sourceToUse
+                )
                 if(complement) {
                     if(supplementData && !combineData) {
                         return supplementNutrientData(nutrientData, complement)

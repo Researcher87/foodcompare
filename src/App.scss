@@ -3,7 +3,7 @@
 // 1.1 Font sizes:
 
 $fontsize-text: calc(0.8rem + min(0.6vh, 0.3vw));       // General font size for texts, such as on the home screen
-$fontsize-forms: calc(0.6rem + min(0.55vh, 0.3vw));      // Default font unsed in forms
+$fontsize-forms: calc(0.6rem + min(0.55vh, 0.3vw));      // Default font used in forms
 $fontsize-label: calc(0.6rem + min(0.4vh, 0.25vw));      // Font size of form labels
 $fontsize-small: calc(0.5rem + min(0.5vh, 0.3vw));      // Font size for small components
 
@@ -25,6 +25,7 @@ $food-analyzer-panel-area: #f2f5fd;     // Background color of the food analyzer
 $food-analyzer-panel-border: $food-analyzer-panel-area;   // Border color if at least one tab is open
 $food-analyzer-panel-empty: $food-analyzer-panel-area;    // Background color of the data panel surrounding if no tab is open
 
+$help-modal-color: #f6eed5;
 
 // 1.3 Food Panel sizes:
 
@@ -575,4 +576,87 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
     position: absolute;
     background-color: $food-analyzer-panel-area;
     padding: 1vw;
+}
+
+
+/*** 11. Overall View ***/
+
+.overallview-table {
+    overflow-x: scroll;
+
+    &table {
+        table-layout: fixed;
+        width: 100%;
+        padding-bottom: 10vh;
+    }
+
+    &table, th, td {
+        border: solid 1px;
+        font-size: $fontsize-forms;
+    }
+}
+
+
+.toolTipTableCell {
+    position: relative;
+}
+
+@mixin toolTipCellContent {
+    display: none;
+    position: absolute;
+    background-color: #fdebd0;
+    border: 1px solid;
+    padding: 1.5ch;
+    font-style: normal;
+    font-size: $fontsize-forms;
+    font-weight: normal;
+    z-index: 100;
+}
+
+.toolTipCellContentHeader {
+    @include toolTipCellContent;
+    min-width: 10vw;
+    top: 5vh;
+    left: 3vw;
+}
+
+.toolTipCellContentTable {
+    @include toolTipCellContent;
+    min-width: 18vw;
+    left: 3vw;
+}
+
+.toolTipTableCell:hover span.toolTipCellContentHeader {
+    display: block;
+}
+
+.toolTipTableCell:hover span.toolTipCellContentTable {
+    display: block;
+}
+
+.tooltipKeyWord {
+    display: inline-block;
+    padding-left: 3ch;
+    font-weight: bold;
+    min-width: 20ch;
+}
+
+
+/*** 12. Help Modal ***/
+
+// Help modal may appear as a modal in a modal, therefore it gets a custom layout (different color and shifted position)
+.help-modal .modal-content {
+    background-color: $help-modal-color;
+    border: 1px solid black;
+    top: 2.5vh !important;
+}
+
+
+/*** 13. Unit Conversion Modal ***/
+
+// Help modal may appear as a modal in a modal, therefore it gets a custom layout (different color and shifted position)
+.unit-modal .modal-content {
+    background-color: #eee;
+    border: 1px solid black;
+    top: 5vh !important;
 }

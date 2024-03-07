@@ -123,10 +123,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         let aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
 
         if (compositeTitle !== null && compositeTitle.trim().length > 0) {
-            const titleToShow = compositeTitle.length < 24
+            aggregatedSelectedFoodItem.title = compositeTitle.length < 24
                 ? compositeTitle.trim()
                 : compositeTitle.substring(0, 21).trim() + "..."
-            aggregatedSelectedFoodItem.title = titleToShow
         } else {
             aggregatedSelectedFoodItem.title = applicationStrings.input_compositelist_title[language]
         }
@@ -170,7 +169,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
 
         if (foodItemToSelect && foodItemToSelect.portionData && foodItemToSelect.portionData.length > 0) {
             let selectedSource = 0;  // SR Legacy = Default source
-            if(applicationContext.applicationData.preferredSource === SOURCE_FNDDS && foodItemToSelect.fnddsId) {
+            if (applicationContext.applicationData.preferredSource === SOURCE_FNDDS && foodItemToSelect.fnddsId) {
                 selectedSource = 1;
             }
 
@@ -192,7 +191,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     const category = applicationContext.applicationData.foodSelector.selectedCategory
         ? applicationContext.applicationData.foodSelector.selectedCategory.value : 0
 
-    const canAccessCategoryTree = props.compositeSelector === false && props.mode !== MODE_EDIT
+    const canAccessCategoryTree = !props.compositeSelector && props.mode !== MODE_EDIT
 
     return (
         <Modal size={'lg'} show={true} onHide={props.onHide} backdrop="static">
@@ -201,7 +200,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
             </Modal.Header>
             <Modal.Body>
                 {showHelpModal && helpText !== null &&
-                <HelpModal helpText={helpText} closeHelpModal={() => setShowHelpModal(false)}/>
+                <HelpModal helpText={helpText}
+                           size={"lg"}
+                           closeHelpModal={() => setShowHelpModal(false)}/>
                 }
                 {showCategoryTreeModal &&
                 <CategoryTreeModal selectedCategory={category}
@@ -246,9 +247,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                         </Button>
                     </span>
                     {canAccessCategoryTree &&
-                        <Button className={"btn btn-secondary"} onClick={onOpenCategoryTreeModal}>
-                            <FaList/>
-                        </Button>
+                    <Button className={"btn btn-secondary"} onClick={onOpenCategoryTreeModal}>
+                        <FaList/>
+                    </Button>
                     }
                 </div>
                 <div className={"d-flex d-row justify-content-end"}>
