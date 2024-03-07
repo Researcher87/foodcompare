@@ -16,10 +16,10 @@ import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodClass from "../../types/nutrientdata/FoodClass";
 import {LanguageContext} from "../../contexts/LangContext";
 import {isMobileDevice, isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
-import {MODE_EDIT, SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
+import {MODE_EDIT, PORTION_KEY_INDIVIDUAL, SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
 import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
-import {Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {
     COLOR_SELECTOR_CATEGORY,
     COLOR_SELECTOR_FOODCLASS, COLOR_SELECTOR_FOODITEM,
@@ -28,6 +28,9 @@ import {
     getCustomSelectStyle
 } from "../../config/UI_Config";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
+import {FaQuestionCircle, FaSlidersH} from "react-icons/fa";
+import {Unit, UnitConversionModal} from "../UnitConversionModal";
+import {max_portion} from "../../config/ChartConfig";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -89,6 +92,8 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const [foodItemsList, setFoodItemsList] = useState<Array<ReactSelectFoodItemOption>>([])
     const [portionsList, setPortionsList] = useState<Array<ReactSelectPortionOption>>([])
     const [sourcesList, setSourcesList] = useState<Array<ReactSelectOption>>([])
+
+    const [unitModalOpen, setUnitModalOpen] = useState<boolean>(false)
 
     // The food class search key entered by the user:
     const [foodClassSearchTerm, setFoodClassSearchTerm] = useState<string>("")
@@ -219,7 +224,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
     const handleTitleChange = (event) => {
         setTitle((event.target.value))
-        if(props.updateCompositeTitle !== undefined) {
+        if (props.updateCompositeTitle !== undefined) {
             props.updateCompositeTitle(event.target.value)
         }
     }
@@ -262,13 +267,13 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             const foodClassItems = getFoodItemsSelectList(foodItems, foodClass.value.id, foodNames, conditions, language)
             setFoodItemsList(foodClassItems)
 
-            if(foodClassItems && foodClassItems.length > 0) {
+            if (foodClassItems && foodClassItems.length > 0) {
                 const firstFoodClassItem = foodClassItems[0]
                 const nameId = firstFoodClassItem.value.nameId ?? -1
                 const firstFoodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
 
                 // The first food item in the list starts with the food class search string entered by the user
-                if(firstFoodItemName && firstFoodItemName.startsWith(foodClassSearchTerm)) {
+                if (firstFoodItemName && firstFoodItemName.startsWith(foodClassSearchTerm)) {
                     selectedFoodItemIndex = 0;
                 } else {   // Search for a food item in the list that starts with the food class search string
                     const matchingIndex = foodClassItems.findIndex(item => {
@@ -276,7 +281,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         const foodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
                         return foodItemName && foodItemName.startsWith(foodClassSearchTerm)
                     })
-                    if(matchingIndex >= 0) {  // Found one item in the list -> Select this item
+                    if (matchingIndex >= 0) {  // Found one item in the list -> Select this item
                         selectedFoodItemIndex = matchingIndex
                     } else {   // Found no item in the list -> Just select the first food item
                         selectedFoodItemIndex = 0
@@ -339,7 +344,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
 
     const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined,
-            portion: PortionData | undefined): SelectedFoodItem | null => {
+                                        portion: PortionData | undefined): SelectedFoodItem | null => {
         if (!foodItem || !foodClass || !portion) {
             return null
         }
@@ -428,11 +433,11 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
      * @param value The value entered in the select input field
      * @param action The event action
      */
-    const handleFoodClassInputChange = (value, { action }) => {
+    const handleFoodClassInputChange = (value, {action}) => {
         if (action === 'input-change') {
             setFoodClassSearchTerm(value.trim())
 
-            if(value.trim().length === 0) {
+            if (value.trim().length === 0) {
                 setFoodClassesTypeaheadList(foodClassesList)
                 return
             }
@@ -445,10 +450,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             // Find all food class elements to the typeahead list that start with the search term
             foodClassesList.forEach(entry => {
                 let label = entry.label.toLowerCase()
-                if(label.includes(foodClassLabelSeparator)) {
+                if (label.includes(foodClassLabelSeparator)) {
                     label = label.substring(0, label.indexOf(foodClassLabelSeparator)).trim()
                 }
-                if(label.startsWith(value)) {
+                if (label.startsWith(value)) {
                     resultList.push(entry)
                     dictionary.push(entry.label)
                 }
@@ -457,10 +462,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             // Now add all food class elements to the typeahead list that match the search term (yet do not start with it)
             foodClassesList.forEach(entry => {
                 let label = entry.label.toLowerCase()
-                if(label.includes(foodClassLabelSeparator)) {
+                if (label.includes(foodClassLabelSeparator)) {
                     label = label.substring(0, label.indexOf(foodClassLabelSeparator)).trim()
                 }
-                if(label.includes(value) && !label.startsWith(value)) {
+                if (label.includes(value) && !label.startsWith(value)) {
                     resultList.push(entry)
                     dictionary.push(entry.label)
                 }
@@ -469,7 +474,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             // Finally add all labels (class or items) that contain the search term
             foodClassesList.forEach(entry => {
                 const label = entry.label.toLowerCase()
-                if(label.includes(value) && !dictionary.includes(entry.label)) {
+                if (label.includes(value) && !dictionary.includes(entry.label)) {
                     resultList.push(entry)
                 }
             })
@@ -479,10 +484,10 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     if (props.selectedFoodItem) {
-        if(!initialized) {
+        if (!initialized) {
             setInitialFoodElement()
         } else {
-            if(initiallySetSelectedFoodItem === null && props.selectedFoodItem !== null
+            if (initiallySetSelectedFoodItem === null && props.selectedFoodItem !== null
                 || (initiallySetSelectedFoodItem !== null
                     && initiallySetSelectedFoodItem.foodItem.id !== props.selectedFoodItem.foodItem.id)
             ) {  // Selecting an element from the category tree => reset category to "all" and load all food classes
@@ -532,7 +537,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
             </div>
         )
 
-        if(props.directCompareSelector && !isMobileDevice()) {  // Direct Compare Selector uses column layout for Checkboxes/Source box
+        if (props.directCompareSelector && !isMobileDevice()) {  // Direct Compare Selector uses column layout for Checkboxes/Source box
             return <div>
                 <span className={'form-label'}>{applicationStrings.label_source[language]}:</span>
                 <div className={"d-flex row"}>
@@ -572,12 +577,12 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const foodclassFormatter = (option) => {
         let label = option.label
 
-        if(label.includes(foodClassLabelSeparator)) {
+        if (label.includes(foodClassLabelSeparator)) {
             const pos = label.indexOf(foodClassLabelSeparator)
             label = label.substring(0, pos)
         }
 
-        if(label.includes("[")) {
+        if (label.includes("[")) {
             const pos = label.indexOf("[")
             label = label.substring(0, pos)
         }
@@ -585,9 +590,35 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         return label
     }
 
-    const stylesCategory = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_CATEGORY) : customSelectStyles
-    const stylesFoodClass = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODCLASS) : customSelectStyles
-    const stylesFoodItem = !props.directCompareSelector ? getCustomSelectStyle(COLOR_SELECTOR_FOODITEM) : customSelectStyles
+    const stylesCategory = !props.directCompareSelector
+        ? getCustomSelectStyle(COLOR_SELECTOR_CATEGORY)
+        : customSelectStyles
+    const stylesFoodClass = !props.directCompareSelector
+        ? getCustomSelectStyle(COLOR_SELECTOR_FOODCLASS)
+        : customSelectStyles
+    const stylesFoodItem = !props.directCompareSelector
+        ? getCustomSelectStyle(COLOR_SELECTOR_FOODITEM)
+        : customSelectStyles
+
+    const onSubmitUnit = (value) => {
+        setPortionAmount(value)
+    }
+
+
+    const sourceUnits: Array<Unit> = [
+        {
+            labelKey: "_ounces",
+            factor: 28.413062
+        },
+        {
+            labelKey: "_fl_ounces",
+            factor: 29.573529
+        },
+        {
+            labelKey: "_pounds",
+            factor: 453.59237
+        },
+    ]
 
     return <div>
         <div className="container">
@@ -613,6 +644,16 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 />
             </div>
             }
+            {unitModalOpen &&
+                <UnitConversionModal sourceUnits={sourceUnits}
+                                     targetUnitLabelKey={"_gram"}
+                                     allowedMinimumTargetValue={1}
+                                     allowedMaximumTargetValue={max_portion}
+                                     initialValue={1}
+                                     onSubmit={onSubmitUnit}
+                                     closeModal={() => setUnitModalOpen(false)}>
+                </UnitConversionModal>
+            }
             <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select className={selectClass}
@@ -622,7 +663,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         formatOptionLabel={foodclassFormatter}
                         value={selectedFoodClass ? selectedFoodClass : foodClassesList[initialFoodClass]}
                         onChange={(value) => handleFoodClassChange(value)}
-                        onMenuClose ={() => resetTypeaheadFilter()}
+                        onMenuClose={() => resetTypeaheadFilter()}
                         styles={stylesFoodClass}
                 />
             </div>
@@ -648,13 +689,23 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                                 onChange={(value) => handlePortionChange(value)}/>
                     </div>
                     <div className={"col-4"}>
-                        <span className={'form-label'}>{amount_label}</span>
-                        <input className={inputClass}
-                               disabled={selectedPortion?.value.portionType !== 0}
-                               value={portionAmount}
-                               style={correspondingSelectElementStyle}
-                               onChange={handlePortionAmountChange}
-                        />
+                        <div className={"d-flex flex-row align-items-end"}>
+                            <div>
+                                <span className={'form-label'}>{amount_label}</span>
+                                <input className={inputClass}
+                                       disabled={selectedPortion?.value.portionType !== 0}
+                                       value={portionAmount}
+                                       style={correspondingSelectElementStyle}
+                                       onChange={handlePortionAmountChange}
+                                />
+                            </div>
+                            <Button className={"btn btn-secondary"}
+                                    disabled={!selectedPortion || selectedPortion.value.portionType !== PORTION_KEY_INDIVIDUAL}
+                                    style={{marginLeft: "1vw"}}
+                                    onClick={() => setUnitModalOpen(true)}>
+                                <FaSlidersH/>
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>

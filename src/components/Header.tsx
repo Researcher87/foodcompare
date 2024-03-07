@@ -139,7 +139,7 @@ export default function Header() {
                             type="radio"
                             value={LANGUAGE_EN}
                             checked={language === LANGUAGE_EN}
-                            onClick={handleLanguageButtonClick}>
+                            onChange={handleLanguageButtonClick}>
                 </Form.Check>
                 <Form.Check inline={true}
                             className="form-radiobutton"
@@ -147,7 +147,7 @@ export default function Header() {
                             type="radio"
                             value={LANGUAGE_DE}
                             checked={language === LANGUAGE_DE}
-                            onClick={handleLanguageButtonClick}>
+                            onChange={handleLanguageButtonClick}>
                 </Form.Check>
             </div>
         )
@@ -168,7 +168,7 @@ export default function Header() {
                             type="radio"
                             value={SOURCE_SRLEGACY}
                             checked={preferredSource === SOURCE_SRLEGACY}
-                            onClick={handleSourceButtonClick}>
+                            onChange={handleSourceButtonClick}>
                 </Form.Check>
                 <Form.Check inline={true}
                             className="form-radiobutton"
@@ -176,7 +176,7 @@ export default function Header() {
                             type="radio"
                             value={SOURCE_FNDDS}
                             checked={preferredSource === SOURCE_FNDDS}
-                            onClick={handleSourceButtonClick}>
+                            onChange={handleSourceButtonClick}>
                 </Form.Check>
             </div>
         )
