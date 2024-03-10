@@ -394,11 +394,11 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 selectedDataPage: TAB_BASE_DATA,
                 directCompareConfigChart: initialDirectCompareConfigData,
                 foodSelector1: {
-                    sourceSupplement: true,
+                    sourceSupplement: false,
                     sourceCombine: false
                 },
                 foodSelector2: {
-                    sourceSupplement: true,
+                    sourceSupplement: false,
                     sourceCombine: false
                 }
             },
@@ -411,7 +411,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             },
             foodSelector: {
                 selectedCategory: null,
-                sourceSupplement: true,
+                sourceSupplement: false,
                 sourceCombine: false,
             },
             preferredSource: SOURCE_SRLEGACY,

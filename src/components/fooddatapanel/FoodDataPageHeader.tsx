@@ -169,12 +169,20 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
     }
 
     const shouldShowBookIcon = selectedDataPage === TAB_VITAMIN_DATA || selectedDataPage == TAB_MINERAL_DATA
-    const aggregatedFoodItem = props.selectedFoodItem?.aggregated === true
+
+    const smallHelpDialogTabs = [TAB_BASE_DATA, TAB_ENERGY_DATA, TAB_INFO, TAB_VITAMIN_DATA, TAB_MINERAL_DATA]
+
+    const helpModalSize = smallHelpDialogTabs.includes(selectedDataPage)
+        ? "sm"
+        : "lg"
 
     return (
         <div style={{paddingBottom: "6px"}}>
             {helpText !== null &&
-            <HelpModal helpText={helpText} closeHelpModal={() => setHelpModalId(0)}/>
+            <HelpModal helpText={helpText}
+                       size={helpModalSize}
+                       closeHelpModal={() => setHelpModalId(0)}
+            />
             }
             {showBookModal &&
             <VitaminsBook selectedDataTab={selectedDataPage} bookData={bookData}

@@ -273,7 +273,9 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                 const firstFoodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
 
                 // The first food item in the list starts with the food class search string entered by the user
-                if (firstFoodItemName && firstFoodItemName.startsWith(foodClassSearchTerm)) {
+                if (firstFoodItemName
+                    && (firstFoodItemName.startsWith(foodClassSearchTerm)
+                        || firstFoodItemName.includes(" " + foodClassSearchTerm))) {
                     selectedFoodItemIndex = 0;
                 } else {   // Search for a food item in the list that starts with the food class search string
                     const matchingIndex = foodClassItems.findIndex(item => {

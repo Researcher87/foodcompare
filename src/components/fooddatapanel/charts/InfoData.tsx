@@ -10,6 +10,9 @@ import {isMobileDevice} from "../../../service/WindowDimension";
 import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";
 import {getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
+import {NutrientData} from "../../../types/nutrientdata/FoodItem";
+import {round} from "../../../service/calculation/MathService";
+import {countNumberOfAvailableValues} from "../../../service/nutrientdata/NutrientStatisticsService";
 
 interface InfoDataProps {
     selectedFoodItem: SelectedFoodItem,
@@ -111,6 +114,50 @@ export function InfoData(props: InfoDataProps) {
     }
 
 
+    const getDebugData = () => {
+        const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList
+        const source1 = nutrientData[0]
+        const source2 = nutrientData.length == 2 ? nutrientData[1] : null
+
+        const makeNutrientValuesLine = (dataObj: NutrientData) => {
+            return "E: " + round(dataObj.baseData.energy, 1) + ", "
+                + "W: " + round(dataObj.baseData.water, 1) + ", "
+                + "C: " + round(dataObj.baseData.carbohydrates, 1) + ", "
+                + "L: " + round(dataObj.baseData.lipids, 1) + ", "
+                + "P: " + round(dataObj.baseData.proteins, 1)
+        }
+
+        const makeAvailableNutrientValuesLine = (nutrientData: NutrientData) => {
+            const valuesStatistics = countNumberOfAvailableValues(props.selectedFoodItem.foodItem, nutrientData.source.id)
+            return `B: ${valuesStatistics.baseDataValues}, 
+                L: ${valuesStatistics.lipidDataValues},
+                C: ${valuesStatistics.carbDataValues},
+                P: ${valuesStatistics.proteinDataValues},
+                V: ${valuesStatistics.vitaminDataValues},
+                M: ${valuesStatistics.mineralDataValues},
+                SUM: ${valuesStatistics.getTotalNumberOfValues()}`
+        }
+
+        const tableDataDebug: Array<RowElement> = [];
+        tableDataDebug.push(createRow(`Key data ${source1.source.name}`, makeNutrientValuesLine(source1)))
+        if (source2) {
+            tableDataDebug.push(createRow(`Key data ${source2.source.name}`, makeNutrientValuesLine(source2)))
+
+        }
+
+        if (source2) {  // Empty line between the two sources if two sources exist
+            tableDataDebug.push(createRow(" ", " "))
+        }
+
+        tableDataDebug.push(createRow(`Avail. data ${source1.source.name}`, makeAvailableNutrientValuesLine(source1)))
+        if (source2) {
+            tableDataDebug.push(createRow(`Avail. data ${source2.source.name}`, makeAvailableNutrientValuesLine(source2)))
+        }
+
+        return tableDataDebug
+    }
+
+
     const makeTableDataCombinedFood = () => {
         if (!applicationContext) {
             return
@@ -129,10 +176,13 @@ export function InfoData(props: InfoDataProps) {
             if (conditionId !== 100) {
                 const condition = applicationContext.foodDataCorpus.conditions.find(condition => condition.id === conditionId)
                 const conditionName = condition ? getName(condition, lang) : null;
-                name += ` (${conditionName})`
+                name += `(${conditionName})`
             }
             tableData.push(
-                createRow(`${name}:`, `${portion} g`)
+                createRow(`${name}
+        :
+            `, `${portion}
+            g`)
             )
         }
 
@@ -154,7 +204,8 @@ export function InfoData(props: InfoDataProps) {
 
     const onLinkClick = () => {
         const sourceItemId = getNutrientData(props.selectedFoodItem).sourceItemId
-        const usdaLink = `https://fdc.nal.usda.gov/fdc-app.html#/food-details/${sourceItemId}/nutrients`
+        const usdaLink = `
+            https://fdc.nal.usda.gov/fdc-app.html#/food-details/${sourceItemId}/nutrients`
         const link = window.open(usdaLink, '_blank')
         if (link) {
             link.focus()
@@ -172,6 +223,11 @@ export function InfoData(props: InfoDataProps) {
                 {!isCompositeFoodElement &&
                 <div>
                     <div>
+                        {applicationContext?.debug &&
+                        <div style={{paddingBottom: "4vh"}}>
+                            {renderSubTable(getDebugData())}
+                        </div>
+                        }
                         <div>
                             {renderSubTable(getGeneralTableData())}
                         </div>

@@ -192,9 +192,10 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         ? applicationContext.applicationData.foodSelector.selectedCategory.value : 0
 
     const canAccessCategoryTree = !props.compositeSelector && props.mode !== MODE_EDIT
+    const size = props.compositeSelector ? "xl" : "lg"
 
     return (
-        <Modal size={'lg'} show={true} onHide={props.onHide} backdrop="static">
+        <Modal size={size} show={true} onHide={props.onHide} backdrop="static">
             <Modal.Header>
                 <b>{title}</b>
             </Modal.Header>

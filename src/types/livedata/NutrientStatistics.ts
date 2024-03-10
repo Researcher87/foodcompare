@@ -9,3 +9,17 @@ export default interface NutrientStatistics {
     median: number | null,
     allValuesSorted: Array<number>
 }
+
+/**
+ * Container class to store information about the available data values of a nutrient data object of a food item (number of nutrients
+ * in the nutrient data source that have a value).
+ */
+export interface FoodItemStatistics {
+    baseDataValues: number,
+    lipidDataValues: number,
+    carbDataValues: number,
+    proteinDataValues: number,
+    vitaminDataValues: number,
+    mineralDataValues: number,
+    getTotalNumberOfValues: () => number
+}

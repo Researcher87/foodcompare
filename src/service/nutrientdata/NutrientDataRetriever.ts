@@ -46,7 +46,6 @@ export function getNutrientDataForFoodItem(foodItem: FoodItem, sourceToUse?: num
     }
 }
 
-
 export function supplementNutrientData(selectedNutrientData: NutrientData, complementeNutrientData: NutrientData): NutrientData {
     const supplementedBaseData = supplementCategory(selectedNutrientData.baseData, complementeNutrientData.baseData)
     const supplementedVitaminData = supplementCategory(selectedNutrientData.vitaminData, complementeNutrientData.vitaminData)

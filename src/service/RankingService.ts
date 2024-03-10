@@ -280,9 +280,8 @@ export function sortChartItems(chartItems: Array<ChartItem>) {
 }
 
 
-export function getValueOfFoodItem(foodItem, selectedValue, sourceToUse= 0, supplementData = true): number | null {
+export function getValueOfFoodItem(foodItem: FoodItem, selectedValue: string, sourceToUse = 0, supplementData = false): number | null {
     let value
-
     const nutrientData = getNutrientDataForFoodItem(foodItem, sourceToUse, supplementData)
 
     const baseData = nutrientData.baseData;

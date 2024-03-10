@@ -44,7 +44,7 @@ export default function LipidsDataChart(props: LipidsDataChartProps) {
 
     const [chartType, setChartType] = useState<string>(chartConfig.chartType)
     const [showLegend, setShowLegend] = useState<boolean>(chartConfig.showLegend)
-    const [hideRemainders, setShowHideRemainders] = useState<boolean>(initialHideRemainders ? initialHideRemainders : false)
+    const [hideRemainders, setShowHideRemainders] = useState<boolean>(initialHideRemainders ? initialHideRemainders : true)
     const [expand100, setExpand100] = useState<boolean>(initialExpand100 ? initialExpand100 : false)
     const [subChart, setSubChart] = useState<string>(chartConfig.subChart ? chartConfig.subChart : LIPIDS_DATA_BASE)
 
