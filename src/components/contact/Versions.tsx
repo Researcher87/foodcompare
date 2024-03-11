@@ -21,13 +21,17 @@ export function Versions() {
         </h6>
 
         <p style={{paddingTop: "24px"}}>
-            <b>New features in Version {release}</b>
+            <b>Changes in Version {release}</b>
             <ul>
-                <li>Layout has been entirely revised.</li>
+                <li>Overall data view has been added.</li>
+                <li>Unit conversion between US weights and gram is now possible in the food selector.</li>
+                <li>Improved naming suggestions in the food selector typeahead field.</li>
+                <li>Food items in larger food classes (e.g. cheese) are now sorted lexicographically.</li>
+                <li>The calculation type of data calculation is now also shown on the info page of a selected food item.</li>
+                <li>Fixes: supplementing was sometimes carried out even when the corresponding option was disabled.</li>
                 <li>Several display bugs have been fixed.</li>
-                <li>Import/Export of data tabs is now available.</li>
-                <li>Selected food items in the food data panel can be edit now (including composite food items).</li>
-                <li>New food items have been added to the database.</li>
+                <li>Food Compare will no longer supplement data between two data sources of a food item if they differ too much in key
+                    parameters.</li>
             </ul>
         </p>
 

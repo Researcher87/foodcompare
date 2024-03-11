@@ -214,8 +214,8 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
     const {selectedFoodItems, selectedFoodItemIndex} = applicationContext.applicationData.foodDataPanel
     const isFoodItemSelected = selectedFoodItems && selectedFoodItems.length > 0
-    const buttonClass = isMobileDevice() ? "btn m-2" : "btn mb-3 foodanalyzer-button"
-    const buttonClassWithExtraSpace = isMobileDevice() ? "btn m-2" : "btn mb-4 foodanalyzer-button"
+    const buttonClass = isMobileDevice() ? "btn m-2" : "btn foodanalyzer-button-normal"
+    const buttonClassWithExtraSpace = isMobileDevice() ? "btn m-2" : "btn foodanalyzer-button-separator"
 
     const divButtonClass = "d-flex flex-column align-items-left"
 
@@ -252,14 +252,6 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                     <FaPlusSquare/>
                     <ReactTooltip id={"fa-btn-add"} globalEventOff="click"/>
                 </Button>
-                <Button onClick={() => onEditSelectedFoodItem()}
-                        className={buttonClassWithExtraSpace}
-                        disabled={!isFoodItemSelected}
-                        data-for={"fa-btn-edit"}
-                        data-tip={applicationStrings.tooltip_icon_editFoodItem[language]}>
-                    <FaEdit/>
-                    <ReactTooltip id={"fa-btn-edit"} globalEventOff="click"/>
-                </Button>
                 <Button onClick={() => onAddNewFoodItem(true)}
                         className={buttonClass}
                         disabled={isMobileDevice()}
@@ -267,6 +259,14 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
                         data-tip={applicationStrings.tooltip_icon_newFoodItemStack[language]}>
                     <FaLayerGroup/>
                     <ReactTooltip id={"fa-btn-aggregate"} globalEventOff="click"/>
+                </Button>
+                <Button onClick={() => onEditSelectedFoodItem()}
+                        className={buttonClassWithExtraSpace}
+                        disabled={!isFoodItemSelected}
+                        data-for={"fa-btn-edit"}
+                        data-tip={applicationStrings.tooltip_icon_editFoodItem[language]}>
+                    <FaEdit/>
+                    <ReactTooltip id={"fa-btn-edit"} globalEventOff="click"/>
                 </Button>
                 <Button onClick={() => onExport()}
                         className={buttonClass}

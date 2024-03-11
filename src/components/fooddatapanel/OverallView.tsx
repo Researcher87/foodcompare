@@ -352,7 +352,6 @@ export const OverallView = (props) => {
                                 bgColor = COLOR_EMPTY
                             } else {
                                 bgColor = getColorCodeForMinMaxRange(min, max, value)
-                                console.log('JUDE', value, bgColor)
                             }
                         } else if (colorSelection == HIGHLIGHTING_SHARE_ALL) {
                             if (value === null) {

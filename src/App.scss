@@ -353,9 +353,19 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
     height: $food-analyzer-chart-height-dc;
 }
 
-.foodanalyzer-button {
-    width: 7vmin;
-    height: 7vmin;
+@mixin foodanalyzer-button {
+    width: min(7vh, 3.5vw);
+    height: min(7vh, 3.5vw);
+}
+
+.foodanalyzer-button-normal {
+    @include foodanalyzer-button;
+    margin-bottom: 1.5vh;
+}
+
+.foodanalyzer-button-separator {
+    @include foodanalyzer-button;
+    margin-bottom: 3.5vh;
 }
 
 .foodanalyzer-buttonbar {

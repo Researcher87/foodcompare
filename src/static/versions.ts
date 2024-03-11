@@ -336,10 +336,11 @@ export const versions = [
         ],
         updates: [
             "The layout of some modals has been changed, in particular the help modals.",
-            "Food Compare will no longer supplements data between two data sources of a food item if they differ too much in key" +
+            "Food Compare will no longer supplement data between two data sources of a food item if they differ too much in key" +
             " parameters.",
             "The applied calculation type for each food item is now shown on the info page.",
-            "The name suggestions in the food selector typeahead field have been improved."
+            "The name suggestions in the food selector typeahead field have been improved.",
+            "Food items in larger food classes (e.g. cheese) are now sorted lexicographically."
         ],
         bugfixes: [
             "Fixed: Some incorrectly linked data sheets have been corrected.",
