@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import * as Constants from "../../../config/Constants"
 import {CHART_TYPE_BAR, CHART_TYPE_PIE, LIPIDS_DATA_BASE} from "../../../config/Constants"

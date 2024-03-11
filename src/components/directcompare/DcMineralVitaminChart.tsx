@@ -1,6 +1,6 @@
 import MineralVitaminChart from "../fooddatapanel/charts/MineralVitaminChart";
 import {AMOUNT_PORTION, CHART_VITAMINS} from "../../config/Constants";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {BarChartConfigurationForm} from "../charthelper/BarChartConfigurationForm";
 import {roundToNextValue} from "../../service/calculation/MathService";
@@ -80,7 +80,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
         : applicationContext.foodDataCorpus.dietaryRequirements?.mineralRequirementData
 
     if (!requirementData) {
-        return <div></div>
+        return <div/>
     }
 
     const handleRadioButtonClick = (event: any): void => {
@@ -172,7 +172,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}/>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem1}
                                      precalculatedData={dataSet1}
@@ -182,7 +182,7 @@ export function DcMineralVitaminChart(props: DC_MineralVitaminChartProps) {
 
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}/>
                 <MineralVitaminChart selectedSubChart={props.selectedSubChart}
                                      selectedFoodItem={props.selectedFoodItem2}
                                      precalculatedData={dataSet2}

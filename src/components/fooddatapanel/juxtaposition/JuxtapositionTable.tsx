@@ -2,13 +2,13 @@ import {JuxtapositionChartProps} from "../../../types/livedata/ChartPropsData";
 import {applicationStrings} from "../../../static/labels";
 import {isMobileDevice} from "../../../service/WindowDimension";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {JuxtapositionTableEntry} from "../../../types/livedata/JuxtapositionTableEntry";
 import {
-    createChartDataForJuxtapostionChart, createJuxtapositionTableData,
-    getFoodItemsForComparison, JuxtapostionChartData
+    createJuxtapositionTableData,
+    getFoodItemsForComparison
 } from "../../../service/chartdata/JuxtapositionDataService";
 
 export function JuxtapositionTable(props: JuxtapositionChartProps) {

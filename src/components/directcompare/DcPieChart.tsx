@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {PieChartConfigurationForm} from "../charthelper/PieChartConfigurationForm";
@@ -249,7 +249,7 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight, marginBottom: "2vh"}}
                  key={"directcompare container" + containerHeight}>
-                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}/>
                 {getChartComponent(props.selectedFoodItem1, 1)}
             </div>
         </Card>
@@ -257,7 +257,7 @@ export function DcPieChart(props: PieChartDirectCompareProp) {
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight, marginBottom: "2vh"}}
                  key={"directcompare container" + containerHeight}>
-                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}/>
                 {getChartComponent(props.selectedFoodItem2, 2)}
             </div>
         </Card>

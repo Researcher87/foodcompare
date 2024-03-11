@@ -1,6 +1,6 @@
 import {JuxtapositionChartProps} from "../../../types/livedata/ChartPropsData";
-import {color_chart_black, color_gray, color_line_blue, color_line_red} from "../../../config/ChartConfig";
-import {useContext, useEffect, useState} from "react";
+import {color_chart_black, color_line_blue, color_line_red} from "../../../config/ChartConfig";
+import React, {useContext} from "react";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {
     createChartDataForJuxtapostionChart, getFoodItemsForComparison,
@@ -11,7 +11,6 @@ import {Bar} from "react-chartjs-2";
 import {
     getBarChartOptionsForJuxtaposition
 } from "../../../service/ChartConfigurationService";
-import SelectedFoodItem from "../../../types/livedata/SelectedFoodItem";
 import {CHART_SIZE_LARGE, CHART_SIZE_MEDIUM, CHART_SIZE_SMALL} from "../../../config/Constants";
 import {shortenName} from "../../../service/nutrientdata/NameTypeService";
 

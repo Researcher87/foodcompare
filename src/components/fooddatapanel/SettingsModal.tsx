@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Button, Form, FormControl, FormGroup, Modal} from "react-bootstrap";
+import {Form, FormGroup, Modal} from "react-bootstrap";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";

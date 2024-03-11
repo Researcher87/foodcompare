@@ -1,8 +1,8 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {applicationStrings} from "../../../static/labels";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {CHART_TYPE_BAR, CHART_TYPE_PIE, TAB_BASE_DATA} from "../../../config/Constants";
+import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants";
 import {Bar, Pie} from "react-chartjs-2";
 import {getBarChartOptions, getPieChartOptions} from "../../../service/ChartConfigurationService";
 import {PieChartConfigurationForm} from "../../charthelper/PieChartConfigurationForm";
@@ -19,8 +19,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
-    const windowSize = useWindowDimension()
-
+    useWindowDimension();
     const chartConfig = props.directCompareConfig
         ? props.directCompareConfig
         : applicationContext

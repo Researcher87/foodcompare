@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {AMOUNT_PORTION, TAB_PROTEINS_DATA} from "../../../config/Constants";
+import {AMOUNT_PORTION} from "../../../config/Constants";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {applicationStrings} from "../../../static/labels";
@@ -17,8 +17,7 @@ export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
-    const windowSize = useWindowDimension()
-
+    useWindowDimension();
     const chartConfig = props.directCompareConfig
         ? props.directCompareConfig
         : applicationContext

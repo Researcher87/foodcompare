@@ -1,12 +1,11 @@
 import {ChartProps} from "../../../types/livedata/ChartPropsData";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {getNutrientGroups} from "../../../service/RankingService";
 import {applicationStrings} from "../../../static/labels";
 import {customSelectStyles} from "../../../config/UI_Config";
 import Select from 'react-select';
-import {useHistory, useLocation} from 'react-router-dom';
 import {
     COMPARISON_REFERENCE_ALL,
     COMPARISON_REFERENCE_ALL_IN_CATEGORY, COMPARISON_REFERENCE_SELECTED_TABS, DISPLAYMODE_CHART
@@ -18,8 +17,6 @@ import {JustapositionSettings} from "./JustapositionSettings";
 export default function JuxtapostionContainer(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const language = useContext(LanguageContext).language
-    const history = useHistory();
-    const location = useLocation();
 
     if (!applicationContext) {
         throw new Error("ApplicationContext unavailable.")
@@ -116,7 +113,7 @@ export default function JuxtapostionContainer(props: ChartProps) {
     return (
         <div className={"juxtaposition-data"}>
             {showSettingsModal &&
-                <JustapositionSettings onHide={() => setShowSettingsModal(false)}></JustapositionSettings>
+                <JustapositionSettings onHide={() => setShowSettingsModal(false)}/>
             }
             <div className={"container row align-items-end"}>
                 <div className={"col-4"}>
@@ -150,7 +147,7 @@ export default function JuxtapostionContainer(props: ChartProps) {
                 {props.displayMode === DISPLAYMODE_CHART ?
                     <JuxtapositionChart selectedGroup={group.value} selectedReference={reference.value} selectedFoodItem={props.selectedFoodItem}/>
                     :
-                    <JuxtapositionTable selectedGroup={group.value} selectedReference={reference.value} selectedFoodItem={props.selectedFoodItem}></JuxtapositionTable>
+                    <JuxtapositionTable selectedGroup={group.value} selectedReference={reference.value} selectedFoodItem={props.selectedFoodItem}/>
                 }
             </div>
         </div>

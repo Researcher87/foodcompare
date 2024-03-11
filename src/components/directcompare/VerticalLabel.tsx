@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import getName from "../../service/LanguageService";

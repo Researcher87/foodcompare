@@ -1,5 +1,4 @@
-import {useContext, useEffect, useState} from "react";
-import * as ChartConfig from "../../../config/ChartConfig"
+import React, {useContext, useEffect, useState} from "react";
 import * as Constants from "../../../config/Constants"
 import {CARBS_DATA_BASE, CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../../config/Constants"
 import {Bar, Pie} from "react-chartjs-2";
@@ -13,7 +12,6 @@ import {initialChartConfigData} from "../../../config/ApplicationSetting";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {CarbDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {GeneralChartConfigDirectCompareWithSubCharts} from "../../../types/livedata/ChartConfigData";
-import {useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {
     getCarbBaseChartData,
@@ -151,7 +149,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
 
 
     const createDetailChartData = () => {
-        const {carbohydrateData, baseData} = getNutrientData(props.selectedFoodItem)
         const nutrientData = getNutrientData(props.selectedFoodItem)
         const totalAmount = getNutrientData(props.selectedFoodItem).baseData.carbohydrates;
         const chartDisplayData = getCarbDetailsChartData(nutrientData, hideRemainders, totalAmount, lang)

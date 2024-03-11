@@ -16,7 +16,7 @@ import LipidsDataChart from "./charts/LipidsDataChart";
 import ProteinDataChart from "./charts/ProteinDataChart";
 import CarbsDataChart from "./charts/CarbsDataChart";
 import {ChartProps} from "../../types/livedata/ChartPropsData";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import JuxtapostionContainer from "./juxtaposition/JuxtapositionContainer";
 

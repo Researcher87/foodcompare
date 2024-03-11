@@ -1,6 +1,6 @@
 import {FoodTableDataObject} from "../../types/livedata/SelectedFoodItemData";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';

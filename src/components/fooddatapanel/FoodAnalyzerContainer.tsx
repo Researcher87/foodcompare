@@ -147,7 +147,7 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             const compressedContent = await compress(fileContent)
 
             // Create pseudo-element representing a download element
-            var element = document.createElement('a');
+            const element = document.createElement('a');
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(compressedContent));
             element.setAttribute('download', "food-compare_dataexport.json");
             element.style.display = 'none';

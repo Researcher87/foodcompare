@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {initialDirectCompareConfigData} from "../../config/ApplicationSetting";
 import {BarChartConfigurationForm} from "../charthelper/BarChartConfigurationForm";
@@ -113,7 +113,7 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
     return <div className={"direct-compare-panel"}>
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}></VerticalLabel>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem1}/>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem1}
                                   precalculatedData={dataSet1}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem1}/>
@@ -122,7 +122,7 @@ export function DcProteinDataChart(props: DirectCompareDataPanelProps) {
 
         <Card>
             <div className={"d-flex"} style={{maxHeight: containerHeight}}>
-                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}></VerticalLabel>
+                <VerticalLabel selectedFoodItem={props.selectedFoodItem2}/>
                 <ProteinDataChart selectedFoodItem={props.selectedFoodItem2}
                                   precalculatedData={dataSet2}
                                   directCompareUse={true} directCompareConfig={preconfigFoodItem2}/>

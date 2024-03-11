@@ -130,14 +130,9 @@ export default function DirectCompareContainer() {
 
     const updateSelectedFoodItems = (selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem) => {
     	const foodClassNameKey1 = selectedFoodItem1.foodClass?.nameKey
-		const nameEntity1 = applicationContext.foodDataCorpus.foodNames.find(entry => entry.id === foodClassNameKey1)
-		const foodClassName1 = nameEntity1 ? nameEntity1.englishName : ''
+		applicationContext.foodDataCorpus.foodNames.find(entry => entry.id === foodClassNameKey1);
 		const foodClassNameKey2 = selectedFoodItem2.foodClass?.nameKey
-		const nameEntity2 = applicationContext.foodDataCorpus.foodNames.find(entry => entry.id === foodClassNameKey2)
-		const foodClassName2 = nameEntity2 ? nameEntity2.englishName : ''
-		const label = `${foodClassName1}; ${foodClassName2}`
-		const debugMode = applicationContext.debug
-
+		applicationContext.foodDataCorpus.foodNames.find(entry => entry.id === foodClassNameKey2);
 		setSelectedFoodItem1(selectedFoodItem1)
         setSelectedFoodItem2(selectedFoodItem2)
         applicationContext.setDirectCompareData.setSelectedDirectCompareItems(selectedFoodItem1, selectedFoodItem2)

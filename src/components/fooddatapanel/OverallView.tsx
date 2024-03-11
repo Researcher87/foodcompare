@@ -21,7 +21,6 @@ import getName from "../../service/LanguageService";
 import {FaQuestionCircle} from "react-icons/fa";
 import {HelpModal} from "../HelpModal";
 import {getHelpText} from "../../service/HelpService";
-import {color_chart_yellow_3} from "../../config/ChartConfig";
 
 const WEIGHT_PORTION = 0
 const WEIGHT_100 = 1
@@ -115,8 +114,6 @@ export const OverallView = (props) => {
             canvasElement.height = canvasElement.clientHeight;
 
             const startPointX = 50
-            const startPointY = 10
-
             const ctx = canvasElement.getContext("2d");
             if (ctx) {
                 const grd = ctx.createLinearGradient(0, 0, 200, 0);
@@ -273,7 +270,7 @@ export const OverallView = (props) => {
                         )
                     })
                 }
-                <th style={thStyle}></th>
+                <th style={thStyle}/>
                 <th style={thStyle}>{applicationStrings.label_overallview_min_short[language]}</th>
                 <th style={thStyle}>{applicationStrings.label_overallview_max_short[language]}</th>
                 <th style={thStyle}>{applicationStrings.label_overallview_avg_short[language]}</th>
@@ -441,7 +438,7 @@ export const OverallView = (props) => {
                             </td>
                         })
                         }
-                        <td></td>
+                        <td/>
                         {makeAggegrationCell(min)}
                         {makeAggegrationCell(max)}
                         {makeAggegrationCell(avg)}

@@ -1,7 +1,7 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import * as ChartConfig from "../../../config/ChartConfig"
-import {Bar, Chart} from "react-chartjs-2";
+import {Bar} from "react-chartjs-2";
 import {getBarChartOptions} from "../../../service/ChartConfigurationService";
 import {applicationStrings} from "../../../static/labels";
 import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/calculation/EnergyService";
@@ -14,8 +14,7 @@ export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
-    const windowSize = useWindowDimension()
-
+    useWindowDimension();
     const nutrientData = getNutrientData(props.selectedFoodItem);
     const energy100g = nutrientData.baseData.energy;
 

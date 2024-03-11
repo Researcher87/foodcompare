@@ -1,5 +1,5 @@
 import FoodAnalyzerContainer from "./FoodAnalyzerContainer";
-import {useContext, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import TabContainer from "./TabContainer";
 import {applicationStrings} from "../../static/labels";
@@ -8,7 +8,7 @@ import {
     PATH_FOODDATA_PANEL,
     QUERYKEY_DATAPANEL_ADD, QUERYKEY_DATAPANEL_ADD_COMPOSITE,
     QUERYKEY_DATAPANEL_AGGREGATED,
-    QUERYKEY_DATAPANEL_ITEM, TAB_JUXTAPOSITION
+    QUERYKEY_DATAPANEL_ITEM
 } from "../../config/Constants";
 import {useHistory} from 'react-router-dom';
 import {makeFoodDataPanelComponent} from "../../service/FoodDataPanelService";
@@ -71,8 +71,7 @@ export default function FoodDataPanelContainer() {
         const {
             selectedDataPage,
             displayMode,
-            chartConfigData,
-            juxtapositionConfigData
+            chartConfigData
         } = applicationContext.applicationData.foodDataPanel
 
         // New query for aggregated food item

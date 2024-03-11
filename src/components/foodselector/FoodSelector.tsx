@@ -28,7 +28,7 @@ import {
     getCustomSelectStyle
 } from "../../config/UI_Config";
 import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
-import {FaQuestionCircle, FaSlidersH} from "react-icons/fa";
+import {FaSlidersH} from "react-icons/fa";
 import {Unit, UnitConversionModal} from "../UnitConversionModal";
 import {max_portion} from "../../config/ChartConfig";
 

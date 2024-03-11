@@ -66,7 +66,7 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
                         </div>
                         <div className={classRow}>
                             <Form.Check inline className="form-radiobutton"
-                                        checked={showLabels === true}
+                                        checked={showLabels}
                                         label={applicationStrings.label_juxtaposition_settings_showLabels[language]}
                                         onChange={() => setShowLabels(!showLabels)}>
                             </Form.Check>

@@ -1,11 +1,11 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {
     CHART_MINERALS,
     CHART_VITAMINS,
     OPTION_YES,
-    AMOUNT_PORTION, AMOUNT_100_GRAM
+    AMOUNT_100_GRAM
 } from "../../../config/Constants";
 import * as ChartConfig from "../../../config/ChartConfig"
 import {applicationStrings} from "../../../static/labels";
@@ -26,8 +26,7 @@ export default function MineralVitaminChart(props: MineralVitaminChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
     const languageContext = useContext(LanguageContext)
     const lang = languageContext.language
-    const windowSize = useWindowDimension()
-
+    useWindowDimension();
     const chartConfigVitamins = props.directCompareConfig
         ? props.directCompareConfig
         : applicationContext

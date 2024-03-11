@@ -1,5 +1,5 @@
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import FoodDataPageHeader from "./FoodDataPageHeader";

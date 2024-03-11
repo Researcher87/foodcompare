@@ -4,7 +4,7 @@ import {ChartPanel} from "./ChartPanel";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import {FoodDataTable} from "./FoodDataTable";
 import {InfoData} from "./charts/InfoData";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 
 interface FoodDataPageBodyProps {
