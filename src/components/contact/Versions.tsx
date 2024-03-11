@@ -1,5 +1,6 @@
 import {buildDate, release} from "../../config/ApplicationSetting";
 import {isMobileDevice} from "../../service/WindowDimension";
+import React from "react";
 
 export function Versions() {
     return <div className={"container"}>

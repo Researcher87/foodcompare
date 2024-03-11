@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 
 import impressum_de from '../../static/image/impressum-german.png';

@@ -1,4 +1,4 @@
-import {Component, createContext, ReactElement} from "react";
+import React, {Component, createContext, ReactElement} from "react";
 import * as NutrientDataImportService from "../service/NutrientDataImportService";
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
@@ -366,7 +366,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
 
     isDebugMode(): boolean {
         const uriData: string | null = parseFoodCompareUri()
-        return uriData !== "test" && uriData !== "debug" ? false : true
+        return !(uriData !== "test" && uriData !== "debug")
     }
 
     state: ApplicationDataContext = {

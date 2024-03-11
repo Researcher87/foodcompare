@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import React, {createContext, useState} from "react";
 import {LANGUAGE_DE, LANGUAGE_EN} from "../config/Constants";
 
 export interface LanguageProviderProps {
@@ -8,7 +8,7 @@ export interface LanguageProviderProps {
 
 export const LanguageContext = createContext<LanguageProviderProps>({
     language: 'en',
-    userLanguageChange: (selectedLanguage) => {return 'en'}
+    userLanguageChange: () => {return 'en'}
 });
 
 export function LanguageProvider({ children }) {
@@ -31,7 +31,7 @@ export function LanguageProvider({ children }) {
             {children}
         </LanguageContext.Provider>
     );
-};
+}
 
 
 

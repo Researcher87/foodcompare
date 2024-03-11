@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {ToggleButton, ToggleButtonGroup} from "react-bootstrap";
@@ -11,8 +11,7 @@ import {DataPrivacy} from "./DataPrivacy";
 
 export function ContactContainer() {
     const languageContext = useContext(LanguageContext)
-    const applicationContext = useContext(ApplicationDataContextStore)
-
+    useContext(ApplicationDataContextStore);
     const menu_contact = 1
     const menu_sources = 2
     const menu_privacy = 3

@@ -8,7 +8,7 @@ export const customSelectStyles = {
         minHeight: selectHeight,
         fontSize: fontsize,
     }),
-    valueContainer: (provided, state) => ({
+    valueContainer: (provided) => ({
         ...provided,
         height: selectHeight,
         minHeight: selectHeight,

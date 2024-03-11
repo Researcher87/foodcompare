@@ -489,9 +489,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         if (!initialized) {
             setInitialFoodElement()
         } else {
-            if (initiallySetSelectedFoodItem === null && props.selectedFoodItem !== null
-                || (initiallySetSelectedFoodItem !== null
-                    && initiallySetSelectedFoodItem.foodItem.id !== props.selectedFoodItem.foodItem.id)
+            if (initiallySetSelectedFoodItem === null || (initiallySetSelectedFoodItem.foodItem.id !== props.selectedFoodItem.foodItem.id)
             ) {  // Selecting an element from the category tree => reset category to "all" and load all food classes
                 setInitiallySetSelectedFoodItem(props.selectedFoodItem)
                 setInitialFoodElement()

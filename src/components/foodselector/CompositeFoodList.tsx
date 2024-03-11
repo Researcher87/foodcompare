@@ -42,7 +42,7 @@ export function CompositeFoodList(props: CompositeFoodListProps) {
             </div>
         }
 
-        return <div></div>
+        return <div/>
     }
 
     return <div className={"container"} style={{maxHeight: "300px", overflowY: "auto"}}>

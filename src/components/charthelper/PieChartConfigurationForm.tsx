@@ -1,10 +1,9 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {applicationStrings} from "../../static/labels";
 import {CHART_TYPE_BAR, CHART_TYPE_PIE} from "../../config/Constants";
 import {Form} from 'react-bootstrap';
 import {PieChartConfigurationProps} from "../../types/livedata/ChartPropsData";
-import {isMobileDevice} from "../../service/WindowDimension";
 
 export function PieChartConfigurationForm(props: PieChartConfigurationProps) {
     const languageContext = useContext(LanguageContext)

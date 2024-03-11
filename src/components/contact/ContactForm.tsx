@@ -12,7 +12,7 @@ import {
     MAIL_INVALID_NAME,
     MAIL_NO_CONTENT
 } from "../../config/ErrorMessageCodes";
-import {RECAPTCHA_KEY, SERVICE_ID, TEMPLATE_ID, USER_ID} from "../../config/ApplicationKeys";
+import {SERVICE_ID, TEMPLATE_ID, USER_ID} from "../../config/ApplicationKeys";
 import emailjs from "emailjs-com";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 
@@ -87,6 +87,9 @@ export function ContactForm() {
                 setMessage("")
                 setMailAdress("")
                 setCharacters(0)
+                if(applicationContext?.debug) {
+                    console.log('RESULT FROM EMAIL JS', result)
+                }
             }, (error) => {
                 if(applicationContext?.debug) {
                     console.log(error.text);
@@ -131,4 +134,4 @@ export function ContactForm() {
             </div>
         </form>
     );
-};
+}

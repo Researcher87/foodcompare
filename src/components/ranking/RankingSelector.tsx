@@ -31,8 +31,8 @@ export function RankingSelector(props: RankingSelectorProps) {
 
     const rankingPanelData = applicationContext?.applicationData.rankingPanelData
 
-    const initializeState = rankingPanelData && rankingPanelData.selectedFoodCategory
-    && rankingPanelData.selectedGroup && rankingPanelData.selectedElement ? true : false
+    const initializeState = !!(rankingPanelData && rankingPanelData.selectedFoodCategory
+        && rankingPanelData.selectedGroup && rankingPanelData.selectedElement)
 
     const [elementsList, setElementsList] = useState<any>()
     const [initialized, setInitialized] = useState<boolean>(initializeState)

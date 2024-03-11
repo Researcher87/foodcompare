@@ -1,5 +1,5 @@
 import {applicationStrings} from "../../static/labels";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 
 export function Sources() {
