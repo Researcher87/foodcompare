@@ -22,11 +22,12 @@ export function getNutrientDataForFoodItem(foodItem: FoodItem, sourceToUse?: num
     if (sourceToUse === null || sourceToUse === undefined || foodItem.nutrientDataList.length === 1) {
         return foodItem.nutrientDataList[0]
     } else {
+        const shouldSupplementData = supplementData && canSupplementData(foodItem.nutrientDataList)
         const nutrientData = foodItem.nutrientDataList.find(
             nutrientDataObject => nutrientDataObject.source.id === sourceToUse
         )
         if (nutrientData) {
-            if(supplementData || combineData) {
+            if(shouldSupplementData || combineData) {
                 const complement = foodItem.nutrientDataList.find(
                     nutrientDataObject => nutrientDataObject.source.id !== sourceToUse
                 )
@@ -158,4 +159,31 @@ function combineCategory(nutrientCategory1: any, nutrientCategory2: any): any {
     })
 
     return finalObject
+}
+
+/**
+ * Determines whether supplementing data is possible. The basic criterion for supplementing missing values are similar base data
+ * in the two data sources. If the deviation is too high, supplemention SHOULD not be carried out.
+ * @param nutrientDataList A list of two nutrient data objects
+ */
+export function canSupplementData(nutrientDataList: Array<NutrientData>): boolean {
+    if(nutrientDataList.length < 2) {
+        return false
+    }
+
+    const energy1 = nutrientDataList[0].baseData.energy
+    const energy2 = nutrientDataList[1].baseData.energy
+
+    if(energy1 === null || energy2 === null) {
+        return false
+    } else if(Math.round(energy1) === Math.round(energy2)) {
+        return true
+    } else {
+        const energyDiff = Math.abs(energy2 - energy1)
+        if(energyDiff > 30) {
+            return false
+        }
+    }
+
+    return true;
 }

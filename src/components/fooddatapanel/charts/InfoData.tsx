@@ -7,7 +7,7 @@ import {getNameFromFoodNameList} from "../../../service/nutrientdata/NameTypeSer
 import {applicationStrings} from "../../../static/labels";
 import getName from "../../../service/LanguageService";
 import {isMobileDevice} from "../../../service/WindowDimension";
-import {getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
+import {canSupplementData, getNutrientData, getSourceName} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {Button} from "react-bootstrap";
 import {getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
 import {NutrientData} from "../../../types/nutrientdata/FoodItem";
@@ -64,6 +64,24 @@ export function InfoData(props: InfoDataProps) {
 
         const tableDataGeneral: Array<RowElement> = [];
 
+        const canSupplement = canSupplementData(props.selectedFoodItem.foodItem.nutrientDataList)
+        let calculationLabel = applicationStrings.label_info_calculation_none;
+
+        if(props.selectedFoodItem.supplementData && props.selectedFoodItem.combineData) {
+            calculationLabel = applicationStrings.label_info_calculation_supplemented_combined
+        } else {
+            if(props.selectedFoodItem.supplementData) {
+                if(canSupplement) {
+                    calculationLabel = applicationStrings.label_info_calculation_supplemented
+                } else {
+                    calculationLabel = applicationStrings.label_info_calculation_supplement_impossible
+                }
+            }
+            if(props.selectedFoodItem.combineData) {
+                calculationLabel = applicationStrings.label_info_calculation_combined
+            }
+        }
+
         tableDataGeneral.push(
             createRow(`${applicationStrings.label_info_foodName[lang]}:`, foodName)
         );
@@ -84,6 +102,9 @@ export function InfoData(props: InfoDataProps) {
         );
         tableDataGeneral.push(
             createRow("", sourceLine2)
+        );
+        tableDataGeneral.push(
+            createRow(`${applicationStrings.label_info_calculation[lang]}:`, calculationLabel[lang])
         );
 
         return tableDataGeneral;

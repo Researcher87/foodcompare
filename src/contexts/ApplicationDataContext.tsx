@@ -120,12 +120,13 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
     }
 
     setItemOfFoodDataPanel = (updatedSelectedFoodItem: SelectedFoodItem, selectedIndex: number) => {
-        const updatedItems =this.state.applicationData.foodDataPanel.selectedFoodItems.map((item, index) => {
+        const updatedItems = this.state.applicationData.foodDataPanel.selectedFoodItems.map((item, index) => {
                 if(selectedIndex === index) {
                     const updatedElement = {...item,
                         portion: updatedSelectedFoodItem.portion,
                         selectedSource: updatedSelectedFoodItem.selectedSource,
                         supplementData: updatedSelectedFoodItem.supplementData,
+                        combineData: updatedSelectedFoodItem.combineData,
                         compositeSubElements: updatedSelectedFoodItem.compositeSubElements
                     }
 
@@ -394,11 +395,11 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 selectedDataPage: TAB_BASE_DATA,
                 directCompareConfigChart: initialDirectCompareConfigData,
                 foodSelector1: {
-                    sourceSupplement: false,
+                    sourceSupplement: true,
                     sourceCombine: false
                 },
                 foodSelector2: {
-                    sourceSupplement: false,
+                    sourceSupplement: true,
                     sourceCombine: false
                 }
             },
@@ -411,7 +412,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             },
             foodSelector: {
                 selectedCategory: null,
-                sourceSupplement: false,
+                sourceSupplement: true,
                 sourceCombine: false,
             },
             preferredSource: SOURCE_SRLEGACY,

@@ -138,9 +138,9 @@ export const OverallView = (props) => {
     }, [selectedHighlighter]);
 
     useEffect(() => {
-        if(selectedHighlighter === null) {
+        if (selectedHighlighter === null) {
             // @ts-ignore
-            if( applicationContext?.applicationData.foodDataPanel.selectedFoodItems.length > 3) {
+            if (applicationContext?.applicationData.foodDataPanel.selectedFoodItems.length > 3) {
                 setSelectedHighlighter(highlighters[HIGHLIGHTING_SHARE_SELECTION])
             } else {
                 setSelectedHighlighter(highlighters[HIGHLIGHTING_MIN_MAX])
@@ -503,7 +503,7 @@ export const OverallView = (props) => {
                         onClick={props.onHide}>
                 </button>
             </Modal.Header>
-            <Modal.Body style={{minHeight: "78vh"}}>
+            <Modal.Body style={{minHeight: "75vh", maxHeight: "75vh", overflowY: "auto"}}>
                 <div>
                     {makeFormHeader()}
                 </div>
@@ -512,20 +512,25 @@ export const OverallView = (props) => {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <span style={{paddingRight: "2ch"}}>
-                <Form.Check inline={true}
-                            className="form-radiobutton"
-                            label={applicationStrings.label_tooltips[language]}
-                            type="checkbox"
-                            checked={showToolTips}
-                            onChange={() => setShowToolTips(!showToolTips)}>
-                </Form.Check>
-                </span>
-                <span>
-                <Button className={"btn btn-secondary"} onClick={onOpenHelpModal}>
-                <FaQuestionCircle/>
-                </Button>
-                </span>
+                <div className={"d-flex flex-row justify-content-between w-100"}>
+                    <div>
+                        <Form.Check inline={true}
+                                    className="form-radiobutton"
+                                    label={applicationStrings.label_tooltips[language]}
+                                    type="checkbox"
+                                    checked={showToolTips}
+                                    onChange={() => setShowToolTips(!showToolTips)}>
+                        </Form.Check>
+                    </div>
+                    <div>
+                        <Button className={"btn btn-primary"} onClick={onOpenHelpModal}>
+                            <FaQuestionCircle/>
+                        </Button>
+                        <Button className={"btn-secondary form-button"} onClick={props.onHide}>
+                            {applicationStrings.button_close[language]}
+                        </Button>
+                    </div>
+                </div>
             </Modal.Footer>
         </Modal>
     )

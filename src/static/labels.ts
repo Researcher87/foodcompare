@@ -443,6 +443,30 @@ export const applicationStrings = {
         de: 'Info',
         en: 'Info'
     },
+    label_info_calculation: {
+        de: 'Berechnung',
+        en: 'Calculation'
+    },
+    label_info_calculation_none: {
+        de: 'Standard',
+        en: 'Default'
+    },
+    label_info_calculation_combined: {
+        de: 'Daten kombiniert',
+        en: 'Combined data'
+    },
+    label_info_calculation_supplement_impossible: {
+        de: 'Standard (Ergänzung nicht möglich)',
+        en: 'Default (Supplement not possible)'
+    },
+    label_info_calculation_supplemented: {
+        de: 'Daten ergänzt',
+        en: 'Supplemented data'
+    },
+    label_info_calculation_supplemented_combined: {
+        de: 'Daten ergänzt und kombiniert',
+        en: 'Supplemented and combined data'
+    },
     label_info_composite: {
         de: 'Enthaltene Lebensmittel',
         en: 'Contained food items'
@@ -948,8 +972,8 @@ export const applicationStrings = {
         en: 'Mean'
     },
     label_overallview_compared: {
-        de: 'Vergleich zur Gesamtdatenbank:',
-        en: 'Compared to Food Compare database:'
+        de: 'Vergleich zur Gesamtdatenbank',
+        en: 'Compared to Food Compare database'
     },
     label_overallview_max: {
         de: 'Höchster Wert',

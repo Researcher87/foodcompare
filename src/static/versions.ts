@@ -308,7 +308,7 @@ export const versions = [
         ]
     },
     {
-        id: "2.1",
+        id: "2.2",
         date: "01-10-2024",
         subject: "Vitamin and mineral book",
         features: [
@@ -323,6 +323,29 @@ export const versions = [
             "Fixed: It was possible to set a portion amount of 0 gram in the edit mode of the food data panel.",
             "Fixed: Several display bugs.",
             "Fixed: Sometimes, the alcohol value in the legend had the wrong color.",
+        ]
+    },
+    {
+        id: "2.2",
+        date: "03-11-2024",
+        subject: "Overall Data View",
+        features: [
+            "Within the food analysis panel, the overall data for all selected tabs can now be displayed. Data highlighting is provided," +
+            " as well as statistical information and comparisons to the Food Compare database.",
+            "Unit conversion between US weights and gram is now possible in the food selector.",
+        ],
+        updates: [
+            "The layout of some modals has been changed, in particular the help modals.",
+            "Food Compare will no longer supplements data between two data sources of a food item if they differ too much in key" +
+            " parameters.",
+            "The applied calculation type for each food item is now shown on the info page.",
+            "The name suggestions in the food selector typeahead field have been improved."
+        ],
+        bugfixes: [
+            "Fixed: Some incorrectly linked data sheets have been corrected.",
+            "Fixed: Issues with data supplementing have been fixed (supplementing was sometimes carried out even when the corresponding" +
+            " option was disabled).",
+            "Fixed: Some style issues have been fixed.",
         ]
     },
 ]
