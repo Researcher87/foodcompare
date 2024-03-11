@@ -1,7 +1,9 @@
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 import FoodItem, {
     BaseData,
-    CarbohydrateData, CarotenoidData, ExtendedVitaminE,
+    CarbohydrateData,
+    CarotenoidData,
+    ExtendedVitaminE,
     LipidData,
     MineralData,
     NutrientData,
@@ -26,7 +28,7 @@ export default function combineFoodItems(compositeList: Array<SelectedFoodItem>,
         aggregated: true
     }
 
-    let combinedFoodItem: SelectedFoodItem = {
+    return {
         id: id,
         foodItem: aggreatedFoodItem,
         portion: {
@@ -38,8 +40,6 @@ export default function combineFoodItems(compositeList: Array<SelectedFoodItem>,
         supplementData: true,
         combineData: false
     };
-
-    return combinedFoodItem;
 }
 
 
@@ -62,7 +62,7 @@ function buildAggregatedNutrientDataList(compositeList: Array<SelectedFoodItem>,
         proteinData: proteinData
     }
 
-    nutrientObject = removeNutrientObjectsWithNullValues(nutrientObject, compositeList, preferredSource);
+    nutrientObject = removeNutrientObjectsWithNullValues(nutrientObject, compositeList);
 
     const nutrientDataList: Array<NutrientData> = [];
     nutrientDataList.push(nutrientObject);
@@ -76,7 +76,7 @@ function buildAggregatedNutrientDataList(compositeList: Array<SelectedFoodItem>,
  * @param nutrientObject
  * @param compositeList
  */
-function removeNutrientObjectsWithNullValues(nutrientObject: NutrientData, compositeList: Array<SelectedFoodItem>, preferredSource: string) {
+function removeNutrientObjectsWithNullValues(nutrientObject: NutrientData, compositeList: Array<SelectedFoodItem>) {
     if (!compositeList) {
         return nutrientObject;
     }

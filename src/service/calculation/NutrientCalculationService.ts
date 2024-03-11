@@ -1,6 +1,5 @@
 import {determineFoodRequirementRatio, determineProteinRequirementRatio} from "./DietaryRequirementService";
 import {UserData} from "../../types/livedata/UserData";
-import {MineralData, VitaminData} from "../../types/nutrientdata/FoodItem";
 import * as Constants from "../../config/Constants";
 
 /**

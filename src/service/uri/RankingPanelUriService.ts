@@ -37,8 +37,8 @@ export function parseRankingPanelDataUri(uri: string, foodDataCorpus: FoodDataCo
     const selectedGroupOption = groups.find(group => group.value === selectedGroup)
     const selectedElementOption: any = elements ? elements.find(element => element.value === selectedElement) : null
 
-    const use100g = fragments[3].substring(0,1) === "0" ? false : true
-    const showDietaryRequirements = fragments[3].substring(1,2) === "0" ? false : true
+    const use100g = fragments[3].substring(0, 1) !== "0"
+    const showDietaryRequirements = fragments[3].substring(1, 2) !== "0"
 
     if(selectedFoodCategoryOption && selectedGroupOption && selectedElementOption) {
         return {

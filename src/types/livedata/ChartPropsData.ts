@@ -1,5 +1,4 @@
 import SelectedFoodItem from "./SelectedFoodItem";
-import {MineralData, ProteinData, VitaminData} from "../nutrientdata/FoodItem";
 
 // BASIC CHARTS COMPONENTS:
 

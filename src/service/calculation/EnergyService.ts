@@ -8,7 +8,7 @@ import {PalCategory} from "../../types/livedata/PalCategory";
  * Creates a list of PAL categories with name and value for the user settings form.
  */
 export function getPalCategories(language: string): Array<PalCategory> {
-    const palCategories = [
+    return [
         {label: createPalCategoryName(language, 1), value: EnergyConstants.PAL_CATEGORY_1},
         {label: createPalCategoryName(language, 2), value: EnergyConstants.PAL_CATEGORY_2},
         {label: createPalCategoryName(language, 3), value: EnergyConstants.PAL_CATEGORY_3},
@@ -17,8 +17,6 @@ export function getPalCategories(language: string): Array<PalCategory> {
         {label: createPalCategoryName(language, 6), value: EnergyConstants.PAL_CATEGORY_6},
         {label: createPalCategoryName(language, 7), value: EnergyConstants.PAL_CATEGORY_7},
     ];
-
-    return palCategories;
 }
 
 /**

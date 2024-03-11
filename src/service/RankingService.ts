@@ -15,7 +15,6 @@ import {
     NUTRIENT_PROTEIN_INDEX,
     NUTRIENT_VITAMIN_INDEX
 } from "../config/Constants";
-import ReactSelectOption from "../types/ReactSelectOption";
 
 
 export interface ChartItem {

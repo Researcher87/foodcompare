@@ -25,7 +25,7 @@ export function isPositiveIntegerValueOrZero(value) {
  *
  */
 export function autoRound(value) {
-    let roundFactor = 0;   // Default round factor
+    let roundFactor: number;   // Default round factor
 
     if(value >= 100) {
         roundFactor = 0;
@@ -91,11 +91,11 @@ export function getNumberOfFixedLength(number: number, digits: number): string {
 
 
 export function convertBooleanToDigit(value: boolean) {
-	return value === true ? 1 : 0
+	return value ? 1 : 0
 }
 
 export function convertStringToBoolean(value: string) {
-	return value === "1" ? true : false
+	return value === "1"
 }
 
 export function calculateMedian(values: Array<number>) {

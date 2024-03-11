@@ -68,7 +68,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const createTotalChartData = () => {
         const category = props.selectedFoodItem.foodClass?.category
         const nutrientData = getNutrientData(props.selectedFoodItem)
-        const chartDisplayData: ChartDisplayData = getTotalChartData(nutrientData, lang, category)
+        const chartDisplayData: ChartDisplayData = getTotalChartData(nutrientData, lang)
 
         return {
             labels: chartDisplayData.labels,
@@ -85,7 +85,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     const createNutrientChartData = () => {
         const category = props.selectedFoodItem.foodClass?.category
         const nutrientData = getNutrientData(props.selectedFoodItem)
-        const chartDisplayData: ChartDisplayData = getNutrientChartData(nutrientData, lang, showDetails, category)
+        const chartDisplayData: ChartDisplayData = getNutrientChartData(nutrientData, lang, showDetails)
 
         return {
             labels: chartDisplayData.labels,
@@ -173,7 +173,7 @@ export default function BaseDataChart(props: BaseDataChartProps) {
                 </div>
                 {legendAllowed &&
                 <div className="d-inline-block float-right legend-container">
-                    <CustomLegend legendData={getBaseChartLegendData(lang, showDetails, props.selectedFoodItem.foodClass?.category)}/>
+                    <CustomLegend legendData={getBaseChartLegendData(lang, showDetails)}/>
                 </div>
                 }
             </div>

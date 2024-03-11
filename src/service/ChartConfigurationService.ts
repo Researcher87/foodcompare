@@ -5,8 +5,6 @@
  * unit: The unit to use for the axis title and tooltip.
  * minYValue: Optional, a pre-defined maxYValue for the Y axis (e.g. 100)
  */
-import {shortenName} from "./nutrientdata/NameTypeService";
-import {applicationStrings} from "../static/labels";
 
 export function getBarChartOptions(title: string, unit: string, maxYValue?: number | undefined) {
     let yAxis: any = {
@@ -75,13 +73,11 @@ function getToolTips(unit: string) {
 
 
 function getScalesForRankingChart() {
-    const scales = {
+    return {
         x: {
             ticks: {
                 autoSkip: false
             },
         }
     };
-
-    return scales;
 }

@@ -4,7 +4,7 @@ import {applicationStrings} from "../../static/labels";
 import * as ChartConfig from "../../config/ChartConfig";
 import {ChartDisplayData, LegendData} from "../../types/livedata/ChartDisplayData";
 
-export function getTotalChartData(nutrientData: NutrientData, language: string, category: number | undefined): ChartDisplayData {
+export function getTotalChartData(nutrientData: NutrientData, language: string): ChartDisplayData {
     const alcoholValuePercentage = nutrientData.baseData.alcohol !== null
         ? autoRound(nutrientData.baseData.alcohol)
         : null
@@ -56,8 +56,7 @@ export function getTotalChartData(nutrientData: NutrientData, language: string, 
 }
 
 
-export function getNutrientChartData(nutrientData: NutrientData, language: string, showDetails: boolean,
-                                     category: number | undefined): ChartDisplayData {
+export function getNutrientChartData(nutrientData: NutrientData, language: string, showDetails: boolean): ChartDisplayData {
     const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids
         + nutrientData.baseData.proteins + (nutrientData.baseData.alcohol ?? 0) + (nutrientData.baseData.caffeine ?? 0)
 
@@ -143,7 +142,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
     }
 }
 
-export function getBaseChartLegendData(lang: string, showDetails: boolean, category: number | undefined): LegendData[] {
+export function getBaseChartLegendData(lang: string, showDetails: boolean): LegendData[] {
     const legendData: LegendData[] = [
         {
             item: applicationStrings.label_nutrient_water[lang],

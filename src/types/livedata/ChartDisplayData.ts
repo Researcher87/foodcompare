@@ -1,6 +1,3 @@
-import {applicationStrings} from "../../static/labels";
-import * as ChartConfig from "../../config/ChartConfig";
-
 export interface ChartDisplayData {
     labels: string[],
     values: number[],
