@@ -32,21 +32,23 @@
     <!-- Fastcounter link:
         https://www.imcounter.com/stats/40519/dashboard
     -->
-    <!--
 
     <span id="fc-40519"></span>
     <script>
-        var fcr = Math.floor(Math.random() * 99999999999);
-        var _fcc = _fcc || [];
-        _fcc.push(["40519"]);
-        _fcc.push(["trans"]);
-        (function () {
-            var fc = document.createElement("script");
-            fc.async = true;
-            fc.src = "https://www.imcounter.com/fcount.php?rnd=" + fcr;
-            var sc = document.getElementById("fc-40519");
-            sc.appendChild(fc);
-        })();
+        const queryString = window.location.search
+        if(!queryString || !(queryString.includes("mode=debug"))) {
+            var fcr = Math.floor(Math.random() * 99999999999);
+            var _fcc = _fcc || [];
+            _fcc.push(["40519"]);
+            _fcc.push(["trans"]);
+            (function () {
+                var fc = document.createElement("script");
+                fc.async = true;
+                fc.src = "https://www.imcounter.com/fcount.php?rnd=" + fcr;
+                var sc = document.getElementById("fc-40519");
+                sc.appendChild(fc);
+            })();
+        }
     </script>
     <noscript>
         <a href="https://www.fastcounter.de/stats/40519/dashboard" rel="nofollow" style="display: none;" target="_blank"
@@ -54,7 +56,6 @@
                                                         alt="Kostenloser Besucherz&auml;hler"
                                                         title="Kostenloser Besucherz&auml;hler"></a>
     </noscript>
-    -->
 
 </head>
 <body>

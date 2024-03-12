@@ -12,7 +12,6 @@ import ReactTooltip from "react-tooltip";
 import {WebPageContainer} from "./components/WebPageContainer";
 import MobileDeviceCheck from "./components/MobileDeviceCheck";
 
-
 function App(): JSX.Element {
     useEffect(() => {
         ReactTooltip.rebuild()
