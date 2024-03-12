@@ -30,51 +30,21 @@ export function WebPageContainer() {
     }
 
     // Registering requires some time and should only be performed when the real site is loaded.
-    if (applicationContext.debug) {
+    if(applicationContext.debug) {
         console.log('Start annotation plugin registration...')
     }
     Chart.register(annotationPlugin)
     Chart.register(ArcElement);
-    if (applicationContext.debug) {
+    if(applicationContext.debug) {
         console.log('...done.')
     }
 
-    if (applicationContext.debug) {
+    if(applicationContext.debug) {
         //require('./../App-debug.scss');
-    }
-
-    const _fccX: Array<Array<string>> | null = null;
-
-    const counter = (): void => {
-        let fcr = Math.floor(Math.random() * 99999999999);
-        let _fcc: Array<Array<string>> | null = _fccX || [];
-        _fcc.push(["40519"]);
-        _fcc.push(["trans"]);
-        (function () {
-            var fc = document.createElement("script");
-            fc.async = true;
-            fc.src = "https://www.imcounter.com/fcount.php?rnd=" + fcr;
-            var sc = document.getElementById("fc-40519");
-            if (sc) {
-            }
-            if (sc) {
-                sc.appendChild(fc);
-            }
-        })();
     }
 
     return (
         <div>
-            {!applicationContext.debug &&
-            <span>
-               <span id="fc-40519">{counter()}</span>
-                <a href="https://www.fastcounter.de/stats/40519/dashboard" rel="nofollow" style={{display: "none"}} target="_blank"
-                   title="Kostenloser Besucherz&auml;hler"><img src="https://www.imcounter.com/fcounter.php?id=40519;"
-                                                                alt="Kostenloser Besucherz&auml;hler"
-                                                                title="Kostenloser Besucherz&auml;hler"/></a>
-            </span>
-            }
-
             <div>
                 <Router>
                     <Header/>
