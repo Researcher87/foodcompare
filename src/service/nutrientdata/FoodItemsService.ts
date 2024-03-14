@@ -1,7 +1,9 @@
-import FoodItem from "../../types/nutrientdata/FoodItem";
+import FoodItem, {PortionData} from "../../types/nutrientdata/FoodItem";
 import NameType from "../../types/nutrientdata/NameType";
 import {ReactSelectFoodItemOption} from "../../types/ReactSelectOption";
 import getName, {} from "../LanguageService";
+import FoodClass from "../../types/nutrientdata/FoodClass";
+import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
 
 
 /**
@@ -86,4 +88,39 @@ export function getFoodItemsOfFoodClass(foodItems: Array<FoodItem>, foodClassId:
             return null
         }
     })
+}
+
+
+/**
+ * Creates a selected food item object (an object selected from the food selector modal and displayed on the food data panel) out of
+ * a food item, a food class and a portion data object.
+ * @param foodItem
+ * @param foodClass
+ * @param portion
+ */
+export function makeSelectedFoodItemObject(
+    foodItem: FoodItem | undefined,
+    foodClass: FoodClass | undefined,
+    portion: PortionData | undefined,
+    portionAmount: number,
+    supplementData: boolean,
+    combineData: boolean,
+    selectedSource?: number
+): SelectedFoodItem | null  {
+    if (!foodItem || !foodClass || !portion) {
+        return null
+    }
+
+    if (portion.portionType === 0) {
+        portion.amount = portionAmount
+    }
+
+    return {
+        foodItem: foodItem,
+        foodClass: foodClass,
+        portion: {...portion},
+        selectedSource: selectedSource ? selectedSource : foodItem.nutrientDataList[0].source.id,
+        supplementData: supplementData,
+        combineData: combineData
+    }
 }

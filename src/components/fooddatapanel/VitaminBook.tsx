@@ -45,7 +45,7 @@ export function VitaminsBook(props: VitaminBookModalProps): ReactElement {
     })
 
     const renderSelectList = () => {
-        const label = applicationStrings.vitamin_book_selection[languageContext.language]
+        const label = applicationStrings.label_selection[languageContext.language]
 
         return (
             <div className={"d-flex flex-row align-items-baseline"} style={{paddingBottom: "3vh"}}>

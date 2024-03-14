@@ -46,7 +46,7 @@ describe('The composite nutrient data service should calculate the correct amoun
         const selectedFoodItem2 = makeSelectedFoodItem(foodItem2, portion2)
 
         const selectedFoodItems: Array<SelectedFoodItem> = [selectedFoodItem1, selectedFoodItem2]
-        const finalObject = combineFoodItems(selectedFoodItems, 0)
+        const finalObject = combineFoodItems(selectedFoodItems)
 
         // Final portion must be the sum of the two aggreaged objects:
         expect(finalObject.portion.amount).toBe(portion1 + portion2)
@@ -110,7 +110,7 @@ describe('The composite nutrient data service should calculate the correct amoun
         const selectedFoodItem2 = makeSelectedFoodItem(foodItem2, portion2)
 
         const selectedFoodItems: Array<SelectedFoodItem> = [selectedFoodItem1, selectedFoodItem2]
-        const finalObject = combineFoodItems(selectedFoodItems, 0)
+        const finalObject = combineFoodItems(selectedFoodItems)
         const finalBaseData = finalObject.foodItem.nutrientDataList[0].baseData
 
         // Portion: 500 g * 10 g + 300 g * 15 g = 95 g for 800 g --> 95 g / 800 g = 11,875 g pro 100 g
@@ -169,7 +169,7 @@ describe('The composite nutrient data service should calculate the correct amoun
         const selectedFoodItem2 = makeSelectedFoodItem(foodItem2, portion2)
 
         const selectedFoodItems: Array<SelectedFoodItem> = [selectedFoodItem1, selectedFoodItem2]
-        const finalObject = combineFoodItems(selectedFoodItems, 0)
+        const finalObject = combineFoodItems(selectedFoodItems)
         const finalVitaminData = finalObject.foodItem.nutrientDataList[0].vitaminData
 
         expect(finalVitaminData.a).toBe(vitaminData1.a)

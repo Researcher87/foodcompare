@@ -6,6 +6,11 @@ export default interface ReactSelectOption {
     value: number
 }
 
+export interface ReactSelectStringValueOption {
+    label: string
+    value: string
+}
+
 export interface ReactSelectFoodItemOption {
     label: string
     value: FoodItem

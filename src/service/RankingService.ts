@@ -15,6 +15,7 @@ import {
     NUTRIENT_PROTEIN_INDEX,
     NUTRIENT_VITAMIN_INDEX
 } from "../config/Constants";
+import ReactSelectOption, {ReactSelectStringValueOption} from "../types/ReactSelectOption";
 
 
 export interface ChartItem {
@@ -26,7 +27,7 @@ export interface ChartItem {
 /**
  * Returns a list of all ranking categories.
  */
-export function getNutrientGroups(language: string) {
+export function getNutrientGroups(language: string): Array<ReactSelectOption> {
     return [
         {value: NUTRIENT_BASE_DATA_INDEX, label: applicationStrings.label_chart_nutrientComposition[language]},
         {value: NUTRIENT_VITAMIN_INDEX, label: applicationStrings.label_nutrient_vit[language]},
@@ -37,11 +38,54 @@ export function getNutrientGroups(language: string) {
     ];
 }
 
+/**
+ * Returns the nutrient group of a nutrient value.
+ * @param groupIndex The group index (constant).
+ * @param language The language to use.
+ */
+export function getNutrientGroup(nutrientValue: string, language: string): ReactSelectOption | undefined {
+    const groupIndex = getNutrientGroupFromValue(nutrientValue, language)
+    return getNutrientGroups(language).find(group => group.value === groupIndex)
+}
+
+/**
+ * Given a nutrient value (constant), this function returns the nutrient group index to which the nutrient belongs.
+ * @param nutrientValue A nutrient value (constant).
+ * @return The nutrient group index (e.g. Base Data, Vitamin Data etc.).
+ */
+export function getNutrientGroupFromValue(nutrientValue: string, language: string): number {
+    const isNutrientInGroup = (nutrientValue: string, nutrientGroup: Array<ReactSelectStringValueOption>): boolean => {
+        return nutrientGroup.find(entry => entry.value === nutrientValue) !== undefined
+    }
+
+    if(isNutrientInGroup(nutrientValue, getVitaminCategoryValues(language))) {
+        return NUTRIENT_VITAMIN_INDEX
+    }
+
+    if(isNutrientInGroup(nutrientValue, getMineralCategoryValues(language))) {
+        return NUTRIENT_MINERAL_INDEX
+    }
+
+    if(isNutrientInGroup(nutrientValue, getLipidCategoryValues(language))) {
+        return NUTRIENT_LIPIDS_INDEX
+    }
+
+    if(isNutrientInGroup(nutrientValue, getCarbohydrateCategoryValues(language))) {
+        return NUTRIENT_CARBS_INDEX
+    }
+
+    if(isNutrientInGroup(nutrientValue, getProteinCategoryValues(language))) {
+        return NUTRIENT_PROTEIN_INDEX
+    }
+
+    return -1
+}
+
 
 /**
  * Returns the list of all selectable vitamins.
  */
-export function getBaseCategoryValues(language: string) {
+export function getBaseCategoryValues(language: string): Array<ReactSelectStringValueOption> {
     return [
         {value: Constants.DATA_ENERGY, label: applicationStrings.label_nutrient_energy[language]},
         {value: Constants.DATA_WATER, label: applicationStrings.label_nutrient_water[language]},
@@ -58,7 +102,7 @@ export function getBaseCategoryValues(language: string) {
 /**
  * Returns the list of all selectable vitamin values.
  */
-export function getVitaminCategoryValues(language: string) {
+export function getVitaminCategoryValues(language: string): Array<ReactSelectStringValueOption> {
     return [
         {value: Constants.DATA_VITAMINS_A, label: applicationStrings.label_nutrient_vit_a[language]},
         {value: Constants.DATA_VITAMINS_B1, label: applicationStrings.label_nutrient_vit_b1[language]},
@@ -79,7 +123,7 @@ export function getVitaminCategoryValues(language: string) {
 /**
  * Returns the list of all selectable mineral values.
  */
-export function getMineralCategoryValues(language: string) {
+export function getMineralCategoryValues(language: string): Array<ReactSelectStringValueOption> {
     return [
         {value: Constants.DATA_MINERAL_CALCIUM, label: applicationStrings.label_nutrient_min_calcium[language]},
         {value: Constants.DATA_MINERAL_IRON, label: applicationStrings.label_nutrient_min_iron[language]},
@@ -98,7 +142,7 @@ export function getMineralCategoryValues(language: string) {
 /**
  * Returns the list of all selectable mineral values.
  */
-export function getLipidCategoryValues(language: string) {
+export function getLipidCategoryValues(language: string): Array<ReactSelectStringValueOption> {
     return [
         {value: Constants.DATA_LIPIDS_SATURATED, label: applicationStrings.label_nutrient_lipids_saturated[language]},
         {
@@ -120,7 +164,7 @@ export function getLipidCategoryValues(language: string) {
 /**
  * Returns the list of all selectable carbohydrate values.
  */
-export function getCarbohydrateCategoryValues(language: string) {
+export function getCarbohydrateCategoryValues(language: string): Array<ReactSelectStringValueOption> {
     return [
         {value: Constants.DATA_CARBS_DIETARY_FIBERS, label: applicationStrings.label_nutrient_dietaryFibers[language]},
         {value: Constants.DATA_CARBS_SUGAR, label: applicationStrings.label_nutrient_sugar[language]},
@@ -144,7 +188,7 @@ export function getCarbohydrateCategoryValues(language: string) {
 /**
  * Returns the list of all protein values.
  */
-export function getProteinCategoryValues(language: string) {
+export function getProteinCategoryValues(language: string): Array<ReactSelectStringValueOption> {
     return [
         {value: Constants.DATA_PROTEIN_ALANINE, label: applicationStrings.label_nutrient_proteins_alanine[language]},
         {value: Constants.DATA_PROTEIN_ARGININE, label: applicationStrings.label_nutrient_proteins_arginine[language]},
@@ -192,7 +236,7 @@ export function getProteinCategoryValues(language: string) {
 }
 
 
-export function getElementsOfRankingGroup(rankingGroup: number, language: string) {
+export function getElementsOfRankingGroup(rankingGroup: number, language: string): Array<ReactSelectStringValueOption> {
     switch (rankingGroup) {
         case NUTRIENT_BASE_DATA_INDEX:
             return getBaseCategoryValues(language)
@@ -206,13 +250,15 @@ export function getElementsOfRankingGroup(rankingGroup: number, language: string
             return getCarbohydrateCategoryValues(language)
         case NUTRIENT_PROTEIN_INDEX:
             return getProteinCategoryValues(language)
+        default:
+            return getBaseCategoryValues(language)  // Fallback
     }
 }
 
 
 export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: Array<FoodClass>, selectedCategory: number,
                                    selectedValue: any, use100gram: number, language: string, foodNamesList: Array<NameType>,
-                                   conditions: Array<NameType>) {
+                                   conditions: Array<NameType>): Array<ChartItem> {
     let chartItems: Array<ChartItem> = [];
 
     for (let i = 0; i < foodList.length; i++) {
@@ -266,7 +312,7 @@ export function getOrderedFoodList(foodList: Array<FoodItem>, foodClassesList: A
 }
 
 
-export function sortChartItems(chartItems: Array<ChartItem>) {
+export function sortChartItems(chartItems: Array<ChartItem>): Array<ChartItem> {
     return chartItems.sort((obj1, obj2) => {
         if (obj1.value > obj2.value) {
             return -1;
@@ -283,12 +329,7 @@ export function getValueOfFoodItem(foodItem: FoodItem, selectedValue: string, so
     let value
     const nutrientData = getNutrientDataForFoodItem(foodItem, sourceToUse, supplementData)
 
-    const baseData = nutrientData.baseData;
-    const vitaminData = nutrientData.vitaminData;
-    const mineralData = nutrientData.mineralData;
-    const lipidData = nutrientData.lipidData;
-    const carbsData = nutrientData.carbohydrateData;
-    const proteinData = nutrientData.proteinData;
+    const { baseData, vitaminData, mineralData, lipidData, carbohydrateData, proteinData} = nutrientData;
 
     if (proteinData === null) {
         return 0;
@@ -445,35 +486,35 @@ export function getValueOfFoodItem(foodItem: FoodItem, selectedValue: string, so
     }
 
     if (selectedValue === Constants.DATA_CARBS_SUGAR) {
-        value = carbsData.sugar;
+        value = carbohydrateData.sugar;
     }
 
     if (selectedValue === Constants.DATA_CARBS_GLUCOSE) {
-        value = carbsData.glucose;
+        value = carbohydrateData.glucose;
     }
 
     if (selectedValue === Constants.DATA_CARBS_FRUCTOSE) {
-        value = carbsData.fructose;
+        value = carbohydrateData.fructose;
     }
 
     if (selectedValue === Constants.DATA_CARBS_GALACTOSE) {
-        value = carbsData.galactose;
+        value = carbohydrateData.galactose;
     }
 
     if (selectedValue === Constants.DATA_CARBS_SUCROSE) {
-        value = carbsData.sucrose;
+        value = carbohydrateData.sucrose;
     }
 
     if (selectedValue === Constants.DATA_CARBS_LACTOSE) {
-        value = carbsData.lactose;
+        value = carbohydrateData.lactose;
     }
 
     if (selectedValue === Constants.DATA_CARBS_MALTOSE) {
-        value = carbsData.maltose;
+        value = carbohydrateData.maltose;
     }
 
     if (selectedValue === Constants.DATA_CARBS_STARCH) {
-        value = carbsData.starch;
+        value = carbohydrateData.starch;
     }
 
 

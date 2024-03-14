@@ -1,6 +1,7 @@
 import SelectedFoodItem from "./SelectedFoodItem";
 import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from "./ChartConfigData";
 import ReactSelectOption from "../ReactSelectOption";
+import {NutrientCondition} from "./NutrientCondition";
 
 export interface ApplicationData {
     foodDataPanel: FoodDataPanelData
@@ -8,6 +9,7 @@ export interface ApplicationData {
     rankingPanelData: RankingPanelData
     foodSelector: FoodSelector
     preferredSource: string
+    nutrientFilter: Array<NutrientCondition>
 }
 
 export interface FoodDataPanelData {
@@ -41,6 +43,6 @@ export interface DirectCompareFoodSelector {
     sourceCombine: boolean
 }
 
-export interface FoodSelector extends DirectCompareFoodSelector{
+export interface FoodSelector extends DirectCompareFoodSelector {
     selectedCategory: ReactSelectOption | null
 }

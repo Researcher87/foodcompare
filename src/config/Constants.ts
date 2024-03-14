@@ -95,6 +95,9 @@ export const LIPIDS_DATA_OMEGA = "lipids data omega chart"
 export const MODE_NEW = "new";
 export const MODE_EDIT = "edit";
 
+export const OPERATOR_ALL = 0
+export const OPERATOR_ANY = 1
+
 export const OPTION_YES = 0
 export const OPTION_NO = 1
 

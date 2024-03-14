@@ -130,7 +130,6 @@ export function InfoData(props: InfoDataProps) {
             return tableDataPortion
         }
 
-
         return [];
     }
 

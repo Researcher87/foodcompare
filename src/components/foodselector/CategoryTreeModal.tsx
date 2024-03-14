@@ -109,7 +109,7 @@ export function CategoryTreeModal(props: CategoryTreeModalProps): ReactElement {
                             <Form.Check inline className="form-radiobutton"
                                         checked={separateByCategory}
                                         label={applicationStrings.label_categoryTree_checkbox[language]}
-                                        onClick={() => setSeparateByCategory(!separateByCategory)}>
+                                        onChange={() => setSeparateByCategory(!separateByCategory)}>
                             </Form.Check>
                         }
                     </div>

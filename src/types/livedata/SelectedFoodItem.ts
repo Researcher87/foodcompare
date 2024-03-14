@@ -16,3 +16,8 @@ export default interface SelectedFoodItem {
 	aggregated?: boolean
     title?: string
 }
+
+export interface FilteredFoodItem {
+    foodItem: FoodItem,
+    source: number
+}

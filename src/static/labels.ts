@@ -103,6 +103,10 @@ export const applicationStrings = {
         de: 'Lebensmittel nach Werten sortieren',
         en: 'Rank food items by a nutrient value'
     },
+    button_mode: {
+        de: 'Modus',
+        en: 'Mode'
+    },
     button_no: {
         de: 'Nein',
         en: 'No'
@@ -335,6 +339,26 @@ export const applicationStrings = {
         de: 'Eingabefehler',
         en: 'Input error'
     },
+    label_filterModal_add: {
+        de: 'Neue Bedingung',
+        en: 'New condition'
+    },
+    label_filterModal_note_addCondition: {
+        de: 'Fügen Sie eine Bedingung hinzu, um eine gefilterte Liste an Lebensmitteln zu erhalten.',
+        en: 'Add a condition to get a filtered list of foods.'
+    },
+    label_filterModal_note_noData: {
+        de: 'Keine Ergebnisse.',
+        en: 'No results.'
+    },
+    label_filterModal_selection: {
+        de: 'Bedingung festlegen',
+        en: 'Define condition'
+    },
+    label_filterModal_title: {
+        de: 'Lebensmittelfilter',
+        en: 'Food filter'
+    },
     label_food: {
         de: "Lebensmittel",
         en: "Food"
@@ -546,6 +570,14 @@ export const applicationStrings = {
     label_mail_error_verification: {
         de: "Bitte verifizieren, dass Sie kein Roboter sind.",
         en: "Please verify that you are not a robot."
+    },
+    label_mode_all: {
+      de: "Alle",
+      en: "All"
+    },
+    label_mode_any: {
+        de: "Eine",
+        en: "Any"
     },
     label_na: {
         de: 'Keine Angabe',
@@ -1055,6 +1087,18 @@ export const applicationStrings = {
         de: '% vom Tagesbedarf',
         en: '% of daily requirement'
     },
+    label_result: {
+        de: 'Ergebnis',
+        en: 'result'
+    },
+    label_results: {
+        de: 'Ergebnisse',
+        en: 'results'
+    },
+    label_selection: {
+        de: "Auswahl:",
+        en: "Selection:"
+    },
     label_source: {
         de: 'Datenquelle',
         en: 'Data source'
@@ -1234,6 +1278,22 @@ export const applicationStrings = {
     message_export_error: {
         de: 'Export fehlgeschlagen: Fehler beim Serialisieren der Food Compare Daten.',
         en: 'Export failed: Error while trying to serialize Food Compare data.'
+    },
+    message_filter_error_existing: {
+        de: 'Eine Bedingung zu diesem Nährstoff existiert bereits. Bitte wählen Sie einen anderen Wert aus.',
+        en: 'There already is a condition to this nutrient. Please select a different value.'
+    },
+    message_filter_error_range: {
+        de: 'Ungültige Eingabe! Das Minimum darf nicht größer als das Maximum sein.',
+        en: 'Invalid input! Minimum must not be above the maximum.'
+    },
+    message_filter_value_correction_min: {
+        de: 'Der Wert wurde an das Minimum des Wertebereichs angepasst.',
+        en: 'The value has been changed to the minimum of the data range.'
+    },
+    message_filter_value_correction_max: {
+        de: 'Der Wert wurde an das Maximum des Wertebereichs angepasst.',
+        en: 'The value has been changed to the maximum of the data range.'
     },
     message_import_error_invalidfile: {
         de: 'Datei konnte nicht verarbeitet werden. Möglicherweise ist dies keine Food Compare Datei.',
@@ -1415,6 +1475,22 @@ export const applicationStrings = {
         de: 'Die Referenzwerte beziehen sich auf die eingestellten Nutzerdaten.',
         en: 'The reference data refer to your entered body data.'
     },
+    tooltip_category_tree: {
+        de: 'Kategoriebaum anzeigen',
+        en: 'Show category tree'
+    },
+    tooltip_filter: {
+        de: 'Lebensmittel filtern',
+        en: 'Food filter'
+    },
+    tooltip_filter_edit: {
+        de: 'Bedingung bearbeiten',
+        en: 'Edit condition'
+    },
+    tooltip_filter_remove: {
+        de: 'Bedingung entfernen',
+        en: 'Remove condition'
+    },
     tooltip_icon_charts: {
         de: 'Diagramm-Modus',
         en: 'Chart mode'
@@ -1474,10 +1550,6 @@ export const applicationStrings = {
     tooltip_source: {
         de: 'Verwendete Quelle: ',
         en: 'Used source: '
-    },
-    vitamin_book_selection: {
-        de: "Auswahl:",
-        en: "Selection:"
     },
     vitamin_book_disclaimer: {
         de: 'Die hier präsentierten Informationen wurden aus freien Quellen wie Wikipedia oder Websites zu Gesundheit und Ernährung zusammengetragen. Es besteht kein Anspruch auf Vollständigkeit oder Korrektheit.',

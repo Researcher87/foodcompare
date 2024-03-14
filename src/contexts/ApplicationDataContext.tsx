@@ -29,6 +29,7 @@ import ReactSelectOption from "../types/ReactSelectOption";
 import {parseFoodCompareUri} from "../service/uri/BaseUriService";
 import {DataSettings} from "../types/livedata/DataSettings";
 import {setFoodDataPageComponent} from "../service/FoodDataPanelService";
+import {NutrientCondition} from "../types/livedata/NutrientCondition";
 
 export interface ApplicationDataContext {
     foodDataCorpus: FoodDataCorpus
@@ -67,6 +68,7 @@ export interface ApplicationContext extends ApplicationDataContext {
         setSelectedDirectCompareDataPage: (selectedPage: string) => void
     }
     setRankingPanelData: (RankingPanelData) => void
+    setNutrientFilter: (nutrientFilter: Array<NutrientCondition>) => void
 }
 
 export const ApplicationDataContextStore = createContext<ApplicationContext | null>(null)
@@ -364,6 +366,15 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
         )
     }
 
+    setNutrientFilter = (nutrientFilter: Array<NutrientCondition>): void => {
+        this.setState(prevState => ({
+                applicationData: {
+                    ...prevState.applicationData, nutrientFilter: nutrientFilter
+                }
+            })
+        )
+    }
+
     isDebugMode(): boolean {
         const uriData: string | null = parseFoodCompareUri()
         return !(uriData !== "test" && uriData !== "debug")
@@ -416,6 +427,7 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
                 sourceCombine: false,
             },
             preferredSource: SOURCE_SRLEGACY,
+            nutrientFilter: []
         },
         userData: {
             age: initialUserDataAge,
@@ -482,7 +494,8 @@ export default class ApplicationDataContextProvider extends Component<any, Appli
             setFoodSelectorConfig: this.setFoodSelectorConfig,
             setRankingPanelData: this.setRankingPanelData,
             setDirectCompareFoodSelector1: this.setDirectCompareFoodSelectorConfig1,
-            setDirectCompareFoodSelector2: this.setDirectCompareFoodSelectorConfig2
+            setDirectCompareFoodSelector2: this.setDirectCompareFoodSelectorConfig2,
+            setNutrientFilter: this.setNutrientFilter
         }
 
         return (

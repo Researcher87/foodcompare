@@ -230,6 +230,22 @@
 					"<li>Highlighting the amount compared to the whole database: The darker the table cell is, the higher is the amount compared to all other foods in the Food Compare database. This option can only be selected if at least 3 foods are displayed and the weight mode is set to  100 g.</li></ol>"
 				]
 			}
+		},
+		{
+			"id": 13,
+			"remark": "Filter Modal",
+			"de": {
+				"title": "Lebensmittel Filter",
+				"content": [
+					"In diesem Menü können Lebensmittel nach bestimmten Kriterien gefiltert werden. Dabei können verschiedene Bedingungen festgelegt werden, die ein Lebensmittel erfüllen muss, damit es in der Ergebnismenge angezeigt wird. Wenn die Filter zu restriktiv sind werden unter Umständen keine Ergebnisse angezeigt."
+				]
+			},
+			"en": {
+				"title": "Food Filter",
+				"content": [
+					"This menu allows you to narrow down foods by means of different nutrient filters. You can define several conditions that foods must fulfill to be part of the result set. If the filters are too strict, no foods may be shown, though."
+				]
+			}
 		}
 	]
 }

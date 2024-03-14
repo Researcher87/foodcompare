@@ -8,17 +8,20 @@ import 'react-notifications/lib/notifications.css';
 import FoodSelector from "./FoodSelector";
 import {applicationStrings} from "../../static/labels";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
+import SelectedFoodItem, {FilteredFoodItem} from "../../types/livedata/SelectedFoodItem";
 import {LanguageContext} from "../../contexts/LangContext";
 import {CompositeFoodList} from "./CompositeFoodList";
 import {initialFoodClassId, maximalPortionSize} from "../../config/ApplicationSetting";
 import combineFoodItems from "../../service/calculation/FoodDataAggregationService";
-import {FaQuestionCircle, FaList} from "react-icons/fa";
+import {FaQuestionCircle, FaList, FaFilter} from "react-icons/fa";
 import {HelpModal} from "../HelpModal";
 import {getHelpText} from "../../service/HelpService";
 import ReactSelectOption from "../../types/ReactSelectOption";
 import {MODE_EDIT, SOURCE_FNDDS} from "../../config/Constants";
 import {CategoryTreeModal} from "./CategoryTreeModal";
+import {FilterModal} from "./filter/FilterModal";
+import {makeSelectedFoodItemObject} from "../../service/nutrientdata/FoodItemsService";
+import ReactTooltip from "react-tooltip";
 
 export interface FoodSelectorModalProps {
     onHide: () => void,
@@ -43,6 +46,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     const [compositeList, setCompositeList] = useState<Array<SelectedFoodItem>>(initialCompositeList ?? [])
     const [showHelpModal, setShowHelpModal] = useState<boolean>(false)
     const [showCategoryTreeModal, setShowCategoryTreeModal] = useState<boolean>(false)
+    const [showFilterModal, setShowFilterModal] = useState<boolean>(false)
 
     if (!applicationContext) {
         return <div/>
@@ -119,8 +123,7 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const onSubmitComposite = () => {
-        const preferredSource = applicationContext.applicationData.preferredSource
-        let aggregatedSelectedFoodItem = combineFoodItems(compositeList, preferredSource)
+        let aggregatedSelectedFoodItem = combineFoodItems(compositeList)
 
         if (compositeTitle !== null && compositeTitle.trim().length > 0) {
             aggregatedSelectedFoodItem.title = compositeTitle.length < 24
@@ -161,7 +164,13 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         setShowCategoryTreeModal(true)
     }
 
-    const title = props.compositeSelector ? applicationStrings.label_foodselector_composite[language] : applicationStrings.label_foodselector[language]
+    const onOpenFilterModal = () => {
+        setShowFilterModal(true)
+    }
+
+    const title = props.compositeSelector
+        ? applicationStrings.label_foodselector_composite[language]
+        : applicationStrings.label_foodselector[language]
     const helpText = props.compositeSelector ? getHelpText(10, language) : getHelpText(9, language)
 
     const selectFoodItemFromCategoryTree = (foodItemId) => {
@@ -188,6 +197,19 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         }
     }
 
+    const selectFoodItemFromFilterModal = (selectedFilterResult: FilteredFoodItem): void => {
+        console.log('STUB: I will set', selectedFilterResult)
+
+        const {foodItem} = selectedFilterResult
+        const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
+        const portionData = foodItem.portionData ? foodItem.portionData[0] : undefined
+
+        const selectedFoodItem = makeSelectedFoodItemObject(foodItem, foodClass, portionData, 0, false, false,
+            selectedFilterResult.source)
+
+        setSelectedFoodItem(selectedFoodItem)
+    }
+
     const category = applicationContext.applicationData.foodSelector.selectedCategory
         ? applicationContext.applicationData.foodSelector.selectedCategory.value : 0
 
@@ -210,6 +232,10 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                                    closeModal={() => setShowCategoryTreeModal(false)}
                                    selectFoodItemFromCategoryTree={selectFoodItemFromCategoryTree}
                 />
+                }
+                {showFilterModal &&
+                <FilterModal closeModal={() => setShowFilterModal(false)}
+                             selectFoodItemFromFilterModal={selectFoodItemFromFilterModal}/>
                 }
                 <div>
                     {!props.compositeSelector ?
@@ -248,8 +274,23 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                         </Button>
                     </span>
                     {canAccessCategoryTree &&
-                    <Button className={"btn btn-secondary"} onClick={onOpenCategoryTreeModal}>
-                        <FaList/>
+                    <span style={{paddingRight: "2ch"}}>
+                        <Button className={"btn btn-secondary"}
+                                onClick={onOpenCategoryTreeModal}
+                                data-for={"fa-btn-categorytree"}
+                                data-tip={applicationStrings.tooltip_category_tree[language]}>
+                            <FaList/>
+                               <ReactTooltip id={"fa-btn-categorytree"}/>
+                        </Button>
+                    </span>
+                    }
+                    {canAccessCategoryTree &&
+                    <Button className={"btn btn-secondary"}
+                            onClick={onOpenFilterModal}
+                            data-for={"fa-btn-filter"}
+                            data-tip={applicationStrings.tooltip_filter[language]}>
+                        <FaFilter/>
+                        <ReactTooltip id={"fa-btn-filter"}/>
                     </Button>
                     }
                 </div>

@@ -26,6 +26,8 @@ $food-analyzer-panel-border: $food-analyzer-panel-area;   // Border color if at 
 $food-analyzer-panel-empty: $food-analyzer-panel-area;    // Background color of the data panel surrounding if no tab is open
 
 $help-modal-color: #f6eed5;
+$modal-background-color-1: #eee;
+$modal-background-color-2: #ddd;
 
 // 1.3 Food Panel sizes:
 
@@ -652,7 +654,7 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
 }
 
 
-/*** 12. Help Modal ***/
+/*** 12. Modals ***/
 
 // Help modal may appear as a modal in a modal, therefore it gets a custom layout (different color and shifted position)
 .help-modal .modal-content {
@@ -661,12 +663,20 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
     top: 2.5vh !important;
 }
 
-
-/*** 13. Unit Conversion Modal ***/
-
-// Help modal may appear as a modal in a modal, therefore it gets a custom layout (different color and shifted position)
 .unit-modal .modal-content {
-    background-color: #eee;
+    background-color: $modal-background-color-1;
     border: 1px solid black;
     top: 5vh !important;
+}
+
+.filter-modal .modal-content {
+    background-color: $modal-background-color-1;
+    border: 1px solid black;
+    top: 8vh !important;
+}
+
+.filter-selection-modal .modal-content {
+    background-color: $modal-background-color-2;
+    border: 1px solid black;
+    top: 15vh !important;
 }

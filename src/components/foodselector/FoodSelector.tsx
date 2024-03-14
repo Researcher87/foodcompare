@@ -9,7 +9,7 @@ import ReactSelectOption, {
 } from "../../types/ReactSelectOption";
 import {getCategorySelectList} from "../../service/nutrientdata/CategoryService";
 import {foodClassLabelSeparator, getFoodClassSelectList} from "../../service/nutrientdata/FoodClassService";
-import {getFoodItemsSelectList} from "../../service/nutrientdata/FoodItemsService";
+import {getFoodItemsSelectList, makeSelectedFoodItemObject} from "../../service/nutrientdata/FoodItemsService";
 import FoodItem, {PortionData} from "../../types/nutrientdata/FoodItem";
 import {getDefaultPortionData, getPortionReactSelectList} from "../../service/nutrientdata/PortionDataService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
@@ -161,22 +161,26 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                             setPortionAmount(defaultPortion.value.amount)
 
                             if (!props.selectedFoodItem) {
-                                makeSelectedFoodItemObject(foodItem, foodClass.value, defaultPortion.value)
+                                makeSelectedFoodItemObject(foodItem, foodClass.value, defaultPortion.value, portionAmount, supplementData,
+                                    combineData, selectedSource ? selectedSource.value : 0)
                             }
                         }
                     }
                 }
             } else {
                 // Update data for outer component whenever render is triggered
+                const source = selectedSource ? selectedSource.value : 0
                 if (selectedFoodItem && selectedFoodClass && selectedPortion) {
-                    const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectedFoodClass.value, selectedPortion.value)
+                    const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectedFoodClass.value, selectedPortion.value,
+                        portionAmount, supplementData, combineData, source)
                     if (newFoodItem) {
                         props.updateSelectedFoodItem(newFoodItem)
                         props.updateFoodSelectorConfig(selectedCategory, supplementData, combineData)
                     }
                 } else if (props.selectedFoodItem) {
                     const {foodItem, foodClass, portion} = props.selectedFoodItem
-                    makeSelectedFoodItemObject(foodItem, foodClass, portion)
+                    makeSelectedFoodItemObject(foodItem, foodClass, portion, portionAmount, supplementData,
+                        combineData, source)
                 }
             }
 
@@ -344,27 +348,6 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         })
     }
 
-
-    const makeSelectedFoodItemObject = (foodItem: FoodItem | undefined, foodClass: FoodClass | undefined,
-                                        portion: PortionData | undefined): SelectedFoodItem | null => {
-        if (!foodItem || !foodClass || !portion) {
-            return null
-        }
-
-        if (portion.portionType === 0) {
-            portion.amount = portionAmount
-        }
-
-        return {
-            foodItem: foodItem,
-            foodClass: foodClass,
-            portion: {...portion},
-            selectedSource: selectedSource ? selectedSource.value : foodItem.nutrientDataList[0].source.id,
-            supplementData: supplementData,
-            combineData: combineData
-        }
-    }
-
     const setInitialFoodElement = () => {
         if (!foodClassesList || foodClassesList.length === 0) {
             return
@@ -518,7 +501,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                                 label={applicationStrings.label_source_supplement[language]}
                                 checked={supplementData}
                                 disabled={sourcesList.length <= 1}
-                                onClick={onCheckSupplementCheckbox}>
+                                onChange={onCheckSupplementCheckbox}>
                     </Form.Check>
                     <ReactTooltip id={"selector-supplement"}/>
                 </label>
@@ -531,7 +514,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                                 label={applicationStrings.label_source_combine[language]}
                                 checked={combineData}
                                 disabled={sourcesList.length <= 1}
-                                onClick={onCheckCombineCheckbox}>
+                                onChange={onCheckCombineCheckbox}>
                     </Form.Check>
                 </label>
             </div>
