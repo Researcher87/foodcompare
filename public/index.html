@@ -32,29 +32,34 @@
     <!-- Fastcounter link:
         https://www.imcounter.com/stats/40519/dashboard
     -->
-    <!--
+
+    <!-- External code for visitor counting -->
 
     <span id="fc-40519"></span>
-    <script>
-        var fcr = Math.floor(Math.random() * 99999999999);
-        var _fcc = _fcc || [];
-        _fcc.push(["40519"]);
-        _fcc.push(["trans"]);
-        (function () {
-            var fc = document.createElement("script");
-            fc.async = true;
-            fc.src = "https://www.imcounter.com/fcount.php?rnd=" + fcr;
-            var sc = document.getElementById("fc-40519");
-            sc.appendChild(fc);
-        })();
-    </script>
     <noscript>
         <a href="https://www.fastcounter.de/stats/40519/dashboard" rel="nofollow" style="display: none;" target="_blank"
            title="Kostenloser Besucherz&auml;hler"><img src="https://www.imcounter.com/fcounter.php?id=40519;"
                                                         alt="Kostenloser Besucherz&auml;hler"
+                                                        style="display: none;"
                                                         title="Kostenloser Besucherz&auml;hler"></a>
     </noscript>
-    -->
+    <script>
+        const host = window.location.host
+        const queryString = window.location.search.substring(1)
+        console.log("INDEX", host)
+        if(queryString.includes("mode=debug") || host.includes("localhost:") || host.includes("127.0.0.1")) {
+            console.log("Skip counter code")
+        } else {
+            var fcr = Math.floor(Math.random()*99999999999);
+            var _fcc = _fcc || []; _fcc.push(["40519"]); _fcc.push(["trans"]);(function(){
+                var fc = document.createElement("script");fc.async = true;
+                fc.src = "https://www.imcounter.com/fcount.php?rnd=" + fcr;
+                var sc = document.getElementById("fc-40519");
+                sc.appendChild(fc);
+            })();
+        }
+    </script>
+
 
 </head>
 <body>
