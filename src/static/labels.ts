@@ -1487,6 +1487,14 @@ export const applicationStrings = {
         de: 'Bedingung bearbeiten',
         en: 'Edit condition'
     },
+    tooltip_filter_option_all: {
+        de: 'Lebensmittel müssen alle Bedingungen erfüllen',
+        en: 'Food elements must fulfill all conditions'
+    },
+    tooltip_filter_option_any: {
+        de: 'Lebensmittel müssen eine der Bedingungen erfüllen',
+        en: 'Food elements must fulfill one of the conditions'
+    },
     tooltip_filter_remove: {
         de: 'Bedingung entfernen',
         en: 'Remove condition'

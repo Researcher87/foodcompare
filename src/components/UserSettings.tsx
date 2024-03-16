@@ -148,7 +148,7 @@ export function UserSettings() {
     const renderTextField = (label, value, callback) => {
         return (
             <Form className={"form-elements"}>
-                <Form.Label className="form-label">{label}:</Form.Label>
+                <Form.Label>{label}:</Form.Label>
                 <FormControl
                     className={inputClass}
                     type="text"
@@ -299,7 +299,7 @@ export function UserSettings() {
                             {renderTextField(applicationStrings.label_userSettings_weight[lang], value_weight, changeWeight)}
                         </div>
                         <div className={"d-flex flex-row align-items-baseline"}>
-                            <Form.Label className="form-label">
+                            <Form.Label>
                                 {applicationStrings.label_userSettings_sex[lang]}
                             </Form.Label>
                             {renderSexRadioButtons()}

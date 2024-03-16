@@ -201,6 +201,8 @@ export function NutrientFilterSelectionModal(props: NutrientFilterSelectionProps
 
 
     const renderForm = () => {
+        const inputFieldStyle = {padding: "0.3ch", margin: "0ch"}
+
         return (
             <div>
                 <div className={"select-menu form-section"}>
@@ -227,18 +229,20 @@ export function NutrientFilterSelectionModal(props: NutrientFilterSelectionProps
                     <FormGroup>
                         <div className={"d-flex flex-row"}>
                             <Form className={"form-elements"}>
-                                <Form.Label className="form-label">Min:</Form.Label>
+                                <Form.Label style={{margin: "0"}}>Min:</Form.Label>
                                 <FormControl
                                     className={"form-control input"}
+                                    style={inputFieldStyle}
                                     type="number"
                                     value={`${minValue}`}
                                     onChange={setMinimum}
                                 />
                             </Form>
                             <Form className={"form-elements"}>
-                                <Form.Label className="form-label">Max:</Form.Label>
+                                <Form.Label style={{margin: "0"}}>Max:</Form.Label>
                                 <FormControl
                                     className={"form-control input"}
+                                    style={inputFieldStyle}
                                     type="number"
                                     value={`${maxValue}`}
                                     onChange={setMaximum}

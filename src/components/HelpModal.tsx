@@ -7,6 +7,7 @@ import {LanguageContext} from "../contexts/LangContext";
 interface HelpModalProps {
     helpText: HelpText,
     size?,
+    style?,
     closeHelpModal: () => void
 }
 
@@ -23,6 +24,7 @@ export function HelpModal(props: HelpModalProps): ReactElement {
                show={true}
                onHide={props.closeHelpModal}
                backdrop="static"
+               style={props.style ? props.style : {}}
         >
             <Modal.Header>
                 <h5 className="modal-title">{props.helpText.title}</h5>

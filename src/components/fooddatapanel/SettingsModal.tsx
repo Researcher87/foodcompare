@@ -72,7 +72,7 @@ export default function SettingsModal(props: SettingsProps) {
                 <FormGroup controlId="formBasicText">
                     <div className="row">
                         <div className={classRow}>
-                            <Form.Label className="form-label">
+                            <Form.Label>
                                 {applicationStrings.modal_settings_label_unit_vitamins[language]}:
                             </Form.Label>
                             <Select options={optionsVitamins}
@@ -82,7 +82,7 @@ export default function SettingsModal(props: SettingsProps) {
                             />
                         </div>
                         <div className={classRow}>
-                            <Form.Label className="form-label">
+                            <Form.Label>
                                 {applicationStrings.modal_settings_label_unit_proteins[language]}:
                             </Form.Label>
                             <Select options={optionsProteins}
@@ -92,7 +92,7 @@ export default function SettingsModal(props: SettingsProps) {
                             />
                         </div>
                         <div className={classRow}>
-                            <Form.Label className="form-label">
+                            <Form.Label>
                                 {applicationStrings.modal_settings_label_provitamins[language]}:
                             </Form.Label>
                             <Select options={optionsProvitamins}

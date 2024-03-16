@@ -46,7 +46,6 @@
     <script>
         const host = window.location.host
         const queryString = window.location.search.substring(1)
-        console.log("INDEX", host)
         if(queryString.includes("mode=debug") || host.includes("localhost:") || host.includes("127.0.0.1")) {
             console.log("Skip counter code")
         } else {

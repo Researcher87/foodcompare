@@ -17,6 +17,7 @@ import {getFoodItemName} from "../../../service/nutrientdata/FoodItemsService";
 import ReactSelectOption from "../../../types/ReactSelectOption";
 import {OPERATOR_ALL, OPERATOR_ANY} from "../../../config/Constants";
 import {getSourceId} from "../../../service/Source";
+import getName from "../../../service/LanguageService";
 
 interface FilterModalProps {
     closeModal: () => void
@@ -52,9 +53,13 @@ export function FilterModal(props: FilterModalProps): ReactElement {
             const {foodNames} = applicationContext.foodDataCorpus
             const selectList = filterData.map((filterResult) => {
                 const foodName = getFoodItemName(filterResult.foodItem, foodNames, language)
+                const condition = applicationContext.foodDataCorpus.conditions.find(
+                    condition => condition.id === filterResult.foodItem.conditionId
+                )
+                const conditionName = condition && filterResult.foodItem.conditionId !== 100 ? `[${getName(condition, language)}]` : ""
                 return {
                     value: filterResult.foodItem.id,
-                    label: foodName ?? ""
+                    label: `${foodName} ${conditionName}` ?? ""
                 }
             })
 
@@ -179,7 +184,7 @@ export function FilterModal(props: FilterModalProps): ReactElement {
                         <ListGroup>
                             {applicationContext.applicationData.nutrientFilter.map(condition => renderFilterListEntry(condition))}
                         </ListGroup>
-                    ):
+                    ) :
                     (
                         <div>
                             {applicationStrings.label_filterModal_note_addCondition[language]}
@@ -222,6 +227,8 @@ export function FilterModal(props: FilterModalProps): ReactElement {
         )
     }
 
+    const radioButtonDisabled = applicationContext.applicationData.nutrientFilter.length <= 1
+
     const renderLeftFooterPart = () => {
         return (
             <div>
@@ -245,16 +252,24 @@ export function FilterModal(props: FilterModalProps): ReactElement {
                                     type="radio"
                                     inline={true}
                                     label={applicationStrings.label_mode_all[language]}
+                                    data-for={"rb-option-all"}
+                                    data-tip={applicationStrings.tooltip_filter_option_all[language]}
+                                    disabled={radioButtonDisabled}
                                     checked={!calculationTypeAny}
                                     onChange={() => setCalculationTypeAny(false)}
                         />
+                        <ReactTooltip id={"rb-option-all"} globalEventOff="click"/>
                         <Form.Check className="form-radiobutton form-horizontal-separation"
                                     type="radio"
                                     inline={true}
                                     label={applicationStrings.label_mode_any[language]}
+                                    data-for={"rb-option-any"}
+                                    data-tip={applicationStrings.tooltip_filter_option_any[language]}
+                                    disabled={radioButtonDisabled}
                                     checked={calculationTypeAny}
                                     onChange={() => setCalculationTypeAny(true)}
                         />
+                        <ReactTooltip id={"rb-option-any"} globalEventOff="click"/>
                     </span>
             </div>
         )
@@ -299,6 +314,7 @@ export function FilterModal(props: FilterModalProps): ReactElement {
             <Modal.Body>
                 {showHelpModal && helpText !== null &&
                 <HelpModal helpText={helpText}
+                           style={{top: "12vh"}}
                            size={"lg"}
                            closeHelpModal={() => setShowHelpModal(false)}/>
                 }

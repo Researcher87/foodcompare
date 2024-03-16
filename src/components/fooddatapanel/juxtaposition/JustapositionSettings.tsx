@@ -55,7 +55,7 @@ export function JustapositionSettings(props: JuxtapositionSettingsProps) {
                 <FormGroup controlId="formBasicText">
                     <div className="row">
                         <div className={classRow}>
-                            <Form.Label className="form-label">
+                            <Form.Label>
                                 {applicationStrings.label_juxtaposition_settings_chartsize[language]}:
                             </Form.Label>
                             <Select options={optionsChartSize}
