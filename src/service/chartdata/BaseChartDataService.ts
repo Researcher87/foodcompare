@@ -207,6 +207,7 @@ export function showEnergyChartLegend(lang: string): LegendData[] {
         {
             item: applicationStrings.label_nutrient_dietaryFibers[lang],
             color: ChartConfig.color_carbs_dietaryFibers,
+            indent: 1
         },
         {
             item: applicationStrings.label_nutrient_lipids[lang],

@@ -43,7 +43,7 @@ export function EnergyCompositionChart(props: ChartProps) {
         ]
 
         const values = [
-            transformToPortion(energyData.carbohydrates - energyData.dietaryFibers),
+            transformToPortion(energyData.carbohydrates),
             transformToPortion(energyData.dietaryFibers),
             transformToPortion(energyData.fat),
             transformToPortion(energyData.proteins),
@@ -109,10 +109,10 @@ export function EnergyCompositionChart(props: ChartProps) {
                     {!isMobileDevice()
                         ? <div className={"header-label-small"}>
                             <span style={{paddingRight: "1.25ch"}}>
-                                <b>{energy100g} kcal / 100 g</b>
+                                <b>{energyPerPortion} kcal {applicationStrings.label_per_portion[language]}</b>
                             </span>
                             <span>
-                                <b>({energyPerPortion} kcal {applicationStrings.label_per_portion[language]})</b>
+                                <b>({energy100g} kcal / 100 g)</b>
                             </span>
                         </div>
                         : <p><b>{energy100g} kcal / 100 g ({energyPerPortion} kcal {applicationStrings.label_per_portion[language]})</b></p>
