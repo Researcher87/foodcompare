@@ -196,3 +196,32 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean): Lege
 
     return legendData;
 }
+
+
+export function showEnergyChartLegend(lang: string): LegendData[] {
+    const legendData: LegendData[] = [
+        {
+            item: applicationStrings.label_nutrient_carbohydrates[lang],
+            color: ChartConfig.color_carbs,
+        },
+        {
+            item: `... ${applicationStrings.label_prefix_hereof[lang]} ${applicationStrings.label_nutrient_dietaryFibers[lang]}`,
+            color: ChartConfig.color_carbs_dietaryFibers,
+            indent: 1,
+        },
+        {
+            item: applicationStrings.label_nutrient_lipids[lang],
+            color: ChartConfig.color_lipids
+        },
+        {
+            item: applicationStrings.label_nutrient_proteins[lang],
+            color: ChartConfig.color_proteins
+        },
+        {
+            item: applicationStrings.label_nutrient_alcohol[lang],
+            color: ChartConfig.color_alcohol
+        },
+    ];
+
+    return legendData
+}

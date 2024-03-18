@@ -3,8 +3,10 @@ export const AMOUNT_100_GRAM = "100 gram"
 export const GRAM = "gram" +
     ""
 
-export const CHART_TYPE_PIE = "pie chart"
-export const CHART_TYPE_BAR = "bar chart"
+export const CHART_TYPE_PIE = "1"
+export const CHART_TYPE_BAR = "2"
+export const CHART_TYPE_COMPOSITION = "3"
+export const CHART_TYPE_ENERGY_LEVEL = "4"
 
 export const CHART_VITAMINS = "chart vitamins"
 export const CHART_MINERALS = "chart minerals"

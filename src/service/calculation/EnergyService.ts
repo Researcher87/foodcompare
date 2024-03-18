@@ -2,6 +2,9 @@ import {SEX_MALE} from '../../config/Constants';
 import {applicationStrings} from "../../static/labels";
 import * as EnergyConstants from '../../config/EnergyConstants'
 import {PalCategory} from "../../types/livedata/PalCategory";
+import {BaseData} from "../../types/nutrientdata/FoodItem";
+import {EnergyData} from "../../types/livedata/EnergyData";
+import {round} from "./MathService";
 
 
 /**
@@ -25,7 +28,7 @@ export function getPalCategories(language: string): Array<PalCategory> {
  * value: The PAL value, e.g. 1.4 or 1.6.
  */
 export function getPalCategory(value: number): number {
-    switch(value) {
+    switch (value) {
         case EnergyConstants.PAL_CATEGORY_1:
             return 1
         case EnergyConstants.PAL_CATEGORY_2:
@@ -47,7 +50,7 @@ export function getPalCategory(value: number): number {
 
 
 export function getPalValue(palCategory: number): number {
-	switch(palCategory) {
+    switch (palCategory) {
         case 1:
             return EnergyConstants.PAL_CATEGORY_1
         case 2:
@@ -82,7 +85,7 @@ function createPalCategoryName(language, category): string {
  * Calculates the Basal Metabolic Rate (BMR) of a person.
  */
 export function calculateBMR(age: number, size: number, weight: number, sex: string): number {
-    if(sex === SEX_MALE) {
+    if (sex === SEX_MALE) {
         const bmr = 3.4 * weight + 15.3 * size - 6.8 * age - 961;
         return Math.round(bmr);
     } else {
@@ -99,9 +102,41 @@ export function calculateBMR(age: number, size: number, weight: number, sex: str
  * leisureSports: Specifies whether leisure sports is performed or not (+0.3 PAL).
  */
 export function calculateTotalEnergyConsumption(bmr: number, palValue: number, leisureSports: boolean): number {
-    if(leisureSports) {
+    if (leisureSports) {
         palValue += 0.3;
     }
 
     return bmr * palValue;
+}
+
+
+/**
+ * Calculates the energy amount data for the different macro nutrients per 100 gram in kcal.
+ * @param baseData Base data object containing the corresponding nutrient data.
+ * @return Energy data object with the precise information about the energy composition.
+ */
+export function calculateEnergyData(baseData: BaseData): EnergyData | null {
+    const {energy, carbohydrates, lipids, proteins, alcohol} = baseData
+    const dietaryFibers = baseData.dietaryFibers !== null ? baseData.dietaryFibers : 0
+
+    if (energy === null || carbohydrates === null || lipids === null || proteins === null) {
+        return null
+    }
+
+    const getValueForPortion = (value: number | null, factor: number): number => {
+        if (value === undefined || value === null) {
+            return 0
+        }
+
+        return round((value * factor), 1);
+    }
+
+    return {
+        carbohydrates: getValueForPortion(carbohydrates - dietaryFibers, 4) + getValueForPortion( dietaryFibers, 2),
+        dietaryFibers: getValueForPortion( dietaryFibers, 2),
+        fat: getValueForPortion(lipids, 9),
+        proteins: getValueForPortion(proteins, 4),
+        alcohol: getValueForPortion(alcohol, 7),
+    }
+
 }

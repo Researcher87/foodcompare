@@ -1,6 +1,6 @@
 import {
     AMOUNT_PORTION,
-    CARBS_DATA_BASE, CHART_SIZE_MEDIUM,
+    CARBS_DATA_BASE, CHART_SIZE_MEDIUM, CHART_TYPE_COMPOSITION,
     CHART_TYPE_PIE,
     LIPIDS_DATA_BASE,
     SEX_MALE
@@ -44,6 +44,10 @@ export const initialChartConfigData: ChartConfigData = {
         showLegend: true,
         showDetails: false
     },
+    energyChartConfig: {
+        chartType: CHART_TYPE_COMPOSITION,
+        showLegend: true
+    },
     vitaminChartConfig: {
         portionType: AMOUNT_PORTION,
         expand100: false
@@ -84,6 +88,10 @@ export const initialDirectCompareConfigData: DirectCompareChartConfigData = {
         chartType: CHART_TYPE_PIE,
         showLegend: false,
         showDetails: false
+    },
+    energyChartConfig: {
+        chartType: CHART_TYPE_COMPOSITION,
+        showLegend: true
     },
     vitaminChartConfig: {
         portionType: AMOUNT_PORTION,

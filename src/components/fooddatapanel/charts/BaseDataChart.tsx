@@ -66,7 +66,6 @@ export default function BaseDataChart(props: BaseDataChartProps) {
     }
 
     const createTotalChartData = () => {
-        const category = props.selectedFoodItem.foodClass?.category
         const nutrientData = getNutrientData(props.selectedFoodItem)
         const chartDisplayData: ChartDisplayData = getTotalChartData(nutrientData, lang)
 

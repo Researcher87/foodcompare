@@ -79,7 +79,8 @@ export function JuxtapositionChart(props: JuxtapositionChartProps) {
                     ...options.scales.x,
                     ticks: ticks
                 }
-            }
+            },
+            animation: false
         }
 
         return options

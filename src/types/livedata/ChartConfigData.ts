@@ -7,6 +7,7 @@ export interface ChartConfigData {
     lipidsChartConfig: GeneralChartConfigWithSubCharts
     carbsChartConfig: GeneralChartConfigWithSubCharts
     proteinChartConfig: BarChartConfig
+    energyChartConfig: GeneralChartConfig
 }
 
 export interface DirectCompareChartConfigData {
@@ -16,6 +17,7 @@ export interface DirectCompareChartConfigData {
     lipidsChartConfig: GeneralChartConfigDirectCompareWithSubCharts
     carbsChartConfig: GeneralChartConfigDirectCompareWithSubCharts
     proteinChartConfig: DirectCompareBarChartConfig
+    energyChartConfig: GeneralChartConfig
 }
 
 export interface GeneralChartConfig {

@@ -115,8 +115,8 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         setShowBookModal(true)
     }
 
-    const enabledDisplayButtonClasses = "btn button-displaymode-enabled"
-    const disabledDisplayButtonClasses = "btn button-displaymode-disabled"
+    const enabledDisplayButtonClasses = "button-displaymode-enabled"
+    const disabledDisplayButtonClasses = "button-displaymode-disabled"
 
     const chartButtonClasses = displayMode === DISPLAYMODE_CHART ? enabledDisplayButtonClasses
         : disabledDisplayButtonClasses;
@@ -176,6 +176,10 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
         ? "sm"
         : "lg"
 
+    const headerLabelClass = fullName.length <= 48
+        ? "header-label"
+        : "header-label-small"
+
     return (
         <div style={{paddingBottom: "6px"}}>
             {helpText !== null &&
@@ -208,63 +212,57 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
                 </div>
                 <div className={"col-10"}>
                     <div className="d-flex flex-row justify-content-between" style={{marginTop: "1vh"}}>
-                        <div style={{paddingTop: "0.75vh", paddingLeft: "1.5vw"}}>
-                            <div className={"header-label"}>
+                        <div style={{paddingTop: "0.75vh", paddingLeft: "1vw"}}>
+                            <div className={headerLabelClass}>
                                 <b>{fullName}</b>
                             </div>
                         </div>
-                        <div className={"d-flex flex-row"} style={{paddingRight: "24px"}}>
-                            <div style={{padding: "0px !important", margin: "0px !important"}}>
-                                {shouldShowBookIcon &&
-                                <span style={{marginRight: "20px"}}>
-                                    <Button
-                                        onClick={() => openVitaminMineralBook()}
-                                        data-tip={bookToolTip}>
-                                                        <ReactTooltip/>
-                                                        <FaBookOpen/>
-                                    </Button>
-                                </span>
-                                }
+                        <div className={"d-flex flex-row align-items-start"} style={{paddingLeft: "0.75vw", paddingRight: "0.25vw"}}>
+                            {shouldShowBookIcon &&
+                            <Button className={"button-foodPanelHead"}
+                                    onClick={() => openVitaminMineralBook()}
+                                    data-tip={bookToolTip}>
+                                <ReactTooltip/>
+                                <FaBookOpen/>
+                            </Button>
+                            }
+                            <div className="btn-group" role="group">
+                                <Button className={chartButtonClasses}
+                                        onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
+                                        active={displayMode === DISPLAYMODE_CHART}
+                                        data-for={"datapanel-chart"}
+                                        data-tip={applicationStrings.tooltip_icon_charts[languageContext.language]}>
+                                    <ReactTooltip id={"datapanel-chart"}/>
+                                    <FaChartBar/>
+                                </Button>
+                                <Button className={tablesButtonClasses}
+                                        onClick={() => handleRadioButtonClick(DISPLAYMODE_TABLE)}
+                                        active={displayMode === DISPLAYMODE_TABLE}
+                                        data-for={"datapanel-table"}
+                                        data-tip={applicationStrings.tooltip_icon_table[languageContext.language]}>
+                                    <ReactTooltip id="datapanel-table"/>
+                                    <FaThList/>
+                                </Button>
                             </div>
-                            <div className={"d-flex flex-row"}>
-                                <div className="btn-group" role="group">
-                                    <Button className={chartButtonClasses}
-                                            onClick={() => handleRadioButtonClick(DISPLAYMODE_CHART)}
-                                            active={displayMode === DISPLAYMODE_CHART}
-                                            data-for={"datapanel-chart"}
-                                            data-tip={applicationStrings.tooltip_icon_charts[languageContext.language]}>
-                                        <ReactTooltip id={"datapanel-chart"}/>
-                                        <FaChartBar/>
-                                    </Button>
-                                    <Button className={tablesButtonClasses}
-                                            onClick={() => handleRadioButtonClick(DISPLAYMODE_TABLE)}
-                                            active={displayMode === DISPLAYMODE_TABLE}
-                                            data-for={"datapanel-table"}
-                                            data-tip={applicationStrings.tooltip_icon_table[languageContext.language]}>
-                                        <ReactTooltip id="datapanel-table"/>
-                                        <FaThList/>
-                                    </Button>
-                                </div>
-                                <div className={"d-flex flex-row"} style={{paddingLeft: "20px"}}>
-                                    <Button className={"btn-primary button-foodPanelHead"}
-                                            onClick={openSettingsMenu}
-                                            data-for={"datapanel-settings"}
-                                            data-tip={applicationStrings.tooltip_icon_settings[languageContext.language]}>
-                                        <ReactTooltip id="datapanel-settings" globalEventOff="click"/>
-                                        <FaTools/>
-                                    </Button>
-                                    <Button className={"btn-primary button-foodPanelHead"}
-                                            onClick={openHelpMenu}>
-                                        <FaQuestionCircle/>
-                                    </Button>
-                                    <Button className={"button-closeTab"}
-                                            onClick={closeTab}
-                                            data-for={"datapanel-close"}
-                                            data-tip={applicationStrings.tooltip_icon_close[languageContext.language]}>
-                                        <ReactTooltip id="datapanel-close"/>
-                                        <FaTimes/>
-                                    </Button>
-                                </div>
+                            <div className={"d-flex flex-row"} style={{paddingLeft: "0.5vw"}}>
+                                <Button className={"button-foodPanelHead"}
+                                        onClick={openSettingsMenu}
+                                        data-for={"datapanel-settings"}
+                                        data-tip={applicationStrings.tooltip_icon_settings[languageContext.language]}>
+                                    <ReactTooltip id="datapanel-settings" globalEventOff="click"/>
+                                    <FaTools/>
+                                </Button>
+                                <Button className={"button-foodPanelHead"}
+                                        onClick={openHelpMenu}>
+                                    <FaQuestionCircle/>
+                                </Button>
+                                <Button className={"button-foodPanelHead"}
+                                        onClick={closeTab}
+                                        data-for={"datapanel-close"}
+                                        data-tip={applicationStrings.tooltip_icon_close[languageContext.language]}>
+                                    <ReactTooltip id="datapanel-close"/>
+                                    <FaTimes/>
+                                </Button>
                             </div>
                         </div>
                     </div>

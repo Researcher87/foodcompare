@@ -1,158 +1,97 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {LanguageContext} from "../../../contexts/LangContext";
-import * as ChartConfig from "../../../config/ChartConfig"
-import {Bar} from "react-chartjs-2";
-import {getBarChartOptions} from "../../../service/ChartConfigurationService";
 import {applicationStrings} from "../../../static/labels";
-import {calculateBMR, calculateTotalEnergyConsumption} from "../../../service/calculation/EnergyService";
 import {ApplicationDataContextStore} from "../../../contexts/ApplicationDataContext";
 import {ChartProps} from "../../../types/livedata/ChartPropsData";
-import {isMobileDevice, useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
+import {EnergyLevelChart} from "./energy/EnergyLevelChart";
+import {Form} from "react-bootstrap";
+import {CHART_TYPE_BAR, CHART_TYPE_COMPOSITION, CHART_TYPE_ENERGY_LEVEL, CHART_TYPE_PIE} from "../../../config/Constants";
+import {EnergyCompositionChart} from "./energy/EnergyCompositionChart";
 
 export default function EnergyDataChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)
-    const languageContext = useContext(LanguageContext)
-    const lang = languageContext.language
-    useWindowDimension();
+    const language = useContext(LanguageContext).language
     const nutrientData = getNutrientData(props.selectedFoodItem);
     const energy100g = nutrientData.baseData.energy;
+
+    const initialChartType = props.directCompareUse
+        ? applicationContext?.applicationData.directCompareDataPanel.directCompareConfigChart.energyChartConfig.chartType ?? CHART_TYPE_COMPOSITION
+        : applicationContext?.applicationData.foodDataPanel.chartConfigData.energyChartConfig.chartType ?? CHART_TYPE_COMPOSITION
+
+    const [chartType, setChartType] = useState<string>(initialChartType)
+
+    useEffect(() => {
+        if (applicationContext) {
+            if (props.directCompareUse) {
+                const newChartConfig = {
+                    ...applicationContext.applicationData.directCompareDataPanel.directCompareConfigChart,
+                    energyChartConfig: {
+                        chartType: chartType,
+                        showLegend: true
+                    }
+                }
+                applicationContext.setDirectCompareData.updateDirectCompareChartConfig(newChartConfig)
+            } else {
+                const newChartConfig = {
+                    ...applicationContext.applicationData.foodDataPanel.chartConfigData,
+                    energyChartConfig: {
+                        chartType: chartType,
+                        showLegend: true
+                    }
+                }
+                applicationContext.setFoodDataPanelData.updateFoodDataPanelChartConfig(newChartConfig)
+            }
+        }
+
+    }, [chartType])
 
     if (!applicationContext || !energy100g) {
         return <div>No data.</div>
     }
 
-    const createEnergyLevelChart = () => {
-        const averagePortion = props.selectedFoodItem.portion.amount
-        const energyPortion = Math.round(energy100g / 100 * averagePortion);
-
-        return {
-            labels: ["100 g", "Portion"],
-            datasets: [{
-                data: [energy100g,
-                    energyPortion
-                ],
-                backgroundColor: [
-                    ChartConfig.color_yellow,
-                    ChartConfig.color_red,
-                ],
-                borderWidth: 2,
-                borderColor: '#555',
-            }]
-
-        }
-    }
-
-
-    const renderUserDataInfoPage = () => {
-        const showInfotext = !(isMobileDevice() && props.directCompareUse)
-
-        return (
-            <div style={{paddingLeft: "2vw", paddingTop: "2vh", maxWidth: "90%"}}>
-                {!isMobileDevice()
-                    ? <div className={"header-label"}><b>{`${energy100g}`} kcal / 100 g</b></div>
-                    : <p><b>{`${energy100g}`} kcal / 100 g</b></p>
-                }
-
-                {showInfotext &&
-                <div className="text-small" style={{paddingTop: "30px"}}>
-                    {applicationContext.userData.initialValues ?
-                        (<div>
-                            <p>{applicationStrings.text_setUserdata_p1[lang]}</p>
-                            <p>{applicationStrings.text_setUserdata_p2[lang]}</p>
-                        </div>)
-                        :
-                        <p>{applicationStrings.text_setUserdata_p3[lang]}</p>
-                    }
-                </div>
-                }
-            </div>
-        )
-    }
-
-
-    const getOptions = () => {
-        const {age, size, weight, sex, palValue, leisureSports} = applicationContext.userData
-        const bmr = calculateBMR(age, size, weight, sex);
-        const totalEnergy = calculateTotalEnergyConsumption(bmr, palValue, leisureSports);
-
-        if (props.directCompareUse) {
-
-        }
-
-        const annotation1 = {
-            drawTime: 'afterDatasetsDraw',
-            type: 'line',
-            mode: 'horizontal',
-            scaleID: 'y-axis-0',
-            yMin: bmr,
-            yMax: bmr,
-            borderColor: ChartConfig.color_line_red,
-            borderWidth: 4,
-            label: {
-                enabled: true,
-                content: applicationStrings.label_chart_bmr[lang]
-            },
-        }
-
-        const annotation2 =
-            {
-                drawTime: 'afterDatasetsDraw',
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                yMin: totalEnergy,
-                yMax: totalEnergy,
-                borderColor: ChartConfig.color_line_blue,
-                borderWidth: 4,
-                label: {
-                    enabled: true,
-                    content: applicationStrings.label_chart_energyExpenditure[lang]
-                }
-            }
-
-        const annotation = {
-            annotations: {
-                line1: annotation1,
-                line2: !(props.directCompareUse && isMobileDevice()) ? annotation2 : undefined,
-            }
-        }
-
-        let options: any = getBarChartOptions(applicationStrings.label_charttype_energy[languageContext.language], "kcal");
-        options = {
-            ...options, plugins: {
-                ...options.plugins,
-                annotation: annotation
-            }
-        }
-
-        return options;
-    }
-
-    const data = createEnergyLevelChart();
-    if (!data) {
-        return <div>{applicationStrings.label_noData[lang]}</div>
-    }
-
-    const chartClass = props.directCompareUse ? "col-12 chart-area-dc" : "col-12 chart-area"
 
     return (
-        <div className="container-fluid">
-            <div className="row " key={"energy container"}>
-                <div className="col-7">
-                    <div className={chartClass}>
-                        <Bar
-                            data={data}
-                            key={'chart energy'}
-                            options={getOptions()}
-                        />
+        <div>
+            {chartType === CHART_TYPE_COMPOSITION &&
+            <div>
+                <EnergyCompositionChart selectedFoodItem={props.selectedFoodItem}/>
+            </div>
+            }
+            {chartType === CHART_TYPE_ENERGY_LEVEL &&
+            <div>
+                <EnergyLevelChart selectedFoodItem={props.selectedFoodItem}></EnergyLevelChart>
+            </div>
+            }
+            <div className="row chart-control-button-bar">
+                <div className="container">
+                    <div className="row">
+                        <form className="form-inline form-group">
+                            <Form.Label className="form-elements">
+                                <b>{applicationStrings.label_charttype[language]}:</b>
+                            </Form.Label>
+                            <Form.Check inline={true}
+                                        className="form-radiobutton"
+                                        label={applicationStrings.label_charttype_energy_composition[language]}
+                                        type="radio"
+                                        value={CHART_TYPE_PIE}
+                                        checked={chartType === CHART_TYPE_COMPOSITION}
+                                        onChange={() => setChartType(CHART_TYPE_COMPOSITION)}>
+                            </Form.Check>
+                            <Form.Check inline={true}
+                                        className="form-radiobutton form-horizontal-separation"
+                                        label={applicationStrings.label_charttype_energy_level[language]}
+                                        type="radio"
+                                        value={CHART_TYPE_BAR}
+                                        checked={chartType === CHART_TYPE_ENERGY_LEVEL}
+                                        onChange={() => setChartType(CHART_TYPE_ENERGY_LEVEL)}>
+                            </Form.Check>
+                        </form>
                     </div>
-                </div>
-                <div className="col-5">
-                    {renderUserDataInfoPage()}
                 </div>
             </div>
         </div>
+
     )
 
 }

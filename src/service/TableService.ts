@@ -19,6 +19,7 @@ import {
 } from "./calculation/provitaminCalculation/ProvitaminEquivalentFactors";
 import {autoRound} from "./calculation/MathService";
 import {DataSettings} from "../types/livedata/DataSettings";
+import {calculateEnergyData} from "./calculation/EnergyService";
 
 export interface TableCalculationParams {
     selectedFoodItem: SelectedFoodItem
@@ -756,22 +757,46 @@ export function createLipidsTable(params: TableCalculationParams): Array<FoodTab
 
 export function createEnergyTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
-    const {selectedFoodItem, portion} = params
+    const {selectedFoodItem, portion, language} = params
 
     const nutrientData = getNutrientData(selectedFoodItem)
     const energy = nutrientData.baseData.energy !== null ? nutrientData.baseData.energy : 0;
+    const energyData = calculateEnergyData(nutrientData.baseData)
 
-    tableData.push(createTableObject(
-        "kcal",
+    const energyKj = MathService.round(4.186 * energy, 1)
+
+    let energyObject = createTableObjectEnergy(
+        "Energie",
         energy,
-        portion, "")
+        energyKj,
+        portion
     );
 
-    tableData.push(createTableObject(
-        "kJ",
-        MathService.round(4.186 * energy, 1),
-        portion, "")
-    );
+    const makeBaseLabel = (key) => {
+        return `${applicationStrings.label_prefix_energy_in[language]} ${key}`
+    }
+
+    if(energyData) {
+        let label = makeBaseLabel(applicationStrings.label_nutrient_carbohydrates_plural[language])
+        const carbEnergy = energyData.carbohydrates + energyData.dietaryFibers
+        energyObject = appendTableDataObject(energyObject, language, label, carbEnergy, portion, "kcal")
+
+        label = ` ... ${applicationStrings.label_prefix_hereof_in[language]} ${applicationStrings.label_nutrient_dietaryFibers_plural[language]}`
+        energyObject = appendTableDataObject(energyObject, language, label, energyData.dietaryFibers, portion, "kcal")
+
+        label = makeBaseLabel(applicationStrings.label_nutrient_lipids[language])
+        energyObject = appendTableDataObject(energyObject, language, label, energyData.fat, portion, "kcal")
+
+        label = makeBaseLabel(applicationStrings.label_nutrient_proteins[language])
+        energyObject = appendTableDataObject(energyObject, language, label, energyData.proteins, portion, "kcal")
+
+        if(energyData.alcohol) {
+            label = makeBaseLabel(applicationStrings.label_nutrient_alcohol[language])
+            energyObject = appendTableDataObject(energyObject, language, label, energyData.alcohol, portion, "kcal")
+        }
+    }
+
+    tableData.push(energyObject)
 
     return tableData;
 }
@@ -1099,6 +1124,17 @@ function createTableObject(label: string, value_100g: number, portion: number, u
         value_100g: `${MathService.autoRound(value_100g)} ${unit}`,
         value_portion: `${MathService.autoRound(valuePortion)} ${unit}`,
         dailyRequirement: requirement ?? ""
+    }
+}
+
+function createTableObjectEnergy(label: string, value_100g_kcal: number, value_100g_kj: number, portion: number): FoodTableDataObject {
+    const valuePortionKcal = calculatePortionData(value_100g_kcal, portion);
+    const valuePortionKj = calculatePortionData(value_100g_kj, portion);
+
+    return {
+        label: label,
+        value_100g: `${MathService.autoRound(value_100g_kcal)} kcal  (${MathService.autoRound(value_100g_kj)} kJ)`,
+        value_portion: `${MathService.autoRound(valuePortionKcal)} kcal  (${MathService.autoRound(valuePortionKj)} kJ)`
     }
 }
 

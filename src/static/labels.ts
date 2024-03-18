@@ -259,13 +259,21 @@ export const applicationStrings = {
         de: 'Anzeige',
         en: 'Display'
     },
-    label_charttype_pie: {
-        de: 'Tortendiagramm',
-        en: 'Pie chart'
-    },
     label_charttype_bar: {
         de: 'Balkendiagramm',
         en: 'Bar chart'
+    },
+    label_charttype_energy_composition: {
+        de: 'Energiezusammensetzung',
+        en: 'Energy composition'
+    },
+    label_charttype_energy_level: {
+        de: 'Energielevel',
+        en: 'Energy level'
+    },
+    label_charttype_pie: {
+        de: 'Tortendiagramm',
+        en: 'Pie chart'
     },
     label_charttype_carbs_base: {
         de: 'Allgemeine Werte',
@@ -607,6 +615,10 @@ export const applicationStrings = {
         de: 'Kohlenhydrate',
         en: 'Carbohydrates'
     },
+    label_nutrient_carbohydrates_plural: {
+        de: 'Kohlenhydraten',
+        en: 'Carbohydrates'
+    },
     label_nutrient_carbohydrates_m: {
         de: 'Kohlenhyd.',
         en: 'Carbs'
@@ -645,6 +657,10 @@ export const applicationStrings = {
     },
     label_nutrient_dietaryFibers: {
         de: 'Ballaststoffe',
+        en: 'Dietary fibers'
+    },
+    label_nutrient_dietaryFibers_plural: {
+        de: 'Ballaststoffen',
         en: 'Dietary fibers'
     },
     label_nutrient_dietaryFibers_short: {
@@ -1055,9 +1071,17 @@ export const applicationStrings = {
         de: 'Bevorzugte Datenquelle',
         en: 'Preferred data source'
     },
+    label_prefix_energy_in: {
+        de: 'Energie in ',
+        en: 'Energy in '
+    },
     label_prefix_hereof: {
         de: 'davon',
         en: 'hereof'
+    },
+    label_prefix_hereof_in: {
+        de: 'davon in ',
+        en: 'hereof in '
     },
     label_ranking_dietaryRequirements: {
         de: 'Zeige Tagesbedarf',

@@ -157,22 +157,22 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
 }
 
 .button-displaymode, .button-displaymode-enabled, .button-displaymode-disabled {
-    width: 40px;
     color: white;
 }
 
 .button-displaymode-enabled {
+    font-size: $fontsize-label !important;
     background: #bf0f17;
 }
 
 .button-displaymode-disabled {
+    font-size: $fontsize-label !important;
     background: rgba(191, 15, 23, 0.5);
 }
 
 .button-foodPanelHead, .button-closeTab {
-    width: 40px;
-    font-size: $fontsize-small;
-    margin-right: 10px;
+    font-size: $fontsize-label !important;
+    margin-right: 0.5vw;
 }
 
 .container-scroll {
@@ -227,11 +227,20 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
     color: black;
 }
 
+@mixin header-label-base {
+           borderBottom: 1px solid #BBBBBB;
+           paddingLeft: 0.4vw;
+           paddingRight: 0.4vw;
+       }
+
 .header-label {
+    @include  header-label-base;
     font-size: min(1.2vw, 2.0vh);
-    borderBottom: 1px solid #BBBBBB;
-    paddingLeft: 0.4vw;
-    paddingRight: 0.4vw;
+}
+
+.header-label-small {
+    @include header-label-base;
+    font-size: min(1vw, 1.8vh);
 }
 
 .header-link {
