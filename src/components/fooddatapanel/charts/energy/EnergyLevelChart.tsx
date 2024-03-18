@@ -9,7 +9,6 @@ import {LanguageContext} from "../../../../contexts/LangContext";
 import {getNutrientData} from "../../../../service/nutrientdata/NutrientDataRetriever";
 import {ChartProps} from "../../../../types/livedata/ChartPropsData";
 import {Bar} from "react-chartjs-2";
-import {autoRound} from "../../../../service/calculation/MathService";
 
 export function EnergyLevelChart(props: ChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

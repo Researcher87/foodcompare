@@ -36,14 +36,14 @@ export function EnergyCompositionChart(props: ChartProps) {
 
         const labels = [
             applicationStrings.label_nutrient_carbohydrates[language],
-            `... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_dietaryFibers[language]}`,
+            applicationStrings.label_nutrient_dietaryFibers[language],
             applicationStrings.label_nutrient_lipids[language],
             applicationStrings.label_nutrient_proteins[language],
             applicationStrings.label_nutrient_alcohol[language],
         ]
 
         const values = [
-            transformToPortion(energyData.carbohydrates),
+            transformToPortion(energyData.carbohydrates - energyData.dietaryFibers),
             transformToPortion(energyData.dietaryFibers),
             transformToPortion(energyData.fat),
             transformToPortion(energyData.proteins),
