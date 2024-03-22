@@ -6,6 +6,7 @@ import {PortionData} from "../../types/nutrientdata/FoodItem"
 import {getPalCategory, getPalValue} from "../calculation/EnergyService"
 import {convertBooleanToDigit, convertStringToBoolean, getNumberOfFixedLength} from "../calculation/MathService"
 import {getUpdatedChartConfig, makeChartConfigUriString} from "./ChartConfigConverter"
+import {prepareUriForParsing} from "./BaseUriService";
 
 
 export function makeFoodDataPanelDefaultUri(foodItemData: FoodItemUriData,
@@ -139,9 +140,4 @@ export function convertPortionDataStringToObject(portionDataString: string): Por
 	}
 }
 
-
-export function prepareUriForParsing(uri: string): string {
-	// Some websites like youtube transform the semicolons in the URL to %3B, which later need to be translated back to semicolons
-	return uri.replace(/%3B/g, ";")
-}
 

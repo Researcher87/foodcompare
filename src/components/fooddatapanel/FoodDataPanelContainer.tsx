@@ -22,6 +22,7 @@ import {
 import {checkUserDataValidity, USERDATA_OK} from "../../service/UserDataService";
 import {isMobileDevice} from "../../service/WindowDimension";
 import {FaExclamationTriangle} from "react-icons/fa";
+import {prepareUriForParsing} from "../../service/uri/BaseUriService";
 
 export default function FoodDataPanelContainer() {
     const applicationContext = useContext(ApplicationDataContextStore)
@@ -31,7 +32,7 @@ export default function FoodDataPanelContainer() {
     const queryString = window.location.search.substring(1)
     const equalOperator = queryString.indexOf("=")
     const key = queryString.substring(0, equalOperator)
-    const value = queryString.substring(equalOperator + 1)
+    const value = prepareUriForParsing(queryString.substring(equalOperator + 1))
 
     const openSelectorModal = key === QUERYKEY_DATAPANEL_ADD && value === "1"
     const openCompositeSelectorModal = key === QUERYKEY_DATAPANEL_ADD_COMPOSITE && value === "1"

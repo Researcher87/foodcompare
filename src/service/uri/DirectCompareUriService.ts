@@ -7,9 +7,9 @@ import {
 	convertUserDataObjectToString,
 	convertUserDataStringToObject,
 	getFoodItemUriData,
-	makeFoodItemDefaultUri,
-	prepareUriForParsing
+	makeFoodItemDefaultUri
 } from "./FoodDataPanelUriService"
+import {prepareUriForParsing} from "./BaseUriService";
 
 export function makeDirectCompareDataUri(selectedFoodItem1: SelectedFoodItem, selectedFoodItem2: SelectedFoodItem, 
 		userData: UserData, selectedDataPage: string, chartConfigData: DirectCompareChartConfigData): string {

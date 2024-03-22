@@ -1,8 +1,8 @@
 import {RankingPanelData} from "../../types/livedata/ApplicationData";
-import {prepareUriForParsing} from "./FoodDataPanelUriService";
 import {getCategorySelectList} from "../nutrientdata/CategoryService";
 import FoodDataCorpus from "../../types/nutrientdata/FoodDataCorpus";
 import {getElementsOfRankingGroup, getNutrientGroups} from "../RankingService";
+import {prepareUriForParsing} from "./BaseUriService";
 
 export function makeRankingPanelDataUri(rankingPanelData: RankingPanelData) {
     const selectedCategory = rankingPanelData.selectedFoodCategory?.value

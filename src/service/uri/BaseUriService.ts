@@ -14,3 +14,17 @@ export function parseFoodCompareUri(): string | null {
 
     return null
 }
+
+export function prepareUriForParsing(uri: string): string {
+    // Some websites like youtube transform the semicolons in the URL to %3B, which later need to be translated back to semicolons
+    if (uri.includes("/%3B")) {
+        return uri.replace(/%3B/g, ";")
+    }
+
+    // Some websites transform the semicolon to an ampersand
+    if (uri.includes("&")) {
+        return uri.replace(/&/g, ";")
+    }
+
+    return uri
+}

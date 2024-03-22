@@ -5,9 +5,9 @@ import { UserData } from "../../types/livedata/UserData"
 import { getUpdatedChartConfig, makeChartConfigUriString } from "./ChartConfigConverter"
 import {
 	convertUserDataObjectToString,
-	convertUserDataStringToObject,
-	prepareUriForParsing
+	convertUserDataStringToObject
 } from "./FoodDataPanelUriService"
+import {prepareUriForParsing} from "./BaseUriService";
 
 
 interface Replacemet {
