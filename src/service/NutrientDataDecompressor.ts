@@ -10,7 +10,7 @@ export function decompressNutrientData(nutrientDataObj: any) {
     let decompressedString = compressedNutrientData
     foodCompareCompressing.forEach(entry => {
         const regExp = new RegExp('"' + entry.target + '"', 'g');
-        decompressedString = decompressedString.replaceAll(regExp,  "\"" + entry.source + "\"")
+        decompressedString = decompressedString.replace(regExp,  "\"" + entry.source + "\"")
     })
     return JSON.parse(decompressedString);
 }
