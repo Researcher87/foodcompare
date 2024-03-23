@@ -3,9 +3,13 @@ import Source from '../types/nutrientdata/Source'
 import FoodItem from '../types/nutrientdata/FoodItem'
 import DietaryRequirement from '../types/nutrientdata/DietaryRequirement'
 
-import nutrientdata from "../static/data/nutrientdata_foodcompare.json";
+import nutrientData from "../static/data/nutrientdata_foodcompare.json";
+
 import FoodDataCorpus from "../types/nutrientdata/FoodDataCorpus"
 import FoodClass from "../types/nutrientdata/FoodClass";
+import {decompressNutrientData} from "./NutrientDataDecompressor";
+
+const nutrientDataDecompressed = decompressNutrientData(nutrientData)
 
 export function loadFoodDataCorpus(): FoodDataCorpus {
 	const categories = loadCategories()
@@ -14,7 +18,7 @@ export function loadFoodDataCorpus(): FoodDataCorpus {
 	const sources = loadSources()
 	const foodNames = loadFoodNames()
 	const foodClasses = loadFoodClasses()
-	const nutrientData = loadFoodItems()
+	const foodItems = loadFoodItems()
 	const dietaryRequirements = loadDietaryRequirements()
 
 	return {
@@ -24,39 +28,39 @@ export function loadFoodDataCorpus(): FoodDataCorpus {
 		sources: sources,
 		foodNames: foodNames,
 		foodClasses: foodClasses,
-		foodItems: nutrientData,
+		foodItems: foodItems,
 		dietaryRequirements: dietaryRequirements
 	}
 }
 
 export function loadConditions(): Array<NameType> {
-	return nutrientdata.conditions;
+	return nutrientDataDecompressed.conditions;
 }
 
 export function loadPortionTypes(): Array<NameType> {
-	return nutrientdata.portionTypes;
+	return nutrientDataDecompressed.portionTypes;
 }
 
 export function loadFoodNames(): Array<NameType> {
-	return nutrientdata.foodNames;
+	return nutrientDataDecompressed.foodNames;
 }
 
 export function loadSources(): Array<Source> {
-	return nutrientdata.sources;
+	return nutrientDataDecompressed.sources;
 }
 
 export function loadCategories(): Array<NameType> {
-	return nutrientdata.categories;
+	return nutrientDataDecompressed.categories;
 }
 
 export function loadFoodClasses(): Array<FoodClass> {
-	return nutrientdata.foodClasses;
+	return nutrientDataDecompressed.foodClasses;
 }
 
 export function loadFoodItems(): Array<FoodItem> {
-	return nutrientdata.foodItems;
+	return nutrientDataDecompressed.foodItems;
 }
 
 export function loadDietaryRequirements(): DietaryRequirement {
-	return nutrientdata.dietaryRequirements;
+	return nutrientDataDecompressed.dietaryRequirements;
 }

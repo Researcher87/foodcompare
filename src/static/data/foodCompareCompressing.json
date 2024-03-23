@@ -1,0 +1,426 @@
+[
+  {
+    "source": "foodClass",
+    "target": "@1"
+  },
+  {
+    "source": "srLegacyId",
+    "target": "@2"
+  },
+  {
+    "source": "fnddsId",
+    "target": "@3"
+  },
+  {
+    "source": "conditionId",
+    "target": "@4"
+  },
+  {
+    "source": "nameId",
+    "target": "@5"
+  },
+  {
+    "source": "defaultPortionId",
+    "target": "@6"
+  },
+  {
+    "source": "portionData",
+    "target": "@7"
+  },
+  {
+    "source": "portionType",
+    "target": "@8"
+  },
+  {
+    "source": "nutrientDataList",
+    "target": "@9"
+  },
+  {
+    "source": "USDA - FNDDS",
+    "target": "@0"
+  },
+  {
+    "source": "USDA - SR Legacy",
+    "target": "@A"
+  },
+  {
+    "source": "https://www.usda.gov/",
+    "target": "@B"
+  },
+  {
+    "source": "sourceItemId",
+    "target": "@C"
+  },
+  {
+    "source": "name",
+    "target": "@Ä"
+  },
+  {
+    "source": "url",
+    "target": "@Ö"
+  },
+  {
+    "source": "baseData",
+    "target": "@D"
+  },
+  {
+    "source": "energy",
+    "target": "@E"
+  },
+  {
+    "source": "water",
+    "target": "@F"
+  },
+  {
+    "source": "carbohydrates",
+    "target": "@G"
+  },
+  {
+    "source": "lipids",
+    "target": "@H"
+  },
+  {
+    "source": "proteins",
+    "target": "@I"
+  },
+  {
+    "source": "dietaryFibers",
+    "target": "@J"
+  },
+  {
+    "source": "alcohol",
+    "target": "@K"
+  },
+  {
+    "source": "caffeine",
+    "target": "@L"
+  },
+  {
+    "source": "ash",
+    "target": "@ä"
+  },
+  {
+    "source": "vitaminData",
+    "target": "@M"
+  },
+  {
+    "source": "b12",
+    "target": "@ö"
+  },
+  {
+    "source": "carotenoidData",
+    "target": "@N"
+  },
+  {
+    "source": "caroteneAlpha",
+    "target": "@O"
+  },
+  {
+    "source": "caroteneBeta",
+    "target": "@P"
+  },
+  {
+    "source": "cryptoxanthin",
+    "target": "@Q"
+  },
+  {
+    "source": "lycopene",
+    "target": "@R"
+  },
+  {
+    "source": "lutein",
+    "target": "@S"
+  },
+  {
+    "source": "extendedVitaminE",
+    "target": "@T"
+  },
+  {
+    "source": "tocopherolBeta",
+    "target": "@U"
+  },
+  {
+    "source": "tocopherolGamma",
+    "target": "@V"
+  },
+  {
+    "source": "tocopherolDelta",
+    "target": "@W"
+  },
+  {
+    "source": "tocotrienolAlpha",
+    "target": "@X"
+  },
+  {
+    "source": "tocotrienolBeta",
+    "target": "@Y"
+  },
+  {
+    "source": "tocotrienolGamma",
+    "target": "@Z"
+  },
+  {
+    "source": "mineralData",
+    "target": "@3a"
+  },
+  {
+    "source": "calcium",
+    "target": "@b"
+  },
+  {
+    "source": "iron",
+    "target": "@c"
+  },
+  {
+    "source": "magnesium",
+    "target": "@d"
+  },
+  {
+    "source": "phosphorus",
+    "target": "@e"
+  },
+  {
+    "source": "sodium",
+    "target": "@f"
+  },
+  {
+    "source": "zinc",
+    "target": "@g"
+  },
+  {
+    "source": "copper",
+    "target": "@h"
+  },
+  {
+    "source": "manganese",
+    "target": "@i"
+  },
+  {
+    "source": "selenium",
+    "target": "@j"
+  },
+  {
+    "source": "fluorid",
+    "target": "@k"
+  },
+  {
+    "source": "potassium",
+    "target": "@l"
+  },
+  {
+    "source": "carbohydrateData",
+    "target": "@m"
+  },
+  {
+    "source": "sugar",
+    "target": "@n"
+  },
+  {
+    "source": "sucrose",
+    "target": "@o"
+  },
+  {
+    "source": "glucose",
+    "target": "@p"
+  },
+  {
+    "source": "fructose",
+    "target": "@q"
+  },
+  {
+    "source": "galactose",
+    "target": "@r"
+  },
+  {
+    "source": "lactose",
+    "target": "@s"
+  },
+  {
+    "source": "maltose",
+    "target": "@t"
+  },
+  {
+    "source": "starch",
+    "target": "@u"
+  },
+  {
+    "source": "lipidData",
+    "target": "@v"
+  },
+  {
+    "source": "unsaturatedMono",
+    "target": "@w"
+  },
+  {
+    "source": "unsaturatedPoly",
+    "target": "@x"
+  },
+  {
+    "source": "transFattyAcids",
+    "target": "@y"
+  },
+  {
+    "source": "cholesterol",
+    "target": "@z"
+  },
+  {
+    "source": "omegaData",
+    "target": "@!"
+  },
+  {
+    "source": "saturated",
+    "target": "@§"
+  },
+  {
+    "source": "proteinData",
+    "target": "@$"
+  },
+  {
+    "source": "tryptophan",
+    "target": "@%"
+  },
+  {
+    "source": "threonine",
+    "target": "@&"
+  },
+  {
+    "source": "isoleucine",
+    "target": "@/"
+  },
+  {
+    "source": "leucine",
+    "target": "@("
+  },
+  {
+    "source": "lysine",
+    "target": "@)"
+  },
+  {
+    "source": "methionine",
+    "target": "@="
+  },
+  {
+    "source": "cystine",
+    "target": "@{"
+  },
+  {
+    "source": "phenylalanine",
+    "target": "@}"
+  },
+  {
+    "source": "tyrosine",
+    "target": "@["
+  },
+  {
+    "source": "valine",
+    "target": "@]"
+  },
+  {
+    "source": "arginine",
+    "target": "@?"
+  },
+  {
+    "source": "histidine",
+    "target": "@*"
+  },
+  {
+    "source": "alanine",
+    "target": "@+"
+  },
+  {
+    "source": "asparticAcid",
+    "target": "@~"
+  },
+  {
+    "source": "glutamicAcid",
+    "target": "@#"
+  },
+  {
+    "source": "proline",
+    "target": "@'"
+  },
+  {
+    "source": "serine",
+    "target": "@<"
+  },
+  {
+    "source": "germanName",
+    "target": "@>"
+  },
+  {
+    "source": "englishName",
+    "target": "@|"
+  },
+  {
+    "source": "glycine",
+    "target": "@,"
+  },
+  {
+    "source": "nameKey",
+    "target": "@;"
+  },
+  {
+    "source": "category",
+    "target": "@:"
+  },
+  {
+    "source": "amount",
+    "target": "@."
+  },
+  {
+    "source": "source",
+    "target": "@-"
+  },
+  {
+    "source": "omega3",
+    "target": "@_"
+  },
+  {
+    "source": "omega6",
+    "target": "@€"
+  },
+  {
+    "source": "uncertain",
+    "target": "@°"
+  },
+  {
+    "source": "uncertainRatio",
+    "target": "@^"
+  },
+  {
+    "source": "male",
+    "target": "@10"
+  },
+  {
+    "source": "female",
+    "target": "@11"
+  },
+  {
+    "source": "femaleBreastFeeding",
+    "target": "@12"
+  },
+  {
+    "source": "femalePregnant",
+    "target": "@13"
+  },
+  {
+    "source": "youngAdult",
+    "target": "@14"
+  },
+  {
+    "source": "midLifeAdult",
+    "target": "@15"
+  },
+  {
+    "source": "preSenior",
+    "target": "@16"
+  },
+  {
+    "source": "senior",
+    "target": "@17"
+  },
+  {
+    "source": "upperLimit",
+    "target": "@18"
+  }
+]
