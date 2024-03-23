@@ -265,127 +265,127 @@
   },
   {
     "source": "omegaData",
-    "target": "@!"
+    "target": "@aa"
   },
   {
     "source": "saturated",
-    "target": "@§"
+    "target": "@ab"
   },
   {
     "source": "proteinData",
-    "target": "@$"
+    "target": "@ac"
   },
   {
     "source": "tryptophan",
-    "target": "@%"
+    "target": "@ad"
   },
   {
     "source": "threonine",
-    "target": "@&"
+    "target": "@ae"
   },
   {
     "source": "isoleucine",
-    "target": "@/"
+    "target": "@af"
   },
   {
     "source": "leucine",
-    "target": "@("
+    "target": "@ag"
   },
   {
     "source": "lysine",
-    "target": "@)"
+    "target": "@ah"
   },
   {
     "source": "methionine",
-    "target": "@="
+    "target": "@ai"
   },
   {
     "source": "cystine",
-    "target": "@{"
+    "target": "@aj"
   },
   {
     "source": "phenylalanine",
-    "target": "@}"
+    "target": "@ak"
   },
   {
     "source": "tyrosine",
-    "target": "@["
+    "target": "@al"
   },
   {
     "source": "valine",
-    "target": "@]"
+    "target": "@am"
   },
   {
     "source": "arginine",
-    "target": "@?"
+    "target": "@an"
   },
   {
     "source": "histidine",
-    "target": "@*"
+    "target": "@ao"
   },
   {
     "source": "alanine",
-    "target": "@+"
+    "target": "@ap"
   },
   {
     "source": "asparticAcid",
-    "target": "@~"
+    "target": "@aq"
   },
   {
     "source": "glutamicAcid",
-    "target": "@#"
+    "target": "@ar"
   },
   {
     "source": "proline",
-    "target": "@'"
+    "target": "@as"
   },
   {
     "source": "serine",
-    "target": "@<"
+    "target": "@at"
   },
   {
     "source": "germanName",
-    "target": "@>"
+    "target": "@au"
   },
   {
     "source": "englishName",
-    "target": "@|"
+    "target": "@av"
   },
   {
     "source": "glycine",
-    "target": "@,"
+    "target": "@aw"
   },
   {
     "source": "nameKey",
-    "target": "@;"
+    "target": "@ax"
   },
   {
     "source": "category",
-    "target": "@:"
+    "target": "@ay"
   },
   {
     "source": "amount",
-    "target": "@."
+    "target": "@az"
   },
   {
     "source": "source",
-    "target": "@-"
+    "target": "@ba"
   },
   {
     "source": "omega3",
-    "target": "@_"
+    "target": "@bb"
   },
   {
     "source": "omega6",
-    "target": "@€"
+    "target": "@bc"
   },
   {
     "source": "uncertain",
-    "target": "@°"
+    "target": "@bd"
   },
   {
     "source": "uncertainRatio",
-    "target": "@^"
+    "target": "@be"
   },
   {
     "source": "male",
