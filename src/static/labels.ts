@@ -343,6 +343,10 @@ export const applicationStrings = {
         de: 'Datentyp',
         en: 'Data type'
     },
+    label_edit_portion: {
+        de: 'Portionsgröße (Gramm):',
+        en: 'Portion amount (gram):'
+    },
     label_error: {
         de: 'Eingabefehler',
         en: 'Input error'

@@ -114,8 +114,13 @@ $food-analyzer-chart-height-dc: calc(35vh);                 // height of the cha
 }
 
 .form-button {
-    min-width: 128px;
-    margin-left: 16px;
+    min-width: 15ch;
+    margin-left: 2ch;
+}
+
+.form-button-sm {
+    min-width: 10ch;
+    margin-left: 1.5ch;
 }
 
 .form-elements {

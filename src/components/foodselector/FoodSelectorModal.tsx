@@ -81,6 +81,19 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
         setCompositeList(newList)
     }
 
+    const editCompositeElement = (index: number, newPortionAmount: number) => {
+        const newList = compositeList.map((item, iteratorIndex) => {
+                if(index !== iteratorIndex) {
+                    return item
+                } else {
+                    return {...item, portion: {
+                        ...item.portion, portionType: 0, amount: newPortionAmount
+                    }}
+                }
+            })
+        setCompositeList(newList)
+    }
+
     const onSubmit = () => {
         if (props.compositeSelector) {
             onSubmitComposite()
@@ -259,7 +272,9 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
                                 </div>
                                 <div className={"col-6"}>
                                     <CompositeFoodList selectedFoodItems={compositeList}
-                                                       deleteItem={deleteCompositeElement}/>
+                                                       deleteItem={deleteCompositeElement}
+                                                       editCompositeElement={editCompositeElement}
+                                    />
                                 </div>
                             </div>
                         </div>
