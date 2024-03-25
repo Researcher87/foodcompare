@@ -13,7 +13,7 @@ import {
     TAB_MINERAL_DATA,
     TAB_PROTEINS_DATA,
     TAB_VITAMIN_DATA,
-    TAB_ENERGY_DATA, CHART_TYPE_COMPOSITION, CHART_TYPE_ENERGY_LEVEL
+    TAB_ENERGY_DATA, CHART_TYPE_COMPOSITION, CHART_TYPE_ENERGY_LEVEL, CHART_TYPE_ENERGY_AGGREGATED
 } from "../../config/Constants"
 import {ChartConfigData, DirectCompareChartConfigData, GeneralizedChartConfig} from "../../types/livedata/ChartConfigData"
 import {convertBooleanToDigit, convertStringToBoolean} from "../calculation/MathService"
@@ -322,6 +322,9 @@ export function convertGeneralizedChartConfigStringToObject(uriString: string): 
             break;
         case "4":
             chartType = CHART_TYPE_ENERGY_LEVEL
+            break;
+        case "5":
+            chartType = CHART_TYPE_ENERGY_AGGREGATED
             break;
     }
 

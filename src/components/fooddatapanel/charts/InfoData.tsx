@@ -263,10 +263,15 @@ export function InfoData(props: InfoDataProps) {
                     </div>
                 </div>
                 }
-                {isCompositeFoodElement &&
+                {isCompositeFoodElement && props.selectedFoodItem?.compositeSubElements &&
                 <div>
                     <h5>{applicationStrings.label_info_composite[lang]}</h5>
                     {renderSubTable(makeTableDataCombinedFood())}
+                </div>
+                }
+                {isCompositeFoodElement && !props.selectedFoodItem?.compositeSubElements &&
+                <div>
+                    {applicationStrings.label_noData[lang]}
                 </div>
                 }
             </div>

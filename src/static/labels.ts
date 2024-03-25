@@ -263,6 +263,14 @@ export const applicationStrings = {
         de: 'Balkendiagramm',
         en: 'Bar chart'
     },
+    label_charttype_energy_aggregated: {
+        de: 'Einzeldaten',
+        en: 'Separate data'
+    },
+    label_charttype_energy_aggregated_title: {
+        de: 'Einzeldaten Energieverteilung',
+        en: 'Seperate energy data'
+    },
     label_charttype_energy_composition: {
         de: 'Energiezusammensetzung',
         en: 'Energy composition'

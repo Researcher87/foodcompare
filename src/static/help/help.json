@@ -25,14 +25,16 @@
 				"title": "Energie",
 				"content": [
 					"<p>Auf dieser Seite wird der Energiegehalt von Lebensmitteln dargestellt. Die Ansicht <b>Energiezusammensetzung</b> zeigt dabei an, wie sich die Gesamtenergie in dem Lebensmittel auf die einzelnen Energieträger in der Nahrung (Makronährstoffe) verteilt. Dazu zählen klassischerweise Kohlenhydrate, Fett und Proteine, aber auch Ballaststoffe und Alkohol.</p>",
-					"<p>In der Ansicht <b>Energielevel</b> wird hingegen angezeigt, wie viel Energie in dem Lebensmittel (je Portion und 100 Gramm) in Bezug zum Grundumsatz und Gesamtumsatz (Grundumsatz + Leistungszuwachs PAL) eines Erwachsenen steckt. Dabei werden die Referenzwerte aus den User-Einstellungen verwendet.</p>"
+					"<p>In der Ansicht <b>Energielevel</b> wird hingegen angezeigt, wie viel Energie in dem Lebensmittel (je Portion und 100 Gramm) in Bezug zum Grundumsatz und Gesamtumsatz (Grundumsatz + Leistungszuwachs PAL) eines Erwachsenen steckt. Dabei werden die Referenzwerte aus den User-Einstellungen verwendet.</p>",
+					"<p>Die Ansicht <b>Einzeldaten</b> steht nur bei kombinierten Lebensmitteln (aggregierte Ansicht) zur Verfügung, wenn das zusammengestellte Element wenigstens aus zwei Lebensmitteln besteht. In der Ansicht wird die Energie für jedes einzelne Lebensmittel dargestellt, einmal als Tortendiagramm (Gesamtzusammensetzung) und Balkendiagramm (einzelne Energiedaten je Lebensmittel).</p>"
 				]
 			},
 			"en": {
 				"title": "Energy",
 				"content": [
 					"<p>This page visualizes the energy composition of foods. The chart <b>Energy composition</b> shows how the overall energy in the selected item is distributed across the several energy sources in food. This primarily includes carbohydrates, fat and proteins, but also dietary fibers and alcohol.</p>",
-					"<p>The chart <b>Energy level</b> displays the energy amount in the food item (per portion and per 100 g) compared to the BMR (Basic Metabolic Rate) and Energy Expenditure (BMR + PAL) of an adult. The BMR and PAL value refer to the set body data in the user settings.</p> "
+					"<p>The chart <b>Energy level</b> displays the energy amount in the food item (per portion and per 100 g) compared to the BMR (Basic Metabolic Rate) and Energy Expenditure (BMR + PAL) of an adult. The BMR and PAL value refer to the set body data in the user settings.</p>",
+					"<p>The third view, <b>Separate data</b>, is only available for combined food data (aggregated data), if the composite element consists of at least two foods. It displays the energy amount of each separate food in the composition, both as pie chart (total composition) and bar chart (single energy amount per food).</p>"
 				]
 			}
 		}, 
