@@ -58,6 +58,10 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
         setFoodSelectorEditMode(true)
         if (selectedFoodItem.aggregated) {
+            if(!selectedFoodItem.compositeSubElements) {
+                NotificationManager.error(applicationStrings.message_error_aggregated[language])
+                return
+            }
             setShowAggregatedFoodSelector(!showFoodAggregatedFoodSelector)
         } else {
             setShowFoodSelector(!showFoodSelector)

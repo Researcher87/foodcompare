@@ -24,11 +24,11 @@ export function AggregatedEnergyChart(props: ChartProps) {
 
         // Generate colors
         const scheme = new ColorScheme;
-        scheme.from_hue(30).scheme('contrast').variation('pastel');
+        scheme.from_hue(150).scheme('contrast').variation('pastel');
         let colors = scheme.colors().map(str => `#${str}`)
-        scheme.from_hue(110).scheme('contrast').variation('pastel');
+        scheme.from_hue(80).scheme('contrast').variation('pastel');
         const colors2 = scheme.colors().map(str => `#${str}`)
-        scheme.from_hue(190).scheme('contrast').variation('pastel');
+        scheme.from_hue(220).scheme('contrast').variation('pastel');
         const colors3 = scheme.colors().map(str => `#${str}`)
         colors = colors.concat(colors2)
         colors = colors.concat(colors3)

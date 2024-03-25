@@ -369,9 +369,9 @@ function buildBaseDataObject(compositeList: Array<SelectedFoodItem>, portionSize
         proteins: createFinalValue(proteins, portionSize),
         water: createFinalValue(water, portionSize),
         dietaryFibers: createFinalValue(dietaryFibers, portionSize),
-        alcohol: alcohol,
-        ash: ash,
-        caffeine: caffeine
+        alcohol: createFinalValue(alcohol, portionSize),
+        ash: createFinalValue(ash, portionSize),
+        caffeine: createFinalValue(caffeine, portionSize)
     }
 
 }

@@ -63,6 +63,15 @@ export default function EnergyDataChart(props: ChartProps) {
 
     }, [chartType])
 
+    useEffect(() => {
+        if (applicationContext) {
+            if(props.selectedFoodItem.aggregated && props.selectedFoodItem.compositeSubElements &&
+                props.selectedFoodItem.compositeSubElements.length <= 1 && chartType === CHART_TYPE_ENERGY_AGGREGATED) {
+                setChartType(CHART_TYPE_COMPOSITION)
+            }
+        }
+    }, [props.selectedFoodItem])
+
     if (!applicationContext || !energy100g) {
         return <div>No data.</div>
     }

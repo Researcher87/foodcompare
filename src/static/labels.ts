@@ -1295,6 +1295,10 @@ export const applicationStrings = {
         de: 'Beim Versenden der Nachricht trat ein Fehler auf.',
         en: 'Error while trying to send message.'
     },
+    message_error_aggregated: {
+        de: 'Kombinierte Datenansicht kann nicht editiert werden.',
+        en: 'Composite data item cannot be edit.'
+    },
     message_error_existing_element: {
         de: 'Das ausgewählte Element befindet sich bereits im Datenbereich. Ein Lebensmittel kann nur einmal hinzugefügt werden.',
         en: 'The selected food item already exists in your list. A food item can be added only once.'
