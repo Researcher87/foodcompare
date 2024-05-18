@@ -97,17 +97,17 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         : null
 
     const labels = [
-        applicationStrings.label_nutrient_carbohydrates_short[language],
         applicationStrings.label_nutrient_lipids[language],
-        applicationStrings.label_nutrient_proteins[language]
+        applicationStrings.label_nutrient_proteins[language],
+        applicationStrings.label_nutrient_carbohydrates_short[language]
     ]
 
-    const values = [carbValuePerc, lipidValuePerc, proteinsValuePerc];
+    const values = [lipidValuePerc, proteinsValuePerc, carbValuePerc];
 
     const colors = [
-        ChartConfig.color_carbs,
         ChartConfig.color_lipids,
-        ChartConfig.color_proteins
+        ChartConfig.color_proteins,
+        ChartConfig.color_carbs
     ];
 
     if (alcoholValuePerc !== null) {
