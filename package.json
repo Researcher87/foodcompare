@@ -1,6 +1,6 @@
 {
   "name": "foodcompare",
-  "version": "1.6",
+  "version": "1.0.0",
   "homepage": "http://food-compare.com",
   "private": true,
   "dependencies": {
