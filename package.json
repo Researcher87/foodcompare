@@ -10,6 +10,8 @@
     "@types/react-dom": "^16.0.1",
     "bootstrap": "^5.1.0",
     "bootstrap-table": "^1.18.3",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
     "chart.js": "^3.5.1",
     "chartjs-plugin-annotation": "^1.0.2",
     "color-scheme": "^1.0.1",
@@ -35,8 +37,8 @@
     "react-snap": "^1.13.1",
     "react-tooltip": "^4.2.21",
     "sass": "^1.48.0",
-    "shrink-string": "^3.1.7",
     "typescript": "^3.5.0-rc",
+    "util": "^0.12.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
