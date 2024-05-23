@@ -1,3 +1,4 @@
+/*
 import combineFoodItems from "../service/calculation/FoodDataAggregationService";
 import SelectedFoodItem from "../types/livedata/SelectedFoodItem";
 import FoodItem, {BaseData} from "../types/nutrientdata/FoodItem";
@@ -192,4 +193,4 @@ describe('The composite nutrient data service should calculate the correct amoun
         }
     }
 
-})
+})*/

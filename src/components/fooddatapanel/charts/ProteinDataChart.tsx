@@ -12,6 +12,7 @@ import {ProteinDataChartProps} from "../../../types/livedata/ChartPropsData";
 import {useWindowDimension} from "../../../service/WindowDimension";
 import {getNutrientData} from "../../../service/nutrientdata/NutrientDataRetriever";
 import {getProteinChartData} from "../../../service/chartdata/ProteinChartDataService";
+import React from 'react'
 
 export default function ProteinDataChart(props: ProteinDataChartProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

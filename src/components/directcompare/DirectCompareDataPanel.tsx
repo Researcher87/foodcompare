@@ -23,6 +23,7 @@ import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeServic
 import {LanguageContext} from "../../contexts/LangContext";
 import {DirectCompareDataPanelProps} from "../../types/livedata/ChartPropsData";
 import {InfoData} from "../fooddatapanel/charts/InfoData";
+import React from 'react'
 
 export function DirectCompareDataPanel(props: DirectCompareDataPanelProps) {
     const applicationContext = useContext(ApplicationDataContextStore)

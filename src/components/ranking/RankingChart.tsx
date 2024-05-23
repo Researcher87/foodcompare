@@ -6,6 +6,8 @@ import {getBarChartOptionsForRanking} from "../../service/ChartConfigurationServ
 import {Bar} from "react-chartjs-2";
 import {applicationStrings} from "../../static/labels";
 import {isMobileDevice} from "../../service/WindowDimension";
+import React from 'react'
+
 
 interface RankingChartProps {
     chartItems: Array<ChartItem>

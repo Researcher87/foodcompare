@@ -14,6 +14,7 @@ import {useContext} from "react";
 import {LanguageContext} from "../../contexts/LangContext";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {isMobileDevice} from "../../service/WindowDimension";
+import React from 'react'
 
 interface ChartMenuPanelProps {
     dataPage: string

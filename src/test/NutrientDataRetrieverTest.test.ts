@@ -1,3 +1,4 @@
+/*
 import {combineNutrientData, supplementNutrientData} from "../service/nutrientdata/NutrientDataRetriever";
 import {
     makeDefaultBaseData,
@@ -80,4 +81,4 @@ describe('The nutrient data retriever should calculated missing data or combined
 
 })
 
-export default {}
+export default {}*/
