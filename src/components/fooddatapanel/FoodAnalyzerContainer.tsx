@@ -17,9 +17,6 @@ import {isMobileDevice} from "../../service/WindowDimension";
 import FoodDataPage from "./FoodDataPage";
 import {OverallView} from "./OverallView";
 
-const {compress, decompress} = require('shrink-string')
-
-
 interface FoodAnalyzerContainerProps {
     openSelectorModal?: boolean
     openCompositeSelectorModal?: boolean
@@ -108,11 +105,10 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
             if (!content) {
                 return;
             }
-            const decompressedContent = await decompress(content)
             const expectedStartOfContent = "{\"selectedFoodItems\":[";
-            if (decompressedContent.startsWith(expectedStartOfContent)) {
+            if (content.startsWith(expectedStartOfContent)) {
                 try {
-                    let foodDataPanelData = JSON.parse(decompressedContent);
+                    let foodDataPanelData = JSON.parse(content);
                     foodDataPanelData = {
                         ...foodDataPanelData, selectedFoodItems: foodDataPanelData.selectedFoodItems.map(item => {
                             return {
@@ -148,11 +144,10 @@ export default function FoodAnalyzerContainer(props: FoodAnalyzerContainerProps)
 
         try {
             const fileContent = JSON.stringify(dataObj);
-            const compressedContent = await compress(fileContent)
 
             // Create pseudo-element representing a download element
             const element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(compressedContent));
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContent));
             element.setAttribute('download', "food-compare_dataexport.json");
             element.style.display = 'none';
             document.body.appendChild(element);
