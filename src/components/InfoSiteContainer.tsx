@@ -68,10 +68,10 @@ export function InfoContainer() {
 
     const renderHomeText = (textElements: HomeTextParagraph[]): any => {
         const renderImage = (index) => {
-            const imageSrc = introImages(`./img-${index + 1}-${language}.png`).default;
+            const imageSrc = introImages(`./img-${index + 1}-${language}.png`);
             return <div className={"d-flex justify-content-center"}>
                 <img src={imageSrc} style={{width: "90%", margin: "auto", maxHeight: "100%"}}
-                     alt={`Intro Image ${index}`}/>
+                     alt={`Intro ${index}`}/>
             </div>
         }
 

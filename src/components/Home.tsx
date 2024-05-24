@@ -18,11 +18,12 @@ import {isMobileDevice} from "../service/WindowDimension";
 const carouselImages = require.context('../static/image/carousel-samples', true);
 const startButtonImages = require.context('../static/image/start-buttons', true);
 
-const startImg1 = startButtonImages(`./StartImg1.jpg`).default
-const startImg2 = startButtonImages(`./StartImg2.jpg`).default
-const startImg3 = startButtonImages(`./StartImg3.jpg`).default
-const startImg4 = startButtonImages(`./StartImg4.jpg`).default
+const startImg1 = startButtonImages(`./StartImg1.jpg`)
+const startImg2 = startButtonImages(`./StartImg2.jpg`)
+const startImg3 = startButtonImages(`./StartImg3.jpg`)
+const startImg4 = startButtonImages(`./StartImg4.jpg`)
 
+console.log('IMAGE', startImg1)
 
 /**
  * Home component (not including Header or Info page).
@@ -67,12 +68,12 @@ export function Home() {
     }
 
     const renderCarousel = () => {
-        const pic1 = carouselImages(`./img-1-${language}.png`).default;
-        const pic2 = carouselImages(`./img-2-${language}.png`).default;
-        const pic3 = carouselImages(`./img-3-${language}.png`).default;
-        const pic4 = carouselImages(`./img-4-${language}.png`).default;
-        const pic5 = carouselImages(`./img-5-${language}.png`).default;
-        const pic6 = carouselImages(`./img-6-${language}.png`).default;
+        const pic1 = carouselImages(`./img-1-${language}.png`);
+        const pic2 = carouselImages(`./img-2-${language}.png`);
+        const pic3 = carouselImages(`./img-3-${language}.png`);
+        const pic4 = carouselImages(`./img-4-${language}.png`);
+        const pic5 = carouselImages(`./img-5-${language}.png`);
+        const pic6 = carouselImages(`./img-6-${language}.png`);
 
         const captionAttribute = `home_carousel_${displayedImage}`;
         const imageCaption = applicationStrings[captionAttribute][language];
