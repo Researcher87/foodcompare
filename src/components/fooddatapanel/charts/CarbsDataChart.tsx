@@ -231,7 +231,6 @@ export default function CarbsDataChart(props: CarbDataChartProps) {
                             className="form-radiobutton"
                             label={applicationStrings.checkbox_chartoption_hideRemainders[lang]}
                             type="checkbox"
-                            disabled={subChart === Constants.CARBS_DATA_DETAIL}
                             checked={hideRemainders}
                             onChange={handleHideRemaindersCheckbox}>
                 </Form.Check>

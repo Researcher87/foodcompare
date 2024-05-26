@@ -60,8 +60,9 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
     const totalValue = nutrientData.baseData.carbohydrates + nutrientData.baseData.lipids
         + nutrientData.baseData.proteins + (nutrientData.baseData.alcohol ?? 0) + (nutrientData.baseData.caffeine ?? 0)
 
-    let sugar = nutrientData.carbohydrateData?.sugar ? nutrientData.carbohydrateData.sugar : 0
-    let dietaryFibers = nutrientData.baseData.dietaryFibers ? nutrientData.baseData.dietaryFibers : 0
+    let sugar = nutrientData.carbohydrateData?.sugar ?? 0
+    let dietaryFibers = nutrientData.baseData.dietaryFibers ?? 0
+    let saturatedFattyAcids = nutrientData.lipidData.saturated ?? 0
 
     // NOTE: Sometimes the sugar or dietary fibers value is above the carbs value, which is impossible (> 100 %)
     if (sugar > totalValue) {
@@ -71,7 +72,7 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
     if (dietaryFibers > totalValue) {
         dietaryFibers = totalValue
     }
-    if (sugar + dietaryFibers > totalValue) {  // Special case, where sug + fibers are above the 100 %
+    if (sugar + dietaryFibers > totalValue) {  // Special case, where sugar + fibers are above the 100 %
         sugar = (sugar / (sugar + dietaryFibers)) * totalValue
         dietaryFibers = (dietaryFibers / (sugar + dietaryFibers)) * totalValue
     }
@@ -83,10 +84,13 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         carbValue = 0
     }
 
+    let lipidsValue = showDetails ? (nutrientData.baseData.lipids - saturatedFattyAcids) : nutrientData.baseData.lipids
+
     const carbValuePerc = autoRound(carbValue / totalValue * 100)
     const sugarValuePerc = autoRound(sugar / totalValue * 100)
+    const saturatedFattyAcidsValuePerc = autoRound(saturatedFattyAcids / totalValue * 100)
     const dietaryFibersPerc = autoRound(dietaryFibers / totalValue * 100)
-    const lipidValuePerc = autoRound(nutrientData.baseData.lipids / totalValue * 100)
+    const lipidValuePerc = autoRound(lipidsValue / totalValue * 100)
     const proteinsValuePerc = autoRound(nutrientData.baseData.proteins / totalValue * 100)
     const alcoholValuePerc = nutrientData.baseData.alcohol !== null
         ? autoRound(nutrientData.baseData.alcohol / totalValue * 100)
@@ -96,32 +100,12 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
         ? autoRound((nutrientData.baseData.caffeine / 1000) / totalValue * 100)
         : null
 
-    const labels = [
-        applicationStrings.label_nutrient_lipids[language],
-        applicationStrings.label_nutrient_proteins[language],
-        applicationStrings.label_nutrient_carbohydrates_short[language]
-    ]
+    // 1. Start with carbohydrate data
+    const labels = [applicationStrings.label_nutrient_carbohydrates_short[language]]
+    const values = [carbValuePerc];
+    const colors = [ ChartConfig.color_carbs];
 
-    const values = [lipidValuePerc, proteinsValuePerc, carbValuePerc];
-
-    const colors = [
-        ChartConfig.color_lipids,
-        ChartConfig.color_proteins,
-        ChartConfig.color_carbs
-    ];
-
-    if (alcoholValuePerc !== null) {
-        labels.push(applicationStrings.label_nutrient_alcohol[language])
-        values.push(alcoholValuePerc)
-        colors.push(ChartConfig.color_alcohol)
-    }
-
-    if (caffeinePerc !== null && caffeinePerc > 0) {
-        labels.push(applicationStrings.label_nutrient_caffeine[language])
-        values.push(caffeinePerc)
-        colors.push(ChartConfig.color_caffeine)
-    }
-
+    // 1a. If details are selected, the carbs detail data comes next
     if (showDetails) {
         if (sugarValuePerc > 0) {
             labels.push(applicationStrings.label_nutrient_sugar[language]);
@@ -133,6 +117,53 @@ export function getNutrientChartData(nutrientData: NutrientData, language: strin
             values.push(dietaryFibersPerc);
             colors.push(ChartConfig.color_carbs_dietaryFibers);
         }
+    }
+
+    // 2. Next comes lipid data
+    labels.push(
+        applicationStrings.label_nutrient_lipids[language]
+    )
+
+    values.push(
+        lipidValuePerc
+    )
+
+    colors.push(
+        ChartConfig.color_lipids
+    )
+
+    // 2a. If details are selected, show the lipids details (saturated)
+    if(showDetails && saturatedFattyAcids > 0) {
+        labels.push(applicationStrings.label_nutrient_lipids_saturated_short[language]);
+        values.push(saturatedFattyAcidsValuePerc);
+        colors.push(ChartConfig.color_lipids_saturated);
+    }
+
+
+    // 3. Next comes protein data
+    labels.push(
+        applicationStrings.label_nutrient_proteins[language],
+    )
+
+    values.push(
+        proteinsValuePerc, 
+    )
+
+    colors.push(
+        ChartConfig.color_proteins,
+    )
+    
+    // 4. Finally, if available, show alcohol and caffeine data
+    if (alcoholValuePerc !== null) {
+        labels.push(applicationStrings.label_nutrient_alcohol[language])
+        values.push(alcoholValuePerc)
+        colors.push(ChartConfig.color_alcohol)
+    }
+
+    if (caffeinePerc !== null && caffeinePerc > 0) {
+        labels.push(applicationStrings.label_nutrient_caffeine[language])
+        values.push(caffeinePerc)
+        colors.push(ChartConfig.color_caffeine)
     }
 
     return {
@@ -150,17 +181,9 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean): Lege
             separateNextElement: true
         },
         {
-            item: applicationStrings.label_nutrient_lipids[lang],
-            color: ChartConfig.color_lipids
-        },
-        {
-            item: applicationStrings.label_nutrient_proteins[lang],
-            color: ChartConfig.color_proteins
-        },
-        {
             item: applicationStrings.label_nutrient_carbohydrates[lang],
             color: ChartConfig.color_carbs,
-        }
+        },
     ];
 
     if (showDetails) {
@@ -178,6 +201,30 @@ export function getBaseChartLegendData(lang: string, showDetails: boolean): Lege
             }
         );
     }
+
+    legendData.push(
+        {
+            item: applicationStrings.label_nutrient_lipids[lang],
+            color: ChartConfig.color_lipids
+        },
+    )
+
+    if (showDetails) {
+        legendData.push(
+            {
+                item: applicationStrings.label_nutrient_lipids_saturated_short[lang],
+                color: ChartConfig.color_lipids_saturated,
+                indent: 1,
+            },
+        );
+    }
+
+    legendData.push(
+        {
+            item: applicationStrings.label_nutrient_proteins[lang],
+            color: ChartConfig.color_proteins
+        }
+    )
 
     legendData.push({
         item: applicationStrings.label_nutrient_alcohol[lang],

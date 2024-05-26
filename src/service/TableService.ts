@@ -553,14 +553,14 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
 
     const unit = params.dataSettings.unitVitamins === UNIT_MILLIGRAM ? "mg" : "µg"
 
-    const firstNutrientData = getNutrientData(selectedFoodItem);
+    const nutrientDataObj = getNutrientData(selectedFoodItem);
 
-    if (firstNutrientData.mineralData.calcium != null) {
+    if (nutrientDataObj.mineralData.calcium != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.calcium, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_calcium[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.calcium, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.calcium, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -568,12 +568,12 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.iron != null) {
+    if (nutrientDataObj.mineralData.iron != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.iron, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_iron[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.iron, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.iron, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -581,12 +581,12 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.magnesium != null) {
+    if (nutrientDataObj.mineralData.magnesium != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.magnesium, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_magnesium[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.magnesium, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.magnesium, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -594,12 +594,12 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.phosphorus != null) {
+    if (nutrientDataObj.mineralData.phosphorus != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.phosphorus, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_phosphorus[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.phosphorus, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.phosphorus, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -607,12 +607,12 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.potassium != null) {
+    if (nutrientDataObj.mineralData.potassium != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.potassium, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_potassium[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.potassium, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.potassium, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -620,24 +620,24 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.sodium != null) {
+    if (nutrientDataObj.mineralData.sodium != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.sodium, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_sodium[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.sodium, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.sodium, dataSettings),
                 portion, unit,
                 requirement
             )
         );
     }
 
-    if (firstNutrientData.mineralData.zinc != null) {
+    if (nutrientDataObj.mineralData.zinc != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.zinc, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_zinc[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.zinc, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.zinc, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -645,12 +645,12 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.copper != null) {
+    if (nutrientDataObj.mineralData.copper != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.copper, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_copper[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.copper, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.copper, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -658,12 +658,12 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.manganese != null) {
+    if (nutrientDataObj.mineralData.manganese != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.manganese, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_manganese[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.manganese, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.manganese, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -671,12 +671,12 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
         );
     }
 
-    if (firstNutrientData.mineralData.selenium != null) {
+    if (nutrientDataObj.mineralData.selenium != null) {
         const requirement = makeDietaryRequirementString(minRequirementData.selenium, userData, dataSettings)
         tableData.push(
             createTableObject(
                 applicationStrings.label_nutrient_min_selenium[language],
-                getVitaminOrMineralAmount(firstNutrientData.mineralData.selenium, dataSettings),
+                getVitaminOrMineralAmount(nutrientDataObj.mineralData.selenium, dataSettings),
                 portion,
                 unit,
                 requirement
@@ -691,62 +691,70 @@ export function createMineralTable(params: TableCalculationParams): Array<FoodTa
 export function createLipidsTable(params: TableCalculationParams): Array<FoodTableDataObject> {
     let tableData: Array<FoodTableDataObject> = [];
     const {selectedFoodItem, portion, language} = params
-    const firstNutrientData = getNutrientData(selectedFoodItem);
+    const nutrientDataObj = getNutrientData(selectedFoodItem);
 
-    if (firstNutrientData.lipidData.saturated != null) {
+    if (nutrientDataObj.lipidData.saturated != null) {
+        tableData.push(createTableObject(
+            applicationStrings.label_nutrient_lipid_totals[language],
+            nutrientDataObj.baseData.lipids,
+            portion, "g")
+        );
+    }
+
+    if (nutrientDataObj.lipidData.saturated != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_saturated[language],
-            firstNutrientData.lipidData.saturated,
+            nutrientDataObj.lipidData.saturated,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.lipidData.unsaturatedMono != null) {
+    if (nutrientDataObj.lipidData.unsaturatedMono != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_unsaturated_mono[language],
-            firstNutrientData.lipidData.unsaturatedMono,
+            nutrientDataObj.lipidData.unsaturatedMono,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.lipidData.unsaturatedPoly != null) {
+    if (nutrientDataObj.lipidData.unsaturatedPoly != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_unsaturated_poly[language],
-            firstNutrientData.lipidData.unsaturatedPoly,
+            nutrientDataObj.lipidData.unsaturatedPoly,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.lipidData.omegaData) {
-        if (firstNutrientData.lipidData.omegaData.omega3 != null) {
+    if (nutrientDataObj.lipidData.omegaData) {
+        if (nutrientDataObj.lipidData.omegaData.omega3 != null) {
             tableData.push(createTableObject(
                 ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega3[language]}`,
-                firstNutrientData.lipidData.omegaData.omega3,
+                nutrientDataObj.lipidData.omegaData.omega3,
                 portion, "g")
             );
         }
 
-        if (firstNutrientData.lipidData.omegaData.omega6 != null) {
+        if (nutrientDataObj.lipidData.omegaData.omega6 != null) {
             tableData.push(createTableObject(
                 ` ... ${applicationStrings.label_prefix_hereof[language]} ${applicationStrings.label_nutrient_lipids_omega6[language]}`,
-                firstNutrientData.lipidData.omegaData.omega6,
+                nutrientDataObj.lipidData.omegaData.omega6,
                 portion, "g")
             );
         }
     }
 
-    if (firstNutrientData.lipidData.transFattyAcids != null) {
+    if (nutrientDataObj.lipidData.transFattyAcids != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_transfattyAcids[language],
-            firstNutrientData.lipidData.transFattyAcids,
+            nutrientDataObj.lipidData.transFattyAcids,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.lipidData.cholesterol != null) {
+    if (nutrientDataObj.lipidData.cholesterol != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipids_cholesterol[language],
-            firstNutrientData.lipidData.cholesterol,
+            nutrientDataObj.lipidData.cholesterol,
             portion, "g")
         );
     }
@@ -806,67 +814,67 @@ export function createCarbsTable(params: TableCalculationParams): Array<FoodTabl
     let tableData: Array<FoodTableDataObject> = [];
     const {selectedFoodItem, portion, language} = params
 
-    const firstNutrientData = getNutrientData(selectedFoodItem);
-    const {carbohydrates, dietaryFibers} = firstNutrientData.baseData
-    const {sugar} = firstNutrientData.carbohydrateData
+    const nutrientDataObj = getNutrientData(selectedFoodItem);
+    const {carbohydrates, dietaryFibers} = nutrientDataObj.baseData
+    const {sugar} = nutrientDataObj.carbohydrateData
 
     if (carbohydrates) {
         const carbObject = makeCarbsTableObject(carbohydrates, sugar, dietaryFibers, portion, language)
         tableData.push(carbObject)
     }
 
-    if (firstNutrientData.carbohydrateData.glucose != null) {
+    if (nutrientDataObj.carbohydrateData.glucose != null) {
         tableData.push(createTableObject(
-            applicationStrings.label_nutrient_carbohydrates_glucose[language],
-            firstNutrientData.carbohydrateData.glucose,
+            applicationStrings.label_nutrient_carbohydrates_glucose_extended[language],
+            nutrientDataObj.carbohydrateData.glucose,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.carbohydrateData.fructose != null) {
+    if (nutrientDataObj.carbohydrateData.fructose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_fructose[language],
-            firstNutrientData.carbohydrateData.fructose,
+            nutrientDataObj.carbohydrateData.fructose,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.carbohydrateData.galactose != null) {
+    if (nutrientDataObj.carbohydrateData.galactose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_galactose[language],
-            firstNutrientData.carbohydrateData.galactose,
+            nutrientDataObj.carbohydrateData.galactose,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.carbohydrateData.sucrose != null) {
+    if (nutrientDataObj.carbohydrateData.sucrose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_sucrose[language],
-            firstNutrientData.carbohydrateData.sucrose,
+            nutrientDataObj.carbohydrateData.sucrose,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.carbohydrateData.lactose != null) {
+    if (nutrientDataObj.carbohydrateData.lactose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_lactose[language],
-            firstNutrientData.carbohydrateData.lactose,
+            nutrientDataObj.carbohydrateData.lactose,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.carbohydrateData.maltose != null) {
+    if (nutrientDataObj.carbohydrateData.maltose != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_maltose[language],
-            firstNutrientData.carbohydrateData.maltose,
+            nutrientDataObj.carbohydrateData.maltose,
             portion, "g")
         );
     }
 
-    if (firstNutrientData.carbohydrateData.starch != null) {
+    if (nutrientDataObj.carbohydrateData.starch != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_carbohydrates_starch[language],
-            firstNutrientData.carbohydrateData.starch,
+            nutrientDataObj.carbohydrateData.starch,
             portion, "g")
         );
     }

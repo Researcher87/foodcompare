@@ -648,6 +648,10 @@ export const applicationStrings = {
         en: 'Galactose'
     },
     label_nutrient_carbohydrates_glucose: {
+        de: 'Glukose',
+        en: 'Glucose'
+    },
+    label_nutrient_carbohydrates_glucose_extended: {
         de: 'Glukose (Traubenzucker)',
         en: 'Glucose'
     },
@@ -686,6 +690,10 @@ export const applicationStrings = {
     label_nutrient_lipids: {
         de: 'Fett',
         en: 'Fats'
+    },
+    label_nutrient_lipid_totals: {
+        de: 'Fettsäuren (gesamt)',
+        en: 'Fatty acids (total)'
     },
     label_nutrient_lipids_long: {
         de: 'Fettsäuren',

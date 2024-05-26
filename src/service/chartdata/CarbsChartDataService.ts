@@ -6,57 +6,48 @@ import {ChartDisplayData, LegendData} from "../../types/livedata/ChartDisplayDat
 
 export function getCarbBaseChartData(nutrientData: NutrientData, hideRemainders: boolean, totalAmount: number,
                                      language: string): ChartDisplayData | null {
-    let totalCarbsAmount = nutrientData.baseData.carbohydrates;
-    let dietaryFibers = nutrientData.baseData.dietaryFibers;
-    let sugar = nutrientData.carbohydrateData.sugar
-
-    // NOTE: Sometimes the sugar or dietary fibers value is above the carbs value, which is impossible (> 100 %)
-    if(sugar && (sugar > totalCarbsAmount)) {
-        sugar = totalCarbsAmount
-    }
-    if(dietaryFibers && (dietaryFibers > totalCarbsAmount)) {
-        dietaryFibers = totalCarbsAmount
-    }
-    if(sugar && dietaryFibers && (sugar + dietaryFibers > totalCarbsAmount)) {  // Special case, where sug + fibers are above the 100 %
-        sugar = (sugar / (sugar+dietaryFibers)) * totalCarbsAmount
-        dietaryFibers = (dietaryFibers / (sugar+dietaryFibers)) * totalCarbsAmount
-    }
-
-    if (!sugar || !dietaryFibers) {
+    let totalCarbs = nutrientData.baseData.carbohydrates
+    if(totalCarbs === 0) {
         return null
     }
 
-    let valueRemainder = totalCarbsAmount - (sugar + dietaryFibers);
-    if (valueRemainder < 0) {
-        valueRemainder = 0
+    const dietaryFibers = nutrientData.baseData.dietaryFibers ? nutrientData.baseData.dietaryFibers : 0
+    const sugar = nutrientData.carbohydrateData.sugar ? nutrientData.carbohydrateData.sugar : 0
+
+    if(!dietaryFibers && !sugar) {
+        return null
     }
 
-    totalCarbsAmount = hideRemainders ? totalCarbsAmount - valueRemainder : totalCarbsAmount
-    valueRemainder = autoRound(valueRemainder / totalCarbsAmount * 100);
-
-    const valueSugar = autoRound(sugar / totalCarbsAmount * 100);
-    const valueDietaryFibers = autoRound(dietaryFibers / totalCarbsAmount * 100);
-
-    if (totalCarbsAmount === 0) {
-        return null;
+    // Sometime the sum of the sub-data items is largen than the total carbs amount
+    if(totalCarbs < (sugar+dietaryFibers)) {
+        totalCarbs = sugar+dietaryFibers
     }
+
+    const remainder = (sugar + dietaryFibers) < totalCarbs ? totalCarbs - sugar - dietaryFibers : 0
+    const totalCarbsValue = hideRemainders ? totalCarbs - remainder : totalCarbs
+
+    const valueSugar = sugar / totalCarbsValue * 100
+    const valueDietaryFibers = dietaryFibers / totalCarbsValue * 100
+    const valueRemainder = remainder / totalCarbsValue * 100;
 
     const labels = [applicationStrings.label_nutrient_sugar[language],
         applicationStrings.label_nutrient_dietaryFibers[language],
     ]
 
-    const data = [valueSugar,
-        valueDietaryFibers]
+    const data = [
+        autoRound(valueSugar),
+        autoRound(valueDietaryFibers)
+    ]
 
     const colors = [
         ChartConfig.color_chart_green_3,
         ChartConfig.color_chart_green_2,
     ]
 
-    if(!hideRemainders) {
+    if(!hideRemainders && valueRemainder > 0) {
         labels.push(applicationStrings.label_nutrient_remainder[language])
         colors.push(ChartConfig.color_chart_misc)
-        data.push(valueRemainder)
+        data.push(autoRound(valueRemainder))
     }
 
     return {
@@ -70,84 +61,88 @@ export function getCarbDetailsChartData(nutrientData: NutrientData, hideRemainde
                                         language: string): ChartDisplayData | null {
     const {carbohydrateData, baseData} = nutrientData
 
-    const valueGlucose = carbohydrateData.glucose !== null ? autoRound(carbohydrateData.glucose / totalAmount * 100) : null;
-    const valueFructose = carbohydrateData.fructose !== null ? autoRound(carbohydrateData.fructose / totalAmount * 100) : null;
-    const valueGalactose = carbohydrateData.galactose !== null ? autoRound(carbohydrateData.galactose / totalAmount * 100) : null;
-    const valueSucrose = carbohydrateData.sucrose !== null ? autoRound(carbohydrateData.sucrose / totalAmount * 100) : null;
-    const valueLactose = carbohydrateData.lactose !== null ? autoRound(carbohydrateData.lactose / totalAmount * 100) : null;
-    const valueMaltose = carbohydrateData.maltose !== null ? autoRound(carbohydrateData.maltose / totalAmount * 100) : null;
-    const valueStarch = carbohydrateData.starch !== null ? autoRound(carbohydrateData.starch / totalAmount * 100) : null;
+    const totalCarbohydratesAmount = baseData.carbohydrates / totalAmount * 100
 
-    const valueDietaryFibers = baseData.dietaryFibers !== null ? autoRound(baseData.dietaryFibers / totalAmount * 100) : null;
+    const valueGlucose = carbohydrateData.glucose !== null ? carbohydrateData.glucose / totalAmount * 100 : 0;
+    const valueFructose = carbohydrateData.fructose !== null ? carbohydrateData.fructose / totalAmount * 100 : 0;
+    const valueGalactose = carbohydrateData.galactose !== null ? carbohydrateData.galactose / totalAmount * 100 : 0;
+    const valueSucrose = carbohydrateData.sucrose !== null ? carbohydrateData.sucrose / totalAmount * 100 : 0;
+    const valueLactose = carbohydrateData.lactose !== null ? carbohydrateData.lactose / totalAmount * 100 : 0;
+    const valueMaltose = carbohydrateData.maltose !== null ? carbohydrateData.maltose / totalAmount * 100 : 0;
+    const valueStarch = carbohydrateData.starch !== null ? carbohydrateData.starch / totalAmount * 100 : 0;
+    const valueDietaryFibers = baseData.dietaryFibers !== null ? baseData.dietaryFibers / totalAmount * 100 : 0;
 
     if (!valueMaltose && !valueSucrose && !valueLactose && !valueGlucose && !valueFructose && !valueGalactose) {
         return null
     }
 
-    let valueRemainder = 100
-
     const labels: string[] = []
     const data: number[] = []
     const colors: string[] = []
 
+    const total = valueGlucose + valueFructose + valueGalactose + valueSucrose + valueLactose + valueMaltose 
+        + valueStarch + valueDietaryFibers
+    const valueRemainder = total < 100 ? 100 - total : 0 
+
+    // Exceeding factor is used in case of the detail carbohydrates exceeding the actual amount of carbohydrates
+    const exceedingFactor = total > totalCarbohydratesAmount
+        ? total / totalCarbohydratesAmount
+        : 1
+
     if (valueGlucose) {
-        valueRemainder -= valueGlucose
         labels.push(applicationStrings.label_nutrient_carbohydrates_glucose[language])
-        data.push(valueGlucose)
+        const value = hideRemainders ? valueGlucose / (100-valueRemainder) * 100 : valueGlucose / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_mono_glucose)
     }
     if (valueFructose) {
-        valueRemainder -= valueFructose
         labels.push(applicationStrings.label_nutrient_carbohydrates_fructose[language])
-        data.push(valueFructose)
+        const value = hideRemainders ? valueFructose / (100-valueRemainder) * 100 : valueFructose / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_mono_fructose)
     }
     if (valueGalactose) {
-        valueRemainder -= valueGalactose
         labels.push(applicationStrings.label_nutrient_carbohydrates_galactose[language])
-        data.push(valueGalactose)
+        const value = hideRemainders ? valueGalactose / (100-valueRemainder) * 100 : valueGalactose / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_mono_galactose)
     }
     if (valueSucrose) {
-        valueRemainder -= valueSucrose
         labels.push(applicationStrings.label_nutrient_carbohydrates_sucrose[language])
-        data.push(valueSucrose)
+        const value = hideRemainders ? valueSucrose / (100-valueRemainder) * 100 : valueSucrose / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_di_sucrose)
     }
     if (valueLactose) {
-        valueRemainder -= valueLactose
         labels.push(applicationStrings.label_nutrient_carbohydrates_lactose[language])
-        data.push(valueLactose)
+        const value = hideRemainders ? valueLactose / (100-valueRemainder) * 100 : valueLactose / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_di_lactose)
     }
     if (valueMaltose) {
-        valueRemainder -= valueMaltose
         labels.push(applicationStrings.label_nutrient_carbohydrates_maltose[language])
-        data.push(valueMaltose)
+        const value = hideRemainders ? valueMaltose / (100-valueRemainder) * 100 : valueMaltose / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_di_maltose)
     }
     if (valueStarch) {
-        valueRemainder -= valueStarch
         labels.push(applicationStrings.label_nutrient_carbohydrates_starch[language])
-        data.push(valueStarch)
+        const value = hideRemainders ? valueStarch / (100-valueRemainder) * 100 : valueStarch / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_starch)
     }
 
     if (valueDietaryFibers) {
-        valueRemainder -= valueDietaryFibers
         labels.push(applicationStrings.label_nutrient_dietaryFibers[language])
-        data.push(valueDietaryFibers)
+        const value = hideRemainders ? valueDietaryFibers / (100-valueRemainder) * 100 : valueDietaryFibers / exceedingFactor
+        data.push(autoRound(value))
         colors.push(ChartConfig.color_carbs_dietaryFibers)
     }
 
-    valueRemainder = autoRound(valueRemainder);
-    if (valueRemainder < 0) {
-        valueRemainder = 0;
-    }
 
     if(!hideRemainders) {
         labels.push(applicationStrings.label_nutrient_remainder[language])
-        data.push(valueRemainder)
+        data.push(autoRound(valueRemainder))
         colors.push(ChartConfig.color_chart_misc)
     }
 

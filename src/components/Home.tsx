@@ -23,8 +23,6 @@ const startImg2 = startButtonImages(`./StartImg2.jpg`)
 const startImg3 = startButtonImages(`./StartImg3.jpg`)
 const startImg4 = startButtonImages(`./StartImg4.jpg`)
 
-console.log('IMAGE', startImg1)
-
 /**
  * Home component (not including Header or Info page).
  * @constructor

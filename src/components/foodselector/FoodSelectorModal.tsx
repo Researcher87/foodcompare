@@ -211,8 +211,6 @@ const FoodSelectorModal: React.FC<FoodSelectorModalProps> = (props: FoodSelector
     }
 
     const selectFoodItemFromFilterModal = (selectedFilterResult: FilteredFoodItem): void => {
-        console.log('STUB: I will set', selectedFilterResult)
-
         const {foodItem} = selectedFilterResult
         const foodClass = applicationContext.foodDataCorpus.foodClasses.find(foodClass => foodClass.id === foodItem.foodClass)
         const portionData = foodItem.portionData ? foodItem.portionData[0] : undefined

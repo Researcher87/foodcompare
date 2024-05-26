@@ -168,7 +168,7 @@ export function getCarbohydrateCategoryValues(language: string): Array<ReactSele
     return [
         {value: Constants.DATA_CARBS_DIETARY_FIBERS, label: applicationStrings.label_nutrient_dietaryFibers[language]},
         {value: Constants.DATA_CARBS_SUGAR, label: applicationStrings.label_nutrient_sugar[language]},
-        {value: Constants.DATA_CARBS_GLUCOSE, label: applicationStrings.label_nutrient_carbohydrates_glucose[language]},
+        {value: Constants.DATA_CARBS_GLUCOSE, label: applicationStrings.label_nutrient_carbohydrates_glucose_extended[language]},
         {
             value: Constants.DATA_CARBS_FRUCTOSE,
             label: applicationStrings.label_nutrient_carbohydrates_fructose[language]
@@ -325,9 +325,10 @@ export function sortChartItems(chartItems: Array<ChartItem>): Array<ChartItem> {
 }
 
 
-export function getValueOfFoodItem(foodItem: FoodItem, selectedValue: string, sourceToUse = 0, supplementData = false): number | null {
+export function getValueOfFoodItem(foodItem: FoodItem, selectedValue: string, sourceToUse = 0, 
+        supplementData = false, combineData = false): number | null {
     let value
-    const nutrientData = getNutrientDataForFoodItem(foodItem, sourceToUse, supplementData)
+    const nutrientData = getNutrientDataForFoodItem(foodItem, sourceToUse, supplementData, combineData)
 
     const { baseData, vitaminData, mineralData, lipidData, carbohydrateData, proteinData} = nutrientData;
 

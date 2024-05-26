@@ -1,25 +1,24 @@
-import React, {useContext, useEffect, useState} from "react";
-import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
-import {applicationStrings} from "../../static/labels";
+import React, { useContext, useEffect, useState } from "react";
+import { ApplicationDataContextStore } from "../../contexts/ApplicationDataContext";
+import { applicationStrings } from "../../static/labels";
 import Select from 'react-select';
 import ReactSelectOption, {
     ReactSelectFoodClassOption,
     ReactSelectFoodItemOption,
     ReactSelectPortionOption
 } from "../../types/ReactSelectOption";
-import {getCategorySelectList} from "../../service/nutrientdata/CategoryService";
-import {foodClassLabelSeparator, getFoodClassSelectList} from "../../service/nutrientdata/FoodClassService";
-import {getFoodItemsSelectList, makeSelectedFoodItemObject} from "../../service/nutrientdata/FoodItemsService";
-import FoodItem, {PortionData} from "../../types/nutrientdata/FoodItem";
-import {getDefaultPortionData, getPortionReactSelectList} from "../../service/nutrientdata/PortionDataService";
+import { getCategorySelectList } from "../../service/nutrientdata/CategoryService";
+import { foodClassLabelSeparator, getFoodClassSelectList } from "../../service/nutrientdata/FoodClassService";
+import { getFoodItemsSelectList, makeSelectedFoodItemObject } from "../../service/nutrientdata/FoodItemsService";
+import FoodItem from "../../types/nutrientdata/FoodItem";
+import { getDefaultPortionData, getPortionReactSelectList } from "../../service/nutrientdata/PortionDataService";
 import SelectedFoodItem from "../../types/livedata/SelectedFoodItem";
-import FoodClass from "../../types/nutrientdata/FoodClass";
-import {LanguageContext} from "../../contexts/LangContext";
-import {isMobileDevice, isSmallScreen, useWindowDimension} from "../../service/WindowDimension";
-import {MODE_EDIT, PORTION_KEY_INDIVIDUAL, SOURCE_FNDDS, SOURCE_SRLEGACY} from "../../config/Constants";
-import {getSourceName} from "../../service/nutrientdata/NutrientDataRetriever";
+import { LanguageContext } from "../../contexts/LangContext";
+import { isMobileDevice, isSmallScreen, useWindowDimension } from "../../service/WindowDimension";
+import { MODE_EDIT, PORTION_KEY_INDIVIDUAL, SOURCE_FNDDS, SOURCE_SRLEGACY } from "../../config/Constants";
+import { getSourceName } from "../../service/nutrientdata/NutrientDataRetriever";
 import ReactTooltip from "react-tooltip";
-import {Button, Form} from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import {
     COLOR_SELECTOR_CATEGORY,
     COLOR_SELECTOR_FOODCLASS, COLOR_SELECTOR_FOODITEM,
@@ -27,10 +26,10 @@ import {
     customSelectStyles,
     getCustomSelectStyle
 } from "../../config/UI_Config";
-import {getNameFromFoodNameList} from "../../service/nutrientdata/NameTypeService";
-import {FaSlidersH} from "react-icons/fa";
-import {Unit, UnitConversionModal} from "../UnitConversionModal";
-import {max_portion} from "../../config/ChartConfig";
+import { getNameFromFoodNameList } from "../../service/nutrientdata/NameTypeService";
+import { FaSlidersH } from "react-icons/fa";
+import { Unit, UnitConversionModal } from "../UnitConversionModal";
+import { max_portion } from "../../config/ChartConfig";
 
 export interface FoodSelectorProps {
     updateSelectedFoodItem: (selectedFoodItem: SelectedFoodItem) => void
@@ -52,7 +51,7 @@ export interface FoodSelectorProps {
  */
 export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const applicationContext = useContext(ApplicationDataContextStore)
-    const {language} = useContext(LanguageContext)
+    const { language } = useContext(LanguageContext)
 
     const initialCategory = applicationContext?.applicationData.foodSelector.selectedCategory
         ? applicationContext.applicationData.foodSelector.selectedCategory
@@ -120,84 +119,84 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     useEffect(() => {
-            if (applicationContext && applicationContext.foodDataCorpus && categoriesList.length === 0) {
-                const foodDataCorpus = applicationContext.foodDataCorpus
+        if (applicationContext && applicationContext.foodDataCorpus && categoriesList.length === 0) {
+            const foodDataCorpus = applicationContext.foodDataCorpus
 
-                if (foodDataCorpus.categories) {
-                    const categoryItems = getCategorySelectList(foodDataCorpus.categories, language)
-                    setCategoriesList(categoryItems)
-                }
+            if (foodDataCorpus.categories) {
+                const categoryItems = getCategorySelectList(foodDataCorpus.categories, language)
+                setCategoriesList(categoryItems)
+            }
 
-                if (foodDataCorpus.foodClasses) {
-                    const category = selectedCategory ? selectedCategory.value : 0
-                    const foodClasses = getFoodClassSelectList(foodDataCorpus, category, applicationContext.foodDataCorpus.foodNames, language)
-                    setFoodClassesList(foodClasses)
-                    setFoodClassesTypeaheadList(foodClasses)  // Initially, the typeahead-list is identical with the food classes list
+            if (foodDataCorpus.foodClasses) {
+                const category = selectedCategory ? selectedCategory.value : 0
+                const foodClasses = getFoodClassSelectList(foodDataCorpus, category, applicationContext.foodDataCorpus.foodNames, language)
+                setFoodClassesList(foodClasses)
+                setFoodClassesTypeaheadList(foodClasses)  // Initially, the typeahead-list is identical with the food classes list
 
-                    const initialFoodClass = getInitialFoodClassNumber(foodClasses)
-                    const foodClass = foodClasses[initialFoodClass]
-                    setSelectedFoodClass(foodClass)
+                const initialFoodClass = getInitialFoodClassNumber(foodClasses)
+                const foodClass = foodClasses[initialFoodClass]
+                setSelectedFoodClass(foodClass)
 
-                    if (foodDataCorpus.foodItems && foodClasses) {
-                        const foodItemsOfFoodClass = getFoodItemsSelectList(
-                            foodDataCorpus.foodItems,
-                            foodClasses[initialFoodClass].value.id,
-                            foodDataCorpus.foodNames,
-                            foodDataCorpus.conditions, language
-                        )
+                if (foodDataCorpus.foodItems && foodClasses) {
+                    const foodItemsOfFoodClass = getFoodItemsSelectList(
+                        foodDataCorpus.foodItems,
+                        foodClasses[initialFoodClass].value.id,
+                        foodDataCorpus.foodNames,
+                        foodDataCorpus.conditions, language
+                    )
 
-                        setFoodItemsList(foodItemsOfFoodClass)
-                        setSelectedFoodItem(foodItemsOfFoodClass[0])
-                        const foodItem = foodItemsOfFoodClass[0].value
+                    setFoodItemsList(foodItemsOfFoodClass)
+                    setSelectedFoodItem(foodItemsOfFoodClass[0])
+                    const foodItem = foodItemsOfFoodClass[0].value
 
-                        if (foodItem && foodItem.portionData) {
-                            const portionDataList = getPortionReactSelectList(foodItem.portionData, foodDataCorpus.portionTypes, language)
-                            setPortionsList(portionDataList)
+                    if (foodItem && foodItem.portionData) {
+                        const portionDataList = getPortionReactSelectList(foodItem.portionData, foodDataCorpus.portionTypes, language)
+                        setPortionsList(portionDataList)
 
-                            updateSourcesList(foodItem)
+                        updateSourcesList(foodItem)
 
-                            const defaultPortion = getDefaultPortionData(foodItem, portionDataList)
-                            setSelectedPortion(defaultPortion)
-                            setPortionAmount(defaultPortion.value.amount)
+                        const defaultPortion = getDefaultPortionData(foodItem, portionDataList)
+                        setSelectedPortion(defaultPortion)
+                        setPortionAmount(defaultPortion.value.amount)
 
-                            if (!props.selectedFoodItem) {
-                                makeSelectedFoodItemObject(foodItem, foodClass.value, defaultPortion.value, portionAmount, supplementData,
-                                    combineData, selectedSource ? selectedSource.value : 0)
-                            }
+                        if (!props.selectedFoodItem) {
+                            makeSelectedFoodItemObject(foodItem, foodClass.value, defaultPortion.value, portionAmount, supplementData,
+                                combineData, selectedSource ? selectedSource.value : 0)
                         }
                     }
                 }
-            } else {
-                // Update data for outer component whenever render is triggered
-                const source = selectedSource ? selectedSource.value : 0
-                if (selectedFoodItem && selectedFoodClass && selectedPortion) {
-                    const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectedFoodClass.value, selectedPortion.value,
-                        portionAmount, supplementData, combineData, source)
-                    if (newFoodItem) {
-                        props.updateSelectedFoodItem(newFoodItem)
-                        props.updateFoodSelectorConfig(selectedCategory, supplementData, combineData)
-                    }
-                } else if (props.selectedFoodItem) {
-                    const {foodItem, foodClass, portion} = props.selectedFoodItem
-                    makeSelectedFoodItemObject(foodItem, foodClass, portion, portionAmount, supplementData,
-                        combineData, source)
-                }
             }
+        } else {
+            // Update data for outer component whenever render is triggered
+            const source = selectedSource ? selectedSource.value : 0
+            if (selectedFoodItem && selectedFoodClass && selectedPortion) {
+                const newFoodItem = makeSelectedFoodItemObject(selectedFoodItem.value, selectedFoodClass.value, selectedPortion.value,
+                    portionAmount, supplementData, combineData, source)
+                if (newFoodItem) {
+                    props.updateSelectedFoodItem(newFoodItem)
+                    props.updateFoodSelectorConfig(selectedCategory, supplementData, combineData)
+                }
+            } else if (props.selectedFoodItem) {
+                const { foodItem, foodClass, portion } = props.selectedFoodItem
+                makeSelectedFoodItemObject(foodItem, foodClass, portion, portionAmount, supplementData,
+                    combineData, source)
+            }
+        }
 
-        }, [selectedFoodItem,
-            selectedPortion,
-            selectedFoodClass,
-            selectedCategory,
-            selectedSource,
-            portionAmount,
-            title,
-            supplementData,
-            combineData
-        ]
+    }, [selectedFoodItem,
+        selectedPortion,
+        selectedFoodClass,
+        selectedCategory,
+        selectedSource,
+        portionAmount,
+        title,
+        supplementData,
+        combineData
+    ]
     )
 
     if (!applicationContext) {
-        return <div/>
+        return <div />
     }
 
     const handleCategoryChange = (category: ReactSelectOption) => {
@@ -263,29 +262,36 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     }
 
     const updateFoodItem = (foodClass: ReactSelectFoodClassOption) => {
-        const {foodItems, foodNames, conditions} = applicationContext.foodDataCorpus
+        const { foodItems, foodNames, conditions } = applicationContext.foodDataCorpus
 
-        if (foodItems) {
-            let selectedFoodItemIndex;
+        if (!foodItems) {
+            return
+        }
 
-            const foodClassItems = getFoodItemsSelectList(foodItems, foodClass.value.id, foodNames, conditions, language)
-            setFoodItemsList(foodClassItems)
+        let selectedFoodItemIndex;
 
-            if (foodClassItems && foodClassItems.length > 0) {
-                const firstFoodClassItem = foodClassItems[0]
-                const nameId = firstFoodClassItem.value.nameId ?? -1
-                const firstFoodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
+        const foodClassItems = getFoodItemsSelectList(foodItems, foodClass.value.id, foodNames, conditions, language)
+        setFoodItemsList(foodClassItems)
 
-                // The first food item in the list starts with the food class search string entered by the user
-                if (firstFoodItemName
-                    && (firstFoodItemName.startsWith(foodClassSearchTerm)
-                        || firstFoodItemName.includes(" " + foodClassSearchTerm))) {
+        if (foodClassItems && foodClassItems.length > 0) {
+            const firstFoodClassItem = foodClassItems[0]
+            const nameId = firstFoodClassItem.value.nameId ?? -1
+
+            const searchTerm = foodClassSearchTerm.toLocaleLowerCase()
+            let firstFoodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
+
+            // The first food item in the list starts with the food class search string entered by the user
+            if (firstFoodItemName) {
+                firstFoodItemName = firstFoodItemName.toLocaleLowerCase()
+                if (firstFoodItemName.startsWith(searchTerm)
+                    || firstFoodItemName.includes(" " + searchTerm)) {
                     selectedFoodItemIndex = 0;
                 } else {   // Search for a food item in the list that starts with the food class search string
                     const matchingIndex = foodClassItems.findIndex(item => {
                         const nameId = item.value.nameId ?? -1
                         const foodItemName = getNameFromFoodNameList(foodNames, nameId, language, false)
-                        return foodItemName && foodItemName.startsWith(foodClassSearchTerm)
+                        return foodItemName && (foodItemName.toLocaleLowerCase().startsWith(searchTerm)
+                            || foodItemName.toLocaleLowerCase().includes(searchTerm))
                     })
                     if (matchingIndex >= 0) {  // Found one item in the list -> Select this item
                         selectedFoodItemIndex = matchingIndex
@@ -314,6 +320,12 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         setPortionAmount(defaultPortion.value.amount)
     }
 
+    const getSourceNames = (foodItem: FoodItem) => {
+        return foodItem.nutrientDataList.map(nutrientDataObject => {
+            const SourceName = getSourceName(nutrientDataObject.source.id)
+            return { label: SourceName, value: nutrientDataObject.source.id }
+        })
+    }
 
     const updateSourcesList = (foodItem: FoodItem) => {
         const sourceNames = getSourceNames(foodItem)
@@ -340,14 +352,6 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
         }
     }
 
-
-    const getSourceNames = (foodItem: FoodItem) => {
-        return foodItem.nutrientDataList.map(nutrientDataObject => {
-            const SourceName = getSourceName(nutrientDataObject.source.id)
-            return {label: SourceName, value: nutrientDataObject.source.id}
-        })
-    }
-
     const setInitialFoodElement = () => {
         if (!foodClassesList || foodClassesList.length === 0) {
             return
@@ -361,7 +365,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
 
         // @ts-ignore
         const foodClassOption = foodClassesList.find(foodClass => foodClass.value.id === predefinedFoodObject.foodClass.id)
-        const {foodItems, foodNames, conditions, portionTypes} = applicationContext.foodDataCorpus
+        const { foodItems, foodNames, conditions, portionTypes } = applicationContext.foodDataCorpus
 
         if (foodClassOption) {
             setSelectedFoodClass(foodClassOption)
@@ -418,7 +422,7 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
      * @param value The value entered in the select input field
      * @param action The event action
      */
-    const handleFoodClassInputChange = (value, {action}) => {
+    const handleFoodClassInputChange = (value, { action }) => {
         if (action === 'input-change') {
             setFoodClassSearchTerm(value.trim())
 
@@ -483,38 +487,38 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     const renderSourceLine = () => {
         const sourceSelectBox = (
             <Select className={selectClass}
-                    options={sourcesList}
-                    isDisabled={sourcesList.length <= 1 || combineData}
-                    value={selectedSource ? selectedSource : sourcesList[0]}
-                    onChange={handleSourceChange}
-                    styles={customSelectStyles}
+                options={sourcesList}
+                isDisabled={sourcesList.length <= 1 || combineData}
+                value={selectedSource ? selectedSource : sourcesList[0]}
+                onChange={handleSourceChange}
+                styles={customSelectStyles}
             />
         )
 
         const checkboxes = (
             <div>
                 <label className="form-elements"
-                       data-for={"selector-supplement"}
-                       data-tip={applicationStrings.label_source_supplement_tooltip[language]}>
-                    <ReactTooltip/>
+                    data-for={"selector-supplement"}
+                    data-tip={applicationStrings.label_source_supplement_tooltip[language]}>
+                    <ReactTooltip />
                     <Form.Check inline className="form-radiobutton"
-                                label={applicationStrings.label_source_supplement[language]}
-                                checked={supplementData}
-                                disabled={sourcesList.length <= 1}
-                                onChange={onCheckSupplementCheckbox}>
+                        label={applicationStrings.label_source_supplement[language]}
+                        checked={supplementData}
+                        disabled={sourcesList.length <= 1}
+                        onChange={onCheckSupplementCheckbox}>
                     </Form.Check>
-                    <ReactTooltip id={"selector-supplement"}/>
+                    <ReactTooltip id={"selector-supplement"} />
                 </label>
                 <label className="form-elements"
-                       data-for={"selector-combine"}
-                       data-tip={applicationStrings.label_source_combine_tooltip[language]}>
-                    <ReactTooltip id={"selector-combine"}/>
+                    data-for={"selector-combine"}
+                    data-tip={applicationStrings.label_source_combine_tooltip[language]}>
+                    <ReactTooltip id={"selector-combine"} />
                     <Form.Check className="form-radiobutton"
-                                style={{minHeight: "1rem"}}
-                                label={applicationStrings.label_source_combine[language]}
-                                checked={combineData}
-                                disabled={sourcesList.length <= 1}
-                                onChange={onCheckCombineCheckbox}>
+                        style={{ minHeight: "1rem" }}
+                        label={applicationStrings.label_source_combine[language]}
+                        checked={combineData}
+                        disabled={sourcesList.length <= 1}
+                        onChange={onCheckCombineCheckbox}>
                     </Form.Check>
                 </label>
             </div>
@@ -606,58 +610,58 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
     return <div>
         <div className="container">
             {props.compositeSelector &&
-            <div>
-                <span className={'form-label'}>{applicationStrings.label_title[language]}:</span>
-                <input className={inputClass}
-                       value={title}
-                       style={correspondingSelectElementStyle}
-                       onChange={handleTitleChange}
-                />
-            </div>
+                <div>
+                    <span className={'form-label'}>{applicationStrings.label_title[language]}:</span>
+                    <input className={inputClass}
+                        value={title}
+                        style={correspondingSelectElementStyle}
+                        onChange={handleTitleChange}
+                    />
+                </div>
             }
             {props.directCompareSelector !== true &&
-            <div className={formClass}>
-                <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
-                <Select className={selectClass}
+                <div className={formClass}>
+                    <span className={'form-label'}>{applicationStrings.label_category[language]}:</span>
+                    <Select className={selectClass}
                         options={categoriesList}
                         isDisabled={props.mode === MODE_EDIT}
                         value={selectedCategory ? selectedCategory : categoriesList[0]}
                         onChange={(value) => handleCategoryChange(value)}
                         styles={stylesCategory}
-                />
-            </div>
+                    />
+                </div>
             }
             {unitModalOpen &&
                 <UnitConversionModal sourceUnits={sourceUnits}
-                                     targetUnitLabelKey={"_gram"}
-                                     allowedMinimumTargetValue={1}
-                                     allowedMaximumTargetValue={max_portion}
-                                     initialValue={1}
-                                     onSubmit={onSubmitUnit}
-                                     closeModal={() => setUnitModalOpen(false)}>
+                    targetUnitLabelKey={"_gram"}
+                    allowedMinimumTargetValue={1}
+                    allowedMaximumTargetValue={max_portion}
+                    initialValue={1}
+                    onSubmit={onSubmitUnit}
+                    closeModal={() => setUnitModalOpen(false)}>
                 </UnitConversionModal>
             }
             <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_foodclass[language]}:</span>
                 <Select className={selectClass}
-                        options={foodClassesTypeaheadList}
-                        isDisabled={props.mode === MODE_EDIT}
-                        onInputChange={handleFoodClassInputChange}
-                        formatOptionLabel={foodclassFormatter}
-                        value={selectedFoodClass ? selectedFoodClass : foodClassesList[initialFoodClass]}
-                        onChange={(value) => handleFoodClassChange(value)}
-                        onMenuClose={() => resetTypeaheadFilter()}
-                        styles={stylesFoodClass}
+                    options={foodClassesTypeaheadList}
+                    isDisabled={props.mode === MODE_EDIT}
+                    onInputChange={handleFoodClassInputChange}
+                    formatOptionLabel={foodclassFormatter}
+                    value={selectedFoodClass ? selectedFoodClass : foodClassesList[initialFoodClass]}
+                    onChange={(value) => handleFoodClassChange(value)}
+                    onMenuClose={() => resetTypeaheadFilter()}
+                    styles={stylesFoodClass}
                 />
             </div>
             <div className={formClass}>
                 <span className={'form-label'}>{applicationStrings.label_fooditem[language]}:</span>
                 <Select className={selectClass}
-                        isDisabled={props.mode === MODE_EDIT}
-                        options={foodItemsList}
-                        value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
-                        onChange={handleFoodItemChange}
-                        styles={stylesFoodItem}
+                    isDisabled={props.mode === MODE_EDIT}
+                    options={foodItemsList}
+                    value={selectedFoodItem ? selectedFoodItem : foodItemsList[0]}
+                    onChange={handleFoodItemChange}
+                    styles={stylesFoodItem}
                 />
             </div>
             <div className={formClass}>
@@ -666,27 +670,27 @@ export default function FoodSelector(props: FoodSelectorProps): JSX.Element {
                         <span
                             className={'form-label'}>{applicationStrings.label_portion[language]}:</span>
                         <Select className={selectClass}
-                                options={portionsList}
-                                styles={customSelectStyles}
-                                value={selectedPortion ? selectedPortion : portionsList[0]}
-                                onChange={(value) => handlePortionChange(value)}/>
+                            options={portionsList}
+                            styles={customSelectStyles}
+                            value={selectedPortion ? selectedPortion : portionsList[0]}
+                            onChange={(value) => handlePortionChange(value)} />
                     </div>
                     <div className={"col-4"}>
                         <div className={"d-flex flex-row align-items-end"}>
                             <div>
                                 <span className={'form-label'}>{amount_label}</span>
                                 <input className={inputClass}
-                                       disabled={selectedPortion?.value.portionType !== 0}
-                                       value={portionAmount}
-                                       style={correspondingSelectElementStyle}
-                                       onChange={handlePortionAmountChange}
+                                    disabled={selectedPortion?.value.portionType !== 0}
+                                    value={portionAmount}
+                                    style={correspondingSelectElementStyle}
+                                    onChange={handlePortionAmountChange}
                                 />
                             </div>
                             <Button className={"btn btn-secondary"}
-                                    disabled={!selectedPortion || selectedPortion.value.portionType !== PORTION_KEY_INDIVIDUAL}
-                                    style={{marginLeft: "1vw"}}
-                                    onClick={() => setUnitModalOpen(true)}>
-                                <FaSlidersH/>
+                                disabled={!selectedPortion || selectedPortion.value.portionType !== PORTION_KEY_INDIVIDUAL}
+                                style={{ marginLeft: "1vw" }}
+                                onClick={() => setUnitModalOpen(true)}>
+                                <FaSlidersH />
                             </Button>
                         </div>
                     </div>

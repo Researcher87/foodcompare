@@ -43,7 +43,10 @@ export function createChartDataForJuxtapostionChart(props: JuxtapositionChartPro
             const nutrientName = valueInGroup.label
             const unit = getUnit(valueInGroup.value)
             referenceData.forEach(foodItem => {
-                const value = getValueOfFoodItem(foodItem, valueInGroup.value)
+                const source = props.selectedFoodItem.selectedSource
+                const supplementData = props.selectedFoodItem.supplementData
+                const combineData = props.selectedFoodItem.combineData
+                const value = getValueOfFoodItem(foodItem, valueInGroup.value, source, supplementData, combineData)
                 const nameKey = foodDataCorpus.foodNames.find(foodName => foodName.id === foodItem.nameId)
                 const name = language === LANGUAGE_DE ? nameKey?.germanName : nameKey?.englishName
                 const fooditemCondition = props.selectedFoodItem.foodItem.conditionId
@@ -98,10 +101,13 @@ export function createJuxtapositionTableData(props: JuxtapositionChartProps, foo
     }
 
     valuesInGroup.forEach(valueInGroup => {
-        const value = getValueOfFoodItem(props.selectedFoodItem.foodItem, valueInGroup.value)
+        const source = props.selectedFoodItem.selectedSource
+        const supplementData = props.selectedFoodItem.supplementData
+        const combineData = props.selectedFoodItem.combineData
+        const value = getValueOfFoodItem(props.selectedFoodItem.foodItem, valueInGroup.value, source, supplementData, combineData)
         const allValues: Array<number> = []
         referenceData.forEach(foodItem => {
-            const value = getValueOfFoodItem(foodItem, valueInGroup.value)
+            const value = getValueOfFoodItem(foodItem, valueInGroup.value, source, supplementData, combineData)
             if(value !== null) {
                 allValues.push(value)
             }
@@ -117,9 +123,7 @@ export function createJuxtapositionTableData(props: JuxtapositionChartProps, foo
         const averageValue = allValues.reduce((a,b) => a + b, 0) / allValues.length
 
         const sorted = allValues.sort((a, b) => b-a)
-        const centerValue = sorted.length / 2
         const medianValue = calculateMedian(allValues)
-
         const rank = sorted.findIndex(num => num === value) + 1
 
         const label = valueInGroup.label
