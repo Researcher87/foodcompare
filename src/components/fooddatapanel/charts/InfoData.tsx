@@ -137,7 +137,7 @@ export function InfoData(props: InfoDataProps) {
     const getDebugData = () => {
         const nutrientData = props.selectedFoodItem.foodItem.nutrientDataList
         const source1 = nutrientData[0]
-        const source2 = nutrientData.length == 2 ? nutrientData[1] : null
+        const source2 = nutrientData.length === 2 ? nutrientData[1] : null
 
         const makeNutrientValuesLine = (dataObj: NutrientData) => {
             return "E: " + round(dataObj.baseData.energy, 1) + ", "

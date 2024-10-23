@@ -100,11 +100,6 @@ export function AggregatedEnergyChart(props: ChartProps) {
     let classBarChart = "col-6"
     const numberOfElements = props.selectedFoodItem.compositeSubElements?.length ?? 0
 
-    if (numberOfElements >= 15) {
-        let classPieChart = "col-5"
-        let classBarChart = "col-7"
-    }
-
 
     return (
         <div className={"container row"}>

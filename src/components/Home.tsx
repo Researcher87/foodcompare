@@ -29,6 +29,9 @@ const startImg4 = startButtonImages(`./StartImg4.jpg`)
  */
 export function Home() {
     const {language} = useContext(LanguageContext)
+
+    console.debug(`User language in Main screen: ${language}`)
+
     const [displayedImage, setDisplayedImage] = useState<number>(0)
     const history = useHistory()
 
@@ -66,6 +69,8 @@ export function Home() {
     }
 
     const renderCarousel = () => {
+        console.debug(`Render Carousel: ${language}`)
+
         const pic1 = carouselImages(`./img-1-${language}.png`);
         const pic2 = carouselImages(`./img-2-${language}.png`);
         const pic3 = carouselImages(`./img-3-${language}.png`);
@@ -118,7 +123,6 @@ export function Home() {
         );
     }
 
-
     const renderHomeHeaderDesktop = () => {
         return <div className={"d-flex flex-row home-header align-items-center"}>
             <div className={"d-flex flex-column w-50"}>
@@ -143,6 +147,8 @@ export function Home() {
     }
 
     const renderStartButtonsDesktop = () => {
+        console.debug(`Render Start buttons: ${language}`)
+
         return (
             <div>
                 <div className={"d-flex flex-row justify-content-center"}>

@@ -338,19 +338,19 @@ export const OverallView = (props) => {
 
                         const colorSelection = selectedHighlighter ? selectedHighlighter.value : HIGHLIGHTING_NONE
 
-                        if (colorSelection == HIGHLIGHTING_MIN_MAX) {
+                        if (colorSelection === HIGHLIGHTING_MIN_MAX) {
                             if (value === min) {
                                 bgColor = COLOR_MIN
                             } else if (value === max) {
                                 bgColor = COLOR_MAX
                             }
-                        } else if (colorSelection == HIGHLIGHTING_SHARE_SELECTION) {
+                        } else if (colorSelection === HIGHLIGHTING_SHARE_SELECTION) {
                             if (max === null || min === null || value === null) {
                                 bgColor = COLOR_EMPTY
                             } else {
                                 bgColor = getColorCodeForMinMaxRange(min, max, value)
                             }
-                        } else if (colorSelection == HIGHLIGHTING_SHARE_ALL) {
+                        } else if (colorSelection === HIGHLIGHTING_SHARE_ALL) {
                             if (value === null) {
                                 bgColor = COLOR_EMPTY
                             } else {
@@ -470,7 +470,7 @@ export const OverallView = (props) => {
 
     const selection = selectedHighlighter ? selectedHighlighter.value : HIGHLIGHTING_NONE
     const makeColorLegend = () => {
-        const showCanvas = canvas && (selection === HIGHLIGHTING_SHARE_SELECTION || selection == HIGHLIGHTING_SHARE_ALL)
+        const showCanvas = canvas && (selection === HIGHLIGHTING_SHARE_SELECTION || selection === HIGHLIGHTING_SHARE_ALL)
         return <div className={"d-flex flex-row justify-content-center"} style={{height: "110px"}}>
             {showCanvas &&
             <canvas ref={canvas} width={400} height={110} style={{border: "1x solid #000000"}}/>

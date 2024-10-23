@@ -39,7 +39,7 @@ export function filterFoodItems(foodItems: Array<FoodItem>, conditions: Array<Nu
             }
         })
 
-        if(matchingSources.length == 2) {  // We have two matching sources => take the preferred source
+        if(matchingSources.length === 2) {  // We have two matching sources => take the preferred source
             const source = matchingSources.filter(source => source === preferredSource)
             if(source) {
                 addResultObject(foodItem, source)

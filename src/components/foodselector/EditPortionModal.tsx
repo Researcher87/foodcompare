@@ -5,7 +5,6 @@ import {correspondingSelectElementStyle} from "../../config/UI_Config";
 import {ApplicationDataContextStore} from "../../contexts/ApplicationDataContext";
 import {LanguageContext} from "../../contexts/LangContext";
 import {NotificationManager} from 'react-notifications'
-import {LANGUAGE_DE} from "../../config/Constants";
 import {maximalPortionSize} from "../../config/ApplicationSetting";
 
 interface EditPortionModalProps {

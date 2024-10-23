@@ -28,11 +28,14 @@ export default function Header() {
     const {language, userLanguageChange} = useContext(LanguageContext)
     const location = useLocation();
 
+    console.debug(`Render Header: ${language}`)
+
     if (applicationContext === null) {
         return <div/>
     }
 
     const handleLanguageButtonClick = (event: any): void => {
+        console.debug(`Handle language button click (org. lang / new event): ${language} / ${event.target.value}`)
         userLanguageChange(event.target.value)
         applicationContext.setFoodDataPanelData.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
     }

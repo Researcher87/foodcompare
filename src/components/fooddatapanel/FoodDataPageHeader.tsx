@@ -168,7 +168,7 @@ export default function FoodDataPageHeader(props: FoodDataPageHeaderProps) {
             break;
     }
 
-    const shouldShowBookIcon = selectedDataPage === TAB_VITAMIN_DATA || selectedDataPage == TAB_MINERAL_DATA
+    const shouldShowBookIcon = selectedDataPage === TAB_VITAMIN_DATA || selectedDataPage === TAB_MINERAL_DATA
 
     const smallHelpDialogTabs = [TAB_BASE_DATA, TAB_INFO, TAB_VITAMIN_DATA, TAB_MINERAL_DATA]
 

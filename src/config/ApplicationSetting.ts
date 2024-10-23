@@ -9,7 +9,7 @@ import {ChartConfigData, DirectCompareChartConfigData, JuxtapositionConfig} from
 import {WindowDimension} from "../service/WindowDimension";
 
 export const release = "2.2"
-export const buildDate = "2024-03-11"
+export const buildDate = "2024-10-23"
 
 export const maxMessageCharacters = 5000
 export const maxElementsInRankingChart = 100

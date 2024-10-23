@@ -832,7 +832,7 @@ export const applicationStrings = {
         en: 'Histidine'
     },
     label_nutrient_proteins_isoleucine: {
-        de: 'Isoleucine',
+        de: 'Isoleucin',
         en: 'Isoleucine'
     },
     label_nutrient_proteins_leucine: {

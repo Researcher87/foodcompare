@@ -44,7 +44,7 @@ export const UnitConversionModal: React.FC<UnitConversionProps> = (props: UnitCo
         } else {
             setConvertedValue(null)
         }
-    }, [inputValue, selectedUnitOption])
+    }, [inputValue, selectedUnitOption, props.sourceUnits])
 
     const onInputChange = (event) => {
         const val = event.target.value
