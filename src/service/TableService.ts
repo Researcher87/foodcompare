@@ -693,7 +693,7 @@ export function createLipidsTable(params: TableCalculationParams): Array<FoodTab
     const {selectedFoodItem, portion, language} = params
     const nutrientDataObj = getNutrientData(selectedFoodItem);
 
-    if (nutrientDataObj.lipidData.saturated != null) {
+    if (nutrientDataObj.baseData.lipids != null) {
         tableData.push(createTableObject(
             applicationStrings.label_nutrient_lipid_totals[language],
             nutrientDataObj.baseData.lipids,
