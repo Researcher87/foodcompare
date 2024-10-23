@@ -14,6 +14,7 @@ import {
     PATH_RANKING
 } from "../config/Constants";
 import {isMobileDevice} from "../service/WindowDimension";
+import {ApplicationDataContextStore} from "../contexts/ApplicationDataContext";
 
 const carouselImages = require.context('../static/image/carousel-samples', true);
 const startButtonImages = require.context('../static/image/start-buttons', true);
@@ -25,12 +26,10 @@ const startImg4 = startButtonImages(`./StartImg4.jpg`)
 
 /**
  * Home component (not including Header or Info page).
- * @constructor
  */
 export function Home() {
     const {language} = useContext(LanguageContext)
-
-    console.debug(`User language in Main screen: ${language}`)
+    const applicationContext = useContext(ApplicationDataContextStore)
 
     const [displayedImage, setDisplayedImage] = useState<number>(0)
     const history = useHistory()
@@ -69,7 +68,9 @@ export function Home() {
     }
 
     const renderCarousel = () => {
-        console.debug(`Render Carousel: ${language}`)
+        if (applicationContext?.debug) {
+            console.log('Define carousel images for language: ',  language)
+        }
 
         const pic1 = carouselImages(`./img-1-${language}.png`);
         const pic2 = carouselImages(`./img-2-${language}.png`);
@@ -147,8 +148,6 @@ export function Home() {
     }
 
     const renderStartButtonsDesktop = () => {
-        console.debug(`Render Start buttons: ${language}`)
-
         return (
             <div>
                 <div className={"d-flex flex-row justify-content-center"}>

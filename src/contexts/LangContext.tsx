@@ -13,7 +13,6 @@ export const LanguageContext = createContext<LanguageProviderProps>({
 
 export function LanguageProvider({ children }) {
     const userLanguage = navigator.language;
-    console.debug(`User language from navigator: ${userLanguage}`)
 
     const preferredLanguage = userLanguage === 'de' || userLanguage === 'de-DE' ? LANGUAGE_DE : LANGUAGE_EN
     const [language, setLanguage] = useState(preferredLanguage);

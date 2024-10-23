@@ -1,6 +1,5 @@
 import logo from '../static/image/logo.png'
 import text from '../static/image/text.png'
-import {Button, Form} from "react-bootstrap";
 import {
     LANGUAGE_DE,
     LANGUAGE_EN,
@@ -21,6 +20,7 @@ import {LanguageContext} from "../contexts/LangContext";
 import {Link} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 import {isMobileDevice} from "../service/WindowDimension";
+import {Button, Form} from "react-bootstrap";
 
 
 export default function Header() {
@@ -28,14 +28,14 @@ export default function Header() {
     const {language, userLanguageChange} = useContext(LanguageContext)
     const location = useLocation();
 
-    console.debug(`Render Header: ${language}`)
-
     if (applicationContext === null) {
         return <div/>
     }
 
     const handleLanguageButtonClick = (event: any): void => {
-        console.debug(`Handle language button click (org. lang / new event): ${language} / ${event.target.value}`)
+        if (applicationContext.debug) {
+            console.log('Handle language button click:', event.target.value)
+        }
         userLanguageChange(event.target.value)
         applicationContext.setFoodDataPanelData.updateAllFoodItemNames(applicationContext.foodDataCorpus.foodNames, event.target.value)
     }
